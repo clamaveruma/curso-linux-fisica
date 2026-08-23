@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Ficheros: tocar sin romper – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../capitulos/cap01.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-mirar" id="toc-sec-mirar" class="nav-link active" data-scroll-target="#sec-mirar"><span class="header-section-number">2.1</span> Mirar dentro sin miedo</a></li>
+  <li><a href="#sec-crear" id="toc-sec-crear" class="nav-link" data-scroll-target="#sec-crear"><span class="header-section-number">2.2</span> Crear: <code>mkdir</code> y <code>touch</code></a></li>
+  <li><a href="#sec-cp-mv" id="toc-sec-cp-mv" class="nav-link" data-scroll-target="#sec-cp-mv"><span class="header-section-number">2.3</span> Copiar y mover: <code>cp</code> y <code>mv</code></a></li>
+  <li><a href="#sec-rm" id="toc-sec-rm" class="nav-link" data-scroll-target="#sec-rm"><span class="header-section-number">2.4</span> Borrar: el comando sin papelera</a></li>
+  <li><a href="#sec-comodines" id="toc-sec-comodines" class="nav-link" data-scroll-target="#sec-comodines"><span class="header-section-number">2.5</span> Comodines: hablar de familias enteras</a></li>
+  <li><a href="#sec-find" id="toc-sec-find" class="nav-link" data-scroll-target="#sec-find"><span class="header-section-number">2.6</span> Encontrar: <code>find</code></a></li>
+  <li><a href="#sec-nano" id="toc-sec-nano" class="nav-link" data-scroll-target="#sec-nano"><span class="header-section-number">2.7</span> Editar: <code>nano</code> (y la verdad sobre <code>vim</code>)</a></li>
+  <li><a href="#sec-dotfiles" id="toc-sec-dotfiles" class="nav-link" data-scroll-target="#sec-dotfiles"><span class="header-section-number">2.8</span> Tus primeros <em>dotfiles</em></a></li>
+  <li><a href="#sec-practica-2" id="toc-sec-practica-2" class="nav-link" data-scroll-target="#sec-practica-2"><span class="header-section-number">2.9</span> Práctica: poner orden en el laboratorio</a></li>
+  <li><a href="#sec-quiz-2" id="toc-sec-quiz-2" class="nav-link" data-scroll-target="#sec-quiz-2"><span class="header-section-number">2.10</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap02" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>En la primera sesión aprendiste a mirar: dónde estás, qué hay, cómo moverte. Hoy los ficheros dejan de ser intocables: vas a leerlos, crearlos, copiarlos, moverlos y — por primera vez — destruirlos. Con red de seguridad, porque en esta casa el borrado no tiene papelera.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 1</strong> · máquina: <strong>tu Linux de diario</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Mirar dentro de cualquier fichero de texto con <code>cat</code>, <code>less</code>, <code>head</code> y <code>tail</code>, sin abrir ningún programa gráfico.</li>
+<li>Crear estructura con <code>mkdir</code> y copiar, mover y renombrar con <code>cp</code> y <code>mv</code> — y por qué mover y renombrar son el mismo gesto.</li>
+<li>Borrar con <code>rm</code> sabiendo exactamente por qué no perdona, y qué hacer antes de pulsar Intro.</li>
+<li>Seleccionar familias enteras de ficheros con comodines (<code>*</code>, <code>?</code>), entendiendo quién los expande de verdad.</li>
+<li>Localizar cualquier cosa con <code>find</code>.</li>
+<li>Editar ficheros en la terminal con <code>nano</code>, y estrenar tus <em>dotfiles</em> con un alias propio.</li>
+</ul>
+</div>
+<section id="sec-mirar" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-mirar"><span class="header-section-number">2.1</span> Mirar dentro sin miedo</h2>
+<p>Tienes desde la sesión pasada un fichero de medidas esperando en <code>~/Descargas</code>. Sabes llegar hasta él; hoy, por fin, vas a abrirlo. El gesto más directo es <code>cat</code> (<em>concatenate</em>), que vuelca el contenido completo en la pantalla:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cd ~/Descargas</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cat pendulo_medidas.csv</span>
+<span class="t-out">medida,longitud_m,periodo_s,incertidumbre_s</span>
+<span class="t-out">1,0.50,1.42,0.02</span>
+<span class="t-out">2,0.50,1.40,0.02</span>
+<span class="t-out">3,0.50,1.43,0.02</span></code></pre>
+<p>Para veinte líneas, perfecto. Pero un fichero de adquisición real puede tener veinte millones, y <code>cat</code> las escupiría todas. Para eso existe <code>less</code>: un visor por páginas — exactamente el mismo que usa <code>man</code>, así que ya te sabes sus teclas: <kbd>↑</kbd>/<kbd>↓</kbd> y <kbd>Espacio</kbd> para avanzar, <kbd>/</kbd> para buscar, <kbd>q</kbd> para salir.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">less pendulo_medidas.csv</span></code></pre>
+<p>Y muchas veces no quieres el fichero entero, sino un vistazo: <code>head</code> enseña las primeras líneas y <code>tail</code> las últimas — la forma más rápida de comprobar cómo empieza y cómo acaba una tanda de medidas:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">head -3 pendulo_medidas.csv</span>
+<span class="t-out">medida,longitud_m,periodo_s,incertidumbre_s</span>
+<span class="t-out">1,0.50,1.42,0.02</span>
+<span class="t-out">2,0.50,1.40,0.02</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">tail -2 pendulo_medidas.csv</span>
+<span class="t-out">19,1.10,2.10,0.02</span>
+<span class="t-out">20,1.10,2.12,0.02</span></code></pre>
+<p>La opción <code>-3</code> es el número de líneas. Fíjate en que acabas de leer un fichero de datos con cuatro herramientas distintas sin abrir una sola ventana. ¿Podías haberle hecho doble clic? Claro. Pero el doble clic no escala: cuando tengas doscientos ficheros de un barrido de simulaciones, <code>head</code> seguirá costando un segundo.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Por qué todo esto funciona con cualquier fichero</strong></p>
+<p>Para Linux un fichero es solo una secuencia de bytes con nombre. No hay ficheros «de Word» o «de Excel» a nivel del sistema: la extensión <code>.csv</code> es una pista para humanos, no una regla. Por eso <code>cat</code> y <code>less</code> abren cualquier cosa — aunque si abres un binario (una foto, un ejecutable) verás caracteres sin sentido: los bytes no eran texto. En el capítulo 3 exprimirás esta idea: si todo es texto o bytes, todo se puede encadenar.</p>
+</div>
+</section>
+<section id="sec-crear" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-crear"><span class="header-section-number">2.2</span> Crear: <code>mkdir</code> y <code>touch</code></h2>
+<p>Un experimento ordenado empieza por su estructura de carpetas. <code>mkdir</code> (<em>make directory</em>) crea directorios, y con la opción <code>-p</code> crea de una vez toda una ruta con sus niveles intermedios:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">mkdir fisica</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">mkdir -p fisica/practicas/optica/datos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls fisica/practicas</span>
+<span class="t-out">optica</span></code></pre>
+<p>Su compañero menor es <code>touch</code>, que crea un fichero vacío (o actualiza la fecha de uno existente). Útil para dejar un marcador o preparar un fichero de notas:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">touch fisica/practicas/optica/notas.txt</span></code></pre>
+</section>
+<section id="sec-cp-mv" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-cp-mv"><span class="header-section-number">2.3</span> Copiar y mover: <code>cp</code> y <code>mv</code></h2>
+<p>Los dos siguen la misma gramática de tres piezas del capítulo 1: programa, origen, destino.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cp pendulo_medidas.csv copia_seguridad.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">mv copia_seguridad.csv ~/fisica/</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">ls ~/fisica</span>
+<span class="t-out">copia_seguridad.csv  practicas</span></code></pre>
+<p><code>cp</code> (<em>copy</em>) duplica: el original no se toca. <code>mv</code> (<em>move</em>) traslada: solo queda el destino. Y aquí viene el gesto que confunde a todo el mundo la primera vez: <strong>renombrar es mover</strong>. No hay comando «rename» — mover un fichero a otro nombre dentro de la misma carpeta <em>es</em> renombrarlo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">mv copia_seguridad.csv pendulo_v1.csv</span></code></pre>
+<p>Para copiar carpetas enteras con todo lo que contienen, <code>cp</code> necesita la opción <code>-r</code> (<em>recursive</em>): <code>cp -r practicas practicas_backup</code>.</p>
+<div id="fig-cpmvrm" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema comparando cp, que deja dos ficheros, mv, que deja solo el destino, y rm, que no deja ninguno">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cpmvrm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap02/fig-cp-mv-rm.svg" class="img-fluid figure-img" alt="Esquema comparando cp, que deja dos ficheros, mv, que deja solo el destino, y rm, que no deja ninguno">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cpmvrm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.1: Tres verbos, tres niveles de cuidado. <code>cp</code> es reversible por naturaleza; <code>mv</code> cambia el mapa; <code>rm</code> no tiene vuelta.
+</figcaption>
+</figure>
+</div>
+<div class="truco">
+<p><strong>✚ Truco · El tabulador vale doble aquí</strong></p>
+<p>En <code>cp</code> y <code>mv</code> casi todo son nombres de ficheros: territorio ideal del tabulador. <code>mv pen</code><kbd>Tab</kbd> completa el origen; y si el destino es una carpeta, <kbd>Tab</kbd> también la completa. Menos teclear, cero erratas — y recuerda: si Tab no completa, el fichero no está donde crees. Esa comprobación gratuita evita la mitad de los <code>mv</code> arrepentidos.</p>
+</div>
+</section>
+<section id="sec-rm" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-rm"><span class="header-section-number">2.4</span> Borrar: el comando sin papelera</h2>
+<p>Llegó el primer comando con consecuencias. <code>rm</code> (<em>remove</em>) borra ficheros, y <code>rm -r</code> borra carpetas con todo lo que contengan:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">rm pendulo_v1.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
+<span class="t-out">practicas</span></code></pre>
+<p>Ahora lee esto despacio, porque es de las frases importantes del curso: <strong><code>rm</code> no pasa por la papelera</strong>. No hay icono desde el que restaurar, no hay «deshacer». El espacio se marca como libre y el sistema lo reutilizará cuando quiera. En el escritorio llevas años protegido por la papelera del gestor de archivos; en la terminal, la protección eres tú.</p>
+<p>Tu red de seguridad son dos costumbres y una opción:</p>
+<ul>
+<li><strong>Antes de un <code>rm</code> con comodines, ensaya con <code>ls</code>.</strong> El mismo patrón que vas a borrar, pero listándolo: <code>ls run*.csv</code>. Lo que te enseñe <code>ls</code> es exactamente lo que borrará <code>rm</code>. Es tu predicción teórica antes del experimento irreversible.</li>
+<li><strong>En <code>rm -r</code>, ruta completa y tabulador</strong>, nunca escrita a mano.</li>
+<li>La opción <code>-i</code> (<em>interactive</em>) pide confirmación fichero a fichero: <code>rm -i *.tmp</code>.</li>
+</ul>
+<div class="aviso">
+<p><strong>△ Cuidado · La papelera gráfica sí perdona; <code>rm</code> no</strong></p>
+<p>Si arrastras un fichero a la papelera del escritorio de Mint, puedes recuperarlo: esa es la diferencia real entre las dos vías, y no es menor. Mientras aprendes, borra en tus carpetas de prácticas, no en tus datos reales — y recuerda que la regla del curso es que lo destructivo de verdad (particionar, formatear) vivirá siempre en la máquina virtual del bloque C.</p>
+</div>
+</section>
+<section id="sec-comodines" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-comodines"><span class="header-section-number">2.5</span> Comodines: hablar de familias enteras</h2>
+<p>Hasta ahora has nombrado los ficheros de uno en uno. Los <strong>comodines</strong> (<em>wildcards</em>) nombran familias: <code>*</code> significa «cualquier cosa, incluso nada» y <code>?</code> «exactamente un carácter». <code>run*.csv</code> son todos los CSV que empiecen por <code>run</code>; <code>run?.csv</code> solo los de un dígito.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">ls run*.csv</span>
+<span class="t-out">run1.csv  run2.csv  run3.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cp run*.csv ~/fisica/practicas/optica/datos/</span></code></pre>
+<p>Una sola línea acaba de copiar toda una serie de medidas. Este es el momento en que la terminal empieza a pagar el peaje de aprenderla: lo que en el gestor de archivos serían tres viajes de ratón (o treinta, con más runs), aquí es una orden.</p>
+<div id="fig-globbing" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema: el patrón run asterisco punto csv pasa por el shell, que lo convierte en una lista de nombres antes de ejecutar ls">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-globbing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap02/fig-globbing.svg" class="img-fluid figure-img" alt="Esquema: el patrón run asterisco punto csv pasa por el shell, que lo convierte en una lista de nombres antes de ejecutar ls">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-globbing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.2: Quién expande el patrón: el shell, no el programa. <code>ls</code> recibe la lista ya hecha.
+</figcaption>
+</figure>
+</div>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · El asterisco nunca llega al programa</strong></p>
+<p>La expansión (<em>globbing</em>) la hace el <strong>shell</strong>, antes de ejecutar nada: cuando <code>ls</code> arranca, ya recibe <code>run1.csv run2.csv run3.csv</code> como argumentos, y no sabe que hubo un asterisco. Por eso los comodines funcionan igual con <em>cualquier</em> comando, incluso con programas que escribas tú — nadie tuvo que programarlos. Y por eso, si el patrón no casa con nada, el programa recibe el asterisco tal cual y suele protestar: el shell no tenía nada que expandir.</p>
+</div>
+<div class="aviso">
+<p><strong>△ Cuidado · El espacio asesino</strong></p>
+<p><code>rm run*.csv</code> borra la familia <code>run…</code>. Pero <code>rm run* .csv</code> — con un espacio colado — son <em>dos</em> argumentos: la familia <code>run*</code> entera y un fichero llamado <code>.csv</code>. El shell expande y <code>rm</code> obedece sin preguntar. Es el accidente clásico de esta sesión: antes de cualquier <code>rm</code> con patrón, ensáyalo con <code>ls</code>. Siempre.</p>
+</div>
+</section>
+<section id="sec-find" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="sec-find"><span class="header-section-number">2.6</span> Encontrar: <code>find</code></h2>
+<p><code>ls</code> enseña lo que hay <em>aquí</em>; <code>find</code> busca <em>por todo el árbol</em>. Sus argumentos son un punto de partida y condiciones:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">find ~/fisica -name "*.csv"</span>
+<span class="t-out">/home/marcos/fisica/practicas/optica/datos/run1.csv</span>
+<span class="t-out">/home/marcos/fisica/practicas/optica/datos/run2.csv</span>
+<span class="t-out">/home/marcos/fisica/practicas/optica/datos/run3.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">find ~/fisica -type d</span>
+<span class="t-out">/home/marcos/fisica</span>
+<span class="t-out">/home/marcos/fisica/practicas</span>
+<span class="t-out">/home/marcos/fisica/practicas/optica</span>
+<span class="t-out">/home/marcos/fisica/practicas/optica/datos</span></code></pre>
+<p><code>-name</code> filtra por nombre (fíjate en las comillas: protegen el <code>*</code> para que lo expanda <code>find</code> y no el shell — acabas de usar lo que aprendiste en la caja anterior). <code>-type d</code> pide solo directorios; <code>-mtime -1</code>, solo lo modificado en el último día. En el capítulo 3, <code>find</code> se convertirá en el generador de listas que alimenta a todos los demás comandos.</p>
+</section>
+<section id="sec-nano" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="sec-nano"><span class="header-section-number">2.7</span> Editar: <code>nano</code> (y la verdad sobre <code>vim</code>)</h2>
+<p>Leer y organizar está bien; en algún momento hay que <em>escribir</em>. El editor de terminal del curso es <code>nano</code>, por una razón honesta: se aprende en un minuto y está en todas partes.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">nano practicas/optica/notas.txt</span></code></pre>
+<p>Se abre un editor a pantalla completa. Escribes como en cualquier sitio, y las dos teclas que importan están siempre rotuladas abajo: <kbd>Ctrl</kbd>+<kbd>O</kbd> guarda (<em>write Out</em>, confirma el nombre con <kbd>Intro</kbd>) y <kbd>Ctrl</kbd>+<kbd>X</kbd> sale. El símbolo <code>^</code> de la barra inferior significa <kbd>Ctrl</kbd>.</p>
+<p>¿Y para qué sirve un editor de terminal existiendo el editor gráfico de Mint? Hoy, para poco. Pero dentro de unas sesiones estarás dentro de un servidor remoto donde <strong>no hay ventanas</strong>: allí <code>nano</code> no es una opción retro, es la única mesa de trabajo. Lo aprendes hoy, en casa, para que ese día sea trámite.</p>
+<div class="historia">
+<p><strong>◷ Historia · Por qué <code>vim</code> asusta (y por qué existe)</strong></p>
+<p>El editor que verás mencionado con reverencia es <code>vim</code>. Su antepasado <code>ed</code> (1969) se diseñó para teletipos: sin pantalla, editar era dar órdenes a ciegas línea a línea — con papel, refrescar la vista costaba tinta. Cuando llegaron las pantallas nació <code>vi</code> (<em>visual</em>, 1976), que arrastra ese ADN: tiene <em>modos</em> — uno para órdenes y otro para escribir — y por eso millones de personas han tecleado texto y visto cómo el editor lo interpretaba como comandos. Es potentísimo y quizá lo ames algún día; este curso solo te pide saber salir si caes dentro por accidente: <kbd>Esc</kbd> y luego <code>:q!</code> e <kbd>Intro</kbd>. Ya formas parte del club de los que saben salir de vim.</p>
+</div>
+</section>
+<section id="sec-dotfiles" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="sec-dotfiles"><span class="header-section-number">2.8</span> Tus primeros <em>dotfiles</em></h2>
+<p>En el capítulo 1 descubriste con <code>ls -a</code> los ficheros ocultos de tu casa: los que empiezan por punto, los <em>dotfiles</em>. No están ocultos por secretos, sino por higiene: son configuración, y estarían en medio todo el día. Hoy vas a editar el más importante: <code>.bashrc</code>, el fichero que bash lee cada vez que abres una terminal.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">nano .bashrc</span></code></pre>
+<p>Baja hasta el final (con <kbd>Ctrl</kbd>+<kbd>V</kbd> avanzas página a página) y añade esta línea:</p>
+<pre class="terminal"><code><span class="t-out">alias ll='ls -lh'</span></code></pre>
+<p>Guarda y sal. Un <strong>alias</strong> es un atajo: a partir de ahora <code>ll</code> significará <code>ls -lh</code>. Para que la terminal actual se entere sin cerrarla, recarga la configuración:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">source ~/.bashrc</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ll</span>
+<span class="t-out">total 44K</span>
+<span class="t-out">drwxr-xr-x 2 marcos marcos 4,0K ago 24 10:12 Descargas</span>
+<span class="t-out">drwxr-xr-x 3 marcos marcos 4,0K ago 24 10:15 fisica</span></code></pre>
+<p>Acabas de configurar tu sistema editando un fichero de texto. Ese es el modo Linux de configurar <em>todo</em> — el capítulo 4 te enseñará cuántas cosas de tu máquina son exactamente esto: un fichero de texto en el sitio correcto.</p>
+<div id="fig-ramac" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Pila de platos del disco duro IBM RAMAC en un museo">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ramac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap02/ramac-discos.jpg" class="img-fluid figure-img" style="width:60.0%" alt="Pila de platos del disco duro IBM RAMAC en un museo">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ramac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.3: El mecanismo de acceso del IBM 350 RAMAC (1956), el primer disco duro comercial: cincuenta platos, cinco megabytes, casi una tonelada. Tus ficheros de hoy viven en el mismo concepto, un billón de veces más denso. <em>Foto: ArnoldReinhold, CC BY-SA 3.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-practica-2" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-practica-2"><span class="header-section-number">2.9</span> Práctica: poner orden en el laboratorio</h2>
+<p>Sesión de campo. Te ha llegado el directorio de un experimento tal como quedó el último día: duplicados, nombres con espacios, un run inservible y ficheros temporales. Tu misión: dejarlo presentable usando todo lo de esta sesión.</p>
+<p>Arranca tu cuaderno (<code>script sesion02.log</code>) y descarga <a href="../datos/cap02/experimento-desordenado.zip" download="experimento-desordenado.zip"><code>experimento-desordenado.zip</code></a>. Extráelo como prefieras — doble clic en el gestor de archivos vale: descomprimir es una de esas cosas que la vía gráfica hace perfectamente bien. Te quedará una carpeta <code>experimento-pendulo</code> en <code>~/Descargas</code>.</p>
+<div id="fig-orden" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dos paneles: la lista caótica de ficheros original y la estructura final organizada en datos, descartes y notas">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-orden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap02/fig-orden.svg" class="img-fluid figure-img" alt="Dos paneles: la lista caótica de ficheros original y la estructura final organizada en datos, descartes y notas">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.4: El plan de la expedición: de la carpeta heredada al experimento presentable.
+</figcaption>
+</figure>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.1 · Reconocimiento</strong></p>
+<p>Entra en la carpeta y haz inventario completo — incluido lo oculto. Después mira dentro de <code>registro.log</code> y de las notas: ¿qué run está mal y por qué? ¿Qué dos ficheros son en realidad el mismo?</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>cd ~/Descargas/experimento-pendulo</code>, <code>ls -a</code> (aparece <code>.config_sensor</code>), y <code>cat registro.log</code> o <code>less</code> sobre las notas. El log canta: <code>ERROR sensor congelado en 45.0 (run6)</code> — y <code>head medidas_run6_MALO.csv</code> lo confirma: todos los ángulos valen ~45. Las notas del día 2 confiesan que <code>run 4.csv</code> y <code>run5 (otra copia).csv</code> son el mismo run guardado dos veces.</p>
+<p><strong>Por qué así</strong> — Antes de mover o borrar nada, un físico lee el cuaderno del experimento. <code>head</code> te deja <em>ver</em> el fallo del sensor en los datos sin abrir ningún programa: eso es diagnosticar desde la terminal.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.2 · Copia de seguridad primero</strong></p>
+<p>Antes de tocar nada: haz una copia completa de la carpeta, llamada <code>experimento-pendulo-original</code>. Comprueba que la copia existe y tiene lo mismo.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Desde <code>~/Descargas</code>: <code>cp -r experimento-pendulo experimento-pendulo-original</code>, y comprobación con <code>ls experimento-pendulo-original</code> (o <code>ls -a</code>, si quieres verificar que el oculto también viajó — sí: <code>-r</code> copia todo).</p>
+<p><strong>Por qué así</strong> — Regla de oro antes de reorganizar datos reales: copia primero, ordena después. <code>cp -r</code> convierte «espero no equivocarme» en «da igual si me equivoco». El coste es un comando; el seguro, total.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.3 · Estructura</strong></p>
+<p>Dentro de <code>experimento-pendulo</code>, crea de una sola orden la estructura <code>datos/</code>, <code>descartes/</code> y <code>notas/</code>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>mkdir datos descartes notas</code> — <code>mkdir</code> acepta varios argumentos y los crea todos. (También valía tres <code>mkdir</code> seguidos; y si hubieras querido niveles anidados, <code>-p</code>.)</p>
+<p><strong>Por qué así</strong> — Un comando, varios argumentos: la gramática del capítulo 1 trabajando para ti. La estructura antes que el contenido: primero las estanterías, luego los libros.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.4 · La serie, en limpio</strong></p>
+<p>Lleva los cinco runs buenos a <code>datos/</code> con nombres uniformes <code>run01.csv</code> … <code>run05.csv</code> (recuerda las comillas para los nombres con espacios), y el run malo a <code>descartes/</code> con un nombre que avise: <code>run06_sensor_malo.csv</code>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Cinco <code>mv</code> con renombrado incluido — mover y renombrar son el mismo gesto:</p>
+<p><code>mv run1.csv datos/run01.csv</code> · <code>mv Run02.csv datos/run02.csv</code> · <code>mv RUN_3.csv datos/run03.csv</code> · <code>mv "run 4.csv" datos/run04.csv</code> · <code>mv "run5 (otra copia).csv" datos/run05.csv</code> · <code>mv medidas_run6_MALO.csv descartes/run06_sensor_malo.csv</code></p>
+<p><strong>Por qué así</strong> — Las comillas protegen los espacios y paréntesis: sin ellas, <code>run 4.csv</code> serían dos argumentos y <code>mv</code> protestaría (o algo peor). ¿Tedioso uno a uno? Sí — el renombrado <em>en lote</em> de verdad llega cuando sepas encadenar comandos: esta molestia de hoy es la motivación del capítulo 3. Y fíjate: <code>run01</code> y no <code>run1</code>, para que el orden alfabético coincida con el numérico cuando haya más de nueve.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.5 · Limpieza fina</strong></p>
+<p>Mueve las notas a <code>notas/</code> (renombrándolas a <code>dia1.txt</code> y <code>dia2.txt</code>), y borra lo que no aporta nada: el temporal y el <code>.bak</code>. Ensaya el borrado con <code>ls</code> antes de ejecutarlo.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>mv "notas dia 1.txt" notas/dia1.txt</code> y <code>mv notas_dia2.txt notas/dia2.txt</code>. Para el borrado, primero el ensayo: <code>ls *.tmp *.bak</code> — lista exactamente <code>borrame.tmp</code> y <code>pendulo.csv.bak</code>, nada más. Ahora sí: <code>rm *.tmp *.bak</code>.</p>
+<p><strong>Por qué así</strong> — El par <code>ls</code>-luego-<code>rm</code> con el mismo patrón es la red de seguridad de esta sesión: la predicción antes de la medida irreversible. Si el <code>ls</code> hubiera enseñado algo inesperado, habrías corregido el patrón sin coste. <code>calibracion.txt</code> y <code>temperatura_lab.csv</code> se quedan: son datos del experimento, no basura.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 2.6 · El censo final</strong></p>
+<p>Sin moverte de <code>experimento-pendulo</code>: obtén con un solo comando la lista de todos los <code>.csv</code> que quedan, estén en la subcarpeta que estén. ¿Cuántos hay? ¿Coincide con lo esperado?</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>find . -name "*.csv"</code> — deben salir siete: cinco en <code>datos/</code>, uno en <code>descartes/</code> y <code>temperatura_lab.csv</code> en la raíz de la carpeta. (Las comillas en <code>"*.csv"</code>: el patrón es para <code>find</code>, no para el shell.)</p>
+<p><strong>Por qué así</strong> — <code>ls</code> mira una carpeta; <code>find</code> recorre el árbol entero. Ese censo final contra lo esperado es el control de calidad del experimentalista: no «creo que está ordenado», sino «lo he contado». Cierra tu cuaderno con <code>exit</code> y guarda <code>sesion02.log</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-2" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="sec-quiz-2"><span class="header-section-number">2.10</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap02">
+  <div class="qz"><p class="qq" data-n="1">Quieres cambiar el nombre de <code>datos.csv</code> a <code>run01.csv</code>. ¿Qué comando usas?</p>
+    <label><input type="radio" name="z1" value="a"><span><code>cp datos.csv run01.csv</code></span></label>
+    <label><input type="radio" name="z1" value="b"><span><code>mv datos.csv run01.csv</code></span></label>
+    <label><input type="radio" name="z1" value="c"><span><code>rename datos.csv run01.csv</code></span></label>
+    <div class="fb good"><b>Correcto.</b> Renombrar es mover al nuevo nombre: mismo gesto, mismo comando.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>cp</code> te dejaría dos ficheros, y el comando estándar de renombrar es precisamente <code>mv</code>: mover y renombrar son lo mismo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Borras un fichero con <code>rm</code> y te arrepientes al instante. ¿Qué puedes hacer?</p>
+    <label><input type="radio" name="z2" value="a"><span>abrir la papelera y restaurarlo</span></label>
+    <label><input type="radio" name="z2" value="b"><span>pulsar Ctrl+Z en la terminal</span></label>
+    <label><input type="radio" name="z2" value="c"><span>nada razonable: <code>rm</code> no pasa por la papelera</span></label>
+    <div class="fb good"><b>Correcto.</b> Por eso la red de seguridad va <em>antes</em>: ensayar con <code>ls</code>, usar <code>-i</code>, y practicar en carpetas de prueba.</div>
+    <div class="fb bad"><b>No exactamente.</b> La papelera es cosa del gestor gráfico, y Ctrl+Z no deshace comandos ya ejecutados. <code>rm</code> es definitivo: la protección es ensayar antes con <code>ls</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">En <code>ls run*.csv</code>, ¿quién convierte <code>run*.csv</code> en la lista de nombres?</p>
+    <label><input type="radio" name="z3" value="a"><span>el shell, antes de ejecutar <code>ls</code></span></label>
+    <label><input type="radio" name="z3" value="b"><span>el propio <code>ls</code>, al arrancar</span></label>
+    <label><input type="radio" name="z3" value="c"><span>la terminal, al dibujar la línea</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>ls</code> nunca ve el asterisco: recibe la lista ya expandida. Por eso los comodines funcionan con cualquier programa.</div>
+    <div class="fb bad"><b>No exactamente.</b> La expansión es trabajo del shell, antes de ejecutar nada — <code>ls</code> recibe los nombres ya listados. Revisa la figura del globbing.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Quieres copiar la carpeta <code>practicas</code> con todo su contenido. ¿Qué necesitas?</p>
+    <label><input type="radio" name="z4" value="a"><span><code>cp practicas backup</code></span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>cp -r practicas backup</code></span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>mv practicas backup</code></span></label>
+    <div class="fb good"><b>Correcto.</b> <code>-r</code> (recursivo) hace que <code>cp</code> baje por toda la carpeta. Sin él, <code>cp</code> se niega a copiar directorios.</div>
+    <div class="fb bad"><b>No exactamente.</b> Para carpetas hace falta <code>cp -r</code> (recursivo); <code>mv</code> la movería en vez de copiarla.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Estás dentro de <code>nano</code> y quieres guardar y salir. La secuencia es…</p>
+    <label><input type="radio" name="z5" value="a"><span><kbd>Ctrl</kbd>+<kbd>O</kbd>, <kbd>Intro</kbd>, <kbd>Ctrl</kbd>+<kbd>X</kbd></span></label>
+    <label><input type="radio" name="z5" value="b"><span><kbd>Esc</kbd> y luego <code>:q!</code></span></label>
+    <label><input type="radio" name="z5" value="c"><span>cerrar la ventana de la terminal</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>^O</code> guarda (confirmas el nombre con Intro) y <code>^X</code> sale. Está siempre rotulado en la barra inferior.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>Esc :q!</code> es el gesto de escape de <em>vim</em> (y además descarta cambios). En nano todo está rotulado abajo: <code>^O</code> guarda, <code>^X</code> sale.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">¿Por qué <code>find . -name "*.csv"</code> lleva comillas en el patrón?</p>
+    <label><input type="radio" name="z6" value="a"><span>por estética: sin ellas funciona igual siempre</span></label>
+    <label><input type="radio" name="z6" value="b"><span>para que el asterisco le llegue a <code>find</code>, y no lo expanda antes el shell</span></label>
+    <label><input type="radio" name="z6" value="c"><span>porque los nombres con espacios lo exigen</span></label>
+    <div class="fb good"><b>Correcto.</b> Sin comillas, el shell expandiría <code>*.csv</code> contra la carpeta actual antes de ejecutar <code>find</code>, y el resultado dependería de dónde estés.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es lo del globbing al revés: aquí el patrón es <em>para</em> <code>find</code>, así que hay que protegerlo del shell con comillas para que llegue intacto.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"c", z3:"a", z4:"b", z5:"a", z6:"b"};
+  document.querySelectorAll("#quiz-cap02 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 2.10)</strong> — Respuestas: 1 b · 2 c · 3 a · 4 b · 5 a · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Hoy has renombrado cinco runs a mano y te ha sabido a poco elegante — bien: esa molestia es la puerta del capítulo 3. Los comandos dejan de trabajar solos y empiezan a encadenarse: la salida de uno como entrada del siguiente, <code>grep</code>, <code>sort</code> y las tuberías. El análisis completo de un log de adquisición sin abrir Python — y saber cuándo sí conviene abrirlo. Guarda <code>sesion02.log</code>: ya tienes dos medidas en tu cuaderno.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 2 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion02.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap01.html" class="pagination-link" aria-label="Abrir la caja negra">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

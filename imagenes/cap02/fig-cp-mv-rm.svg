@@ -1,0 +1,36 @@
+<svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Qué hace cada comando: cp copia, mv mueve, rm destruye">
+  <defs>
+    <marker id="fcp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+    <marker id="fmv" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#9A6A14"/></marker>
+    <marker id="frm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#C4342A"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- fila cp -->
+    <text x="30" y="52" font-size="15" fill="#2F6F62" font-weight="600">cp</text>
+    <rect x="90" y="30" width="120" height="34" rx="3" fill="#FAF6EB" stroke="#2F6F62" stroke-width="1.4"/>
+    <text x="150" y="51" font-size="12" fill="#2B2318" text-anchor="middle">datos.csv</text>
+    <line x1="220" y1="47" x2="330" y2="47" stroke="#2F6F62" stroke-width="1.6" marker-end="url(#fcp)"/>
+    <rect x="340" y="30" width="120" height="34" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.4"/>
+    <text x="400" y="51" font-size="12" fill="#2B2318" text-anchor="middle">copia.csv</text>
+    <text x="490" y="45" font-size="11" fill="#6A5F4D">quedan las dos:</text>
+    <text x="490" y="60" font-size="11" fill="#2F6F62">el original no se toca</text>
+    <!-- fila mv -->
+    <text x="30" y="137" font-size="15" fill="#9A6A14" font-weight="600">mv</text>
+    <rect x="90" y="115" width="120" height="34" rx="3" fill="none" stroke="#9C8F79" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="150" y="136" font-size="12" fill="#9C8F79" text-anchor="middle">datos.csv</text>
+    <line x1="220" y1="132" x2="330" y2="132" stroke="#9A6A14" stroke-width="1.6" marker-end="url(#fmv)"/>
+    <rect x="340" y="115" width="120" height="34" rx="3" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.4"/>
+    <text x="400" y="136" font-size="12" fill="#2B2318" text-anchor="middle">run01.csv</text>
+    <text x="490" y="130" font-size="11" fill="#6A5F4D">solo queda el destino:</text>
+    <text x="490" y="145" font-size="11" fill="#9A6A14">mover y renombrar son lo mismo</text>
+    <!-- fila rm -->
+    <text x="30" y="222" font-size="15" fill="#C4342A" font-weight="600">rm</text>
+    <rect x="90" y="200" width="120" height="34" rx="3" fill="none" stroke="#9C8F79" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="150" y="221" font-size="12" fill="#9C8F79" text-anchor="middle">datos.csv</text>
+    <line x1="220" y1="217" x2="330" y2="217" stroke="#C4342A" stroke-width="1.6" marker-end="url(#frm)"/>
+    <text x="358" y="224" font-size="20" fill="#C4342A" font-weight="600">✕</text>
+    <text x="490" y="215" font-size="11" fill="#6A5F4D">no pasa por la papelera:</text>
+    <text x="490" y="230" font-size="11" fill="#C4342A" font-weight="600">no hay vuelta atrás</text>
+    <text x="350" y="278" font-size="11.5" fill="#6A5F4D" text-anchor="middle">tres verbos, tres niveles de cuidado: copiar es seguro · mover cambia el mapa · borrar es definitivo</text>
+  </g>
+</svg>
