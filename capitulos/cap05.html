@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Paquetes y procesos – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../capitulos/cap04.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-apt" id="toc-sec-apt" class="nav-link active" data-scroll-target="#sec-apt"><span class="header-section-number">5.1</span> Instalar por debajo del envoltorio</a></li>
+  <li><a href="#sec-distro" id="toc-sec-distro" class="nav-link" data-scroll-target="#sec-distro"><span class="header-section-number">5.2</span> Qué es una distro (ahora ya lo puedes entender)</a></li>
+  <li><a href="#sec-procesos" id="toc-sec-procesos" class="nav-link" data-scroll-target="#sec-procesos"><span class="header-section-number">5.3</span> Qué está pasando ahora mismo: procesos</a></li>
+  <li><a href="#sec-kill" id="toc-sec-kill" class="nav-link" data-scroll-target="#sec-kill"><span class="header-section-number">5.4</span> Terminar lo colgado: señales y <code>kill</code></a></li>
+  <li><a href="#sec-background" id="toc-sec-background" class="nav-link" data-scroll-target="#sec-background"><span class="header-section-number">5.5</span> Segundo plano: el <code>&amp;</code></a></li>
+  <li><a href="#sec-path" id="toc-sec-path" class="nav-link" data-scroll-target="#sec-path"><span class="header-section-number">5.6</span> El <code>$PATH</code>: la deuda del <code>./</code></a></li>
+  <li><a href="#sec-practica-5" id="toc-sec-practica-5" class="nav-link" data-scroll-target="#sec-practica-5"><span class="header-section-number">5.7</span> Práctica: el taller</a></li>
+  <li><a href="#sec-quiz-5" id="toc-sec-quiz-5" class="nav-link" data-scroll-target="#sec-quiz-5"><span class="header-section-number">5.8</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap05" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Dos misterios cotidianos caen hoy. Primero: qué pasa de verdad cuando el Gestor de software instala un programa — vas a hacerlo tú por debajo, con <code>apt</code>. Segundo: qué está <em>ejecutándose</em> ahora mismo en tu máquina, cómo vigilarlo y cómo rematar un programa colgado. Y de postre, la deuda del capítulo 4: por qué <code>./</code>, qué es el <code>$PATH</code>, y el clásico «este no es mi Python» que algún día te robará una tarde si hoy no lo desactivamos.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 1–4</strong> · máquina: <strong>tu Linux de diario</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Instalar, buscar y desinstalar programas con <code>apt</code>, y qué son un repositorio y una dependencia.</li>
+<li>La diferencia exacta entre <code>apt update</code> y <code>apt upgrade</code> (y por qué van siempre en pareja).</li>
+<li>Qué es una distro de verdad — kernel, utilidades, paquetes, escritorio — y de qué familia es tu Mint.</li>
+<li>Ver los procesos vivos con <code>ps</code>, <code>top</code> y <code>htop</code>, y terminar uno colgado con <code>kill</code>.</li>
+<li>Lanzar tareas en segundo plano con <code>&amp;</code>.</li>
+<li>Leer el <code>$PATH</code>: por qué <code>./</code>, y por qué a veces <code>python</code> no es el Python que crees.</li>
+</ul>
+</div>
+<section id="sec-apt" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-apt"><span class="header-section-number">5.1</span> Instalar por debajo del envoltorio</h2>
+<p>Cada vez que el Gestor de software de Mint instala algo, quien trabaja es <code>apt</code> (<em>Advanced Package Tool</em>). Un programa en Linux se distribuye como <strong>paquete</strong> — el programa, más sus metadatos: versión, de qué otros paquetes depende — y los paquetes viven en <strong>repositorios</strong>: almacenes en internet mantenidos por tu distro, con decenas de miles de paquetes verificados. Tu máquina guarda un <strong>catálogo local</strong> con la lista de lo que existe; instalar es elegir del catálogo.</p>
+<div id="fig-apt" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del repositorio en internet, el catálogo local que refresca apt update, y el sistema donde instalan apt install y apt upgrade">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-apt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap05/fig-apt.svg" class="img-fluid figure-img" alt="Esquema del repositorio en internet, el catálogo local que refresca apt update, y el sistema donde instalan apt install y apt upgrade">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-apt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.1: El triángulo de <code>apt</code>. La confusión clásica del principiante es creer que <code>update</code> actualiza programas: solo refresca la lista.
+</figcaption>
+</figure>
+</div>
+<p>Vamos a instalar algo útil para el resto del capítulo. Tres pasos: refrescar el catálogo, buscar, instalar — los dos que tocan el sistema piden <code>sudo</code>, y ahora sabes exactamente por qué:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt update</span>
+<span class="t-out">[sudo] contraseña de marcos:</span>
+<span class="t-out">Obj:1 http://packages.linuxmint.com xia InRelease</span>
+<span class="t-out">Des:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]</span>
+<span class="t-out">Leyendo lista de paquetes... Hecho</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">apt search ^htop</span>
+<span class="t-out">htop/noble 3.3.0-4 amd64</span>
+<span class="t-out">  interactive processes viewer</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install htop</span>
+<span class="t-out">Leyendo lista de paquetes... Hecho</span>
+<span class="t-out">Creando árbol de dependencias... Hecho</span>
+<span class="t-out">Se instalarán los siguientes paquetes NUEVOS:</span>
+<span class="t-out">  htop</span>
+<span class="t-out">Configurando htop (3.3.0-4) ...</span></code></pre>
+<p>Fíjate en «árbol de dependencias»: si el paquete necesita bibliotecas que no tienes, <code>apt</code> las localiza, las trae y las instala en el orden correcto, solo. Esa resolución automática — que hoy parece obvia — es el gran invento de este sistema. Desinstalar es <code>sudo apt remove htop</code>; y la pareja <code>sudo apt update &amp;&amp; sudo apt upgrade</code> es exactamente lo que el escudito de actualizaciones de Mint hace por ti cada semana.</p>
+<div class="truco">
+<p><strong>✚ Truco · Las dos caras del mismo catálogo</strong></p>
+<p>El Gestor de software y Synaptic (el gestor gráfico veterano, más detallista) son <em>interfaces</em> del mismo <code>apt</code>: mismo catálogo, mismos paquetes, mismos botones de fondo. Para descubrir software con capturas y reseñas, la vía gráfica es estupenda. La terminal gana en precisión — versiones exactas, <code>apt show</code> — y sobre todo donde no hay botones: tu futuro servidor. Usa la que pida el momento.</p>
+</div>
+</section>
+<section id="sec-distro" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-distro"><span class="header-section-number">5.2</span> Qué es una distro (ahora ya lo puedes entender)</h2>
+<p>Con el vocabulario de hoy, la pregunta «¿qué Linux tienes?» por fin tiene respuesta técnica. <strong>Linux</strong>, en rigor, es solo el kernel: el núcleo que habla con el hardware. Encima van las utilidades del sistema (bash, <code>ls</code>, <code>grep</code>… — el proyecto GNU), encima el sistema de paquetes con sus repositorios, y encima el escritorio. Una <strong>distribución</strong> es una elección concreta y empaquetada de todas esas capas.</p>
+<div id="fig-distro" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Pila de capas de una distro: kernel, utilidades, paquetes y escritorio, junto a la genealogía Debian, Ubuntu, Mint">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap05/fig-distro.svg" class="img-fluid figure-img" alt="Pila de capas de una distro: kernel, utilidades, paquetes y escritorio, junto a la genealogía Debian, Ubuntu, Mint">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.2: Las capas, y la familia. Cambiar de escritorio es cambiar la capa de arriba; cambiar de familia de paquetes ya es mudarse.
+</figcaption>
+</figure>
+</div>
+<p>Tu Mint pertenece a la familia Debian: hereda de Ubuntu, que hereda de Debian, y por eso este capítulo te sirve igual en las tres — y en el Debian <em>sin escritorio</em> que instalarás en el bloque C. Cuando leas «Fedora usa <code>dnf</code>» o «Arch usa <code>pacman</code>», ya sabes qué significa: otra familia, otro gestor de paquetes, mismas ideas. Y los escritorios — Cinnamon en tu Mint, GNOME, KDE, Xfce — son la capa más visible y la menos profunda: mismo sistema debajo, distinta carrocería.</p>
+<div class="historia">
+<p><strong>◷ Historia · Debra, Ian, y el infierno de las dependencias</strong></p>
+<p>Debian nació en 1993, bautizado por su creador con su nombre y el de su pareja: <strong>Deb</strong>ra + <strong>Ian</strong> Murdock. Su gran legado llegó en 1998 con <code>apt</code>: hasta entonces, instalar un programa era perseguir a mano la cadena de bibliotecas que necesitaba — el «infierno de las dependencias» que todavía traumatiza a los veteranos. La resolución automática de <code>apt</code> lo enterró, y la idea es hoy universal: <code>pip</code> y <code>conda</code> en Python son descendientes directos de ese concepto. Cuando esta tarde <code>apt</code> te resuelva un árbol de dependencias en un segundo, levanta la vista un momento: estás viendo el invento de Ian.</p>
+</div>
+<div id="fig-murdock" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Ian Murdock hablando en una conferencia en 2008">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-murdock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap05/ian-murdock-2008.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Ian Murdock hablando en una conferencia en 2008">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-murdock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.3: Ian Murdock (1973–2015), fundador de Debian, en 2008. Todo lo que instale tu Mint pasa por la arquitectura que él empezó. <em>Foto: Ilya Schurov, CC BY-SA 2.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-procesos" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-procesos"><span class="header-section-number">5.3</span> Qué está pasando ahora mismo: procesos</h2>
+<p>Un <strong>proceso</strong> es un programa <em>en ejecución</em>: el fichero ejecutable era la partitura, el proceso es el concierto. Cada uno tiene un número único — el <strong>PID</strong> — y un dueño, con sus permisos del capítulo 4. <code>ps</code> los lista; la variante que verás en todas partes es <code>ps aux</code> (todos los procesos, de todos los usuarios, con detalle):</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ps aux | wc -l</span>
+<span class="t-out">312</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ps aux | grep firefox</span>
+<span class="t-out">marcos     8113  4.2  3.1 ... /usr/lib/firefox/firefox</span></code></pre>
+<p>Trescientos procesos y solo tienes tres ventanas abiertas: el resto es el sistema trabajando — servicios, el escritorio, controladores. Y sí: acabas de filtrar procesos con las tuberías del capítulo 3, porque <code>ps</code> escupe texto como todo el mundo.</p>
+<p>Para <em>vigilar</em> en directo está <code>top</code>, y su versión moderna — la que instalaste hace un rato — <code>htop</code>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">htop</span></code></pre>
+<p>Un panel vivo: barras de CPU por núcleo, memoria, y la lista de procesos ordenada por consumo, actualizándose sola. Se sale con <kbd>q</kbd>, como en <code>less</code> — y con <kbd>F6</kbd> eliges por qué columna ordenar. Cuando el ventilador de tu portátil despegue en mitad de una simulación, <code>htop</code> es la primera ventanilla de información: qué proceso, cuánta CPU, cuánta memoria.</p>
+<div class="truco">
+<p><strong>✚ Truco · La versión con gráficas</strong></p>
+<p>El Monitor del sistema de Mint (menú → Administración) es esta misma información con gráficas de colores — perfectamente digno para un vistazo rápido. <code>htop</code> gana en detalle, en velocidad… y en que funciona idéntico dentro del servidor sin ventanas al que te conectarás por SSH. Aprendido una vez, vale en todas partes.</p>
+</div>
+</section>
+<section id="sec-kill" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-kill"><span class="header-section-number">5.4</span> Terminar lo colgado: señales y <code>kill</code></h2>
+<p>El caso real: tu script de análisis lleva veinte minutos en un bucle del que no va a salir. Los procesos se gobiernan mandándoles <strong>señales</strong>. Una ya la usas sin saberlo: <kbd>Ctrl</kbd>+<kbd>C</kbd> en la terminal envía SIGINT — «interrúmpete» — al proceso que ocupa el primer plano. Para un proceso que no está en tu terminal, la señal se envía por PID:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ps aux | grep analisis</span>
+<span class="t-out">marcos    9204 98.7  0.4 ... python analisis.py</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">kill 9204</span></code></pre>
+<p><code>kill</code>, pese al nombre, es educado: envía SIGTERM — «termina, por favor» — y el proceso puede cerrar ficheros y despedirse. Si lo ignora, queda el recurso final: <code>kill -9</code>, SIGKILL, que no se puede ignorar ni atender — el kernel lo elimina en seco. La diferencia importa: es apagar la centrífuga con su rampa de frenado frente a cortarle la corriente. La segunda funciona siempre, pero lo que hubiera a medio escribir se queda a medias. Protocolo: primero <code>kill</code>, cinco segundos de cortesía, y solo entonces <code>kill -9</code>.</p>
+</section>
+<section id="sec-background" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-background"><span class="header-section-number">5.5</span> Segundo plano: el <code>&amp;</code></h2>
+<p>Hasta hoy, cada comando secuestra tu terminal hasta terminar. Un <code>&amp;</code> al final lo lanza al <strong>segundo plano</strong> y te devuelve el prompt:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sleep 600 &amp;</span>
+<span class="t-out">[1] 9871</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">jobs</span>
+<span class="t-out">[1]+  Ejecutando              sleep 600 &amp;</span></code></pre>
+<p>El shell te dice su número de trabajo <code>[1]</code> y su PID. <code>jobs</code> lista lo que tienes en marcha; <code>fg</code> lo trae de vuelta al primer plano; y si un comando ya lanzado te está reteniendo, <kbd>Ctrl</kbd>+<kbd>Z</kbd> lo pausa y <code>bg</code> lo reanuda detrás. Para una simulación de diez minutos mientras sigues trabajando, esto basta. Para una de diez <em>horas</em> en un servidor remoto hará falta algo más robusto — se llama <code>tmux</code>, y es el plato fuerte del capítulo 12. El <code>&amp;</code> de hoy es su semilla.</p>
+</section>
+<section id="sec-path" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-path"><span class="header-section-number">5.6</span> El <code>$PATH</code>: la deuda del <code>./</code></h2>
+<p>Toca pagar lo prometido. El shell guarda <strong>variables de entorno</strong> — datos con nombre que los programas heredan. Míralas: <code>env</code> las lista todas; <code>echo</code> imprime una:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">echo $HOME</span>
+<span class="t-out">/home/marcos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">echo $PATH</span>
+<span class="t-out">/home/marcos/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</span></code></pre>
+<p>Esa lista separada por <code>:</code> es el <strong>PATH</strong>: los directorios donde el shell busca, <em>en orden</em>, cada comando que tecleas. Escribes <code>ls</code>, el shell recorre la lista, lo encuentra en <code>/usr/bin</code> y lo ejecuta. <code>which</code> te dice quién ganó la búsqueda:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">which ls</span>
+<span class="t-out">/usr/bin/ls</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">which python3</span>
+<span class="t-out">/usr/bin/python3</span></code></pre>
+<div id="fig-path" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El shell busca el comando python recorriendo los directorios del PATH en orden; el entorno de conda va primero y gana">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap05/fig-path.svg" class="img-fluid figure-img" alt="El shell busca el comando python recorriendo los directorios del PATH en orden; el entorno de conda va primero y gana">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.4: La búsqueda del PATH, y sus dos moraleja: el orden decide, y <code>./</code> se la salta.
+</figcaption>
+</figure>
+</div>
+<p>Y aquí las dos respuestas pendientes. <strong>Por qué <code>./</code></strong>: el directorio actual <em>no</em> está en el PATH — es una decisión de seguridad, para que entrar en una carpeta ajena no pueda ejecutarte programas por sorpresa —, así que a tus scripts se les da la ruta explícita: <code>./informe.sh</code>. <strong>Y el «no es mi Python»</strong>: herramientas como conda funcionan <em>anteponiendo</em> su directorio al PATH cuando activas un entorno. Desde ese momento, <code>python</code> es el suyo — con sus paquetes, su versión — y no el del sistema:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">conda activate tfg</span>
+<span class="t-out">(tfg) marcos@portatil:~$ which python</span>
+<span class="t-out">/home/marcos/miniconda3/envs/tfg/bin/python</span></code></pre>
+<div class="aviso">
+<p><strong>△ Cuidado · El primer gesto ante «aquí falta un paquete»</strong></p>
+<p>El clásico: «en mi terminal funciona, en Jupyter no encuentra numpy» — o al revés. Antes de reinstalar nada a lo loco, dos comandos de diagnóstico: <code>which python</code> (¿<em>qué</em> Python está respondiendo?) y <code>echo $PATH</code> (¿quién va primero en la cola?). El noventa por ciento de esos misterios es un entorno activado — o sin activar — cambiando quién gana la búsqueda. Ahora tienes el instrumento para verlo en diez segundos.</p>
+</div>
+</section>
+<section id="sec-practica-5" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-practica-5"><span class="header-section-number">5.7</span> Práctica: el taller</h2>
+<p>Cuaderno en marcha (<code>script sesion05.log</code>). Hoy instalarás software de verdad — todo reversible con <code>apt remove</code>.</p>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.1 · Tu primera instalación completa</strong></p>
+<p>Instala el paquete <code>tree</code> con el ciclo completo: refresca el catálogo, búscalo, léelo (<code>apt show tree</code> — mira su descripción y su campo <code>Depends:</code>), instálalo. Después estrénalo: <code>tree ~/Descargas/experimento-pendulo</code>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo apt update</code>, <code>apt search ^tree</code>, <code>apt show tree</code>, <code>sudo apt install tree</code>. Y el estreno dibuja tu trabajo del capítulo 2:</p>
+<pre><code>experimento-pendulo
+├── datos
+│   ├── run01.csv
+│   ├── ...
+├── descartes
+├── notas
+├── LEEME.txt
+└── registro.log</code></pre>
+<p><strong>Por qué así</strong> — <code>apt show</code> antes de instalar es el hábito sano: qué es, cuánto ocupa, de qué depende (<code>Depends: libc6</code> — la biblioteca C que comparte casi todo el sistema). Buscar, leer, instalar: el mismo rigor que con un reactivo nuevo en el laboratorio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.2 · El censo de procesos</strong></p>
+<p>¿Cuántos procesos corren en tu máquina? ¿Y cuántos pertenecen a cada usuario? Para lo segundo, <code>ps -eo user</code> te da la columna de dueños limpia — termina tú la tubería (capítulo 3) que produce el ranking.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ps aux | wc -l</code> (unos 300) y <code>ps -eo user | sort | uniq -c | sort -nr | head -3</code> — root encabeza, tú segundo, y el resto son cuentas de servicio del capítulo 4.</p>
+<p><strong>Por qué así</strong> — ¿Por qué <code>ps -eo user</code> y no <code>ps aux | cut -d' ' -f1</code>? Prueba el <code>cut</code> y verás rarezas: <code>ps aux</code> alinea columnas con <em>varios</em> espacios seguidos, y para <code>cut</code> cada espacio separa un campo. La lección del log del capítulo 3, reapareciendo: antes de cortar, mira cómo está separado de verdad. Aquí es más limpio pedirle a <code>ps</code> la columna exacta.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.3 · Caza controlada</strong></p>
+<p>Lanza <code>sleep 600 &amp;</code>. Localiza su PID de dos maneras distintas (<code>jobs -l</code> y <code>ps aux | grep</code>), termínalo educadamente, y verifica que ya no está.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sleep 600 &amp;</code>, luego <code>jobs -l</code> (muestra el PID junto al <code>[1]</code>) o <code>ps aux | grep sleep</code>. Con el número: <code>kill 9871</code> (el tuyo será otro). Verificación: <code>jobs</code> vacío, o <code>ps aux | grep sleep</code> sin resultado — salvo, quizá, ¡el propio <code>grep sleep</code> cazándose a sí mismo en la lista! Es el clásico bucle del aprendiz: el grep aparece porque él también es un proceso cuya línea de comando contiene «sleep».</p>
+<p><strong>Por qué así</strong> — <code>sleep</code> es el conejillo perfecto: un proceso inofensivo que hace exactamente nada durante N segundos. El protocolo practicado — localizar, <code>kill</code>, verificar — es idéntico para la simulación colgada de verdad.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.4 · update no es upgrade</strong></p>
+<p>Sin ejecutarlos: escribe en tu cuaderno qué hará exactamente cada mitad de <code>sudo apt update &amp;&amp; sudo apt upgrade</code>. Después ejecuta la pareja y comprueba tu predicción con la salida real.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>update</code> descarga las listas nuevas del repositorio: al final resume cuántos paquetes «se pueden actualizar» — pero no toca ninguno. <code>upgrade</code> compara esas listas con lo instalado y trae las versiones nuevas (te enseña la lista y pide confirmación). El <code>&amp;&amp;</code> encadena: «y si lo anterior salió bien, entonces…».</p>
+<p><strong>Por qué así</strong> — Predicción teórica y contraste experimental, como siempre. Esta pareja es el mantenimiento básico de tu máquina — y la versión terminal exacta de lo que el escudito de actualizaciones de Mint te ofrece con un clic.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.5 · Un <code>bin</code> propio</strong></p>
+<p>Objetivo: que tu <code>diagnostico.sh</code> del capítulo 4 se ejecute desde cualquier sitio, sin <code>./</code> ni rutas. Pasos: crea <code>~/bin</code>, mueve el script dentro, añade el directorio al PATH de la sesión (<code>export PATH="$HOME/bin:$PATH"</code>), y prueba <code>diagnostico.sh</code> a secas desde varios directorios. Comprueba con <code>which</code> quién responde.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>mkdir -p ~/bin</code>, <code>mv ~/Descargas/diagnostico.sh ~/bin/</code> (ajusta el origen), <code>export PATH="$HOME/bin:$PATH"</code>, y desde donde quieras: <code>diagnostico.sh</code>. <code>which diagnostico.sh</code> → <code>/home/marcos/bin/diagnostico.sh</code>. El <code>export</code> vale solo para esta terminal; en Mint, <code>~/bin</code> se añade solo al PATH en cuanto existe — a partir de tu próximo inicio de sesión será permanente sin tocar nada.</p>
+<p><strong>Por qué así</strong> — Acabas de hacer lo que hacen todos los profesionales: una carpeta propia de herramientas, delante del PATH. Tus scripts pasan de «ficheros que hay que buscar» a comandos de pleno derecho. Es el patrón de conda a escala casera — y ahora entiendes ambos.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 5.6 · ¿Quién es tu Python?</strong></p>
+<p>Averigua qué <code>python3</code> responde en tu sistema (<code>which</code>), y su versión (<code>python3 --version</code>). Si usas conda o entornos virtuales: actívalo y repite <code>which python</code> — documenta en tu cuaderno el antes y el después del PATH (<code>echo $PATH | cut -d':' -f1</code> enseña quién va primero).</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sin entorno: <code>/usr/bin/python3</code>, el del sistema. Con un entorno conda activado, <code>which python</code> salta a <code>~/miniconda3/envs/&lt;nombre&gt;/bin/python</code>, y el primer campo del PATH (ese <code>cut -d':' -f1</code>) es ahora el directorio del entorno: la figura del capítulo, en vivo.</p>
+<p><strong>Por qué así</strong> — Este par de comandos — <code>which python</code>, <code>echo $PATH</code> — es el estetoscopio de los entornos de Python. El día del misterioso «ModuleNotFoundError» los agradecerás. Cierra el cuaderno: <code>exit</code>, <code>sesion05.log</code> a la colección.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-5" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="sec-quiz-5"><span class="header-section-number">5.8</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap05">
+  <div class="qz"><p class="qq" data-n="1">`sudo apt update`…</p>
+    <label><input type="radio" name="z1" value="a"><span>actualiza todos los programas instalados</span></label>
+    <label><input type="radio" name="z1" value="b"><span>refresca el catálogo: qué existe y en qué versión</span></label>
+    <label><input type="radio" name="z1" value="c"><span>actualiza el kernel</span></label>
+    <div class="fb good"><b>Correcto.</b> Solo la lista. Quien instala versiones nuevas es <code>upgrade</code> — por eso van en pareja.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>update</code> no toca ni un programa: pone al día el mapa. El territorio lo actualiza <code>upgrade</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Una «dependencia» de un paquete es…</p>
+    <label><input type="radio" name="z2" value="a"><span>otro paquete que necesita para funcionar</span></label>
+    <label><input type="radio" name="z2" value="b"><span>una versión antigua del mismo paquete</span></label>
+    <label><input type="radio" name="z2" value="c"><span>el repositorio del que procede</span></label>
+    <div class="fb good"><b>Correcto.</b> Y <code>apt</code> resuelve la cadena entera solo — el invento que enterró el «infierno de dependencias».</div>
+    <div class="fb bad"><b>No exactamente.</b> Es otro paquete requerido (una biblioteca, casi siempre). <code>apt show</code> las lista en su campo <code>Depends:</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">El PID de un proceso es…</p>
+    <label><input type="radio" name="z3" value="a"><span>su prioridad de CPU</span></label>
+    <label><input type="radio" name="z3" value="b"><span>su número identificador único mientras vive</span></label>
+    <label><input type="radio" name="z3" value="c"><span>el puerto de red que usa</span></label>
+    <div class="fb good"><b>Correcto.</b> Es la matrícula que usan <code>ps</code>, <code>htop</code> y <code>kill</code> para señalarlo sin ambigüedad.</div>
+    <div class="fb bad"><b>No exactamente.</b> El PID es el identificador del proceso — la matrícula a la que apunta <code>kill</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Diferencia entre <code>kill PID</code> y <code>kill -9 PID</code>:</p>
+    <label><input type="radio" name="z4" value="a"><span>ninguna: -9 solo es más rápido</span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>kill</code> pide terminar con orden; <code>-9</code> elimina en seco, sin opción a limpiar</span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>-9</code> mata también los procesos vecinos</span></label>
+    <div class="fb good"><b>Correcto.</b> SIGTERM es la rampa de frenado; SIGKILL, cortar la corriente. Protocolo: primero el educado, luego el definitivo.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>kill</code> a secas (SIGTERM) deja al proceso cerrar sus cosas; <code>-9</code> (SIGKILL) no se puede atender ni ignorar — lo a medias se queda a medias.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Tecleas <code>python</code> con un entorno conda activado. ¿Cuál se ejecuta?</p>
+    <label><input type="radio" name="z5" value="a"><span>el primero que aparezca recorriendo el PATH en orden — el del entorno</span></label>
+    <label><input type="radio" name="z5" value="b"><span>siempre el del sistema, <code>/usr/bin/python3</code></span></label>
+    <label><input type="radio" name="z5" value="c"><span>el más moderno de los instalados</span></label>
+    <div class="fb good"><b>Correcto.</b> Conda antepone su directorio al PATH, y la búsqueda se detiene en el primer acierto. <code>which python</code> te lo confirma.</div>
+    <div class="fb bad"><b>No exactamente.</b> Gana el primero del PATH — y conda se pone el primero al activarse. Ni antigüedad ni preferencias: orden de lista.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Tu script está en el directorio actual, pero <code>informe.sh</code> da «orden no encontrada». ¿Por qué?</p>
+    <label><input type="radio" name="z6" value="a"><span>le falta <code>chmod u+x</code></span></label>
+    <label><input type="radio" name="z6" value="b"><span>el directorio actual no está en el PATH: es <code>./informe.sh</code></span></label>
+    <label><input type="radio" name="z6" value="c"><span>los scripts requieren <code>sudo</code></span></label>
+    <div class="fb good"><b>Correcto.</b> «Estar aquí» no basta: el shell solo busca en el PATH. La ruta explícita <code>./</code> se salta la búsqueda (sin permisos de ejecución daría «permiso denegado», que es otro mensaje).</div>
+    <div class="fb bad"><b>No exactamente.</b> El mensaje «orden no encontrada» es de búsqueda, no de permisos: el directorio actual no está en el PATH. Con <code>./informe.sh</code> le das la ruta y no hay que buscar.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"a", z3:"b", z4:"b", z5:"a", z6:"b"};
+  document.querySelectorAll("#quiz-cap05 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 5.8)</strong> — Respuestas: 1 b · 2 a · 3 b · 4 b · 5 a · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Último capítulo del bloque B, y el que abre la puerta a todo lo demás: discos y particiones — <code>lsblk</code>, montar y desmontar, qué es esa partición EFI —, y la película completa de lo que pasa entre el botón de encendido y tu escritorio: UEFI, GRUB, kernel. Es el prerrequisito directo de la instalación del bloque C: entender el quirófano antes de operar. Guarda <code>sesion05.log</code>.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 5 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion05.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap04.html" class="pagination-link" aria-label="El árbol y los permisos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

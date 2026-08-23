@@ -1,0 +1,29 @@
+<svg viewBox="0 0 700 270" width="700" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cómo busca el shell un programa recorriendo el PATH en orden">
+  <defs>
+    <marker id="fpa" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <rect x="40" y="30" width="220" height="40" rx="4" fill="#0E1512"/>
+    <text x="58" y="55" font-size="14" fill="#6BD6BC">$ <tspan fill="#FFFFFF" font-weight="600">python</tspan></text>
+    <text x="290" y="55" font-size="11" fill="#6A5F4D">→ el shell recorre el PATH <tspan font-weight="600" fill="#C4342A">en orden</tspan>:</text>
+    <!-- parada 1 -->
+    <rect x="40" y="95" width="240" height="52" rx="4" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.6"/>
+    <text x="52" y="116" font-size="11" fill="#9A6A14" font-weight="600">1º ~/miniconda3/envs/tfg/bin</text>
+    <text x="52" y="134" font-size="10" fill="#6A5F4D">aquí HAY un python → ¡gana este!</text>
+    <!-- parada 2 -->
+    <rect x="310" y="95" width="170" height="52" rx="4" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2"/>
+    <text x="322" y="116" font-size="11" fill="#6A5F4D">2º /usr/local/bin</text>
+    <text x="322" y="134" font-size="10" fill="#9C8F79">ni se mira</text>
+    <!-- parada 3 -->
+    <rect x="510" y="95" width="160" height="52" rx="4" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2"/>
+    <text x="522" y="116" font-size="11" fill="#6A5F4D">3º /usr/bin</text>
+    <text x="522" y="134" font-size="10" fill="#9C8F79">el del sistema, ignorado</text>
+    <line x1="150" y1="75" x2="150" y2="88" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fpa)"/>
+    <line x1="285" y1="121" x2="303" y2="121" stroke="#C9B995" stroke-width="1.4" stroke-dasharray="4 3"/>
+    <line x1="485" y1="121" x2="503" y2="121" stroke="#C9B995" stroke-width="1.4" stroke-dasharray="4 3"/>
+    <!-- moralejas -->
+    <text x="350" y="185" font-size="11.5" fill="#6A5F4D" text-anchor="middle">con el entorno conda activado, «python» es <tspan fill="#9A6A14" font-weight="600">su</tspan> python — por eso <tspan fill="#24564B" font-weight="600">which python</tspan> es el primer gesto de diagnóstico</text>
+    <text x="350" y="215" font-size="11" fill="#6A5F4D" text-anchor="middle">y <tspan font-weight="600" fill="#C4342A">./analisis.sh</tspan> lleva ruta explícita: sin búsqueda — por eso el «./» del capítulo 4</text>
+    <text x="350" y="245" font-size="10" fill="#9C8F79" text-anchor="middle">el directorio actual NO está en el PATH: que «estar aquí» no ejecute programas por sorpresa es una decisión de seguridad</text>
+  </g>
+</svg>

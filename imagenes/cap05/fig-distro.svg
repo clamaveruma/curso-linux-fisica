@@ -1,0 +1,37 @@
+<svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Qué es una distro: las capas, y la genealogía de Mint">
+  <defs>
+    <marker id="fdg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#9C8F79"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- pila de capas -->
+    <text x="185" y="35" font-size="12" fill="#6A5F4D" text-anchor="middle" font-weight="600">una distro = estas capas, elegidas y empaquetadas</text>
+    <rect x="60" y="50" width="250" height="44" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="185" y="70" font-size="12" fill="#24564B" text-anchor="middle" font-weight="600">escritorio</text>
+    <text x="185" y="86" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Cinnamon · GNOME · KDE · Xfce…</text>
+    <rect x="60" y="100" width="250" height="44" rx="3" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.3"/>
+    <text x="185" y="120" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">paquetes + gestor</text>
+    <text x="185" y="136" font-size="9.5" fill="#6A5F4D" text-anchor="middle">apt y los repositorios de este capítulo</text>
+    <rect x="60" y="150" width="250" height="44" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.3"/>
+    <text x="185" y="170" font-size="12" fill="#2B2318" text-anchor="middle" font-weight="600">utilidades del sistema</text>
+    <text x="185" y="186" font-size="9.5" fill="#6A5F4D" text-anchor="middle">bash, ls, cp, grep… (proyecto GNU)</text>
+    <rect x="60" y="200" width="250" height="44" rx="3" fill="#0E1512"/>
+    <text x="185" y="220" font-size="12" fill="#6BD6BC" text-anchor="middle" font-weight="600">kernel Linux</text>
+    <text x="185" y="236" font-size="9.5" fill="#7E938C" text-anchor="middle">habla con el hardware — cap. 6</text>
+    <!-- genealogia -->
+    <text x="530" y="35" font-size="12" fill="#6A5F4D" text-anchor="middle" font-weight="600">la familia de tu Mint</text>
+    <rect x="450" y="55" width="160" height="40" rx="3" fill="#FAF6EB" stroke="#C4342A" stroke-width="1.3"/>
+    <text x="530" y="73" font-size="12" fill="#C4342A" text-anchor="middle" font-weight="600">Debian · 1993</text>
+    <text x="530" y="88" font-size="9.5" fill="#6A5F4D" text-anchor="middle">la madre: inventó los .deb</text>
+    <line x1="530" y1="98" x2="530" y2="118" stroke="#9C8F79" stroke-width="1.5" marker-end="url(#fdg)"/>
+    <rect x="450" y="123" width="160" height="40" rx="3" fill="#FAF6EB" stroke="#9A6A14" stroke-width="1.3"/>
+    <text x="530" y="141" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">Ubuntu · 2004</text>
+    <text x="530" y="156" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Debian, pulido y a plazo fijo</text>
+    <line x1="530" y1="166" x2="530" y2="186" stroke="#9C8F79" stroke-width="1.5" marker-end="url(#fdg)"/>
+    <rect x="450" y="191" width="160" height="40" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.5"/>
+    <text x="530" y="209" font-size="12" fill="#24564B" text-anchor="middle" font-weight="600">Mint · 2006</text>
+    <text x="530" y="224" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Ubuntu + Cinnamon + pulido</text>
+    <text x="530" y="258" font-size="9.5" fill="#9C8F79" text-anchor="middle">misma familia: mismos .deb,</text>
+    <text x="530" y="272" font-size="9.5" fill="#9C8F79" text-anchor="middle">mismo apt, mismo curso</text>
+    <text x="185" y="272" font-size="9.5" fill="#9C8F79" text-anchor="middle">cambiar de distro = cambiar de elección de capas, no de mundo</text>
+  </g>
+</svg>
