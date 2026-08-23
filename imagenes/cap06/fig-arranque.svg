@@ -1,0 +1,48 @@
+<svg viewBox="0 0 700 250" width="700" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La película del arranque: UEFI, GRUB, kernel, systemd, sesión">
+  <defs>
+    <marker id="fbo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <text x="30" y="46" font-size="20">⏻</text>
+    <line x1="58" y1="40" x2="88" y2="40" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fbo)"/>
+    <!-- UEFI -->
+    <rect x="95" y="18" width="115" height="46" rx="4" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.3"/>
+    <text x="152" y="38" font-size="12" fill="#2B2318" text-anchor="middle" font-weight="600">UEFI</text>
+    <text x="152" y="54" font-size="9" fill="#6A5F4D" text-anchor="middle">el firmware de la placa</text>
+    <text x="152" y="82" font-size="9" fill="#9C8F79" text-anchor="middle">inventaría el hardware y</text>
+    <text x="152" y="94" font-size="9" fill="#9C8F79" text-anchor="middle">busca la partición EFI</text>
+    <line x1="215" y1="40" x2="245" y2="40" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fbo)"/>
+    <!-- GRUB -->
+    <rect x="252" y="18" width="115" height="46" rx="4" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.4"/>
+    <text x="309" y="38" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">GRUB</text>
+    <text x="309" y="54" font-size="9" fill="#6A5F4D" text-anchor="middle">el gestor de arranque</text>
+    <text x="309" y="82" font-size="9" fill="#9C8F79" text-anchor="middle">el menú (si hay varios SO)</text>
+    <text x="309" y="94" font-size="9" fill="#9C8F79" text-anchor="middle">y carga el kernel en RAM</text>
+    <line x1="372" y1="40" x2="402" y2="40" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fbo)"/>
+    <!-- kernel -->
+    <rect x="409" y="18" width="115" height="46" rx="4" fill="#0E1512"/>
+    <text x="466" y="38" font-size="12" fill="#6BD6BC" text-anchor="middle" font-weight="600">kernel Linux</text>
+    <text x="466" y="54" font-size="9" fill="#D8E6E0" text-anchor="middle">toma el mando</text>
+    <text x="466" y="82" font-size="9" fill="#9C8F79" text-anchor="middle">controladores, memoria,</text>
+    <text x="466" y="94" font-size="9" fill="#9C8F79" text-anchor="middle">y monta / (tu ext4)</text>
+    <line x1="529" y1="40" x2="559" y2="40" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fbo)"/>
+    <!-- systemd -->
+    <rect x="566" y="18" width="115" height="46" rx="4" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.4"/>
+    <text x="623" y="38" font-size="12" fill="#24564B" text-anchor="middle" font-weight="600">systemd</text>
+    <text x="623" y="54" font-size="9" fill="#6A5F4D" text-anchor="middle">el primer proceso: PID 1</text>
+    <text x="623" y="82" font-size="9" fill="#9C8F79" text-anchor="middle">arranca los servicios</text>
+    <text x="623" y="94" font-size="9" fill="#9C8F79" text-anchor="middle">y la pantalla de login</text>
+    <!-- linea de tiempo -->
+    <line x1="60" y1="140" x2="660" y2="140" stroke="#9C8F79" stroke-width="1.3"/>
+    <circle cx="95" cy="140" r="3.5" fill="#9C8F79"/>
+    <text x="95" y="162" font-size="10" fill="#6A5F4D" text-anchor="middle">0 s</text>
+    <circle cx="290" cy="140" r="3.5" fill="#9A6A14"/>
+    <text x="290" y="162" font-size="10" fill="#6A5F4D" text-anchor="middle">~3 s</text>
+    <circle cx="470" cy="140" r="3.5" fill="#2F6F62"/>
+    <text x="470" y="162" font-size="10" fill="#6A5F4D" text-anchor="middle">~8 s</text>
+    <circle cx="640" cy="140" r="3.5" fill="#C4342A"/>
+    <text x="640" y="162" font-size="10" fill="#6A5F4D" text-anchor="middle">~20 s · escritorio</text>
+    <text x="350" y="200" font-size="10.5" fill="#6A5F4D" text-anchor="middle">cada eslabón carga al siguiente y le pasa el mando — la cadena entera se mide con systemd-analyze</text>
+    <text x="350" y="222" font-size="10" fill="#9C8F79" text-anchor="middle">esta película es exactamente lo que verás — y controlarás — al instalar Debian en el bloque C</text>
+  </g>
+</svg>
