@@ -1,0 +1,26 @@
+<svg viewBox="0 0 700 210" width="700" height="210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El shell expande los comodines antes de ejecutar el programa">
+  <defs>
+    <marker id="fgl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- lo que escribes -->
+    <rect x="25" y="45" width="200" height="46" rx="4" fill="#0E1512"/>
+    <text x="40" y="73" font-size="14" fill="#6BD6BC">$ <tspan fill="#FFFFFF" font-weight="600">ls </tspan><tspan fill="#E8C170">run*.csv</tspan></text>
+    <text x="125" y="115" font-size="10.5" fill="#9C8F79" text-anchor="middle">lo que tú escribes</text>
+    <!-- shell -->
+    <line x1="230" y1="68" x2="280" y2="68" stroke="#6A5F4D" stroke-width="1.5" marker-end="url(#fgl)"/>
+    <rect x="288" y="38" width="150" height="60" rx="4" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.5"/>
+    <text x="363" y="62" font-size="12.5" fill="#24564B" text-anchor="middle" font-weight="600">SHELL</text>
+    <text x="363" y="80" font-size="10.5" fill="#6A5F4D" text-anchor="middle">expande el patrón</text>
+    <text x="363" y="115" font-size="10.5" fill="#9C8F79" text-anchor="middle">antes de ejecutar nada</text>
+    <!-- lo que recibe ls -->
+    <line x1="443" y1="68" x2="493" y2="68" stroke="#6A5F4D" stroke-width="1.5" marker-end="url(#fgl)"/>
+    <rect x="500" y="30" width="180" height="76" rx="4" fill="#FAF6EB" stroke="#9A6A14" stroke-width="1.4"/>
+    <text x="515" y="52" font-size="11.5" fill="#2B2318">ls run1.csv</text>
+    <text x="548" y="69" font-size="11.5" fill="#2B2318">run2.csv</text>
+    <text x="548" y="86" font-size="11.5" fill="#2B2318">run3.csv</text>
+    <text x="590" y="126" font-size="10.5" fill="#9C8F79" text-anchor="middle">lo que recibe ls</text>
+    <text x="350" y="168" font-size="12" fill="#6A5F4D" text-anchor="middle"><tspan font-weight="600" fill="#C4342A">ls</tspan> nunca llega a ver el asterisco: cuando arranca, ya es una lista de nombres</text>
+    <text x="350" y="190" font-size="10.5" fill="#9C8F79" text-anchor="middle">por eso los comodines funcionan igual con cualquier programa</text>
+  </g>
+</svg>
