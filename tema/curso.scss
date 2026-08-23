@@ -50,13 +50,19 @@ h2 {
 }
 
 // Bloques de código como terminal
-div.sourceCode, pre {
+div.sourceCode, pre, pre.sourceCode {
   background: $term-bg;
   color: #D8E6E0;
   border-radius: 6px;
   box-shadow: 0 2px 0 rgba(43,35,24,.18);
 }
-pre code { background: transparent; color: inherit; }
+// La hoja de resaltado de Quarto colorea con selectores de clase
+// (code.sourceCode); estas reglas la superan en especificidad para que
+// el texto de los terminales sea siempre claro sobre el fondo oscuro.
+pre code, pre code.sourceCode, code.sourceCode {
+  background: transparent;
+  color: inherit;
+}
 
 // Tablas: cabecera teal estilo cuaderno
 table thead th {

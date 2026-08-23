@@ -25,6 +25,9 @@ format:
     theme:
       - cosmo
       - tema/curso.scss
+    # Resaltado de sintaxis pensado para fondo oscuro (solo web;
+    # el PDF mantiene el tema claro por defecto)
+    highlight-style: monokai
     toc: true
     toc-depth: 3
     number-sections: true
