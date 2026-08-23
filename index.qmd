@@ -16,6 +16,31 @@ el flujo de trabajo real de la física computacional.
 **Regla única e innegociable:** no copies y pegues los comandos.
 Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.
 
+## Qué necesitas para empezar {.unnumbered}
+
+**Lo que suponemos que ya sabes.** Manejar un ordenador con soltura por
+la vía gráfica: ventanas, carpetas, navegador, instalar un programa.
+Nada más. No hace falta haber abierto una terminal en tu vida — ese es
+justo el punto de partida. Saber programar (Python, C…) ayuda en los
+ejercicios de análisis de las últimas sesiones, pero no es requisito
+para empezar.
+
+**Lo que necesitas tener instalado.** Un Linux de escritorio
+funcionando. El curso está escrito y probado sobre **Linux Mint**, y
+cualquier pariente cercano — Ubuntu y sus derivados, Debian con
+escritorio — sirve exactamente igual: los comandos son los mismos y
+solo cambiará algún detalle cosmético de los menús. Vale cualquier
+ordenador de la última década y una conexión a internet para descargar
+los materiales.
+
+¿Que tu máquina tiene Windows o macOS? El apéndice
+[Vengo de Windows](anexos/anexo-windows.qmd) te preparará un Linux
+dentro de tu sistema (pendiente de redacción durante el piloto).
+
+Algunos bloques pedirán algo más, y se avisará al llegar: VirtualBox en
+el bloque C (virtualización e instalación) y acceso al router de tu
+casa en el bloque D (redes) — nada que comprar, nada que arriesgar.
+
 ::: {.pie-piloto}
 © 2026 Claudio M. Martínez Velasco. El texto de este curso se publica
 bajo licencia [Creative Commons Atribución–CompartirIgual 4.0

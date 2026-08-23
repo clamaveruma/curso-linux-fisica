@@ -114,6 +114,7 @@ Fuente única en Markdown con Quarto. Dos salidas por capítulo o bloque: HTML a
 ## 7. Pendiente de decidir
 
 - Portada bonita para el libro (web y PDF; Quarto admite `cover-image`) — se hará más adelante.
+- **Pasada final del PDF** (decidido 2026-08-24: el PDF se aparca hasta terminar la redacción; la web es el canal durante el piloto): reactivar formato `pdf` y `downloads` en `_quarto.yml` y los pasos tinytex/librsvg del workflow; colorear los bloques de terminal en PDF con un tema claro (ampliar `tema/terminal.lua` con salida LaTeX coloreada); revisar la tabla estrecha de §1.1 en A4.
 - ~~Nombre del curso~~ → decidido (2026-08-23): **«Bendito maldito Linux»**, subtítulo «Trabajar en Linux y conceptos de redes, explicado tan fácil que hasta un físico lo puede entender», lema «Terminal, sistemas, redes y trabajo remoto · 12 sesiones prácticas».
 - Distribución Debian vs Mint para la VM del bloque C (Debian es más «servidor real»; Mint es continuidad con su escritorio — propuesta: Mint no, Debian sí, y explicar por qué en el propio capítulo).
 - Nombre del curso.
