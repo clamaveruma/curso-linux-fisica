@@ -277,6 +277,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<p>Y dos siglas que te perseguirán en toda la documentación, así que estrenémoslas ya: esta forma de trabajar — órdenes de texto — es una <strong>CLI</strong> (<em>command-line interface</em>, interfaz de línea de comandos); la de ventanas y ratón de todos los días es una <strong>GUI</strong> (<em>graphical user interface</em>). No son rivales: son dos puertas a la misma casa, y este curso te entrega la que te faltaba.</p>
 <div id="fig-circuito" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del circuito de una orden: tú, terminal, shell y programa, con flechas de ida y vuelta">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-circuito-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -346,7 +347,7 @@ Figura&nbsp;1.4: Noventa años de la misma idea: teclear texto, recibir texto. T
 <span class="t-out">hola, máquina</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tty</span>
 <span class="t-out">/dev/pts/0</span></code></pre>
-<p>Cuatro comandos, cuatro respuestas instantáneas. <code>whoami</code> — quién soy. <code>date</code> — qué hora es. <code>echo</code> — repite lo que te digo. <code>tty</code> — qué terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón: escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.</p>
+<p>Cuatro comandos, cuatro respuestas instantáneas. <code>whoami</code> — quién soy. <code>date</code> — qué hora es. <code>echo</code> — repite lo que te digo. <code>tty</code> — qué terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón: escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt reaparece pidiendo la siguiente. Ese ciclo es toda la terminal — y tiene nombre técnico: <strong>REPL</strong> (<em>read–eval–print loop</em>: leer, ejecutar, imprimir, repetir). No es nuevo para ti: el intérprete de Python, con su <code>&gt;&gt;&gt;</code>, es exactamente otro REPL. Cambia el idioma; el ciclo es el mismo.</p>
 <p>¿Y si te equivocas? Prueba a escribir <code>whoami</code> mal a propósito:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">woami</span>
 <span class="t-out">bash: woami: orden no encontrada</span></code></pre>

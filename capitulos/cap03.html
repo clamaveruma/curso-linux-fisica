@@ -294,6 +294,16 @@ Figura&nbsp;3.1: Los tres canales, numerados 0, 1 y 2. La genialidad está en se
 <li><code>&gt;</code> <strong>sobrescribe</strong> el fichero de destino sin preguntar. Su hermano <code>&gt;&gt;</code> <strong>añade</strong> al final sin destruir lo anterior.</li>
 <li>Los errores (stderr) <em>no</em> viajan con <code>&gt;</code>: siguen saliendo por pantalla, que es donde quieres verlos. Para capturarlos también existe <code>2&gt;</code> — el <code>2</code> es el número del canal de la figura.</li>
 </ul>
+<div id="fig-redireccion" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El stdout de grep desviado con el símbolo mayor que hacia el fichero errores.txt, mientras el stderr sigue llegando a la pantalla">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-redireccion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap03/fig-redireccion.svg" class="img-fluid figure-img" alt="El stdout de grep desviado con el símbolo mayor que hacia el fichero errores.txt, mientras el stderr sigue llegando a la pantalla">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-redireccion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: La misma escena que la figura anterior, con el desvío puesto: <code>&gt;</code> reconecta el stdout al fichero; el stderr ni se entera.
+</figcaption>
+</figure>
+</div>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">echo "Informe de la noche" &gt; informe.txt</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">echo "generado el 19 de agosto" &gt;&gt; informe.txt</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cat informe.txt</span>
@@ -307,19 +317,19 @@ Figura&nbsp;3.1: Los tres canales, numerados 0, 1 y 2. La genialidad está en se
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">grep ERROR adquisicion.log | wc -l</span>
 <span class="t-out">108</span></code></pre>
 <p>Léelo como una cadena de montaje: <code>grep</code> filtra las líneas con <code>ERROR</code>, y su salida — en vez de inundar la pantalla — entra en <code>wc -l</code> (<em>word count</em>, opción <em>lines</em>), que solo cuenta. De 7 198 líneas a un número: esta noche hubo 108 fallos.</p>
+<div id="fig-pipe" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El stdout de grep entra por una tubería en el stdin de wc, y solo el resultado final, 108, llega a la pantalla">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap03/fig-pipe.svg" class="img-fluid figure-img" alt="El stdout de grep entra por una tubería en el stdin de wc, y solo el resultado final, 108, llega a la pantalla">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: El enchufe entre programas. Es la tercera manera de conectar el stdout: a la pantalla (por defecto), a un fichero (<code>&gt;</code>), o a otro programa (<code>|</code>).
+</figcaption>
+</figure>
+</div>
 <div class="historia">
 <p><strong>◷ Historia · Una manguera de jardín en Bell Labs</strong></p>
 <p>La tubería tiene padre: Doug McIlroy, jefe del departamento donde nació Unix. En 1964 — cinco años <em>antes</em> de Unix — ya escribía en un memorándum que los programas deberían acoplarse «como los tramos de una manguera de jardín: se enrosca otro segmento cuando hace falta tratar el agua de otra manera». Estuvo casi una década insistiendo, hasta que una noche de 1973 Ken Thompson cedió, la implementó en el kernel, y en una semana el equipo reescribió medio sistema en forma de filtros encadenables. De esa semana sale la <strong>filosofía Unix</strong> que estás usando ahora: haz que cada programa haga una sola cosa bien, y que todos hablen el mismo idioma — texto.</p>
-</div>
-<div id="fig-mcilroy" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Retrato de Douglas McIlroy">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mcilroy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap03/mcilroy.jpg" class="img-fluid figure-img" style="width:45.0%" alt="Retrato de Douglas McIlroy">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mcilroy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.2: Doug McIlroy en 2011. Propuso la tubería en 1964; el símbolo <code>|</code> tardó nueve años en existir. <em>Foto: Denise Panyik-Dale, CC BY 2.0, Wikimedia Commons.</em>
-</figcaption>
-</figure>
 </div>
 </section>
 <section id="sec-herramientas" class="level2" data-number="3.4">
@@ -402,9 +412,13 @@ Figura&nbsp;3.2: Doug McIlroy en 2011. Propuso la tubería en 1964; el símbolo 
 <img src="../imagenes/cap03/fig-tuberia.svg" class="img-fluid figure-img" alt="Cadena de programas grep, cut, sort y uniq que transforma el log de 7198 líneas en un ranking de tres sensores">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tuberia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.3: La tubería completa del análisis, con lo que fluye en cada tramo.
+Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tramo.
 </figcaption>
 </figure>
+</div>
+<div class="truco">
+<p><strong>✚ Truco · La tubería perfecta no se memoriza: se pregunta</strong></p>
+<p>Que no te intimide la de cinco piezas: es el ejemplo más completo del curso a propósito, para que veas el mecanismo entero de una vez. Tu día a día serán tuberías de dos o tres — y si esta la has entendido, ya sabes cómo funcionan todas. Y una verdad incómoda de toda CLI: <strong>olvidar las herramientas y sus opciones es normal</strong>, hasta para los veteranos. Está permitido pedirle a una inteligencia artificial que te construya el comando («¿cómo cuento los ERROR por sensor en este log?») — con la disciplina del físico: <em>lee</em> el comando que te proponga pieza a pieza, verifica con <code>man</code> o <code>--help</code> lo que no reconozcas, y jamás ejecutes a ciegas nada que lleve <code>sudo</code> o <code>rm</code>. Tú ya sabes leer comandos: la IA propone, tú dispones. Este oficio lo afinaremos en un anexo del curso.</p>
 </div>
 <p>¿Y las temperaturas? El valor viene como <code>temp_C=22.66</code>: un <code>=</code> de separador y <code>cut</code> lo recorta igual de bien. Máxima de la noche:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 | sort -n | tail -1</span>
