@@ -26,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -82,7 +47,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1af5ed76814383e0b4b4c97bd2e93a9c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e01b946754854c560e420fd55a70a11b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -140,7 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Linux, redes y sistemas para físicos</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/clamaveruma/curso-linux-fisica" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
     <a href="../Linux,-redes-y-sistemas-para-físicos.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
@@ -252,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-terminal-shell" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="sec-terminal-shell"><span class="header-section-number">1.1</span> Qué es esto que parpadea</h2>
 <p>Abre la terminal de tu equipo (en Mint: menú → Terminal, o <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>). Verás algo así:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ▮</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">▮</span></code></pre>
 <p>Esa línea se llama <strong>prompt</strong>, y es una frase completa aunque no lo parezca: «soy el usuario <code>marcos</code>, en la máquina <code>portatil</code>, estoy en el directorio <code>~</code>, y el <code>$</code> significa que te escucho». Cada símbolo informa. El cursor parpadeante es la pregunta: <em>¿qué quieres?</em></p>
 <p>Antes de responder, deshagamos una confusión que arrastra todo el mundo. Aquí hay <strong>dos programas distintos</strong> colaborando, no uno:</p>
 <table class="caption-top table">
@@ -347,18 +311,18 @@ Figura&nbsp;1.4: Noventa años de la misma idea: teclear texto, recibir texto. T
 <section id="sec-primeras-palabras" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="sec-primeras-palabras"><span class="header-section-number">1.2</span> Primeras palabras</h2>
 <p>Vamos a hablarle. Una regla para todo el curso, y es innegociable: <strong>no copies y pegues los comandos — tecléalos</strong>. Los dedos aprenden lo que los ojos solo reconocen. Escribe cada línea y pulsa <kbd>Intro</kbd>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ whoami</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>marcos</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ date</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>domingo, 23 de agosto de 2026, 18:04:11 CEST</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ echo "hola, máquina"</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>hola, máquina</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ tty</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>/dev/pts/0</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">whoami</span>
+<span class="t-out">marcos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">date</span>
+<span class="t-out">domingo, 23 de agosto de 2026, 18:04:11 CEST</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">echo "hola, máquina"</span>
+<span class="t-out">hola, máquina</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tty</span>
+<span class="t-out">/dev/pts/0</span></code></pre>
 <p>Cuatro comandos, cuatro respuestas instantáneas. <code>whoami</code> — quién soy. <code>date</code> — qué hora es. <code>echo</code> — repite lo que te digo. <code>tty</code> — qué terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón: escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.</p>
 <p>¿Y si te equivocas? Prueba a escribir <code>whoami</code> mal a propósito:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ woami</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bash: woami: orden no encontrada</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">woami</span>
+<span class="t-out">bash: woami: orden no encontrada</span></code></pre>
 <p>Nada explota. El shell te dice exactamente qué pasó: no conoce ningún programa con ese nombre. <strong>Los mensajes de error de la terminal se leen, no se temen</strong> — casi siempre contienen el diagnóstico completo. Aprender a leerlos es la mitad de este curso.</p>
 </section>
 <section id="sec-anatomia" class="level2" data-number="1.3">
@@ -394,13 +358,13 @@ Figura&nbsp;1.6: El árbol, podado a lo esencial. En el capítulo 4 exploraremos
 </figure>
 </div>
 <p>Tres comandos son tu GPS:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ pwd</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>/home/marcos</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ls</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Descargas  Documentos  Escritorio  Imágenes  Música  Vídeos</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd Descargas</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~/Descargas$ pwd</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>/home/marcos/Descargas</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">pwd</span>
+<span class="t-out">/home/marcos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
+<span class="t-out">Descargas  Documentos  Escritorio  Imágenes  Música  Vídeos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cd Descargas</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">pwd</span>
+<span class="t-out">/home/marcos/Descargas</span></code></pre>
 <p><code>pwd</code> (<em>print working directory</em>) responde «¿dónde estoy?». <code>ls</code> (<em>list</em>) responde «¿qué hay aquí?». <code>cd</code> (<em>change directory</em>) te mueve. Observa que el prompt cambió: ahora dice <code>~/Descargas</code>. El prompt es tu brújula permanente.</p>
 <section id="rutas-absolutas-y-relativas" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="rutas-absolutas-y-relativas"><span class="header-section-number">1.4.1</span> Rutas absolutas y relativas</h3>
@@ -417,12 +381,12 @@ Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide 
 </figure>
 </div>
 <p>Dos atajos completan el mapa: <code>..</code> es «el directorio padre» (un nivel hacia la raíz) y <code>.</code> es «aquí mismo». Y <code>cd</code> tiene dos gestos que usarás mil veces: sin argumentos te lleva a casa desde cualquier lugar, y <code>cd -</code> vuelve al sitio donde estabas justo antes.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~/Descargas$ cd ..</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd /etc</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:/etc$ cd</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd -</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>/etc</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>marcos@portatil:/etc$</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cd ..</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cd /etc</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">/etc</span><span class="t-dim">$</span> <span class="t-cmd">cd</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cd -</span>
+<span class="t-out">/etc</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">/etc</span><span class="t-dim">$</span></code></pre>
 <div class="aviso">
 <p><strong>△ Tranquilidad · Hoy no puedes romper nada</strong></p>
 <p>Todos los comandos de este capítulo son de <em>solo lectura</em>: miran, no tocan. Aún no sabes borrar ni modificar nada — disfruta de esta era de inocencia mientras dure. Cuando lleguen los comandos con consecuencias (capítulo 2), llegarán también las redes de seguridad.</p>
@@ -448,10 +412,10 @@ Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide 
 <section id="sec-ayuda" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="sec-ayuda"><span class="header-section-number">1.6</span> Pedir ayuda sin salir del sistema</h2>
 <p>Aquí está la clave de la autonomía, el motivo por el que este curso existe. Ante una duda, el reflejo entrenado es preguntarle a Google o a una IA. Pero tu sistema lleva dentro la documentación completa y exacta de cada comando <em>de tu versión concreta</em>, disponible sin conexión:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ls --help</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Modo de empleo: ls [OPCIÓN]... [FICHERO]...</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Lista información sobre los FICHEROs...</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ man ls</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls --help</span>
+<span class="t-out">Modo de empleo: ls [OPCIÓN]... [FICHERO]...</span>
+<span class="t-out">Lista información sobre los FICHEROs...</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">man ls</span></code></pre>
 <p><code>--help</code> da el resumen rápido en pantalla. <code>man</code> (<em>manual</em>) abre la página completa en un visor con sus propias teclas: <kbd>↑</kbd>/<kbd>↓</kbd> y <kbd>Espacio</kbd> para moverte, <kbd>/</kbd> para <em>buscar</em> dentro (escribe el término y <kbd>Intro</kbd>; <kbd>n</kbd> salta a la siguiente aparición), y <kbd>q</kbd> para salir. Esa tecla <kbd>/</kbd> convierte cada página de manual en un documento consultable en segundos.</p>
 <div class="historia">
 <p><strong>◷ Historia · El manual nació con el sistema</strong></p>
@@ -471,12 +435,12 @@ Figura&nbsp;1.8: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores de
 <section id="sec-script" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="sec-script"><span class="header-section-number">1.7</span> Tu cuaderno de laboratorio: <code>script</code></h2>
 <p>En el laboratorio no se te ocurriría medir sin cuaderno. En la terminal, tampoco: el comando <code>script</code> graba <em>todo</em> lo que aparezca en pantalla — tus órdenes y las respuestas — en un fichero, hasta que escribas <code>exit</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ script sesion01.log</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Script iniciado, el fichero de anotación es 'sesion01.log'</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ pwd</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>/home/marcos</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ exit</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Script terminado, el fichero de anotación es 'sesion01.log'</span></code></pre></div>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">script sesion01.log</span>
+<span class="t-out">Script iniciado, el fichero de anotación es 'sesion01.log'</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">pwd</span>
+<span class="t-out">/home/marcos</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span>
+<span class="t-out">Script terminado, el fichero de anotación es 'sesion01.log'</span></code></pre>
 <p>Desde ahora, <strong>cada sesión de este curso empieza con <code>script sesionNN.log</code> y termina con <code>exit</code></strong>. Te servirá para revisar qué hiciste, para preguntar con evidencia («esto es exactamente lo que pasó») — y durante el piloto, esos logs son los datos experimentales con los que mejoraremos el curso. Eres a la vez el físico y el experimento.</p>
 </section>
 <section id="sec-practica" class="level2" data-number="1.8">
