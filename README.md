@@ -1,7 +1,8 @@
-# Linux, redes y sistemas para físicos
+# Bendito maldito Linux
 
-Curso introductorio: terminal, sistema, virtualización, redes y trabajo
-remoto. 12 sesiones + proyecto final. En fase piloto.
+Curso introductorio para físicos: terminal, sistema, virtualización,
+redes y trabajo remoto. 12 sesiones + proyecto final. En fase piloto.
+Web: https://clamaveruma.github.io/curso-linux-fisica/
 
 ## Estructura
 - `_quarto.yml` — configuración: libro con salida web y PDF descargable

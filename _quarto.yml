@@ -12,10 +12,12 @@ copyright:
   year: 2026
 
 filters:
-  - tema/terminal.lua   # colorea los bloques ```terminal en la web
+  - tema/terminal.lua    # colorea los bloques ```terminal en la web
+  - tema/soluciones.lua  # en PDF, soluciones al final del capítulo
 
 book:
-  title: "Linux, redes y sistemas para físicos"
+  title: "Bendito maldito Linux"
+  subtitle: "Trabajar en Linux y conceptos de redes, explicado tan fácil que hasta un físico lo puede entender"
   author: "Claudio M. Martínez Velasco"
   date: 2026-08-01
   date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»
@@ -26,7 +28,8 @@ book:
   chapters:
     - index.qmd
     - capitulos/cap01.qmd
-    # - capitulos/cap02.qmd   # ← descomentar según se escriban
+    # - capitulos/cap02.qmd   # ← redactado; se activa tras verificar su PDF
+    # - capitulos/cap03.qmd   # ← descomentar según se escriban
   appendices:
     - anexos/anexo-windows.qmd
 
@@ -49,8 +52,12 @@ format:
     toc: true
     number-sections: true
     colorlinks: true
-    # En PDF las soluciones plegables se imprimen abiertas;
-    # moverlas a apéndice es un paso posterior con perfil LaTeX.
+    # Fondo gris de los bloques de terminal (los usa tema/terminal.lua):
+    include-in-header:
+      text: |
+        \usepackage{framed}
+        \usepackage{fancyvrb}
+        \definecolor{shadecolor}{RGB}{240,237,230}
 
 execute:
   freeze: auto

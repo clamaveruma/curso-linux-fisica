@@ -63,11 +63,19 @@ Escribe `tty` en tu terminal y el sistema te dirá qué «teletipo» eres.
 Hay medio siglo de arqueología funcionando en tu portátil.
 :::
 
+:::: {.content-visible when-format="html"}
 ::: {layout-ncol=2}
 ![Un teletipo ASR-33 (años 60): teclado, rollo de papel, y ni rastro de pantalla. *Foto: ArnoldReinhold, CC BY-SA 3.0, Wikimedia Commons.*](../imagenes/cap01/teletipo-asr33.jpg){#fig-asr33 fig-alt="Teletipo ASR-33 con rollo de papel en un museo"}
 
 ![El DEC VT100 (1978): el papel se vuelve pantalla. Tu terminal de hoy lo sigue emulando. *Foto: Jason Scott, CC BY 2.0, Wikimedia Commons.*](../imagenes/cap01/terminal-vt100.jpg){#fig-vt100 fig-alt="Terminal DEC VT100 con un listado de ficheros en pantalla"}
 :::
+::::
+
+:::: {.content-visible when-format="pdf"}
+![Un teletipo ASR-33 (años 60): teclado, rollo de papel, y ni rastro de pantalla. *Foto: ArnoldReinhold, CC BY-SA 3.0, Wikimedia Commons.*](../imagenes/cap01/teletipo-asr33.jpg){#fig-asr33 fig-alt="Teletipo ASR-33 con rollo de papel en un museo" width="70%"}
+
+![El DEC VT100 (1978): el papel se vuelve pantalla. Tu terminal de hoy lo sigue emulando. *Foto: Jason Scott, CC BY 2.0, Wikimedia Commons.*](../imagenes/cap01/terminal-vt100.jpg){#fig-vt100 fig-alt="Terminal DEC VT100 con un listado de ficheros en pantalla" width="70%"}
+::::
 
 ![Noventa años de la misma idea: teclear texto, recibir texto. Tu terminal «emula» por software lo que fue una máquina física.](../imagenes/cap01/fig-cronologia-tty.svg){#fig-cronologia fig-alt="Cronología del teletipo a tu terminal: años 30, UNIX 1969, VT100 1978, hoy"}
 
@@ -317,6 +325,7 @@ Ve a la raíz del sistema y lista lo que hay. Después responde:
 ¿cuántos directorios de primer nivel tiene tu Mint, aproximadamente?
 ¿Reconoces `etc`, `home` y `tmp` de la @fig-arbol?
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `cd /` y después `ls`. Verás en torno a 20 entradas:
 `bin  boot  dev  etc  home  lib  ...`
@@ -326,6 +335,7 @@ recuerda que `ls` acepta como argumento cualquier ruta. Dos caminos
 correctos para lo mismo: en la terminal casi siempre los hay, y ninguno
 es «el bueno».
 :::
+::::
 :::
 
 ::: {.ejercicio}
@@ -335,6 +345,7 @@ Estás en `/home/marcos/Descargas`. Escribe **dos** comandos distintos,
 uno con ruta relativa y otro con absoluta, que te lleven a
 `/home/marcos/Documentos`.
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 Relativa: `cd ../Documentos` · Absoluta: `cd /home/marcos/Documentos`
 (o el híbrido `cd ~/Documentos`).
@@ -345,6 +356,7 @@ origen común. La absoluta funciona idéntica estés donde estés — por eso
 los scripts que escribas en el futuro preferirán rutas absolutas: no
 dependen de dónde los ejecutes.
 :::
+::::
 :::
 
 ::: {.ejercicio}
@@ -354,6 +366,7 @@ Ejecuta `ls -lh /etc` y elige cualquier línea. Identifica en ella: el
 tamaño del fichero y su fecha de modificación. ¿Qué crees que aporta la
 opción `-h`? Compruébalo repitiendo sin ella.
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 En una línea como `-rw-r--r-- 1 root root 3,0K ago 12 10:33 fstab`, el
 tamaño es `3,0K` y la fecha `ago 12 10:33`. Sin `-h`, el tamaño aparece
@@ -364,6 +377,7 @@ G. El resto de la línea (ese `-rw-r--r--` y los dos `root`) es el
 sistema de permisos y propietarios — protagonista del capítulo 4. Por
 ahora te basta con saber que está ahí y que significa algo.
 :::
+::::
 :::
 
 ::: {.ejercicio}
@@ -373,6 +387,7 @@ Sin usar internet: encuentra en `man ls` la opción que ordena los
 ficheros por fecha de modificación, del más reciente al más antiguo.
 Pista: dentro del visor, la tecla <kbd>/</kbd> busca.
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `man ls`, luego `/modificación` (o `/time` si tu manual está en inglés)
 e <kbd>Intro</kbd>. La opción es `-t`. Prueba: `ls -lt ~/Descargas` —
@@ -383,6 +398,7 @@ mayoría de búsquedas en Google que hace un principiante. Es más rápido,
 no requiere conexión, y describe exactamente *tu* versión del programa,
 no la de un tutorial de 2019.
 :::
+::::
 :::
 
 ::: {.ejercicio}
@@ -392,6 +408,7 @@ Sin ejecutarlo todavía: partiendo de `/home/marcos`, ¿qué imprimirá
 `pwd` tras esta secuencia? `cd /tmp` → `cd` → `cd Descargas` → `cd ..`
 — Escribe tu predicción, luego compruébala experimentalmente.
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `/home/marcos`.
 
@@ -401,6 +418,7 @@ argumentos, a casa (`/home/marcos`); `cd Descargas`, a
 predijiste bien las cuatro, las rutas ya son tuyas. Si no, repite la
 secuencia mirando el prompt en cada paso: es tu brújula.
 :::
+::::
 :::
 
 ::: {.ejercicio}
@@ -423,6 +441,7 @@ localízalo: comprueba con `ls` que está en tu carpeta de descargas, y
 averigua su tamaño y su fecha con lo aprendido en @sec-anatomia.
 :::
 
+:::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `ls -lh ~/Descargas` — y ahí estará `pendulo_medidas.csv`, con menos de
 1K y fecha de hoy. Con `ls -lt ~/Descargas` saldrá el primero de la
@@ -433,6 +452,7 @@ llegar hasta cualquier fichero del sistema, pero aún no sabes mirar
 dentro desde la terminal. Ese es, exactamente, el primer gesto de la
 próxima sesión.
 :::
+::::
 :::
 
 ## Autocomprobación {#sec-quiz}
@@ -502,19 +522,44 @@ Marca una respuesta por pregunta; la corrección es inmediata.
 
 :::
 
-::: {.content-visible when-format="pdf"}
+:::: {.content-visible when-format="pdf"}
 
-Responde de memoria y comprueba al final de la lista.
+Responde de memoria; las respuestas están al final del capítulo.
 
-1. El programa que interpreta tus órdenes y las ejecuta es… **a)** la terminal · **b)** el shell · **c)** la consola
-2. En `ls -lt /etc`, la pieza `/etc` es… **a)** una opción · **b)** el programa · **c)** el argumento
-3. Estás en `/home/ana/datos` y ejecutas `cd ..`. ¿Dónde acabas? **a)** `/home/ana` · **b)** `/home` · **c)** `/`
-4. ¿Cuál de estas es una ruta relativa? **a)** `/home/marcos/datos` · **b)** `../figuras/fig01.png` · **c)** `/etc`
-5. Dentro de `man ls`, ¿qué tecla inicia una búsqueda? **a)** `/` · **b)** Ctrl+F · **c)** Tab
-6. Escribes `cd Des`, pulsas Tab y no se completa nada. La lectura correcta es… **a)** el tabulador está desactivado · **b)** probablemente no existe nada que empiece por «Des» aquí · **c)** hay que pulsarlo más fuerte
+1.  El programa que interpreta tus órdenes y las ejecuta es…
+    a)  la terminal
+    b)  el shell
+    c)  la consola
 
-*Respuestas: 1b · 2c · 3a · 4b · 5a · 6b.*
+2.  En `ls -lt /etc`, la pieza `/etc` es…
+    a)  una opción
+    b)  el programa
+    c)  el argumento
 
+3.  Estás en `/home/ana/datos` y ejecutas `cd ..`. ¿Dónde acabas?
+    a)  `/home/ana`
+    b)  `/home`
+    c)  `/`
+
+4.  ¿Cuál de estas es una ruta relativa?
+    a)  `/home/marcos/datos`
+    b)  `../figuras/fig01.png`
+    c)  `/etc`
+
+5.  Dentro de `man ls`, ¿qué tecla inicia una búsqueda?
+    a)  `/`
+    b)  Ctrl+F
+    c)  Tab
+
+6.  Escribes `cd Des`, pulsas Tab y no se completa nada. La lectura correcta es…
+    a)  el tabulador está desactivado
+    b)  probablemente no existe nada que empiece por «Des» aquí
+    c)  hay que pulsarlo más fuerte
+
+::::
+
+::: {.solucion-final}
+**Autocomprobación (test de la sección 1.9)** — Respuestas: 1 b · 2 c · 3 a · 4 b · 5 a · 6 b.
 :::
 
 ::: {.proxima}

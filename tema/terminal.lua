@@ -11,6 +11,13 @@ end
 
 function CodeBlock(el)
   if not el.classes:includes("terminal") then return nil end
+  if FORMAT:match("latex") then
+    -- PDF: caja con fondo gris (shadecolor, definida en _quarto.yml)
+    local txt = el.text:gsub("▮", "_")
+    return pandoc.RawBlock("latex",
+      "\\begin{snugshade}\n\\begin{Verbatim}[fontsize=\\small]\n"
+      .. txt .. "\n\\end{Verbatim}\n\\end{snugshade}")
+  end
   if not FORMAT:match("html") then
     return pandoc.CodeBlock(el.text)
   end

@@ -114,6 +114,7 @@ Fuente única en Markdown con Quarto. Dos salidas por capítulo o bloque: HTML a
 ## 7. Pendiente de decidir
 
 - Portada bonita para el libro (web y PDF; Quarto admite `cover-image`) — se hará más adelante.
+- ~~Nombre del curso~~ → decidido (2026-08-23): **«Bendito maldito Linux»**, subtítulo «Trabajar en Linux y conceptos de redes, explicado tan fácil que hasta un físico lo puede entender», lema «Terminal, sistemas, redes y trabajo remoto · 12 sesiones prácticas».
 - Distribución Debian vs Mint para la VM del bloque C (Debian es más «servidor real»; Mint es continuidad con su escritorio — propuesta: Mint no, Debian sí, y explicar por qué en el propio capítulo).
 - Nombre del curso.
 - Si el bloque D incluye o no un vistazo a DNS filtrado tipo Pi-hole como ejercicio avanzado opcional.

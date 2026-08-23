@@ -28,13 +28,13 @@ $code-color: $teal-deep;
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600;700&display=swap');
 
-// Papel milimetrado, versión tenue (ajustada tras el feedback del piloto)
+// Papel milimetrado, versión tenue, en azul cuaderno
 body {
   background-image:
-    repeating-linear-gradient(to right,  rgba(96,130,140,.06) 0 1px, transparent 1px 20px),
-    repeating-linear-gradient(to bottom, rgba(96,130,140,.06) 0 1px, transparent 1px 20px),
-    repeating-linear-gradient(to right,  rgba(96,130,140,.13)  0 1px, transparent 1px 100px),
-    repeating-linear-gradient(to bottom, rgba(96,130,140,.13)  0 1px, transparent 1px 100px);
+    repeating-linear-gradient(to right,  rgba(80,105,160,.06) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(to bottom, rgba(80,105,160,.06) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(to right,  rgba(80,105,160,.13)  0 1px, transparent 1px 100px),
+    repeating-linear-gradient(to bottom, rgba(80,105,160,.13)  0 1px, transparent 1px 100px);
 }
 
 // Números de sección en rojo bolígrafo, como en el prototipo
@@ -248,6 +248,11 @@ figcaption, .figure-caption {
     color: $ink;
   }
 }
+// Las respuestas del test solo existen para el PDF (las mueve
+// tema/soluciones.lua al final del capítulo); en la web, el quiz
+// interactivo ya corrige solo.
+.solucion-final { display: none; }
+
 .pie-piloto {
   font-family: $font-family-monospace;
   font-size: .72rem;
