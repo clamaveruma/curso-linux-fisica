@@ -1,0 +1,249 @@
+/*-- scss:defaults --*/
+
+// ── Paleta del curso (validada en el prototipo del cap. 1) ──
+$paper:      #F2ECDF;   // papel sepia
+$card:       #FAF6EB;   // tarjetas crema
+$ink:        #2B2318;   // tinta cálida
+$ink-soft:   #6A5F4D;
+$ink-faint:  #9C8F79;
+$pen:        #C4342A;   // rojo bolígrafo (acentos, ejercicios)
+$teal:       #2F6F62;   // verde azulado (identidad, teoría)
+$teal-deep:  #24564B;
+$teal-soft:  #DFE9DF;
+$amber:      #9A6A14;   // ámbar (cajas de historia)
+$amber-soft: #F5EBD6;
+$term-bg:    #0E1512;   // fondo de terminal
+$term-acc:   #6BD6BC;
+
+$body-bg: $paper;
+$body-color: $ink;
+$link-color: $teal-deep;
+$font-family-sans-serif: "IBM Plex Sans", system-ui, sans-serif;
+$font-family-monospace: "IBM Plex Mono", ui-monospace, monospace;
+$headings-font-family: "IBM Plex Serif", Georgia, serif;
+$code-bg: $teal-soft;
+$code-color: $teal-deep;
+
+/*-- scss:rules --*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600;700&display=swap');
+
+// Papel milimetrado, versión tenue (ajustada tras el feedback del piloto)
+body {
+  background-image:
+    repeating-linear-gradient(to right,  rgba(96,130,140,.06) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(to bottom, rgba(96,130,140,.06) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(to right,  rgba(96,130,140,.13)  0 1px, transparent 1px 100px),
+    repeating-linear-gradient(to bottom, rgba(96,130,140,.13)  0 1px, transparent 1px 100px);
+}
+
+// Números de sección en rojo bolígrafo, como en el prototipo
+.header-section-number {
+  font-family: $font-family-monospace;
+  color: $pen;
+  font-weight: 600;
+  margin-right: .35em;
+}
+h2 {
+  border-bottom: 1px solid rgba(47,111,98,.30);
+  padding-bottom: .25rem;
+}
+
+// Bloques de código como terminal
+div.sourceCode, pre {
+  background: $term-bg;
+  color: #D8E6E0;
+  border-radius: 6px;
+  box-shadow: 0 2px 0 rgba(43,35,24,.18);
+}
+pre code { background: transparent; color: inherit; }
+
+// Tablas: cabecera teal estilo cuaderno
+table thead th {
+  font-family: $font-family-monospace;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: $teal;
+  border-bottom: 2px solid $teal;
+}
+table tbody td { border-bottom: 1px solid rgba(122,94,58,.17); }
+
+// ── Portada de capítulo ──
+.lede {
+  font-size: 1.08em;
+  color: $ink-soft;
+  max-width: 58ch;
+}
+.chapmeta {
+  font-family: $font-family-monospace;
+  font-size: .78rem;
+  color: $ink-faint;
+  border-top: 1px solid rgba(122,94,58,.17);
+  border-bottom: 1px solid rgba(122,94,58,.17);
+  padding: .55rem 0;
+  margin: 1.2rem 0 1.6rem;
+  strong { color: $teal; }
+}
+.objetivos {
+  background: $card;
+  border: 1px solid rgba(122,94,58,.17);
+  border-left: 3px solid $teal;
+  border-radius: 3px;
+  padding: 1.1rem 1.4rem;
+  margin: 1.6rem 0 2.2rem;
+  ul { margin-bottom: 0; }
+  li { margin: .25rem 0; font-size: .95em; }
+  > p:first-child strong {
+    font-family: $font-family-monospace;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: $teal;
+  }
+}
+
+// Cajas del curso: se usan como  ::: {.por-dentro} ... :::
+.por-dentro, .historia, .aviso, .truco {
+  background: $card;
+  border: 1px solid rgba(122,94,58,.17);
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-radius: 3px;
+  padding: 1.1rem 1.4rem;
+  margin: 1.6rem 0;
+  font-size: 0.93em;
+}
+.por-dentro { border-left-color: $teal; background: mix($teal-soft, $card, 30%); }
+.historia   { border-left-color: $amber; background: mix($amber-soft, $card, 45%); }
+.aviso      { border-left-color: $pen; background: mix(#F5DED6, $card, 35%); }
+.truco      { border-left-color: $teal; background: $teal-soft; }
+
+.por-dentro > p:first-child strong,
+.historia   > p:first-child strong,
+.aviso      > p:first-child strong,
+.truco      > p:first-child strong {
+  font-family: $font-family-monospace;
+  font-size: 0.78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.por-dentro > p:first-child strong { color: $teal; }
+.historia   > p:first-child strong { color: $amber; }
+.aviso      > p:first-child strong { color: $pen; }
+.truco      > p:first-child strong { color: $teal-deep; }
+
+// ── Figuras: marco de tarjeta y pie en monoespaciada ──
+.quarto-figure img, figure img {
+  background: $card;
+  border: 1px solid rgba(122,94,58,.17);
+  border-radius: 3px;
+  padding: 10px;
+  max-width: 100%;
+}
+figcaption, .figure-caption {
+  font-family: $font-family-monospace;
+  font-size: .74rem;
+  color: $ink-faint;
+  line-height: 1.5;
+  margin-top: .5rem;
+}
+
+// Ejercicios:  ::: {.ejercicio} ... :::
+.ejercicio {
+  background: $card;
+  border: 1px solid rgba(122,94,58,.17);
+  border-left: 3px solid $pen;
+  border-radius: 3px;
+  padding: 1rem 1.3rem;
+  margin: 1.2rem 0;
+  > p:first-child strong {
+    font-family: $font-family-monospace;
+    font-size: .76rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: $pen;
+  }
+}
+
+// Las soluciones usan el callout plegable nativo de Quarto
+.callout.callout-style-default.callout-tip {
+  border-left-color: $teal;
+  background-color: mix($teal-soft, $card, 35%);
+}
+
+// ── Quiz de autocomprobación (idéntico al prototipo) ──
+.quiz {
+  background: $card;
+  border: 1px solid rgba(122,94,58,.17);
+  border-top: 3px solid $teal;
+  border-radius: 3px;
+  padding: 1.4rem;
+  margin: 1.6rem 0;
+}
+.qz { margin: 0 0 1.4rem; }
+.qz:last-of-type { margin-bottom: .4rem; }
+.qz .qq { font-weight: 600; font-size: .95em; margin: 0 0 .55rem; }
+.qz .qq::before {
+  content: attr(data-n) " · ";
+  font-family: $font-family-monospace;
+  color: $pen;
+  font-weight: 600;
+  font-size: .85em;
+}
+.qz label {
+  display: flex; gap: .55rem; align-items: flex-start;
+  padding: .35rem .55rem; border-radius: 2px; cursor: pointer;
+  font-size: .92em; margin-bottom: 0;
+}
+.qz label:hover { background: $teal-soft; }
+.qz input { accent-color: $teal; margin-top: .3rem; flex: none; }
+.qz .fb {
+  display: none; font-size: .88em;
+  border-left: 2px solid $teal;
+  padding: .25rem 0 .25rem .75rem; margin: .5rem 0 0;
+}
+.qz .fb b {
+  font-family: $font-family-monospace;
+  font-size: .78em; letter-spacing: .06em; text-transform: uppercase;
+}
+.qz.ok .fb.good { display: block; }
+.qz.ko .fb.bad  { display: block; }
+.qz.ok .fb b { color: $teal; }
+.qz.ko .fb b { color: $pen; }
+.qz.ko .fb.bad { border-left-color: $pen; }
+
+// ── Cierre de capítulo ──
+.proxima {
+  border: 1px solid rgba(122,94,58,.17);
+  border-left: 3px solid $pen;
+  background: $card;
+  padding: 1.2rem 1.5rem;
+  margin: 2.6rem 0 0;
+  color: $ink-soft;
+  > p:first-child strong {
+    font-family: $headings-font-family;
+    font-size: 1.25rem;
+    color: $ink;
+  }
+}
+.pie-piloto {
+  font-family: $font-family-monospace;
+  font-size: .72rem;
+  color: $ink-faint;
+  border-top: 1px solid rgba(122,94,58,.17);
+  padding-top: .8rem;
+  margin-top: 2.6rem;
+}
+
+// kbd al estilo del prototipo
+kbd {
+  font-family: $font-family-monospace;
+  font-size: .82em;
+  background: #FFFCF2;
+  color: $ink;
+  border: 1px solid #CBBFA4;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 1px 6px;
+}

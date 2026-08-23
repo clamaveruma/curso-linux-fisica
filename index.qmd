@@ -1,0 +1,13 @@
+# Bienvenida {.unnumbered}
+
+Llevas años usando Linux sin haber hablado nunca con él directamente.
+Este curso es esa conversación: doce sesiones para pasar de usuario de
+escritorio a alguien que instala su sistema, entiende su red y trabaja
+con soltura en un servidor remoto.
+
+Escrito para estudiantes de física: los ejercicios usan datos de
+laboratorio, las analogías vienen de la mecánica, y el destino final es
+el flujo de trabajo real de la física computacional.
+
+**Regla única e innegociable:** no copies y pegues los comandos.
+Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.

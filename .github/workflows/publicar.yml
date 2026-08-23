@@ -1,0 +1,21 @@
+name: Publicar curso
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  render-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true    # LaTeX mínimo para el PDF
+      - name: Conversor SVG→PDF para las figuras
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

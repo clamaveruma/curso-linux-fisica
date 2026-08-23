@@ -1,0 +1,4 @@
+# Vengo de Windows {#sec-anexo-windows}
+
+<!-- Para la versión publicada: preparar entorno con VirtualBox o WSL. -->
+Pendiente de redacción tras el piloto.

@@ -1,0 +1,38 @@
+<svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Árbol de directorios de Linux">
+  <g font-family="IBM Plex Mono,monospace" font-size="13.5">
+    <!-- raíz -->
+    <text x="60" y="40" fill="#C4342A" font-weight="600" font-size="16">/</text>
+    <text x="90" y="40" fill="#9C8F79" font-size="11">la raíz: aquí nace todo</text>
+    <line x1="66" y1="50" x2="66" y2="272" stroke="#C9B995" stroke-width="1.5"/>
+    <!-- ramas nivel 1 -->
+    <line x1="66" y1="75" x2="100" y2="75" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="110" y="80" fill="#2F6F62" font-weight="600">bin/</text>
+    <text x="185" y="80" fill="#9C8F79" font-size="11">los programas básicos</text>
+    <line x1="66" y1="115" x2="100" y2="115" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="110" y="120" fill="#2F6F62" font-weight="600">etc/</text>
+    <text x="185" y="120" fill="#9C8F79" font-size="11">la configuración del sistema</text>
+    <line x1="66" y1="155" x2="100" y2="155" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="110" y="160" fill="#2F6F62" font-weight="600">tmp/</text>
+    <text x="185" y="160" fill="#9C8F79" font-size="11">papelera de trabajo, se vacía sola</text>
+    <line x1="66" y1="195" x2="100" y2="195" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="110" y="200" fill="#2F6F62" font-weight="600">home/</text>
+    <text x="185" y="200" fill="#9C8F79" font-size="11">las casas de los usuarios</text>
+    <!-- home subtree -->
+    <line x1="130" y1="210" x2="130" y2="262" stroke="#C9B995" stroke-width="1.5"/>
+    <line x1="130" y1="235" x2="160" y2="235" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="170" y="240" fill="#C4342A" font-weight="600">marcos/</text>
+    <text x="262" y="240" fill="#9A6A14" font-size="12">← tú vives aquí: ~</text>
+    <line x1="130" y1="262" x2="160" y2="262" stroke="#C9B995" stroke-width="1.5"/>
+    <text x="170" y="267" fill="#6A5F4D">ana/</text>
+    <!-- marcos subtree -->
+    <line x1="196" y1="246" x2="196" y2="292" stroke="#C9B995" stroke-width="1"/>
+    <line x1="196" y1="266" x2="222" y2="266" stroke="#C9B995" stroke-width="1"/>
+    <text x="230" y="271" fill="#6A5F4D" font-size="12.5">Descargas/</text>
+    <line x1="196" y1="290" x2="222" y2="290" stroke="#C9B995" stroke-width="1"/>
+    <text x="230" y="295" fill="#6A5F4D" font-size="12.5">datos/</text>
+    <!-- ruta destacada -->
+    <text x="430" y="235" fill="#2B2318" font-size="12.5">ruta absoluta a tu carpeta:</text>
+    <text x="430" y="257" fill="#2F6F62" font-weight="600" font-size="13.5">/home/marcos/datos</text>
+    <text x="430" y="279" fill="#9C8F79" font-size="11.5">se lee de la raíz hacia abajo</text>
+  </g>
+</svg>

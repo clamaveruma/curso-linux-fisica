@@ -1,0 +1,43 @@
+project:
+  type: book
+  output-dir: _site
+  resources:
+    - datos/      # los datasets se publican junto a la web
+
+lang: es
+
+book:
+  title: "Linux, redes y sistemas para físicos"
+  author: "Claudio"
+  date: today
+  # El botón de descarga del PDF en la barra superior sale de aquí:
+  downloads: [pdf]
+  repo-url: https://github.com/clamaveruma/curso-linux-fisica
+  chapters:
+    - index.qmd
+    - capitulos/cap01.qmd
+    # - capitulos/cap02.qmd   # ← descomentar según se escriban
+  appendices:
+    - anexos/anexo-windows.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - tema/curso.scss
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-copy: false        # regla del curso: no copies, teclea
+    fontsize: 16.5px
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    toc: true
+    number-sections: true
+    colorlinks: true
+    # En PDF las soluciones plegables se imprimen abiertas;
+    # moverlas a apéndice es un paso posterior con perfil LaTeX.
+
+execute:
+  freeze: auto

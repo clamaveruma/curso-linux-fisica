@@ -1,0 +1,43 @@
+<svg viewBox="0 0 700 260" width="700" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ruta absoluta frente a ruta relativa">
+  <defs>
+    <marker id="fra" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#C4342A"/>
+    </marker>
+    <marker id="frr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/>
+    </marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- panel izquierdo: absoluta -->
+    <rect x="15" y="15" width="325" height="230" rx="4" fill="#FAF6EB" stroke="#C4342A" stroke-width="1.3"/>
+    <text x="35" y="42" font-size="12" fill="#C4342A" font-weight="600" letter-spacing="1">RUTA ABSOLUTA</text>
+    <text x="35" y="59" font-size="10.5" fill="#9C8F79">el sistema de referencia del laboratorio</text>
+    <text x="60" y="93" font-size="14" fill="#2B2318" font-weight="600">/</text>
+    <text x="85" y="118" font-size="13" fill="#6A5F4D">home/</text>
+    <text x="110" y="143" font-size="13" fill="#6A5F4D">marcos/</text>
+    <text x="135" y="168" font-size="13" fill="#2B2318" font-weight="600">datos/</text>
+    <line x1="66" y1="98" x2="66" y2="112" stroke="#C9B995" stroke-width="1.2"/>
+    <line x1="91" y1="123" x2="91" y2="137" stroke="#C9B995" stroke-width="1.2"/>
+    <line x1="116" y1="148" x2="116" y2="162" stroke="#C9B995" stroke-width="1.2"/>
+    <!-- flecha del recorrido completo -->
+    <path d="M50 85 C 30 120, 60 150, 120 166" fill="none" stroke="#C4342A" stroke-width="1.8" marker-end="url(#fra)"/>
+    <text x="35" y="205" font-size="13.5" fill="#C4342A" font-weight="600">/home/marcos/datos</text>
+    <text x="35" y="226" font-size="10.5" fill="#6A5F4D">empieza en la raíz · vale desde cualquier sitio</text>
+    <!-- panel derecho: relativa -->
+    <rect x="360" y="15" width="325" height="230" rx="4" fill="#FAF6EB" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="380" y="42" font-size="12" fill="#24564B" font-weight="600" letter-spacing="1">RUTA RELATIVA</text>
+    <text x="380" y="59" font-size="10.5" fill="#9C8F79">el sistema de referencia del observador</text>
+    <text x="405" y="93" font-size="13" fill="#6A5F4D">marcos/</text>
+    <text x="430" y="123" font-size="13" fill="#2B2318" font-weight="600">Descargas/</text>
+    <text x="547" y="123" font-size="10.5" fill="#9A6A14">← estás aquí</text>
+    <text x="430" y="168" font-size="13" fill="#2B2318" font-weight="600">datos/</text>
+    <line x1="411" y1="98" x2="411" y2="117" stroke="#C9B995" stroke-width="1.2"/>
+    <line x1="411" y1="128" x2="411" y2="162" stroke="#C9B995" stroke-width="1.2"/>
+    <!-- flecha: subir con .. y bajar -->
+    <path d="M425 116 C 400 105, 400 100, 420 96" fill="none" stroke="#2F6F62" stroke-width="1.8"/>
+    <path d="M435 98 C 415 105, 408 140, 424 163" fill="none" stroke="#2F6F62" stroke-width="1.8" marker-end="url(#frr)"/>
+    <text x="378" y="112" font-size="11" fill="#2F6F62" font-weight="600">..</text>
+    <text x="380" y="205" font-size="13.5" fill="#24564B" font-weight="600">../datos</text>
+    <text x="380" y="226" font-size="10.5" fill="#6A5F4D">se mide desde donde estás · corta pero local</text>
+  </g>
+</svg>

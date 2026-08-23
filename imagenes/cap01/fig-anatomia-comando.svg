@@ -1,0 +1,20 @@
+<svg viewBox="0 0 700 190" width="700" height="190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomía de un comando: programa, opciones, argumento">
+  <g font-family="IBM Plex Mono,monospace">
+    <rect x="40" y="55" width="620" height="52" rx="5" fill="#0E1512"/>
+    <text x="66" y="88" font-size="21" fill="#6BD6BC">$</text>
+    <text x="95" y="88" font-size="21" fill="#FFFFFF" font-weight="600">ls</text>
+    <text x="150" y="88" font-size="21" fill="#E8C170">-l -h</text>
+    <text x="255" y="88" font-size="21" fill="#D8E6E0">/home/marcos/datos</text>
+    <!-- llaves y etiquetas -->
+    <path d="M95 115 v8 h33 v-8" fill="none" stroke="#2F6F62" stroke-width="1.5"/>
+    <text x="111" y="142" font-size="12.5" fill="#2F6F62" text-anchor="middle" font-weight="600">programa</text>
+    <text x="111" y="158" font-size="10.5" fill="#9C8F79" text-anchor="middle">qué hacer</text>
+    <path d="M150 115 v8 h95 v-8" fill="none" stroke="#9A6A14" stroke-width="1.5"/>
+    <text x="197" y="142" font-size="12.5" fill="#9A6A14" text-anchor="middle" font-weight="600">opciones</text>
+    <text x="197" y="158" font-size="10.5" fill="#9C8F79" text-anchor="middle">cómo hacerlo</text>
+    <path d="M255 115 v8 h230 v-8" fill="none" stroke="#C4342A" stroke-width="1.5"/>
+    <text x="370" y="142" font-size="12.5" fill="#C4342A" text-anchor="middle" font-weight="600">argumento</text>
+    <text x="370" y="158" font-size="10.5" fill="#9C8F79" text-anchor="middle">sobre qué actuar</text>
+    <text x="350" y="34" font-size="12" fill="#6A5F4D" text-anchor="middle">verbo · adverbios · complemento — como una frase</text>
+  </g>
+</svg>
