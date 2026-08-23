@@ -6,15 +6,22 @@ project:
 
 lang: es
 
+license: "CC BY-SA 4.0"
+copyright:
+  holder: Claudio M. Martínez Velasco
+  year: 2026
+
 filters:
   - tema/terminal.lua   # colorea los bloques ```terminal en la web
 
 book:
   title: "Linux, redes y sistemas para físicos"
-  author: "Claudio"
-  date: today
+  author: "Claudio M. Martínez Velasco"
+  date: "Agosto de 2026"
   # El botón de descarga del PDF en la barra superior sale de aquí:
   downloads: [pdf]
+  page-footer:
+    center: "© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0"
   chapters:
     - index.qmd
     - capitulos/cap01.qmd

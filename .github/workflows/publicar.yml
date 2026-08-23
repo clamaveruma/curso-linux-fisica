@@ -4,6 +4,10 @@ on:
     branches: [main]
 permissions:
   contents: write
+# Si llegan dos push seguidos, se cancela la publicación vieja:
+concurrency:
+  group: publicar
+  cancel-in-progress: true
 jobs:
   render-publish:
     runs-on: ubuntu-latest
