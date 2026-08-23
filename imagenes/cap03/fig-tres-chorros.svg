@@ -1,0 +1,40 @@
+<svg viewBox="0 0 700 240" width="700" height="240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Los tres canales de todo programa: stdin, stdout y stderr">
+  <defs>
+    <marker id="f3in" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#9A6A14"/></marker>
+    <marker id="f3out" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+    <marker id="f3err" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#C4342A"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- teclado -->
+    <rect x="30" y="80" width="110" height="46" rx="5" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
+    <g fill="#9C8F79">
+      <rect x="42" y="92" width="12" height="9" rx="1.5"/><rect x="58" y="92" width="12" height="9" rx="1.5"/><rect x="74" y="92" width="12" height="9" rx="1.5"/><rect x="90" y="92" width="12" height="9" rx="1.5"/><rect x="106" y="92" width="12" height="9" rx="1.5"/>
+      <rect x="50" y="106" width="60" height="9" rx="1.5"/>
+    </g>
+    <text x="85" y="145" font-size="10.5" fill="#6A5F4D" text-anchor="middle">teclado</text>
+    <!-- programa -->
+    <rect x="280" y="70" width="150" height="66" rx="5" fill="#0E1512"/>
+    <text x="355" y="99" font-size="15" fill="#6BD6BC" text-anchor="middle" font-weight="600">programa</text>
+    <text x="355" y="119" font-size="11" fill="#D8E6E0" text-anchor="middle">(grep, sort, wc…)</text>
+    <!-- pantalla -->
+    <rect x="560" y="45" width="110" height="76" rx="5" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
+    <rect x="570" y="55" width="90" height="46" rx="2" fill="#0E1512"/>
+    <text x="578" y="73" font-size="9" fill="#6BD6BC">resultado…</text>
+    <text x="578" y="90" font-size="9" fill="#E8837A">aviso: …</text>
+    <text x="615" y="140" font-size="10.5" fill="#6A5F4D" text-anchor="middle">pantalla</text>
+    <!-- stdin -->
+    <line x1="145" y1="103" x2="272" y2="103" stroke="#9A6A14" stroke-width="2" marker-end="url(#f3in)"/>
+    <text x="208" y="93" font-size="11.5" fill="#9A6A14" text-anchor="middle" font-weight="600">0 · stdin</text>
+    <text x="208" y="122" font-size="9.5" fill="#9C8F79" text-anchor="middle">lo que entra</text>
+    <!-- stdout -->
+    <line x1="435" y1="88" x2="552" y2="78" stroke="#2F6F62" stroke-width="2" marker-end="url(#f3out)"/>
+    <text x="493" y="70" font-size="11.5" fill="#2F6F62" text-anchor="middle" font-weight="600">1 · stdout</text>
+    <text x="493" y="103" font-size="9.5" fill="#9C8F79" text-anchor="middle">el resultado</text>
+    <!-- stderr -->
+    <line x1="435" y1="122" x2="552" y2="112" stroke="#C4342A" stroke-width="2" marker-end="url(#f3err)"/>
+    <text x="493" y="140" font-size="11.5" fill="#C4342A" text-anchor="middle" font-weight="600">2 · stderr</text>
+    <text x="493" y="156" font-size="9.5" fill="#9C8F79" text-anchor="middle">las quejas</text>
+    <text x="350" y="192" font-size="11" fill="#6A5F4D" text-anchor="middle">dos salidas separadas: puedes guardar el resultado y seguir viendo los errores</text>
+    <text x="350" y="212" font-size="10" fill="#9C8F79" text-anchor="middle">si no los conectas a otro sitio, los tres canales apuntan a tu terminal</text>
+  </g>
+</svg>
