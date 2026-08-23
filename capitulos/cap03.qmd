@@ -1,0 +1,521 @@
+# El flujo de datos {#sec-cap03}
+
+::: {.lede}
+Esta noche tu experimento ha generado un registro de 7 198 líneas.
+Nadie va a leerlas. Hoy aprendes el gesto que define a Unix desde hace
+cincuenta años: conectar programas pequeños como conectas aparatos en
+un montaje experimental, hasta que de un fichero inabarcable sale una
+respuesta de tres líneas.
+:::
+
+::: {.chapmeta}
+⏱ **2–3 h** con ejercicios · requisitos: **capítulos 1 y 2** · máquina: **tu Linux de diario**
+:::
+
+::: {.objetivos}
+**Al terminar esta sesión sabrás**
+
+- Qué son los tres canales de todo programa — stdin, stdout, stderr — y por qué esa separación es una idea brillante.
+- Guardar la salida de cualquier comando en un fichero con `>` y `>>`, sin perder los errores por el camino.
+- Encadenar programas con la tubería `|`: la salida de uno como entrada del siguiente.
+- Usar la caja de herramientas del análisis: `wc`, `grep`, `sort`, `uniq` y `cut`.
+- Construir una tubería pieza a pieza, comprobando cada paso — el método que evita los errores silenciosos.
+- Decidir con criterio cuándo resolver algo con tuberías y cuándo abrir Python.
+:::
+
+## Los tres chorros {#sec-canales}
+
+Todo programa de terminal, sin excepción, nace conectado a tres
+canales. Por uno le entra texto: la **entrada estándar** (*stdin*).
+Por otro escupe sus resultados: la **salida estándar** (*stdout*). Y
+por el tercero protesta: la **salida de errores** (*stderr*). Si no
+dices lo contrario, los tres apuntan a tu terminal: stdin al teclado,
+y las dos salidas a la pantalla.
+
+![Los tres canales, numerados 0, 1 y 2. La genialidad está en separar el resultado de las quejas.](../imagenes/cap03/fig-tres-chorros.svg){#fig-canales fig-alt="Esquema de un programa con su entrada estándar desde el teclado y sus dos salidas, resultado y errores, hacia la pantalla"}
+
+¿Por qué *dos* salidas? Piensa en el log de esta noche: si el programa
+de adquisición mezclara las medidas y los avisos de error en el mismo
+chorro, guardar los datos limpios sería un suplicio. Separados, puedes
+enviar cada uno a un sitio. Ese es exactamente el siguiente paso.
+
+## Redirigir: `>` y `>>` {#sec-redirigir}
+
+El símbolo `>` desvía la salida estándar de la pantalla a un fichero.
+Descarga el registro de esta noche (está al final del capítulo, en la
+práctica) y prueba:
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log > errores.txt
+marcos@portatil:~/Descargas$ head -2 errores.txt
+2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor
+2026-08-18 10:03:02 ERROR s3 sin respuesta del sensor
+```
+
+`grep` (lo conoces en un momento) no imprimió nada en pantalla: su
+stdout fue a parar a `errores.txt`. Dos reglas de seguridad:
+
+- `>` **sobrescribe** el fichero de destino sin preguntar. Su hermano
+  `>>` **añade** al final sin destruir lo anterior.
+- Los errores (stderr) *no* viajan con `>`: siguen saliendo por
+  pantalla, que es donde quieres verlos. Para capturarlos también
+  existe `2>` — el `2` es el número del canal de la figura.
+
+```terminal
+marcos@portatil:~/Descargas$ echo "Informe de la noche" > informe.txt
+marcos@portatil:~/Descargas$ echo "generado el 19 de agosto" >> informe.txt
+marcos@portatil:~/Descargas$ cat informe.txt
+Informe de la noche
+generado el 19 de agosto
+```
+
+`echo`, que conociste el primer día como un juguete, acaba de revelar
+su oficio real: fabricar líneas de texto para tus ficheros.
+
+## La tubería: `|` {#sec-tuberia}
+
+Y aquí está la idea central del capítulo. Si `>` conecta un programa
+con un fichero, la **tubería** `|` conecta un programa con *otro
+programa*: el stdout del de la izquierda se convierte en el stdin del
+de la derecha. Sin ficheros intermedios, sin pasos manuales.
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log | wc -l
+108
+```
+
+Léelo como una cadena de montaje: `grep` filtra las líneas con
+`ERROR`, y su salida — en vez de inundar la pantalla — entra en `wc -l`
+(*word count*, opción *lines*), que solo cuenta. De 7 198 líneas a un
+número: esta noche hubo 108 fallos.
+
+::: {.historia}
+**◷ Historia · Una manguera de jardín en Bell Labs**
+
+La tubería tiene padre: Doug McIlroy, jefe del departamento donde
+nació Unix. En 1964 — cinco años *antes* de Unix — ya escribía en un
+memorándum que los programas deberían acoplarse «como los tramos de
+una manguera de jardín: se enrosca otro segmento cuando hace falta
+tratar el agua de otra manera». Estuvo casi una década insistiendo,
+hasta que una noche de 1973 Ken Thompson cedió, la implementó en el
+kernel, y en una semana el equipo reescribió medio sistema en forma de
+filtros encadenables. De esa semana sale la **filosofía Unix** que
+estás usando ahora: haz que cada programa haga una sola cosa bien, y
+que todos hablen el mismo idioma — texto.
+:::
+
+![Doug McIlroy en 2011. Propuso la tubería en 1964; el símbolo `|` tardó nueve años en existir. *Foto: Denise Panyik-Dale, CC BY 2.0, Wikimedia Commons.*](../imagenes/cap03/mcilroy.jpg){#fig-mcilroy fig-alt="Retrato de Douglas McIlroy" width="45%"}
+
+## La caja de herramientas {#sec-herramientas}
+
+Cinco filtros bastan para el noventa por ciento del trabajo. Todos
+leen texto por stdin (o de un fichero que les des) y escriben texto
+por stdout — por eso encajan entre sí en cualquier orden:
+
+| Herramienta | Qué hace | La opción estrella |
+|-------------|----------|--------------------|
+| `wc` | cuenta | `-l` solo líneas |
+| `grep PATRON` | deja pasar las líneas que contienen el patrón | `-c` cuenta en vez de mostrar; `-v` invierte: las que NO lo contienen |
+| `sort` | ordena las líneas | `-n` numérico; `-r` al revés |
+| `uniq` | colapsa líneas repetidas **adyacentes** | `-c` antepone cuántas veces |
+| `cut` | recorta columnas | `-d' '` separador, `-f4` cuarto campo |
+
+Y los que ya conoces, `head` y `tail`, también son filtros: al final
+de una tubería sirven para quedarte con lo primero o lo último.
+
+::: {.aviso}
+**△ Cuidado · `uniq` solo ve lo adyacente**
+
+`uniq` no busca repetidos por todo el fichero: colapsa líneas iguales
+*consecutivas*. Sueltas por ahí, se le escapan. Por eso el dúo
+inseparable es `sort | uniq`: primero juntas los iguales, luego
+colapsas. Si algún día un recuento te sale absurdo, revisa si te
+faltó el `sort`.
+:::
+
+## El análisis, pieza a pieza {#sec-analisis}
+
+Vamos a responder la pregunta que un físico se hace ante ese log:
+**¿qué sensor está fallando?** Y vamos a hacerlo con el método
+profesional: construir la tubería paso a paso, mirando qué sale de
+cada pieza antes de añadir la siguiente.
+
+Primer paso: aislar los errores y *mirar* unas cuantas líneas.
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log | head -3
+2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor
+2026-08-18 10:03:02 ERROR s3 sin respuesta del sensor
+2026-08-18 10:03:04 ERROR s3 sin respuesta del sensor
+```
+
+El nombre del sensor es una columna. Contemos con los dedos sobre una
+línea: fecha (1), hora (2), nivel (3), **sensor (4)**, mensaje (5 en
+adelante). Segundo paso: recortar esa columna… y comprobar.
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log | cut -d' ' -f5 | head -3
+sin
+sin
+sin
+```
+
+¿«sin»? Hemos cortado el campo 5 — la primera palabra del *mensaje* —
+en vez del 4. Este tropiezo está puesto aquí a propósito, porque es el
+error más típico del capítulo y porque el método lo ha cazado al
+instante: **cada pieza nueva se comprueba con un `head` antes de
+seguir**. Corregimos y ahora sí:
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log | cut -d' ' -f4 | head -3
+s3
+s3
+s3
+```
+
+Tercer paso: de 108 nombres de sensor al recuento. Los iguales juntos
+(`sort`), colapsados contando (`uniq -c`), y el ranking de mayor a
+menor (`sort -nr`):
+
+```terminal
+marcos@portatil:~/Descargas$ grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr
+     90 s3
+     15 s1
+      3 s4
+```
+
+Veredicto en una línea: el sensor **s3** es el culpable con 90 fallos
+(un conector flojo, apostaría un físico), s1 tuvo una racha corta de
+lecturas corruptas y s4 apenas tres tropiezos. Este es el momento del
+capítulo: acabas de interrogar a 7 198 líneas con una sola orden.
+
+![La tubería completa del análisis, con lo que fluye en cada tramo.](../imagenes/cap03/fig-tuberia.svg){#fig-tuberia fig-alt="Cadena de programas grep, cut, sort y uniq que transforma el log de 7198 líneas en un ranking de tres sensores"}
+
+¿Y las temperaturas? El valor viene como `temp_C=22.66`: un `=` de
+separador y `cut` lo recorta igual de bien. Máxima de la noche:
+
+```terminal
+marcos@portatil:~/Descargas$ grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 | sort -n | tail -1
+25.00
+```
+
+25.00 justos — sospechosamente redondo. Cruza el dato: `grep -c WARN
+adquisicion.log` da 357 avisos de «saturada» del sensor s2. El sensor
+no midió 25.00: se quedó *clavado* en su tope mientras la temperatura
+real seguía subiendo. Dos tuberías te acaban de dar el diagnóstico
+completo del montaje: s3 se desconecta, s2 está derivando hasta
+saturar.
+
+::: {.por-dentro}
+**◉ Por dentro · ¿Y aquel renombrado en lote?**
+
+En el capítulo 2 renombraste cinco runs a mano y prometimos algo
+mejor. La verdad completa: las tuberías transforman *texto*, no
+ejecutan una orden por cada fichero — para eso hacen falta los bucles
+del shell, que viven en el anexo de *scripting*. Pero ya tienes la
+mitad de la solución: `find . -name "*.csv"` te fabrica la **lista**
+sobre la que un bucle trabajaría. La tubería prepara el trabajo; el
+bucle lo remata. Todo llega.
+:::
+
+## ¿Y Python? {#sec-python}
+
+La pregunta honesta: tú sabes NumPy — ¿no era más fácil en Python? El
+mismo recuento, en Python legible:
+
+```python
+recuento = {}
+for linea in open("adquisicion.log"):
+    if " ERROR " in linea:
+        sensor = linea.split()[3]
+        recuento[sensor] = recuento.get(sensor, 0) + 1
+for sensor, n in sorted(recuento.items(), key=lambda kv: -kv[1]):
+    print(n, sensor)
+```
+
+Ocho líneas, mismo resultado (`90 s3 · 15 s1 · 3 s4` — comprobado).
+Entonces, ¿cuándo cada cosa?
+
+- **Tubería** cuando la pregunta es exploratoria y la respuesta cabe
+  en pantalla: ¿cuántos?, ¿cuáles?, ¿quién más? Diez segundos, cero
+  ficheros nuevos, y funciona idéntica en el superordenador al que te
+  conectes por SSH — donde quizá no puedas instalar nada.
+- **Python** cuando empieza el *cálculo*: estadística, ajustes,
+  gráficas, o cualquier análisis que mañana querrás repetir con otros
+  datos. Un script se documenta y se cita; una tubería se teclea y se
+  olvida.
+
+El flujo real de un físico computacional es la secuencia de ambos:
+explorar con tuberías hasta entender qué hay, y entonces escribir el
+script de Python que lo analiza en serio. Las dos herramientas no
+compiten: se turnan.
+
+## Práctica: la noche en el laboratorio {#sec-practica-3}
+
+::: {.content-visible when-format="html"}
+Arranca tu cuaderno (`script sesion03.log`) y descarga el registro de
+la noche:
+[`adquisicion.log`](../datos/cap03/adquisicion.log){download="adquisicion.log"}
+(305 KB de texto — ni se te ocurra abrirlo con doble clic: para eso
+está la sesión de hoy). Trabaja en `~/Descargas` o muévelo a tu
+carpeta de física del capítulo 2.
+:::
+
+::: {.content-visible when-format="pdf"}
+Arranca tu cuaderno (`script sesion03.log`) y descarga el registro de
+la noche, `adquisicion.log`, desde esta misma sección en la versión
+web del curso (305 KB de texto — ni se te ocurra abrirlo con doble
+clic: para eso está la sesión de hoy). Trabaja en `~/Descargas` o
+muévelo a tu carpeta de física del capítulo 2.
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.1 · Dimensiones del problema**
+
+¿Cuántas líneas tiene el log? ¿Cuántas corresponden al sensor `s2`?
+Pista para lo segundo: el patrón de `grep` puede llevar espacios si lo
+proteges con comillas — y ` s2 ` con espacios alrededor evita
+confundirlo con cualquier otra cosa.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`wc -l adquisicion.log` → 7 198. Y `grep -c " s2 " adquisicion.log` →
+1 799.
+
+**Por qué así** — Las comillas protegen los espacios del patrón (son
+los mismos espacios-separadores del capítulo 1). Sin ellos, `s2`
+también casaría en cualquier línea que contuviera esa pareja de
+caracteres en otro sitio. Acotar el patrón es la mitad del oficio de
+`grep`.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.2 · El primer síntoma**
+
+¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue?
+Resuélvelo con una tubería que termine en `head`.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`grep ERROR adquisicion.log | head -1` →
+`2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor`. El s3, a las
+10:03:00 — tres minutos después de arrancar.
+
+**Por qué así** — El log ya está en orden cronológico, así que «el
+primer error» es literalmente la primera línea que pase el filtro.
+Cuando el orden te lo dan hecho, aprovéchalo: ni `sort` ni nada.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.3 · ¿Quién avisa?**
+
+Los `WARN` son avisos, no fallos. ¿Qué sensores emitieron avisos esta
+noche? La respuesta debe ser la lista de nombres, sin repetir.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq` → `s2`,
+solo. (Con `uniq -c` verás además que fueron 357 avisos.)
+
+**Por qué así** — Misma maquinaria que el ranking del capítulo, sin el
+`-c`: cuando solo quieres saber *quiénes*, `sort | uniq` es la
+pregunta «¿qué valores distintos hay en esta columna?». Apréndetela
+como frase hecha: la usarás mil veces.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.4 · La reconstrucción**
+
+Sin mirar la sección del análisis: reconstruye de memoria la tubería
+del ranking de errores por sensor, pieza a pieza, comprobando cada
+paso con `head`. Compara tu resultado con el del capítulo.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr`
+→ `90 s3 · 15 s1 · 3 s4`.
+
+**Por qué así** — Si te salió a la primera, perfecto. Si no, mejor
+aún: el objetivo era practicar el método — añadir una pieza, `head`,
+mirar, seguir. Una tubería no se escribe: se *cultiva*. El día que te
+salga una de seis etapas habrás llegado sin darte cuenta.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.5 · Rango de temperaturas**
+
+¿Entre qué mínima y máxima se movieron las lecturas *válidas* (las
+líneas `INFO`)? ¿Y por qué la máxima debe mirarse con lupa?
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Mínima: `grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 |
+sort -n | head -1` → 20.45. Máxima: la misma tubería con `tail -1` →
+25.00. Y 25.00 es justo el tope donde s2 satura (los 357 `WARN`): la
+«máxima» no es una medida, es el techo del instrumento.
+
+**Por qué así** — `sort -n` ordena como números (sin `-n`, `9` iría
+después de `25`, orden alfabético). Y la lección de física: un valor
+sospechosamente redondo en el extremo del rango huele a saturación,
+no a dato. La tubería te dio el número; el criterio lo pones tú.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.6 · El informe**
+
+Construye un fichero `informe.txt` con tres secciones usando solo
+`echo` y redirecciones: una línea de título, el total de errores, y el
+ranking por sensor. Las dos primeras con `echo` (una crea el fichero,
+la otra añade); la tercera, añadiendo la salida de tu tubería del 3.4.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+```
+echo "Informe de adquisicion - 18 de agosto" > informe.txt
+grep -c ERROR adquisicion.log >> informe.txt
+grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr >> informe.txt
+```
+Comprueba con `cat informe.txt`: título, `108`, y las tres líneas del
+ranking.
+
+**Por qué así** — Primera línea con `>` (crea o vacía el fichero) y el
+resto con `>>` (añaden). Si hubieras usado `>` en todas, cada orden
+habría borrado la anterior y el informe tendría solo el ranking. Ese
+matiz — crear una vez, añadir después — es la gramática de todo
+informe generado por comandos. Cierra el cuaderno con `exit` y guarda
+`sesion03.log`.
+:::
+::::
+:::
+
+## Autocomprobación {#sec-quiz-3}
+
+::: {.content-visible when-format="html"}
+
+Marca una respuesta por pregunta; la corrección es inmediata.
+
+```{=html}
+<div class="quiz" id="quiz-cap03">
+  <div class="qz"><p class="qq" data-n="1">En <code>grep ERROR log | wc -l</code>, la tubería conecta…</p>
+    <label><input type="radio" name="z1" value="a"><span>el stdout de <code>grep</code> con el stdin de <code>wc</code></span></label>
+    <label><input type="radio" name="z1" value="b"><span>el stderr de <code>grep</code> con la pantalla</span></label>
+    <label><input type="radio" name="z1" value="c"><span>los dos programas con el fichero <code>log</code></span></label>
+    <div class="fb good"><b>Correcto.</b> La salida estándar del de la izquierda se convierte en la entrada estándar del de la derecha. El fichero solo lo lee <code>grep</code>.</div>
+    <div class="fb bad"><b>No exactamente.</b> La tubería une stdout→stdin entre programas; el fichero es asunto de <code>grep</code>, y stderr va por su propio canal. Revisa la figura de los tres chorros.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">¿Por qué <code>uniq -c</code> casi siempre lleva un <code>sort</code> delante?</p>
+    <label><input type="radio" name="z2" value="a"><span>porque <code>uniq</code> solo colapsa repetidos adyacentes</span></label>
+    <label><input type="radio" name="z2" value="b"><span>porque <code>uniq</code> exige entrada numérica</span></label>
+    <label><input type="radio" name="z2" value="c"><span>por costumbre: sin <code>sort</code> da lo mismo</span></label>
+    <div class="fb good"><b>Correcto.</b> Sin ordenar antes, los repetidos dispersos se le escapan y el recuento sale mal — el clásico error silencioso.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>uniq</code> solo ve líneas iguales <em>consecutivas</em>: el <code>sort</code> previo junta los iguales para que el recuento sea completo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">Ejecutas dos veces <code>echo hola > f.txt</code>. ¿Qué contiene <code>f.txt</code>?</p>
+    <label><input type="radio" name="z3" value="a"><span>dos líneas con «hola»</span></label>
+    <label><input type="radio" name="z3" value="b"><span>una sola línea con «hola»</span></label>
+    <label><input type="radio" name="z3" value="c"><span>depende del contenido anterior</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>&gt;</code> sobrescribe cada vez: la segunda ejecución vació el fichero y volvió a escribir. Para acumular, <code>&gt;&gt;</code>.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>&gt;</code> sobrescribe sin preguntar — cada ejecución deja el fichero solo con su línea. El que añade es <code>&gt;&gt;</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">¿Qué hace <code>cut -d' ' -f4</code>?</p>
+    <label><input type="radio" name="z4" value="a"><span>recorta los 4 primeros caracteres de cada línea</span></label>
+    <label><input type="radio" name="z4" value="b"><span>se queda con el cuarto campo, separando por espacios</span></label>
+    <label><input type="radio" name="z4" value="c"><span>elimina la cuarta columna y deja el resto</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>-d</code> fija el separador y <code>-f</code> elige el campo. Y ya sabes qué pasa si cuentas mal los campos: se comprueba con un <code>head</code>.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>cut</code> trocea cada línea por el separador de <code>-d</code> y entrega el campo que pide <code>-f</code>: aquí, el cuarto.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Quieres guardar los resultados en un fichero pero seguir viendo los errores en pantalla. ¿Qué canal captura <code>2&gt;</code>?</p>
+    <label><input type="radio" name="z5" value="a"><span>stderr, la salida de errores</span></label>
+    <label><input type="radio" name="z5" value="b"><span>stdout, la salida estándar</span></label>
+    <label><input type="radio" name="z5" value="c"><span>stdin, la entrada</span></label>
+    <div class="fb good"><b>Correcto.</b> El 2 es el número de stderr (0=stdin, 1=stdout). Con <code>&gt;</code> a un fichero y sin tocar el 2, consigues justo eso: datos guardados, quejas visibles.</div>
+    <div class="fb bad"><b>No exactamente.</b> La numeración es 0=stdin, 1=stdout, 2=stderr — <code>2&gt;</code> desvía las quejas. Vuelve a la figura de los tres chorros.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">¿Cuál es el equivalente exacto de <code>grep ERROR log | wc -l</code>?</p>
+    <label><input type="radio" name="z6" value="a"><span><code>grep -c ERROR log</code></span></label>
+    <label><input type="radio" name="z6" value="b"><span><code>wc -l ERROR log</code></span></label>
+    <label><input type="radio" name="z6" value="c"><span><code>sort ERROR log | uniq -c</code></span></label>
+    <div class="fb good"><b>Correcto.</b> <code>grep -c</code> cuenta las líneas que casan, ahorrándose la tubería. Muchos filtros tienen estos atajos — se descubren en su <code>man</code>.</div>
+    <div class="fb bad"><b>No exactamente.</b> El atajo es <code>grep -c</code>: cuenta en vez de mostrar. Mismo resultado, una pieza menos.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"a", z2:"a", z3:"b", z4:"b", z5:"a", z6:"a"};
+  document.querySelectorAll("#quiz-cap03 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+```
+
+:::
+
+:::: {.content-visible when-format="pdf"}
+
+Responde de memoria; las respuestas están al final del capítulo.
+
+1.  En `grep ERROR log | wc -l`, la tubería conecta…
+    a)  el stdout de `grep` con el stdin de `wc`
+    b)  el stderr de `grep` con la pantalla
+    c)  los dos programas con el fichero `log`
+
+2.  ¿Por qué `uniq -c` casi siempre lleva un `sort` delante?
+    a)  porque `uniq` solo colapsa repetidos adyacentes
+    b)  porque `uniq` exige entrada numérica
+    c)  por costumbre: sin `sort` da lo mismo
+
+3.  Ejecutas dos veces `echo hola > f.txt`. ¿Qué contiene `f.txt`?
+    a)  dos líneas con «hola»
+    b)  una sola línea con «hola»
+    c)  depende del contenido anterior
+
+4.  ¿Qué hace `cut -d' ' -f4`?
+    a)  recorta los 4 primeros caracteres de cada línea
+    b)  se queda con el cuarto campo, separando por espacios
+    c)  elimina la cuarta columna y deja el resto
+
+5.  ¿Qué canal captura `2>`?
+    a)  stderr, la salida de errores
+    b)  stdout, la salida estándar
+    c)  stdin, la entrada
+
+6.  ¿Cuál es el equivalente exacto de `grep ERROR log | wc -l`?
+    a)  `grep -c ERROR log`
+    b)  `wc -l ERROR log`
+    c)  `sort ERROR log | uniq -c`
+
+::::
+
+::: {.solucion-final}
+**Autocomprobación (test de la sección 3.8)** — Respuestas: 1 a · 2 a · 3 b · 4 b · 5 a · 6 a.
+:::
+
+::: {.proxima}
+**La próxima sesión**
+
+Con el bloque A completo, ya *hablas* con la máquina. En el capítulo 4
+empieza el bloque B: abrir el capó. El mapa completo del árbol — qué
+vive de verdad en `/etc`, `/var`, `/usr` —, quién es `root`, qué
+significa exactamente ese `sudo` que tecleas con fe, y el sistema de
+permisos `rwx` que llevas viendo en cada `ls -l` sin leerlo. Guarda
+`sesion03.log`: tres medidas ya en tu cuaderno.
+:::
+
+::: {.pie-piloto}
+cap. 3 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu `sesion03.log`
+:::
