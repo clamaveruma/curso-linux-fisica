@@ -17,7 +17,8 @@ filters:
 book:
   title: "Linux, redes y sistemas para físicos"
   author: "Claudio M. Martínez Velasco"
-  date: "Agosto de 2026"
+  date: 2026-08-01
+  date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»
   # El botón de descarga del PDF en la barra superior sale de aquí:
   downloads: [pdf]
   page-footer:
