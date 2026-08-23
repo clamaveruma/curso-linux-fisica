@@ -1,0 +1,123 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Linux, redes y sistemas para físicos",
+    "section": "",
+    "text": "Bienvenida\nLlevas años usando Linux sin haber hablado nunca con él directamente. Este curso es esa conversación: doce sesiones para pasar de usuario de escritorio a alguien que instala su sistema, entiende su red y trabaja con soltura en un servidor remoto.\nEscrito para estudiantes de física: los ejercicios usan datos de laboratorio, las analogías vienen de la mecánica, y el destino final es el flujo de trabajo real de la física computacional.\nRegla única e innegociable: no copies y pegues los comandos. Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.",
+    "crumbs": [
+      "Bienvenida"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html",
+    "href": "capitulos/cap01.html",
+    "title": "1  Abrir la caja negra",
+    "section": "",
+    "text": "1.1 Qué es esto que parpadea\nAbre la terminal de tu equipo (en Mint: menú → Terminal, o Ctrl+Alt+T). Verás algo así:\nEsa línea se llama prompt, y es una frase completa aunque no lo parezca: «soy el usuario marcos, en la máquina portatil, estoy en el directorio ~, y el $ significa que te escucho». Cada símbolo informa. El cursor parpadeante es la pregunta: ¿qué quieres?\nAntes de responder, deshagamos una confusión que arrastra todo el mundo. Aquí hay dos programas distintos colaborando, no uno:",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-terminal-shell",
+    "href": "capitulos/cap01.html#sec-terminal-shell",
+    "title": "1  Abrir la caja negra",
+    "section": "",
+    "text": "marcos@portatil:~$ ▮\n\n\n\n\n\n\n\n\n\n\nPieza\nQué es\nAnalogía de laboratorio\n\n\n\n\nTerminal\nLa ventana: dibuja texto, recoge tus teclas. No entiende nada de lo que escribes.\nLa pantalla del osciloscopio\n\n\nShell\nEl intérprete que vive dentro: lee tu orden, la ejecuta, devuelve el resultado. El tuyo se llama bash.\nLa electrónica que procesa la señal\n\n\nConsola\nHistóricamente, el hardware físico conectado a la máquina. Hoy se usa como sinónimo informal.\nEl instrumento completo sobre la mesa\n\n\n\n\n\n\n\n\n\nFigura 1.1: El circuito completo de una orden. La terminal solo dibuja; quien entiende es el shell.\n\n\n\n\n◷ Historia · Por qué tu terminal se llama tty\nEn los años 30, mucho antes de los ordenadores, las agencias de noticias transmitían texto con teletipos (teletypewriters, «tty»): máquinas de escribir que enviaban cada tecla por un cable e imprimían lo que llegaba. Cuando en los 60 hubo que hablar con los primeros ordenadores compartidos, nadie diseñó una interfaz nueva: se enchufó el teletipo que ya existía. El ordenador «contestaba» imprimiendo en papel.\nLas pantallas sustituyeron al papel en los 70 —el DEC VT100 de 1978 fijó el estándar que tu terminal aún emula— pero el nombre se quedó. Escribe tty en tu terminal y el sistema te dirá qué «teletipo» eres. Hay medio siglo de arqueología funcionando en tu portátil.\n\n\n\n\n\n\n\n\n\n\nFigura 1.2: Un teletipo ASR-33 (años 60): teclado, rollo de papel, y ni rastro de pantalla. Foto: ArnoldReinhold, CC BY-SA 3.0, Wikimedia Commons.\n\n\n\n\n\n\n\n\n\n\n\nFigura 1.3: El DEC VT100 (1978): el papel se vuelve pantalla. Tu terminal de hoy lo sigue emulando. Foto: Jason Scott, CC BY 2.0, Wikimedia Commons.\n\n\n\n\n\n\n\n\n\n\n\n\nFigura 1.4: Noventa años de la misma idea: teclear texto, recibir texto. Tu terminal «emula» por software lo que fue una máquina física.\n\n\n\n\n◉ Por dentro · ¿Por qué sobrevive una interfaz de los años 60?\nNo es nostalgia. El texto tiene tres propiedades que ninguna interfaz gráfica iguala: es componible (la salida de un programa puede ser la entrada de otro, lo verás en el capítulo 3), es reproducible (un comando se copia en un correo, un artículo o un script y produce exactamente lo mismo), y viaja bien (manejar un superordenador a 2 000 km por SSH cuesta lo mismo que manejar tu portátil). En física computacional, esas tres propiedades son la diferencia entre un resultado y un resultado reproducible.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-primeras-palabras",
+    "href": "capitulos/cap01.html#sec-primeras-palabras",
+    "title": "1  Abrir la caja negra",
+    "section": "1.2 Primeras palabras",
+    "text": "1.2 Primeras palabras\nVamos a hablarle. Una regla para todo el curso, y es innegociable: no copies y pegues los comandos — tecléalos. Los dedos aprenden lo que los ojos solo reconocen. Escribe cada línea y pulsa Intro:\nmarcos@portatil:~$ whoami\nmarcos\nmarcos@portatil:~$ date\ndomingo, 23 de agosto de 2026, 18:04:11 CEST\nmarcos@portatil:~$ echo \"hola, máquina\"\nhola, máquina\nmarcos@portatil:~$ tty\n/dev/pts/0\nCuatro comandos, cuatro respuestas instantáneas. whoami — quién soy. date — qué hora es. echo — repite lo que te digo. tty — qué terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón: escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.\n¿Y si te equivocas? Prueba a escribir whoami mal a propósito:\nmarcos@portatil:~$ woami\nbash: woami: orden no encontrada\nNada explota. El shell te dice exactamente qué pasó: no conoce ningún programa con ese nombre. Los mensajes de error de la terminal se leen, no se temen — casi siempre contienen el diagnóstico completo. Aprender a leerlos es la mitad de este curso.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-anatomia",
+    "href": "capitulos/cap01.html#sec-anatomia",
+    "title": "1  Abrir la caja negra",
+    "section": "1.3 Anatomía de un comando",
+    "text": "1.3 Anatomía de un comando\nCasi todo lo que escribirás en tu vida en una terminal sigue una única gramática de tres piezas:\n\n\n\n\n\n\nFigura 1.5: La gramática universal: «lista (ls), en formato largo y legible (-l -h), el contenido de esa carpeta (/home/marcos/datos)».\n\n\n\nLas opciones empiezan por guion y modifican el comportamiento. Las cortas se pueden agrupar: ls -l -h y ls -lh son idénticos. Muchas tienen versión larga y legible: -h es --human-readable. Los argumentos son el objeto de la acción — normalmente ficheros o carpetas. Si no das argumento, cada programa tiene un valor por defecto razonable: ls a secas lista donde estás.\n\n✚ Truco · Los espacios importan\nEl shell separa las piezas por espacios. ls-lh (sin espacio) es para él un solo programa llamado «ls-lh», que no existe. Y una carpeta llamada mis datos son dos argumentos salvo que la protejas con comillas: ls \"mis datos\". Por eso los científicos veteranos nombran todo sin_espacios — adopta la costumbre desde hoy.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-arbol",
+    "href": "capitulos/cap01.html#sec-arbol",
+    "title": "1  Abrir la caja negra",
+    "section": "1.4 El territorio: moverse por el árbol",
+    "text": "1.4 El territorio: moverse por el árbol\nTodo el sistema — programas, configuración, tus datos, tus fotos — vive en un único árbol de directorios que nace en la raíz, escrita /. No hay «unidades C: y D:»: todo cuelga del mismo tronco. Tu casa está en /home/tu_usuario, y como es el sitio donde pasarás la vida, tiene apodo: la virgulilla ~.\n\n\n\n\n\n\nFigura 1.6: El árbol, podado a lo esencial. En el capítulo 4 exploraremos qué guarda cada rama; hoy basta con saber orientarse.\n\n\n\nTres comandos son tu GPS:\nmarcos@portatil:~$ pwd\n/home/marcos\nmarcos@portatil:~$ ls\nDescargas  Documentos  Escritorio  Imágenes  Música  Vídeos\nmarcos@portatil:~$ cd Descargas\nmarcos@portatil:~/Descargas$ pwd\n/home/marcos/Descargas\npwd (print working directory) responde «¿dónde estoy?». ls (list) responde «¿qué hay aquí?». cd (change directory) te mueve. Observa que el prompt cambió: ahora dice ~/Descargas. El prompt es tu brújula permanente.\n\n1.4.1 Rutas absolutas y relativas\nHay dos maneras de indicar cualquier lugar del árbol, y la diferencia es idéntica a la de un sistema de referencia en mecánica:\nUna ruta absoluta empieza por / y se mide desde la raíz: /home/marcos/datos. Vale desde cualquier sitio, siempre, como unas coordenadas del sistema de laboratorio. Una ruta relativa se mide desde donde estás ahora: si estás en ~, escribir datos basta. Es el sistema de referencia del observador — más corto, pero depende de tu posición.\n\n\n\n\n\n\nFigura 1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide desde la raíz; la relativa, desde ti.\n\n\n\nDos atajos completan el mapa: .. es «el directorio padre» (un nivel hacia la raíz) y . es «aquí mismo». Y cd tiene dos gestos que usarás mil veces: sin argumentos te lleva a casa desde cualquier lugar, y cd - vuelve al sitio donde estabas justo antes.\nmarcos@portatil:~/Descargas$ cd ..\nmarcos@portatil:~$ cd /etc\nmarcos@portatil:/etc$ cd\nmarcos@portatil:~$ cd -\n/etc\nmarcos@portatil:/etc$\n\n△ Tranquilidad · Hoy no puedes romper nada\nTodos los comandos de este capítulo son de solo lectura: miran, no tocan. Aún no sabes borrar ni modificar nada — disfruta de esta era de inocencia mientras dure. Cuando lleguen los comandos con consecuencias (capítulo 2), llegarán también las redes de seguridad.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-superpoderes",
+    "href": "capitulos/cap01.html#sec-superpoderes",
+    "title": "1  Abrir la caja negra",
+    "section": "1.5 Los dos superpoderes",
+    "text": "1.5 Los dos superpoderes\nLo que de verdad separa a quien sufre la terminal de quien la habita no es saber más comandos. Son dos teclas.\n\n1.5.1 El tabulador: nunca escribas nombres enteros\nEscribe cd Des y pulsa Tab. El shell completa: cd Descargas/. Si hay varias opciones que empiezan igual, pulsa Tab dos veces y te las muestra todas. Esto no es solo comodidad: si el tabulador no completa, el fichero no está donde crees — acabas de detectar un error antes de cometerlo. El tabulador es tu comprobación experimental continua.\n\n\n1.5.2 El historial: nunca escribas nada dos veces\nLa flecha ↑ recupera comandos anteriores, uno a uno. Pero el gesto profesional es Ctrl+R: búsqueda inversa. Púlsalo, teclea un fragmento de cualquier comando que hayas usado («des», por ejemplo), y aparecerá el más reciente que lo contenga. Intro lo ejecuta; Ctrl+R otra vez busca más atrás. El comando history te enseña la lista completa numerada.\n\n◉ Por dentro · Dónde vive tu memoria\nEl historial no es magia: bash lo va guardando en un fichero oculto llamado .bashhistory… casi: .bash_history, dentro de tu casa. Los ficheros cuyo nombre empieza por punto están ocultos por convención — ls no los muestra salvo que le pidas ls -a (all). Pruébalo en ~: descubrirás docenas de ficheros de configuración que llevan años viviendo contigo sin que los hayas visto. En el capítulo 4 aprenderás qué hacen.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-ayuda",
+    "href": "capitulos/cap01.html#sec-ayuda",
+    "title": "1  Abrir la caja negra",
+    "section": "1.6 Pedir ayuda sin salir del sistema",
+    "text": "1.6 Pedir ayuda sin salir del sistema\nAquí está la clave de la autonomía, el motivo por el que este curso existe. Ante una duda, el reflejo entrenado es preguntarle a Google o a una IA. Pero tu sistema lleva dentro la documentación completa y exacta de cada comando de tu versión concreta, disponible sin conexión:\nmarcos@portatil:~$ ls --help\nModo de empleo: ls [OPCIÓN]... [FICHERO]...\nLista información sobre los FICHEROs...\nmarcos@portatil:~$ man ls\n--help da el resumen rápido en pantalla. man (manual) abre la página completa en un visor con sus propias teclas: ↑/↓ y Espacio para moverte, / para buscar dentro (escribe el término y Intro; n salta a la siguiente aparición), y q para salir. Esa tecla / convierte cada página de manual en un documento consultable en segundos.\n\n◷ Historia · El manual nació con el sistema\nUnix nació en 1969 en los Bell Labs, escrito por Ken Thompson y Dennis Ritchie en un PDP-7 arrinconado — el proyecto oficial de sistema operativo del laboratorio acababa de cancelarse, y ellos siguieron por gusto. En 1971, su jefe puso una condición para comprarles una máquina mejor: que documentaran el sistema. Así nació el Unix Programmer’s Manual, y con él la costumbre, viva 55 años después, de que cada programa lleve su página man. La notación ls(1) que verás por ahí significa «la página de ls en la sección 1 del manual» — la numeración original de 1971.\n\n\n\n\n\n\n\nFigura 1.8: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores de Unix, hacia 1973 — con el manual ya en marcha. Foto: dominio público, Wikimedia Commons.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-script",
+    "href": "capitulos/cap01.html#sec-script",
+    "title": "1  Abrir la caja negra",
+    "section": "1.7 Tu cuaderno de laboratorio: script",
+    "text": "1.7 Tu cuaderno de laboratorio: script\nEn el laboratorio no se te ocurriría medir sin cuaderno. En la terminal, tampoco: el comando script graba todo lo que aparezca en pantalla — tus órdenes y las respuestas — en un fichero, hasta que escribas exit.\nmarcos@portatil:~$ script sesion01.log\nScript iniciado, el fichero de anotación es 'sesion01.log'\nmarcos@portatil:~$ pwd\n/home/marcos\nmarcos@portatil:~$ exit\nScript terminado, el fichero de anotación es 'sesion01.log'\nDesde ahora, cada sesión de este curso empieza con script sesionNN.log y termina con exit. Te servirá para revisar qué hiciste, para preguntar con evidencia («esto es exactamente lo que pasó») — y durante el piloto, esos logs son los datos experimentales con los que mejoraremos el curso. Eres a la vez el físico y el experimento.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-practica",
+    "href": "capitulos/cap01.html#sec-practica",
+    "title": "1  Abrir la caja negra",
+    "section": "1.8 Práctica: la expedición",
+    "text": "1.8 Práctica: la expedición\nSesión de campo. Arranca tu cuaderno (script sesion01.log) y responde a cada pregunta ejecutando comandos, no de memoria. Las soluciones están plegadas: inténtalo de verdad antes de abrirlas.\n\nEjercicio 1.1 · Reconocimiento del territorio\nVe a la raíz del sistema y lista lo que hay. Después responde: ¿cuántos directorios de primer nivel tiene tu Mint, aproximadamente? ¿Reconoces etc, home y tmp de la Figura 1.6?\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\ncd / y después ls. Verás en torno a 20 entradas: bin  boot  dev  etc  home  lib  ...\nPor qué así — También valía ls / directamente, sin moverte — recuerda que ls acepta como argumento cualquier ruta. Dos caminos correctos para lo mismo: en la terminal casi siempre los hay, y ninguno es «el bueno».\n\n\n\n\n\nEjercicio 1.2 · Sistemas de referencia\nEstás en /home/marcos/Descargas. Escribe dos comandos distintos, uno con ruta relativa y otro con absoluta, que te lleven a /home/marcos/Documentos.\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nRelativa: cd ../Documentos · Absoluta: cd /home/marcos/Documentos (o el híbrido cd ~/Documentos).\nPor qué así — .. sube a /home/marcos y desde ahí baja a Documentos: es el cambio de sistema de referencia pasando por el origen común. La absoluta funciona idéntica estés donde estés — por eso los scripts que escribas en el futuro preferirán rutas absolutas: no dependen de dónde los ejecutes.\n\n\n\n\n\nEjercicio 1.3 · Leer al instrumento\nEjecuta ls -lh /etc y elige cualquier línea. Identifica en ella: el tamaño del fichero y su fecha de modificación. ¿Qué crees que aporta la opción -h? Compruébalo repitiendo sin ella.\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEn una línea como -rw-r--r-- 1 root root 3,0K ago 12 10:33 fstab, el tamaño es 3,0K y la fecha ago 12 10:33. Sin -h, el tamaño aparece en bytes crudos: 3044.\nPor qué así — -h es --human-readable: convierte bytes a K, M, G. El resto de la línea (ese -rw-r--r-- y los dos root) es el sistema de permisos y propietarios — protagonista del capítulo 4. Por ahora te basta con saber que está ahí y que significa algo.\n\n\n\n\n\nEjercicio 1.4 · La biblioteca responde\nSin usar internet: encuentra en man ls la opción que ordena los ficheros por fecha de modificación, del más reciente al más antiguo. Pista: dentro del visor, la tecla / busca.\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nman ls, luego /modificación (o /time si tu manual está en inglés) e Intro. La opción es -t. Prueba: ls -lt ~/Descargas — tu descarga más reciente aparece la primera.\nPor qué así — Este gesto — man + / — sustituye a la mayoría de búsquedas en Google que hace un principiante. Es más rápido, no requiere conexión, y describe exactamente tu versión del programa, no la de un tutorial de 2019.\n\n\n\n\n\nEjercicio 1.5 · Predicción teórica\nSin ejecutarlo todavía: partiendo de /home/marcos, ¿qué imprimirá pwd tras esta secuencia? cd /tmp → cd → cd Descargas → cd .. — Escribe tu predicción, luego compruébala experimentalmente.\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n/home/marcos.\nPor qué así — Paso a paso: cd /tmp te lleva a /tmp; cd sin argumentos, a casa (/home/marcos); cd Descargas, a /home/marcos/Descargas; y .. sube al padre: de vuelta a casa. Si predijiste bien las cuatro, las rutas ya son tuyas. Si no, repite la secuencia mirando el prompt en cada paso: es tu brújula.\n\n\n\n\n\nEjercicio 1.6 · Preparando el material de la próxima sesión\nDescarga este fichero de medidas — veinte periodos de un péndulo, el clásico de primero: pendulo_medidas.csv. Después, desde la terminal, localízalo: comprueba con ls que está en tu carpeta de descargas, y averigua su tamaño y su fecha con lo aprendido en Sección 1.3.\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nls -lh ~/Descargas — y ahí estará pendulo_medidas.csv, con menos de 1K y fecha de hoy. Con ls -lt ~/Descargas saldrá el primero de la lista.\nPor qué así — Fíjate en lo que no hemos hecho: abrirlo. Sabes llegar hasta cualquier fichero del sistema, pero aún no sabes mirar dentro desde la terminal. Ese es, exactamente, el primer gesto de la próxima sesión.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap01.html#sec-quiz",
+    "href": "capitulos/cap01.html#sec-quiz",
+    "title": "1  Abrir la caja negra",
+    "section": "1.9 Autocomprobación",
+    "text": "1.9 Autocomprobación\nMarca una respuesta por pregunta; la corrección es inmediata.\n\n  El programa que interpreta tus órdenes y las ejecuta es…\n    la terminal\n    el shell\n    la consola\n    Correcto. La terminal solo dibuja; quien entiende y ejecuta es el shell — en tu caso, bash.\n    No exactamente. La terminal es la ventana que dibuja texto; quien interpreta y ejecuta es el shell (bash). Revisa la tabla de la sección 1.1.\n  \n  En ls -lt /etc, la pieza /etc es…\n    una opción\n    el programa\n    el argumento\n    Correcto. Es el objeto de la acción: qué directorio listar. Las opciones son -lt y el programa, ls.\n    No exactamente. /etc no lleva guion ni es lo primero: es el argumento, el objeto sobre el que actúa ls. Vuelve a la figura de la anatomía del comando.\n  \n  Estás en /home/ana/datos y ejecutas cd ... ¿Dónde acabas?\n    /home/ana\n    /home\n    /\n    Correcto. .. sube exactamente un nivel: al directorio padre.\n    No exactamente. .. sube un solo nivel: el padre de /home/ana/datos es /home/ana.\n  \n  ¿Cuál de estas es una ruta relativa?\n    /home/marcos/datos\n    ../figuras/fig01.png\n    /etc\n    Correcto. No empieza por /: se mide desde donde estés, como el sistema de referencia del observador.\n    No exactamente. La regla es una sola: si empieza por /, es absoluta (se mide desde la raíz). ../figuras/fig01.png no empieza por /.\n  \n  Dentro de man ls, ¿qué tecla inicia una búsqueda?\n    /\n    Ctrl+F\n    Tab\n    Correcto. / busca, n salta a la siguiente aparición, q sale. Tres teclas que sustituyen muchas búsquedas en Google.\n    No exactamente. El visor de man usa sus propias teclas: / para buscar, n para la siguiente aparición, q para salir.\n  \n  Escribes cd Des, pulsas Tab y no se completa nada. La lectura correcta es…\n    el tabulador está desactivado\n    probablemente no existe nada que empiece por «Des» aquí\n    hay que pulsarlo más fuerte\n    Correcto. El silencio del tabulador es un dato: o no existe, o hay varias opciones (dos Tab las muestran). Acabas de detectar un error antes de cometerlo.\n    No exactamente. Cuando Tab calla, te está dando información: nada empieza así en este directorio (o hay empate entre varias opciones — dos pulsaciones lo revelan).\n  \n\n\n\nLa próxima sesión\nTienes un fichero de medidas esperando en ~/Descargas y todavía no sabes abrirlo, copiarlo ni ponerlo a salvo. En el capítulo 2 los ficheros dejan de ser intocables: leerlos, copiarlos, moverlos, organizarlos en lote — y el primer comando capaz de destruir, con su red de seguridad correspondiente. Cierra tu cuaderno con exit y guarda sesion01.log: es tu primera medida experimental de este curso.\n\n\ncap. 1 v0.2 · piloto — anota tiempo real invertido, dudas y erratas junto a tu sesion01.log",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abrir la caja negra</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html",
+    "href": "anexos/anexo-windows.html",
+    "title": "Apéndice A — Vengo de Windows",
+    "section": "",
+    "text": "Pendiente de redacción tras el piloto.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows</span>"
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+<svg viewBox="0 0 700 150" width="700" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cronología: del teletipo a tu terminal">
+  <line x1="30" y1="105" x2="670" y2="105" stroke="#9C8F79" stroke-width="1.5"/>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- 1930s teletipo -->
+    <circle cx="80" cy="105" r="4" fill="#9A6A14"/>
+    <rect x="55" y="45" width="50" height="34" rx="3" fill="none" stroke="#9A6A14" stroke-width="1.5"/>
+    <line x1="62" y1="56" x2="98" y2="56" stroke="#9A6A14" stroke-width="1.2"/>
+    <line x1="62" y1="63" x2="90" y2="63" stroke="#9A6A14" stroke-width="1.2"/>
+    <line x1="62" y1="70" x2="94" y2="70" stroke="#9A6A14" stroke-width="1.2"/>
+    <text x="80" y="128" font-size="11" fill="#6A5F4D" text-anchor="middle">años 30</text>
+    <text x="80" y="141" font-size="10" fill="#9C8F79" text-anchor="middle">teletipo · papel</text>
+    <!-- 1969 unix -->
+    <circle cx="255" cy="105" r="4" fill="#2F6F62"/>
+    <text x="255" y="72" font-size="13" fill="#2F6F62" text-anchor="middle" font-weight="600">UNIX</text>
+    <text x="255" y="128" font-size="11" fill="#6A5F4D" text-anchor="middle">1969</text>
+    <text x="255" y="141" font-size="10" fill="#9C8F79" text-anchor="middle">Bell Labs</text>
+    <!-- 1978 vt100 -->
+    <circle cx="430" cy="105" r="4" fill="#2F6F62"/>
+    <rect x="405" y="42" width="50" height="38" rx="4" fill="none" stroke="#2F6F62" stroke-width="1.5"/>
+    <rect x="412" y="49" width="36" height="20" fill="#DFE9DF"/>
+    <text x="430" y="63" font-size="9" fill="#24564B" text-anchor="middle">$_</text>
+    <text x="430" y="128" font-size="11" fill="#6A5F4D" text-anchor="middle">1978</text>
+    <text x="430" y="141" font-size="10" fill="#9C8F79" text-anchor="middle">DEC VT100 · pantalla</text>
+    <!-- hoy -->
+    <circle cx="610" cy="105" r="4" fill="#C4342A"/>
+    <rect x="583" y="46" width="54" height="32" rx="3" fill="#0E1512"/>
+    <text x="592" y="66" font-size="10" fill="#6BD6BC">$ ▮</text>
+    <text x="610" y="128" font-size="11" fill="#6A5F4D" text-anchor="middle">hoy</text>
+    <text x="610" y="141" font-size="10" fill="#9C8F79" text-anchor="middle">emulador · tu portátil</text>
+  </g>
+</svg>

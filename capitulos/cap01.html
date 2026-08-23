@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Abrir la caja negra – Linux, redes y sistemas para físicos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1af5ed76814383e0b4b4c97bd2e93a9c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Linux, redes y sistemas para físicos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/clamaveruma/curso-linux-fisica" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="../Linux,-redes-y-sistemas-para-físicos.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-terminal-shell" id="toc-sec-terminal-shell" class="nav-link active" data-scroll-target="#sec-terminal-shell"><span class="header-section-number">1.1</span> Qué es esto que parpadea</a></li>
+  <li><a href="#sec-primeras-palabras" id="toc-sec-primeras-palabras" class="nav-link" data-scroll-target="#sec-primeras-palabras"><span class="header-section-number">1.2</span> Primeras palabras</a></li>
+  <li><a href="#sec-anatomia" id="toc-sec-anatomia" class="nav-link" data-scroll-target="#sec-anatomia"><span class="header-section-number">1.3</span> Anatomía de un comando</a></li>
+  <li><a href="#sec-arbol" id="toc-sec-arbol" class="nav-link" data-scroll-target="#sec-arbol"><span class="header-section-number">1.4</span> El territorio: moverse por el árbol</a>
+  <ul class="collapse">
+  <li><a href="#rutas-absolutas-y-relativas" id="toc-rutas-absolutas-y-relativas" class="nav-link" data-scroll-target="#rutas-absolutas-y-relativas"><span class="header-section-number">1.4.1</span> Rutas absolutas y relativas</a></li>
+  </ul></li>
+  <li><a href="#sec-superpoderes" id="toc-sec-superpoderes" class="nav-link" data-scroll-target="#sec-superpoderes"><span class="header-section-number">1.5</span> Los dos superpoderes</a>
+  <ul class="collapse">
+  <li><a href="#el-tabulador-nunca-escribas-nombres-enteros" id="toc-el-tabulador-nunca-escribas-nombres-enteros" class="nav-link" data-scroll-target="#el-tabulador-nunca-escribas-nombres-enteros"><span class="header-section-number">1.5.1</span> El tabulador: nunca escribas nombres enteros</a></li>
+  <li><a href="#el-historial-nunca-escribas-nada-dos-veces" id="toc-el-historial-nunca-escribas-nada-dos-veces" class="nav-link" data-scroll-target="#el-historial-nunca-escribas-nada-dos-veces"><span class="header-section-number">1.5.2</span> El historial: nunca escribas nada dos veces</a></li>
+  </ul></li>
+  <li><a href="#sec-ayuda" id="toc-sec-ayuda" class="nav-link" data-scroll-target="#sec-ayuda"><span class="header-section-number">1.6</span> Pedir ayuda sin salir del sistema</a></li>
+  <li><a href="#sec-script" id="toc-sec-script" class="nav-link" data-scroll-target="#sec-script"><span class="header-section-number">1.7</span> Tu cuaderno de laboratorio: <code>script</code></a></li>
+  <li><a href="#sec-practica" id="toc-sec-practica" class="nav-link" data-scroll-target="#sec-practica"><span class="header-section-number">1.8</span> Práctica: la expedición</a></li>
+  <li><a href="#sec-quiz" id="toc-sec-quiz" class="nav-link" data-scroll-target="#sec-quiz"><span class="header-section-number">1.9</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap01" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Llevas años usando Linux sin haber hablado nunca con él directamente. Hoy empieza la conversación: qué es realmente esa ventana negra, por qué sigue siendo la herramienta central del cálculo científico medio siglo después, y tus primeros pasos dentro.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>ninguno</strong> · máquina: <strong>tu Linux de diario</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Distinguir terminal, shell y consola (y por qué casi todo el mundo los confunde).</li>
+<li>Leer y escribir la anatomía de cualquier comando: programa, opciones, argumentos.</li>
+<li>Moverte por el árbol de directorios con <code>pwd</code>, <code>ls</code> y <code>cd</code>, con rutas absolutas y relativas.</li>
+<li>Usar los dos superpoderes que separan a quien sufre la terminal de quien la disfruta: el tabulador y el historial.</li>
+<li>Pedir ayuda al propio sistema con <code>man</code> y <code>--help</code>, sin salir a internet.</li>
+<li>Registrar tu sesión con <code>script</code>: tu cuaderno de laboratorio de este curso.</li>
+</ul>
+</div>
+<section id="sec-terminal-shell" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-terminal-shell"><span class="header-section-number">1.1</span> Qué es esto que parpadea</h2>
+<p>Abre la terminal de tu equipo (en Mint: menú → Terminal, o <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>). Verás algo así:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ▮</span></code></pre></div>
+<p>Esa línea se llama <strong>prompt</strong>, y es una frase completa aunque no lo parezca: «soy el usuario <code>marcos</code>, en la máquina <code>portatil</code>, estoy en el directorio <code>~</code>, y el <code>$</code> significa que te escucho». Cada símbolo informa. El cursor parpadeante es la pregunta: <em>¿qué quieres?</em></p>
+<p>Antes de responder, deshagamos una confusión que arrastra todo el mundo. Aquí hay <strong>dos programas distintos</strong> colaborando, no uno:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pieza</th>
+<th>Qué es</th>
+<th>Analogía de laboratorio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Terminal</strong></td>
+<td>La ventana: dibuja texto, recoge tus teclas. No entiende nada de lo que escribes.</td>
+<td>La pantalla del osciloscopio</td>
+</tr>
+<tr class="even">
+<td><strong>Shell</strong></td>
+<td>El intérprete que vive dentro: lee tu orden, la ejecuta, devuelve el resultado. El tuyo se llama <code>bash</code>.</td>
+<td>La electrónica que procesa la señal</td>
+</tr>
+<tr class="odd">
+<td><strong>Consola</strong></td>
+<td>Históricamente, el hardware físico conectado a la máquina. Hoy se usa como sinónimo informal.</td>
+<td>El instrumento completo sobre la mesa</td>
+</tr>
+</tbody>
+</table>
+<div id="fig-circuito" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del circuito de una orden: tú, terminal, shell y programa, con flechas de ida y vuelta">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-circuito-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-circuito-orden.svg" class="img-fluid figure-img" alt="Esquema del circuito de una orden: tú, terminal, shell y programa, con flechas de ida y vuelta">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circuito-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.1: El circuito completo de una orden. La terminal solo dibuja; quien entiende es el shell.
+</figcaption>
+</figure>
+</div>
+<div class="historia">
+<p><strong>◷ Historia · Por qué tu terminal se llama tty</strong></p>
+<p>En los años 30, mucho antes de los ordenadores, las agencias de noticias transmitían texto con <em>teletipos</em> (<em>teletypewriters</em>, «tty»): máquinas de escribir que enviaban cada tecla por un cable e imprimían lo que llegaba. Cuando en los 60 hubo que hablar con los primeros ordenadores compartidos, nadie diseñó una interfaz nueva: se enchufó el teletipo que ya existía. El ordenador «contestaba» imprimiendo en papel.</p>
+<p>Las pantallas sustituyeron al papel en los 70 —el DEC VT100 de 1978 fijó el estándar que tu terminal aún emula— pero el nombre se quedó. Escribe <code>tty</code> en tu terminal y el sistema te dirá qué «teletipo» eres. Hay medio siglo de arqueología funcionando en tu portátil.</p>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-asr33" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Teletipo ASR-33 con rollo de papel en un museo">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-asr33-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/teletipo-asr33.jpg" class="img-fluid figure-img" alt="Teletipo ASR-33 con rollo de papel en un museo">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-asr33-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.2: Un teletipo ASR-33 (años 60): teclado, rollo de papel, y ni rastro de pantalla. <em>Foto: ArnoldReinhold, CC BY-SA 3.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-vt100" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Terminal DEC VT100 con un listado de ficheros en pantalla">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vt100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/terminal-vt100.jpg" class="img-fluid figure-img" alt="Terminal DEC VT100 con un listado de ficheros en pantalla">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vt100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.3: El DEC VT100 (1978): el papel se vuelve pantalla. Tu terminal de hoy lo sigue emulando. <em>Foto: Jason Scott, CC BY 2.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="fig-cronologia" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Cronología del teletipo a tu terminal: años 30, UNIX 1969, VT100 1978, hoy">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cronologia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-cronologia-tty.svg" class="img-fluid figure-img" alt="Cronología del teletipo a tu terminal: años 30, UNIX 1969, VT100 1978, hoy">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cronologia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.4: Noventa años de la misma idea: teclear texto, recibir texto. Tu terminal «emula» por software lo que fue una máquina física.
+</figcaption>
+</figure>
+</div>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · ¿Por qué sobrevive una interfaz de los años 60?</strong></p>
+<p>No es nostalgia. El texto tiene tres propiedades que ninguna interfaz gráfica iguala: es <strong>componible</strong> (la salida de un programa puede ser la entrada de otro, lo verás en el capítulo 3), es <strong>reproducible</strong> (un comando se copia en un correo, un artículo o un script y produce exactamente lo mismo), y <strong>viaja bien</strong> (manejar un superordenador a 2 000 km por SSH cuesta lo mismo que manejar tu portátil). En física computacional, esas tres propiedades son la diferencia entre un resultado y un resultado <em>reproducible</em>.</p>
+</div>
+</section>
+<section id="sec-primeras-palabras" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-primeras-palabras"><span class="header-section-number">1.2</span> Primeras palabras</h2>
+<p>Vamos a hablarle. Una regla para todo el curso, y es innegociable: <strong>no copies y pegues los comandos — tecléalos</strong>. Los dedos aprenden lo que los ojos solo reconocen. Escribe cada línea y pulsa <kbd>Intro</kbd>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ whoami</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>marcos</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ date</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>domingo, 23 de agosto de 2026, 18:04:11 CEST</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ echo "hola, máquina"</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>hola, máquina</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ tty</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>/dev/pts/0</span></code></pre></div>
+<p>Cuatro comandos, cuatro respuestas instantáneas. <code>whoami</code> — quién soy. <code>date</code> — qué hora es. <code>echo</code> — repite lo que te digo. <code>tty</code> — qué terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón: escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.</p>
+<p>¿Y si te equivocas? Prueba a escribir <code>whoami</code> mal a propósito:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ woami</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bash: woami: orden no encontrada</span></code></pre></div>
+<p>Nada explota. El shell te dice exactamente qué pasó: no conoce ningún programa con ese nombre. <strong>Los mensajes de error de la terminal se leen, no se temen</strong> — casi siempre contienen el diagnóstico completo. Aprender a leerlos es la mitad de este curso.</p>
+</section>
+<section id="sec-anatomia" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-anatomia"><span class="header-section-number">1.3</span> Anatomía de un comando</h2>
+<p>Casi todo lo que escribirás en tu vida en una terminal sigue una única gramática de tres piezas:</p>
+<div id="fig-anatomia" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Anatomía de un comando: programa, opciones y argumento señalados sobre una línea de terminal">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anatomia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-anatomia-comando.svg" class="img-fluid figure-img" alt="Anatomía de un comando: programa, opciones y argumento señalados sobre una línea de terminal">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anatomia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.5: La gramática universal: «lista (<code>ls</code>), en formato largo y legible (<code>-l -h</code>), el contenido de esa carpeta (<code>/home/marcos/datos</code>)».
+</figcaption>
+</figure>
+</div>
+<p>Las <strong>opciones</strong> empiezan por guion y modifican el comportamiento. Las cortas se pueden agrupar: <code>ls -l -h</code> y <code>ls -lh</code> son idénticos. Muchas tienen versión larga y legible: <code>-h</code> es <code>--human-readable</code>. Los <strong>argumentos</strong> son el objeto de la acción — normalmente ficheros o carpetas. Si no das argumento, cada programa tiene un valor por defecto razonable: <code>ls</code> a secas lista <em>donde estás</em>.</p>
+<div class="truco">
+<p><strong>✚ Truco · Los espacios importan</strong></p>
+<p>El shell separa las piezas por espacios. <code>ls-lh</code> (sin espacio) es para él un solo programa llamado «ls-lh», que no existe. Y una carpeta llamada <code>mis datos</code> son <em>dos</em> argumentos salvo que la protejas con comillas: <code>ls "mis datos"</code>. Por eso los científicos veteranos nombran todo <code>sin_espacios</code> — adopta la costumbre desde hoy.</p>
+</div>
+</section>
+<section id="sec-arbol" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-arbol"><span class="header-section-number">1.4</span> El territorio: moverse por el árbol</h2>
+<p>Todo el sistema — programas, configuración, tus datos, tus fotos — vive en un único árbol de directorios que nace en la raíz, escrita <code>/</code>. No hay «unidades C: y D:»: todo cuelga del mismo tronco. Tu casa está en <code>/home/tu_usuario</code>, y como es el sitio donde pasarás la vida, tiene apodo: la virgulilla <code>~</code>.</p>
+<div id="fig-arbol" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Árbol de directorios de Linux desde la raíz, con home, etc, tmp y las casas de los usuarios">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-arbol-directorios.svg" class="img-fluid figure-img" alt="Árbol de directorios de Linux desde la raíz, con home, etc, tmp y las casas de los usuarios">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.6: El árbol, podado a lo esencial. En el capítulo 4 exploraremos qué guarda cada rama; hoy basta con saber orientarse.
+</figcaption>
+</figure>
+</div>
+<p>Tres comandos son tu GPS:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ pwd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>/home/marcos</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ls</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Descargas  Documentos  Escritorio  Imágenes  Música  Vídeos</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd Descargas</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~/Descargas$ pwd</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>/home/marcos/Descargas</span></code></pre></div>
+<p><code>pwd</code> (<em>print working directory</em>) responde «¿dónde estoy?». <code>ls</code> (<em>list</em>) responde «¿qué hay aquí?». <code>cd</code> (<em>change directory</em>) te mueve. Observa que el prompt cambió: ahora dice <code>~/Descargas</code>. El prompt es tu brújula permanente.</p>
+<section id="rutas-absolutas-y-relativas" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="rutas-absolutas-y-relativas"><span class="header-section-number">1.4.1</span> Rutas absolutas y relativas</h3>
+<p>Hay dos maneras de indicar cualquier lugar del árbol, y la diferencia es idéntica a la de un sistema de referencia en mecánica:</p>
+<p>Una <strong>ruta absoluta</strong> empieza por <code>/</code> y se mide desde la raíz: <code>/home/marcos/datos</code>. Vale desde cualquier sitio, siempre, como unas coordenadas del sistema de laboratorio. Una <strong>ruta relativa</strong> se mide desde donde estás ahora: si estás en <code>~</code>, escribir <code>datos</code> basta. Es el sistema de referencia del observador — más corto, pero depende de tu posición.</p>
+<div id="fig-rutas" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparación entre ruta absoluta desde la raíz y ruta relativa desde el directorio actual">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rutas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-rutas.svg" class="img-fluid figure-img" alt="Comparación entre ruta absoluta desde la raíz y ruta relativa desde el directorio actual">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rutas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide desde la raíz; la relativa, desde ti.
+</figcaption>
+</figure>
+</div>
+<p>Dos atajos completan el mapa: <code>..</code> es «el directorio padre» (un nivel hacia la raíz) y <code>.</code> es «aquí mismo». Y <code>cd</code> tiene dos gestos que usarás mil veces: sin argumentos te lleva a casa desde cualquier lugar, y <code>cd -</code> vuelve al sitio donde estabas justo antes.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~/Descargas$ cd ..</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd /etc</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:/etc$ cd</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ cd -</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>/etc</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>marcos@portatil:/etc$</span></code></pre></div>
+<div class="aviso">
+<p><strong>△ Tranquilidad · Hoy no puedes romper nada</strong></p>
+<p>Todos los comandos de este capítulo son de <em>solo lectura</em>: miran, no tocan. Aún no sabes borrar ni modificar nada — disfruta de esta era de inocencia mientras dure. Cuando lleguen los comandos con consecuencias (capítulo 2), llegarán también las redes de seguridad.</p>
+</div>
+</section>
+</section>
+<section id="sec-superpoderes" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sec-superpoderes"><span class="header-section-number">1.5</span> Los dos superpoderes</h2>
+<p>Lo que de verdad separa a quien sufre la terminal de quien la habita no es saber más comandos. Son dos teclas.</p>
+<section id="el-tabulador-nunca-escribas-nombres-enteros" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="el-tabulador-nunca-escribas-nombres-enteros"><span class="header-section-number">1.5.1</span> El tabulador: nunca escribas nombres enteros</h3>
+<p>Escribe <code>cd Des</code> y pulsa <kbd>Tab</kbd>. El shell completa: <code>cd Descargas/</code>. Si hay varias opciones que empiezan igual, pulsa <kbd>Tab</kbd> <em>dos veces</em> y te las muestra todas. Esto no es solo comodidad: <strong>si el tabulador no completa, el fichero no está donde crees</strong> — acabas de detectar un error antes de cometerlo. El tabulador es tu comprobación experimental continua.</p>
+</section>
+<section id="el-historial-nunca-escribas-nada-dos-veces" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="el-historial-nunca-escribas-nada-dos-veces"><span class="header-section-number">1.5.2</span> El historial: nunca escribas nada dos veces</h3>
+<p>La flecha <kbd>↑</kbd> recupera comandos anteriores, uno a uno. Pero el gesto profesional es <kbd>Ctrl</kbd>+<kbd>R</kbd>: búsqueda inversa. Púlsalo, teclea un fragmento de cualquier comando que hayas usado («des», por ejemplo), y aparecerá el más reciente que lo contenga. <kbd>Intro</kbd> lo ejecuta; <kbd>Ctrl</kbd>+<kbd>R</kbd> otra vez busca más atrás. El comando <code>history</code> te enseña la lista completa numerada.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Dónde vive tu memoria</strong></p>
+<p>El historial no es magia: bash lo va guardando en un fichero oculto llamado <code>.bashhistory</code>… casi: <code>.bash_history</code>, dentro de tu casa. Los ficheros cuyo nombre empieza por punto están ocultos por convención — <code>ls</code> no los muestra salvo que le pidas <code>ls -a</code> (<em>all</em>). Pruébalo en <code>~</code>: descubrirás docenas de ficheros de configuración que llevan años viviendo contigo sin que los hayas visto. En el capítulo 4 aprenderás qué hacen.</p>
+</div>
+</section>
+</section>
+<section id="sec-ayuda" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="sec-ayuda"><span class="header-section-number">1.6</span> Pedir ayuda sin salir del sistema</h2>
+<p>Aquí está la clave de la autonomía, el motivo por el que este curso existe. Ante una duda, el reflejo entrenado es preguntarle a Google o a una IA. Pero tu sistema lleva dentro la documentación completa y exacta de cada comando <em>de tu versión concreta</em>, disponible sin conexión:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ ls --help</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Modo de empleo: ls [OPCIÓN]... [FICHERO]...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Lista información sobre los FICHEROs...</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ man ls</span></code></pre></div>
+<p><code>--help</code> da el resumen rápido en pantalla. <code>man</code> (<em>manual</em>) abre la página completa en un visor con sus propias teclas: <kbd>↑</kbd>/<kbd>↓</kbd> y <kbd>Espacio</kbd> para moverte, <kbd>/</kbd> para <em>buscar</em> dentro (escribe el término y <kbd>Intro</kbd>; <kbd>n</kbd> salta a la siguiente aparición), y <kbd>q</kbd> para salir. Esa tecla <kbd>/</kbd> convierte cada página de manual en un documento consultable en segundos.</p>
+<div class="historia">
+<p><strong>◷ Historia · El manual nació con el sistema</strong></p>
+<p>Unix nació en 1969 en los Bell Labs, escrito por Ken Thompson y Dennis Ritchie en un PDP-7 arrinconado — el proyecto oficial de sistema operativo del laboratorio acababa de cancelarse, y ellos siguieron por gusto. En 1971, su jefe puso una condición para comprarles una máquina mejor: que documentaran el sistema. Así nació el <em>Unix Programmer’s Manual</em>, y con él la costumbre, viva 55 años después, de que cada programa lleve su página <code>man</code>. La notación <code>ls(1)</code> que verás por ahí significa «la página de <code>ls</code> en la sección 1 del manual» — la numeración original de 1971.</p>
+</div>
+<div id="fig-thompson-ritchie" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Fotografía en blanco y negro de Ken Thompson y Dennis Ritchie">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-thompson-ritchie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/thompson-ritchie-1973.jpg" class="img-fluid figure-img" style="width:65.0%" alt="Fotografía en blanco y negro de Ken Thompson y Dennis Ritchie">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thompson-ritchie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.8: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores de Unix, hacia 1973 — con el manual ya en marcha. <em>Foto: dominio público, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-script" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="sec-script"><span class="header-section-number">1.7</span> Tu cuaderno de laboratorio: <code>script</code></h2>
+<p>En el laboratorio no se te ocurriría medir sin cuaderno. En la terminal, tampoco: el comando <code>script</code> graba <em>todo</em> lo que aparezca en pantalla — tus órdenes y las respuestas — en un fichero, hasta que escribas <code>exit</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ script sesion01.log</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Script iniciado, el fichero de anotación es 'sesion01.log'</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ pwd</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>/home/marcos</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>marcos@portatil:~$ exit</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Script terminado, el fichero de anotación es 'sesion01.log'</span></code></pre></div>
+<p>Desde ahora, <strong>cada sesión de este curso empieza con <code>script sesionNN.log</code> y termina con <code>exit</code></strong>. Te servirá para revisar qué hiciste, para preguntar con evidencia («esto es exactamente lo que pasó») — y durante el piloto, esos logs son los datos experimentales con los que mejoraremos el curso. Eres a la vez el físico y el experimento.</p>
+</section>
+<section id="sec-practica" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="sec-practica"><span class="header-section-number">1.8</span> Práctica: la expedición</h2>
+<p>Sesión de campo. Arranca tu cuaderno (<code>script sesion01.log</code>) y responde a cada pregunta <em>ejecutando comandos</em>, no de memoria. Las soluciones están plegadas: inténtalo de verdad antes de abrirlas.</p>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.1 · Reconocimiento del territorio</strong></p>
+<p>Ve a la raíz del sistema y lista lo que hay. Después responde: ¿cuántos directorios de primer nivel tiene tu Mint, aproximadamente? ¿Reconoces <code>etc</code>, <code>home</code> y <code>tmp</code> de la <a href="#fig-arbol" class="quarto-xref">Figura&nbsp;<span>1.6</span></a>?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>cd /</code> y después <code>ls</code>. Verás en torno a 20 entradas: <code>bin  boot  dev  etc  home  lib  ...</code></p>
+<p><strong>Por qué así</strong> — También valía <code>ls /</code> directamente, sin moverte — recuerda que <code>ls</code> acepta como argumento cualquier ruta. Dos caminos correctos para lo mismo: en la terminal casi siempre los hay, y ninguno es «el bueno».</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.2 · Sistemas de referencia</strong></p>
+<p>Estás en <code>/home/marcos/Descargas</code>. Escribe <strong>dos</strong> comandos distintos, uno con ruta relativa y otro con absoluta, que te lleven a <code>/home/marcos/Documentos</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Relativa: <code>cd ../Documentos</code> · Absoluta: <code>cd /home/marcos/Documentos</code> (o el híbrido <code>cd ~/Documentos</code>).</p>
+<p><strong>Por qué así</strong> — <code>..</code> sube a <code>/home/marcos</code> y desde ahí baja a <code>Documentos</code>: es el cambio de sistema de referencia pasando por el origen común. La absoluta funciona idéntica estés donde estés — por eso los scripts que escribas en el futuro preferirán rutas absolutas: no dependen de dónde los ejecutes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.3 · Leer al instrumento</strong></p>
+<p>Ejecuta <code>ls -lh /etc</code> y elige cualquier línea. Identifica en ella: el tamaño del fichero y su fecha de modificación. ¿Qué crees que aporta la opción <code>-h</code>? Compruébalo repitiendo sin ella.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En una línea como <code>-rw-r--r-- 1 root root 3,0K ago 12 10:33 fstab</code>, el tamaño es <code>3,0K</code> y la fecha <code>ago 12 10:33</code>. Sin <code>-h</code>, el tamaño aparece en bytes crudos: <code>3044</code>.</p>
+<p><strong>Por qué así</strong> — <code>-h</code> es <code>--human-readable</code>: convierte bytes a K, M, G. El resto de la línea (ese <code>-rw-r--r--</code> y los dos <code>root</code>) es el sistema de permisos y propietarios — protagonista del capítulo 4. Por ahora te basta con saber que está ahí y que significa algo.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.4 · La biblioteca responde</strong></p>
+<p>Sin usar internet: encuentra en <code>man ls</code> la opción que ordena los ficheros por fecha de modificación, del más reciente al más antiguo. Pista: dentro del visor, la tecla <kbd>/</kbd> busca.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>man ls</code>, luego <code>/modificación</code> (o <code>/time</code> si tu manual está en inglés) e <kbd>Intro</kbd>. La opción es <code>-t</code>. Prueba: <code>ls -lt ~/Descargas</code> — tu descarga más reciente aparece la primera.</p>
+<p><strong>Por qué así</strong> — Este gesto — <code>man</code> + <kbd>/</kbd> — sustituye a la mayoría de búsquedas en Google que hace un principiante. Es más rápido, no requiere conexión, y describe exactamente <em>tu</em> versión del programa, no la de un tutorial de 2019.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.5 · Predicción teórica</strong></p>
+<p>Sin ejecutarlo todavía: partiendo de <code>/home/marcos</code>, ¿qué imprimirá <code>pwd</code> tras esta secuencia? <code>cd /tmp</code> → <code>cd</code> → <code>cd Descargas</code> → <code>cd ..</code> — Escribe tu predicción, luego compruébala experimentalmente.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>/home/marcos</code>.</p>
+<p><strong>Por qué así</strong> — Paso a paso: <code>cd /tmp</code> te lleva a <code>/tmp</code>; <code>cd</code> sin argumentos, a casa (<code>/home/marcos</code>); <code>cd Descargas</code>, a <code>/home/marcos/Descargas</code>; y <code>..</code> sube al padre: de vuelta a casa. Si predijiste bien las cuatro, las rutas ya son tuyas. Si no, repite la secuencia mirando el prompt en cada paso: es tu brújula.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.6 · Preparando el material de la próxima sesión</strong></p>
+<p>Descarga este fichero de medidas — veinte periodos de un péndulo, el clásico de primero: <a href="../datos/pendulo_medidas.csv" download="pendulo_medidas.csv"><code>pendulo_medidas.csv</code></a>. Después, <em>desde la terminal</em>, localízalo: comprueba con <code>ls</code> que está en tu carpeta de descargas, y averigua su tamaño y su fecha con lo aprendido en <a href="#sec-anatomia" class="quarto-xref"><span>Sección 1.3</span></a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ls -lh ~/Descargas</code> — y ahí estará <code>pendulo_medidas.csv</code>, con menos de 1K y fecha de hoy. Con <code>ls -lt ~/Descargas</code> saldrá el primero de la lista.</p>
+<p><strong>Por qué así</strong> — Fíjate en lo que <em>no</em> hemos hecho: abrirlo. Sabes llegar hasta cualquier fichero del sistema, pero aún no sabes mirar dentro desde la terminal. Ese es, exactamente, el primer gesto de la próxima sesión.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="sec-quiz"><span class="header-section-number">1.9</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap01">
+  <div class="qz"><p class="qq" data-n="1">El programa que interpreta tus órdenes y las ejecuta es…</p>
+    <label><input type="radio" name="z1" value="a"><span>la terminal</span></label>
+    <label><input type="radio" name="z1" value="b"><span>el shell</span></label>
+    <label><input type="radio" name="z1" value="c"><span>la consola</span></label>
+    <div class="fb good"><b>Correcto.</b> La terminal solo dibuja; quien entiende y ejecuta es el shell — en tu caso, bash.</div>
+    <div class="fb bad"><b>No exactamente.</b> La terminal es la ventana que dibuja texto; quien interpreta y ejecuta es el shell (bash). Revisa la tabla de la sección 1.1.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">En <code>ls -lt /etc</code>, la pieza <code>/etc</code> es…</p>
+    <label><input type="radio" name="z2" value="a"><span>una opción</span></label>
+    <label><input type="radio" name="z2" value="b"><span>el programa</span></label>
+    <label><input type="radio" name="z2" value="c"><span>el argumento</span></label>
+    <div class="fb good"><b>Correcto.</b> Es el objeto de la acción: qué directorio listar. Las opciones son <code>-lt</code> y el programa, <code>ls</code>.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>/etc</code> no lleva guion ni es lo primero: es el argumento, el objeto sobre el que actúa <code>ls</code>. Vuelve a la figura de la anatomía del comando.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">Estás en <code>/home/ana/datos</code> y ejecutas <code>cd ..</code>. ¿Dónde acabas?</p>
+    <label><input type="radio" name="z3" value="a"><span>/home/ana</span></label>
+    <label><input type="radio" name="z3" value="b"><span>/home</span></label>
+    <label><input type="radio" name="z3" value="c"><span>/</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>..</code> sube exactamente un nivel: al directorio padre.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>..</code> sube un solo nivel: el padre de <code>/home/ana/datos</code> es <code>/home/ana</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">¿Cuál de estas es una ruta relativa?</p>
+    <label><input type="radio" name="z4" value="a"><span><code>/home/marcos/datos</code></span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>../figuras/fig01.png</code></span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>/etc</code></span></label>
+    <div class="fb good"><b>Correcto.</b> No empieza por <code>/</code>: se mide desde donde estés, como el sistema de referencia del observador.</div>
+    <div class="fb bad"><b>No exactamente.</b> La regla es una sola: si empieza por <code>/</code>, es absoluta (se mide desde la raíz). <code>../figuras/fig01.png</code> no empieza por <code>/</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Dentro de <code>man ls</code>, ¿qué tecla inicia una búsqueda?</p>
+    <label><input type="radio" name="z5" value="a"><span><kbd>/</kbd></span></label>
+    <label><input type="radio" name="z5" value="b"><span><kbd>Ctrl</kbd>+<kbd>F</kbd></span></label>
+    <label><input type="radio" name="z5" value="c"><span><kbd>Tab</kbd></span></label>
+    <div class="fb good"><b>Correcto.</b> <kbd>/</kbd> busca, <kbd>n</kbd> salta a la siguiente aparición, <kbd>q</kbd> sale. Tres teclas que sustituyen muchas búsquedas en Google.</div>
+    <div class="fb bad"><b>No exactamente.</b> El visor de man usa sus propias teclas: <kbd>/</kbd> para buscar, <kbd>n</kbd> para la siguiente aparición, <kbd>q</kbd> para salir.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Escribes <code>cd Des</code>, pulsas <kbd>Tab</kbd> y no se completa nada. La lectura correcta es…</p>
+    <label><input type="radio" name="z6" value="a"><span>el tabulador está desactivado</span></label>
+    <label><input type="radio" name="z6" value="b"><span>probablemente no existe nada que empiece por «Des» aquí</span></label>
+    <label><input type="radio" name="z6" value="c"><span>hay que pulsarlo más fuerte</span></label>
+    <div class="fb good"><b>Correcto.</b> El silencio del tabulador es un dato: o no existe, o hay varias opciones (dos <kbd>Tab</kbd> las muestran). Acabas de detectar un error antes de cometerlo.</div>
+    <div class="fb bad"><b>No exactamente.</b> Cuando Tab calla, te está dando información: nada empieza así en este directorio (o hay empate entre varias opciones — dos pulsaciones lo revelan).</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"c", z3:"a", z4:"b", z5:"a", z6:"b"};
+  document.querySelectorAll("#quiz-cap01 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Tienes un fichero de medidas esperando en <code>~/Descargas</code> y todavía no sabes abrirlo, copiarlo ni ponerlo a salvo. En el capítulo 2 los ficheros dejan de ser intocables: leerlos, copiarlos, moverlos, organizarlos en lote — y el primer comando capaz de destruir, con su red de seguridad correspondiente. Cierra tu cuaderno con <code>exit</code> y guarda <code>sesion01.log</code>: es tu primera medida experimental de este curso.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 1 v0.2 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion01.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Bienvenida">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenida</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
