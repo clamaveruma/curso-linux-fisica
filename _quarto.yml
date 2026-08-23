@@ -6,13 +6,15 @@ project:
 
 lang: es
 
+filters:
+  - tema/terminal.lua   # colorea los bloques ```terminal en la web
+
 book:
   title: "Linux, redes y sistemas para físicos"
   author: "Claudio"
   date: today
   # El botón de descarga del PDF en la barra superior sale de aquí:
   downloads: [pdf]
-  repo-url: https://github.com/clamaveruma/curso-linux-fisica
   chapters:
     - index.qmd
     - capitulos/cap01.qmd

@@ -27,7 +27,7 @@ después, y tus primeros pasos dentro.
 Abre la terminal de tu equipo (en Mint: menú → Terminal, o
 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>). Verás algo así:
 
-```default
+```terminal
 marcos@portatil:~$ ▮
 ```
 
@@ -90,7 +90,7 @@ Vamos a hablarle. Una regla para todo el curso, y es innegociable:
 **no copies y pegues los comandos — tecléalos**. Los dedos aprenden lo
 que los ojos solo reconocen. Escribe cada línea y pulsa <kbd>Intro</kbd>:
 
-```default
+```terminal
 marcos@portatil:~$ whoami
 marcos
 marcos@portatil:~$ date
@@ -109,7 +109,7 @@ reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.
 
 ¿Y si te equivocas? Prueba a escribir `whoami` mal a propósito:
 
-```default
+```terminal
 marcos@portatil:~$ woami
 bash: woami: orden no encontrada
 ```
@@ -155,7 +155,7 @@ apodo: la virgulilla `~`.
 
 Tres comandos son tu GPS:
 
-```default
+```terminal
 marcos@portatil:~$ pwd
 /home/marcos
 marcos@portatil:~$ ls
@@ -189,7 +189,7 @@ hacia la raíz) y `.` es «aquí mismo». Y `cd` tiene dos gestos que
 usarás mil veces: sin argumentos te lleva a casa desde cualquier lugar,
 y `cd -` vuelve al sitio donde estabas justo antes.
 
-```default
+```terminal
 marcos@portatil:~/Descargas$ cd ..
 marcos@portatil:~$ cd /etc
 marcos@portatil:/etc$ cd
@@ -250,7 +250,7 @@ existe. Ante una duda, el reflejo entrenado es preguntarle a Google o a
 una IA. Pero tu sistema lleva dentro la documentación completa y exacta
 de cada comando *de tu versión concreta*, disponible sin conexión:
 
-```default
+```terminal
 marcos@portatil:~$ ls --help
 Modo de empleo: ls [OPCIÓN]... [FICHERO]...
 Lista información sobre los FICHEROs...
@@ -288,7 +288,7 @@ terminal, tampoco: el comando `script` graba *todo* lo que aparezca en
 pantalla — tus órdenes y las respuestas — en un fichero, hasta que
 escribas `exit`.
 
-```default
+```terminal
 marcos@portatil:~$ script sesion01.log
 Script iniciado, el fichero de anotación es 'sesion01.log'
 marcos@portatil:~$ pwd

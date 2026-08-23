@@ -29,6 +29,13 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 **Regla de seguridad transversal:** nada destructivo se practica en la máquina de trabajo. Particionar, instalar y romper se hace en la VM. Los cambios en el router de casa se dividen en exploración (solo lectura), reversibles (con procedimiento de vuelta atrás) y avanzados (opcionales).
 
+**Terminal y herramientas gráficas** *(añadido 2026-08-23)*: la terminal es el eje del curso, pero sin menospreciar la vía gráfica. Cuando exista un equivalente gráfico de uso común, se menciona en una línea o caja al cierre de la sección («esto mismo, con ratón»), señalando qué aporta cada vía. Anclas concretas en el temario:
+
+- Cap. 5: los gestores gráficos de paquetes (Gestor de software de Mint, Synaptic) como cara visible de `apt`; y un apartado breve sobre **qué es una distro de verdad** (kernel + paquetes + escritorio) con panorama de escritorios (Cinnamon, GNOME, KDE…).
+- Cap. 6: **Disks (gnome-disks) y GParted** junto a `lsblk`/`mount` — GParted reaparece como herramienta estándar en la instalación del cap. 8.
+- Caps. 9–10: NetworkManager (el applet de red y `nmtui`) junto a `ip`, por ser lo que se usa de verdad al configurar redes.
+- `nano` ya es el editor del curso desde el cap. 2 (con `vim` mencionado con honestidad).
+
 ## 3. Temario
 
 ### Bloque A — La terminal (3 sesiones, ~7 h)
@@ -106,6 +113,7 @@ Fuente única en Markdown con Quarto. Dos salidas por capítulo o bloque: HTML a
 
 ## 7. Pendiente de decidir
 
+- Portada bonita para el libro (web y PDF; Quarto admite `cover-image`) — se hará más adelante.
 - Distribución Debian vs Mint para la VM del bloque C (Debian es más «servidor real»; Mint es continuidad con su escritorio — propuesta: Mint no, Debian sí, y explicar por qué en el propio capítulo).
 - Nombre del curso.
 - Si el bloque D incluye o no un vistazo a DNS filtrado tipo Pi-hole como ejercicio avanzado opcional.

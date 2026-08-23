@@ -64,6 +64,21 @@ pre code, pre code.sourceCode, code.sourceCode {
   color: inherit;
 }
 
+// Bloques ```terminal (coloreados por tema/terminal.lua al estilo del
+// prompt de Mint: quién teclea en verde, dónde está en ámbar, la orden
+// en blanco, la respuesta atenuada)
+pre.terminal {
+  padding: 1rem 1.2rem;
+  font-size: .875em;
+  line-height: 1.65;
+  overflow-x: auto;
+  .t-p   { color: $term-acc; font-weight: 500; }  // usuario@máquina
+  .t-hl  { color: #E8C170; }                      // ruta actual
+  .t-dim { color: #7E938C; }                      // separadores : $
+  .t-cmd { color: #FFFFFF; font-weight: 600; }    // lo que teclea el alumno
+  .t-out { color: #9FB4AC; }                      // respuesta del sistema
+}
+
 // Tablas: cabecera teal estilo cuaderno
 table thead th {
   font-family: $font-family-monospace;
