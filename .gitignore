@@ -1,6 +1,8 @@
 _site/
 .quarto/
 *.log
+# los datasets del curso sí se versionan, aunque sean .log
+!datos/**
 
 /.quarto/
 **/*.quarto_ipynb
