@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; El árbol y los permisos – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../capitulos/cap03.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-fhs" id="toc-sec-fhs" class="nav-link active" data-scroll-target="#sec-fhs"><span class="header-section-number">4.1</span> El mapa del territorio</a></li>
+  <li><a href="#sec-usuarios" id="toc-sec-usuarios" class="nav-link" data-scroll-target="#sec-usuarios"><span class="header-section-number">4.2</span> Quién eres: usuarios y grupos</a></li>
+  <li><a href="#sec-sudo" id="toc-sec-sudo" class="nav-link" data-scroll-target="#sec-sudo"><span class="header-section-number">4.3</span> <code>root</code> y <code>sudo</code>: llamar a la puerta del administrador</a></li>
+  <li><a href="#sec-permisos" id="toc-sec-permisos" class="nav-link" data-scroll-target="#sec-permisos"><span class="header-section-number">4.4</span> Leer <code>rwx</code> de un vistazo</a></li>
+  <li><a href="#sec-script-ejecutable" id="toc-sec-script-ejecutable" class="nav-link" data-scroll-target="#sec-script-ejecutable"><span class="header-section-number">4.5</span> Tu primer script ejecutable</a></li>
+  <li><a href="#sec-configs" id="toc-sec-configs" class="nav-link" data-scroll-target="#sec-configs"><span class="header-section-number">4.6</span> La expedición de las configuraciones</a></li>
+  <li><a href="#sec-practica-4" id="toc-sec-practica-4" class="nav-link" data-scroll-target="#sec-practica-4"><span class="header-section-number">4.7</span> Práctica: inspección general</a></li>
+  <li><a href="#sec-quiz-4" id="toc-sec-quiz-4" class="nav-link" data-scroll-target="#sec-quiz-4"><span class="header-section-number">4.8</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap04" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Ya hablas con la máquina; empieza el bloque B: abrir el capó. Hoy recorres el mapa completo del árbol — qué vive de verdad en cada rama —, descubres que tu sistema es multiusuario hasta la médula, entiendes por fin qué firma exactamente ese <code>sudo</code> que tecleas con fe, y aprendes a leer el idioma <code>rwx</code> que llevas dos capítulos viendo pasar en cada <code>ls -l</code>.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>bloque A (capítulos 1–3)</strong> · máquina: <strong>tu Linux de diario</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Orientarte por el árbol completo: qué hay en <code>/etc</code>, <code>/home</code>, <code>/var</code>, <code>/usr</code>, <code>/tmp</code> — y qué rareza es <code>/proc</code>.</li>
+<li>Quién eres para el sistema: usuarios, grupos, y el fichero donde está apuntado todo el censo.</li>
+<li>Qué es <code>root</code>, qué hace <code>sudo</code> de verdad, y por qué te pide <em>tu</em> contraseña y no otra.</li>
+<li>Leer de un vistazo los permisos <code>rwx</code> de cualquier fichero, y cambiarlos con <code>chmod</code>.</li>
+<li>Convertir tus tuberías del capítulo 3 en tu primer <em>script</em> ejecutable.</li>
+<li>Localizar dónde guardan su configuración bash, conda y Jupyter — la tuya y la del sistema.</li>
+</ul>
+</div>
+<section id="sec-fhs" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-fhs"><span class="header-section-number">4.1</span> El mapa del territorio</h2>
+<p>En el capítulo 1 asomaste la cabeza a la raíz; hoy toca el mapa entero. Cada directorio de <code>/</code> tiene un oficio, y el reparto no es casualidad: es un estándar — el <em>Filesystem Hierarchy Standard</em> — que comparten casi todos los Linux del mundo. Apréndete el plano una vez y te orientarás en cualquier máquina que toques el resto de tu vida, incluido el clúster de cálculo que te espera en unos años.</p>
+<div id="fig-fhs" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Árbol de la raíz de Linux con la función de cada directorio: bin, boot, dev, etc, home, lib, proc, root, tmp, usr y var">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fhs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap04/fig-fhs.svg" class="img-fluid figure-img" alt="Árbol de la raíz de Linux con la función de cada directorio: bin, boot, dev, etc, home, lib, proc, root, tmp, usr y var">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fhs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.1: El plano de la casa. Tres direcciones en rojo: la configuración (<code>/etc</code>), tu casa (<code>/home</code>) y los registros (<code>/var/log</code>).
+</figcaption>
+</figure>
+</div>
+<p>Compruébalo sobre tu propia máquina, con las herramientas que ya tienes:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /</span>
+<span class="t-out">bin  boot  dev  etc  home  lib  media  mnt  opt  proc  root  run  sbin  srv  tmp  usr  var</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /etc | wc -l</span>
+<span class="t-out">228</span></code></pre>
+<p>Doscientos y pico ficheros de configuración — la tubería del capítulo 3 acaba de contarlos sin despeinarse. Fíjate en la idea de fondo, porque es la misma que viste con <code>.bashrc</code>: <strong>en Linux, configurar el sistema es editar ficheros de texto en <code>/etc</code></strong>. No hay registro opaco ni caja negra: está todo ahí, legible con <code>less</code>.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · <code>/proc</code>, el directorio que no existe</strong></p>
+<p>Haz <code>cat /proc/uptime</code>: dos números, los segundos que lleva encendida la máquina. Ese «fichero» no está en tu disco — <code>/proc</code> es una ventana que el kernel fabrica al vuelo para contarte su estado, disfrazada de directorio para que puedas usar <code>cat</code>, <code>grep</code> y compañía sobre ella. Prueba <code>grep "model name" /proc/cpuinfo</code>: acabas de interrogar a tu procesador con las herramientas del capítulo 3. «Todo es un fichero» no era una metáfora: es la decisión de diseño más rentable de Unix.</p>
+</div>
+</section>
+<section id="sec-usuarios" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-usuarios"><span class="header-section-number">4.2</span> Quién eres: usuarios y grupos</h2>
+<p><code>whoami</code> te lo dijo el primer día; la respuesta completa la da <code>id</code>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">id</span>
+<span class="t-out">uid=1000(marcos) gid=1000(marcos) grupos=1000(marcos),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev)</span></code></pre>
+<p>Para el sistema no eres «marcos»: eres el <strong>uid 1000</strong> — el nombre es un alias para humanos. Y perteneces a <strong>grupos</strong>: bolsas de usuarios a las que se conceden permisos en bloque. Ahí en medio hay uno que va a protagonizar la siguiente sección: <code>sudo</code>.</p>
+<p>¿Y dónde está apuntado el censo? En un fichero de texto de <code>/etc</code>, naturalmente:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">less /etc/passwd</span>
+<span class="t-out">root:x:0:0:root:/root:/bin/bash</span>
+<span class="t-out">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span>
+<span class="t-out">...</span>
+<span class="t-out">marcos:x:1000:1000:Marcos,,,:/home/marcos:/bin/bash</span></code></pre>
+<p>Cada línea, un usuario; los campos, separados por <code>:</code> — uid, casa, shell. Dos sorpresas al leerlo: la primera línea es <code>root</code>, con <strong>uid 0</strong>; y hay docenas de usuarios que no son personas (<code>daemon</code>, <code>www-data</code>…) — cuentas de servicio con las que el sistema se reparte a sí mismo el trabajo, cada una con los permisos justos de su oficio.</p>
+<div class="historia">
+<p><strong>◷ Historia · Los permisos nacieron porque el ordenador era de todos</strong></p>
+<p>En los 70, «tener ordenador» significaba compartir <em>el</em> ordenador del departamento: decenas de terminales enchufados a una sola máquina Unix, cada usuario con su cuenta, todos a la vez — el <em>tiempo compartido</em>. En ese mundo, que tus ficheros no fueran legibles por el resto no era paranoia: era convivencia. Tu portátil ya no se comparte, pero heredó intacto aquel esqueleto multiusuario — y le sigue sacando partido: cada servicio corre como un usuario distinto para que un fallo en uno no arrastre al sistema. Y en el clúster de cálculo al que te conectarás algún día, el tiempo compartido sigue siendo, literalmente, la forma de vida.</p>
+</div>
+<div id="fig-timesharing" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Usuario trabajando en un terminal Unix en 1978">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-timesharing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap04/unix-timesharing-1978.jpg" class="img-fluid figure-img" style="width:75.0%" alt="Usuario trabajando en un terminal Unix en 1978">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timesharing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.2: Un terminal Unix de tiempo compartido en la Universidad de Wisconsin, 1978. Decenas de personas, una máquina: de ahí vienen usuarios, grupos y permisos. <em>Foto: Dave Winer, CC BY-SA 2.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-sudo" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-sudo"><span class="header-section-number">4.3</span> <code>root</code> y <code>sudo</code>: llamar a la puerta del administrador</h2>
+<p><code>root</code>, uid 0, es el superusuario: el único para quien los permisos no existen. Puede leerlo todo, borrarlo todo, romperlo todo. Por eso en Mint nadie trabaja <em>como</em> root — ni siquiera tú, que administras tu propia máquina. Compruébalo intentando entrar en su casa:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /root</span>
+<span class="t-out">ls: no se puede abrir el directorio '/root': Permiso denegado</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ls /root</span>
+<span class="t-out">[sudo] contraseña de marcos:</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span></code></pre>
+<p>Ahí está el mecanismo civilizado: <code>sudo</code> (<em>superuser do</em>) ejecuta <strong>una única orden</strong> con los poderes de root, y deja constancia en el registro del sistema de quién la pidió y cuándo. Pide <em>tu</em> contraseña — no una «contraseña de root» — porque lo que comprueba es que tú eres tú y que estás autorizado: miembro del grupo <code>sudo</code> que viste en <code>id</code>. La orden terminó, y volviste a ser el uid 1000 de siempre. Poderes de administrador de usar y tirar, con recibo.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · <code>sudo</code> firma con tu nombre</strong></p>
+<p>Con <code>sudo</code> delante, <code>rm</code> ya no protege nada: puede vaciar el sistema entero. La regla del curso es doble. Uno: <strong>jamás teclees un <code>sudo</code> que no entiendas</strong> — y eso incluye los que te sugiera una IA o un foro (cuando llegue el anexo sobre IA verás cómo verificarlos con <code>man</code> antes). Dos: lo destructivo de verdad — particionar, formatear, reinstalar — no se practica aquí, sino en la máquina virtual del bloque C, donde romper es gratis.</p>
+</div>
+</section>
+<section id="sec-permisos" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-permisos"><span class="header-section-number">4.4</span> Leer <code>rwx</code> de un vistazo</h2>
+<p>Llevas desde el capítulo 1 viendo cosas como <code>-rw-r--r--</code> en cada <code>ls -l</code> y esquivándolas educadamente. Se acabó: son diez caracteres con una gramática exacta.</p>
+<div id="fig-permisos" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Descomposición de la cadena de permisos rw-r--r--: tipo de fichero, permisos del dueño, del grupo y de otros">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-permisos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap04/fig-permisos.svg" class="img-fluid figure-img" alt="Descomposición de la cadena de permisos rw-r--r--: tipo de fichero, permisos del dueño, del grupo y de otros">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-permisos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.3: Diez caracteres, cuatro bloques: tipo, y permisos del dueño, del grupo y del resto del mundo.
+</figcaption>
+</figure>
+</div>
+<p>Sobre un directorio, <code>x</code> no significa «ejecutar» sino <strong>entrar</strong>: sin esa <code>x</code> no puedes hacer <code>cd</code> dentro. Y ahora ya puedes leer entradas de <code>ls -l</code> como un nativo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls -l /etc/shadow</span>
+<span class="t-out">-rw-r----- 1 root shadow 1523 ago 20 10:11 /etc/shadow</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cat /etc/shadow</span>
+<span class="t-out">cat: /etc/shadow: Permiso denegado</span></code></pre>
+<p>Traducción: dueño <code>root</code> (lee y escribe), grupo <code>shadow</code> (solo lee), y los demás — tú — <strong>nada</strong>. Por eso el <code>cat</code> rebota. Ese fichero guarda los <em>hashes</em> de las contraseñas: es el ejemplo perfecto de un permiso haciendo exactamente su trabajo. Compáralo con su vecino <code>/etc/passwd</code> (<code>-rw-r--r--</code>): el censo es público, las contraseñas no.</p>
+<p>Cambiar permisos es <code>chmod</code> (<em>change mode</em>), y su dialecto simbólico se lee solo: a quién (<code>u</code>, <code>g</code>, <code>o</code>), qué gesto (<code>+</code> da, <code>-</code> quita), qué permiso (<code>r</code>, <code>w</code>, <code>x</code>):</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">chmod go-r pendulo_v1.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls -l pendulo_v1.csv</span>
+<span class="t-out">-rw------- 1 marcos marcos 428 ago 24 11:02 pendulo_v1.csv</span></code></pre>
+<p>Grupo y otros acaban de perder la lectura: ese dato ya solo lo ves tú. (También existe <code>chown</code> para cambiar el <em>dueño</em>, pero regalar ficheros es cosa de root — te cruzarás con él al administrar tu servidor.)</p>
+</section>
+<section id="sec-script-ejecutable" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-script-ejecutable"><span class="header-section-number">4.5</span> Tu primer script ejecutable</h2>
+<p>Y aquí es donde los capítulos 2, 3 y 4 se dan la mano. Aquella tubería del análisis que tecleabas una y otra vez — ¿y si fuera un <em>programa</em>? Escríbela en un fichero con <code>nano informe.sh</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>echo "Informe de adquisicion"</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>grep -c ERROR adquisicion.log</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</span></code></pre></div>
+<p>La primera línea — el <em>shebang</em> <code>#!</code> — le dice al sistema qué intérprete ejecuta esto: bash. El resto es, literalmente, lo que tecleabas. Dale el permiso que le falta y estrénalo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">chmod u+x informe.sh</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">./informe.sh</span>
+<span class="t-out">Informe de adquisicion</span>
+<span class="t-out">108</span>
+<span class="t-out">     90 s3</span>
+<span class="t-out">     15 s1</span>
+<span class="t-out">      3 s4</span></code></pre>
+<p>Acabas de escribir un programa. El <code>./</code> delante significa «el de <em>este</em> directorio» — por qué hace falta exactamente eso lo entenderás en el capítulo 5, cuando abramos el <code>$PATH</code>. La idea que importa hoy: <strong>un script no es más que comandos guardados, y <code>x</code> es lo que lo convierte de apunte en herramienta.</strong></p>
+<div class="truco">
+<p><strong>✚ Truco · Los permisos, también con ratón</strong></p>
+<p>Todo este sistema <code>rwx</code> lo tienes en la vía gráfica: clic derecho sobre cualquier fichero en el gestor de archivos → Propiedades → pestaña Permisos. Son las mismas casillas de leer, escribir y ejecutar para dueño, grupo y otros. Para un fichero suelto es perfectamente digno; la terminal gana cuando son doscientos — o cuando estás en un servidor sin escritorio, que es tu futuro próximo.</p>
+</div>
+</section>
+<section id="sec-configs" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-configs"><span class="header-section-number">4.6</span> La expedición de las configuraciones</h2>
+<p>El ancla práctica del capítulo, y una pregunta que te harás mil veces: <em>¿dónde guarda su configuración este programa?</em> La respuesta tiene un patrón — la del <strong>sistema</strong> en <code>/etc</code>, la <strong>tuya</strong> en dotfiles de tu casa — y ya tienes herramientas para verificarlo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls -a ~ | grep -i conda</span>
+<span class="t-out">.conda</span>
+<span class="t-out">.condarc</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls ~/.jupyter</span>
+<span class="t-out">jupyter_notebook_config.py</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /etc/jupyter 2&gt; /dev/null</span></code></pre>
+<p>Ahí está tu ecosistema científico: <code>.condarc</code> (tus canales y entornos de conda), <code>~/.jupyter</code> (tu Jupyter), <code>.bashrc</code> (tu shell, del capítulo 2). Ninguno necesita <code>sudo</code>: son tuyos, en tu casa. Cuando un programa «se comporta raro» en tu cuenta pero no en la de otro, la explicación vive casi siempre en uno de estos ficheros ocultos — ahora sabes dónde mirar. (¿Y ese <code>2&gt; /dev/null</code> del final? Los tres chorros del capítulo 3: manda las quejas al agujero negro del sistema. Si <code>/etc/jupyter</code> no existe, silencio en vez de error — útil cuando solo exploras.)</p>
+</section>
+<section id="sec-practica-4" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="sec-practica-4"><span class="header-section-number">4.7</span> Práctica: inspección general</h2>
+<p>Cuaderno en marcha (<code>script sesion04.log</code>) y a explorar tu propia máquina. Ningún ejercicio de hoy modifica nada fuera de tu casa.</p>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.1 · El censo de <code>/etc</code></strong></p>
+<p>¿Cuántas entradas tiene tu <code>/etc</code>? ¿Qué Linux exacto ejecutas? (Pista: la respuesta está en <code>/etc/os-release</code>, y <code>grep PRETTY</code> la aísla.)</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ls /etc | wc -l</code> (en torno a 200, según lo instalado) y <code>grep PRETTY /etc/os-release</code> → <code>PRETTY_NAME="Linux Mint 22.2"</code> (o tu versión).</p>
+<p><strong>Por qué así</strong> — Todo son ficheros de texto, así que las herramientas del capítulo 3 valen también para interrogar al sistema. Ese <code>os-release</code> es exactamente lo que los programas leen cuando quieren saber dónde están corriendo.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.2 · Leer el censo</strong></p>
+<p>Usando <code>/etc/passwd</code> y tuberías: ¿cuántas cuentas hay en total en tu sistema? ¿Cuáles son personas de verdad? (Pista: las personas tienen su casa en <code>/home</code> — y <code>grep</code> sabe buscar eso.)</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Total: <code>wc -l /etc/passwd</code> (unas 40–50). Personas: <code>grep /home /etc/passwd | cut -d':' -f1</code> — probablemente solo tú.</p>
+<p><strong>Por qué así</strong> — El separador aquí es <code>:</code>, y <code>cut -d':' -f1</code> recorta el nombre igual que recortaba sensores en el log. El resto de cuentas son los usuarios de servicio: el sistema repartiéndose el trabajo con permisos mínimos.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.3 · Tus credenciales</strong></p>
+<p>Con un solo comando y sin leer ficheros: comprueba si tu usuario pertenece al grupo <code>sudo</code>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>id | grep sudo</code> — si tu línea de <code>id</code> aparece (con <code>27(sudo)</code> iluminado), estás dentro. También valía <code>groups</code>, que lista solo los nombres.</p>
+<p><strong>Por qué así</strong> — <code>id</code> escupe texto y <code>grep</code> filtra texto: la componibilidad del capítulo 3 aplicada a la administración. Estar en ese grupo es lo que hace que <code>sudo</code> te acepte; en un ordenador del laboratorio, probablemente no lo estarás — y ahora entiendes por qué.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.4 · Detective de permisos</strong></p>
+<p>Ejecuta <code>ls -l /etc/passwd /etc/shadow /usr/bin/nano /tmp</code> (el último con <code>ls -ld /tmp</code>: la <code>d</code> hace que describa el directorio en vez de su contenido). Traduce a palabras los permisos de cada uno. ¿Cuál puede leer todo el mundo pero escribir solo root? ¿En cuál puedes escribir tú?</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>/etc/passwd</code> → <code>-rw-r--r--</code>: censo público, lo escribe solo root. <code>/etc/shadow</code> → <code>-rw-r-----</code>: ni leerlo puedes. <code>/usr/bin/nano</code> → <code>-rwxr-xr-x</code>: todo el mundo lo ejecuta, solo root lo modifica — así deben ser los programas del sistema. <code>/tmp</code> → <code>drwxrwxrwt</code>: escribible por todos (esa <code>t</code> final es un matiz — impide borrar lo ajeno — que puedes archivar como curiosidad).</p>
+<p><strong>Por qué así</strong> — Cuatro ficheros, cuatro políticas distintas, y las cuatro se leen de un vistazo con la figura del capítulo. Los permisos no son burocracia: son el diseño de seguridad del sistema, escrito en diez caracteres.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.5 · De tubería a herramienta</strong></p>
+<p>Crea el script <code>diagnostico.sh</code> que imprima: quién eres, en qué máquina estás (<code>hostname</code>), la fecha, y cuánto lleva encendido el equipo (<code>/proc/uptime</code>). Hazlo ejecutable y ejecútalo dos veces — comprueba que la fecha cambia y el uptime crece.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con <code>nano diagnostico.sh</code>:</p>
+<pre><code>#!/bin/bash
+whoami
+hostname
+date
+cat /proc/uptime</code></pre>
+<p>Después <code>chmod u+x diagnostico.sh</code> y <code>./diagnostico.sh</code>.</p>
+<p><strong>Por qué así</strong> — Es el patrón completo de la sección: comandos guardados + shebang + <code>u+x</code> + <code>./</code>. Cuando administres tu servidor, tus scripts de diagnóstico serán exactamente esto con más líneas. El uptime que crece entre ejecuciones te confirma que <code>/proc</code> se fabrica al vuelo: dos lecturas, dos realidades.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 4.6 · <code>sudo</code>, con recibo</strong></p>
+<p>Ejecuta <code>ls /root</code> sin y con <code>sudo</code>. Después reflexiona por escrito en tu cuaderno (una frase vale): ¿por qué es <em>mejor</em> este diseño — pedir permiso orden a orden — que trabajar directamente como root todo el rato?</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sin <code>sudo</code>: permiso denegado. Con él: tu contraseña, y la casa de root (probablemente casi vacía). La reflexión, en la dirección de: como root, <em>cualquier</em> errata es potencialmente fatal — un <code>rm</code> mal apuntado, un espacio de más como el del capítulo 2. Con <code>sudo</code> elevas los privilegios solo el segundo que hacen falta, y cada uso queda registrado con tu nombre.</p>
+<p><strong>Por qué así</strong> — Es el principio de mínimo privilegio, y es idéntico al del laboratorio: la llave del armario de isótopos no se lleva en el bolsillo todo el día; se pide, se usa, se devuelve, y queda apuntado. Cierra el cuaderno: <code>exit</code>, y a la colección <code>sesion04.log</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-4" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="sec-quiz-4"><span class="header-section-number">4.8</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap04">
+  <div class="qz"><p class="qq" data-n="1">¿Dónde vive la configuración del sistema en Linux?</p>
+    <label><input type="radio" name="z1" value="a"><span>en <code>/etc</code>, como ficheros de texto</span></label>
+    <label><input type="radio" name="z1" value="b"><span>en un registro binario central</span></label>
+    <label><input type="radio" name="z1" value="c"><span>en <code>/tmp</code></span></label>
+    <div class="fb good"><b>Correcto.</b> Texto plano en <code>/etc</code>: legible con <code>less</code>, buscable con <code>grep</code>, editable con <code>nano</code> (y sudo).</div>
+    <div class="fb bad"><b>No exactamente.</b> Justo lo contrario de un registro opaco: <code>/etc</code> es texto plano a la vista. <code>/tmp</code> es la papelera de trabajo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">El usuario con uid 0 es…</p>
+    <label><input type="radio" name="z2" value="a"><span>el primero que se creó al instalar</span></label>
+    <label><input type="radio" name="z2" value="b"><span><code>root</code>, para quien no existen los permisos</span></label>
+    <label><input type="radio" name="z2" value="c"><span>una cuenta de servicio como <code>daemon</code></span></label>
+    <div class="fb good"><b>Correcto.</b> El superusuario. Tu cuenta normal es el uid 1000; las de servicio, números bajos intermedios.</div>
+    <div class="fb bad"><b>No exactamente.</b> El uid 0 es <code>root</code>. Tu usuario de la instalación es el 1000 — compruébalo con <code>id</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">¿Qué hace exactamente <code>sudo ls /root</code>?</p>
+    <label><input type="radio" name="z3" value="a"><span>te convierte en root hasta que cierres la terminal</span></label>
+    <label><input type="radio" name="z3" value="b"><span>ejecuta solo ese <code>ls</code> como root, y lo deja registrado</span></label>
+    <label><input type="radio" name="z3" value="c"><span>pide la contraseña de root para desbloquear la carpeta</span></label>
+    <div class="fb good"><b>Correcto.</b> Una orden, con recibo, y de vuelta a tu uid de siempre. Y la contraseña que pide es la tuya: comprueba que tú eres tú y estás autorizado.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>sudo</code> eleva una única orden y registra quién la pidió; la contraseña es la tuya, no la de root. Poderes de usar y tirar.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Un fichero muestra <code>-rw-r-----</code> con dueño <code>root</code> y grupo <code>shadow</code>. Tú no estás en ese grupo. ¿Qué puedes hacer con él?</p>
+    <label><input type="radio" name="z4" value="a"><span>leerlo, pero no modificarlo</span></label>
+    <label><input type="radio" name="z4" value="b"><span>nada: ni leerlo</span></label>
+    <label><input type="radio" name="z4" value="c"><span>leerlo y ejecutarlo</span></label>
+    <div class="fb good"><b>Correcto.</b> Tu bloque es el tercero — «otros» — y está a ceros: <code>---</code>. Es la política de <code>/etc/shadow</code> haciendo su trabajo.</div>
+    <div class="fb bad"><b>No exactamente.</b> Tú caes en el bloque «otros», el tercero: <code>---</code>. Ni leer, ni escribir, ni ejecutar — revisa la figura del decodificador.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Sobre un <em>directorio</em>, el permiso <code>x</code> significa…</p>
+    <label><input type="radio" name="z5" value="a"><span>poder entrar en él</span></label>
+    <label><input type="radio" name="z5" value="b"><span>poder ejecutar sus ficheros</span></label>
+    <label><input type="radio" name="z5" value="c"><span>nada: solo aplica a ficheros</span></label>
+    <div class="fb good"><b>Correcto.</b> Sin la <code>x</code>, el <code>cd</code> rebota. La <code>r</code> lista nombres; la <code>x</code> deja pasar.</div>
+    <div class="fb bad"><b>No exactamente.</b> En directorios, <code>x</code> es la llave de la puerta: permite entrar con <code>cd</code>. Lo que hagan los ficheros de dentro depende de sus propios permisos.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Escribes un script y al hacer <code>./analisis.sh</code> el shell dice «Permiso denegado». ¿Qué falta?</p>
+    <label><input type="radio" name="z6" value="a"><span>ejecutarlo con <code>sudo</code></span></label>
+    <label><input type="radio" name="z6" value="b"><span><code>chmod u+x analisis.sh</code></span></label>
+    <label><input type="radio" name="z6" value="c"><span>moverlo a <code>/bin</code></span></label>
+    <div class="fb good"><b>Correcto.</b> Le falta el permiso de ejecución para su dueño. <code>sudo</code> no pinta nada aquí — y desconfía del reflejo de añadirlo «a ver si cuela».</div>
+    <div class="fb bad"><b>No exactamente.</b> No es cuestión de privilegios ni de ubicación: al fichero le falta la <code>x</code>. <code>chmod u+x</code> lo convierte de apunte en herramienta.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"a", z2:"b", z3:"b", z4:"b", z5:"a", z6:"b"};
+  document.querySelectorAll("#quiz-cap04 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 4.8)</strong> — Respuestas: 1 a · 2 b · 3 b · 4 b · 5 a · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Sabes quién puede tocar qué; el capítulo 5 pregunta <em>qué está pasando ahora mismo</em>: procesos, <code>top</code>, señales y el arte de matar un programa colgado. Y la otra mitad del capó: qué hace de verdad el gestor de software de Mint por debajo — <code>apt</code>, repositorios, dependencias — y el misterio de por qué a veces <code>python</code> no es el Python que crees. Guarda <code>sesion04.log</code>.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 4 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion04.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap03.html" class="pagination-link" aria-label="El flujo de datos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

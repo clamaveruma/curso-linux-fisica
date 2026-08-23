@@ -1,0 +1,31 @@
+<svg viewBox="0 0 700 270" width="700" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomía de los permisos: tipo, dueño, grupo y otros">
+  <g font-family="IBM Plex Mono,monospace">
+    <rect x="60" y="45" width="580" height="52" rx="5" fill="#0E1512"/>
+    <text x="88" y="79" font-size="22" fill="#9C8F79">-</text>
+    <text x="112" y="79" font-size="22" fill="#6BD6BC" font-weight="600">rw-</text>
+    <text x="168" y="79" font-size="22" fill="#E8C170" font-weight="600">r--</text>
+    <text x="224" y="79" font-size="22" fill="#E8837A" font-weight="600">r--</text>
+    <text x="300" y="79" font-size="17" fill="#D8E6E0">marcos fisica</text>
+    <text x="470" y="79" font-size="17" fill="#7E938C">nota.txt</text>
+    <!-- llaves -->
+    <path d="M85 105 v8 h14 v-8" fill="none" stroke="#9C8F79" stroke-width="1.4"/>
+    <text x="92" y="132" font-size="11.5" fill="#6A5F4D" text-anchor="middle">tipo</text>
+    <text x="92" y="148" font-size="10" fill="#9C8F79" text-anchor="middle">- fichero</text>
+    <text x="92" y="162" font-size="10" fill="#9C8F79" text-anchor="middle">d directorio</text>
+    <path d="M112 105 v8 h48 v-8" fill="none" stroke="#2F6F62" stroke-width="1.5"/>
+    <text x="136" y="132" font-size="11.5" fill="#2F6F62" text-anchor="middle" font-weight="600">dueño</text>
+    <text x="136" y="148" font-size="10" fill="#9C8F79" text-anchor="middle">u (user)</text>
+    <path d="M168 105 v8 h48 v-8" fill="none" stroke="#9A6A14" stroke-width="1.5"/>
+    <text x="192" y="132" font-size="11.5" fill="#9A6A14" text-anchor="middle" font-weight="600">grupo</text>
+    <text x="192" y="148" font-size="10" fill="#9C8F79" text-anchor="middle">g (group)</text>
+    <path d="M224 105 v8 h48 v-8" fill="none" stroke="#C4342A" stroke-width="1.5"/>
+    <text x="248" y="132" font-size="11.5" fill="#C4342A" text-anchor="middle" font-weight="600">otros</text>
+    <text x="248" y="148" font-size="10" fill="#9C8F79" text-anchor="middle">o (others)</text>
+    <path d="M300 105 v8 h145 v-8" fill="none" stroke="#9C8F79" stroke-width="1.2"/>
+    <text x="372" y="132" font-size="11" fill="#6A5F4D" text-anchor="middle">de quién es · de qué grupo</text>
+    <!-- leyenda rwx -->
+    <rect x="60" y="185" width="580" height="62" rx="4" fill="#FAF6EB" stroke="#C9B995" stroke-width="1"/>
+    <text x="90" y="210" font-size="13" fill="#2B2318"><tspan font-weight="600" fill="#2F6F62">r</tspan> leer · <tspan font-weight="600" fill="#9A6A14">w</tspan> escribir · <tspan font-weight="600" fill="#C4342A">x</tspan> ejecutar (en un directorio: entrar)</text>
+    <text x="90" y="234" font-size="11.5" fill="#6A5F4D">este nota.txt: su dueño lo lee y lo escribe; su grupo y el resto del mundo, solo leerlo</text>
+  </g>
+</svg>
