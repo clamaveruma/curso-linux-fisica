@@ -21,7 +21,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 **Extensión:** ~30 horas efectivas en 12 sesiones de 2–3 h, pensadas para dos semanas intensivas o un mes tranquilo. Cada sesión debe cerrar con una victoria visible.
 
-**Tono:** español con términos técnicos en inglés. Teoría integrada como cajas «Por dentro» al final de cada sección práctica — primero funciona, luego se entiende por qué.
+**Tono:** español con términos técnicos en inglés. Teoría integrada como cajas «Por dentro» al final de cada sección práctica — primero funciona, luego se entiende por qué. Vocabulario profesional introducido sobre la marcha y en contexto (CLI, GUI, REPL, shell, prompt…), con su expansión la primera vez *(añadido 2026-08-24)*.
 
 **Ejercicios:** muchos, anclados en material de física (CSVs de medidas, logs de adquisición, barridos de simulaciones). Soluciones ocultas con explicación razonada del porqué, no corrección binaria. Tests de autocomprobación breves al final de cada capítulo, como repaso, no como eje.
 

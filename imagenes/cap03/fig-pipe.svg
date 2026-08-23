@@ -1,0 +1,29 @@
+<svg viewBox="0 0 700 240" width="700" height="240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La tubería conecta la salida estándar de un programa con la entrada estándar del siguiente">
+  <defs>
+    <marker id="fpp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- programa A -->
+    <rect x="45" y="65" width="160" height="66" rx="5" fill="#0E1512"/>
+    <text x="125" y="94" font-size="14" fill="#6BD6BC" text-anchor="middle" font-weight="600">grep ERROR</text>
+    <text x="125" y="114" font-size="10" fill="#D8E6E0" text-anchor="middle">filtra 7 198 líneas</text>
+    <!-- tubo -->
+    <rect x="235" y="80" width="230" height="36" rx="18" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.6"/>
+    <text x="350" y="104" font-size="18" fill="#24564B" text-anchor="middle" font-weight="600">|</text>
+    <line x1="209" y1="98" x2="231" y2="98" stroke="#2F6F62" stroke-width="2" marker-end="url(#fpp)"/>
+    <line x1="469" y1="98" x2="491" y2="98" stroke="#2F6F62" stroke-width="2" marker-end="url(#fpp)"/>
+    <text x="278" y="72" font-size="10.5" fill="#2F6F62" text-anchor="middle" font-weight="600">1 · stdout</text>
+    <text x="425" y="72" font-size="10.5" fill="#9A6A14" text-anchor="middle" font-weight="600">0 · stdin</text>
+    <text x="350" y="136" font-size="9.5" fill="#9C8F79" text-anchor="middle">108 líneas viajan por dentro — nunca tocan la pantalla ni el disco</text>
+    <!-- programa B -->
+    <rect x="498" y="65" width="120" height="66" rx="5" fill="#0E1512"/>
+    <text x="558" y="94" font-size="14" fill="#6BD6BC" text-anchor="middle" font-weight="600">wc -l</text>
+    <text x="558" y="114" font-size="10" fill="#D8E6E0" text-anchor="middle">solo cuenta</text>
+    <!-- salida final -->
+    <line x1="622" y1="98" x2="648" y2="98" stroke="#2F6F62" stroke-width="2" marker-end="url(#fpp)"/>
+    <text x="666" y="103" font-size="15" fill="#C4342A" font-weight="600">108</text>
+    <text x="666" y="120" font-size="8.5" fill="#9C8F79" text-anchor="middle">pantalla</text>
+    <text x="350" y="180" font-size="11.5" fill="#6A5F4D" text-anchor="middle">la tubería enchufa el stdout del de la izquierda al stdin del de la derecha</text>
+    <text x="350" y="202" font-size="10.5" fill="#9C8F79" text-anchor="middle">compárala con la redirección: <tspan font-weight="600">&gt;</tspan> conecta con un fichero · <tspan font-weight="600">|</tspan> conecta con otro programa</text>
+  </g>
+</svg>

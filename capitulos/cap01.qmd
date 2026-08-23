@@ -45,6 +45,13 @@ mundo. Aquí hay **dos programas distintos** colaborando, no uno:
 | **Shell** | El intérprete que vive dentro: lee tu orden, la ejecuta, devuelve el resultado. El tuyo se llama `bash`. | La electrónica que procesa la señal |
 | **Consola** | Históricamente, el hardware físico conectado a la máquina. Hoy se usa como sinónimo informal. | El instrumento completo sobre la mesa |
 
+Y dos siglas que te perseguirán en toda la documentación, así que
+estrenémoslas ya: esta forma de trabajar — órdenes de texto — es una
+**CLI** (*command-line interface*, interfaz de línea de comandos); la
+de ventanas y ratón de todos los días es una **GUI** (*graphical user
+interface*). No son rivales: son dos puertas a la misma casa, y este
+curso te entrega la que te faltaba.
+
 ![El circuito completo de una orden. La terminal solo dibuja; quien entiende es el shell.](../imagenes/cap01/fig-circuito-orden.svg){#fig-circuito fig-alt="Esquema del circuito de una orden: tú, terminal, shell y programa, con flechas de ida y vuelta"}
 
 ::: {.historia}
@@ -113,7 +120,11 @@ Cuatro comandos, cuatro respuestas instantáneas. `whoami` — quién soy.
 `date` — qué hora es. `echo` — repite lo que te digo. `tty` — qué
 terminal soy (ahí está el teletipo fantasma). Fíjate en el patrón:
 escribes una orden, el shell la ejecuta, te devuelve texto, y el prompt
-reaparece pidiendo la siguiente. Ese ciclo es toda la terminal.
+reaparece pidiendo la siguiente. Ese ciclo es toda la terminal — y
+tiene nombre técnico: **REPL** (*read–eval–print loop*: leer, ejecutar,
+imprimir, repetir). No es nuevo para ti: el intérprete de Python, con
+su `>>>`, es exactamente otro REPL. Cambia el idioma; el ciclo es el
+mismo.
 
 ¿Y si te equivocas? Prueba a escribir `whoami` mal a propósito:
 
