@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Proyecto final: tu primer servidor – Bendito maldito Linux</title>
+<title>Apéndice D — Montar de todo: discos, pendrives y unidades remotas – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-windows.html" rel="next">
-<link href="../capitulos/cap12.html" rel="prev">
+<link href="../anexos/anexo-e1-ia.html" rel="next">
+<link href="../anexos/anexo-b1-scripting.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/proyecto-final.html">Proyecto final: tu primer servidor</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b2-montajes.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../capitulos/proyecto-final.html" class="sidebar-item-text sidebar-link active">
+  <a href="../capitulos/proyecto-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Proyecto final: tu primer servidor</span></a>
   </div>
 </li>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
+  <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
   </div>
 </li>
@@ -283,20 +283,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#las-reglas" id="toc-las-reglas" class="nav-link active" data-scroll-target="#las-reglas">Las reglas</a></li>
-  <li><a href="#los-hitos" id="toc-los-hitos" class="nav-link" data-scroll-target="#los-hitos">Los hitos</a></li>
-  <li><a href="#el-análisis-de-partida" id="toc-el-análisis-de-partida" class="nav-link" data-scroll-target="#el-análisis-de-partida">El análisis de partida</a></li>
-  <li><a href="#hoja-de-verificación" id="toc-hoja-de-verificación" class="nav-link" data-scroll-target="#hoja-de-verificación">Hoja de verificación</a></li>
-  <li><a href="#después" id="toc-después" class="nav-link" data-scroll-target="#después">Después</a></li>
+  <li><a href="#ver-qué-hay-montado" id="toc-ver-qué-hay-montado" class="nav-link active" data-scroll-target="#ver-qué-hay-montado">Ver qué hay montado</a></li>
+  <li><a href="#montar-a-mano-un-disco-que-conectas" id="toc-montar-a-mano-un-disco-que-conectas" class="nav-link" data-scroll-target="#montar-a-mano-un-disco-que-conectas">Montar a mano un disco que conectas</a></li>
+  <li><a href="#montaje-permanente-etcfstab" id="toc-montaje-permanente-etcfstab" class="nav-link" data-scroll-target="#montaje-permanente-etcfstab">Montaje permanente: <code>/etc/fstab</code></a></li>
+  <li><a href="#carpetas-de-otra-máquina-i-sshfs" id="toc-carpetas-de-otra-máquina-i-sshfs" class="nav-link" data-scroll-target="#carpetas-de-otra-máquina-i-sshfs">Carpetas de otra máquina, I: SSHFS</a></li>
+  <li><a href="#carpetas-de-otra-máquina-ii-smb-y-nfs" id="toc-carpetas-de-otra-máquina-ii-smb-y-nfs" class="nav-link" data-scroll-target="#carpetas-de-otra-máquina-ii-smb-y-nfs">Carpetas de otra máquina, II: SMB y NFS</a></li>
+  <li><a href="#servir-una-carpeta-desde-tu-vm-por-nfs" id="toc-servir-una-carpeta-desde-tu-vm-por-nfs" class="nav-link" data-scroll-target="#servir-una-carpeta-desde-tu-vm-por-nfs">Servir una carpeta desde tu VM por NFS</a></li>
+  <li><a href="#práctica" id="toc-práctica" class="nav-link" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b2-montajes.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-proyecto" class="quarto-section-identifier">Proyecto final: tu primer servidor</span></h1>
+<h1 class="title"><span id="sec-anexo-b2" class="quarto-section-identifier">Apéndice D — Montar de todo: discos, pendrives y unidades remotas</span></h1>
 </div>
 
 
@@ -313,160 +315,174 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="lede">
-<p>El ensayo general. Durante doce sesiones cada pieza vino con su explicación y su solución plegada; hoy no hay solución: hay una lista de objetivos, la referencia al capítulo donde vive cada pieza, y una hoja de verificación. Montas de cero un servidor Linux, lo conectas, lo aseguras, le subes un dataset, lanzas un análisis que sobrevive a tu ausencia y recoges los resultados. Es, pieza a pieza, el flujo de trabajo remoto de un físico computacional — y al terminar sabrás que sabes hacerlo, que es distinto de haberlo leído.</p>
-</div>
-<div class="chapmeta">
-<p>⏱ <strong>~3 h</strong> · requisitos: <strong>los doce capítulos</strong> · máquina: <strong>tu Linux de diario y una VM nueva</strong></p>
-</div>
-<section id="las-reglas" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="las-reglas">Las reglas</h2>
-<ul>
-<li><strong>Desde cero.</strong> Crea una VM <em>nueva</em> llamada <code>servidor</code> (o borra <code>debian-lab</code> y empieza limpio). Que el músculo se acuerde sin el capítulo delante.</li>
-<li><strong>Todo por terminal</strong>, salvo la creación de la VM y sus instantáneas, que se hacen en virt-manager.</li>
-<li><strong>Cuaderno obligatorio</strong>: <code>script proyecto.log</code> en tu Mint antes de empezar. Anota el tiempo de cada hito y qué te atascó: es el dato que el curso quiere.</li>
-<li><strong>Cada hito se verifica con un comando</strong>, no con una sensación. La hoja del final dice cuál.</li>
-<li><strong>Si te atascas</strong>: primero el capítulo indicado; después <code>man</code>; y si sigues atascado, pide el comando a una IA con la disciplina del curso — léelo entero, verifica lo que no reconozcas, jamás un <code>sudo</code> o un <code>rm</code> a ciegas.</li>
-</ul>
-<div id="fig-arquitectura" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El portátil con Mint a la izquierda, la máquina virtual servidor a la derecha, y entre ambos las flechas de rsync y ssh sobre la red NAT">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-arquitectura-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/proyecto/fig-arquitectura.svg" class="img-fluid figure-img" alt="El portátil con Mint a la izquierda, la máquina virtual servidor a la derecha, y entre ambos las flechas de rsync y ssh sobre la red NAT">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arquitectura-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un capítulo.
-</figcaption>
-</figure>
+<p>El capítulo 6 enseñó la idea — un disco se <em>engancha</em> en un directorio del árbol único — y Mint la aplica sola cada vez que pinchas un pendrive. Este anexo la lleva hasta el final: montar a mano, montar discos de otros formatos, hacer un montaje permanente, y enganchar carpetas que viven en <em>otra máquina</em> — por SSH, por el protocolo de Windows y por el de los laboratorios. Todo por terminal y todo por ventanas, porque aquí las dos vías se usan de verdad. Requiere los capítulos 6 y 11.</p>
+<section id="ver-qué-hay-montado" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ver-qué-hay-montado">Ver qué hay montado</h2>
+<p>Dos comandos que ya conoces y uno nuevo: <code>lsblk -f</code> (con <code>-f</code>, enseña el sistema de ficheros y la etiqueta de cada partición), <code>df -h</code> (lo montado, con su espacio), y <code>findmnt</code>, que dibuja el árbol de montajes entero — útil cuando <code>df</code> es demasiado largo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lsblk -f</span>
+<span class="t-out">NAME        FSTYPE FSVER LABEL     UUID                                 MOUNTPOINTS</span>
+<span class="t-out">sdb           </span>
+<span class="t-out">└─sdb1      exfat  1.0   VIAJE     6A3F-1B2C                            /media/marcos/VIAJE</span>
+<span class="t-out">nvme0n1</span>
+<span class="t-out">├─nvme0n1p1 vfat   FAT32           7C21-9E04                            /boot/efi</span>
+<span class="t-out">└─nvme0n1p2 ext4   1.0             3f8a2c1e-…                           /</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">findmnt /media/marcos/VIAJE</span>
+<span class="t-out">TARGET               SOURCE    FSTYPE OPTIONS</span>
+<span class="t-out">/media/marcos/VIAJE  /dev/sdb1 exfat  rw,nosuid,nodev,relatime,uid=1000,gid=1000</span></code></pre>
+<p>Fíjate en el <strong>UUID</strong>: el identificador único de cada partición. Los nombres <code>sdb1</code> cambian según el orden en que enchufes las cosas; el UUID no. Por eso los montajes permanentes se escriben con él.</p>
+</section>
+<section id="montar-a-mano-un-disco-que-conectas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="montar-a-mano-un-disco-que-conectas">Montar a mano un disco que conectas</h2>
+<p>Mint monta los pendrives en <code>/media/tu_usuario/ETIQUETA</code>. En un servidor sin escritorio no hay nadie que lo haga, y a veces en el portátil quieres controlarlo — montar solo lectura un disco antiguo, por ejemplo, para no tocar nada. El gesto: un directorio vacío como punto de montaje, <code>mount</code>, <code>umount</code>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo mkdir -p /mnt/viejo</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo mount -o ro /dev/sdb1 /mnt/viejo</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /mnt/viejo</span>
+<span class="t-out">tesis_2019  fotos  backup_windows</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo umount /mnt/viejo</span></code></pre>
+<p><code>-o ro</code> (<em>read-only</em>) es el seguro: nada de lo que hagas podrá escribir en ese disco. <code>/mnt</code> es el sitio tradicional para montajes manuales — <code>/media</code> es de los automáticos. Y <strong>otros formatos</strong> funcionan igual: <code>mount</code> detecta solo NTFS (el de Windows; Mint trae el controlador), exFAT y FAT32, y los ext4 de otro Linux. Con ext4 ajeno verás una curiosidad del capítulo 4: los ficheros aparecen con el <em>número</em> de usuario que tenían allí (<code>uid 1001</code>, quizá sin nombre) — los permisos viajan con el disco, los nombres no. Si <code>mount</code> protesta con «tipo de sistema de ficheros desconocido», falta el paquete del formato (<code>exfatprogs</code>, <code>ntfs-3g</code>); <code>apt</code> lo resuelve.</p>
+<div class="truco">
+<p><strong>✚ Truco · La aplicación «Discos»</strong></p>
+<p>Menú → Accesorios → <strong>Discos</strong> (<code>gnome-disks</code>) es la cara gráfica de todo este anexo, y muy buena: elige el disco a la izquierda, la partición en el dibujo, y los botones ▶ / ■ montan y desmontan. El icono de engranaje tiene <em>Editar opciones de montaje</em>, que es — literalmente — la forma con ratón de escribir la línea de <code>fstab</code> de la sección siguiente, con el UUID puesto por ti y sin riesgo de errata. También formatea y comprueba discos. Para un disco suelto en tu portátil, empieza por aquí; la terminal es para el servidor y para entender qué hizo el botón.</p>
 </div>
 </section>
-<section id="los-hitos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="los-hitos">Los hitos</h2>
-<p><strong>1. La máquina</strong> <em>(capítulo 7)</em>. VM <code>servidor</code>: 2 CPU, 4 GB, disco de 20 GB, red NAT, con la ISO de Debian verificada en la bandeja.</p>
-<p><strong>2. La instalación</strong> <em>(capítulos 6 y 8)</em>. Debian sin escritorio, con servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te atreves, <code>/home</code> separado. Contraseña de root vacía. Al terminar, apaga desde dentro e instantánea <code>recien-instalado</code>.</p>
-<p><strong>3. La red</strong> <em>(capítulos 9 y 10)</em>. Averigua la IP del servidor, bautízalo en el <code>/etc/hosts</code> de tu Mint como <code>servidor</code>, y comprueba que responde por nombre. De propina: ¿qué puerta tiene abierta?</p>
-<p><strong>4. El acceso</strong> <em>(capítulo 11)</em>. Tu clave pública en el servidor, alias <code>servidor</code> en <code>~/.ssh/config</code>, entrada sin contraseña. Después, cierra la puerta a las contraseñas en <code>sshd_config</code> — con copia del fichero y sesión de reserva abierta — y demuestra que te rechaza sin clave.</p>
-<p><strong>5. El sistema</strong> <em>(capítulos 4 y 5)</em>. Actualízalo. Instala lo que el análisis necesita: <code>tmux</code>, <code>htop</code>, <code>tree</code>. Comprueba con <code>which</code> que están, y con <code>df -h</code> cuánto disco queda.</p>
-<p><strong>6. Los datos</strong> <em>(capítulos 2 y 11)</em>. Crea en el servidor <code>~/proyecto/datos</code> y <code>~/proyecto/resultados</code>. Sube con <code>rsync</code> el <code>adquisicion.log</code> del capítulo 3 y la carpeta <code>experimento-pendulo</code> del capítulo 2. <code>tree ~/proyecto</code> debe enseñar el orden.</p>
-<p><strong>7. El análisis</strong> <em>(capítulos 3, 4 y 12)</em>. Escribe en el servidor <code>analisis.py</code> (abajo tienes uno de partida) y un <code>analiza.sh</code> con shebang que lo lance y anote la fecha en <code>resultados/registro.txt</code>. Hazlo ejecutable. Lánzalo dentro de una sesión tmux <code>analisis</code>, desengánchate, <strong>cierra la conexión y apaga la Wi-Fi un minuto</strong>. Vuelve, engánchate, y mira si ha terminado.</p>
-<p><strong>8. La recogida</strong> <em>(capítulo 11)</em>. Trae <code>resultados/</code> a tu Mint con <code>rsync</code>, y abre el informe. Repite el <code>rsync</code>: debe no transferir nada.</p>
-<p><strong>9. Propina</strong> <em>(capítulo 12)</em>. Jupyter en el servidor a través de un túnel, abriendo el informe desde el navegador. Y un <code>du -h</code> del disco de la VM antes y después de todo: ¿cuánto ha crecido?</p>
+<section id="montaje-permanente-etcfstab" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="montaje-permanente-etcfstab">Montaje permanente: <code>/etc/fstab</code></h2>
+<p>Un montaje a mano dura hasta el reinicio. Para que un disco de datos aparezca <em>siempre</em> en el mismo sitio, se apunta en <code>/etc/fstab</code> (<em>file system table</em>) — un fichero de texto de <code>/etc</code>, cómo no — con el protocolo del capítulo 10: copia antes, vuelta atrás escrita. Cada línea son seis campos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a># dispositivo (por UUID)                  punto de montaje  tipo   opciones          dump pass</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>UUID=3f8a2c1e-…                            /                 ext4   errors=remount-ro 0    1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>UUID=7C21-9E04                             /boot/efi         vfat   umask=0077        0    1</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>UUID=9d4b7e20-…                            /datos            ext4   defaults,nofail   0    2</span></code></pre></div>
+<p>Las dos primeras las escribió el instalador del capítulo 8 — ahora puedes leerlas. La tercera es tuya: un segundo disco interno con tus datos, montado en <code>/datos</code> en cada arranque. Dos reglas que evitan la avería clásica: <strong><code>nofail</code></strong> — si el disco no está, el sistema arranca igual en vez de quedarse esperando —, y <strong>probar sin reiniciar</strong> con <code>sudo mount -a</code>, que monta todo lo de <code>fstab</code> que no esté montado y te enseña el error si te has equivocado. Una línea mal escrita sin <code>nofail</code> puede dejar el arranque en modo de emergencia; con la copia de seguridad y <code>mount -a</code>, nunca llegarás ahí.</p>
 </section>
-<section id="el-análisis-de-partida" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="el-análisis-de-partida">El análisis de partida</h2>
-<p>Sin NumPy — un servidor recién instalado no lo tiene, y no lo necesita para esto —. Solo biblioteca estándar, como en el capítulo 3:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analisis.py — recuento de errores por sensor y rango de temperaturas</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>errores <span class="op">=</span> Counter()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>temps <span class="op">=</span> []</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos/adquisicion.log"</span>) <span class="im">as</span> f:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        campos <span class="op">=</span> linea.split()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        nivel, sensor <span class="op">=</span> campos[<span class="dv">2</span>], campos[<span class="dv">3</span>]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> nivel <span class="op">==</span> <span class="st">"ERROR"</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            errores[sensor] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> nivel <span class="op">==</span> <span class="st">"INFO"</span> <span class="kw">and</span> <span class="st">"temp_C="</span> <span class="kw">in</span> linea:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            temps.append(<span class="bu">float</span>(linea.split(<span class="st">"temp_C="</span>)[<span class="dv">1</span>]))</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"resultados/informe.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> out:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    out.write(<span class="st">"Errores por sensor:</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sensor, n <span class="kw">in</span> errores.most_common():</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        out.write(<span class="ss">f"  </span><span class="sc">{</span>sensor<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    out.write(<span class="ss">f"Temperatura minima: </span><span class="sc">{</span><span class="bu">min</span>(temps)<span class="sc">:.2f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    out.write(<span class="ss">f"Temperatura maxima: </span><span class="sc">{</span><span class="bu">max</span>(temps)<span class="sc">:.2f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"informe escrito en resultados/informe.txt"</span>)</span></code></pre></div>
-<p>Si el informe dice <code>s3: 90</code>, <code>s1: 15</code>, <code>s4: 3</code> y un rango de 20,45 a 25,00, el análisis coincide con las tuberías del capítulo 3 — dos métodos, un resultado, como debe ser. Y si te sobra tiempo: que <code>analisis.py</code> genere también un CSV con errores por minuto, y grafícalo en tu Mint.</p>
+<section id="carpetas-de-otra-máquina-i-sshfs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="carpetas-de-otra-máquina-i-sshfs">Carpetas de otra máquina, I: SSHFS</h2>
+<p>Aquí entra el capítulo 11. Si puedes entrar en una máquina por SSH, puedes montar cualquier carpeta suya en tu árbol como si fuera un disco — sin administrar nada en el servidor:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install sshfs</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">mkdir ~/lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sshfs lab:/home/marcos ~/lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls ~/lab</span>
+<span class="t-out">adquisicion.log  proyecto  simula.py</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">fusermount -u ~/lab</span></code></pre>
+<p>Desde ese momento tu editor, tu Python, tu gestor de archivos ven <code>~/lab</code> como una carpeta local — cada lectura y escritura viaja por SSH con tu clave. Se desmonta con <code>fusermount -u</code> (no hace falta <code>sudo</code>: el montaje es tuyo). Es la herramienta perfecta para editar cómodamente ficheros de un servidor donde no tienes más que SSH — un clúster incluido —; a cambio, es lento para carpetas grandes.</p>
 </section>
-<section id="hoja-de-verificación" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="hoja-de-verificación">Hoja de verificación</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 62%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Hito</th>
-<th>Comando (desde tu Mint salvo indicación)</th>
-<th>Lo que debe salir</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td><code>virsh list --all</code></td>
-<td><code>servidor</code> en la lista</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td><code>ssh servidor lsblk</code></td>
-<td>EFI en <code>/boot/efi</code>, raíz en <code>/</code>, <code>[SWAP]</code></td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td><code>virsh snapshot-list servidor</code></td>
-<td><code>recien-instalado</code></td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td><code>ping -c 1 servidor</code></td>
-<td>respuesta desde <code>192.168.122.x</code></td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><code>nmap servidor</code></td>
-<td>solo <code>22/tcp open</code></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><code>ssh servidor hostname</code></td>
-<td><code>servidor</code>, sin pedir contraseña</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td><code>ssh -o PubkeyAuthentication=no servidor</code></td>
-<td><code>Permission denied (publickey)</code></td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td><code>ssh servidor "which tmux htop tree"</code></td>
-<td>tres rutas</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td><code>ssh servidor tree ~/proyecto</code></td>
-<td><code>datos/</code> con el log y el experimento; <code>resultados/</code> vacío</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td><code>ssh servidor tmux ls</code></td>
-<td>la sesión <code>analisis</code></td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><code>ssh servidor cat ~/proyecto/resultados/informe.txt</code></td>
-<td>el informe con <code>s3: 90</code></td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td><code>rsync -av servidor:~/proyecto/resultados/ ~/resultados/</code> (2.ª vez)</td>
-<td><code>sent … bytes</code>, ningún fichero listado</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td><code>du -sh</code> del <code>.qcow2</code> (con <code>sudo</code>)</td>
-<td>más que en el capítulo 7</td>
-</tr>
-</tbody>
-</table>
+<section id="carpetas-de-otra-máquina-ii-smb-y-nfs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="carpetas-de-otra-máquina-ii-smb-y-nfs">Carpetas de otra máquina, II: SMB y NFS</h2>
+<p>Dos protocolos más, cada uno con su mundo. <strong>SMB</strong> (también llamado CIFS o «compartir de Windows») es lo que hablan los NAS domésticos, las impresoras y los PC con Windows. <strong>NFS</strong> es el de Unix: es lo que hay debajo cuando en el laboratorio o el clúster tu casa «aparece» en todas las máquinas a la vez.</p>
+<p>Por ventanas, los dos son un solo gesto: en el gestor de archivos (Nemo en tu Mint; Caja, Nautilus o Thunar en otros escritorios), <em>Archivo → Conectar al servidor…</em> y una dirección: <code>smb://nas/datos</code>, <code>sftp://lab/home/marcos</code>, <code>nfs://servidor/export</code>. La carpeta aparece en la barra lateral y todo es arrastrar y soltar. Por terminal, cada uno tiene su paquete y su <code>-t</code>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install cifs-utils nfs-common</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo mkdir -p /mnt/nas /mnt/lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo mount -t cifs //nas/datos /mnt/nas -o username=marcos,uid=1000,gid=1000</span>
+<span class="t-out">Password for marcos@//nas/datos: ********</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo mount -t nfs debian-lab:/home/marcos/proyecto /mnt/lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">findmnt -t cifs,nfs</span></code></pre>
+<p>En SMB, <code>uid=1000,gid=1000</code> hace que los ficheros aparezcan como tuyos (el protocolo no entiende de usuarios Linux); en NFS los permisos viajan de verdad, así que tu usuario debe tener <strong>el mismo número</strong> en las dos máquinas — <code>id</code>, capítulo 4 — o verás ficheros ajenos. Para hacerlos permanentes, <code>fstab</code> con dos opciones más: <code>_netdev</code> («espera a la red») y, en SMB, un fichero de credenciales con permisos <code>600</code> en vez de la contraseña a la vista:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>//nas/datos                       /mnt/nas  cifs  credentials=/etc/smb-nas,uid=1000,gid=1000,nofail,_netdev  0 0</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>debian-lab:/home/marcos/proyecto  /mnt/lab  nfs   defaults,nofail,_netdev                                    0 0</span></code></pre></div>
+<p>¿Cuál usar? <strong>SSHFS</strong> cuando solo tienes SSH y no administras el servidor. <strong>SMB</strong> cuando el otro lado es un NAS, un Windows o la impresora de casa. <strong>NFS</strong> cuando tú (o el laboratorio) administráis ambos lados y quieres rendimiento y permisos de verdad. Y por ventanas, los tres son la misma pantalla de <em>Conectar al servidor</em>.</p>
 </section>
-<section id="después" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="después">Después</h2>
-<p>Escribe en el cuaderno, para ti, tres respuestas: qué hito te costó más y por qué; qué harías distinto la segunda vez; y cuánto tardaste en total. Esas tres líneas y <code>proyecto.log</code> son la medida del curso.</p>
-<p>Y luego, el paso que ya no es un ejercicio: pide una cuenta en el clúster de tu universidad — o mira qué horas tiene tu grupo en la Red Española de Supercomputación. Cuando te la den, entra por SSH con tu clave, teclea <code>tmux attach || tmux new</code>, y empieza a trabajar. Ya sabes dónde estás parado.</p>
-<div class="pie-piloto">
-<p>proyecto final v0.1 · piloto — el cuaderno <code>proyecto.log</code> con tiempos por hito es el dato más valioso que puedes devolver al curso</p>
+<section id="servir-una-carpeta-desde-tu-vm-por-nfs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="servir-una-carpeta-desde-tu-vm-por-nfs">Servir una carpeta desde tu VM por NFS</h2>
+<p>Para ver NFS entero, el servidor lo puedes montar tú en <code>debian-lab</code> — con instantánea antes, como siempre:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install nfs-kernel-server</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">echo "/home/marcos/proyecto 192.168.122.0/24(rw,sync,no_subtree_check)" | sudo tee -a /etc/exports</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo exportfs -ra</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo exportfs -v</span>
+<span class="t-out">/home/marcos/proyecto  192.168.122.0/24(rw,sync,no_subtree_check)</span></code></pre>
+<p><code>/etc/exports</code> dice qué carpeta se comparte y con quién — aquí, con toda la red NAT del capítulo 7 —; <code>exportfs -ra</code> la publica. Desde tu Mint, el <code>mount -t nfs</code> de la sección anterior la engancha, y con el mismo <code>uid 1000</code> en ambas máquinas, lo que escribas en <code>/mnt/lab</code> aparece en la VM como tuyo. Es exactamente lo que verás en un clúster: tu casa está en un servidor NFS, y cada nodo de cálculo la monta.</p>
+</section>
+<section id="práctica" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
+<div class="ejercicio">
+<p><strong>Ejercicio B2.1 · A mano y solo lectura</strong></p>
+<p>Con un pendrive: desmóntalo desde el gestor de archivos, móntalo a mano en <code>/mnt/usb</code> en modo solo lectura, intenta crear un fichero dentro (debe fallar), desmonta, y vuelve a montar sin <code>ro</code>. Observa <code>findmnt /mnt/usb</code> en cada estado.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo mkdir -p /mnt/usb</code>, <code>sudo mount -o ro /dev/sdb1 /mnt/usb</code> (tu letra según <code>lsblk</code>), <code>touch /mnt/usb/prueba</code> → «sistema de ficheros de solo lectura»; <code>sudo umount /mnt/usb</code>; <code>sudo mount /dev/sdb1 /mnt/usb</code> y el <code>touch</code> funciona (en FAT/exFAT, con los permisos <code>rwxrwxrwx</code> del capítulo 6).</p>
+<p><strong>Por qué así</strong> — El montaje de solo lectura es el gesto con el que se examina un disco ajeno o dañado sin riesgo. Y verlo fallar al escribir es la mejor demostración de que la opción manda.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio B2.2 · Permanente, por las dos vías</strong></p>
+<p>Si tienes una partición de datos (o el propio pendrive, para practicar): añádele un montaje permanente primero con «Discos → Editar opciones de montaje», y mira qué línea ha escrito en <code>/etc/fstab</code> (<code>cat</code>). Después bórrala con <code>nano</code>, escríbela tú a mano con <code>nofail</code>, y compruébala con <code>sudo mount -a</code>. Copia de <code>fstab</code> antes de todo.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>«Discos» escribe algo como <code>UUID=… /mnt/datos auto nosuid,nodev, nofail,x-gvfs-show 0 0</code>. La tuya a mano: <code>UUID=… /mnt/datos ext4 defaults,nofail 0 2</code> (o <code>exfat</code> con <code>uid=1000,gid=1000</code> para un pendrive). <code>sudo mount -a</code> sin quejas y <code>findmnt /mnt/datos</code> la confirma.</p>
+<p><strong>Por qué así</strong> — Ver la línea que genera la aplicación gráfica y escribir la tuya después es la forma honesta de aprender <code>fstab</code>: entiendes cada campo y pierdes el miedo. <code>nofail</code> y <code>mount -a</code> son la red de seguridad que te separa del arranque en modo emergencia.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio B2.3 · La VM como carpeta</strong></p>
+<p>Monta la casa de <code>debian-lab</code> con SSHFS en <code>~/lab</code>, edita desde tu Mint (con el editor que quieras) el <code>informe.txt</code> del proyecto, y comprueba desde dentro de la VM (<code>ssh lab cat …</code>) que el cambio está allí. Desmonta.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sshfs lab:/home/marcos ~/lab</code>, editar <code>~/lab/proyecto/resultados/ informe.txt</code>, <code>ssh lab cat proyecto/resultados/informe.txt</code> muestra el cambio, <code>fusermount -u ~/lab</code>.</p>
+<p><strong>Por qué así</strong> — Cada escritura viajó por SSH con tu clave: el mismo túnel de <code>scp</code>, presentado como un directorio. Es la forma más cómoda de trabajar con ficheros de un servidor donde no administras nada.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio B2.4 · NFS de punta a punta (opcional)</strong></p>
+<p>Con instantánea de la VM: exporta <code>~/proyecto</code> de <code>debian-lab</code> por NFS, móntalo en tu Mint en <code>/mnt/lab</code>, crea un fichero desde cada lado y comprueba con <code>ls -l</code> que ambos aparecen como <code>marcos</code> en las dos máquinas. Hazlo permanente en <code>fstab</code> con <code>nofail,_netdev</code> y verifica con <code>mount -a</code>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Servidor: <code>nfs-kernel-server</code>, línea en <code>/etc/exports</code>, <code>exportfs -ra</code>. Cliente: <code>nfs-common</code>, <code>sudo mount -t nfs debian-lab:/home/marcos/ proyecto /mnt/lab</code>. Los ficheros son de <code>marcos</code> a ambos lados porque los dos usuarios tienen <code>uid 1000</code>. Línea de <code>fstab</code> con <code>_netdev</code> y <code>nofail</code>; <code>sudo umount /mnt/lab &amp;&amp; sudo mount -a</code> la prueba.</p>
+<p><strong>Por qué así</strong> — Has montado la infraestructura de un laboratorio en miniatura: una casa compartida por red con permisos reales. El día que en el clúster te digan «tu <code>$HOME</code> está en NFS», sabrás exactamente qué significa — y por qué tu <code>uid</code> importa.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -813,13 +829,13 @@ Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un c
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/cap12.html" class="pagination-link" aria-label="Vivir en remoto">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span>
+      <a href="../anexos/anexo-b1-scripting.html" class="pagination-link" aria-label="Scripting: bucles, condiciones y `cron`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows (o de macOS)">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA como herramienta, no como oráculo">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
