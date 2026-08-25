@@ -1,0 +1,216 @@
+# Scripting: bucles, condiciones y `cron` {#sec-anexo-b1}
+
+En el capítulo 2 renombraste cinco ficheros a mano y el curso prometió
+algo mejor; en el capítulo 3 dijimos que las tuberías transforman
+texto pero no *ejecutan una orden por cada fichero*; en el 4
+escribiste tu primer script. Este anexo cierra esa deuda: las cuatro
+piezas de bash que convierten comandos sueltos en programas — y `cron`,
+para que se ejecuten sin ti.
+
+## Variables y sustitución {.unnumbered}
+
+```terminal
+marcos@portatil:~/fisica$ dir=resultados_$(date +%F)
+marcos@portatil:~/fisica$ echo "$dir"
+resultados_2026-08-26
+marcos@portatil:~/fisica$ mkdir "$dir"
+```
+
+Dos ideas. Una variable se crea con `nombre=valor` (sin espacios
+alrededor del `=`) y se lee con `$nombre`. Y `$(comando)` ejecuta el
+comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla
+que evita el noventa por ciento de los sustos: **las variables van
+siempre entre comillas dobles** — `"$dir"` — para que un valor con
+espacios (capítulo 1) no se rompa en dos argumentos.
+
+## El bucle `for` {.unnumbered}
+
+```terminal
+marcos@portatil:~/fisica$ for f in *.csv; do echo "procesando $f"; done
+procesando run01.csv
+procesando run02.csv
+procesando run03.csv
+```
+
+`for f in LISTA; do …; done` repite el bloque una vez por elemento,
+con `$f` valiendo cada uno. La lista puede ser un comodín del
+capítulo 2 (`*.csv`), una salida de comando (`$(cat lista.txt)`) o
+palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en
+lote quitando el `_final`:
+
+```terminal
+marcos@portatil:~/fisica$ ls
+run01_final.csv  run02_final.csv  run03_final.csv
+marcos@portatil:~/fisica$ for f in *_final.csv; do mv "$f" "${f/_final/}"; done
+marcos@portatil:~/fisica$ ls
+run01.csv  run02.csv  run03.csv
+```
+
+`${f/_final/}` es una *sustitución* dentro de la variable: el valor
+de `f` con `_final` cambiado por nada. Hay una familia entera:
+`${f%.csv}` quita la extensión, `${f#run}` quita el prefijo. Antes
+de un `mv` en lote, el gesto de seguridad es cambiar `mv` por `echo
+mv` y mirar qué *haría*: la simulación en seco.
+
+## Condiciones: `if` {.unnumbered}
+
+```default
+#!/bin/bash
+# comprueba.sh — ¿existe el fichero que me pasan?
+if [ -f "$1" ]; then
+    echo "$1 existe y tiene $(wc -l < "$1") líneas"
+else
+    echo "no encuentro $1"
+    exit 1
+fi
+```
+
+`$1` es el primer argumento con que se llamó al script
+(`./comprueba.sh adquisicion.log`), `$2` el segundo, y así. `[ -f
+"$1" ]` pregunta «¿es un fichero?»; otros: `-d` directorio, `-z`
+cadena vacía, `-gt` mayor que para números. `exit 1` termina con
+código de error: es el `$?` que puedes consultar después, y lo que
+`&&` (capítulo 5) mira para decidir si continúa. Un script que
+comprueba sus entradas y falla *con mensaje* vale el doble que uno que
+simplemente revienta.
+
+## `while` y leer línea a línea {.unnumbered}
+
+```default
+#!/bin/bash
+# por cada sensor de la lista, cuenta sus errores
+while read -r sensor; do
+    n=$(grep -c "ERROR $sensor" adquisicion.log)
+    echo "$sensor: $n errores"
+done < sensores.txt
+```
+
+`while read -r linea; do …; done < fichero` recorre un fichero línea a
+línea — la forma correcta de tratar listas que vienen de otro sitio.
+Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los
+scripts son el pegamento que convierte comandos sueltos en
+procedimiento.
+
+## Un script completo {.unnumbered}
+
+Todo junto, con las dos líneas de cabecera que distinguen a un script
+serio: `set -e` (para al primer error, en vez de seguir a ciegas) y un
+uso claro cuando faltan argumentos.
+
+```default
+#!/bin/bash
+# organiza.sh — mueve a datos/ los CSV de un run y anota el registro
+set -e
+if [ $# -ne 1 ]; then
+    echo "uso: $0 CARPETA_DEL_EXPERIMENTO"
+    exit 1
+fi
+cd "$1"
+mkdir -p datos descartes
+for f in *.csv; do
+    if grep -q "sensor congelado" "$f"; then
+        mv "$f" descartes/
+    else
+        mv "$f" datos/
+    fi
+    echo "$(date +%T) $f" >> registro.log
+done
+echo "hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados"
+```
+
+Es el ejercicio del capítulo 2 hecho en un segundo y repetible mañana
+con otro experimento. `$#` es el número de argumentos; `$0`, el nombre
+del propio script. Con `chmod u+x` y en tu `~/bin` (capítulo 5), es
+una herramienta tuya.
+
+## `cron`: que se ejecute sin ti {.unnumbered}
+
+`cron` ejecuta comandos a horas fijas. Tu tabla se edita con
+`crontab -e` (la primera vez pregunta qué editor: `nano`), y cada
+línea son cinco campos de tiempo y un comando:
+
+```default
+# min hora día mes díasemana   comando
+  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/
+   0   8   *   *    1          /home/marcos/bin/informe.sh >> /home/marcos/informes.log 2>&1
+```
+
+La primera línea copia tu carpeta de física al servidor del capítulo
+11 cada noche a las 2:30 — una copia de seguridad que ya no depende
+de acordarte. La segunda lanza tu informe los lunes a las 8. Tres
+reglas de `cron`: **rutas absolutas** (no hay `cd`, no hay tu `PATH`
+de la terminal), **redirige la salida** a un fichero (si no, se pierde
+o se convierte en correo), y prueba el comando *a mano* antes de
+programarlo. En sistemas con `systemd` existe el equivalente moderno —
+los *timers* — que verás en servidores; la idea es la misma.
+
+## Práctica {.unnumbered}
+
+::: {.ejercicio}
+**Ejercicio B1.1 · La deuda del capítulo 2**
+
+Crea una carpeta con `touch run0{1..5}_final.csv` (las llaves son otro
+truco de bash: generan la secuencia) y renómbralos en lote quitando
+`_final` — primero en seco con `echo mv`, luego de verdad.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`for f in *_final.csv; do echo mv "$f" "${f/_final/}"; done` enseña las
+cinco órdenes; sin el `echo`, las ejecuta. `ls` confirma.
+
+**Por qué así** — El ensayo en seco es el hábito que convierte un
+bucle con `mv` (o `rm`) de peligro en herramienta. Te costó cinco
+renombrados en el capítulo 2; con cinco mil costaría lo mismo.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio B1.2 · Un script con criterio**
+
+Escribe `resumen.sh` que reciba un fichero de log como argumento,
+compruebe que existe (y proteste si no), y escriba cuántas líneas
+`ERROR`, `WARN` e `INFO` tiene — con un bucle sobre los tres niveles.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+```
+#!/bin/bash
+set -e
+[ -f "$1" ] || { echo "uso: $0 FICHERO.log"; exit 1; }
+for nivel in ERROR WARN INFO; do
+    echo "$nivel: $(grep -c " $nivel " "$1")"
+done
+```
+
+**Por qué así** — Tres piezas del anexo en ocho líneas: argumento,
+comprobación con salida de error, y bucle con una tubería dentro.
+`[ … ] || { …; }` es la forma compacta de «si no, protesta y sal».
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio B1.3 · Copia nocturna (opcional)**
+
+Programa con `cron` una copia diaria de tu carpeta de física a
+`debian-lab` con `rsync`, a una hora en la que el portátil suela estar
+encendido. Prueba primero el comando a mano; después, cambia la hora a
+«dentro de dos minutos» para ver que `cron` lo ejecuta, y déjalo en
+su hora definitiva.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`crontab -e` y una línea como `15 22 * * * rsync -a /home/marcos/fisica/
+lab:~/copia_fisica/ >> /home/marcos/copia.log 2>&1`. La prueba «dentro
+de dos minutos» confirma que la clave SSH (capítulo 11) funciona sin
+ti — `cron` no puede teclear frases de paso, así que si pusiste una,
+hará falta un agente de claves o una clave sin frase solo para esto.
+
+**Por qué así** — Es el primer proceso *automático* de tu vida como
+administrador: una copia que ocurre aunque lo olvides. El detalle de
+la frase de paso es el clásico tropiezo de las tareas programadas —
+y ahora ya lo conoces.
+:::
+::::
+:::

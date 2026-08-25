@@ -1,0 +1,83 @@
+# La IA como herramienta, no como oráculo {#sec-anexo-e1}
+
+Este anexo nace de una frase de la encuesta con la que se diseñó el
+curso: «cuando algo falla, le pregunto a una IA y copio-pego sin
+entender». No hay nada malo en preguntar — este propio curso te ha
+animado a hacerlo en el capítulo 3. Lo malo es el *copiar-pegar sin
+entender*, y contra eso tienes ahora doce capítulos de munición. Aquí
+está el protocolo.
+
+## Por qué no se copia a ciegas {.unnumbered}
+
+Una IA no ve tu máquina. No sabe qué distro tienes, qué versión, qué
+hay en ese directorio, si ese disco es el tuyo. Genera comandos
+*plausibles* — y a veces inventa opciones que no existen, o mezcla la
+sintaxis de dos herramientas. Tres consecuencias reales que este curso
+te ha enseñado a reconocer: un `rm -rf` con la ruta equivocada
+(capítulo 2), un `sudo` que no entiendes (capítulo 4), y un
+`curl … | bash` — descargar un script de internet y ejecutarlo sin
+mirarlo — que es, literalmente, dejar que un desconocido teclee en tu
+terminal con tus permisos.
+
+## El protocolo {.unnumbered}
+
+1. **Pregunta con contexto.** «Linux Mint 22, quiero renombrar todos
+   los `.csv` de esta carpeta quitando `_final`; he probado `mv` uno a
+   uno». Cuanto más concreto, menos inventa.
+2. **Lee el comando con la anatomía del capítulo 1**: programa,
+   opciones, argumentos. Si hay una tubería, pieza a pieza (capítulo
+   3). Si hay `sudo`, `rm`, `dd`, `>` o `|`, subraya cada uno.
+3. **Verifica lo que no reconozcas** con `man` o `--help` (capítulo 1).
+   Una opción que no aparece en `man` no existe — la IA la inventó.
+4. **Clasifica el riesgo**: *lectura* (`ls`, `grep`, `cat`, `df`…) —
+   ejecuta; *escritura* (`mv`, `cp`, `>`, `chmod`) — copia de seguridad
+   o ensayo en seco con `echo`; *destructivo o privilegiado* (`rm -r`,
+   `sudo`, `dd`, `mkfs`, `curl | bash`) — solo si lo entiendes entero,
+   y la primera vez en la VM (capítulo 7).
+5. **Ejecuta en el sitio adecuado** y **contrasta el resultado** con lo
+   que esperabas — `ls` después de un `mv`, `df` después de limpiar. Si
+   no cuadra, para: no pidas «otro comando» hasta saber qué pasó.
+
+## Para qué es excelente {.unnumbered}
+
+- **Explicar un comando ajeno.** Al revés de lo habitual: pega el
+  comando de un foro y pregunta «¿qué hace exactamente, pieza a
+  pieza?». Contrasta con `man`.
+- **Traducir un mensaje de error.** Pega la salida completa (el
+  `2>` del capítulo 3 sirve para guardarla) y pregunta qué significa —
+  no «cómo lo arreglo».
+- **Construir tuberías y expresiones** que no recuerdas: «`grep` de
+  las líneas que empiezan por fecha y tienen ERROR». Luego, `head`
+  para comprobar (capítulo 3).
+- **Recordar sintaxis**: el `for` de bash, los campos de `cron`, las
+  opciones de `rsync`. Es el `man` con lenguaje natural.
+
+## Para qué no {.unnumbered}
+
+- **Saber el estado de tu sistema.** Eso lo sabes tú con `ip a`,
+  `lsblk`, `df`, `which python`. Pregunta después de mirar, no antes.
+- **Tomar decisiones irreversibles.** «¿Borro esta partición?» no se
+  le pregunta a nadie que no vea tu `lsblk`.
+- **Sustituir el cuaderno.** Un comando que funcionó y no anotaste es
+  un comando que volverás a pedir.
+
+::: {.aviso}
+**△ Cuidado · Las tres frases que deben encender la alarma**
+
+«Ejecuta esto con `sudo` y debería funcionar» — sin explicar qué
+hace. «Copia esto en la terminal: `curl … | sudo bash`» — un script
+remoto con todos los poderes. Y «prueba `rm -rf` en esa carpeta para
+limpiar» — sin haber visto qué contiene. Ante cualquiera de las tres,
+el protocolo entero, sin saltarse pasos. El curso no te ha dado
+comandos: te ha dado el criterio para leerlos. Úsalo.
+:::
+
+## Un ejemplo completo {.unnumbered}
+
+Pregunta: «Debian 13 sin escritorio, quiero ver qué carpetas de mi
+casa ocupan más espacio». Respuesta típica: `du -sh ~/* | sort -rh |
+head`. Lectura: `du` (capítulo 6) con `-s` y `-h`; tubería a `sort`
+con `-r` y `-h` — `man sort` confirma que `-h` ordena magnitudes
+humanas —; `head` para diez líneas. Riesgo: lectura pura. Ejecutas.
+Contrastas: las cifras cuadran con `df`. Treinta segundos, entendido,
+anotado en el cuaderno. Así se usa una IA cuando se sabe Linux.

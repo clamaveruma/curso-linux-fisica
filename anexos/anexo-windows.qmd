@@ -1,4 +1,67 @@
-# Vengo de Windows {#sec-anexo-windows}
+# Vengo de Windows (o de macOS) {#sec-anexo-windows}
 
-<!-- Para la versión publicada: preparar entorno con VirtualBox o WSL. -->
-Pendiente de redacción tras el piloto.
+El curso está escrito para un Linux de escritorio — Mint, Ubuntu o
+parientes — instalado en el ordenador. Si tu máquina tiene Windows o
+macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y
+conviene elegir bien, porque no cubren lo mismo.
+
+## Los dos caminos {.unnumbered}
+
+| | **A · Un Mint completo en VirtualBox** | **B · WSL2 (Ubuntu dentro de Windows)** |
+|---|---|---|
+| Qué es | una máquina virtual con Linux Mint entero, escritorio incluido | una terminal Ubuntu integrada en Windows, sin escritorio |
+| Instalar | 30–40 min; ISO de Mint + VirtualBox | 5 min; una orden en PowerShell |
+| Bloques A y B (caps. 1–6) | ✔ todo | ✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica |
+| Bloque C (caps. 7–8) | ✔ con un matiz (abajo) | ✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado |
+| Bloques D y E (caps. 9–12) | ✔ | ✔ (la red es la de Windows; SSH funciona igual) |
+| Recomendado para | seguir el curso entero como está escrito | empezar hoy con la terminal, o si tu PC va justo de RAM |
+
+Si puedes, el **camino A**: es un Linux de verdad — con su `apt`, su
+`systemd`, su `lsblk` — y todo el curso encaja. Con Windows en un
+Mac con chip Apple, el equivalente de VirtualBox es **UTM** (gratuito)
+y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que
+la publica).
+
+## Camino A: Mint en VirtualBox {.unnumbered}
+
+1. Descarga **VirtualBox** (virtualbox.org) e instálalo como cualquier
+   programa. Descarga la ISO de **Linux Mint** (linuxmint.com, edición
+   Cinnamon) y verifica su huella como en el capítulo 7 — en
+   PowerShell: `Get-FileHash linuxmint-22.iso -Algorithm SHA256`.
+2. **Nueva máquina**: nombre `mint`, tipo Linux / Ubuntu (64-bit),
+   4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de
+   40 GB. Elige la ISO como medio de arranque.
+3. Arranca. Mint entra en modo *live* — un escritorio de prueba —; el
+   icono **Install Linux Mint** lanza el instalador. Aquí sí vale
+   «borrar el disco e instalar»: el disco es el fichero de la VM, y
+   todo lo que aprenderás en el capítulo 8 sobre particionar lo harás
+   después, en otra VM dentro de esta.
+4. Tras reiniciar, en el menú *Dispositivos → Insertar imagen de CD de
+   las Guest Additions* e instálalas: dan pantalla completa,
+   portapapeles compartido y carpetas compartidas con Windows.
+5. Ya estás en el capítulo 1. Cuando llegues al bloque C, activa en
+   VirtualBox *Configuración → Sistema → Procesador → Habilitar VT-x/
+   AMD-V anidado* para que KVM funcione dentro del Mint virtual. Si tu
+   CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox
+   directamente en Windows: los conceptos son idénticos, y la caja
+   «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.
+
+## Camino B: WSL2 {.unnumbered}
+
+En PowerShell como administrador: `wsl --install` — instala WSL2 y un
+Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese
+momento, la aplicación *Ubuntu* del menú de inicio es tu terminal, y
+los capítulos 1 a 5 funcionan tal cual (`sudo apt install`, `nano`,
+tuberías, permisos, `htop`). Tres avisos honestos: tus ficheros de
+Windows están en `/mnt/c/…`, más lentos que tu casa Linux; `lsblk` y
+el arranque del capítulo 6 no describen tu máquina, sino el disco
+virtual de WSL — léelo como teoría; y para los bloques C en adelante
+querrás el camino A.
+
+## Lo que no cambia {.unnumbered}
+
+Sea cual sea el camino: cuaderno con `script`, ejercicios en escalera,
+y la regla de seguridad — lo destructivo, en una VM. La única
+diferencia real es que, además de aprender Linux, aprenderás dónde
+termina Windows y dónde empieza la máquina de mentira. Y cuando
+quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.
