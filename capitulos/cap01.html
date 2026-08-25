@@ -497,6 +497,16 @@ Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide 
 <section id="el-historial-nunca-escribas-nada-dos-veces" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="el-historial-nunca-escribas-nada-dos-veces"><span class="header-section-number">1.5.2</span> El historial: nunca escribas nada dos veces</h3>
 <p>La flecha <kbd>↑</kbd> recupera comandos anteriores, uno a uno. Pero el gesto profesional es <kbd>Ctrl</kbd>+<kbd>R</kbd>: búsqueda inversa. Púlsalo, teclea un fragmento de cualquier comando que hayas usado («des», por ejemplo), y aparecerá el más reciente que lo contenga. <kbd>Intro</kbd> lo ejecuta; <kbd>Ctrl</kbd>+<kbd>R</kbd> otra vez busca más atrás. El comando <code>history</code> te enseña la lista completa numerada.</p>
+<div id="fig-superpoderes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A la izquierda, el tabulador completa cd Des en cd Descargas; a la derecha, Ctrl+R busca en el historial por un fragmento">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-superpoderes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-superpoderes.svg" class="img-fluid figure-img" alt="A la izquierda, el tabulador completa cd Des en cd Descargas; a la derecha, Ctrl+R busca en el historial por un fragmento">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-superpoderes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.8: Dos teclas que separan a quien sufre la terminal de quien la habita. Ninguna de las dos te pide memorizar nada.
+</figcaption>
+</figure>
+</div>
 <div class="por-dentro">
 <p><strong>◉ Por dentro · Dónde vive tu memoria</strong></p>
 <p>El historial no es magia: bash lo va guardando en un fichero oculto llamado <code>.bashhistory</code>… casi: <code>.bash_history</code>, dentro de tu casa. Los ficheros cuyo nombre empieza por punto están ocultos por convención — <code>ls</code> no los muestra salvo que le pidas <code>ls -a</code> (<em>all</em>). Pruébalo en <code>~</code>: descubrirás docenas de ficheros de configuración que llevan años viviendo contigo sin que los hayas visto. En el capítulo 4 aprenderás qué hacen.</p>
@@ -511,6 +521,16 @@ Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide 
 <span class="t-out">Lista información sobre los FICHEROs...</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">man ls</span></code></pre>
 <p><code>--help</code> da el resumen rápido en pantalla. <code>man</code> (<em>manual</em>) abre la página completa en un visor con sus propias teclas: <kbd>↑</kbd>/<kbd>↓</kbd> y <kbd>Espacio</kbd> para moverte, <kbd>/</kbd> para <em>buscar</em> dentro (escribe el término y <kbd>Intro</kbd>; <kbd>n</kbd> salta a la siguiente aparición), y <kbd>q</kbd> para salir. Esa tecla <kbd>/</kbd> convierte cada página de manual en un documento consultable en segundos.</p>
+<div id="fig-teclas-man" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Una página de manual con las teclas para moverse, buscar con la barra, saltar a la siguiente aparición con n y salir con q">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-teclas-man-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap01/fig-teclas-man.svg" class="img-fluid figure-img" alt="Una página de manual con las teclas para moverse, buscar con la barra, saltar a la siguiente aparición con n y salir con q">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-teclas-man-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.9: Las cuatro teclas del visor. Las mismas valen para <code>less</code> y para <code>htop</code> — las verás durante todo el curso.
+</figcaption>
+</figure>
+</div>
 <div class="historia">
 <p><strong>◷ Historia · El manual nació con el sistema</strong></p>
 <p>Unix nació en 1969 en los Bell Labs, escrito por Ken Thompson y Dennis Ritchie en un PDP-7 arrinconado — el proyecto oficial de sistema operativo del laboratorio acababa de cancelarse, y ellos siguieron por gusto. En 1971, su jefe puso una condición para comprarles una máquina mejor: que documentaran el sistema. Así nació el <em>Unix Programmer’s Manual</em>, y con él la costumbre, viva 55 años después, de que cada programa lleve su página <code>man</code>. La notación <code>ls(1)</code> que verás por ahí significa «la página de <code>ls</code> en la sección 1 del manual» — la numeración original de 1971.</p>
@@ -521,7 +541,7 @@ Figura&nbsp;1.7: Mismo destino, dos sistemas de referencia. La absoluta se mide 
 <img src="../imagenes/cap01/thompson-ritchie-1973.jpg" class="img-fluid figure-img" style="width:65.0%" alt="Fotografía en blanco y negro de Ken Thompson y Dennis Ritchie">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thompson-ritchie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1.8: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores de Unix, hacia 1973 — con el manual ya en marcha. <em>Foto: dominio público, Wikimedia Commons.</em>
+Figura&nbsp;1.10: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores de Unix, hacia 1973 — con el manual ya en marcha. <em>Foto: dominio público, Wikimedia Commons.</em>
 </figcaption>
 </figure>
 </div>
