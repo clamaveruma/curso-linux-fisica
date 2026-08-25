@@ -1,0 +1,41 @@
+<svg viewBox="0 0 700 260" width="700" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Qué pasa al escribir un nombre: la cadena de consultas DNS hasta obtener la dirección IP">
+  <defs>
+    <marker id="fdn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+    <marker id="fdr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <rect x="30" y="30" width="200" height="44" rx="4" fill="#0E1512"/>
+    <text x="130" y="57" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">$ ping debian.org</text>
+    <text x="130" y="92" font-size="9.5" fill="#9C8F79" text-anchor="middle">tu máquina solo sabe hablar con números</text>
+    <!-- pregunta al resolver -->
+    <line x1="235" y1="52" x2="300" y2="52" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fdn)"/>
+    <text x="268" y="42" font-size="9" fill="#6A5F4D" text-anchor="middle">«¿debian.org?»</text>
+    <rect x="308" y="30" width="150" height="44" rx="4" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.4"/>
+    <text x="383" y="49" font-size="11" fill="#9A6A14" text-anchor="middle" font-weight="600">tu resolver</text>
+    <text x="383" y="65" font-size="9" fill="#6A5F4D" text-anchor="middle">el router, o 9.9.9.9</text>
+    <!-- cadena -->
+    <line x1="383" y1="80" x2="383" y2="108" stroke="#6A5F4D" stroke-width="1.4" marker-end="url(#fdn)"/>
+    <rect x="290" y="112" width="186" height="30" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.1"/>
+    <text x="383" y="131" font-size="9.5" fill="#2B2318" text-anchor="middle">raíz: «.org lo lleva aquel»</text>
+    <line x1="383" y1="146" x2="383" y2="164" stroke="#6A5F4D" stroke-width="1.4" marker-end="url(#fdn)"/>
+    <rect x="290" y="168" width="186" height="30" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.1"/>
+    <text x="383" y="187" font-size="9.5" fill="#2B2318" text-anchor="middle">.org: «debian lo lleva aquel»</text>
+    <line x1="383" y1="202" x2="383" y2="220" stroke="#6A5F4D" stroke-width="1.4" marker-end="url(#fdn)"/>
+    <rect x="290" y="224" width="186" height="30" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="383" y="243" font-size="9.5" fill="#24564B" text-anchor="middle" font-weight="600">debian.org: «151.101.66.132»</text>
+    <!-- respuesta -->
+    <path d="M300 60 C 260 70, 240 80, 180 80" fill="none" stroke="#2F6F62" stroke-width="1.8" marker-end="url(#fdr)"/>
+    <text x="220" y="112" font-size="10" fill="#2F6F62" text-anchor="middle" font-weight="600">151.101.66.132</text>
+    <text x="220" y="126" font-size="9" fill="#9C8F79" text-anchor="middle">en unos 20 ms</text>
+    <!-- nota -->
+    <text x="590" y="60" font-size="9.5" fill="#6A5F4D" text-anchor="middle">tres preguntas en cascada,</text>
+    <text x="590" y="74" font-size="9.5" fill="#6A5F4D" text-anchor="middle">de lo general a lo concreto:</text>
+    <text x="590" y="88" font-size="9.5" fill="#6A5F4D" text-anchor="middle">como buscar un despacho</text>
+    <text x="590" y="102" font-size="9.5" fill="#6A5F4D" text-anchor="middle">preguntando en conserjería,</text>
+    <text x="590" y="116" font-size="9.5" fill="#6A5F4D" text-anchor="middle">luego en la planta,</text>
+    <text x="590" y="130" font-size="9.5" fill="#6A5F4D" text-anchor="middle">luego en el pasillo</text>
+    <text x="590" y="170" font-size="9.5" fill="#9C8F79" text-anchor="middle">el resolver se lo apunta</text>
+    <text x="590" y="184" font-size="9.5" fill="#9C8F79" text-anchor="middle">(caché): la segunda vez</text>
+    <text x="590" y="198" font-size="9.5" fill="#9C8F79" text-anchor="middle">responde al instante</text>
+  </g>
+</svg>
