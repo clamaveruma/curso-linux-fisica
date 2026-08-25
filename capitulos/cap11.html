@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; SSH: entrar en otra máquina – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-c1-pc-real.html" rel="next">
+<link href="../capitulos/cap10.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap11.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Instalar Linux de verdad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-cliente-servidor" id="toc-sec-cliente-servidor" class="nav-link active" data-scroll-target="#sec-cliente-servidor"><span class="header-section-number">11.1</span> Cliente y servidor</a></li>
+  <li><a href="#sec-nivel-0" id="toc-sec-nivel-0" class="nav-link" data-scroll-target="#sec-nivel-0"><span class="header-section-number">11.2</span> Nivel 0: tu propia máquina como servidor</a></li>
+  <li><a href="#sec-claves" id="toc-sec-claves" class="nav-link" data-scroll-target="#sec-claves"><span class="header-section-number">11.3</span> Claves en vez de contraseñas</a></li>
+  <li><a href="#sec-config" id="toc-sec-config" class="nav-link" data-scroll-target="#sec-config"><span class="header-section-number">11.4</span> Un nombre para cada servidor: <code>~/.ssh/config</code></a></li>
+  <li><a href="#sec-copiar" id="toc-sec-copiar" class="nav-link" data-scroll-target="#sec-copiar"><span class="header-section-number">11.5</span> Mover ficheros: <code>scp</code> y <code>rsync</code></a></li>
+  <li><a href="#sec-comando-remoto" id="toc-sec-comando-remoto" class="nav-link" data-scroll-target="#sec-comando-remoto"><span class="header-section-number">11.6</span> Ejecutar allí, sin quedarse</a></li>
+  <li><a href="#sec-nivel-2" id="toc-sec-nivel-2" class="nav-link" data-scroll-target="#sec-nivel-2"><span class="header-section-number">11.7</span> Nivel 2: cuando el servidor es de verdad</a></li>
+  <li><a href="#sec-practica-11" id="toc-sec-practica-11" class="nav-link" data-scroll-target="#sec-practica-11"><span class="header-section-number">11.8</span> Práctica: la escalera</a></li>
+  <li><a href="#sec-quiz-11" id="toc-sec-quiz-11" class="nav-link" data-scroll-target="#sec-quiz-11"><span class="header-section-number">11.9</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap11" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Bloque E: trabajar en remoto. Todo lo anterior conducía aquí — un servidor instalado por ti, con nombre, con una puerta abierta, y el mapa de cómo llegar. Hoy entras por esa puerta. Aprendes el comando con el que un físico computacional pasa media vida, sustituyes las contraseñas por claves — más seguras y más cómodas a la vez —, y mueves ficheros entre máquinas como si estuvieran en la misma mesa. Primero contigo mismo, luego con tu VM, y después con cualquier servidor del mundo.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 8 y 10</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Qué son el cliente y el servidor SSH, y qué pasa exactamente al conectar por primera vez (la huella, <code>known_hosts</code>).</li>
+<li>Convertir tu propia máquina en servidor con <code>openssh-server</code>, y entrar en ella desde ella misma.</li>
+<li>Crear un par de claves ed25519, instalarlo en el servidor con <code>ssh-copy-id</code> y no volver a teclear una contraseña.</li>
+<li>Bautizar servidores en <code>~/.ssh/config</code> para conectar con una palabra.</li>
+<li>Copiar ficheros entre máquinas con <code>scp</code> y sincronizar carpetas con <code>rsync</code>.</li>
+<li>Ejecutar un comando en otra máquina sin abrir sesión — y por qué eso cambia tu forma de trabajar.</li>
+<li>Qué cambia cuando el servidor es de verdad: la universidad, una nube, o tu casa desde fuera.</li>
+</ul>
+</div>
+<section id="sec-cliente-servidor" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-cliente-servidor"><span class="header-section-number">11.1</span> Cliente y servidor</h2>
+<p><strong>SSH</strong> (<em>Secure Shell</em>) es un shell — el del capítulo 1 — que corre en <em>otra</em> máquina, con tu teclado y tu pantalla conectados a él por la red, cifrado de punta a punta. Tiene dos mitades: el <strong>servidor</strong> (<code>sshd</code>, el que escucha en el puerto 22 que viste ayer) y el <strong>cliente</strong> (<code>ssh</code>, el comando que tecleas). Tu <code>debian-lab</code> lleva el servidor desde la instalación; tu Mint trae el cliente de serie. Y gracias al <code>/etc/hosts</code> de ayer, la máquina tiene nombre:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@debian-lab</span>
+<span class="t-out">The authenticity of host 'debian-lab (192.168.122.15)' can't be established.</span>
+<span class="t-out">ED25519 key fingerprint is SHA256:kX9v2Lm4pQ7rT1sW8yZaBcDeFgHiJkLmNoPqRsTuVwX.</span>
+<span class="t-out">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span>
+<span class="t-out">Warning: Permanently added 'debian-lab' (ED25519) to the list of known hosts.</span>
+<span class="t-out">marcos@debian-lab's password:</span>
+<span class="t-out">Linux debian-lab 6.12.0-amd64 #1 SMP Debian 6.12.41-1 x86_64</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">hostname</span>
+<span class="t-out">debian-lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span>
+<span class="t-out">Connection to debian-lab closed.</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span></code></pre>
+<p>Léelo con calma, porque cada línea enseña algo. La pregunta de la <strong>huella</strong> (<em>fingerprint</em>) solo aparece la primera vez: SSH no conoce a esa máquina y te pide que confirmes que es quien dice ser; al decir <code>yes</code>, apunta su huella en <code>~/.ssh/known_hosts</code> y a partir de ahí la reconoce sola. (Si algún día esa huella <em>cambia</em>, SSH se negará a conectar con un aviso en mayúsculas: o han reinstalado el servidor, o alguien se está haciendo pasar por él. Nunca se ignora.) Después, la contraseña de tu usuario <em>en el servidor</em>, y el prompt cambia: <strong><code>marcos@debian-lab</code></strong>. Tu terminal está ahora en la otra máquina — cada comando que teclees se ejecuta allí, con sus ficheros, sus permisos, su <code>apt</code>. <code>exit</code> te devuelve a casa. Ese cambio de prompt es tu brújula del bloque E: mira siempre dónde estás antes de teclear.</p>
+<div class="historia">
+<p><strong>◷ Historia · Del teléfono al cifrado</strong></p>
+<p>Entrar en un ordenador lejano es más viejo que internet: en los 70 se hacía colgando el auricular del teléfono en un <em>acoplador acústico</em> que convertía los bits en pitidos, a 300 bits por segundo — un folio de texto por minuto. Los protocolos de entonces, <code>telnet</code> y <code>rlogin</code>, enviaban tu contraseña tal cual por la línea; nadie pensó que importara hasta que importó: en 1995, tras descubrir que alguien había pinchado la red de la Universidad de Helsinki y estaba recolectando contraseñas, el investigador Tatu Ylönen escribió en unos meses un sustituto cifrado y lo liberó. Lo llamó Secure Shell. Cuatro años después el proyecto OpenBSD lo reescribió como software libre — OpenSSH — y es el que corre hoy en tu <code>debian-lab</code>, en el clúster de la universidad y en cada servidor de cada nube.</p>
+</div>
+<div id="fig-acoplador" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Acoplador acústico con un auricular de teléfono apoyado">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acoplador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/acoplador-acustico.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Acoplador acústico con un auricular de teléfono apoyado">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoplador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.1: Un acoplador acústico de los años 70: el auricular del teléfono se encajaba en las dos ventosas, y por ahí viajaba tu sesión — a 300 bits por segundo y sin cifrar. <em>Foto: G. Edward Johnson, dominio público, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-nivel-0" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-nivel-0"><span class="header-section-number">11.2</span> Nivel 0: tu propia máquina como servidor</h2>
+<p>Antes de irte lejos, el experimento más corto posible: convertir tu Mint en servidor y entrar en él <em>desde él mismo</em>. Suena absurdo, pero tiene dos utilidades — practicar sin red de por medio, y abrir tu portátil a otras máquinas de tu casa (o a tu móvil, con cualquier app de SSH):</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install openssh-server</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">systemctl status ssh | head -3</span>
+<span class="t-out">● ssh.service - OpenBSD Secure Shell server</span>
+<span class="t-out">     Loaded: loaded (/usr/lib/systemd/system/ssh.service; enabled)</span>
+<span class="t-out">     Active: active (running) since Tue 2026-08-25 18:40:02 CEST</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@localhost</span>
+<span class="t-out">marcos@localhost's password:</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span></code></pre>
+<p><code>localhost</code> es el <code>127.0.0.1</code> del capítulo 9: tú mismo. El prompt no cambia — estás en la misma máquina — pero la sesión es una sesión SSH completa, cifrada y con servidor en medio.</p>
+<div id="fig-tres-niveles" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Escalera de tres niveles: localhost, la máquina virtual debian-lab y un host real de la universidad">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tres-niveles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/fig-tres-niveles.svg" class="img-fluid figure-img" alt="Escalera de tres niveles: localhost, la máquina virtual debian-lab y un host real de la universidad">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tres-niveles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.2: Los tres niveles del capítulo. El curso se escribe contra el nivel 1; el 2 es para quien tenga dónde.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-claves" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-claves"><span class="header-section-number">11.3</span> Claves en vez de contraseñas</h2>
+<p>Teclear la contraseña en cada conexión es incómodo, y en un servidor expuesto a internet es peligroso: hay robots probando contraseñas en el puerto 22 de todas las máquinas del mundo, a todas horas. La solución es a la vez más cómoda y más segura, y es física de la buena: un <strong>par de claves</strong>. La <strong>privada</strong> se queda en tu máquina y no sale de ella jamás; la <strong>pública</strong> se regala a cada servidor en el que quieras entrar. El servidor te lanza un reto que solo la privada puede resolver, comprueba la respuesta con la pública, y te deja pasar. Ninguna contraseña viaja; ningún secreto se copia.</p>
+<div id="fig-ssh-claves" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del par de claves SSH: la privada permanece en el cliente, la pública se copia al servidor en authorized_keys">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ssh-claves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/fig-ssh-claves.svg" class="img-fluid figure-img" alt="Esquema del par de claves SSH: la privada permanece en el cliente, la pública se copia al servidor en authorized_keys">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ssh-claves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comparte; la llave, nunca.
+</figcaption>
+</figure>
+</div>
+<p>Tres comandos y no vuelves a teclear una contraseña:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh-keygen -t ed25519 -C "marcos@portatil"</span>
+<span class="t-out">Generating public/private ed25519 key pair.</span>
+<span class="t-out">Enter file in which to save the key (/home/marcos/.ssh/id_ed25519):</span>
+<span class="t-out">Enter passphrase (empty for no passphrase):</span>
+<span class="t-out">Your identification has been saved in /home/marcos/.ssh/id_ed25519</span>
+<span class="t-out">Your public key has been saved in /home/marcos/.ssh/id_ed25519.pub</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh-copy-id marcos@debian-lab</span>
+<span class="t-out">marcos@debian-lab's password:</span>
+<span class="t-out">Number of key(s) added: 1</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@debian-lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span></code></pre>
+<p><code>ssh-keygen</code> crea el par (<code>ed25519</code> es el algoritmo moderno: claves cortas, rápidas, seguras). Pon una <strong>frase de paso</strong> (<em>passphrase</em>) cuando la pida: es la contraseña <em>de la clave</em>, por si alguien te roba el portátil; tu escritorio la recuerda durante la sesión, así que solo la escribirás una vez al día. <code>ssh-copy-id</code> hace el reparto: entra con tu contraseña una última vez y deja tu clave pública en el servidor, en <code>~/.ssh/authorized_keys</code>. Y la tercera línea es el premio: dentro sin preguntar nada.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Los permisos vuelven a mandar</strong></p>
+<p>Mira en <code>debian-lab</code>: <code>ls -la ~/.ssh</code> → <code>drwx------</code> para la carpeta y <code>-rw-------</code> para <code>authorized_keys</code>. Y en tu Mint, <code>ls -l ~/.ssh/id_ed25519</code> → <code>-rw-------</code>. SSH <strong>se niega a usar claves que otros puedan leer</strong>: si un día tu clave «deja de funcionar» tras copiarla o restaurarla, el diagnóstico es casi siempre <code>chmod 600</code> sobre la privada y <code>chmod 700</code> sobre <code>~/.ssh</code>. El capítulo 4 no era teoría: es la razón por la que tu llave está a salvo de los demás usuarios de la máquina.</p>
+</div>
+</section>
+<section id="sec-config" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-config"><span class="header-section-number">11.4</span> Un nombre para cada servidor: <code>~/.ssh/config</code></h2>
+<p>Con varias máquinas — la VM, la universidad, un servidor de cálculo — recordar usuarios, direcciones y puertos cansa. <code>~/.ssh/config</code> es la agenda de SSH: un fichero de texto (¿qué si no?) que crea alias. <code>nano ~/.ssh/config</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Host lab</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    HostName debian-lab</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    User marcos</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Host uni</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    HostName servidor.uma.es</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    User m.garcia</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Port 22</span></code></pre></div>
+<p>Desde ahora, <code>ssh lab</code> basta — y también vale para <code>scp</code> y <code>rsync</code>. Cuando la universidad te dé una cuenta, será una entrada más en esta agenda, y todo lo que sigue funcionará igual con <code>uni</code> que con <code>lab</code>.</p>
+</section>
+<section id="sec-copiar" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-copiar"><span class="header-section-number">11.5</span> Mover ficheros: <code>scp</code> y <code>rsync</code></h2>
+<p>Copiar entre máquinas usa la misma gramática que <code>cp</code> del capítulo 2, con un <code>máquina:</code> delante de la ruta remota:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp adquisicion.log lab:~/</span>
+<span class="t-out">adquisicion.log                          100%  298KB  41.2MB/s   00:00</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp -r experimento-pendulo lab:~/</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp lab:~/informe.txt .</span></code></pre>
+<p>Subir, subir una carpeta (<code>-r</code>), bajar: tres formas del mismo gesto. Para carpetas grandes que cambian — los resultados de una simulación que vas recogiendo — el profesional es <strong><code>rsync</code></strong>: copia solo lo que ha cambiado, se puede interrumpir y reanudar, y muestra el progreso:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">rsync -av --progress simulaciones/ lab:~/simulaciones/</span>
+<span class="t-out">sending incremental file list</span>
+<span class="t-out">run07.csv</span>
+<span class="t-out">        1,204,112 100%   38.12MB/s    0:00:00</span>
+<span class="t-out">sent 1,204,589 bytes  received 42 bytes  2,409,262.00 bytes/sec</span></code></pre>
+<p><code>-a</code> conserva fechas y permisos, <code>-v</code> cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: <strong>la barra final importa</strong>. <code>simulaciones/</code> (con barra) sincroniza <em>el contenido</em> de la carpeta; <code>simulaciones</code> (sin barra) copia <em>la carpeta entera</em> dentro del destino. La segunda vez que ejecutes el mismo <code>rsync</code> tardará un segundo: solo viaja lo nuevo.</p>
+<div class="truco">
+<p><strong>✚ Truco · Arrastrar y soltar por SSH</strong></p>
+<p>El gestor de archivos de Mint sabe hablar SSH: en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe <code>sftp://debian-lab/home/marcos</code> y verás la casa del servidor como una carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el primo de <code>scp</code> que viaja por el mismo túnel. Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día.</p>
+</div>
+</section>
+<section id="sec-comando-remoto" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="sec-comando-remoto"><span class="header-section-number">11.6</span> Ejecutar allí, sin quedarse</h2>
+<p>El detalle que convierte SSH de «terminal lejana» en herramienta de trabajo: puedes pedirle a otra máquina que ejecute <strong>un comando</strong> y te devuelva la salida, sin abrir sesión:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab hostname</span>
+<span class="t-out">debian-lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab "grep -c ERROR adquisicion.log"</span>
+<span class="t-out">108</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab df -h / | tail -1</span>
+<span class="t-out">/dev/vda2         17G   1,4G   15G   9% /</span></code></pre>
+<p>Ahí están los tres bloques anteriores dándose la mano: el <code>grep</code> del capítulo 3 corriendo en el servidor del capítulo 8, con el resultado llegando a tu terminal por la red del bloque D — y ese <code>| tail -1</code> se ejecuta <em>en tu Mint</em>, sobre lo que el servidor devolvió. Cuando tengas una simulación en un clúster, «¿ha terminado?» será <code>ssh cluster ls resultados/</code>, sin moverte de tu editor.</p>
+</section>
+<section id="sec-nivel-2" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-nivel-2"><span class="header-section-number">11.7</span> Nivel 2: cuando el servidor es de verdad</h2>
+<p>Todo lo anterior funciona idéntico con un servidor a mil kilómetros; solo cambia lo que hay después de la <code>@</code>. Dónde conseguir uno, mientras el curso se escribe (comprueba disponibilidad y condiciones, que cambian):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 40%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vía</th>
+<th>Qué es</th>
+<th>Coste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Cuenta de la universidad</strong></td>
+<td>el servicio de informática o tu grupo de investigación suelen tener máquinas Linux con SSH para alumnos</td>
+<td>gratis; pídelo</td>
+</tr>
+<tr class="even">
+<td><strong>Servidor de un profesor</strong></td>
+<td>acceso temporal a una máquina del departamento</td>
+<td>gratis, con permiso</td>
+</tr>
+<tr class="odd">
+<td><strong>Nube, capa gratuita</strong></td>
+<td>varias nubes regalan una VM pequeña permanente o por meses (Oracle Cloud, Google Cloud, AWS…)</td>
+<td>gratis con tarjeta de por medio: lee la letra pequeña</td>
+</tr>
+<tr class="even">
+<td><strong>Shell público</strong></td>
+<td>comunidades que ofrecen cuentas SSH gratuitas (SDF, los <em>tildes</em>)</td>
+<td>gratis; para practicar</td>
+</tr>
+</tbody>
+</table>
+<p>Las diferencias prácticas: la dirección será pública o un nombre DNS; el puerto puede no ser el 22 (<code>-p 2222</code>, o <code>Port</code> en tu <code>config</code>); te pedirán tu <strong>clave pública</strong> por adelantado — la que ya sabes generar — y quizá un segundo factor. Y la lección de seguridad que cierra el capítulo: un servidor a la vista de internet recibe miles de intentos de contraseña al día. Se sobrevive con claves y con la contraseña <em>desactivada</em> — exactamente lo que harás en el ejercicio 11.6, en tu VM y con instantánea.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · La clave privada es tu identidad</strong></p>
+<p>Tres reglas sin excepción. Uno: la <strong>privada nunca se copia</strong> a otro sitio — ni al servidor, ni a un correo, ni «para tenerla en el portátil del laboratorio»: allí se genera otro par. Dos: <strong>frase de paso</strong> siempre. Tres: si una huella de servidor conocido <em>cambia</em> de repente, no se acepta a ciegas — se pregunta a quien lo administra. Con esas tres, SSH es hoy la forma más segura que existe de trabajar a distancia; sin ellas, es una puerta abierta con tu nombre.</p>
+</div>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · El camino inverso: tu casa desde fuera (opcional)</strong></p>
+<p>¿Y entrar en tu Mint desde la universidad? Ayer viste por qué no se puede sin más: tu casa está detrás del NAT. Haría falta pedirle al router que <em>reenvíe</em> el puerto 22 de su dirección pública a tu Mint («reenvío de puertos» o <em>port forwarding</em>, en la sección WAN) — un cambio reversible más, que abriría una puerta de tu casa a todo internet. Solo tiene sentido con claves y contraseña desactivada, y si tu compañía te tiene tras un CG-NAT (ejercicio 9.3), ni así. Lo dejamos como experimento avanzado para quien lo necesite; el capítulo 12 enseña una vía más elegante para casi todos los casos.</p>
+</div>
+</section>
+<section id="sec-practica-11" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="sec-practica-11"><span class="header-section-number">11.8</span> Práctica: la escalera</h2>
+<p>Cuaderno en marcha (<code>script sesion11.log</code>). Los cambios de hoy en la VM se hacen con instantánea previa; en tu Mint, solo se instala un paquete y se crean ficheros en <code>~/.ssh</code>.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.1 · Nivel 0: contigo mismo</strong></p>
+<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 10, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal. <em>Pista: <code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
+<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 12, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.2 · Nivel 1: el servidor</strong></p>
+<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir. <em>Pista: <code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
+<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.3 · Las claves</strong></p>
+<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos. <em>Pista: <code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
+<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.4 · Alias, copia y comando remoto</strong></p>
+<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas). <em>Pista: <code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
+<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.5 · <code>rsync</code> y la barra</strong></p>
+<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja. <em>Pista: <code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
+<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.6 · Cerrar la puerta a las contraseñas</strong></p>
+<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza. <em>Pista: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La línea suele venir comentada (<code>#PasswordAuthentication yes</code>): descoméntala y ponla a <code>no</code>. Tras el reinicio del servicio, <code>ssh lab</code> entra por clave; <code>ssh -o PubkeyAuthentication=no lab</code> devuelve <code>Permission denied (publickey)</code>. Vuelta atrás: restaurar el <code>.bak</code> y reiniciar <code>ssh</code> — o la instantánea.</p>
+<p><strong>Por qué así</strong> — Es <em>el</em> endurecimiento básico de cualquier servidor expuesto, y lo has hecho con todas las redes: instantánea, copia, sesión abierta de reserva. La regla de oro de los administradores — «nunca cierres la sesión que funciona hasta probar la nueva» — acaba de entrar en tu repertorio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · Opcional · el host real</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.7 · Nivel 2, si tienes dónde</strong></p>
+<p>Si dispones de una cuenta en un servidor real (universidad, nube o shell público): añádelo a tu <code>~/.ssh/config</code>, instala tu clave pública por la vía que te indiquen, entra, y repite el parte de «¿dónde estoy?» del 11.2 más un <code>ping</code> de vuelta a tu casa desde allí — para ver la distancia con los ojos del capítulo 9. <em>Pista: si el puerto no es el 22, <code>Port</code> en la agenda; si te dan solo un formulario web para la clave, el contenido a pegar es tu <code>id_ed25519.pub</code> completo.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La experiencia es idéntica a <code>debian-lab</code> con dos diferencias visibles: el <code>ping</code> de vuelta a tu IP pública tarda decenas de milisegundos (kilómetros reales), y probablemente <code>sudo</code> no funcione — no eres administrador allí, y ahora entiendes exactamente qué significa eso.</p>
+<p><strong>Por qué así</strong> — El curso se escribió para que llegaras aquí sin necesitar este ejercicio; hacerlo cierra el círculo: la escalera de tres niveles era la misma máquina a tres distancias.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-11" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="sec-quiz-11"><span class="header-section-number">11.9</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap11">
+  <div class="qz"><p class="qq" data-n="1">Al conectar por primera vez a un servidor, SSH te pregunta si aceptas su huella porque…</p>
+    <label><input type="radio" name="z1" value="a"><span>todavía no conoce esa máquina y quiere que confirmes que es quien dice ser</span></label>
+    <label><input type="radio" name="z1" value="b"><span>tu contraseña es incorrecta</span></label>
+    <label><input type="radio" name="z1" value="c"><span>el servidor no tiene clave</span></label>
+    <div class="fb good"><b>Correcto.</b> Al aceptar, la apunta en <code>known_hosts</code>. Si esa huella cambia algún día, el aviso en mayúsculas significa «reinstalado… o suplantado».</div>
+    <div class="fb bad"><b>No exactamente.</b> Es la presentación: una máquina nueva para tu cliente. Solo pasa la primera vez, y se guarda en <code>~/.ssh/known_hosts</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">¿Qué fichero se copia al servidor con <code>ssh-copy-id</code>?</p>
+    <label><input type="radio" name="z2" value="a"><span>la clave privada, <code>id_ed25519</code></span></label>
+    <label><input type="radio" name="z2" value="b"><span>la clave pública, <code>id_ed25519.pub</code>, a <code>authorized_keys</code></span></label>
+    <label><input type="radio" name="z2" value="c"><span>tu contraseña cifrada</span></label>
+    <div class="fb good"><b>Correcto.</b> La cerradura se reparte; la llave se queda en casa. La privada no viaja nunca, a ningún sitio.</div>
+    <div class="fb bad"><b>No exactamente.</b> Solo la pública, que es la que se puede regalar. Copiar la privada a cualquier parte es la regla que nunca se rompe.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">¿Qué hace <code>ssh lab "grep -c ERROR datos.log"</code>?</p>
+    <label><input type="radio" name="z3" value="a"><span>abre una sesión interactiva en <code>lab</code></span></label>
+    <label><input type="radio" name="z3" value="b"><span>ejecuta ese comando en <code>lab</code> y te devuelve la salida, sin abrir sesión</span></label>
+    <label><input type="radio" name="z3" value="c"><span>copia <code>datos.log</code> a tu máquina y lo cuenta aquí</span></label>
+    <div class="fb good"><b>Correcto.</b> Los datos y el cálculo allí, el resultado aquí. Es la forma de preguntar «¿ha terminado mi simulación?» sin moverte.</div>
+    <div class="fb bad"><b>No exactamente.</b> Con un comando detrás, SSH lo ejecuta en el servidor y vuelve. Nada se copia; la sesión ni se abre.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Para subir la carpeta <code>datos</code> entera a <code>lab</code>:</p>
+    <label><input type="radio" name="z4" value="a"><span><code>scp datos lab:~/</code></span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>scp -r datos lab:~/</code></span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>ssh datos lab</code></span></label>
+    <div class="fb good"><b>Correcto.</b> Como <code>cp</code>: las carpetas piden <code>-r</code>. Y el <code>máquina:</code> delante de la ruta es lo único nuevo.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es la gramática de <code>cp</code> con destino remoto: carpeta → <code>-r</code>. Sin él, <code>scp</code> se niega.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">La ventaja de <code>rsync</code> sobre <code>scp</code> para una carpeta que cambia es que…</p>
+    <label><input type="radio" name="z5" value="a"><span>va cifrado y <code>scp</code> no</span></label>
+    <label><input type="radio" name="z5" value="b"><span>solo transfiere lo que ha cambiado, y se puede reanudar</span></label>
+    <label><input type="radio" name="z5" value="c"><span>no necesita SSH</span></label>
+    <div class="fb good"><b>Correcto.</b> La segunda ejecución tarda un segundo. Y ojo con la barra final: contenido de la carpeta frente a la carpeta entera.</div>
+    <div class="fb bad"><b>No exactamente.</b> Ambos van por SSH y cifrados. <code>rsync</code> gana por incremental y reanudable: ideal para resultados que se van acumulando.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Tras <code>PasswordAuthentication no</code> en el servidor…</p>
+    <label><input type="radio" name="z6" value="a"><span>ya nadie puede entrar</span></label>
+    <label><input type="radio" name="z6" value="b"><span>solo entra quien tenga una clave privada cuya pública esté en <code>authorized_keys</code></span></label>
+    <label><input type="radio" name="z6" value="c"><span>las contraseñas se vuelven más largas</span></label>
+    <div class="fb good"><b>Correcto.</b> Los robots que prueban contraseñas se quedan fuera; tú, con tu clave, dentro. El endurecimiento básico de todo servidor expuesto.</div>
+    <div class="fb bad"><b>No exactamente.</b> Se cierra la puerta a las contraseñas, no a las claves: entra quien demuestre tener la privada. Por eso se prueba la clave <em>antes</em> de cerrar la sesión de reserva.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"a", z2:"b", z3:"b", z4:"b", z5:"b", z6:"b"};
+  document.querySelectorAll("#quiz-cap11 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 11.9)</strong> — Respuestas: 1 a · 2 b · 3 b · 4 b · 5 b · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Ya entras y sales de tu servidor. El capítulo 12 es vivir en él: lanzar una simulación, cerrar el portátil, volver mañana y encontrarla terminada — <code>tmux</code>, la sesión que no muere. Y el caso estrella del físico computacional: un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil a través de un túnel SSH. De postre, qué es «la nube» en dos párrafos y qué es SLURM en dos páginas: la puerta al doctorado. Guarda <code>sesion11.log</code>.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 11 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion11.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap10.html" class="pagination-link" aria-label="Nombres y caminos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
