@@ -19,7 +19,7 @@ D y E.
 **Al terminar esta sesión sabrás**
 
 - Qué es una máquina virtual, qué es un hipervisor, y qué se virtualiza exactamente: CPU, memoria, disco y red.
-- Instalar el taller de virtualización de Linux — KVM, QEMU, libvirt y `virt-manager` — con un solo `apt`.
+- Instalar el taller de virtualización de Linux — KVM, QEMU, libvirt y `virt-manager` — desde el Gestor de software o con un solo `apt`.
 - Descargar la imagen de instalación de Debian y comprobar que no viene corrupta.
 - Crear una máquina virtual desde cero, arrancarla y apagarla sin miedo.
 - Usar instantáneas: guardar el estado de la máquina y restaurarlo en segundos.
@@ -97,21 +97,39 @@ Virtualización:                       VT-x
 Un número mayor que cero (`vmx` es Intel, `svm` es AMD) significa que
 sí. Si saliera 0, la virtualización suele estar apagada en el UEFI del
 capítulo 6: se activa allí, en la opción llamada *VT-x*, *AMD-V* o
-*SVM Mode*. Ahora el taller entero, con el gesto del capítulo 5:
+*SVM Mode*.
+
+El taller entero se instala como cualquier programa: abre el
+**Gestor de software** de Mint, busca «Gestor de máquinas virtuales»
+(o `virt-manager`) e **Instalar**. Fíjate en la lista que te enseña
+antes de aceptar: además de la ventana, trae `qemu`, `libvirt` y
+compañía — son las dependencias del capítulo 5, y el gestor las
+resuelve solo. La misma operación, en una línea de terminal, es el
+gesto de siempre:
 
 ```terminal
 marcos@portatil:~$ sudo apt install virt-manager
 [sudo] contraseña de marcos:
 Se instalarán los siguientes paquetes NUEVOS:
   libvirt-daemon-system qemu-system-x86 virt-manager virt-viewer ...
+```
+
+Al abrir por primera vez el Gestor de máquinas virtuales (menú →
+Administración) te pedirá tu contraseña: es el sistema comprobando
+que eres administrador antes de dejarte tocar el hipervisor. Funciona
+tal cual — pero hay un paso que la instalación gráfica *no* hace por
+ti y que conviene dar: añadirte al grupo `libvirt`.
+
+```terminal
 marcos@portatil:~$ sudo usermod -aG libvirt marcos
 ```
 
-La segunda orden te añade al grupo `libvirt` — capítulo 4: los grupos
-son bolsas de permisos, y este es el que autoriza a manejar máquinas
-virtuales sin `sudo`. Como con todo cambio de grupos, hace efecto al
-**cerrar sesión y volver a entrar**. Después, la comprobación de que
-todo respira:
+Capítulo 4: los grupos son bolsas de permisos, y este es el que
+autoriza a manejar máquinas virtuales sin `sudo` — virt-manager deja
+de pedirte la contraseña, y `virsh`, su cara de terminal, funciona
+directamente. Como con todo cambio de grupos, hace efecto al **cerrar
+sesión y volver a entrar**. Después, la comprobación de que todo
+respira:
 
 ```terminal
 marcos@portatil:~$ groups
@@ -353,15 +371,18 @@ capacidad concreta de la CPU.
 ::: {.ejercicio}
 **Ejercicio 7.2 · Montar el taller**
 
-Instala `virt-manager`, añádete al grupo `libvirt`, cierra y vuelve a
-abrir sesión, y comprueba con `groups` y `virsh list --all` que estás
-dentro y que el taller responde. *Pista: `apt install` resuelve las
-dependencias solo; `usermod -aG` añade sin quitar los grupos que ya
+Instala el Gestor de máquinas virtuales por la vía que prefieras —
+Gestor de software o `apt` —, ábrelo una vez (te pedirá la
+contraseña), añádete al grupo `libvirt`, cierra y vuelve a abrir
+sesión, y comprueba con `groups` y `virsh list --all` que estás dentro
+y que el taller responde. *Pista: las dos vías instalan exactamente
+los mismos paquetes; `usermod -aG` añade sin quitar los grupos que ya
 tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
-`sudo apt install virt-manager`, `sudo usermod -aG libvirt $USER`,
+Gestor de software → «Gestor de máquinas virtuales» → Instalar (o
+`sudo apt install virt-manager`), `sudo usermod -aG libvirt $USER`,
 cerrar sesión y entrar. `groups` debe listar `libvirt`; `virsh list
 --all` devuelve una tabla vacía sin quejarse. Si protesta con «permiso
 denegado» hablando de un *socket*, es que no reiniciaste la sesión.
