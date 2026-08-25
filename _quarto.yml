@@ -36,7 +36,8 @@ book:
     - capitulos/cap06.qmd
     - capitulos/cap07.qmd
     - capitulos/cap08.qmd
-    # - capitulos/cap09.qmd   # ← descomentar según se escriban
+    - capitulos/cap09.qmd
+    # - capitulos/cap10.qmd   # ← descomentar según se escriban
   appendices:
     - anexos/anexo-c1-pc-real.qmd
     - anexos/anexo-windows.qmd

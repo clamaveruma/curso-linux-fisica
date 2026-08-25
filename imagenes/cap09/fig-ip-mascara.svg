@@ -1,0 +1,28 @@
+<svg viewBox="0 0 700 260" width="700" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomía de una dirección IP con máscara /24: parte de red y parte de máquina">
+  <g font-family="IBM Plex Mono,monospace">
+    <text x="350" y="34" font-size="12" fill="#6A5F4D" text-anchor="middle">tu portátil, según <tspan font-weight="600" fill="#24564B">ip a</tspan>:</text>
+    <rect x="90" y="50" width="520" height="56" rx="5" fill="#0E1512"/>
+    <text x="118" y="87" font-size="24" fill="#6BD6BC" font-weight="600">192.168.1</text>
+    <text x="256" y="87" font-size="24" fill="#D8E6E0">.</text>
+    <text x="272" y="87" font-size="24" fill="#E8C170" font-weight="600">34</text>
+    <text x="322" y="87" font-size="24" fill="#E8837A" font-weight="600">/24</text>
+    <!-- llaves -->
+    <path d="M118 116 v8 h130 v-8" fill="none" stroke="#2F6F62" stroke-width="1.5"/>
+    <text x="183" y="143" font-size="12" fill="#2F6F62" text-anchor="middle" font-weight="600">la red</text>
+    <text x="183" y="159" font-size="10" fill="#9C8F79" text-anchor="middle">igual para todos los aparatos de tu casa</text>
+    <path d="M272 116 v8 h32 v-8" fill="none" stroke="#9A6A14" stroke-width="1.5"/>
+    <text x="288" y="143" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">la máquina</text>
+    <text x="288" y="159" font-size="10" fill="#9C8F79" text-anchor="middle">distinto en cada una</text>
+    <path d="M322 116 v8 h50 v-8" fill="none" stroke="#C4342A" stroke-width="1.5"/>
+    <text x="347" y="143" font-size="12" fill="#C4342A" text-anchor="middle" font-weight="600">la máscara</text>
+    <text x="347" y="159" font-size="10" fill="#9C8F79" text-anchor="middle">dónde termina la red</text>
+    <!-- explicación /24 -->
+    <text x="470" y="140" font-size="10.5" fill="#6A5F4D">/24 = los 24 primeros bits</text>
+    <text x="470" y="156" font-size="10.5" fill="#6A5F4D">(tres números de cuatro) son</text>
+    <text x="470" y="172" font-size="10.5" fill="#6A5F4D">la red; queda 1 para máquinas:</text>
+    <text x="470" y="188" font-size="10.5" fill="#24564B" font-weight="600">254 direcciones posibles</text>
+    <!-- vecinos -->
+    <text x="350" y="222" font-size="10.5" fill="#6A5F4D" text-anchor="middle">tus vecinos: <tspan fill="#2F6F62">192.168.1</tspan>.<tspan fill="#9A6A14">1</tspan> el router · <tspan fill="#2F6F62">192.168.1</tspan>.<tspan fill="#9A6A14">57</tspan> el móvil · <tspan fill="#2F6F62">192.168.1</tspan>.<tspan fill="#9A6A14">120</tspan> la tele</text>
+    <text x="350" y="244" font-size="10" fill="#9C8F79" text-anchor="middle">misma red → se hablan directamente; otra red → hace falta el router</text>
+  </g>
+</svg>
