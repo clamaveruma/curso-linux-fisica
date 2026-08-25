@@ -89,6 +89,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 - **0. Vengo de Windows:** preparar entorno con VirtualBox o WSL (para la versión publicada).
 - **B1. Scripting:** bash con bucles y condicionales, `cron`. Fuera del cuerpo por presupuesto de tiempo.
+- **B2. Montar de todo** *(añadido 2026-08-26 a petición de Claudio)*: discos y pendrives a mano y de otros formatos, montaje permanente con `fstab` y con la aplicación «Discos», y unidades remotas por SSHFS, SMB y NFS, por terminal y desde el gestor de archivos (Nemo/Caja).
 - **E1. La IA como herramienta, no como oráculo:** cómo pedir comandos, cómo verificarlos con `man` antes de ejecutar, por qué jamás se copia-pega un `curl | bash` ni un `sudo` sin leer. Nace directamente del «pregunto a la IA y copio-pego» de la encuesta.
 
 ## 4. El problema del host remoto: solución por capas
@@ -97,7 +98,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 |---|---|---|
 | 0 | `ssh localhost` en su propia máquina | Todos |
 | 1 | La VM del bloque C, por la red NAT de libvirt (el anfitrión la alcanza sin configurar nada; puente opcional) | Todos los que sigan el curso |
-| 2 | Host real: cuenta de la universidad, servidor del profesor con acceso temporal, capa gratuita de nube o shell público | Recomendado, no requisito |
+| 2 | Host real: cuenta de la universidad, servidor del profesor con acceso temporal, capa gratuita de nube o shell público *(tabla concreta en el cap. 11, revisada 2026-08-26: Azure for Students / GitHub Student Pack, Oracle Always Free, tilde.town/SDF, Codespaces, Cloud Shell)* | Recomendado, no requisito |
 
 El curso se escribe contra el nivel 1: nadie queda excluido y la experiencia es funcionalmente idéntica a un servidor real. El capítulo 11 lista las vías del nivel 2 con una nota: verificar disponibilidad y condiciones de las opciones gratuitas en el momento de redactarlo, porque cambian.
 

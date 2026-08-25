@@ -82,7 +82,10 @@ Cuando pinchas un pendrive, Mint lo monta solo en
 `/media/tu_usuario/NOMBRE` y te abre la ventana — cómodo y correcto.
 La versión manual es `mount` (montar) y `umount` (desmontar; sí, sin
 la primera *n*), y la usarás en el servidor sin escritorio. Hoy te
-basta con saber *leerlo*:
+basta con saber *leerlo* — montar a mano discos de otros formatos,
+hacerlo permanente y enganchar carpetas de otras máquinas es el
+[anexo B2](../anexos/anexo-b2-montajes.qmd), para cuando hayas visto
+SSH:
 
 ```terminal
 marcos@portatil:~$ lsblk

@@ -224,7 +224,10 @@ direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe
 carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el
 primo de `scp` que viaja por el mismo túnel. Para un fichero suelto
 es perfecto; `rsync` gana cuando son mil ficheros o hay que repetir
-la copia cada día.
+la copia cada día. Y si prefieres que la casa del servidor aparezca
+como una carpeta *de verdad* en tu árbol — para abrirla desde
+cualquier programa —, eso se llama montar por SSHFS, y está en el
+[anexo B2](../anexos/anexo-b2-montajes.qmd).
 :::
 
 ## Ejecutar allí, sin quedarse {#sec-comando-remoto}
@@ -258,11 +261,15 @@ que cambian):
 
 | Vía | Qué es | Coste |
 |-----|--------|-------|
-| **Cuenta de la universidad** | el servicio de informática o tu grupo de investigación suelen tener máquinas Linux con SSH para alumnos | gratis; pídelo |
-| **Servidor de un profesor** | acceso temporal a una máquina del departamento | gratis, con permiso |
-| **Nube, capa gratuita** | varias nubes regalan una VM pequeña permanente o por meses (Oracle Cloud, Google Cloud, AWS…) | gratis con tarjeta de por medio: lee la letra pequeña |
-| **Shell público** | comunidades que ofrecen cuentas SSH gratuitas (SDF, los *tildes*) | gratis; para practicar |
+| **Universidad o alguien conocido** | el servicio de informática, tu grupo, o el servidor de un profesor: una máquina Linux con SSH | gratis; pídela — es la mejor opción |
+| **Azure for Students / GitHub Student Developer Pack** | con tu correo de la universidad: créditos para VMs *reales* con IP pública (Azure 100 $, DigitalOcean 200 $ y más), sin tarjeta | gratis para estudiantes |
+| **Oracle Cloud «Always Free»** | una VM real y permanente (ARM, hasta 4 núcleos) con IP pública | gratis; pide tarjeta para identificarte, y a veces no hay plazas |
+| **tilde.town, SDF** | un servidor Unix compartido por SSH; la cuenta se pide *entregando tu clave pública* — el ejercicio 11.3 en la vida real | gratis, sin tarjeta; sin `sudo`: para practicar |
+| **GitHub Codespaces** | un contenedor Ubuntu con terminal (60 h/mes en la cuenta gratuita); se entra con `gh codespace ssh` | gratis; es un contenedor, no una VM |
+| **Google Cloud Shell** | una terminal en el navegador con 5 GB de casa persistente; `gcloud cloud-shell ssh` desde tu Mint | gratis, sin tarjeta; la máquina es efímera |
 
+(Las condiciones de estos servicios cambian cada pocos meses:
+comprueba disponibilidad y letra pequeña antes de contar con uno.)
 Las diferencias prácticas: la dirección será pública o un nombre DNS;
 el puerto puede no ser el 22 (`-p 2222`, o `Port` en tu `config`);
 te pedirán tu **clave pública** por adelantado — la que ya sabes
