@@ -47,7 +47,6 @@ book:
     - anexos/anexo-b1-scripting.qmd
     - anexos/anexo-b2-montajes.qmd
     - anexos/anexo-e1-ia.qmd
-    - anexos/anexo-e2-slurm.qmd
 
 format:
   html:

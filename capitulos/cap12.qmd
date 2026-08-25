@@ -22,7 +22,7 @@ concretos — y por dónde seguir el día que te den cuenta en un clúster.
 - Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.
 - Ejecutar Jupyter en el servidor con los datos y la CPU de allí, y trabajar desde tu portátil.
 - Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.
-- Qué es un clúster de cálculo y dónde seguir el día que te den cuenta en uno.
+- Qué es un clúster de cálculo, y por qué lo aprendido aquí es lo que su guía dará por sabido.
 :::
 
 ## La sesión que muere {#sec-sesion-muere}
@@ -191,20 +191,19 @@ den un usuario, este capítulo será tu primera semana.
 
 ![MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona: miles de `debian-lab` físicos compartidos por una cola. *Foto: Gemmaribasmaspoch, CC BY-SA 4.0, Wikimedia Commons.*](../imagenes/cap12/marenostrum-4.jpg){#fig-marenostrum fig-alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal" width="80%"}
 
-## Cuando te den cuenta en un clúster {#sec-cluster}
+## Y si algún día te dan un clúster {#sec-cluster}
 
 Un **clúster** de cálculo — el de la universidad, el de la Red
 Española de Supercomputación — es la tercera edición del tiempo
 compartido: miles de máquinas como tu `debian-lab`, pero físicas y
 unidas por una red rapidísima, repartidas entre cientos de
-investigadores por una **cola de trabajos**. Se entra por SSH (este
-bloque entero aplica), se prepara el trabajo en una máquina de
-recepción y se le *pide* a la cola que lo ejecute cuando haya hueco.
-El gestor de colas más común se llama **SLURM**, y su manual de dos
-páginas — anatomía del clúster, el *job script*, enviar, consultar y
-cancelar — está en el [anexo E2](../anexos/anexo-e2-slurm.qmd), para
-el día en que te den el usuario. Hoy no hace falta: con `tmux` y el
-túnel ya tienes el noventa por ciento de lo que harás allí.
+investigadores por una **cola de trabajos**: se entra por SSH, se
+prepara el trabajo y se le pide a la cola que lo ejecute cuando haya
+hueco. Cada centro tiene su gestor de colas y su guía de usuario, y
+esa guía será tu manual el día que toque. Lo que este bloque te ha
+dado — entrar por SSH con clave, sobrevivir a la desconexión con
+`tmux`, mover datos con `rsync` — es exactamente lo que esa guía
+dará por sabido.
 
 ## Práctica: vivir en el servidor {#sec-practica-12}
 
@@ -439,9 +438,9 @@ instalarla, conectarla y trabajar en ella desde lejos. Queda el
 ensayo general: el **proyecto final**, en el que montas de cero un
 servidor — VM, instalación, red, SSH con clave, dataset, análisis en
 tmux — sin más guía que una lista de objetivos. Y quedan los anexos
-para cuando los necesites: scripting con bucles, la IA como
-herramienta y no como oráculo, el camino para quien venga de Windows
-— y SLURM, para el día del clúster. Guarda
+para cuando los necesites: scripting con bucles, montar unidades de
+todo tipo, la IA como herramienta y no como oráculo, y el camino para
+quien venga de Windows. Guarda
 `sesion12.log`: son doce medidas.
 :::
 

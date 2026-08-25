@@ -79,7 +79,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 **11. SSH.** Cliente y servidor. Instalar `openssh-server`. Claves ed25519, `ssh-copy-id`, el fichero `~/.ssh/config`. Copiar con `scp` y `rsync`.
 *Práctica en tres niveles* (ver §4): localhost → la VM del bloque C → un host real si se tiene.
 
-**12. Vivir en remoto.** `tmux`: lanzar una simulación, desconectarse, volver. Túneles SSH y el caso estrella: Jupyter corriendo en el servidor, abierto en tu navegador local. Qué es «la nube» en términos concretos. SLURM en dos páginas: qué es una cola, aspecto de un job script — la puerta al doctorado.
+**12. Vivir en remoto.** `tmux`: lanzar una simulación, desconectarse, volver. Túneles SSH y el caso estrella: Jupyter corriendo en el servidor, abierto en tu navegador local. Qué es «la nube» en términos concretos. ~~SLURM en dos páginas~~ *(eliminado del curso el 2026-08-26 por decisión de Claudio: un físico no lo necesita normalmente; el cap. 12 deja solo la noción de clúster y cola de trabajos)*.
 
 ### Proyecto final (~3 h)
 
