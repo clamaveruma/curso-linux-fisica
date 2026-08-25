@@ -39,7 +39,8 @@ book:
     - capitulos/cap09.qmd
     - capitulos/cap10.qmd
     - capitulos/cap11.qmd
-    # - capitulos/cap12.qmd   # ← descomentar según se escriban
+    - capitulos/cap12.qmd
+    # - capitulos/proyecto-final.qmd   # ← pendiente
   appendices:
     - anexos/anexo-c1-pc-real.qmd
     - anexos/anexo-windows.qmd

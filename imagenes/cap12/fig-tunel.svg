@@ -1,0 +1,30 @@
+<svg viewBox="0 0 700 250" width="700" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Túnel SSH: el Jupyter del servidor aparece en el navegador del portátil como si fuera local">
+  <defs>
+    <marker id="ftn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- portatil -->
+    <rect x="30" y="50" width="230" height="140" rx="6" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
+    <text x="145" y="74" font-size="11.5" fill="#2B2318" text-anchor="middle" font-weight="600">tu portátil</text>
+    <rect x="50" y="90" width="190" height="52" rx="4" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="145" y="110" font-size="10.5" fill="#24564B" text-anchor="middle" font-weight="600">navegador</text>
+    <text x="145" y="128" font-size="9.5" fill="#6A5F4D" text-anchor="middle">http://localhost:8888</text>
+    <text x="145" y="168" font-size="9" fill="#9C8F79" text-anchor="middle">«parece que Jupyter corre aquí»</text>
+    <!-- tunel -->
+    <rect x="265" y="100" width="170" height="32" rx="16" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.6"/>
+    <text x="350" y="121" font-size="10.5" fill="#24564B" text-anchor="middle" font-weight="600">túnel SSH · cifrado</text>
+    <text x="350" y="86" font-size="9.5" fill="#2F6F62" text-anchor="middle">ssh -L 8888:localhost:8888 lab</text>
+    <line x1="242" y1="116" x2="262" y2="116" stroke="#2F6F62" stroke-width="1.6" marker-end="url(#ftn)"/>
+    <line x1="437" y1="116" x2="457" y2="116" stroke="#2F6F62" stroke-width="1.6" marker-end="url(#ftn)"/>
+    <text x="350" y="152" font-size="9" fill="#9C8F79" text-anchor="middle">el puerto 8888 de tu máquina</text>
+    <text x="350" y="165" font-size="9" fill="#9C8F79" text-anchor="middle">desemboca en el 8888 del servidor</text>
+    <!-- servidor -->
+    <rect x="460" y="50" width="220" height="140" rx="6" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
+    <text x="570" y="74" font-size="11.5" fill="#2B2318" text-anchor="middle" font-weight="600">el servidor</text>
+    <rect x="480" y="90" width="180" height="52" rx="4" fill="#0E1512"/>
+    <text x="570" y="110" font-size="10.5" fill="#6BD6BC" text-anchor="middle" font-weight="600">jupyter lab</text>
+    <text x="570" y="128" font-size="9.5" fill="#D8E6E0" text-anchor="middle">escucha solo en localhost:8888</text>
+    <text x="570" y="168" font-size="9" fill="#9C8F79" text-anchor="middle">con los datos y la CPU del servidor</text>
+    <text x="350" y="222" font-size="10" fill="#6A5F4D" text-anchor="middle">el puerto 8888 nunca se abre a la red: solo existe dentro del túnel — tu navegador local, su cálculo remoto</text>
+  </g>
+</svg>
