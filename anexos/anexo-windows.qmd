@@ -58,10 +58,81 @@ el arranque del capítulo 6 no describen tu máquina, sino el disco
 virtual de WSL — léelo como teoría; y para los bloques C en adelante
 querrás el camino A.
 
+## Dos caminos más: el USB persistente y el arranque dual {.unnumbered}
+
+Hay otras dos formas de tener un Linux *de verdad* en tu ordenador
+sin renunciar a Windows. Una es limpia y fácil; la otra no es para
+principiantes.
+
+### Camino C · Un Linux *live* en un pendrive, con persistencia {.unnumbered}
+
+Cualquier ISO de Mint arranca «en vivo» desde un pendrive: un
+escritorio completo que no toca tu disco… y que olvida todo al
+apagar. La **persistencia** arregla eso: una partición extra en el
+mismo pendrive donde se guardan tus ficheros, tu configuración y lo
+que instales con `apt`. Desde Windows, la forma más sencilla es
+**Rufus** (rufus.ie, gratuito):
+
+1. Un pendrive **USB 3 de 32 GB** (16 como mínimo) que puedas borrar;
+   cuanto más rápido, mejor: es tu disco duro durante el curso.
+2. Rufus → elige el pendrive y la ISO de Mint → aparece el control
+   **«Tamaño de la partición persistente»**: dale todo lo que quepa
+   (16–24 GB) → Empezar. Rufus crea la partición `casper-rw` de
+   persistencia por ti.
+3. Reinicia con la tecla del menú de arranque (anexo C1) y elige el
+   pendrive. Mint arranca en vivo; lo que hagas, se queda.
+
+Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un
+sistema *live*) funciona si tienes 8 GB de RAM, y el capítulo 6 lo
+verás con dos discos en `lsblk`, el tuyo y el de Windows, que es
+incluso más instructivo. Los *peros*, honestos: va a la velocidad
+del pendrive (un USB 2 barato desespera); no actualices el kernel
+(`apt upgrade` sí, pero el sistema *live* arranca siempre con el
+suyo); y como con cualquier pendrive, si lo arrancas de un tirón en
+mal momento la persistencia puede corromperse — copia tu carpeta de
+física al servidor de vez en cuando (capítulo 11 y anexo B1: `rsync`
+con `cron`). Para quien quiera varias ISO en un mismo pendrive
+existe **Ventoy**, con persistencia configurable por fichero; es más
+potente y más liado — para más adelante.
+
+Y una variante con más recorrido: en vez de un sistema *live*,
+**instalar Linux entero en un SSD externo por USB** — con el
+instalador del capítulo 8, eligiendo ese disco como destino y
+poniendo en él la partición EFI. Es un Linux completo, rápido y
+permanente que arranca en cualquier PC desde el menú de arranque.
+La única pega es seria: al elegir el disco de destino, equivocarse
+destruye Windows. Es el camino perfecto *después* del capítulo 8 y
+del anexo C1, con el plan escrito y `lsblk` delante — no antes.
+
+### Camino D · Arranque dual: solo con alguien que sepa {.unnumbered}
+
+Instalar Linux en una partición del disco interno, junto a Windows,
+y elegir al encender. Es lo que hace mucha gente y lo que cubre el
+anexo C1 — pero **no es para hacerlo a solas el primer día**. Las
+implicaciones que hay que entender antes: reducir la partición de
+Windows (desde Windows, con su «inicio rápido» y BitLocker
+desactivados), que GRUB pase a gestionar el arranque de los dos
+sistemas, que una actualización grande de Windows puede pisar ese
+arranque y dejarte «sin Linux» hasta repararlo, y que deshacerlo
+requiere saber restaurar el cargador de Windows. Si tienes a alguien
+que lo haya hecho varias veces y te lo explique mientras lo hace,
+adelante — con copia de seguridad. Si no, el camino C te da el
+mismo Linux sin ninguno de esos riesgos, y el capítulo 8 te
+enseñará a hacer el dual tú mismo cuando toque.
+
+| | Cubre el curso | Riesgo para Windows | Para quién |
+|---|---|---|---|
+| **A** Mint en VirtualBox | todo (bloque C con virtualización anidada) | ninguno | la opción por defecto |
+| **B** WSL2 | terminal y redes; no discos ni instalación | ninguno | empezar hoy mismo |
+| **C** USB persistente (Rufus) | todo, a la velocidad del pendrive | ninguno | quien quiere Linux «real» sin tocar el disco |
+| **C'** instalación en SSD externo | todo, rápido | alto al instalar, ninguno después | tras el capítulo 8 y el anexo C1 |
+| **D** arranque dual | todo | medio, y permanente | solo acompañado por alguien que sepa |
+
 ## Lo que no cambia {.unnumbered}
 
 Sea cual sea el camino: cuaderno con `script`, ejercicios en escalera,
-y la regla de seguridad — lo destructivo, en una VM. La única
+y la regla de seguridad — lo destructivo, en una VM (y con el USB
+persistente, además, copia periódica de tu carpeta al servidor). La única
 diferencia real es que, además de aprender Linux, aprenderás dónde
 termina Windows y dónde empieza la máquina de mentira. Y cuando
 quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.

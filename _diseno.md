@@ -87,7 +87,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 ### Anexos opcionales
 
-- **0. Vengo de Windows:** preparar entorno con VirtualBox o WSL (para la versión publicada).
+- **0. Vengo de Windows:** preparar entorno con VirtualBox o WSL (para la versión publicada). *Ampliado 2026-08-26 a petición de Claudio: USB live persistente con Rufus (camino limpio recomendado), instalación completa en SSD externo (tras el cap. 8) y arranque dual solo acompañado por alguien que sepa.*
 - **B1. Scripting:** bash con bucles y condicionales, `cron`. Fuera del cuerpo por presupuesto de tiempo.
 - **B2. Montar de todo** *(añadido 2026-08-26 a petición de Claudio)*: discos y pendrives a mano y de otros formatos, montaje permanente con `fstab` y con la aplicación «Discos», y unidades remotas por SSHFS, SMB y NFS, por terminal y desde el gestor de archivos (Nemo/Caja).
 - **E1. La IA como herramienta, no como oráculo:** cómo pedir comandos, cómo verificarlos con `man` antes de ejecutar, por qué jamás se copia-pega un `curl | bash` ni un `sudo` sin leer. Nace directamente del «pregunto a la IA y copio-pego» de la encuesta.
