@@ -250,6 +250,8 @@ Púlsalo, teclea un fragmento de cualquier comando que hayas usado
 busca más atrás. El comando `history` te enseña la lista completa
 numerada.
 
+![Dos teclas que separan a quien sufre la terminal de quien la habita. Ninguna de las dos te pide memorizar nada.](../imagenes/cap01/fig-superpoderes.svg){#fig-superpoderes fig-alt="A la izquierda, el tabulador completa cd Des en cd Descargas; a la derecha, Ctrl+R busca en el historial por un fragmento"}
+
 ::: {.por-dentro}
 **◉ Por dentro · Dónde vive tu memoria**
 
@@ -283,6 +285,8 @@ y <kbd>Espacio</kbd> para moverte, <kbd>/</kbd> para *buscar* dentro
 siguiente aparición), y <kbd>q</kbd> para salir. Esa tecla <kbd>/</kbd>
 convierte cada página de manual en un documento consultable en
 segundos.
+
+![Las cuatro teclas del visor. Las mismas valen para `less` y para `htop` — las verás durante todo el curso.](../imagenes/cap01/fig-teclas-man.svg){#fig-teclas-man fig-alt="Una página de manual con las teclas para moverse, buscar con la barra, saltar a la siguiente aparición con n y salir con q"}
 
 ::: {.historia}
 **◷ Historia · El manual nació con el sistema**

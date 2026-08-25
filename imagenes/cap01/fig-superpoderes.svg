@@ -1,0 +1,34 @@
+<svg viewBox="0 0 700 290" width="700" height="290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Los dos superpoderes: el tabulador completa nombres y Ctrl+R busca en el historial">
+  <defs>
+    <marker id="fsp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- panel Tab -->
+    <rect x="15" y="15" width="325" height="260" rx="4" fill="#FAF6EB" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="35" y="42" font-size="12" fill="#24564B" font-weight="600" letter-spacing="1">EL TABULADOR</text>
+    <text x="35" y="59" font-size="10" fill="#9C8F79">nunca escribas nombres enteros</text>
+    <rect x="35" y="72" width="285" height="30" rx="4" fill="#0E1512"/>
+    <text x="47" y="92" font-size="12" fill="#6BD6BC">$ <tspan fill="#FFFFFF" font-weight="600">cd Des</tspan><tspan fill="#E8C170">▮</tspan></text>
+    <text x="178" y="120" font-size="11" fill="#2F6F62" text-anchor="middle" font-weight="600">⇥ Tab</text>
+    <line x1="178" y1="106" x2="178" y2="128" stroke="#2F6F62" stroke-width="1.6" marker-end="url(#fsp)"/>
+    <rect x="35" y="134" width="285" height="30" rx="4" fill="#0E1512"/>
+    <text x="47" y="154" font-size="12" fill="#6BD6BC">$ <tspan fill="#FFFFFF" font-weight="600">cd Descargas/</tspan></text>
+    <text x="35" y="190" font-size="10" fill="#6A5F4D">¿varias opciones? <tspan font-weight="600" fill="#2F6F62">Tab Tab</tspan> las enseña:</text>
+    <rect x="35" y="198" width="285" height="30" rx="4" fill="#0E1512"/>
+    <text x="47" y="218" font-size="11" fill="#9FB4AC">Descargas/  Documentos/</text>
+    <text x="35" y="250" font-size="10" fill="#C4342A" font-weight="600">si Tab calla, el fichero no está donde crees:</text>
+    <text x="35" y="264" font-size="10" fill="#6A5F4D">un error detectado antes de cometerlo</text>
+    <!-- panel historial -->
+    <rect x="360" y="15" width="325" height="260" rx="4" fill="#FAF6EB" stroke="#9A6A14" stroke-width="1.3"/>
+    <text x="380" y="42" font-size="12" fill="#9A6A14" font-weight="600" letter-spacing="1">EL HISTORIAL</text>
+    <text x="380" y="59" font-size="10" fill="#9C8F79">nunca escribas nada dos veces</text>
+    <text x="380" y="85" font-size="10.5" fill="#6A5F4D"><tspan font-weight="600" fill="#9A6A14">↑</tspan>  recupera el anterior, uno a uno</text>
+    <text x="380" y="112" font-size="10.5" fill="#6A5F4D"><tspan font-weight="600" fill="#9A6A14">Ctrl+R</tspan>  busca hacia atrás por un fragmento:</text>
+    <rect x="380" y="122" width="285" height="30" rx="4" fill="#0E1512"/>
+    <text x="392" y="142" font-size="11.5" fill="#9FB4AC">(reverse-i-search)`des': <tspan fill="#FFFFFF" font-weight="600">cd Descargas</tspan></text>
+    <text x="380" y="178" font-size="10.5" fill="#6A5F4D"><tspan font-weight="600" fill="#9A6A14">Intro</tspan>  lo ejecuta · <tspan font-weight="600" fill="#9A6A14">Ctrl+R</tspan> otra vez, más atrás</text>
+    <text x="380" y="204" font-size="10.5" fill="#6A5F4D"><tspan font-weight="600" fill="#9A6A14">history</tspan>  la lista completa, numerada</text>
+    <text x="380" y="240" font-size="10" fill="#9C8F79">todo vive en ~/.bash_history — un fichero</text>
+    <text x="380" y="254" font-size="10" fill="#9C8F79">oculto que verás en el capítulo 2</text>
+  </g>
+</svg>
