@@ -690,14 +690,169 @@
     ]
   },
   {
+    "objectID": "capitulos/cap08.html",
+    "href": "capitulos/cap08.html",
+    "title": "8  Instalar Linux de verdad",
+    "section": "",
+    "text": "8.1 El plan, antes que el instalador\nLos instaladores modernos permiten no pensar: «usar el disco entero», siguiente, siguiente. Hoy no vas a pulsar ese botón, y la razón es la misma por la que un físico no arranca un montaje sin un esquema: cuando lo hagas en tu PC de verdad, con un Windows al lado o un disco con datos, «usar el disco entero» será exactamente lo que no quieres. Se decide el plan en papel, se ejecuta en la VM, se repite hasta que sea rutina.\nLo que instalas: Debian 13 — la madre de tu Mint (capítulo 5) —, imagen netinst, sin escritorio. Sí, sin escritorio: un servidor al que hablarás por terminal y, a partir del capítulo 11, por SSH. Es lo que te encontrarás en el clúster y en la nube, y es lo que construye el proyecto final. Nombre de la máquina: debian-lab. Usuario: el tuyo.\nTres particiones, y cada decisión la tomas con el capítulo 6 en la cabeza: la EFI (512 MB, FAT32, montada en /boot/efi) es el buzón donde GRUB dejará su llave; la raíz (/, ext4) se lleva casi todo; y swap (2 GB) es el desahogo de la RAM cuando se llena — en una VM de 4 GB, un seguro barato. ¿Y /home separado? Es una opción respetable — permite reinstalar el sistema sin tocar tus datos — pero complica el reparto de espacio; para el taller, un solo / basta. Un detalle nuevo: dentro de la VM el disco no se llama sda ni nvme0n1 sino vda — virtio disk, el disco de mentira del hipervisor. Mismo mapa, otro nombre.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-plan",
+    "href": "capitulos/cap08.html#sec-plan",
+    "title": "8  Instalar Linux de verdad",
+    "section": "",
+    "text": "Figura 8.1: El plan de particiones para el disco virtual. Tres piezas, cada una con su oficio del capítulo 6.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-arrancar-instalador",
+    "href": "capitulos/cap08.html#sec-arrancar-instalador",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.2 Arrancar el instalador",
+    "text": "8.2 Arrancar el instalador\nAbre virt-manager, selecciona debian-lab y pulsa el triángulo de Ejecutar (o, desde la terminal, virsh start debian-lab y abre su ventana). La ISO sigue en la bandeja, así que la VM arranca en el menú del instalador: Graphical install, Install, y opciones avanzadas. Los dos primeros son el mismo instalador con dos caras — la gráfica es más cómoda con ratón; la de texto funciona en cualquier sitio, incluida una consola remota sin ventanas. Elige la que quieras; las pantallas y las decisiones son idénticas.\n\n\n\n\n\n\nFigura 8.2: El menú de arranque de la ISO. Fíjate en la esquina inferior: es GRUB — el mismo cargador del capítulo 6 — sirviendo el instalador. Captura de la versión 12 (la 13 es idéntica): Paowee, GPL, Wikimedia Commons.\n\n\n\n\n\n\n\n\n\nFigura 8.3: El instalador de Debian en modo gráfico, en su primera pregunta: el idioma. Cada pantalla es una pregunta, y ya sabes responderlas todas. Captura de la versión 12: Paowee, GPL, Wikimedia Commons.\n\n\n\nLas primeras pantallas son las fáciles, y una de ellas esconde la decisión más importante del día:\n\nIdioma, país, teclado: español, España, español. (Un profesional a veces deja el sistema en inglés para buscar errores en internet con más éxito; para el curso, español, que es como verás los mensajes en los ejemplos.)\nRed: la VM recibe dirección sola de la red NAT — es el DHCP del capítulo 9, adelantado. Nombre de la máquina: debian-lab. Dominio: vacío.\nContraseña de root: déjala vacía. No es un descuido, es un truco documentado de Debian: si root queda sin contraseña, el instalador desactiva la cuenta de root y añade a tu usuario al grupo sudo — exactamente el modelo de tu Mint, el del capítulo\n\nSi pones contraseña, tendrás un root activo y un usuario sin sudo, y el primer sudo apt te dará un disgusto.\n\nTu usuario: nombre completo, nombre de usuario (marcos), contraseña. Zona horaria: la tuya.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-particionar",
+    "href": "capitulos/cap08.html#sec-particionar",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.3 Particionar a mano",
+    "text": "8.3 Particionar a mano\nLlega la pantalla que asusta a todo el mundo, y que tú vas a leer con calma. Elige Manual. Verás el disco — vda, 20 GB, «Virtio Block Device» — sin particiones. El procedimiento, pantalla a pantalla:\n\nSelecciona el disco vda → Crear una nueva tabla de particiones vacía → sí → tipo gpt (la tabla moderna que UEFI espera, capítulo 6). Aparece una línea «ESPACIO LIBRE» de 20 GB.\nSelecciona el espacio libre → Crear una partición nueva → tamaño 512 MB → al principio → Utilizar como: Partición del sistema EFI → Se ha terminado de definir la partición.\nEspacio libre otra vez → partición nueva → tamaño 17.5 GB (o lo que quede menos 2 GB) → Utilizar como: ext4 → Punto de montaje: / → terminar.\nEspacio libre restante → partición nueva → todo lo que queda → Utilizar como: área de intercambio (swap) → terminar.\nCompara la tabla con la figura: vda1 EFI, vda2 ext4 /, vda3 swap. Finalizar el particionado y escribir los cambios en el disco → «¿Desea escribir los cambios?» → Sí.\n\nEse último Sí es el punto sin retorno de cualquier instalación: a partir de ahí el disco se formatea. En tu VM el disco es un fichero vacío y el susto es gratis; en tu PC real será el momento de haber leído tres veces qué disco has elegido — vuelve a esta frase cuando llegue el día.\n\n△ Cuidado · Lo que este capítulo no hace en tu Mint\nNi una sola orden de hoy se ejecuta en tu máquina real: todo pasa dentro de la ventana de debian-lab. Si en algún momento ves el prompt marcos@portatil, estás fuera de la VM — para en seco. Dentro, el prompt dirá marcos@debian-lab. Ese nombre de máquina que pusiste en el instalador acaba de convertirse en tu cinturón de seguridad.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-espejo-grub",
+    "href": "capitulos/cap08.html#sec-espejo-grub",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.4 Espejo, programas y GRUB",
+    "text": "8.4 Espejo, programas y GRUB\nCon el disco listo, el instalador copia el sistema base y hace las últimas preguntas:\n\nRéplica de Debian (mirror, el espejo): el repositorio del capítulo 5, en su versión Debian. deb.debian.org sirve; proxy, vacío. De aquí descargará todo lo que no cabía en la netinst.\nConcurso de popularidad: no.\nSelección de programas — la pantalla decisiva del servidor. Desmarca Entorno de escritorio Debian y GNOME (vienen marcados). Marca Servidor SSH — el bloque E te lo agradecerá — y Utilidades estándar del sistema. Nada más.\nCargador de arranque: arrancaste la VM en modo UEFI, así que GRUB se instala solo en la partición EFI que creaste. Si pregunta por «forzar la instalación en la ruta de medios extraíbles», no.\n\nReinicia cuando lo pida. La ISO se expulsa sola, y en el primer arranque desde el disco recién estrenado verás, durante unos segundos, el menú de GRUB — el eslabón del capítulo 6 que hoy has puesto tú. Es el mismo menú de la figura anterior, pero ahora sirve tu sistema en vez del instalador.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-primer-arranque",
+    "href": "capitulos/cap08.html#sec-primer-arranque",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.5 El primer arranque: comprobar que respira",
+    "text": "8.5 El primer arranque: comprobar que respira\nSin escritorio, el sistema te recibe con una consola de texto y un login:. Entra con tu usuario, y pásale la revisión del bloque B — son tus comandos, sobre tu instalación:\nmarcos@debian-lab:~$ lsblk\nNAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS\nvda    254:0    0   20G  0 disk\n├─vda1 254:1    0  512M  0 part /boot/efi\n├─vda2 254:2    0 17,5G  0 part /\n└─vda3 254:3    0    2G  0 part [SWAP]\nmarcos@debian-lab:~$ df -h /\nS.ficheros     Tamaño Usados  Disp Uso% Montado en\n/dev/vda2         17G   1,3G   15G   8% /\nmarcos@debian-lab:~$ ip a | grep \"inet \"\n    inet 127.0.0.1/8 scope host lo\n    inet 192.168.122.15/24 brd 192.168.122.255 scope global dynamic enp1s0\nmarcos@debian-lab:~$ systemctl status ssh | head -3\n● ssh.service - OpenBSD Secure Shell server\n     Loaded: loaded (/lib/systemd/system/ssh.service; enabled)\n     Active: active (running) since Tue 2026-08-25 19:02:11 CEST\nLéelo como el parte de un experimento que ha salido bien: las tres particiones montadas donde las pusiste; un sistema completo que ocupa 1,3 GB; una dirección 192.168.122.x — la red NAT del capítulo 7, repartida por tu Mint —; y un servidor SSH ya activo, esperando al capítulo 11. Pon la instalación al día con el gesto del capítulo 5 (sudo apt update && sudo apt upgrade) — y fíjate en que sudo funciona: el truco de la contraseña vacía de root ha hecho su efecto.\nY ahora, el protocolo del capítulo 7. Apaga la máquina con sudo poweroff — un servidor se apaga desde dentro, no desde el botón —, y en virt-manager crea la instantánea recien-instalado. Es el punto de retorno del resto del curso.\n\n✚ Truco · Dos cosas que verás y no te esperabas\nLa consola de texto no muestra nada mientras tecleas la contraseña — ni asteriscos: es normal, escribe y pulsa Intro. Y la ventana de la VM se queda con tu ratón y tu teclado cuando haces clic dentro: la tecla para soltarlos es Ctrl derecho (virt-manager lo indica en la barra de título). Ambas cosas son mucho más frecuentes de lo que parece: la primera pasa en todo servidor, la segunda en toda VM.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-romper",
+    "href": "capitulos/cap08.html#sec-romper",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.6 Romper, mirar, restaurar",
+    "text": "8.6 Romper, mirar, restaurar\nHay una cosa que un instalador nunca enseña: qué pasa cuando se rompe. Hoy sí. Restaura la instantánea si has hecho pruebas, arranca la VM, entra, y haz lo impensable — con el capítulo 6 en mente:\nmarcos@debian-lab:~$ sudo rm -rf /boot\nmarcos@debian-lab:~$ ls /boot\nls: no se puede acceder a '/boot': No existe el fichero o el directorio\nmarcos@debian-lab:~$ sudo reboot\nAcabas de borrar el kernel y la configuración de GRUB. El sistema sigue funcionando hasta que se apaga: todo lo que necesitaba ya estaba cargado en RAM. Pero al reiniciar, la cadena del capítulo 6 se rompe en el segundo eslabón: GRUB no encuentra el kernel, y te quedas en su consola de emergencia (grub&gt;) o en un aviso del UEFI. Míralo bien. Es la pantalla que aterroriza a quien no sabe qué es GRUB — y tú sabes exactamente qué falta y por qué.\nAhora, desde virt-manager: Forzar apagado → Instantáneas → recien-instalado → Ejecutar. Arranca. Cinco segundos, y /boot está de vuelta como si nada. Ese es el bloque C entero en una escena: el miedo a romper ha desaparecido porque romper cuesta cinco segundos.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-pc-real",
+    "href": "capitulos/cap08.html#sec-pc-real",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.7 Del ensayo al ordenador de verdad",
+    "text": "8.7 Del ensayo al ordenador de verdad\nTodo lo que has hecho hoy es, paso a paso, lo que harás el día que instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en un pendrive, el disco tiene nombre real y quizá un Windows dentro, y no hay instantánea que te salve — y por eso existe el anexo C1: la lista de comprobación completa para ese día, con la grabación del pendrive por la vía gráfica y por terminal.\n\n\n\n\n\n\nFigura 8.4: Una misma imagen, dos destinos. Lo que ensayas en la VM es exactamente lo que ejecutarás en el PC real.\n\n\n\n\n◷ Historia · De ochenta disquetes a un pendrive\nInstalar Linux en 1994 empezaba por descargar decenas de imágenes de disquete — Slackware llegó a necesitar más de cincuenta, en series con nombres como A, AP, D, N — y grabarlas una a una, rezando para que ninguna viniera mal. El CD (1995) lo redujo a un disco; el pendrive de arranque, a un fichero copiado byte a byte. Lo que no ha cambiado en treinta años es la parte que hoy has practicado: decidir las particiones, elegir el cargador de arranque, y aguantar el pulso en el «¿desea escribir los cambios?». Los soportes se encogen; las decisiones son las mismas.\n\n\n\n\n\n\n\nFigura 8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con más de cien veces la capacidad de toda la caja. Una instalación de los 90 cabía justo en una caja así. Foto: JIP, CC BY-SA 3.0, Wikimedia Commons.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-practica-8",
+    "href": "capitulos/cap08.html#sec-practica-8",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.8 Práctica: la sala de operaciones",
+    "text": "8.8 Práctica: la sala de operaciones\nCuaderno en marcha en tu Mint (script sesion08.log): anota ahí tus decisiones y tiempos; dentro de la VM no hace falta grabar nada.\nNivel 1 · Lo esencial\n\nEjercicio 8.1 · El plan, por escrito\nAntes de arrancar el instalador, escribe en tu cuaderno la tabla de particiones que vas a crear: nombre de dispositivo, tamaño, sistema de ficheros y punto de montaje de cada una. Y dos decisiones más: nombre de la máquina y contraseña de root (vacía, y por qué). Pista: la figura del plan tiene todo; el «por qué» de root está en la sección de arrancar el instalador.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nvda1 512 MB · FAT32 · /boot/efi (EFI) — vda2 ~17,5 GB · ext4 · / — vda3 2 GB · swap. Máquina debian-lab. Root vacío: Debian desactiva root y da sudo a tu usuario, como en Mint.\nPor qué así — El plan escrito es lo que separa una instalación de una apuesta. En el PC real añadirás una columna: «¿qué había antes en esa partición?» — y ahí es donde el hábito te salvará los datos.\n\n\n\n\n\n\nEjercicio 8.2 · La instalación\nEjecuta la instalación completa siguiendo las secciones del capítulo — particionado manual, sin escritorio, con servidor SSH — y anota en el cuaderno cuánto ha tardado y en qué pantalla dudaste. Pista: si en el particionado te pierdes, «Deshacer los cambios realizados a las particiones» vuelve al principio sin coste; y si algo sale mal de verdad, Forzar apagado* y volver a arrancar la VM reinicia el instalador desde cero.*\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEntre 20 y 40 minutos la primera vez, gran parte esperando descargas del espejo. Las dudas típicas: la pantalla de root (vacío), el tamaño de la raíz (lo que quede menos el swap) y la selección de programas (desmarcar el escritorio). Al terminar, el login: en consola de texto es la señal de éxito.\nPor qué así — La primera instalación siempre es lenta y torpe; la segunda (ejercicio 8.5) es donde se nota que has aprendido. Por eso el diseño de este capítulo insiste en repetir.\n\n\n\n\n\n\nEjercicio 8.3 · El parte del primer arranque\nEntra en debian-lab y ejecuta la revisión del capítulo: lsblk, df -h /, ip a | grep \"inet \" y systemctl status ssh. Copia los cuatro resultados al cuaderno y compáralos con tu plan del 8.1. Después, actualiza el sistema con apt. Pista: son exactamente los comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nLas tres particiones montadas según el plan; alrededor de 1,3 GB usados; una dirección 192.168.122.x; y ssh.service en active (running). sudo apt update && sudo apt upgrade debe funcionar sin pedir nada raro: la prueba de que el truco de root funcionó.\nPor qué así — Cada comando verifica una decisión del instalador: particiones, tamaño, red, SSH. Un físico no da por bueno un montaje sin medirlo; tú tampoco das por buena una instalación.\n\n\n\n\n\n\nEjercicio 8.4 · La instantánea que importa\nApaga la VM desde dentro (sudo poweroff) y crea la instantánea recien-instalado. Compruébala con virsh desde tu Mint. Pista: capítulo 7, sección de instantáneas — con la máquina apagada, la instantánea guarda el disco y es la más limpia de restaurar.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nVer → Instantáneas → + → nombre recien-instalado. En Mint: virsh snapshot-list debian-lab la muestra con estado shutoff.\nPor qué así — Es el punto de retorno de todo lo que queda de curso: los experimentos de red del bloque D y el servidor del bloque E parten de aquí. Restaurarla es siempre una opción legítima.\n\n\n\n\n\nNivel 2 · El reto\n\nEjercicio 8.5 · Romper el arranque\nCon la instantánea a salvo: borra /boot, reinicia, y observa exactamente dónde se rompe la cadena del capítulo 6. Describe la pantalla en el cuaderno. Después restaura la instantánea y comprueba que /boot está de vuelta. Pista: la orden está en la sección «Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe decir debian-lab.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsudo rm -rf /boot, sudo reboot → GRUB arranca (su llave sigue en la partición EFI, que no has tocado) pero no encuentra el kernel: te deja en grub&gt; o en un error de «file not found». Forzar apagado → restaurar recien-instalado → ls /boot muestra el kernel (vmlinuz-…) y la carpeta grub como si nada.\nPor qué así — Ver romperse un eslabón concreto de la cadena convierte «no arranca» en «falta el kernel, GRUB sigue ahí»: un diagnóstico. Y la restauración es la demostración práctica de para qué sirve el bloque C.\n\n\n\n\n\n\nEjercicio 8.6 · La segunda instalación, cronometrada\nBorra la máquina entera desde virt-manager (Eliminar, marcando borrar el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala Debian desde cero — esta vez con /home en su propia partición de 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el tiempo. Pista: el plan cambia en una línea: la raíz se queda con ~12,5 GB y /home recibe 5 GB, ext4, punto de montaje /home. Crea las cuatro particiones en orden: EFI, raíz, home, swap.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nNormalmente la mitad del tiempo de la primera vez, y lsblk mostrará vda3 montado en /home. Renueva la instantánea recien-instalado sobre esta máquina — es la definitiva.\nPor qué así — «Romperla y reinstalar hasta que aburra» era el objetivo declarado del capítulo. La variante del /home separado enseña el matiz que más se discute en foros — y te deja decidir con criterio propio, que es lo único que cuenta.\n\n\n\n\n\nNivel 3 · Opcional · el pendrive real\n\nEjercicio 8.7 · El pendrive de arranque (sin instalar nada)\nSiguiendo el anexo C1, graba la ISO en un pendrive que puedas borrar, arranca tu portátil desde él hasta el menú del instalador — y sal sin elegir nada: apaga y arranca de nuevo tu Mint. Objetivo: haber visto el menú de arranque del UEFI y el instalador en hardware real sin tocar un solo byte de tu disco. Pista: en el anexo tienes las dos vías — la aplicación «Discos» de Mint y la orden dd — y la regla de oro: lsblk antes y después de pinchar el pendrive para estar seguro de su nombre.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEl pendrive aparece como sda (o sdb) al pinchar; se graba con «Discos → Restaurar imagen de disco» o con sudo dd if=debian….iso of=/dev/sdX bs=4M status=progress (con la X correcta, verificada dos veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o Esc según la marca) y se elige el pendrive. Verás el mismo menú que en la VM; Ctrl+Alt+Supr o apagar te devuelve a Mint intacto.\nPor qué así — Es el ensayo general con el vestuario de verdad, y la única parte del capítulo con un riesgo real: equivocar la letra del pendrive en dd borra el disco equivocado. Por eso la vía gráfica es perfectamente honorable — elige por su nombre y tamaño, sin letras — y por eso el anexo insiste en comprobar dos veces.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/cap08.html#sec-quiz-8",
+    "href": "capitulos/cap08.html#sec-quiz-8",
+    "title": "8  Instalar Linux de verdad",
+    "section": "8.9 Autocomprobación",
+    "text": "8.9 Autocomprobación\nMarca una respuesta por pregunta; la corrección es inmediata.\n\n  La imagen «netinst» de Debian…\n    contiene el sistema completo con escritorio\n    contiene solo lo mínimo para arrancar el instalador; el resto lo descarga del espejo\n    solo sirve para máquinas virtuales\n    Correcto. Por eso pesa 700 MB y por eso el instalador pregunta por la «réplica»: el repositorio del capítulo 5 hace el resto.\n    No exactamente. Es la imagen mínima: arranca el instalador y descarga lo demás de la red. Vale para VM y para PC real por igual.\n  \n  Dejar vacía la contraseña de root en el instalador de Debian…\n    es un fallo de seguridad grave\n    desactiva root y da sudo a tu usuario, como en Mint\n    hace que el instalador se detenga\n    Correcto. Es el comportamiento documentado de Debian y el modelo del capítulo 4: poderes de administrador orden a orden, con recibo.\n    No exactamente. Con root vacío, Debian bloquea esa cuenta y mete a tu usuario en el grupo sudo. Con contraseña, tendrías root activo y un usuario sin sudo.\n  \n  En una instalación UEFI, GRUB deja su llave de arranque en…\n    la partición EFI (FAT32, montada en /boot/efi)\n    la swap\n    el sector cero del disco, siempre\n    Correcto. El buzón del capítulo 6. Por eso la EFI es la primera partición del plan, y por eso borrar /boot rompe el kernel pero no a GRUB.\n    No exactamente. El UEFI busca cargadores en la partición EFI: ahí va GRUB. El «sector cero» era el mundo antiguo (BIOS/MBR).\n  \n  Marcaste «Servidor SSH» en la selección de programas para…\n    poder navegar por internet desde la VM\n    que la máquina acepte conexiones remotas desde tu Mint (bloque E)\n    acelerar la instalación\n    Correcto. Un servidor sin escritorio se administra por SSH; instalarlo desde el primer día es lo que hace cualquier administrador.\n    No exactamente. SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 11.\n  \n  Tras sudo rm -rf /boot, el sistema sigue funcionando hasta reiniciar porque…\n    el kernel ya estaba cargado en RAM; solo falta al arrancar\n    Linux protege /boot y no lo borra de verdad\n    GRUB tiene una copia\n    Correcto. Lo cargado en memoria no depende ya del disco. Al reiniciar, GRUB busca el kernel en /boot y no lo encuentra: cadena rota en el segundo eslabón.\n    No exactamente. Con sudo, rm borra de verdad. Lo que te mantiene vivo es que el kernel ya está en RAM — hasta el próximo arranque.\n  \n  La diferencia más peligrosa entre instalar en la VM y en un PC real es…\n    que el instalador es distinto\n    que en el PC real hay discos con datos y no hay instantánea que restaurar\n    que en el PC real no se puede particionar a mano\n    Correcto. Mismo instalador, mismas decisiones — pero el «¿desea escribir los cambios?» es irreversible. De ahí el plan escrito y la lista del anexo C1.\n    No exactamente. El instalador y el particionado son idénticos. Lo que cambia es el riesgo: datos reales, disco real, sin deshacer.\n  \n\n\n\nAutocomprobación (test de la sección 8.9) — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 a · 6 b.\n\n\nLa próxima sesión\nTienes un servidor instalado por ti, con una dirección 192.168.122.x que todavía no sabes leer. El bloque D empieza ahí: qué es una dirección IP, qué es esa máscara /24, quién reparte las direcciones en tu casa — y la expedición al router de la compañía, en modo solo lectura, para hacer el censo de todos los aparatos que viven en tu red. Guarda sesion08.log: bloque C completo.\n\n\ncap. 8 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu sesion08.log",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html",
+    "href": "anexos/anexo-c1-pc-real.html",
+    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "section": "",
+    "text": "A.1 Antes de tocar nada\nTodo lo que ensayaste en la máquina virtual del capítulo 8 vale para un ordenador físico. Este anexo es la lista que se lee antes de empezar y se sigue durante, porque aquí no hay instantánea que restaurar. Léela entera una vez; el día de la instalación, tenla abierta en el móvil.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
+    "href": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
+    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "section": "",
+    "text": "Copia de seguridad de todo lo que importe del disco de destino — aunque «vayas a dejar Windows». Un error de letra en el particionado no avisa.\nPlan de particiones escrito (ejercicio 8.1), con una columna más: qué hay ahora en cada partición del disco y qué va a pasarle.\nSi vas a convivir con Windows: reduce su partición desde Windows (Administración de discos → Reducir volumen) antes de arrancar el instalador, y desactiva el «inicio rápido» de Windows, que deja el disco a medio cerrar.\nISO verificada con sha256sum (capítulo 7). Debian incluye desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst: ya no hace falta la imagen «non-free».\nUn pendrive de 2 GB o más que puedas borrar por completo, y cable de red si es posible: la instalación por cable ahorra sorpresas con la Wi-Fi.\nLa tecla del menú de arranque de tu equipo, buscada antes: suele ser F12 (Dell, Lenovo), F9 (HP), Esc o F2 (ASUS, Acer), Opción (Mac Intel). Se pulsa nada más encender.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
+    "href": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
+    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "section": "A.2 Grabar el pendrive",
+    "text": "A.2 Grabar el pendrive\nLa ISO se copia al pendrive byte a byte — no se «pega» como un fichero. Dos vías igual de válidas:\nCon ratón (recomendada la primera vez). En Mint, aplicación Discos: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → Restaurar imagen de disco → elige la ISO → Iniciar restauración. Eliges el destino por su nombre, sin letras que confundir.\nCon terminal. Primero, la regla de oro: lsblk antes de pinchar el pendrive y después, para ver qué nombre nuevo aparece (sda, sdb…). Luego, con esa letra y solo con esa:\nmarcos@portatil:~/Descargas$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  14,9G  0 disk\n└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON\nnvme0n1     259:0    0 476,9G  0 disk\nmarcos@portatil:~/Descargas$ sudo umount /dev/sda1\nmarcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress\ndd copia bloques de if (input file) a of (output file) sin preguntar nada: si of= apunta a tu disco interno, lo destruye en silencio. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (/dev/sda), no una partición (sda1). Cuando termine, sync y expulsar (capítulo 6).",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
+    "href": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
+    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "section": "A.3 Arrancar e instalar",
+    "text": "A.3 Arrancar e instalar\n\nPendrive pinchado, encender, tecla del menú de arranque, elegir el pendrive (la entrada que dice UEFI: delante — no la otra, si aparecen dos).\nSi el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. Secure Boot puede quedarse activado: Debian lo soporta.\nInstalador: idénticas pantallas que en la VM. En el particionado manual, el disco se llamará nvme0n1 o sda y tendrá particiones ya. Con Windows al lado: no crees una tabla nueva (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como Partición del sistema EFI sin formatearla.\nContraseña de root vacía → tu usuario con sudo (capítulo 8).\nSelección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.\nGRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
+    "href": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
+    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "section": "A.4 Después del primer arranque",
+    "text": "A.4 Después del primer arranque\n\nlsblk y df -h: el parte del capítulo 8, sobre hardware real.\nsudo apt update && sudo apt upgrade.\nWi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar en lspci | grep -i (red, VGA, audio) para saber qué chip tienes, y de ahí a la wiki de Debian.\nGuarda el plan de particiones y tus notas en el cuaderno del curso: la próxima instalación la harás en la mitad de tiempo.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
     "objectID": "anexos/anexo-windows.html",
     "href": "anexos/anexo-windows.html",
-    "title": "Apéndice A — Vengo de Windows",
+    "title": "Apéndice B — Vengo de Windows",
     "section": "",
     "text": "Pendiente de redacción tras el piloto.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows</span>"
     ]
   }
 ]
