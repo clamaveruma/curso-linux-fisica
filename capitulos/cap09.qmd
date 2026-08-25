@@ -74,8 +74,33 @@ principio identifican la *red* y cuántos quedan para la *máquina*.
 
 Con `/24`, los 24 primeros bits — tres números — son la red:
 `192.168.1`. Queda un byte para las máquinas: 254 direcciones útiles
-(la `.0` nombra a la red y la `.255` es la de «todos a la vez»). Y la
-regla que lo explica todo: **dos máquinas de la misma red se hablan
+(la `.0` nombra a la red y la `.255` es la de «todos a la vez»).
+
+La misma máscara se escribe de tres maneras, y te encontrarás las
+tres: la **barra** (`/24`) que usa `ip a`; la **decimal con puntos**
+(`255.255.255.0`) que enseñan el icono de red y el router; y la
+**binaria**, que es lo que la máquina usa de verdad — unos donde hay
+red, ceros donde hay máquina. Basta con escribirla en binario una vez
+para que las otras dos dejen de ser arbitrarias:
+
+| Barra | Decimal con puntos | Binario | Máquinas útiles | Típico de… |
+|-------|--------------------|---------|-----------------|------------|
+| `/24` | `255.255.255.0` | `11111111.11111111.11111111.00000000` | 254 | tu casa, un laboratorio |
+| `/16` | `255.255.0.0` | `11111111.11111111.00000000.00000000` | 65 534 | un campus |
+| `/8` | `255.0.0.0` | `11111111.00000000.00000000.00000000` | 16 777 214 | la red `10.x.x.x` de una multinacional |
+| `/25` | `255.255.255.128` | `11111111.11111111.11111111.10000000` | 126 | media casa: la máscara ya no cae en un punto |
+| `/30` | `255.255.255.252` | `11111111.11111111.11111111.11111100` | 2 | un enlace entre dos routers |
+
+Dos ejemplos leídos del todo. `192.168.1.34/24`: máscara
+`255.255.255.0`, en binario 24 unos y 8 ceros; red `192.168.1.0`,
+máquina `34`, vecinos del `.1` al `.254`. Y `10.20.30.40/8`: máscara
+`255.0.0.0`, 8 unos y 24 ceros; red `10.0.0.0`, y los otros tres
+números — `20.30.40` — identifican la máquina entre casi 17 millones.
+El `/25` es el que delata a quien no ha visto el binario: el `128` de
+`255.255.255.128` es simplemente `10000000` — un bit más de red,
+robado a las máquinas.
+
+Y la regla que lo explica todo: **dos máquinas de la misma red se hablan
 directamente; para llegar a otra red hace falta un intermediario**, el
 **router**, al que tu máquina llama *puerta de enlace* (*gateway*).
 `ip route` te dice cuál es la tuya:
