@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice A — Vengo de Windows (o de macOS) – Bendito maldito Linux</title>
+<title>Apéndice C — Scripting: bucles, condiciones y cron – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-c1-pc-real.html" rel="next">
-<link href="../capitulos/proyecto-final.html" rel="prev">
+<link href="../anexos/anexo-e1-ia.html" rel="next">
+<link href="../anexos/anexo-c1-pc-real.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -208,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link active">
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
@@ -220,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
+  <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
@@ -242,19 +277,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#los-dos-caminos" id="toc-los-dos-caminos" class="nav-link active" data-scroll-target="#los-dos-caminos">Los dos caminos</a></li>
-  <li><a href="#camino-a-mint-en-virtualbox" id="toc-camino-a-mint-en-virtualbox" class="nav-link" data-scroll-target="#camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</a></li>
-  <li><a href="#camino-b-wsl2" id="toc-camino-b-wsl2" class="nav-link" data-scroll-target="#camino-b-wsl2">Camino B: WSL2</a></li>
-  <li><a href="#lo-que-no-cambia" id="toc-lo-que-no-cambia" class="nav-link" data-scroll-target="#lo-que-no-cambia">Lo que no cambia</a></li>
+  <li><a href="#variables-y-sustitución" id="toc-variables-y-sustitución" class="nav-link active" data-scroll-target="#variables-y-sustitución">Variables y sustitución</a></li>
+  <li><a href="#el-bucle-for" id="toc-el-bucle-for" class="nav-link" data-scroll-target="#el-bucle-for">El bucle <code>for</code></a></li>
+  <li><a href="#condiciones-if" id="toc-condiciones-if" class="nav-link" data-scroll-target="#condiciones-if">Condiciones: <code>if</code></a></li>
+  <li><a href="#while-y-leer-línea-a-línea" id="toc-while-y-leer-línea-a-línea" class="nav-link" data-scroll-target="#while-y-leer-línea-a-línea"><code>while</code> y leer línea a línea</a></li>
+  <li><a href="#un-script-completo" id="toc-un-script-completo" class="nav-link" data-scroll-target="#un-script-completo">Un script completo</a></li>
+  <li><a href="#cron-que-se-ejecute-sin-ti" id="toc-cron-que-se-ejecute-sin-ti" class="nav-link" data-scroll-target="#cron-que-se-ejecute-sin-ti"><code>cron</code>: que se ejecute sin ti</a></li>
+  <li><a href="#práctica" id="toc-práctica" class="nav-link" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-windows" class="quarto-section-identifier">Apéndice A — Vengo de Windows (o de macOS)</span></h1>
+<h1 class="title"><span id="sec-anexo-b1" class="quarto-section-identifier">Apéndice C — Scripting: bucles, condiciones y <code>cron</code></span></h1>
 </div>
 
 
@@ -271,74 +309,158 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>El curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.</p>
-<section id="los-dos-caminos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="los-dos-caminos">Los dos caminos</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>A · Un Mint completo en VirtualBox</strong></th>
-<th><strong>B · WSL2 (Ubuntu dentro de Windows)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Qué es</td>
-<td>una máquina virtual con Linux Mint entero, escritorio incluido</td>
-<td>una terminal Ubuntu integrada en Windows, sin escritorio</td>
-</tr>
-<tr class="even">
-<td>Instalar</td>
-<td>30–40 min; ISO de Mint + VirtualBox</td>
-<td>5 min; una orden en PowerShell</td>
-</tr>
-<tr class="odd">
-<td>Bloques A y B (caps. 1–6)</td>
-<td>✔ todo</td>
-<td>✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica</td>
-</tr>
-<tr class="even">
-<td>Bloque C (caps. 7–8)</td>
-<td>✔ con un matiz (abajo)</td>
-<td>✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado</td>
-</tr>
-<tr class="odd">
-<td>Bloques D y E (caps. 9–12)</td>
-<td>✔</td>
-<td>✔ (la red es la de Windows; SSH funciona igual)</td>
-</tr>
-<tr class="even">
-<td>Recomendado para</td>
-<td>seguir el curso entero como está escrito</td>
-<td>empezar hoy con la terminal, o si tu PC va justo de RAM</td>
-</tr>
-</tbody>
-</table>
-<p>Si puedes, el <strong>camino A</strong>: es un Linux de verdad — con su <code>apt</code>, su <code>systemd</code>, su <code>lsblk</code> — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es <strong>UTM</strong> (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).</p>
+<p>En el capítulo 2 renombraste cinco ficheros a mano y el curso prometió algo mejor; en el capítulo 3 dijimos que las tuberías transforman texto pero no <em>ejecutan una orden por cada fichero</em>; en el 4 escribiste tu primer script. Este anexo cierra esa deuda: las cuatro piezas de bash que convierten comandos sueltos en programas — y <code>cron</code>, para que se ejecuten sin ti.</p>
+<section id="variables-y-sustitución" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="variables-y-sustitución">Variables y sustitución</h2>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">dir=resultados_$(date +%F)</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">echo "$dir"</span>
+<span class="t-out">resultados_2026-08-26</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">mkdir "$dir"</span></code></pre>
+<p>Dos ideas. Una variable se crea con <code>nombre=valor</code> (sin espacios alrededor del <code>=</code>) y se lee con <code>$nombre</code>. Y <code>$(comando)</code> ejecuta el comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla que evita el noventa por ciento de los sustos: <strong>las variables van siempre entre comillas dobles</strong> — <code>"$dir"</code> — para que un valor con espacios (capítulo 1) no se rompa en dos argumentos.</p>
 </section>
-<section id="camino-a-mint-en-virtualbox" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</h2>
-<ol type="1">
-<li>Descarga <strong>VirtualBox</strong> (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de <strong>Linux Mint</strong> (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: <code>Get-FileHash linuxmint-22.iso -Algorithm SHA256</code>.</li>
-<li><strong>Nueva máquina</strong>: nombre <code>mint</code>, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.</li>
-<li>Arranca. Mint entra en modo <em>live</em> — un escritorio de prueba —; el icono <strong>Install Linux Mint</strong> lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.</li>
-<li>Tras reiniciar, en el menú <em>Dispositivos → Insertar imagen de CD de las Guest Additions</em> e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.</li>
-<li>Ya estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox <em>Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado</em> para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.</li>
-</ol>
+<section id="el-bucle-for" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="el-bucle-for">El bucle <code>for</code></h2>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">for f in *.csv; do echo "procesando $f"; done</span>
+<span class="t-out">procesando run01.csv</span>
+<span class="t-out">procesando run02.csv</span>
+<span class="t-out">procesando run03.csv</span></code></pre>
+<p><code>for f in LISTA; do …; done</code> repite el bloque una vez por elemento, con <code>$f</code> valiendo cada uno. La lista puede ser un comodín del capítulo 2 (<code>*.csv</code>), una salida de comando (<code>$(cat lista.txt)</code>) o palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en lote quitando el <code>_final</code>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
+<span class="t-out">run01_final.csv  run02_final.csv  run03_final.csv</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">for f in *_final.csv; do mv "$f" "${f/_final/}"; done</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
+<span class="t-out">run01.csv  run02.csv  run03.csv</span></code></pre>
+<p><code>${f/_final/}</code> es una <em>sustitución</em> dentro de la variable: el valor de <code>f</code> con <code>_final</code> cambiado por nada. Hay una familia entera: <code>${f%.csv}</code> quita la extensión, <code>${f#run}</code> quita el prefijo. Antes de un <code>mv</code> en lote, el gesto de seguridad es cambiar <code>mv</code> por <code>echo mv</code> y mirar qué <em>haría</em>: la simulación en seco.</p>
 </section>
-<section id="camino-b-wsl2" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-b-wsl2">Camino B: WSL2</h2>
-<p>En PowerShell como administrador: <code>wsl --install</code> — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación <em>Ubuntu</em> del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (<code>sudo apt install</code>, <code>nano</code>, tuberías, permisos, <code>htop</code>). Tres avisos honestos: tus ficheros de Windows están en <code>/mnt/c/…</code>, más lentos que tu casa Linux; <code>lsblk</code> y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.</p>
+<section id="condiciones-if" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="condiciones-if">Condiciones: <code>if</code></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a># comprueba.sh — ¿existe el fichero que me pasan?</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>if [ -f "$1" ]; then</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    echo "$1 existe y tiene $(wc -l &lt; "$1") líneas"</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>else</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    echo "no encuentro $1"</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    exit 1</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fi</span></code></pre></div>
+<p><code>$1</code> es el primer argumento con que se llamó al script (<code>./comprueba.sh adquisicion.log</code>), <code>$2</code> el segundo, y así. <code>[ -f "$1" ]</code> pregunta «¿es un fichero?»; otros: <code>-d</code> directorio, <code>-z</code> cadena vacía, <code>-gt</code> mayor que para números. <code>exit 1</code> termina con código de error: es el <code>$?</code> que puedes consultar después, y lo que <code>&amp;&amp;</code> (capítulo 5) mira para decidir si continúa. Un script que comprueba sus entradas y falla <em>con mensaje</em> vale el doble que uno que simplemente revienta.</p>
 </section>
-<section id="lo-que-no-cambia" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="lo-que-no-cambia">Lo que no cambia</h2>
-<p>Sea cual sea el camino: cuaderno con <code>script</code>, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM. La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.</p>
+<section id="while-y-leer-línea-a-línea" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="while-y-leer-línea-a-línea"><code>while</code> y leer línea a línea</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a># por cada sensor de la lista, cuenta sus errores</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>while read -r sensor; do</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    n=$(grep -c "ERROR $sensor" adquisicion.log)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    echo "$sensor: $n errores"</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>done &lt; sensores.txt</span></code></pre></div>
+<p><code>while read -r linea; do …; done &lt; fichero</code> recorre un fichero línea a línea — la forma correcta de tratar listas que vienen de otro sitio. Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los scripts son el pegamento que convierte comandos sueltos en procedimiento.</p>
+</section>
+<section id="un-script-completo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="un-script-completo">Un script completo</h2>
+<p>Todo junto, con las dos líneas de cabecera que distinguen a un script serio: <code>set -e</code> (para al primer error, en vez de seguir a ciegas) y un uso claro cuando faltan argumentos.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a># organiza.sh — mueve a datos/ los CSV de un run y anota el registro</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>set -e</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>if [ $# -ne 1 ]; then</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    echo "uso: $0 CARPETA_DEL_EXPERIMENTO"</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    exit 1</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fi</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>cd "$1"</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mkdir -p datos descartes</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>for f in *.csv; do</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    if grep -q "sensor congelado" "$f"; then</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        mv "$f" descartes/</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    else</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        mv "$f" datos/</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    fi</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    echo "$(date +%T) $f" &gt;&gt; registro.log</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>done</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>echo "hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados"</span></code></pre></div>
+<p>Es el ejercicio del capítulo 2 hecho en un segundo y repetible mañana con otro experimento. <code>$#</code> es el número de argumentos; <code>$0</code>, el nombre del propio script. Con <code>chmod u+x</code> y en tu <code>~/bin</code> (capítulo 5), es una herramienta tuya.</p>
+</section>
+<section id="cron-que-se-ejecute-sin-ti" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="cron-que-se-ejecute-sin-ti"><code>cron</code>: que se ejecute sin ti</h2>
+<p><code>cron</code> ejecuta comandos a horas fijas. Tu tabla se edita con <code>crontab -e</code> (la primera vez pregunta qué editor: <code>nano</code>), y cada línea son cinco campos de tiempo y un comando:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a># min hora día mes díasemana   comando</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   0   8   *   *    1          /home/marcos/bin/informe.sh &gt;&gt; /home/marcos/informes.log 2&gt;&amp;1</span></code></pre></div>
+<p>La primera línea copia tu carpeta de física al servidor del capítulo 11 cada noche a las 2:30 — una copia de seguridad que ya no depende de acordarte. La segunda lanza tu informe los lunes a las 8. Tres reglas de <code>cron</code>: <strong>rutas absolutas</strong> (no hay <code>cd</code>, no hay tu <code>PATH</code> de la terminal), <strong>redirige la salida</strong> a un fichero (si no, se pierde o se convierte en correo), y prueba el comando <em>a mano</em> antes de programarlo. En sistemas con <code>systemd</code> existe el equivalente moderno — los <em>timers</em> — que verás en servidores; la idea es la misma.</p>
+</section>
+<section id="práctica" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
+<div class="ejercicio">
+<p><strong>Ejercicio B1.1 · La deuda del capítulo 2</strong></p>
+<p>Crea una carpeta con <code>touch run0{1..5}_final.csv</code> (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando <code>_final</code> — primero en seco con <code>echo mv</code>, luego de verdad.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>for f in *_final.csv; do echo mv "$f" "${f/_final/}"; done</code> enseña las cinco órdenes; sin el <code>echo</code>, las ejecuta. <code>ls</code> confirma.</p>
+<p><strong>Por qué así</strong> — El ensayo en seco es el hábito que convierte un bucle con <code>mv</code> (o <code>rm</code>) de peligro en herramienta. Te costó cinco renombrados en el capítulo 2; con cinco mil costaría lo mismo.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio B1.2 · Un script con criterio</strong></p>
+<p>Escribe <code>resumen.sh</code> que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas <code>ERROR</code>, <code>WARN</code> e <code>INFO</code> tiene — con un bucle sobre los tres niveles.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>#!/bin/bash
+set -e
+[ -f "$1" ] || { echo "uso: $0 FICHERO.log"; exit 1; }
+for nivel in ERROR WARN INFO; do
+    echo "$nivel: $(grep -c " $nivel " "$1")"
+done</code></pre>
+<p><strong>Por qué así</strong> — Tres piezas del anexo en ocho líneas: argumento, comprobación con salida de error, y bucle con una tubería dentro. <code>[ … ] || { …; }</code> es la forma compacta de «si no, protesta y sal».</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio B1.3 · Copia nocturna (opcional)</strong></p>
+<p>Programa con <code>cron</code> una copia diaria de tu carpeta de física a <code>debian-lab</code> con <code>rsync</code>, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que <code>cron</code> lo ejecuta, y déjalo en su hora definitiva.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>crontab -e</code> y una línea como <code>15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&amp;1</code>. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 11) funciona sin ti — <code>cron</code> no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.</p>
+<p><strong>Por qué así</strong> — Es el primer proceso <em>automático</em> de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -684,13 +806,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Proyecto final: tu primer servidor</span>
+      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA como herramienta, no como oráculo">
+        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

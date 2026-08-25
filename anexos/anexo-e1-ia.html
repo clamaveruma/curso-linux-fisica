@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice A — Vengo de Windows (o de macOS) – Bendito maldito Linux</title>
+<title>Apéndice D — La IA como herramienta, no como oráculo – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-c1-pc-real.html" rel="next">
-<link href="../capitulos/proyecto-final.html" rel="prev">
+<link href="../anexos/anexo-b1-scripting.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -208,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link active">
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
@@ -226,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
   </div>
 </li>
@@ -242,19 +241,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#los-dos-caminos" id="toc-los-dos-caminos" class="nav-link active" data-scroll-target="#los-dos-caminos">Los dos caminos</a></li>
-  <li><a href="#camino-a-mint-en-virtualbox" id="toc-camino-a-mint-en-virtualbox" class="nav-link" data-scroll-target="#camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</a></li>
-  <li><a href="#camino-b-wsl2" id="toc-camino-b-wsl2" class="nav-link" data-scroll-target="#camino-b-wsl2">Camino B: WSL2</a></li>
-  <li><a href="#lo-que-no-cambia" id="toc-lo-que-no-cambia" class="nav-link" data-scroll-target="#lo-que-no-cambia">Lo que no cambia</a></li>
+  <li><a href="#por-qué-no-se-copia-a-ciegas" id="toc-por-qué-no-se-copia-a-ciegas" class="nav-link active" data-scroll-target="#por-qué-no-se-copia-a-ciegas">Por qué no se copia a ciegas</a></li>
+  <li><a href="#el-protocolo" id="toc-el-protocolo" class="nav-link" data-scroll-target="#el-protocolo">El protocolo</a></li>
+  <li><a href="#para-qué-es-excelente" id="toc-para-qué-es-excelente" class="nav-link" data-scroll-target="#para-qué-es-excelente">Para qué es excelente</a></li>
+  <li><a href="#para-qué-no" id="toc-para-qué-no" class="nav-link" data-scroll-target="#para-qué-no">Para qué no</a></li>
+  <li><a href="#un-ejemplo-completo" id="toc-un-ejemplo-completo" class="nav-link" data-scroll-target="#un-ejemplo-completo">Un ejemplo completo</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-windows" class="quarto-section-identifier">Apéndice A — Vengo de Windows (o de macOS)</span></h1>
+<h1 class="title"><span id="sec-anexo-e1" class="quarto-section-identifier">Apéndice D — La IA como herramienta, no como oráculo</span></h1>
 </div>
 
 
@@ -271,74 +271,45 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>El curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.</p>
-<section id="los-dos-caminos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="los-dos-caminos">Los dos caminos</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>A · Un Mint completo en VirtualBox</strong></th>
-<th><strong>B · WSL2 (Ubuntu dentro de Windows)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Qué es</td>
-<td>una máquina virtual con Linux Mint entero, escritorio incluido</td>
-<td>una terminal Ubuntu integrada en Windows, sin escritorio</td>
-</tr>
-<tr class="even">
-<td>Instalar</td>
-<td>30–40 min; ISO de Mint + VirtualBox</td>
-<td>5 min; una orden en PowerShell</td>
-</tr>
-<tr class="odd">
-<td>Bloques A y B (caps. 1–6)</td>
-<td>✔ todo</td>
-<td>✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica</td>
-</tr>
-<tr class="even">
-<td>Bloque C (caps. 7–8)</td>
-<td>✔ con un matiz (abajo)</td>
-<td>✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado</td>
-</tr>
-<tr class="odd">
-<td>Bloques D y E (caps. 9–12)</td>
-<td>✔</td>
-<td>✔ (la red es la de Windows; SSH funciona igual)</td>
-</tr>
-<tr class="even">
-<td>Recomendado para</td>
-<td>seguir el curso entero como está escrito</td>
-<td>empezar hoy con la terminal, o si tu PC va justo de RAM</td>
-</tr>
-</tbody>
-</table>
-<p>Si puedes, el <strong>camino A</strong>: es un Linux de verdad — con su <code>apt</code>, su <code>systemd</code>, su <code>lsblk</code> — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es <strong>UTM</strong> (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).</p>
+<p>Este anexo nace de una frase de la encuesta con la que se diseñó el curso: «cuando algo falla, le pregunto a una IA y copio-pego sin entender». No hay nada malo en preguntar — este propio curso te ha animado a hacerlo en el capítulo 3. Lo malo es el <em>copiar-pegar sin entender</em>, y contra eso tienes ahora doce capítulos de munición. Aquí está el protocolo.</p>
+<section id="por-qué-no-se-copia-a-ciegas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="por-qué-no-se-copia-a-ciegas">Por qué no se copia a ciegas</h2>
+<p>Una IA no ve tu máquina. No sabe qué distro tienes, qué versión, qué hay en ese directorio, si ese disco es el tuyo. Genera comandos <em>plausibles</em> — y a veces inventa opciones que no existen, o mezcla la sintaxis de dos herramientas. Tres consecuencias reales que este curso te ha enseñado a reconocer: un <code>rm -rf</code> con la ruta equivocada (capítulo 2), un <code>sudo</code> que no entiendes (capítulo 4), y un <code>curl … | bash</code> — descargar un script de internet y ejecutarlo sin mirarlo — que es, literalmente, dejar que un desconocido teclee en tu terminal con tus permisos.</p>
 </section>
-<section id="camino-a-mint-en-virtualbox" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</h2>
+<section id="el-protocolo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="el-protocolo">El protocolo</h2>
 <ol type="1">
-<li>Descarga <strong>VirtualBox</strong> (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de <strong>Linux Mint</strong> (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: <code>Get-FileHash linuxmint-22.iso -Algorithm SHA256</code>.</li>
-<li><strong>Nueva máquina</strong>: nombre <code>mint</code>, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.</li>
-<li>Arranca. Mint entra en modo <em>live</em> — un escritorio de prueba —; el icono <strong>Install Linux Mint</strong> lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.</li>
-<li>Tras reiniciar, en el menú <em>Dispositivos → Insertar imagen de CD de las Guest Additions</em> e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.</li>
-<li>Ya estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox <em>Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado</em> para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.</li>
+<li><strong>Pregunta con contexto.</strong> «Linux Mint 22, quiero renombrar todos los <code>.csv</code> de esta carpeta quitando <code>_final</code>; he probado <code>mv</code> uno a uno». Cuanto más concreto, menos inventa.</li>
+<li><strong>Lee el comando con la anatomía del capítulo 1</strong>: programa, opciones, argumentos. Si hay una tubería, pieza a pieza (capítulo 3). Si hay <code>sudo</code>, <code>rm</code>, <code>dd</code>, <code>&gt;</code> o <code>|</code>, subraya cada uno.</li>
+<li><strong>Verifica lo que no reconozcas</strong> con <code>man</code> o <code>--help</code> (capítulo 1). Una opción que no aparece en <code>man</code> no existe — la IA la inventó.</li>
+<li><strong>Clasifica el riesgo</strong>: <em>lectura</em> (<code>ls</code>, <code>grep</code>, <code>cat</code>, <code>df</code>…) — ejecuta; <em>escritura</em> (<code>mv</code>, <code>cp</code>, <code>&gt;</code>, <code>chmod</code>) — copia de seguridad o ensayo en seco con <code>echo</code>; <em>destructivo o privilegiado</em> (<code>rm -r</code>, <code>sudo</code>, <code>dd</code>, <code>mkfs</code>, <code>curl | bash</code>) — solo si lo entiendes entero, y la primera vez en la VM (capítulo 7).</li>
+<li><strong>Ejecuta en el sitio adecuado</strong> y <strong>contrasta el resultado</strong> con lo que esperabas — <code>ls</code> después de un <code>mv</code>, <code>df</code> después de limpiar. Si no cuadra, para: no pidas «otro comando» hasta saber qué pasó.</li>
 </ol>
 </section>
-<section id="camino-b-wsl2" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-b-wsl2">Camino B: WSL2</h2>
-<p>En PowerShell como administrador: <code>wsl --install</code> — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación <em>Ubuntu</em> del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (<code>sudo apt install</code>, <code>nano</code>, tuberías, permisos, <code>htop</code>). Tres avisos honestos: tus ficheros de Windows están en <code>/mnt/c/…</code>, más lentos que tu casa Linux; <code>lsblk</code> y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.</p>
+<section id="para-qué-es-excelente" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="para-qué-es-excelente">Para qué es excelente</h2>
+<ul>
+<li><strong>Explicar un comando ajeno.</strong> Al revés de lo habitual: pega el comando de un foro y pregunta «¿qué hace exactamente, pieza a pieza?». Contrasta con <code>man</code>.</li>
+<li><strong>Traducir un mensaje de error.</strong> Pega la salida completa (el <code>2&gt;</code> del capítulo 3 sirve para guardarla) y pregunta qué significa — no «cómo lo arreglo».</li>
+<li><strong>Construir tuberías y expresiones</strong> que no recuerdas: «<code>grep</code> de las líneas que empiezan por fecha y tienen ERROR». Luego, <code>head</code> para comprobar (capítulo 3).</li>
+<li><strong>Recordar sintaxis</strong>: el <code>for</code> de bash, los campos de <code>cron</code>, las opciones de <code>rsync</code>. Es el <code>man</code> con lenguaje natural.</li>
+</ul>
 </section>
-<section id="lo-que-no-cambia" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="lo-que-no-cambia">Lo que no cambia</h2>
-<p>Sea cual sea el camino: cuaderno con <code>script</code>, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM. La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.</p>
+<section id="para-qué-no" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="para-qué-no">Para qué no</h2>
+<ul>
+<li><strong>Saber el estado de tu sistema.</strong> Eso lo sabes tú con <code>ip a</code>, <code>lsblk</code>, <code>df</code>, <code>which python</code>. Pregunta después de mirar, no antes.</li>
+<li><strong>Tomar decisiones irreversibles.</strong> «¿Borro esta partición?» no se le pregunta a nadie que no vea tu <code>lsblk</code>.</li>
+<li><strong>Sustituir el cuaderno.</strong> Un comando que funcionó y no anotaste es un comando que volverás a pedir.</li>
+</ul>
+<div class="aviso">
+<p><strong>△ Cuidado · Las tres frases que deben encender la alarma</strong></p>
+<p>«Ejecuta esto con <code>sudo</code> y debería funcionar» — sin explicar qué hace. «Copia esto en la terminal: <code>curl … | sudo bash</code>» — un script remoto con todos los poderes. Y «prueba <code>rm -rf</code> en esa carpeta para limpiar» — sin haber visto qué contiene. Ante cualquiera de las tres, el protocolo entero, sin saltarse pasos. El curso no te ha dado comandos: te ha dado el criterio para leerlos. Úsalo.</p>
+</div>
+</section>
+<section id="un-ejemplo-completo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="un-ejemplo-completo">Un ejemplo completo</h2>
+<p>Pregunta: «Debian 13 sin escritorio, quiero ver qué carpetas de mi casa ocupan más espacio». Respuesta típica: <code>du -sh ~/* | sort -rh | head</code>. Lectura: <code>du</code> (capítulo 6) con <code>-s</code> y <code>-h</code>; tubería a <code>sort</code> con <code>-r</code> y <code>-h</code> — <code>man sort</code> confirma que <code>-h</code> ordena magnitudes humanas —; <code>head</code> para diez líneas. Riesgo: lectura pura. Ejecutas. Contrastas: las cifras cuadran con <code>df</code>. Treinta segundos, entendido, anotado en el cuaderno. Así se usa una IA cuando se sabe Linux.</p>
 
 
 </section>
@@ -684,14 +655,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Proyecto final: tu primer servidor</span>
+      <a href="../anexos/anexo-b1-scripting.html" class="pagination-link" aria-label="Scripting: bucles, condiciones y `cron`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

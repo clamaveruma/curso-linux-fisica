@@ -14,7 +14,7 @@
     "href": "index.html#qué-necesitas-para-empezar",
     "title": "Bendito maldito Linux",
     "section": "Qué necesitas para empezar",
-    "text": "Qué necesitas para empezar\nLo que suponemos que ya sabes. Manejar un ordenador con soltura por la vía gráfica: ventanas, carpetas, navegador, instalar un programa. Nada más. No hace falta haber abierto una terminal en tu vida — ese es justo el punto de partida. Saber programar (Python, C…) ayuda en los ejercicios de análisis de las últimas sesiones, pero no es requisito para empezar.\nLo que necesitas tener instalado. Un Linux de escritorio funcionando. El curso está escrito y probado sobre Linux Mint, y cualquier pariente cercano — Ubuntu y sus derivados, Debian con escritorio — sirve exactamente igual: los comandos son los mismos y solo cambiará algún detalle cosmético de los menús. Vale cualquier ordenador de la última década y una conexión a internet para descargar los materiales.\n¿Que tu máquina tiene Windows o macOS? El apéndice Vengo de Windows te preparará un Linux dentro de tu sistema (pendiente de redacción durante el piloto).\nAlgunos bloques pedirán algo más, y se avisará al llegar: unos 8 GB de RAM y 25 GB libres para la máquina virtual del bloque C (virtualización e instalación; el software, KVM y virt-manager, viene en los repositorios de tu Linux) y acceso al router de tu casa en el bloque D (redes) — nada que comprar, nada que arriesgar.\n\n© 2026 Claudio M. Martínez Velasco. El texto de este curso se publica bajo licencia Creative Commons Atribución–CompartirIgual 4.0 (CC BY-SA 4.0). Las fotografías conservan las licencias indicadas en su pie de figura.",
+    "text": "Qué necesitas para empezar\nLo que suponemos que ya sabes. Manejar un ordenador con soltura por la vía gráfica: ventanas, carpetas, navegador, instalar un programa. Nada más. No hace falta haber abierto una terminal en tu vida — ese es justo el punto de partida. Saber programar (Python, C…) ayuda en los ejercicios de análisis de las últimas sesiones, pero no es requisito para empezar.\nLo que necesitas tener instalado. Un Linux de escritorio funcionando. El curso está escrito y probado sobre Linux Mint, y cualquier pariente cercano — Ubuntu y sus derivados, Debian con escritorio — sirve exactamente igual: los comandos son los mismos y solo cambiará algún detalle cosmético de los menús. Vale cualquier ordenador de la última década y una conexión a internet para descargar los materiales.\n¿Que tu máquina tiene Windows o macOS? El apéndice Vengo de Windows te prepara un Linux dentro de tu sistema, con dos caminos según lo que quieras cubrir.\nAlgunos bloques pedirán algo más, y se avisará al llegar: unos 8 GB de RAM y 25 GB libres para la máquina virtual del bloque C (virtualización e instalación; el software, KVM y virt-manager, viene en los repositorios de tu Linux) y acceso al router de tu casa en el bloque D (redes) — nada que comprar, nada que arriesgar.\n\n© 2026 Claudio M. Martínez Velasco. El texto de este curso se publica bajo licencia Creative Commons Atribución–CompartirIgual 4.0 (CC BY-SA 4.0). Las fotografías conservan las licencias indicadas en su pie de figura.",
     "crumbs": [
       "Bienvenida"
     ]
@@ -1200,69 +1200,256 @@
     ]
   },
   {
-    "objectID": "anexos/anexo-c1-pc-real.html",
-    "href": "anexos/anexo-c1-pc-real.html",
-    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "objectID": "anexos/anexo-windows.html",
+    "href": "anexos/anexo-windows.html",
+    "title": "Apéndice A — Vengo de Windows (o de macOS)",
     "section": "",
-    "text": "A.1 Antes de tocar nada\nTodo lo que ensayaste en la máquina virtual del capítulo 8 vale para un ordenador físico. Este anexo es la lista que se lee antes de empezar y se sigue durante, porque aquí no hay instantánea que restaurar. Léela entera una vez; el día de la instalación, tenla abierta en el móvil.",
+    "text": "Los dos caminos\nEl curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.\nSi puedes, el camino A: es un Linux de verdad — con su apt, su systemd, su lsblk — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es UTM (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#los-dos-caminos",
+    "href": "anexos/anexo-windows.html#los-dos-caminos",
+    "title": "Apéndice A — Vengo de Windows (o de macOS)",
+    "section": "",
+    "text": "A · Un Mint completo en VirtualBox\nB · WSL2 (Ubuntu dentro de Windows)\n\n\n\n\nQué es\nuna máquina virtual con Linux Mint entero, escritorio incluido\nuna terminal Ubuntu integrada en Windows, sin escritorio\n\n\nInstalar\n30–40 min; ISO de Mint + VirtualBox\n5 min; una orden en PowerShell\n\n\nBloques A y B (caps. 1–6)\n✔ todo\n✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica\n\n\nBloque C (caps. 7–8)\n✔ con un matiz (abajo)\n✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado\n\n\nBloques D y E (caps. 9–12)\n✔\n✔ (la red es la de Windows; SSH funciona igual)\n\n\nRecomendado para\nseguir el curso entero como está escrito\nempezar hoy con la terminal, o si tu PC va justo de RAM",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
+    "href": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
+    "title": "Apéndice A — Vengo de Windows (o de macOS)",
+    "section": "Camino A: Mint en VirtualBox",
+    "text": "Camino A: Mint en VirtualBox\n\nDescarga VirtualBox (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de Linux Mint (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: Get-FileHash linuxmint-22.iso -Algorithm SHA256.\nNueva máquina: nombre mint, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.\nArranca. Mint entra en modo live — un escritorio de prueba —; el icono Install Linux Mint lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.\nTras reiniciar, en el menú Dispositivos → Insertar imagen de CD de las Guest Additions e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.\nYa estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#camino-b-wsl2",
+    "href": "anexos/anexo-windows.html#camino-b-wsl2",
+    "title": "Apéndice A — Vengo de Windows (o de macOS)",
+    "section": "Camino B: WSL2",
+    "text": "Camino B: WSL2\nEn PowerShell como administrador: wsl --install — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación Ubuntu del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (sudo apt install, nano, tuberías, permisos, htop). Tres avisos honestos: tus ficheros de Windows están en /mnt/c/…, más lentos que tu casa Linux; lsblk y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#lo-que-no-cambia",
+    "href": "anexos/anexo-windows.html#lo-que-no-cambia",
+    "title": "Apéndice A — Vengo de Windows (o de macOS)",
+    "section": "Lo que no cambia",
+    "text": "Lo que no cambia\nSea cual sea el camino: cuaderno con script, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM. La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html",
+    "href": "anexos/anexo-c1-pc-real.html",
+    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
+    "section": "",
+    "text": "B.1 Antes de tocar nada\nTodo lo que ensayaste en la máquina virtual del capítulo 8 vale para un ordenador físico. Este anexo es la lista que se lee antes de empezar y se sigue durante, porque aquí no hay instantánea que restaurar. Léela entera una vez; el día de la instalación, tenla abierta en el móvil.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
     "href": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
-    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
+    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
     "section": "",
     "text": "Copia de seguridad de todo lo que importe del disco de destino — aunque «vayas a dejar Windows». Un error de letra en el particionado no avisa.\nPlan de particiones escrito (ejercicio 8.1), con una columna más: qué hay ahora en cada partición del disco y qué va a pasarle.\nSi vas a convivir con Windows: reduce su partición desde Windows (Administración de discos → Reducir volumen) antes de arrancar el instalador, y desactiva el «inicio rápido» de Windows, que deja el disco a medio cerrar.\nISO verificada con sha256sum (capítulo 7). Debian incluye desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst: ya no hace falta la imagen «non-free».\nUn pendrive de 2 GB o más que puedas borrar por completo, y cable de red si es posible: la instalación por cable ahorra sorpresas con la Wi-Fi.\nLa tecla del menú de arranque de tu equipo, buscada antes: suele ser F12 (Dell, Lenovo), F9 (HP), Esc o F2 (ASUS, Acer), Opción (Mac Intel). Se pulsa nada más encender.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
     "href": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
-    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
-    "section": "A.2 Grabar el pendrive",
-    "text": "A.2 Grabar el pendrive\nLa ISO se copia al pendrive byte a byte — no se «pega» como un fichero. Dos vías igual de válidas:\nCon ratón (recomendada la primera vez). En Mint, aplicación Discos: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → Restaurar imagen de disco → elige la ISO → Iniciar restauración. Eliges el destino por su nombre, sin letras que confundir.\nCon terminal. Primero, la regla de oro: lsblk antes de pinchar el pendrive y después, para ver qué nombre nuevo aparece (sda, sdb…). Luego, con esa letra y solo con esa:\nmarcos@portatil:~/Descargas$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  14,9G  0 disk\n└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON\nnvme0n1     259:0    0 476,9G  0 disk\nmarcos@portatil:~/Descargas$ sudo umount /dev/sda1\nmarcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress\ndd copia bloques de if (input file) a of (output file) sin preguntar nada: si of= apunta a tu disco interno, lo destruye en silencio. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (/dev/sda), no una partición (sda1). Cuando termine, sync y expulsar (capítulo 6).",
+    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
+    "section": "B.2 Grabar el pendrive",
+    "text": "B.2 Grabar el pendrive\nLa ISO se copia al pendrive byte a byte — no se «pega» como un fichero. Dos vías igual de válidas:\nCon ratón (recomendada la primera vez). En Mint, aplicación Discos: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → Restaurar imagen de disco → elige la ISO → Iniciar restauración. Eliges el destino por su nombre, sin letras que confundir.\nCon terminal. Primero, la regla de oro: lsblk antes de pinchar el pendrive y después, para ver qué nombre nuevo aparece (sda, sdb…). Luego, con esa letra y solo con esa:\nmarcos@portatil:~/Descargas$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  14,9G  0 disk\n└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON\nnvme0n1     259:0    0 476,9G  0 disk\nmarcos@portatil:~/Descargas$ sudo umount /dev/sda1\nmarcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress\ndd copia bloques de if (input file) a of (output file) sin preguntar nada: si of= apunta a tu disco interno, lo destruye en silencio. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (/dev/sda), no una partición (sda1). Cuando termine, sync y expulsar (capítulo 6).",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
     "href": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
-    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
-    "section": "A.3 Arrancar e instalar",
-    "text": "A.3 Arrancar e instalar\n\nPendrive pinchado, encender, tecla del menú de arranque, elegir el pendrive (la entrada que dice UEFI: delante — no la otra, si aparecen dos).\nSi el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. Secure Boot puede quedarse activado: Debian lo soporta.\nInstalador: idénticas pantallas que en la VM. En el particionado manual, el disco se llamará nvme0n1 o sda y tendrá particiones ya. Con Windows al lado: no crees una tabla nueva (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como Partición del sistema EFI sin formatearla.\nContraseña de root vacía → tu usuario con sudo (capítulo 8).\nSelección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.\nGRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.",
+    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
+    "section": "B.3 Arrancar e instalar",
+    "text": "B.3 Arrancar e instalar\n\nPendrive pinchado, encender, tecla del menú de arranque, elegir el pendrive (la entrada que dice UEFI: delante — no la otra, si aparecen dos).\nSi el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. Secure Boot puede quedarse activado: Debian lo soporta.\nInstalador: idénticas pantallas que en la VM. En el particionado manual, el disco se llamará nvme0n1 o sda y tendrá particiones ya. Con Windows al lado: no crees una tabla nueva (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como Partición del sistema EFI sin formatearla.\nContraseña de root vacía → tu usuario con sudo (capítulo 8).\nSelección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.\nGRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
     "href": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
-    "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
-    "section": "A.4 Después del primer arranque",
-    "text": "A.4 Después del primer arranque\n\nlsblk y df -h: el parte del capítulo 8, sobre hardware real.\nsudo apt update && sudo apt upgrade.\nWi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar en lspci | grep -i (red, VGA, audio) para saber qué chip tienes, y de ahí a la wiki de Debian.\nGuarda el plan de particiones y tus notas en el cuaderno del curso: la próxima instalación la harás en la mitad de tiempo.",
+    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
+    "section": "B.4 Después del primer arranque",
+    "text": "B.4 Después del primer arranque\n\nlsblk y df -h: el parte del capítulo 8, sobre hardware real.\nsudo apt update && sudo apt upgrade.\nWi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar en lspci | grep -i (red, VGA, audio) para saber qué chip tienes, y de ahí a la wiki de Debian.\nGuarda el plan de particiones y tus notas en el cuaderno del curso: la próxima instalación la harás en la mitad de tiempo.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
     ]
   },
   {
-    "objectID": "anexos/anexo-windows.html",
-    "href": "anexos/anexo-windows.html",
-    "title": "Apéndice B — Vengo de Windows",
+    "objectID": "anexos/anexo-b1-scripting.html",
+    "href": "anexos/anexo-b1-scripting.html",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
     "section": "",
-    "text": "Pendiente de redacción tras el piloto.",
+    "text": "Variables y sustitución\nEn el capítulo 2 renombraste cinco ficheros a mano y el curso prometió algo mejor; en el capítulo 3 dijimos que las tuberías transforman texto pero no ejecutan una orden por cada fichero; en el 4 escribiste tu primer script. Este anexo cierra esa deuda: las cuatro piezas de bash que convierten comandos sueltos en programas — y cron, para que se ejecuten sin ti.\nDos ideas. Una variable se crea con nombre=valor (sin espacios alrededor del =) y se lee con $nombre. Y $(comando) ejecuta el comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla que evita el noventa por ciento de los sustos: las variables van siempre entre comillas dobles — \"$dir\" — para que un valor con espacios (capítulo 1) no se rompa en dos argumentos.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows</span>"
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
+    "href": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "",
+    "text": "marcos@portatil:~/fisica$ dir=resultados_$(date +%F)\nmarcos@portatil:~/fisica$ echo \"$dir\"\nresultados_2026-08-26\nmarcos@portatil:~/fisica$ mkdir \"$dir\"",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#el-bucle-for",
+    "href": "anexos/anexo-b1-scripting.html#el-bucle-for",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "El bucle for",
+    "text": "El bucle for\nmarcos@portatil:~/fisica$ for f in *.csv; do echo \"procesando $f\"; done\nprocesando run01.csv\nprocesando run02.csv\nprocesando run03.csv\nfor f in LISTA; do …; done repite el bloque una vez por elemento, con $f valiendo cada uno. La lista puede ser un comodín del capítulo 2 (*.csv), una salida de comando ($(cat lista.txt)) o palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en lote quitando el _final:\nmarcos@portatil:~/fisica$ ls\nrun01_final.csv  run02_final.csv  run03_final.csv\nmarcos@portatil:~/fisica$ for f in *_final.csv; do mv \"$f\" \"${f/_final/}\"; done\nmarcos@portatil:~/fisica$ ls\nrun01.csv  run02.csv  run03.csv\n${f/_final/} es una sustitución dentro de la variable: el valor de f con _final cambiado por nada. Hay una familia entera: ${f%.csv} quita la extensión, ${f#run} quita el prefijo. Antes de un mv en lote, el gesto de seguridad es cambiar mv por echo mv y mirar qué haría: la simulación en seco.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#condiciones-if",
+    "href": "anexos/anexo-b1-scripting.html#condiciones-if",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "Condiciones: if",
+    "text": "Condiciones: if\n#!/bin/bash\n# comprueba.sh — ¿existe el fichero que me pasan?\nif [ -f \"$1\" ]; then\n    echo \"$1 existe y tiene $(wc -l &lt; \"$1\") líneas\"\nelse\n    echo \"no encuentro $1\"\n    exit 1\nfi\n$1 es el primer argumento con que se llamó al script (./comprueba.sh adquisicion.log), $2 el segundo, y así. [ -f \"$1\" ] pregunta «¿es un fichero?»; otros: -d directorio, -z cadena vacía, -gt mayor que para números. exit 1 termina con código de error: es el $? que puedes consultar después, y lo que && (capítulo 5) mira para decidir si continúa. Un script que comprueba sus entradas y falla con mensaje vale el doble que uno que simplemente revienta.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
+    "href": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "while y leer línea a línea",
+    "text": "while y leer línea a línea\n#!/bin/bash\n# por cada sensor de la lista, cuenta sus errores\nwhile read -r sensor; do\n    n=$(grep -c \"ERROR $sensor\" adquisicion.log)\n    echo \"$sensor: $n errores\"\ndone &lt; sensores.txt\nwhile read -r linea; do …; done &lt; fichero recorre un fichero línea a línea — la forma correcta de tratar listas que vienen de otro sitio. Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los scripts son el pegamento que convierte comandos sueltos en procedimiento.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#un-script-completo",
+    "href": "anexos/anexo-b1-scripting.html#un-script-completo",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "Un script completo",
+    "text": "Un script completo\nTodo junto, con las dos líneas de cabecera que distinguen a un script serio: set -e (para al primer error, en vez de seguir a ciegas) y un uso claro cuando faltan argumentos.\n#!/bin/bash\n# organiza.sh — mueve a datos/ los CSV de un run y anota el registro\nset -e\nif [ $# -ne 1 ]; then\n    echo \"uso: $0 CARPETA_DEL_EXPERIMENTO\"\n    exit 1\nfi\ncd \"$1\"\nmkdir -p datos descartes\nfor f in *.csv; do\n    if grep -q \"sensor congelado\" \"$f\"; then\n        mv \"$f\" descartes/\n    else\n        mv \"$f\" datos/\n    fi\n    echo \"$(date +%T) $f\" &gt;&gt; registro.log\ndone\necho \"hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados\"\nEs el ejercicio del capítulo 2 hecho en un segundo y repetible mañana con otro experimento. $# es el número de argumentos; $0, el nombre del propio script. Con chmod u+x y en tu ~/bin (capítulo 5), es una herramienta tuya.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
+    "href": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "cron: que se ejecute sin ti",
+    "text": "cron: que se ejecute sin ti\ncron ejecuta comandos a horas fijas. Tu tabla se edita con crontab -e (la primera vez pregunta qué editor: nano), y cada línea son cinco campos de tiempo y un comando:\n# min hora día mes díasemana   comando\n  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/\n   0   8   *   *    1          /home/marcos/bin/informe.sh &gt;&gt; /home/marcos/informes.log 2&gt;&1\nLa primera línea copia tu carpeta de física al servidor del capítulo 11 cada noche a las 2:30 — una copia de seguridad que ya no depende de acordarte. La segunda lanza tu informe los lunes a las 8. Tres reglas de cron: rutas absolutas (no hay cd, no hay tu PATH de la terminal), redirige la salida a un fichero (si no, se pierde o se convierte en correo), y prueba el comando a mano antes de programarlo. En sistemas con systemd existe el equivalente moderno — los timers — que verás en servidores; la idea es la misma.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#práctica",
+    "href": "anexos/anexo-b1-scripting.html#práctica",
+    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
+    "section": "Práctica",
+    "text": "Práctica\n\nEjercicio B1.1 · La deuda del capítulo 2\nCrea una carpeta con touch run0{1..5}_final.csv (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando _final — primero en seco con echo mv, luego de verdad.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nfor f in *_final.csv; do echo mv \"$f\" \"${f/_final/}\"; done enseña las cinco órdenes; sin el echo, las ejecuta. ls confirma.\nPor qué así — El ensayo en seco es el hábito que convierte un bucle con mv (o rm) de peligro en herramienta. Te costó cinco renombrados en el capítulo 2; con cinco mil costaría lo mismo.\n\n\n\n\n\n\nEjercicio B1.2 · Un script con criterio\nEscribe resumen.sh que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas ERROR, WARN e INFO tiene — con un bucle sobre los tres niveles.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n#!/bin/bash\nset -e\n[ -f \"$1\" ] || { echo \"uso: $0 FICHERO.log\"; exit 1; }\nfor nivel in ERROR WARN INFO; do\n    echo \"$nivel: $(grep -c \" $nivel \" \"$1\")\"\ndone\nPor qué así — Tres piezas del anexo en ocho líneas: argumento, comprobación con salida de error, y bucle con una tubería dentro. [ … ] || { …; } es la forma compacta de «si no, protesta y sal».\n\n\n\n\n\n\nEjercicio B1.3 · Copia nocturna (opcional)\nPrograma con cron una copia diaria de tu carpeta de física a debian-lab con rsync, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que cron lo ejecuta, y déjalo en su hora definitiva.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\ncrontab -e y una línea como 15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&1. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 11) funciona sin ti — cron no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.\nPor qué así — Es el primer proceso automático de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html",
+    "href": "anexos/anexo-e1-ia.html",
+    "title": "Apéndice D — La IA como herramienta, no como oráculo",
+    "section": "",
+    "text": "Por qué no se copia a ciegas\nEste anexo nace de una frase de la encuesta con la que se diseñó el curso: «cuando algo falla, le pregunto a una IA y copio-pego sin entender». No hay nada malo en preguntar — este propio curso te ha animado a hacerlo en el capítulo 3. Lo malo es el copiar-pegar sin entender, y contra eso tienes ahora doce capítulos de munición. Aquí está el protocolo.\nUna IA no ve tu máquina. No sabe qué distro tienes, qué versión, qué hay en ese directorio, si ese disco es el tuyo. Genera comandos plausibles — y a veces inventa opciones que no existen, o mezcla la sintaxis de dos herramientas. Tres consecuencias reales que este curso te ha enseñado a reconocer: un rm -rf con la ruta equivocada (capítulo 2), un sudo que no entiendes (capítulo 4), y un curl … | bash — descargar un script de internet y ejecutarlo sin mirarlo — que es, literalmente, dejar que un desconocido teclee en tu terminal con tus permisos.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>La IA como herramienta, no como oráculo</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html#el-protocolo",
+    "href": "anexos/anexo-e1-ia.html#el-protocolo",
+    "title": "Apéndice D — La IA como herramienta, no como oráculo",
+    "section": "El protocolo",
+    "text": "El protocolo\n\nPregunta con contexto. «Linux Mint 22, quiero renombrar todos los .csv de esta carpeta quitando _final; he probado mv uno a uno». Cuanto más concreto, menos inventa.\nLee el comando con la anatomía del capítulo 1: programa, opciones, argumentos. Si hay una tubería, pieza a pieza (capítulo 3). Si hay sudo, rm, dd, &gt; o |, subraya cada uno.\nVerifica lo que no reconozcas con man o --help (capítulo 1). Una opción que no aparece en man no existe — la IA la inventó.\nClasifica el riesgo: lectura (ls, grep, cat, df…) — ejecuta; escritura (mv, cp, &gt;, chmod) — copia de seguridad o ensayo en seco con echo; destructivo o privilegiado (rm -r, sudo, dd, mkfs, curl | bash) — solo si lo entiendes entero, y la primera vez en la VM (capítulo 7).\nEjecuta en el sitio adecuado y contrasta el resultado con lo que esperabas — ls después de un mv, df después de limpiar. Si no cuadra, para: no pidas «otro comando» hasta saber qué pasó.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>La IA como herramienta, no como oráculo</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html#para-qué-es-excelente",
+    "href": "anexos/anexo-e1-ia.html#para-qué-es-excelente",
+    "title": "Apéndice D — La IA como herramienta, no como oráculo",
+    "section": "Para qué es excelente",
+    "text": "Para qué es excelente\n\nExplicar un comando ajeno. Al revés de lo habitual: pega el comando de un foro y pregunta «¿qué hace exactamente, pieza a pieza?». Contrasta con man.\nTraducir un mensaje de error. Pega la salida completa (el 2&gt; del capítulo 3 sirve para guardarla) y pregunta qué significa — no «cómo lo arreglo».\nConstruir tuberías y expresiones que no recuerdas: «grep de las líneas que empiezan por fecha y tienen ERROR». Luego, head para comprobar (capítulo 3).\nRecordar sintaxis: el for de bash, los campos de cron, las opciones de rsync. Es el man con lenguaje natural.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>La IA como herramienta, no como oráculo</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html#para-qué-no",
+    "href": "anexos/anexo-e1-ia.html#para-qué-no",
+    "title": "Apéndice D — La IA como herramienta, no como oráculo",
+    "section": "Para qué no",
+    "text": "Para qué no\n\nSaber el estado de tu sistema. Eso lo sabes tú con ip a, lsblk, df, which python. Pregunta después de mirar, no antes.\nTomar decisiones irreversibles. «¿Borro esta partición?» no se le pregunta a nadie que no vea tu lsblk.\nSustituir el cuaderno. Un comando que funcionó y no anotaste es un comando que volverás a pedir.\n\n\n△ Cuidado · Las tres frases que deben encender la alarma\n«Ejecuta esto con sudo y debería funcionar» — sin explicar qué hace. «Copia esto en la terminal: curl … | sudo bash» — un script remoto con todos los poderes. Y «prueba rm -rf en esa carpeta para limpiar» — sin haber visto qué contiene. Ante cualquiera de las tres, el protocolo entero, sin saltarse pasos. El curso no te ha dado comandos: te ha dado el criterio para leerlos. Úsalo.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>La IA como herramienta, no como oráculo</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html#un-ejemplo-completo",
+    "href": "anexos/anexo-e1-ia.html#un-ejemplo-completo",
+    "title": "Apéndice D — La IA como herramienta, no como oráculo",
+    "section": "Un ejemplo completo",
+    "text": "Un ejemplo completo\nPregunta: «Debian 13 sin escritorio, quiero ver qué carpetas de mi casa ocupan más espacio». Respuesta típica: du -sh ~/* | sort -rh | head. Lectura: du (capítulo 6) con -s y -h; tubería a sort con -r y -h — man sort confirma que -h ordena magnitudes humanas —; head para diez líneas. Riesgo: lectura pura. Ejecutas. Contrastas: las cifras cuadran con df. Treinta segundos, entendido, anotado en el cuaderno. Así se usa una IA cuando se sabe Linux.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>La IA como herramienta, no como oráculo</span>"
     ]
   }
 ]
