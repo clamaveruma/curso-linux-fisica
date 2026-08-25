@@ -68,6 +68,25 @@ del capítulo 4: los permisos `rwx` son una *prestación del sistema de
 ficheros* — por eso un pendrive FAT no los tiene, y todo aparece como
 `rwxrwxrwx` cuando lo montas.
 
+::: {.truco}
+**✚ Truco · El mapa con ratón: «Discos» y GParted**
+
+Todo lo que `lsblk` te cuenta en texto lo dibujan dos aplicaciones
+gráficas que conviene conocer por su nombre, porque las verás en
+cualquier foro. **Discos** (menú → Accesorios; `gnome-disks`) viene
+con Mint: enseña cada disco con sus particiones como una barra de
+colores, monta y desmonta con un botón, formatea un pendrive y edita
+las opciones de montaje (anexo B2). **GParted** (`sudo apt install
+gparted`, y viene de serie en el pendrive *live* de Mint) es *el*
+editor de particiones: crea, borra, redimensiona y mueve particiones
+— es la herramienta con la que se le hace sitio a Linux junto a
+Windows, y su hermano de texto es lo que usarás en el instalador del
+capítulo 8. Hoy, por la regla del curso, las abres solo para *mirar*:
+GParted sobre tu disco real es tan destructivo como potente. Para
+tocar, la máquina virtual del bloque C o un pendrive que puedas
+borrar.
+:::
+
 ## Montar: enganchar discos al árbol {#sec-montar}
 
 Y aquí se cierra por fin el círculo abierto el primer día, cuando te

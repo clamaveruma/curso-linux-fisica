@@ -15,7 +15,9 @@ abierta en el móvil.
   más: qué hay ahora en cada partición del disco y qué va a pasarle.
 - [ ] Si vas a **convivir con Windows**: reduce su partición *desde
   Windows* (Administración de discos → Reducir volumen) antes de
-  arrancar el instalador, y desactiva el «inicio rápido» de Windows,
+  arrancar el instalador — o con **GParted** desde el pendrive *live*
+  de Mint, que es lo que hace mucha gente; en ambos casos con copia
+  de seguridad hecha —, y desactiva el «inicio rápido» de Windows,
   que deja el disco a medio cerrar.
 - [ ] **ISO verificada** con `sha256sum` (capítulo 7). Debian incluye
   desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst:

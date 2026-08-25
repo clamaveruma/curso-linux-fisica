@@ -71,7 +71,10 @@ literalmente — la forma con ratón de escribir la línea de `fstab` de
 la sección siguiente, con el UUID puesto por ti y sin riesgo de
 errata. También formatea y comprueba discos. Para un disco suelto en
 tu portátil, empieza por aquí; la terminal es para el servidor y para
-entender qué hizo el botón.
+entender qué hizo el botón. Y para *cambiar* particiones — crear,
+borrar, redimensionar — la herramienta es **GParted** (capítulo 6),
+que va un paso más allá de «Discos» y exige el mismo respeto que
+`dd`.
 :::
 
 ## Montaje permanente: `/etc/fstab` {.unnumbered}
