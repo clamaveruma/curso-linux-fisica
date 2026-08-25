@@ -251,6 +251,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#los-dos-caminos" id="toc-los-dos-caminos" class="nav-link active" data-scroll-target="#los-dos-caminos">Los dos caminos</a></li>
   <li><a href="#camino-a-mint-en-virtualbox" id="toc-camino-a-mint-en-virtualbox" class="nav-link" data-scroll-target="#camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</a></li>
   <li><a href="#camino-b-wsl2" id="toc-camino-b-wsl2" class="nav-link" data-scroll-target="#camino-b-wsl2">Camino B: WSL2</a></li>
+  <li><a href="#dos-caminos-más-el-usb-persistente-y-el-arranque-dual" id="toc-dos-caminos-más-el-usb-persistente-y-el-arranque-dual" class="nav-link" data-scroll-target="#dos-caminos-más-el-usb-persistente-y-el-arranque-dual">Dos caminos más: el USB persistente y el arranque dual</a>
+  <ul class="collapse">
+  <li><a href="#camino-c-un-linux-live-en-un-pendrive-con-persistencia" id="toc-camino-c-un-linux-live-en-un-pendrive-con-persistencia" class="nav-link" data-scroll-target="#camino-c-un-linux-live-en-un-pendrive-con-persistencia">Camino C · Un Linux <em>live</em> en un pendrive, con persistencia</a></li>
+  <li><a href="#camino-d-arranque-dual-solo-con-alguien-que-sepa" id="toc-camino-d-arranque-dual-solo-con-alguien-que-sepa" class="nav-link" data-scroll-target="#camino-d-arranque-dual-solo-con-alguien-que-sepa">Camino D · Arranque dual: solo con alguien que sepa</a></li>
+  </ul></li>
   <li><a href="#lo-que-no-cambia" id="toc-lo-que-no-cambia" class="nav-link" data-scroll-target="#lo-que-no-cambia">Lo que no cambia</a></li>
   </ul>
 </nav>
@@ -342,9 +347,76 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="unnumbered anchored" data-anchor-id="camino-b-wsl2">Camino B: WSL2</h2>
 <p>En PowerShell como administrador: <code>wsl --install</code> — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación <em>Ubuntu</em> del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (<code>sudo apt install</code>, <code>nano</code>, tuberías, permisos, <code>htop</code>). Tres avisos honestos: tus ficheros de Windows están en <code>/mnt/c/…</code>, más lentos que tu casa Linux; <code>lsblk</code> y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.</p>
 </section>
+<section id="dos-caminos-más-el-usb-persistente-y-el-arranque-dual" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="dos-caminos-más-el-usb-persistente-y-el-arranque-dual">Dos caminos más: el USB persistente y el arranque dual</h2>
+<p>Hay otras dos formas de tener un Linux <em>de verdad</em> en tu ordenador sin renunciar a Windows. Una es limpia y fácil; la otra no es para principiantes.</p>
+<section id="camino-c-un-linux-live-en-un-pendrive-con-persistencia" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="camino-c-un-linux-live-en-un-pendrive-con-persistencia">Camino C · Un Linux <em>live</em> en un pendrive, con persistencia</h3>
+<p>Cualquier ISO de Mint arranca «en vivo» desde un pendrive: un escritorio completo que no toca tu disco… y que olvida todo al apagar. La <strong>persistencia</strong> arregla eso: una partición extra en el mismo pendrive donde se guardan tus ficheros, tu configuración y lo que instales con <code>apt</code>. Desde Windows, la forma más sencilla es <strong>Rufus</strong> (rufus.ie, gratuito):</p>
+<ol type="1">
+<li>Un pendrive <strong>USB 3 de 32 GB</strong> (16 como mínimo) que puedas borrar; cuanto más rápido, mejor: es tu disco duro durante el curso.</li>
+<li>Rufus → elige el pendrive y la ISO de Mint → aparece el control <strong>«Tamaño de la partición persistente»</strong>: dale todo lo que quepa (16–24 GB) → Empezar. Rufus crea la partición <code>casper-rw</code> de persistencia por ti.</li>
+<li>Reinicia con la tecla del menú de arranque (anexo C1) y elige el pendrive. Mint arranca en vivo; lo que hagas, se queda.</li>
+</ol>
+<p>Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema <em>live</em>) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en <code>lsblk</code>, el tuyo y el de Windows, que es incluso más instructivo. Los <em>peros</em>, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (<code>apt upgrade</code> sí, pero el sistema <em>live</em> arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 11 y anexo B1: <code>rsync</code> con <code>cron</code>). Para quien quiera varias ISO en un mismo pendrive existe <strong>Ventoy</strong>, con persistencia configurable por fichero; es más potente y más liado — para más adelante.</p>
+<p>Y una variante con más recorrido: en vez de un sistema <em>live</em>, <strong>instalar Linux entero en un SSD externo por USB</strong> — con el instalador del capítulo 8, eligiendo ese disco como destino y poniendo en él la partición EFI. Es un Linux completo, rápido y permanente que arranca en cualquier PC desde el menú de arranque. La única pega es seria: al elegir el disco de destino, equivocarse destruye Windows. Es el camino perfecto <em>después</em> del capítulo 8 y del anexo C1, con el plan escrito y <code>lsblk</code> delante — no antes.</p>
+</section>
+<section id="camino-d-arranque-dual-solo-con-alguien-que-sepa" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="camino-d-arranque-dual-solo-con-alguien-que-sepa">Camino D · Arranque dual: solo con alguien que sepa</h3>
+<p>Instalar Linux en una partición del disco interno, junto a Windows, y elegir al encender. Es lo que hace mucha gente y lo que cubre el anexo C1 — pero <strong>no es para hacerlo a solas el primer día</strong>. Las implicaciones que hay que entender antes: reducir la partición de Windows (desde Windows, con su «inicio rápido» y BitLocker desactivados), que GRUB pase a gestionar el arranque de los dos sistemas, que una actualización grande de Windows puede pisar ese arranque y dejarte «sin Linux» hasta repararlo, y que deshacerlo requiere saber restaurar el cargador de Windows. Si tienes a alguien que lo haya hecho varias veces y te lo explique mientras lo hace, adelante — con copia de seguridad. Si no, el camino C te da el mismo Linux sin ninguno de esos riesgos, y el capítulo 8 te enseñará a hacer el dual tú mismo cuando toque.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Cubre el curso</th>
+<th>Riesgo para Windows</th>
+<th>Para quién</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A</strong> Mint en VirtualBox</td>
+<td>todo (bloque C con virtualización anidada)</td>
+<td>ninguno</td>
+<td>la opción por defecto</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong> WSL2</td>
+<td>terminal y redes; no discos ni instalación</td>
+<td>ninguno</td>
+<td>empezar hoy mismo</td>
+</tr>
+<tr class="odd">
+<td><strong>C</strong> USB persistente (Rufus)</td>
+<td>todo, a la velocidad del pendrive</td>
+<td>ninguno</td>
+<td>quien quiere Linux «real» sin tocar el disco</td>
+</tr>
+<tr class="even">
+<td><strong>C’</strong> instalación en SSD externo</td>
+<td>todo, rápido</td>
+<td>alto al instalar, ninguno después</td>
+<td>tras el capítulo 8 y el anexo C1</td>
+</tr>
+<tr class="odd">
+<td><strong>D</strong> arranque dual</td>
+<td>todo</td>
+<td>medio, y permanente</td>
+<td>solo acompañado por alguien que sepa</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
 <section id="lo-que-no-cambia" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="lo-que-no-cambia">Lo que no cambia</h2>
-<p>Sea cual sea el camino: cuaderno con <code>script</code>, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM. La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.</p>
+<p>Sea cual sea el camino: cuaderno con <code>script</code>, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM (y con el USB persistente, además, copia periódica de tu carpeta al servidor). La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.</p>
 
 
 </section>
