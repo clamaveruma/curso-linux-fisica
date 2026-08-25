@@ -20,7 +20,7 @@ antes de tocar nada.
 - Qué es el DNS, quién responde cuando preguntas por un nombre, y cómo ver la respuesta con `host`.
 - El fichero `/etc/hosts`: la guía telefónica más antigua, y cómo usarla para bautizar a tu máquina virtual.
 - Seguir el camino de tus paquetes hasta la universidad con `tracepath`, salto a salto.
-- Qué es un puerto, por qué SSH es el 22 y la web el 443, y cómo ver qué puertas tiene abiertas una máquina.
+- Qué es exactamente un puerto TCP, qué cuatro números identifican una conexión, por qué SSH es el 22 y la web el 443, y cómo ver qué puertas tiene abiertas una máquina.
 - TCP frente a UDP en diez minutos, y qué es un cortafuegos.
 - Por qué el cable gana a la Wi-Fi para un servidor — y medirlo.
 - El protocolo de cambio reversible: anotar, escribir la vuelta atrás, cambiar, verificar.
@@ -111,10 +111,15 @@ opciones — `apt install traceroute` si lo echas de menos.)
 
 ## Una dirección, muchas puertas: los puertos {#sec-puertos}
 
-Una máquina tiene una dirección, pero ofrece muchos servicios a la
-vez. Cada uno escucha en un **puerto**: un número del 1 al 65 535 que
-acompaña a la dirección. Conectarse a una máquina es siempre
-conectarse a *dirección:puerto*, y los puertos de los servicios
+Vuelve a la analogía postal del capítulo 9: la IP es la calle; el
+**puerto** es el número de piso. Es, literalmente, un número de 16
+bits — de 0 a 65 535 — escrito en el sobre de la capa de transporte
+(TCP o UDP), y sirve para que la máquina que recibe el paquete sepa a
+*qué programa* dárselo, porque en una máquina hay decenas corriendo a
+la vez. Un programa que quiere recibir le dice al kernel «lo que
+llegue al 22, es mío»: eso es **escuchar** en un puerto, y solo un
+programa puede escuchar en cada número. Conectarse a una máquina es
+siempre conectarse a *dirección:puerto*, y los de los servicios
 clásicos están acordados desde hace décadas:
 
 | Puerto | Servicio | Dónde lo verás |
@@ -146,13 +151,50 @@ Tu servidor, visto desde dentro y desde fuera, cuenta lo mismo: una
 puerta abierta, la 22, y detrás el servidor SSH que marcaste en el
 instalador. Mañana entrarás por ella.
 
+Queda la pregunta que desconcierta a todo el mundo: si `sshd` escucha
+en *un* puerto, ¿cómo atiende a cien clientes a la vez sin mezclar
+sus conversaciones? Porque una **conexión** no la identifica un
+puerto, sino **cuatro números**: la IP y el puerto de *cada* extremo.
+El servidor pone los suyos (`192.168.122.15`, `22`); el cliente pone
+su IP y elige, para cada conexión, un puerto **efímero** libre y alto
+— el `51234` de la tabla NAT del capítulo 9 era exactamente eso. Dos
+terminales tuyas conectadas al mismo servidor son dos cuartetos
+distintos (`…:51234 → …:22` y `…:51240 → …:22`), y el kernel del
+servidor reparte cada paquete a la conversación correcta por su
+cuarteto. Es también lo que permite que tu navegador tenga diez
+pestañas abiertas contra el mismo servidor, y lo que hacía posible la
+libreta del router: sin puertos distintos, el NAT no tendría cómo
+distinguir tu portátil de tu móvil.
+
+![Cuatro números por conexión. El servidor repite los suyos; el cliente estrena un puerto efímero cada vez.](../imagenes/cap10/fig-conexion-tcp.svg){#fig-conexion-tcp fig-alt="Dos conexiones desde la misma máquina cliente al puerto 22 del mismo servidor, distinguidas por el puerto efímero de origen"}
+
+Y se ve en vivo: `ss -tn` (sin la `l`) lista las conexiones
+*establecidas* con sus dos extremos, cuarteto completo:
+
+```terminal
+marcos@portatil:~$ ss -tn
+State  Recv-Q Send-Q Local Address:Port    Peer Address:Port
+ESTAB  0      0      192.168.122.1:51234   192.168.122.15:22
+ESTAB  0      0      192.168.1.34:44810    151.101.66.132:443
+```
+
+Tu sesión SSH con la VM y una pestaña del navegador, cada una con su
+puerto efímero. Un último detalle que conecta con el capítulo 4: los
+puertos **por debajo del 1024** — los de los servicios clásicos —
+solo puede reservarlos `root`. Así, un usuario cualquiera no puede
+poner un programa suyo a escuchar en el 22 y hacerse pasar por el
+SSH de la máquina.
+
 ::: {.por-dentro}
 **◉ Por dentro · TCP y UDP en diez minutos**
 
 Los paquetes viajan de dos maneras. **TCP** es correo certificado:
-antes de enviar se establece una conexión, cada paquete se confirma,
-los perdidos se reenvían y todo llega en orden — más lento, pero
-fiable. SSH, la web y el correo van así. **UDP** es una postal: se
+antes de enviar nada, los dos extremos se saludan en tres pasos —
+«¿estás?», «estoy, ¿y tú?», «aquí» (el *handshake*: SYN, SYN-ACK,
+ACK) — y a partir de ahí cada paquete va numerado, el receptor
+confirma lo que recibe, lo que se pierde se reenvía y todo se
+entrega en orden. Más lento, pero fiable: SSH, la web y el correo van
+así. **UDP** es una postal: se
 envía y ya, sin conexión ni confirmación — rapidísimo, y si una se
 pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos
 van así: prefieren perder un paquete a esperar. Por eso `nmap` decía

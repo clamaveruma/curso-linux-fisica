@@ -17,13 +17,51 @@ lucecitas que te dio la compañía. Hoy la abres — en modo solo lectura
 ::: {.objetivos}
 **Al terminar esta sesión sabrás**
 
+- Cómo se hablan dos ordenadores: el modelo de capas, qué sobre pone cada una, y por qué la MAC no sale de tu casa mientras la IP recorre el mundo.
 - Leer tu ficha de red con `ip a` e `ip route`: interfaz, dirección MAC, dirección IP, máscara y puerta de enlace.
 - Qué significa el `/24` de una dirección, y cómo decide quién puede hablar con quién directamente.
 - Quién reparte las direcciones — DHCP — y por qué tu portátil sabe la suya sin que se la hayas dicho.
 - Medir con `ping` si una máquina responde y cuánto tarda — y qué tiene que ver ese tiempo con la velocidad de la luz.
-- La diferencia entre tu dirección privada y la pública, y qué es el NAT que las separa.
+- La diferencia entre tu dirección privada y la pública, y cómo el router traduce entre ambas con su tabla NAT — paso a paso, con la respuesta de vuelta incluida.
 - Entrar en la página de administración de tu router, orientarte en ella y hacer el censo de tu red sin tocar nada.
 :::
+
+## Cómo se hablan dos ordenadores {#sec-capas}
+
+Antes de teclear nada, el modelo mental — porque con él, todo lo que
+sigue es leer; sin él, es memorizar. Cuando tu portátil envía algo a
+otro ordenador — una página, un `ping`, una sesión SSH — no manda «un
+mensaje»: lo trocea en **paquetes** de unos pocos miles de bytes, y
+cada paquete viaja por su cuenta, metido en varios sobres, uno dentro
+de otro. Cada sobre lo escribe y lo lee una **capa** distinta, y eso
+es todo lo que hay que saber del famoso *modelo de capas*: los libros
+lo cuentan con siete (el modelo OSI); internet usa en la práctica
+cinco, y son estas:
+
+| Capa | Qué resuelve | Con qué | Dónde la verás |
+|------|--------------|---------|----------------|
+| **Aplicación** | qué se dice | HTTP, SSH, DNS | capítulos 10–12 |
+| **Transporte** | a qué *programa* de la máquina va, y si llega entero y en orden | TCP, UDP, los **puertos** | capítulo 10 |
+| **Red** | a qué *máquina* del mundo va, aunque esté a diez saltos | **IP**, direcciones, routers | este capítulo |
+| **Enlace** | al vecino de al lado, por este cable o esta Wi-Fi | Ethernet, Wi-Fi, direcciones **MAC** | `ip a`, línea `link/ether` |
+| **Física** | bits convertidos en voltios, luz o radio | cobre, fibra, aire | tu asignatura |
+
+![Cada capa añade su sobre. Los routers del camino solo abren el de fuera; el sobre IP llega intacto, y lo que hay dentro solo lo lee el programa de destino.](../imagenes/cap09/fig-capas.svg){#fig-capas fig-alt="La pila de capas de la red y un paquete dibujado como sobres anidados: Ethernet, IP, TCP y los datos"}
+
+La analogía postal lo deja claro. Tú escribes la carta (los **datos**).
+La metes en un sobre con el número de piso (el **puerto**: qué
+programa, entre los muchos de esa máquina, debe abrirla). Ese sobre
+va dentro de otro con la dirección de la calle (la **IP**: qué máquina
+del mundo). Y ese, dentro de un sobre más que solo entiende el
+repartidor de tu barrio (la **MAC**: qué aparato de *esta* red, por
+este cable). En cada salto, el repartidor abre el sobre exterior, lee
+la calle del siguiente, y vuelve a envolver para el siguiente
+repartidor. Por eso la MAC **solo importa dentro de tu casa** y la IP
+importa en todo el mundo; por eso un **router** no es más que una
+máquina que lee el sobre IP y decide por qué puerta sale; y por eso
+los puertos, que verás en el capítulo 10, son el número de piso que
+hace posible que una dirección sirva a muchos programas — y, como
+descubrirás dentro de un rato, a muchas casas.
 
 ## Tu ficha de red: `ip a` {#sec-ip-a}
 
@@ -46,9 +84,10 @@ marcos@portatil:~$ ip a
 Tres interfaces. `lo` es el *loopback*: la máquina hablando consigo
 misma (`127.0.0.1` siempre eres tú — la usarás en el capítulo 11).
 `wlp3s0` es tu Wi-Fi (`enp…` sería el cable), con dos direcciones
-distintas: la **MAC** (`link/ether a4:34:…`, el número de serie
-grabado en la tarjeta de fábrica) y la **IP** (`inet 192.168.1.34/24`,
-la que te ha tocado en esta red). Y `virbr0` es el router de mentira
+distintas — una por capa: la **MAC** (`link/ether a4:34:…`, el número
+de serie grabado en la tarjeta de fábrica: capa de enlace, el sobre
+del barrio) y la **IP** (`inet 192.168.1.34/24`, la que te ha tocado
+en esta red: capa de red, el sobre con la calle). Y `virbr0` es el router de mentira
 del capítulo 7 — la red NAT de tus máquinas virtuales. Ese `dynamic`
 al final de tu IP es una pista para dentro de dos secciones.
 
@@ -215,6 +254,41 @@ Translation*):
 
 ![Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.](../imagenes/cap09/fig-nat-casa.svg){#fig-nat fig-alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública"}
 
+¿Cómo puede una sola dirección servir a toda la casa? Con los sobres
+de la primera sección, paso a paso. Tu portátil pide una página web:
+sale un paquete que dice *«de 192.168.1.34, puerto 51234 → a
+151.101.66.132, puerto 443»*. El router lo intercepta antes de que
+salga a internet y hace dos cosas: **reescribe el remitente** — ahora
+dice *«de 83.44.120.9, puerto 51234»*, su dirección pública — y
+**apunta una línea en su libreta**: «lo que vuelva dirigido a
+83.44.120.9:51234 es en realidad para 192.168.1.34:51234». El servidor
+responde a la única dirección que conoce, la pública; el router recibe
+la respuesta, busca la línea, y **reescribe el destinatario**: → a
+192.168.1.34:51234. Tu portátil recibe su página y nunca supo que le
+cambiaron el nombre. Mientras, tu móvil hace lo mismo con otro puerto
+(58001) y tiene su propia línea. Esa libreta es la **tabla NAT**:
+
+| Dentro (privado) | Fuera (público) | Hablando con |
+|------------------|-----------------|--------------|
+| `192.168.1.34:51234` | `83.44.120.9:51234` | `151.101.66.132:443` |
+| `192.168.1.57:58001` | `83.44.120.9:58001` | `142.250.184.14:443` |
+
+![La libreta del router. Cada conversación que sale deja una línea; cada respuesta que vuelve se busca en ella. Lo que llega sin línea, se tira.](../imagenes/cap09/fig-nat-tabla.svg){#fig-nat-tabla fig-alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta"}
+
+De esta libreta salen todas las consecuencias que importan. Un
+paquete que llega desde internet *sin que nadie de casa lo haya
+pedido* — alguien probando suerte en tu puerto 22 — no tiene línea en
+la tabla: el router no sabe a quién dárselo y lo descarta. Por eso
+**desde fuera nadie entra sin invitación**. Cuando *quieras* que
+alguien entre — tú mismo por SSH desde la universidad —, tendrás que
+escribir a mano una línea permanente: «lo que llegue al puerto 22
+público, dáselo siempre a 192.168.1.34» — es el *reenvío de puertos*
+del capítulo 10. Y fíjate en el detalle que explica el capítulo
+siguiente: la traducción funciona **gracias a los puertos**. La
+dirección pública es la calle; los puertos son los pisos, y el router
+puede permitirse una sola calle porque tiene sesenta y cinco mil
+pisos que repartir entre las conversaciones de toda la casa.
+
 Puedes ver las dos caras desde tu terminal: la privada en `ip a`, y la
 pública preguntándole a un servidor de fuera qué dirección ve:
 
@@ -224,14 +298,15 @@ marcos@portatil:~$ curl ifconfig.me
 ```
 
 Esa es tu casa vista desde internet — y coincidirá con la que el
-router llama *WAN* en su página. Dos consecuencias que dan forma a los
-tres capítulos siguientes. La cómoda: **desde fuera nadie puede entrar
-en tus aparatos sin invitación**, porque no tienen dirección pública
-que apuntar. La incómoda: cuando *quieras* que alguien entre — tú
-mismo, por SSH desde la universidad —, tendrás que pedirle al router
-que abra una puerta concreta (capítulo 10). Y fíjate en el detalle
-elegante: tu `debian-lab` vive detrás de *dos* NAT — el de libvirt y
-el de casa. Las muñecas rusas de la sección anterior, otra vez.
+router llama *WAN* en su página. Dos remates. Tu `debian-lab` vive
+detrás de *dos* libretas — la de tu Mint (para la red `192.168.122.x`)
+y la del router —: cada paquete suyo cambia de remitente dos veces al
+salir y de destinatario dos veces al volver. Y algunas compañías
+añaden una tercera libreta en sus propias instalaciones para miles de
+casas a la vez (el CG-NAT del ejercicio 9.3): entonces ni la línea
+escrita a mano en tu router sirve, porque el intruso — o tú desde la
+universidad — nunca llega a tu router. Muñecas rusas, todas con la
+misma lógica.
 
 ## El router por dentro (solo lectura) {#sec-router}
 

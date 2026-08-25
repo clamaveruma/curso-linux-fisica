@@ -1,0 +1,40 @@
+<svg viewBox="0 0 700 330" width="700" height="330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Las capas de la red: cada una añade un sobre al paquete, y cada sobre lo lee alguien distinto">
+  <defs>
+    <marker id="fcp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- pila de capas -->
+    <text x="150" y="30" font-size="11.5" fill="#6A5F4D" text-anchor="middle" font-weight="600">las capas, de arriba abajo</text>
+    <rect x="30" y="42" width="240" height="38" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2"/>
+    <text x="42" y="58" font-size="10.5" fill="#2B2318" font-weight="600">aplicación</text>
+    <text x="42" y="73" font-size="9" fill="#6A5F4D">qué se dice · HTTP, SSH, DNS</text>
+    <rect x="30" y="86" width="240" height="38" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.2"/>
+    <text x="42" y="102" font-size="10.5" fill="#24564B" font-weight="600">transporte</text>
+    <text x="42" y="117" font-size="9" fill="#6A5F4D">a qué programa, y si llega entero · TCP/UDP, puertos</text>
+    <rect x="30" y="130" width="240" height="38" rx="3" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.2"/>
+    <text x="42" y="146" font-size="10.5" fill="#9A6A14" font-weight="600">red</text>
+    <text x="42" y="161" font-size="9" fill="#6A5F4D">a qué máquina del mundo · IP, routers</text>
+    <rect x="30" y="174" width="240" height="38" rx="3" fill="#F5DED6" stroke="#C4342A" stroke-width="1.2"/>
+    <text x="42" y="190" font-size="10.5" fill="#C4342A" font-weight="600">enlace</text>
+    <text x="42" y="205" font-size="9" fill="#6A5F4D">al vecino de al lado · Ethernet, Wi-Fi, MAC</text>
+    <rect x="30" y="218" width="240" height="38" rx="3" fill="#0E1512"/>
+    <text x="42" y="234" font-size="10.5" fill="#6BD6BC" font-weight="600">física</text>
+    <text x="42" y="249" font-size="9" fill="#D8E6E0">bits en cobre, fibra o aire</text>
+    <!-- el paquete: sobres dentro de sobres -->
+    <text x="490" y="30" font-size="11.5" fill="#6A5F4D" text-anchor="middle" font-weight="600">un paquete en el cable: sobres dentro de sobres</text>
+    <rect x="300" y="60" width="380" height="120" rx="4" fill="#F5DED6" stroke="#C4342A" stroke-width="1.3"/>
+    <text x="312" y="76" font-size="9.5" fill="#C4342A" font-weight="600">Ethernet · MAC destino: la del router</text>
+    <rect x="316" y="84" width="352" height="86" rx="4" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.3"/>
+    <text x="328" y="100" font-size="9.5" fill="#9A6A14" font-weight="600">IP · de 192.168.1.34 → a 151.101.66.132</text>
+    <rect x="332" y="108" width="320" height="52" rx="4" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="344" y="124" font-size="9.5" fill="#24564B" font-weight="600">TCP · del puerto 51234 → al puerto 443</text>
+    <rect x="348" y="132" width="288" height="20" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1"/>
+    <text x="492" y="146" font-size="9.5" fill="#2B2318" text-anchor="middle">datos: «GET /index.html…»</text>
+    <!-- viaje -->
+    <text x="490" y="210" font-size="10" fill="#6A5F4D" text-anchor="middle">en cada salto, el router abre el sobre rojo, lee el amarillo</text>
+    <text x="490" y="224" font-size="10" fill="#6A5F4D" text-anchor="middle">y mete todo en un sobre rojo nuevo para el siguiente vecino</text>
+    <text x="490" y="250" font-size="10" fill="#9C8F79" text-anchor="middle">el sobre IP llega intacto al destino; el TCP y los datos</text>
+    <text x="490" y="264" font-size="10" fill="#9C8F79" text-anchor="middle">solo los abre la máquina final — y el programa del puerto 443</text>
+    <text x="350" y="310" font-size="10" fill="#6A5F4D" text-anchor="middle">por eso la MAC solo importa dentro de tu casa y la IP en todo el mundo · el modelo OSI de los libros tiene siete capas; internet usa estas</text>
+  </g>
+</svg>
