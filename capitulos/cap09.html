@@ -248,14 +248,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#sec-ip-a" id="toc-sec-ip-a" class="nav-link active" data-scroll-target="#sec-ip-a"><span class="header-section-number">9.1</span> Tu ficha de red: <code>ip a</code></a></li>
-  <li><a href="#sec-mascara" id="toc-sec-mascara" class="nav-link" data-scroll-target="#sec-mascara"><span class="header-section-number">9.2</span> El <code>/24</code>: red y máquina</a></li>
-  <li><a href="#sec-dhcp" id="toc-sec-dhcp" class="nav-link" data-scroll-target="#sec-dhcp"><span class="header-section-number">9.3</span> ¿Quién reparte las direcciones? DHCP</a></li>
-  <li><a href="#sec-ping" id="toc-sec-ping" class="nav-link" data-scroll-target="#sec-ping"><span class="header-section-number">9.4</span> ¿Estás ahí? <code>ping</code></a></li>
-  <li><a href="#sec-nat" id="toc-sec-nat" class="nav-link" data-scroll-target="#sec-nat"><span class="header-section-number">9.5</span> Privada, pública, y el NAT entre medias</a></li>
-  <li><a href="#sec-router" id="toc-sec-router" class="nav-link" data-scroll-target="#sec-router"><span class="header-section-number">9.6</span> El router por dentro (solo lectura)</a></li>
-  <li><a href="#sec-practica-9" id="toc-sec-practica-9" class="nav-link" data-scroll-target="#sec-practica-9"><span class="header-section-number">9.7</span> Práctica: el censo de casa</a></li>
-  <li><a href="#sec-quiz-9" id="toc-sec-quiz-9" class="nav-link" data-scroll-target="#sec-quiz-9"><span class="header-section-number">9.8</span> Autocomprobación</a></li>
+  <li><a href="#sec-capas" id="toc-sec-capas" class="nav-link active" data-scroll-target="#sec-capas"><span class="header-section-number">9.1</span> Cómo se hablan dos ordenadores</a></li>
+  <li><a href="#sec-ip-a" id="toc-sec-ip-a" class="nav-link" data-scroll-target="#sec-ip-a"><span class="header-section-number">9.2</span> Tu ficha de red: <code>ip a</code></a></li>
+  <li><a href="#sec-mascara" id="toc-sec-mascara" class="nav-link" data-scroll-target="#sec-mascara"><span class="header-section-number">9.3</span> El <code>/24</code>: red y máquina</a></li>
+  <li><a href="#sec-dhcp" id="toc-sec-dhcp" class="nav-link" data-scroll-target="#sec-dhcp"><span class="header-section-number">9.4</span> ¿Quién reparte las direcciones? DHCP</a></li>
+  <li><a href="#sec-ping" id="toc-sec-ping" class="nav-link" data-scroll-target="#sec-ping"><span class="header-section-number">9.5</span> ¿Estás ahí? <code>ping</code></a></li>
+  <li><a href="#sec-nat" id="toc-sec-nat" class="nav-link" data-scroll-target="#sec-nat"><span class="header-section-number">9.6</span> Privada, pública, y el NAT entre medias</a></li>
+  <li><a href="#sec-router" id="toc-sec-router" class="nav-link" data-scroll-target="#sec-router"><span class="header-section-number">9.7</span> El router por dentro (solo lectura)</a></li>
+  <li><a href="#sec-practica-9" id="toc-sec-practica-9" class="nav-link" data-scroll-target="#sec-practica-9"><span class="header-section-number">9.8</span> Práctica: el censo de casa</a></li>
+  <li><a href="#sec-quiz-9" id="toc-sec-quiz-9" class="nav-link" data-scroll-target="#sec-quiz-9"><span class="header-section-number">9.9</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -290,16 +291,80 @@ ul.task-list li input[type="checkbox"] {
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
+<li>Cómo se hablan dos ordenadores: el modelo de capas, qué sobre pone cada una, y por qué la MAC no sale de tu casa mientras la IP recorre el mundo.</li>
 <li>Leer tu ficha de red con <code>ip a</code> e <code>ip route</code>: interfaz, dirección MAC, dirección IP, máscara y puerta de enlace.</li>
 <li>Qué significa el <code>/24</code> de una dirección, y cómo decide quién puede hablar con quién directamente.</li>
 <li>Quién reparte las direcciones — DHCP — y por qué tu portátil sabe la suya sin que se la hayas dicho.</li>
 <li>Medir con <code>ping</code> si una máquina responde y cuánto tarda — y qué tiene que ver ese tiempo con la velocidad de la luz.</li>
-<li>La diferencia entre tu dirección privada y la pública, y qué es el NAT que las separa.</li>
+<li>La diferencia entre tu dirección privada y la pública, y cómo el router traduce entre ambas con su tabla NAT — paso a paso, con la respuesta de vuelta incluida.</li>
 <li>Entrar en la página de administración de tu router, orientarte en ella y hacer el censo de tu red sin tocar nada.</li>
 </ul>
 </div>
-<section id="sec-ip-a" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="sec-ip-a"><span class="header-section-number">9.1</span> Tu ficha de red: <code>ip a</code></h2>
+<section id="sec-capas" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-capas"><span class="header-section-number">9.1</span> Cómo se hablan dos ordenadores</h2>
+<p>Antes de teclear nada, el modelo mental — porque con él, todo lo que sigue es leer; sin él, es memorizar. Cuando tu portátil envía algo a otro ordenador — una página, un <code>ping</code>, una sesión SSH — no manda «un mensaje»: lo trocea en <strong>paquetes</strong> de unos pocos miles de bytes, y cada paquete viaja por su cuenta, metido en varios sobres, uno dentro de otro. Cada sobre lo escribe y lo lee una <strong>capa</strong> distinta, y eso es todo lo que hay que saber del famoso <em>modelo de capas</em>: los libros lo cuentan con siete (el modelo OSI); internet usa en la práctica cinco, y son estas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 31%">
+<col style="width: 20%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capa</th>
+<th>Qué resuelve</th>
+<th>Con qué</th>
+<th>Dónde la verás</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Aplicación</strong></td>
+<td>qué se dice</td>
+<td>HTTP, SSH, DNS</td>
+<td>capítulos 10–12</td>
+</tr>
+<tr class="even">
+<td><strong>Transporte</strong></td>
+<td>a qué <em>programa</em> de la máquina va, y si llega entero y en orden</td>
+<td>TCP, UDP, los <strong>puertos</strong></td>
+<td>capítulo 10</td>
+</tr>
+<tr class="odd">
+<td><strong>Red</strong></td>
+<td>a qué <em>máquina</em> del mundo va, aunque esté a diez saltos</td>
+<td><strong>IP</strong>, direcciones, routers</td>
+<td>este capítulo</td>
+</tr>
+<tr class="even">
+<td><strong>Enlace</strong></td>
+<td>al vecino de al lado, por este cable o esta Wi-Fi</td>
+<td>Ethernet, Wi-Fi, direcciones <strong>MAC</strong></td>
+<td><code>ip a</code>, línea <code>link/ether</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Física</strong></td>
+<td>bits convertidos en voltios, luz o radio</td>
+<td>cobre, fibra, aire</td>
+<td>tu asignatura</td>
+</tr>
+</tbody>
+</table>
+<div id="fig-capas" class="quarto-float quarto-figure quarto-figure-center anchored" alt="La pila de capas de la red y un paquete dibujado como sobres anidados: Ethernet, IP, TCP y los datos">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-capas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-capas.svg" class="img-fluid figure-img" alt="La pila de capas de la red y un paquete dibujado como sobres anidados: Ethernet, IP, TCP y los datos">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-capas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.1: Cada capa añade su sobre. Los routers del camino solo abren el de fuera; el sobre IP llega intacto, y lo que hay dentro solo lo lee el programa de destino.
+</figcaption>
+</figure>
+</div>
+<p>La analogía postal lo deja claro. Tú escribes la carta (los <strong>datos</strong>). La metes en un sobre con el número de piso (el <strong>puerto</strong>: qué programa, entre los muchos de esa máquina, debe abrirla). Ese sobre va dentro de otro con la dirección de la calle (la <strong>IP</strong>: qué máquina del mundo). Y ese, dentro de un sobre más que solo entiende el repartidor de tu barrio (la <strong>MAC</strong>: qué aparato de <em>esta</em> red, por este cable). En cada salto, el repartidor abre el sobre exterior, lee la calle del siguiente, y vuelve a envolver para el siguiente repartidor. Por eso la MAC <strong>solo importa dentro de tu casa</strong> y la IP importa en todo el mundo; por eso un <strong>router</strong> no es más que una máquina que lee el sobre IP y decide por qué puerta sale; y por eso los puertos, que verás en el capítulo 10, son el número de piso que hace posible que una dirección sirva a muchos programas — y, como descubrirás dentro de un rato, a muchas casas.</p>
+</section>
+<section id="sec-ip-a" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-ip-a"><span class="header-section-number">9.2</span> Tu ficha de red: <code>ip a</code></h2>
 <p>El comando de este bloque es <code>ip</code>, y su primera pregunta es «¿quién soy en la red?»: <code>ip a</code> (<em>address</em>). La salida asusta la primera vez; léela por bloques, que cada bloque es una <strong>interfaz</strong> — una tarjeta de red, real o virtual:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip a</span>
 <span class="t-out">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 ...</span>
@@ -309,14 +374,14 @@ ul.task-list li input[type="checkbox"] {
 <span class="t-out">    inet 192.168.1.34/24 brd 192.168.1.255 scope global dynamic wlp3s0</span>
 <span class="t-out">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 ...</span>
 <span class="t-out">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span></code></pre>
-<p>Tres interfaces. <code>lo</code> es el <em>loopback</em>: la máquina hablando consigo misma (<code>127.0.0.1</code> siempre eres tú — la usarás en el capítulo 11). <code>wlp3s0</code> es tu Wi-Fi (<code>enp…</code> sería el cable), con dos direcciones distintas: la <strong>MAC</strong> (<code>link/ether a4:34:…</code>, el número de serie grabado en la tarjeta de fábrica) y la <strong>IP</strong> (<code>inet 192.168.1.34/24</code>, la que te ha tocado en esta red). Y <code>virbr0</code> es el router de mentira del capítulo 7 — la red NAT de tus máquinas virtuales. Ese <code>dynamic</code> al final de tu IP es una pista para dentro de dos secciones.</p>
+<p>Tres interfaces. <code>lo</code> es el <em>loopback</em>: la máquina hablando consigo misma (<code>127.0.0.1</code> siempre eres tú — la usarás en el capítulo 11). <code>wlp3s0</code> es tu Wi-Fi (<code>enp…</code> sería el cable), con dos direcciones distintas — una por capa: la <strong>MAC</strong> (<code>link/ether a4:34:…</code>, el número de serie grabado en la tarjeta de fábrica: capa de enlace, el sobre del barrio) y la <strong>IP</strong> (<code>inet 192.168.1.34/24</code>, la que te ha tocado en esta red: capa de red, el sobre con la calle). Y <code>virbr0</code> es el router de mentira del capítulo 7 — la red NAT de tus máquinas virtuales. Ese <code>dynamic</code> al final de tu IP es una pista para dentro de dos secciones.</p>
 <div class="truco">
 <p><strong>✚ Truco · La misma ficha, en el icono de red</strong></p>
 <p>El icono de red de tu escritorio (clic → <em>Información de la conexión</em>) muestra exactamente esto: dirección IP, máscara, puerta de enlace, DNS. Es la vía gráfica de <code>ip a</code>, y perfectamente digna para un vistazo. La terminal gana cuando la máquina no tiene escritorio — tu <code>debian-lab</code> — o cuando quieres pegarlo en un correo pidiendo ayuda: «esto es lo que dice <code>ip a</code>» es la frase con la que empiezan todos los diagnósticos de red.</p>
 </div>
 </section>
-<section id="sec-mascara" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="sec-mascara"><span class="header-section-number">9.2</span> El <code>/24</code>: red y máquina</h2>
+<section id="sec-mascara" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-mascara"><span class="header-section-number">9.3</span> El <code>/24</code>: red y máquina</h2>
 <p>Una dirección IP son cuatro números de 0 a 255 — cuatro bytes, tú sabes de esto — y el <code>/24</code> es la <strong>máscara</strong>: dice cuántos bits del principio identifican la <em>red</em> y cuántos quedan para la <em>máquina</em>.</p>
 <div id="fig-ip-mascara" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dirección 192.168.1.34/24 descompuesta en parte de red, parte de máquina y máscara">
 <figure class="quarto-float quarto-float-fig figure">
@@ -324,7 +389,7 @@ ul.task-list li input[type="checkbox"] {
 <img src="../imagenes/cap09/fig-ip-mascara.svg" class="img-fluid figure-img" alt="Dirección 192.168.1.34/24 descompuesta en parte de red, parte de máquina y máscara">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ip-mascara-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;9.1: La anatomía de tu dirección. Los tres primeros números son el «prefijo» que comparte toda la casa; el último es el tuyo.
+Figura&nbsp;9.2: La anatomía de tu dirección. Los tres primeros números son el «prefijo» que comparte toda la casa; el último es el tuyo.
 </figcaption>
 </figure>
 </div>
@@ -393,8 +458,8 @@ Figura&nbsp;9.1: La anatomía de tu dirección. Los tres primeros números son e
 <span class="t-out">192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1</span></code></pre>
 <p>Léelo como instrucciones de un GPS: «para <code>192.168.1.0/24</code> (mi casa), sal directo por la Wi-Fi; para <code>192.168.122.0/24</code> (mis VMs), por <code>virbr0</code>; para <em>todo lo demás</em> (<code>default</code>), entrégaselo a <code>192.168.1.1</code>». Ese <code>192.168.1.1</code> es tu router — el que abrirás al final del capítulo.</p>
 </section>
-<section id="sec-dhcp" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="sec-dhcp"><span class="header-section-number">9.3</span> ¿Quién reparte las direcciones? DHCP</h2>
+<section id="sec-dhcp" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-dhcp"><span class="header-section-number">9.4</span> ¿Quién reparte las direcciones? DHCP</h2>
 <p>Nunca le has dicho a tu portátil que es el <code>.34</code>. Se lo dijo el router, mediante <strong>DHCP</strong> (<em>Dynamic Host Configuration Protocol</em>): al conectarte, tu máquina grita a la red «¿alguien me da una dirección?» y el servidor DHCP del router le responde con un <em>préstamo</em> — una dirección libre, la máscara, la puerta de enlace y el servidor de nombres (capítulo 10) — por un tiempo limitado, que se renueva solo. De ahí el <code>dynamic</code> de <code>ip a</code>, y de ahí que tu móvil cambie de número de vez en cuando.</p>
 <p>Y ya lo has visto funcionar dos veces sin saberlo: la red <code>default</code> de libvirt lleva su propio servidor DHCP — por eso <code>debian-lab</code> apareció con <code>192.168.122.15</code> sin configurar nada —, y el instalador de Debian pidió su dirección exactamente así. El mismo mecanismo a tres escalas: tu casa, tu hipervisor, el campus de la universidad.</p>
 <div class="historia">
@@ -410,7 +475,7 @@ Figura&nbsp;9.1: La anatomía de tu dirección. Los tres primeros números son e
 <img src="../imagenes/cap09/arpanet-imp.jpg" class="img-fluid figure-img" alt="Armario del Interface Message Processor de ARPANET, el primer router">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;9.2: El primer IMP de ARPANET (1969), el abuelo de la caja con lucecitas de tu salón. <em>Foto: Steve Jurvetson, CC BY 2.0, Wikimedia Commons.</em>
+Figura&nbsp;9.3: El primer IMP de ARPANET (1969), el abuelo de la caja con lucecitas de tu salón. <em>Foto: Steve Jurvetson, CC BY 2.0, Wikimedia Commons.</em>
 </figcaption>
 </figure>
 </div>
@@ -422,7 +487,7 @@ Figura&nbsp;9.2: El primer IMP de ARPANET (1969), el abuelo de la caja con lucec
 <img src="../imagenes/cap09/arpanet-log-lo.jpg" class="img-fluid figure-img" alt="Página manuscrita del registro del IMP de UCLA anotando la primera conexión">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-lo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;9.3: La página del cuaderno de UCLA con el registro de aquel «LO», 22:30 del 29 de octubre de 1969. <em>Dominio público, Wikimedia Commons.</em>
+Figura&nbsp;9.4: La página del cuaderno de UCLA con el registro de aquel «LO», 22:30 del 29 de octubre de 1969. <em>Dominio público, Wikimedia Commons.</em>
 </figcaption>
 </figure>
 </div>
@@ -430,8 +495,8 @@ Figura&nbsp;9.3: La página del cuaderno de UCLA con el registro de aquel «LO»
 </div>
 </div>
 </section>
-<section id="sec-ping" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="sec-ping"><span class="header-section-number">9.4</span> ¿Estás ahí? <code>ping</code></h2>
+<section id="sec-ping" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-ping"><span class="header-section-number">9.5</span> ¿Estás ahí? <code>ping</code></h2>
 <p><code>ping</code> manda un paquete diminuto a una dirección y cronometra la respuesta. Es el estetoscopio de las redes: responde a «¿esa máquina existe y me oye?» y de propina mide <em>cuánto tarda</em>:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 3 192.168.1.1</span>
 <span class="t-out">PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.</span>
@@ -452,8 +517,8 @@ Figura&nbsp;9.3: La página del cuaderno de UCLA con el registro de aquel «LO»
 <p>Ese tiempo es de <em>ida y vuelta</em>, y tiene un mínimo físico que puedes calcular. En fibra la luz va a unos dos tercios de <em>c</em> — 200 000 km/s —, así que cada milisegundo de ida y vuelta corresponde como mucho a 100 km de distancia. Un servidor a 15 ms está, como mínimo, en un radio de 1 500 km; uno a 150 ms está seguro al otro lado de un océano, y nada lo bajará de ahí — ni la fibra más cara. Es la razón por la que los centros de datos se construyen cerca de sus usuarios, y por la que un clúster «en la nube» a 5 000 km nunca se sentirá tan inmediato como la máquina de al lado. Pocas veces un comando de terminal te deja medir una constante fundamental.</p>
 </div>
 </section>
-<section id="sec-nat" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="sec-nat"><span class="header-section-number">9.5</span> Privada, pública, y el NAT entre medias</h2>
+<section id="sec-nat" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-nat"><span class="header-section-number">9.6</span> Privada, pública, y el NAT entre medias</h2>
 <p>Hay algo raro en tu <code>192.168.1.34</code>: millones de casas del mundo tienen exactamente esa misma dirección. No es un error: las redes <code>192.168.x.x</code>, <code>10.x.x.x</code> y <code>172.16–31.x.x</code> son <strong>direcciones privadas</strong>, reservadas para uso interno y repetidas en cada casa, oficina o laboratorio. Internet nunca las ve. Lo que internet ve es la <strong>dirección pública</strong> de tu router — una sola para toda la casa — y la traducción entre ambas es el <strong>NAT</strong> (<em>Network Address Translation</em>):</p>
 <div id="fig-nat" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
 <figure class="quarto-float quarto-float-fig figure">
@@ -461,17 +526,50 @@ Figura&nbsp;9.3: La página del cuaderno de UCLA con el registro de aquel «LO»
 <img src="../imagenes/cap09/fig-nat-casa.svg" class="img-fluid figure-img" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;9.4: Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.
+Figura&nbsp;9.5: Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.
 </figcaption>
 </figure>
 </div>
+<p>¿Cómo puede una sola dirección servir a toda la casa? Con los sobres de la primera sección, paso a paso. Tu portátil pide una página web: sale un paquete que dice <em>«de 192.168.1.34, puerto 51234 → a 151.101.66.132, puerto 443»</em>. El router lo intercepta antes de que salga a internet y hace dos cosas: <strong>reescribe el remitente</strong> — ahora dice <em>«de 83.44.120.9, puerto 51234»</em>, su dirección pública — y <strong>apunta una línea en su libreta</strong>: «lo que vuelva dirigido a 83.44.120.9:51234 es en realidad para 192.168.1.34:51234». El servidor responde a la única dirección que conoce, la pública; el router recibe la respuesta, busca la línea, y <strong>reescribe el destinatario</strong>: → a 192.168.1.34:51234. Tu portátil recibe su página y nunca supo que le cambiaron el nombre. Mientras, tu móvil hace lo mismo con otro puerto (58001) y tiene su propia línea. Esa libreta es la <strong>tabla NAT</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dentro (privado)</th>
+<th>Fuera (público)</th>
+<th>Hablando con</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>192.168.1.34:51234</code></td>
+<td><code>83.44.120.9:51234</code></td>
+<td><code>151.101.66.132:443</code></td>
+</tr>
+<tr class="even">
+<td><code>192.168.1.57:58001</code></td>
+<td><code>83.44.120.9:58001</code></td>
+<td><code>142.250.184.14:443</code></td>
+</tr>
+</tbody>
+</table>
+<div id="fig-nat-tabla" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nat-tabla-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-nat-tabla.svg" class="img-fluid figure-img" alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nat-tabla-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.6: La libreta del router. Cada conversación que sale deja una línea; cada respuesta que vuelve se busca en ella. Lo que llega sin línea, se tira.
+</figcaption>
+</figure>
+</div>
+<p>De esta libreta salen todas las consecuencias que importan. Un paquete que llega desde internet <em>sin que nadie de casa lo haya pedido</em> — alguien probando suerte en tu puerto 22 — no tiene línea en la tabla: el router no sabe a quién dárselo y lo descarta. Por eso <strong>desde fuera nadie entra sin invitación</strong>. Cuando <em>quieras</em> que alguien entre — tú mismo por SSH desde la universidad —, tendrás que escribir a mano una línea permanente: «lo que llegue al puerto 22 público, dáselo siempre a 192.168.1.34» — es el <em>reenvío de puertos</em> del capítulo 10. Y fíjate en el detalle que explica el capítulo siguiente: la traducción funciona <strong>gracias a los puertos</strong>. La dirección pública es la calle; los puertos son los pisos, y el router puede permitirse una sola calle porque tiene sesenta y cinco mil pisos que repartir entre las conversaciones de toda la casa.</p>
 <p>Puedes ver las dos caras desde tu terminal: la privada en <code>ip a</code>, y la pública preguntándole a un servidor de fuera qué dirección ve:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">curl ifconfig.me</span>
 <span class="t-out">83.44.120.9</span></code></pre>
-<p>Esa es tu casa vista desde internet — y coincidirá con la que el router llama <em>WAN</em> en su página. Dos consecuencias que dan forma a los tres capítulos siguientes. La cómoda: <strong>desde fuera nadie puede entrar en tus aparatos sin invitación</strong>, porque no tienen dirección pública que apuntar. La incómoda: cuando <em>quieras</em> que alguien entre — tú mismo, por SSH desde la universidad —, tendrás que pedirle al router que abra una puerta concreta (capítulo 10). Y fíjate en el detalle elegante: tu <code>debian-lab</code> vive detrás de <em>dos</em> NAT — el de libvirt y el de casa. Las muñecas rusas de la sección anterior, otra vez.</p>
+<p>Esa es tu casa vista desde internet — y coincidirá con la que el router llama <em>WAN</em> en su página. Dos remates. Tu <code>debian-lab</code> vive detrás de <em>dos</em> libretas — la de tu Mint (para la red <code>192.168.122.x</code>) y la del router —: cada paquete suyo cambia de remitente dos veces al salir y de destinatario dos veces al volver. Y algunas compañías añaden una tercera libreta en sus propias instalaciones para miles de casas a la vez (el CG-NAT del ejercicio 9.3): entonces ni la línea escrita a mano en tu router sirve, porque el intruso — o tú desde la universidad — nunca llega a tu router. Muñecas rusas, todas con la misma lógica.</p>
 </section>
-<section id="sec-router" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="sec-router"><span class="header-section-number">9.6</span> El router por dentro (solo lectura)</h2>
+<section id="sec-router" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-router"><span class="header-section-number">9.7</span> El router por dentro (solo lectura)</h2>
 <p>El <code>192.168.1.1</code> de <code>ip route</code> no es solo una dirección: es una <strong>página web</strong>. Escríbela en el navegador y aparecerá la administración de tu router — usuario y contraseña suelen estar en la pegatina de la caja (y si son los de fábrica, el capítulo 10 tendrá algo que decir). Cada compañía diseña la suya, pero todas tienen los mismos cajones; tu tarea hoy es <em>encontrarlos sin tocar nada</em>:</p>
 <ul>
 <li><strong>Estado / Información</strong>: la dirección WAN (compárala con <code>curl ifconfig.me</code>), el tiempo encendido, la versión del firmware.</li>
@@ -490,8 +588,8 @@ Figura&nbsp;9.4: Tres aparatos dentro, una dirección fuera. El router reescribe
 <span class="t-out">192.168.122.15 dev virbr0 lladdr 52:54:00:9a:4e:21 REACHABLE</span></code></pre>
 <p>Y para un censo completo por tu cuenta existe <code>nmap</code>, el explorador de redes: <code>sudo apt install nmap</code> y <code>nmap -sn 192.168.1.0/24</code> toca a la puerta de las 254 direcciones y lista quién responde. Es una herramienta legítima <strong>sobre tu propia red</strong>; usarla sobre redes ajenas es, según dónde, un delito. Aquí, en casa, es tu censo de respaldo.</p>
 </section>
-<section id="sec-practica-9" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="sec-practica-9"><span class="header-section-number">9.7</span> Práctica: el censo de casa</h2>
+<section id="sec-practica-9" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="sec-practica-9"><span class="header-section-number">9.8</span> Práctica: el censo de casa</h2>
 <p>Cuaderno en marcha (<code>script sesion09.log</code>). Todo lo de hoy es lectura: ni un cambio en el router, ni un cambio en tu máquina.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
@@ -637,8 +735,8 @@ Figura&nbsp;9.4: Tres aparatos dentro, una dirección fuera. El router reescribe
 </div>
 </div>
 </section>
-<section id="sec-quiz-9" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="sec-quiz-9"><span class="header-section-number">9.8</span> Autocomprobación</h2>
+<section id="sec-quiz-9" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="sec-quiz-9"><span class="header-section-number">9.9</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap09">
   <div class="qz"><p class="qq" data-n="1">En <code>192.168.1.34/24</code>, el <code>/24</code> indica…</p>
