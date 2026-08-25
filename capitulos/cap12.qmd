@@ -316,9 +316,9 @@ reabrir túnel, el cuaderno y su kernel siguen vivos: viven en tmux.
 
 **Por qué así** — Este es el montaje completo: los datos y el
 cálculo en la máquina remota, tu comodidad en la local. En un
-clúster el patrón es el mismo, con Jupyter lanzado desde un nodo de
-cálculo vía SLURM — pregúntalo allí: casi todos tienen una receta
-escrita para exactamente esto.
+clúster el patrón es el mismo, con Jupyter lanzado en una máquina de
+cálculo — pregúntalo allí: casi todos tienen una receta escrita para
+exactamente esto.
 :::
 ::::
 :::

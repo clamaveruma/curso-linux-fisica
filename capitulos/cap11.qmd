@@ -677,8 +677,8 @@ lanzar una simulación, cerrar el portátil, volver mañana y
 encontrarla terminada — `tmux`, la sesión que no muere. Y llega el
 caso estrella del físico computacional: un Jupyter corriendo en el
 servidor, abierto en el navegador de tu portátil a través de un túnel
-SSH. De postre sabrás qué es «la nube» en dos párrafos y qué es SLURM
-en dos páginas: la puerta al doctorado. Guarda `sesion11.log`.
+SSH. De postre sabrás qué es «la nube» en dos párrafos, y qué es un
+clúster en dos frases. Guarda `sesion11.log`.
 :::
 
 ::: {.pie-piloto}
