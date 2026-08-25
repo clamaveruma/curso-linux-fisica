@@ -350,16 +350,6 @@ Figura&nbsp;5.2: Las capas, y la familia. Cambiar de escritorio es cambiar la ca
 <p><strong>◷ Historia · Debra, Ian, y el infierno de las dependencias</strong></p>
 <p>Debian nació en 1993, bautizado por su creador con su nombre y el de su pareja: <strong>Deb</strong>ra + <strong>Ian</strong> Murdock. Su gran legado llegó en 1998 con <code>apt</code>: hasta entonces, instalar un programa era perseguir a mano la cadena de bibliotecas que necesitaba — el «infierno de las dependencias» que todavía traumatiza a los veteranos. La resolución automática de <code>apt</code> lo enterró, y la idea es hoy universal: <code>pip</code> y <code>conda</code> en Python son descendientes directos de ese concepto. Cuando esta tarde <code>apt</code> te resuelva un árbol de dependencias en un segundo, levanta la vista un momento: estás viendo el invento de Ian.</p>
 </div>
-<div id="fig-murdock" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Ian Murdock hablando en una conferencia en 2008">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-murdock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap05/ian-murdock-2008.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Ian Murdock hablando en una conferencia en 2008">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-murdock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;5.3: Ian Murdock (1973–2015), fundador de Debian, en 2008. Todo lo que instale tu Mint pasa por la arquitectura que él empezó. <em>Foto: Ilya Schurov, CC BY-SA 2.0, Wikimedia Commons.</em>
-</figcaption>
-</figure>
-</div>
 </section>
 <section id="sec-procesos" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-procesos"><span class="header-section-number">5.3</span> Qué está pasando ahora mismo: procesos</h2>
@@ -384,6 +374,16 @@ Figura&nbsp;5.3: Ian Murdock (1973–2015), fundador de Debian, en 2008. Todo lo
 <span class="t-out">marcos    9204 98.7  0.4 ... python analisis.py</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">kill 9204</span></code></pre>
 <p><code>kill</code>, pese al nombre, es educado: envía SIGTERM — «termina, por favor» — y el proceso puede cerrar ficheros y despedirse. Si lo ignora, queda el recurso final: <code>kill -9</code>, SIGKILL, que no se puede ignorar ni atender — el kernel lo elimina en seco. La diferencia importa: es apagar la centrífuga con su rampa de frenado frente a cortarle la corriente. La segunda funciona siempre, pero lo que hubiera a medio escribir se queda a medias. Protocolo: primero <code>kill</code>, cinco segundos de cortesía, y solo entonces <code>kill -9</code>.</p>
+<div id="fig-procesos" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Un proceso lanzado por el shell, con las señales SIGINT, SIGTERM y SIGKILL llegando a él, y su terminación">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-procesos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap05/fig-procesos.svg" class="img-fluid figure-img" alt="Un proceso lanzado por el shell, con las señales SIGINT, SIGTERM y SIGKILL llegando a él, y su terminación">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-procesos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.3: La vida de un proceso. Nace del shell, corre en primer o segundo plano, y termina cuando acaba — o cuando una señal se lo pide.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="sec-background" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="sec-background"><span class="header-section-number">5.5</span> Segundo plano: el <code>&amp;</code></h2>
