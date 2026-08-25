@@ -199,7 +199,9 @@ envía y ya, sin conexión ni confirmación — rapidísimo, y si una se
 pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos
 van así: prefieren perder un paquete a esperar. Por eso `nmap` decía
 `22/tcp`: el puerto 22 *de TCP*. Los dos sistemas conviven en la misma
-dirección con números independientes.
+dirección con numeraciones independientes — el 53 de UDP (DNS) y el
+53 de TCP son puertas distintas, aunque el mismo programa suela
+atender las dos.
 :::
 
 ::: {.truco}

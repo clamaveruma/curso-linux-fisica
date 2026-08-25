@@ -12,12 +12,13 @@ servidor del mundo.
 :::
 
 ::: {.chapmeta}
-⏱ **2–3 h** con ejercicios · requisitos: **capítulos 8 y 10** · máquina: **tu Linux de diario y `debian-lab`**
+⏱ **2–3 h** con ejercicios · requisitos: **capítulos 8 y 10** · máquina: **tu Linux de diario y `debian-lab`** · nivel: **el capítulo más avanzado del curso — lo esencial cabe en las dos primeras secciones**
 :::
 
 ::: {.objetivos}
 **Al terminar esta sesión sabrás**
 
+- Conectarte a otro ordenador *con ratón*, desde el gestor de archivos: SSH, Samba, FTP y NFS por el mismo diálogo.
 - Qué son el cliente y el servidor SSH, y qué pasa exactamente al conectar por primera vez (la huella, `known_hosts`).
 - Convertir tu propia máquina en servidor con `openssh-server`, y entrar en ella desde ella misma.
 - Crear un par de claves ed25519, instalarlo en el servidor con `ssh-copy-id` y no volver a teclear una contraseña.
@@ -26,6 +27,47 @@ servidor del mundo.
 - Ejecutar un comando en otra máquina sin abrir sesión — y por qué eso cambia tu forma de trabajar.
 - Qué cambia cuando el servidor es de verdad: la universidad, una nube, o tu casa desde fuera.
 :::
+
+::: {.aviso}
+**△ Aviso · Este capítulo tiene dos velocidades**
+
+Lo **esencial** — y suficiente para el proyecto final — son las dos
+primeras secciones: conectarte a otro ordenador con el gestor de
+archivos, y abrir una sesión SSH con tu contraseña. Todo lo demás —
+claves, agenda, `rsync`, comandos remotos, endurecer el servidor — es
+lo que usa un profesional a diario, pero es **avanzado**: si en algún
+punto te pierdes, quédate con lo esencial, sigue al capítulo 12 (que
+solo necesita saber entrar) y vuelve aquí cuando el resto te haga
+falta. Nadie aprende SSH entero en una tarde.
+:::
+
+## Primero con ratón: otro ordenador en tu gestor de archivos {#sec-con-raton}
+
+Antes de teclear un solo comando, la versión que ya sabes usar. Tu
+gestor de archivos — Nemo en Mint (Caja, Nautilus o Thunar en otros
+escritorios) — sabe abrir carpetas que viven en *otra máquina*, y lo
+hace con un solo diálogo para todos los protocolos que te vas a
+encontrar. Menú **Archivo → Conectar al servidor…** y verás un
+desplegable con el tipo de conexión:
+
+| Tipo | Qué es | Cuándo te lo encontrarás |
+|------|--------|--------------------------|
+| **SSH** (SFTP) | ficheros a través de una sesión SSH cifrada | cualquier máquina Linux con SSH — tu `debian-lab`, el clúster |
+| **Windows / Samba** (SMB) | el «compartir carpeta» de Windows y de los NAS | la impresora de casa, el disco de red, el PC con Windows |
+| **FTP** | el protocolo veterano de transferir ficheros, sin cifrar | servidores públicos de datos, alojamientos web antiguos |
+| **WebDAV** | ficheros sobre una web | nubes universitarias, Nextcloud |
+| **NFS** (escribiendo `nfs://…` en la barra de dirección) | el compartir de Unix | laboratorios y clústeres (anexo B2) |
+
+Pruébalo ahora con lo que ya tienes: tipo **SSH**, servidor
+`debian-lab` (el nombre que le diste en el capítulo 10), carpeta
+`/home/marcos`, usuario `marcos`, y tu contraseña. La casa del
+servidor aparece en la barra lateral como una carpeta más: arrastra
+un fichero, ábrelo, edítalo, bórralo — todo viaja por el servidor
+SSH que dejaste instalado en el capítulo 8. Eso que acaba de pasar
+*es* SSH; el resto del capítulo es el mismo mecanismo visto desde la
+terminal, donde además de mover ficheros podrás *ejecutar* cosas en
+la otra máquina. Si hoy no pasas de esta sección, ya sabes conectarte
+a otro ordenador — que era el objetivo.
 
 ## Cliente y servidor {#sec-cliente-servidor}
 
@@ -216,15 +258,14 @@ destino. La segunda vez que ejecutes el mismo `rsync` tardará un
 segundo: solo viaja lo nuevo.
 
 ::: {.truco}
-**✚ Truco · Arrastrar y soltar por SSH**
+**✚ Truco · Arrastrar y soltar sigue valiendo**
 
-El gestor de archivos de Mint sabe hablar SSH: en la barra de
-direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe
-`sftp://debian-lab/home/marcos` y verás la casa del servidor como una
-carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el
-primo de `scp` que viaja por el mismo túnel. Para un fichero suelto
-es perfecto; `rsync` gana cuando son mil ficheros o hay que repetir
-la copia cada día. Y si prefieres que la casa del servidor aparezca
+La conexión con ratón de la primera sección es SFTP — el primo de
+`scp` que viaja por el mismo túnel — y también se abre escribiendo
+`sftp://debian-lab/home/marcos` en la barra de direcciones
+(<kbd>Ctrl</kbd>+<kbd>L</kbd>). Para un fichero suelto es perfecto;
+`rsync` gana cuando son mil ficheros o hay que repetir la copia cada
+día. Y si prefieres que la casa del servidor aparezca
 como una carpeta *de verdad* en tu árbol — para abrirla desde
 cualquier programa —, eso se llama montar por SSHFS, y está en el
 [anexo B2](../anexos/anexo-b2-montajes.qmd).
@@ -314,6 +355,31 @@ paquete y se crean ficheros en `~/.ssh`.
 **Nivel 1 · Lo esencial**
 
 ::: {.ejercicio}
+**Ejercicio 11.0 · Con ratón**
+
+Desde el gestor de archivos, conéctate a `debian-lab` por SSH con el
+diálogo *Conectar al servidor…*, copia un fichero cualquiera de tu
+Mint a la casa del servidor arrastrándolo, y comprueba en la barra
+lateral que la conexión queda como marcador. Después desconéctala
+(botón ⏏ junto al marcador). *Pista: tipo SSH, servidor `debian-lab`,
+usuario `marcos`; si pide aceptar una «identidad» desconocida, es la
+huella que explica la sección siguiente — acepta.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Archivo → Conectar al servidor → SSH · `debian-lab` · `/home/marcos` ·
+`marcos` → contraseña → la carpeta aparece; arrastrar el fichero;
+⏏ para desconectar. Desde la VM, `ls ~` muestra el fichero copiado.
+
+**Por qué así** — Es exactamente `scp` con ratón, y para mucha gente
+es *toda* la SSH que necesitan. El resto del capítulo existe para
+cuando el ratón se queda corto: ejecutar cosas allí, automatizar, o
+entrar en máquinas sin ventanas.
+:::
+::::
+:::
+
+::: {.ejercicio}
 **Ejercicio 11.1 · Nivel 0: contigo mismo**
 
 Instala `openssh-server` en tu Mint, comprueba que el servicio
@@ -358,6 +424,8 @@ saber que existe es saber leer el aviso de huella cambiada.
 :::
 ::::
 :::
+
+**Nivel 2 · Avanzado (pero muy útil)**
 
 ::: {.ejercicio}
 **Ejercicio 11.3 · Las claves**
@@ -408,8 +476,6 @@ del trabajo remoto: los datos y el cálculo allí, el resultado aquí.
 :::
 ::::
 :::
-
-**Nivel 2 · El mecanismo**
 
 ::: {.ejercicio}
 **Ejercicio 11.5 · `rsync` y la barra**

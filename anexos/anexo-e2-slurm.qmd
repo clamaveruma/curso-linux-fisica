@@ -1,0 +1,121 @@
+# SLURM en dos páginas: el día del clúster {#sec-anexo-e2}
+
+Este anexo es para un día concreto: el día que te den un usuario en
+el clúster de la universidad o de la Red Española de Supercomputación.
+No hace falta antes — y sin los capítulos 11 y 12 (SSH y tmux) no se
+entiende. Es la parte más avanzada del curso, y por eso vive aquí y
+no en el cuerpo: léela cuando tengas dónde probarla.
+
+En un clúster no ejecutas nada: **pides**. Entras por SSH en el *nodo
+de acceso* (*login node*), describes tu trabajo en un fichero, se lo
+entregas a la cola, y cuando SLURM encuentra hueco en los nodos de
+cálculo, lo ejecuta y te deja los resultados. Tres reglas que todo
+administrador agradecerá que sepas antes de llegar: en el nodo de
+acceso no se calcula (se edita, se envía, se consulta); se pide lo que
+se necesita — pedir de más retrasa tu turno; y los resultados van a
+donde te digan (`scratch`, normalmente), no a tu casa.
+
+![La anatomía de un clúster. Tú solo tocas el nodo de la izquierda; SLURM reparte el resto.](../imagenes/cap12/fig-slurm.svg){#fig-slurm fig-alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo"}
+
+El fichero que se entrega es un **job script** — y ya sabes
+escribirlo: es un script de bash del capítulo 4, con unas líneas de
+comentario que SLURM lee como instrucciones:
+
+```default
+#!/bin/bash
+#SBATCH --job-name=pendulo
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8G
+#SBATCH --time=02:00:00
+#SBATCH --output=pendulo_%j.log
+
+module load python/3.12
+cd $HOME/pendulo
+python3 simula.py --pasos 1000000 > resultados.csv
+```
+
+Cada `#SBATCH` es una petición: nombre, núcleos, memoria, tiempo
+máximo, dónde escribir la salida (`%j` se sustituye por el número de
+trabajo). Para bash son comentarios — el script se puede probar
+localmente con `bash trabajo.sh` —; para SLURM son el contrato. El
+`module load` es el mecanismo con que los clústeres ofrecen versiones
+de software sin pisarse: cada `module` ajusta tu `$PATH` del
+capítulo 5. Y el ciclo entero son cuatro comandos:
+
+```terminal
+usuario@login1:~$ sbatch trabajo.sh
+Submitted batch job 48213
+usuario@login1:~$ squeue -u usuario
+  JOBID PARTITION     NAME     USER ST  TIME  NODES NODELIST(REASON)
+  48213   general  pendulo  usuario PD  0:00      1 (Priority)
+usuario@login1:~$ squeue -u usuario
+  48213   general  pendulo  usuario  R  4:12      1 nodo03
+usuario@login1:~$ scancel 48213
+```
+
+`sbatch` entrega; `squeue` consulta — `PD` es *pendiente* en la cola,
+`R` es *corriendo*, y la columna final dice por qué espera o dónde
+corre —; `scancel` retira. Cuando termine, `pendulo_48213.log` tendrá
+lo que el script escribiera por pantalla, y `resultados.csv` estará
+donde lo dejaste. Para pruebas cortas existe `srun --pty bash`: te
+da una terminal *dentro* de un nodo de cálculo durante un rato, para
+probar antes de enviar en serio. Con esto, el primer día de doctorado
+tendrás más recorrido que la mayoría de los que llevan un año.
+
+## Práctica {.unnumbered}
+
+::: {.ejercicio}
+**Ejercicio E2.1 · Leer un job script**
+
+Sin ejecutar nada (no tienes SLURM… todavía): lee el script de
+arriba y responde en el cuaderno — ¿cuántos núcleos pide?, ¿cuánto
+tiempo máximo?, ¿dónde quedará lo que el programa imprima por
+pantalla si el trabajo recibe el número 48213?, ¿qué pasa si el
+programa tarda tres horas?, ¿y por qué `bash trabajo.sh` lo ejecutaría
+igualmente en tu portátil? *Pista: las líneas `#SBATCH` son
+comentarios para bash y contrato para SLURM.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+4 núcleos; 2 horas; en `pendulo_48213.log`; si excede el tiempo,
+SLURM lo mata sin contemplaciones (y por eso se pide con margen, pero
+no de más); y bash ignora las líneas `#`, así que ejecuta el `cd` y
+el `python3` sin más — salvo `module load`, que solo existe en el
+clúster.
+
+**Por qué así** — Leer con soltura un job script antes de tener
+acceso a un clúster es exactamente la ventaja que este curso quería
+darte. El resto — particiones, colas con nombre, GPU — son variantes
+de estas cinco líneas.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio E2.2 · Tu propio job script, ensayado en local**
+
+Escribe `trabajo.sh` para tu `simula.py` con cabecera `#SBATCH`
+(nombre, 1 núcleo, 512 MB, 15 minutos, salida `simula_%j.log`),
+hazlo ejecutable, y *ensáyalo* en `debian-lab` con `bash trabajo.sh`
+— sin SLURM, las peticiones se ignoran y el script corre igual.
+Verifica que produce `progreso.txt`. *Pista: quita el `module load`
+(no existe en tu VM) y usa rutas absolutas, como en el capítulo 1: en
+un nodo de cálculo no sabes desde dónde te ejecutan.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Un script con shebang, cinco `#SBATCH`, `cd /home/marcos` y
+`python3 simula.py`. `chmod u+x trabajo.sh` y `bash trabajo.sh` lo
+ejecuta igual que lo haría un nodo de cálculo. El día que tengas
+cuenta en un clúster, este fichero — más el `module load` que allí
+te indiquen — es lo primero que enviarás con `sbatch`.
+
+**Por qué así** — Has cerrado el círculo del curso: un script de bash
+(cap. 4) con rutas absolutas (cap. 1), lanzado en un servidor (cap.
+8) al que entras por SSH con clave (cap. 11), preparado para una cola
+(cap. 12). Doce sesiones, un físico que sabe dónde está parado.
+Guarda `sesion12.log`.
+:::
+::::
+:::
+

@@ -6,10 +6,8 @@ servidor; hoy aprendes a *quedarte* sin estar: lanzar una simulación,
 cerrar el portátil, volver mañana desde otra ciudad y encontrarla
 terminada. Después, el truco favorito del físico computacional — un
 Jupyter corriendo en el servidor, abierto en el navegador de tu
-portátil por un túnel cifrado. Y de postre, dos cosas que te van a
-nombrar el primer día del doctorado: qué es «la nube» en términos
-concretos, y qué es SLURM, la cola de trabajos de todos los clústeres
-del mundo.
+portátil por un túnel cifrado. Y de postre, qué es «la nube» en términos
+concretos — y por dónde seguir el día que te den cuenta en un clúster.
 :::
 
 ::: {.chapmeta}
@@ -24,7 +22,7 @@ del mundo.
 - Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.
 - Ejecutar Jupyter en el servidor con los datos y la CPU de allí, y trabajar desde tu portátil.
 - Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.
-- La anatomía de un clúster y de un *job script* de SLURM: enviar, consultar, cancelar.
+- Qué es un clúster de cálculo y dónde seguir el día que te den cuenta en uno.
 :::
 
 ## La sesión que muere {#sec-sesion-muere}
@@ -193,63 +191,20 @@ den un usuario, este capítulo será tu primera semana.
 
 ![MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona: miles de `debian-lab` físicos compartidos por una cola. *Foto: Gemmaribasmaspoch, CC BY-SA 4.0, Wikimedia Commons.*](../imagenes/cap12/marenostrum-4.jpg){#fig-marenostrum fig-alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal" width="80%"}
 
-## SLURM en dos páginas {#sec-slurm}
+## Cuando te den cuenta en un clúster {#sec-cluster}
 
-En un clúster no ejecutas nada: **pides**. Entras por SSH en el *nodo
-de acceso* (*login node*), describes tu trabajo en un fichero, se lo
-entregas a la cola, y cuando SLURM encuentra hueco en los nodos de
-cálculo, lo ejecuta y te deja los resultados. Tres reglas que todo
-administrador agradecerá que sepas antes de llegar: en el nodo de
-acceso no se calcula (se edita, se envía, se consulta); se pide lo que
-se necesita — pedir de más retrasa tu turno; y los resultados van a
-donde te digan (`scratch`, normalmente), no a tu casa.
-
-![La anatomía de un clúster. Tú solo tocas el nodo de la izquierda; SLURM reparte el resto.](../imagenes/cap12/fig-slurm.svg){#fig-slurm fig-alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo"}
-
-El fichero que se entrega es un **job script** — y ya sabes
-escribirlo: es un script de bash del capítulo 4, con unas líneas de
-comentario que SLURM lee como instrucciones:
-
-```default
-#!/bin/bash
-#SBATCH --job-name=pendulo
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=8G
-#SBATCH --time=02:00:00
-#SBATCH --output=pendulo_%j.log
-
-module load python/3.12
-cd $HOME/pendulo
-python3 simula.py --pasos 1000000 > resultados.csv
-```
-
-Cada `#SBATCH` es una petición: nombre, núcleos, memoria, tiempo
-máximo, dónde escribir la salida (`%j` se sustituye por el número de
-trabajo). Para bash son comentarios — el script se puede probar
-localmente con `bash trabajo.sh` —; para SLURM son el contrato. El
-`module load` es el mecanismo con que los clústeres ofrecen versiones
-de software sin pisarse: cada `module` ajusta tu `$PATH` del
-capítulo 5. Y el ciclo entero son cuatro comandos:
-
-```terminal
-usuario@login1:~$ sbatch trabajo.sh
-Submitted batch job 48213
-usuario@login1:~$ squeue -u usuario
-  JOBID PARTITION     NAME     USER ST  TIME  NODES NODELIST(REASON)
-  48213   general  pendulo  usuario PD  0:00      1 (Priority)
-usuario@login1:~$ squeue -u usuario
-  48213   general  pendulo  usuario  R  4:12      1 nodo03
-usuario@login1:~$ scancel 48213
-```
-
-`sbatch` entrega; `squeue` consulta — `PD` es *pendiente* en la cola,
-`R` es *corriendo*, y la columna final dice por qué espera o dónde
-corre —; `scancel` retira. Cuando termine, `pendulo_48213.log` tendrá
-lo que el script escribiera por pantalla, y `resultados.csv` estará
-donde lo dejaste. Para pruebas cortas existe `srun --pty bash`: te
-da una terminal *dentro* de un nodo de cálculo durante un rato, para
-probar antes de enviar en serio. Con esto, el primer día de doctorado
-tendrás más recorrido que la mayoría de los que llevan un año.
+Un **clúster** de cálculo — el de la universidad, el de la Red
+Española de Supercomputación — es la tercera edición del tiempo
+compartido: miles de máquinas como tu `debian-lab`, pero físicas y
+unidas por una red rapidísima, repartidas entre cientos de
+investigadores por una **cola de trabajos**. Se entra por SSH (este
+bloque entero aplica), se prepara el trabajo en una máquina de
+recepción y se le *pide* a la cola que lo ejecute cuando haya hueco.
+El gestor de colas más común se llama **SLURM**, y su manual de dos
+páginas — anatomía del clúster, el *job script*, enviar, consultar y
+cancelar — está en el [anexo E2](../anexos/anexo-e2-slurm.qmd), para
+el día en que te den el usuario. Hoy no hace falta: con `tmux` y el
+túnel ya tienes el noventa por ciento de lo que harás allí.
 
 ## Práctica: vivir en el servidor {#sec-practica-12}
 
@@ -369,63 +324,6 @@ escrita para exactamente esto.
 ::::
 :::
 
-::: {.ejercicio}
-**Ejercicio 12.5 · Leer un job script**
-
-Sin ejecutar nada (no tienes SLURM… todavía): lee el script de la
-sección y responde en el cuaderno — ¿cuántos núcleos pide?, ¿cuánto
-tiempo máximo?, ¿dónde quedará lo que el programa imprima por
-pantalla si el trabajo recibe el número 48213?, ¿qué pasa si el
-programa tarda tres horas?, ¿y por qué `bash trabajo.sh` lo ejecutaría
-igualmente en tu portátil? *Pista: las líneas `#SBATCH` son
-comentarios para bash y contrato para SLURM.*
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-4 núcleos; 2 horas; en `pendulo_48213.log`; si excede el tiempo,
-SLURM lo mata sin contemplaciones (y por eso se pide con margen, pero
-no de más); y bash ignora las líneas `#`, así que ejecuta el `cd` y
-el `python3` sin más — salvo `module load`, que solo existe en el
-clúster.
-
-**Por qué así** — Leer con soltura un job script antes de tener
-acceso a un clúster es exactamente la ventaja que este curso quería
-darte. El resto — particiones, colas con nombre, GPU — son variantes
-de estas cinco líneas.
-:::
-::::
-:::
-
-**Nivel 3 · El reto (opcional)**
-
-::: {.ejercicio}
-**Ejercicio 12.6 · Tu propio job script, ensayado en local**
-
-Escribe `trabajo.sh` para tu `simula.py` con cabecera `#SBATCH`
-(nombre, 1 núcleo, 512 MB, 15 minutos, salida `simula_%j.log`),
-hazlo ejecutable, y *ensáyalo* en `debian-lab` con `bash trabajo.sh`
-— sin SLURM, las peticiones se ignoran y el script corre igual.
-Verifica que produce `progreso.txt`. *Pista: quita el `module load`
-(no existe en tu VM) y usa rutas absolutas, como en el capítulo 1: en
-un nodo de cálculo no sabes desde dónde te ejecutan.*
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-Un script con shebang, cinco `#SBATCH`, `cd /home/marcos` y
-`python3 simula.py`. `chmod u+x trabajo.sh` y `bash trabajo.sh` lo
-ejecuta igual que lo haría un nodo de cálculo. El día que tengas
-cuenta en un clúster, este fichero — más el `module load` que allí
-te indiquen — es lo primero que enviarás con `sbatch`.
-
-**Por qué así** — Has cerrado el círculo del curso: un script de bash
-(cap. 4) con rutas absolutas (cap. 1), lanzado en un servidor (cap.
-8) al que entras por SSH con clave (cap. 11), preparado para una cola
-(cap. 12). Doce sesiones, un físico que sabe dónde está parado.
-Guarda `sesion12.log`.
-:::
-::::
-:::
-
 ## Autocomprobación {#sec-quiz-12}
 
 ::: {.content-visible when-format="html"}
@@ -462,24 +360,24 @@ Marca una respuesta por pregunta; la corrección es inmediata.
     <div class="fb good"><b>Correcto.</b> Te dan una IP, un usuario y dónde pegar tu clave pública; a partir de ahí, todo el bloque E sin cambiar una coma.</div>
     <div class="fb bad"><b>No exactamente.</b> Es el capítulo 7 en el edificio de otro: una máquina virtual con sistema operativo completo, que se paga por tiempo encendida.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="5">En un clúster con SLURM, el nodo de acceso sirve para…</p>
-    <label><input type="radio" name="z5" value="a"><span>ejecutar la simulación</span></label>
-    <label><input type="radio" name="z5" value="b"><span>editar, enviar a la cola y consultar; el cálculo va a los nodos de cálculo</span></label>
-    <label><input type="radio" name="z5" value="c"><span>nada: es solo un cortafuegos</span></label>
-    <div class="fb good"><b>Correcto.</b> La regla número uno de todo clúster. Calcular en el nodo de acceso es la forma más rápida de recibir un correo del administrador.</div>
-    <div class="fb bad"><b>No exactamente.</b> El nodo de acceso es la recepción: se prepara y se envía con <code>sbatch</code>. El trabajo corre donde SLURM decida.</div>
+  <div class="qz"><p class="qq" data-n="5">Lanzaste Jupyter en el servidor dentro de tmux y cerraste el portátil. Al día siguiente…</p>
+    <label><input type="radio" name="z5" value="a"><span>el cuaderno y su kernel siguen vivos: basta abrir un túnel nuevo</span></label>
+    <label><input type="radio" name="z5" value="b"><span>Jupyter murió al cerrarse el túnel</span></label>
+    <label><input type="radio" name="z5" value="c"><span>hay que reinstalar Jupyter</span></label>
+    <div class="fb good"><b>Correcto.</b> El túnel es solo el camino; lo que vive es la sesión tmux del servidor. Túnel nuevo, misma URL, todo donde estaba.</div>
+    <div class="fb bad"><b>No exactamente.</b> El túnel se cierra con la conexión, pero Jupyter corre dentro de tmux, en el servidor: sobrevive. Abre otro túnel y sigue.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="6">Las líneas <code>#SBATCH --time=02:00:00</code> de un job script son…</p>
-    <label><input type="radio" name="z6" value="a"><span>comentarios para bash, instrucciones para SLURM</span></label>
-    <label><input type="radio" name="z6" value="b"><span>errores de sintaxis que bash ignora por suerte</span></label>
-    <label><input type="radio" name="z6" value="c"><span>obligatorias para que el script funcione en tu portátil</span></label>
-    <div class="fb good"><b>Correcto.</b> Por eso un job script se ensaya con <code>bash</code> en cualquier máquina y se entrega con <code>sbatch</code> en el clúster: mismo fichero, dos lectores.</div>
-    <div class="fb bad"><b>No exactamente.</b> Para bash empiezan por <code>#</code>: comentarios. SLURM las lee como el contrato del trabajo. En tu portátil no hacen falta ni estorban.</div>
+  <div class="qz"><p class="qq" data-n="6"><code>tmux attach || tmux new</code> significa…</p>
+    <label><input type="radio" name="z6" value="a"><span>engánchate a tu sesión si existe; si no, crea una</span></label>
+    <label><input type="radio" name="z6" value="b"><span>crea siempre una sesión nueva</span></label>
+    <label><input type="radio" name="z6" value="c"><span>cierra todas las sesiones</span></label>
+    <div class="fb good"><b>Correcto.</b> El <code>||</code> del capítulo 5: «y si lo anterior falla, entonces…». Es lo primero que se teclea en un servidor ajeno.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>||</code> ejecuta la segunda orden solo si la primera falla: intenta engancharte, y crea la sesión únicamente si no había ninguna.</div>
   </div>
 </div>
 <script>
 (function(){
-  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"b", z6:"a"};
+  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"a", z6:"a"};
   document.querySelectorAll("#quiz-cap12 .qz input").forEach(i => {
     i.addEventListener("change", () => {
       const qz = i.closest(".qz");
@@ -517,20 +415,20 @@ Responde de memoria; las respuestas están al final del capítulo.
     b)  un ordenador que no necesita sistema operativo
     c)  un disco duro en internet
 
-5.  En un clúster con SLURM, el nodo de acceso sirve para…
-    a)  ejecutar la simulación
-    b)  editar, enviar a la cola y consultar; el cálculo va a los nodos de cálculo
-    c)  nada: es solo un cortafuegos
+5.  Lanzaste Jupyter en el servidor dentro de tmux y cerraste el portátil. Al día siguiente…
+    a)  el cuaderno y su kernel siguen vivos: basta abrir un túnel nuevo
+    b)  Jupyter murió al cerrarse el túnel
+    c)  hay que reinstalar Jupyter
 
-6.  Las líneas `#SBATCH --time=02:00:00` de un job script son…
-    a)  comentarios para bash, instrucciones para SLURM
-    b)  errores de sintaxis que bash ignora por suerte
-    c)  obligatorias para que el script funcione en tu portátil
+6.  `tmux attach || tmux new` significa…
+    a)  engánchate a tu sesión si existe; si no, crea una
+    b)  crea siempre una sesión nueva
+    c)  cierra todas las sesiones
 
 ::::
 
 ::: {.solucion-final}
-**Autocomprobación (test de la sección 12.8)** — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 b · 6 a.
+**Autocomprobación (test de la sección 12.8)** — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 a · 6 a.
 :::
 
 ::: {.proxima}
@@ -542,8 +440,8 @@ ensayo general: el **proyecto final**, en el que montas de cero un
 servidor — VM, instalación, red, SSH con clave, dataset, análisis en
 tmux — sin más guía que una lista de objetivos. Y quedan los anexos
 para cuando los necesites: scripting con bucles, la IA como
-herramienta y no como oráculo, y el camino para quien venga de
-Windows. Guarda
+herramienta y no como oráculo, el camino para quien venga de Windows
+— y SLURM, para el día del clúster. Guarda
 `sesion12.log`: son doce medidas.
 :::
 
