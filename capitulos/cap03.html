@@ -503,7 +503,7 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 <p>25.00 justos — sospechosamente redondo. Cruza el dato: <code>grep -c WARN adquisicion.log</code> da 357 avisos de «saturada» del sensor s2. El sensor no midió 25.00: se quedó <em>clavado</em> en su tope mientras la temperatura real seguía subiendo. Dos tuberías te acaban de dar el diagnóstico completo del montaje: s3 se desconecta, s2 está derivando hasta saturar.</p>
 <div class="por-dentro">
 <p><strong>◉ Por dentro · ¿Y aquel renombrado en lote?</strong></p>
-<p>En el capítulo 2 renombraste cinco runs a mano y prometimos algo mejor. La verdad completa: las tuberías transforman <em>texto</em>, no ejecutan una orden por cada fichero — para eso hacen falta los bucles del shell, que viven en el anexo de <em>scripting</em>. Pero ya tienes la mitad de la solución: <code>find . -name "*.csv"</code> te fabrica la <strong>lista</strong> sobre la que un bucle trabajaría. La tubería prepara el trabajo; el bucle lo remata. Todo llega.</p>
+<p>En el capítulo 2 renombraste cinco series a mano y prometimos algo mejor. La verdad completa: las tuberías transforman <em>texto</em>, no ejecutan una orden por cada fichero — para eso hacen falta los bucles del shell, que viven en el anexo de <em>scripting</em>. Pero ya tienes la mitad de la solución: <code>find . -name "*.csv"</code> te fabrica la <strong>lista</strong> sobre la que un bucle trabajaría. La tubería prepara el trabajo; el bucle lo remata. Todo llega.</p>
 </div>
 </section>
 <section id="sec-python" class="level2" data-number="3.7">
@@ -805,7 +805,7 @@ grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr &gt;&gt; 
 </div>
 <div class="proxima">
 <p><strong>La próxima sesión</strong></p>
-<p>Con el bloque A completo, ya <em>hablas</em> con la máquina. En el capítulo 4 empieza el bloque B: abrir el capó. El mapa completo del árbol — qué vive de verdad en <code>/etc</code>, <code>/var</code>, <code>/usr</code> —, quién es <code>root</code>, qué significa exactamente ese <code>sudo</code> que tecleas con fe, y el sistema de permisos <code>rwx</code> que llevas viendo en cada <code>ls -l</code> sin leerlo. Guarda <code>sesion03.log</code>: tres medidas ya en tu cuaderno.</p>
+<p>Con el bloque A completo, ya <em>hablas</em> con la máquina. En el capítulo 4 empieza el bloque B: abrir el capó. Recorrerás el mapa completo del árbol — qué vive de verdad en <code>/etc</code>, <code>/var</code>, <code>/usr</code> —, sabrás quién es <code>root</code> y qué significa exactamente ese <code>sudo</code> que tecleas con fe, y aprenderás a leer el sistema de permisos <code>rwx</code> que llevas viendo en cada <code>ls -l</code> sin entenderlo. Guarda <code>sesion03.log</code>: tres medidas ya en tu cuaderno.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 3 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion03.log</code></p>

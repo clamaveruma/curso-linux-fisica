@@ -384,7 +384,7 @@ Figura&nbsp;2.1: Tres verbos, tres niveles de cuidado. <code>cp</code> es revers
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">ls run*.csv</span>
 <span class="t-out">run1.csv  run2.csv  run3.csv</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">cp run*.csv ~/fisica/practicas/optica/datos/</span></code></pre>
-<p>Una sola línea acaba de copiar toda una serie de medidas. Este es el momento en que la terminal empieza a pagar el peaje de aprenderla: lo que en el gestor de archivos serían tres viajes de ratón (o treinta, con más runs), aquí es una orden.</p>
+<p>Una sola línea acaba de copiar toda una serie de medidas. Este es el momento en que la terminal empieza a pagar el peaje de aprenderla: lo que en el gestor de archivos serían tres viajes de ratón (o treinta, con más series), aquí es una orden.</p>
 <div id="fig-globbing" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema: el patrón run asterisco punto csv pasa por el shell, que lo convierte en una lista de nombres antes de ejecutar ls">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-globbing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -455,7 +455,7 @@ Figura&nbsp;2.3: El mecanismo de acceso del IBM 350 RAMAC (1956), el primer disc
 </section>
 <section id="sec-practica-2" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="sec-practica-2"><span class="header-section-number">2.9</span> Práctica: poner orden en el laboratorio</h2>
-<p>Sesión de campo. Te ha llegado el directorio de un experimento tal como quedó el último día: duplicados, nombres con espacios, un run inservible y ficheros temporales. Tu misión: dejarlo presentable usando todo lo de esta sesión.</p>
+<p>Sesión de campo. Te ha llegado el directorio de un experimento tal como quedó el último día: duplicados, nombres con espacios, una serie («run», en la jerga del laboratorio — así se llaman los ficheros) inservible y ficheros temporales. Tu misión: dejarlo presentable usando todo lo de esta sesión.</p>
 <p>Arranca tu cuaderno (<code>script sesion02.log</code>) y descarga <a href="../datos/cap02/experimento-desordenado.zip" download="experimento-desordenado.zip"><code>experimento-desordenado.zip</code></a>. Extráelo como prefieras — doble clic en el gestor de archivos vale: descomprimir es una de esas cosas que la vía gráfica hace perfectamente bien. Te quedará una carpeta <code>experimento-pendulo</code> en <code>~/Descargas</code>.</p>
 <div id="fig-orden" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dos paneles: la lista caótica de ficheros original y la estructura final organizada en datos, descartes y notas">
 <figure class="quarto-float quarto-float-fig figure">
@@ -469,7 +469,7 @@ Figura&nbsp;2.4: El plan de la expedición: de la carpeta heredada al experiment
 </div>
 <div class="ejercicio">
 <p><strong>Ejercicio 2.1 · Reconocimiento</strong></p>
-<p>Entra en la carpeta y haz inventario completo — incluido lo oculto. Después mira dentro de <code>registro.log</code> y de las notas: ¿qué run está mal y por qué? ¿Qué dos ficheros son en realidad el mismo?</p>
+<p>Entra en la carpeta y haz inventario completo — incluido lo oculto. Después mira dentro de <code>registro.log</code> y de las notas: ¿qué serie está mal y por qué? ¿Qué dos ficheros son en realidad el mismo?</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -483,7 +483,7 @@ Figura&nbsp;2.4: El plan de la expedición: de la carpeta heredada al experiment
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>cd ~/Descargas/experimento-pendulo</code>, <code>ls -a</code> (aparece <code>.config_sensor</code>), y <code>cat registro.log</code> o <code>less</code> sobre las notas. El log canta: <code>ERROR sensor congelado en 45.0 (run6)</code> — y <code>head medidas_run6_MALO.csv</code> lo confirma: todos los ángulos valen ~45. Las notas del día 2 confiesan que <code>run 4.csv</code> y <code>run5 (otra copia).csv</code> son el mismo run guardado dos veces.</p>
+<p><code>cd ~/Descargas/experimento-pendulo</code>, <code>ls -a</code> (aparece <code>.config_sensor</code>), y <code>cat registro.log</code> o <code>less</code> sobre las notas. El log canta: <code>ERROR sensor congelado en 45.0 (run6)</code> — y <code>head medidas_run6_MALO.csv</code> lo confirma: todos los ángulos valen ~45. Las notas del día 2 confiesan que <code>run 4.csv</code> y <code>run5 (otra copia).csv</code> son la misma serie guardada dos veces.</p>
 <p><strong>Por qué así</strong> — Antes de mover o borrar nada, un físico lee el cuaderno del experimento. <code>head</code> te deja <em>ver</em> el fallo del sensor en los datos sin abrir ningún programa: eso es diagnosticar desde la terminal.</p>
 </div>
 </div>
@@ -538,7 +538,7 @@ Figura&nbsp;2.4: El plan de la expedición: de la carpeta heredada al experiment
 </div>
 <div class="ejercicio">
 <p><strong>Ejercicio 2.4 · La serie, en limpio</strong></p>
-<p>Lleva los cinco runs buenos a <code>datos/</code> con nombres uniformes <code>run01.csv</code> … <code>run05.csv</code> (recuerda las comillas para los nombres con espacios), y el run malo a <code>descartes/</code> con un nombre que avise: <code>run06_sensor_malo.csv</code>.</p>
+<p>Lleva las cinco series buenas a <code>datos/</code> con nombres uniformes <code>run01.csv</code> … <code>run05.csv</code> (recuerda las comillas para los nombres con espacios), y la serie mala a <code>descartes/</code> con un nombre que avise: <code>run06_sensor_malo.csv</code>.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -671,7 +671,7 @@ Figura&nbsp;2.4: El plan de la expedición: de la carpeta heredada al experiment
 </div>
 <div class="proxima">
 <p><strong>La próxima sesión</strong></p>
-<p>Hoy has renombrado cinco runs a mano y te ha sabido a poco elegante — bien: esa molestia es la puerta del capítulo 3. Los comandos dejan de trabajar solos y empiezan a encadenarse: la salida de uno como entrada del siguiente, <code>grep</code>, <code>sort</code> y las tuberías. El análisis completo de un log de adquisición sin abrir Python — y saber cuándo sí conviene abrirlo. Guarda <code>sesion02.log</code>: ya tienes dos medidas en tu cuaderno.</p>
+<p>Hoy has renombrado cinco series de medidas a mano y te ha sabido a poco elegante — bien: esa molestia es la puerta del capítulo 3, donde los comandos dejan de trabajar solos y empiezan a encadenarse, de modo que la salida de uno se convierte en la entrada del siguiente. Ahí aparecen <code>grep</code>, <code>sort</code> y las tuberías. Harás el análisis completo de un registro de adquisición sin abrir Python, y aprenderás cuándo sí conviene abrirlo. Guarda <code>sesion02.log</code>: ya tienes dos medidas en tu cuaderno.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 2 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion02.log</code></p>
