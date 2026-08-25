@@ -347,6 +347,10 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>La tabla explica media convivencia con Windows: un pendrive exFAT lo leen ambos mundos; tu ext4, Windows ni lo ve. Y fíjate en el detalle del capítulo 4: los permisos <code>rwx</code> son una <em>prestación del sistema de ficheros</em> — por eso un pendrive FAT no los tiene, y todo aparece como <code>rwxrwxrwx</code> cuando lo montas.</p>
+<div class="truco">
+<p><strong>✚ Truco · El mapa con ratón: «Discos» y GParted</strong></p>
+<p>Todo lo que <code>lsblk</code> te cuenta en texto lo dibujan dos aplicaciones gráficas que conviene conocer por su nombre, porque las verás en cualquier foro. <strong>Discos</strong> (menú → Accesorios; <code>gnome-disks</code>) viene con Mint: enseña cada disco con sus particiones como una barra de colores, monta y desmonta con un botón, formatea un pendrive y edita las opciones de montaje (anexo B2). <strong>GParted</strong> (<code>sudo apt install gparted</code>, y viene de serie en el pendrive <em>live</em> de Mint) es <em>el</em> editor de particiones: crea, borra, redimensiona y mueve particiones — es la herramienta con la que se le hace sitio a Linux junto a Windows, y su hermano de texto es lo que usarás en el instalador del capítulo 8. Hoy, por la regla del curso, las abres solo para <em>mirar</em>: GParted sobre tu disco real es tan destructivo como potente. Para tocar, la máquina virtual del bloque C o un pendrive que puedas borrar.</p>
+</div>
 </section>
 <section id="sec-montar" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-montar"><span class="header-section-number">6.3</span> Montar: enganchar discos al árbol</h2>
