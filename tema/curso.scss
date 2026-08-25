@@ -37,6 +37,16 @@ body {
     repeating-linear-gradient(to bottom, rgba(80,105,160,.13)  0 1px, transparent 1px 100px);
 }
 
+// Texto justificado con guionado automático (el PDF ya lo hace solo)
+main.content p, main.content li {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+main.content figcaption p, main.content .figure-caption,
+main.content .chapmeta p, main.content .pie-piloto p,
+main.content .qz label { text-align: left; hyphens: manual; }
+
 // Números de sección en rojo bolígrafo, como en el prototipo
 .header-section-number {
   font-family: $font-family-monospace;

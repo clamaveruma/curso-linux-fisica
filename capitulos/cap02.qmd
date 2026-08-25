@@ -324,9 +324,10 @@ sitio correcto.
 
 Sesión de campo. Te ha llegado el directorio de un experimento tal
 como quedó el último día: duplicados, nombres con espacios, una serie
-(«run», en la jerga del laboratorio — así se llaman los ficheros)
-inservible y ficheros temporales. Tu misión: dejarlo presentable
-usando todo lo de esta sesión.
+de medidas inservible y ficheros temporales. (Los ficheros se llaman
+`run…`: es la jerga del laboratorio para cada serie de medidas, y así
+la verás en cualquier grupo.) Tu misión: dejarlo presentable usando
+todo lo de esta sesión.
 
 ::: {.content-visible when-format="html"}
 Arranca tu cuaderno (`script sesion02.log`) y descarga
