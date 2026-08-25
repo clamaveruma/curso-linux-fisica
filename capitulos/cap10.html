@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Nombres y caminos – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-c1-pc-real.html" rel="next">
+<link href="../capitulos/cap09.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Instalar Linux de verdad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-dns" id="toc-sec-dns" class="nav-link active" data-scroll-target="#sec-dns"><span class="header-section-number">10.1</span> Qué pasa al escribir un nombre: DNS</a></li>
+  <li><a href="#sec-tracepath" id="toc-sec-tracepath" class="nav-link" data-scroll-target="#sec-tracepath"><span class="header-section-number">10.2</span> El camino: <code>tracepath</code></a></li>
+  <li><a href="#sec-puertos" id="toc-sec-puertos" class="nav-link" data-scroll-target="#sec-puertos"><span class="header-section-number">10.3</span> Una dirección, muchas puertas: los puertos</a></li>
+  <li><a href="#sec-cable-wifi" id="toc-sec-cable-wifi" class="nav-link" data-scroll-target="#sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</a></li>
+  <li><a href="#sec-cambios" id="toc-sec-cambios" class="nav-link" data-scroll-target="#sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</a></li>
+  <li><a href="#sec-practica-10" id="toc-sec-practica-10" class="nav-link" data-scroll-target="#sec-practica-10"><span class="header-section-number">10.6</span> Práctica: la guía y las puertas</a></li>
+  <li><a href="#sec-quiz-10" id="toc-sec-quiz-10" class="nav-link" data-scroll-target="#sec-quiz-10"><span class="header-section-number">10.7</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Ayer hablaste con la red por números. Hoy descubres todo lo que pasa en el segundo que transcurre entre escribir <code>debian.org</code> y ver la página: la guía telefónica de internet, el camino que recorren tus paquetes salto a salto hasta la universidad, y por qué una máquina tiene una dirección pero miles de puertas. Y por primera vez tocas el router — con cambios reversibles, cada uno con su vuelta atrás escrita antes de tocar nada.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 9</strong> · máquina: <strong>tu Linux de diario, la VM y el router (cambios reversibles)</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Qué es el DNS, quién responde cuando preguntas por un nombre, y cómo ver la respuesta con <code>host</code>.</li>
+<li>El fichero <code>/etc/hosts</code>: la guía telefónica más antigua, y cómo usarla para bautizar a tu máquina virtual.</li>
+<li>Seguir el camino de tus paquetes hasta la universidad con <code>tracepath</code>, salto a salto.</li>
+<li>Qué es un puerto, por qué SSH es el 22 y la web el 443, y cómo ver qué puertas tiene abiertas una máquina.</li>
+<li>TCP frente a UDP en diez minutos, y qué es un cortafuegos.</li>
+<li>Por qué el cable gana a la Wi-Fi para un servidor — y medirlo.</li>
+<li>El protocolo de cambio reversible: anotar, escribir la vuelta atrás, cambiar, verificar.</li>
+</ul>
+</div>
+<section id="sec-dns" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-dns"><span class="header-section-number">10.1</span> Qué pasa al escribir un nombre: DNS</h2>
+<p>Tu máquina solo sabe hablar con números; tú solo recuerdas nombres. Entre ambos está el <strong>DNS</strong> (<em>Domain Name System</em>): un servicio distribuido por todo el planeta que traduce <code>debian.org</code> en <code>151.101.66.132</code>. Lo usas cada vez que escribes un nombre, y <code>ping</code> te lo enseña sin pedírselo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 1 debian.org</span>
+<span class="t-out">PING debian.org (151.101.66.132) 56(84) bytes of data.</span>
+<span class="t-out">64 bytes from 151.101.66.132: icmp_seq=1 ttl=57 time=18.2 ms</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">host debian.org</span>
+<span class="t-out">debian.org has address 151.101.66.132</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">resolvectl status | grep "DNS Servers"</span>
+<span class="t-out">       DNS Servers: 192.168.1.1</span></code></pre>
+<p><code>host</code> hace la pregunta a secas y te da la respuesta. Y <code>resolvectl status</code> te dice <strong>a quién</strong> se la hace tu máquina: a <code>192.168.1.1</code> — el router, que a su vez pregunta a los servidores de tu compañía. Es uno de los datos que el DHCP del capítulo 9 te prestó junto con la dirección.</p>
+<div id="fig-dns" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Tu máquina pregunta al resolver, que consulta en cascada a los servidores raíz, a los de .org y a los de debian.org hasta obtener la dirección">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap10/fig-dns.svg" class="img-fluid figure-img" alt="Tu máquina pregunta al resolver, que consulta en cascada a los servidores raíz, a los de .org y a los de debian.org hasta obtener la dirección">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.1: La cadena de preguntas, de lo general a lo concreto. Nadie sabe todas las direcciones del mundo; cada servidor sabe a quién preguntar.
+</figcaption>
+</figure>
+</div>
+<p>¿Y antes del DNS? Un fichero de texto — en Linux siempre hay un fichero de texto — que sigue existiendo y que tu máquina consulta <em>antes</em> que a cualquier servidor: <code>/etc/hosts</code>.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cat /etc/hosts</span>
+<span class="t-out">127.0.0.1       localhost</span>
+<span class="t-out">127.0.1.1       portatil</span></code></pre>
+<p>Dos líneas: <code>localhost</code> eres tú, y <code>portatil</code> también. Lo interesante es lo que puedes <em>añadir</em>: una línea <code>192.168.122.15  debian-lab</code> y, desde ese momento, <code>ping debian-lab</code> — y en el capítulo 11, <code>ssh debian-lab</code> — funciona sin números. Es la guía telefónica privada de tu máquina, y la práctica de hoy la estrena.</p>
+<div class="historia">
+<p><strong>◷ Historia · Cuando internet cabía en un folio</strong></p>
+<p>En los años 70, la «guía» de ARPANET era literalmente un fichero, <code>HOSTS.TXT</code>, que una oficina de Stanford mantenía a mano y que cada máquina de la red descargaba periódicamente: nombre, dirección, y ya. Funcionó mientras internet tenía docenas de máquinas; en 1983, con cientos y creciendo, Paul Mockapetris diseñó el DNS — un sistema <em>distribuido</em> en el que nadie tiene la lista entera y cada uno responde por su parcela. Tu <code>/etc/hosts</code> es el descendiente directo de aquel fichero: la guía de bolsillo que sobrevivió a la guía telefónica.</p>
+</div>
+<div id="fig-arpanet-mapa" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de los nodos y enlaces de ARPANET en 1977">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arpanet-mapa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap10/arpanet-mapa-1977.png" class="img-fluid figure-img" style="width:80.0%" alt="Diagrama de los nodos y enlaces de ARPANET en 1977">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arpanet-mapa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.2: El mapa lógico de ARPANET en marzo de 1977: cada máquina de la red, en una hoja. Hoy no cabría en un país. <em>Dominio público, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-tracepath" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-tracepath"><span class="header-section-number">10.2</span> El camino: <code>tracepath</code></h2>
+<p><code>ping</code> te decía <em>cuánto</em> tardaba un paquete; <code>tracepath</code> te enseña <em>por dónde</em> pasa. Cada router del camino es un <strong>salto</strong>, y la herramienta los va descubriendo uno a uno:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tracepath -n uma.es</span>
+<span class="t-out"> 1?: [LOCALHOST]                      pmtu 1500</span>
+<span class="t-out"> 1:  192.168.1.1                        2.104ms</span>
+<span class="t-out"> 2:  10.40.128.1                        9.870ms</span>
+<span class="t-out"> 3:  81.46.12.201                      12.335ms</span>
+<span class="t-out"> ...</span>
+<span class="t-out"> 9:  150.214.40.10                     21.482ms reached</span></code></pre>
+<p>El primer salto es siempre tu router; el segundo ya está en la compañía (fíjate: una dirección <code>10.x</code> — privada, capítulo 9 — que la operadora usa por dentro); y unos saltos después, la universidad. El tiempo crece con cada salto, y el mínimo lo pone la física de ayer. Cuando «no va internet», <code>tracepath</code> te dice <em>hasta dónde</em> llega: si se corta en el salto 1, el problema es tuyo; si en el 2 o el 3, de la compañía. (<code>traceroute</code>, su hermano clásico, hace lo mismo con más opciones — <code>apt install traceroute</code> si lo echas de menos.)</p>
+</section>
+<section id="sec-puertos" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-puertos"><span class="header-section-number">10.3</span> Una dirección, muchas puertas: los puertos</h2>
+<p>Una máquina tiene una dirección, pero ofrece muchos servicios a la vez. Cada uno escucha en un <strong>puerto</strong>: un número del 1 al 65 535 que acompaña a la dirección. Conectarse a una máquina es siempre conectarse a <em>dirección:puerto</em>, y los puertos de los servicios clásicos están acordados desde hace décadas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 29%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Puerto</th>
+<th>Servicio</th>
+<th>Dónde lo verás</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>22</strong></td>
+<td>SSH</td>
+<td>el capítulo 11 entero</td>
+</tr>
+<tr class="even">
+<td><strong>53</strong></td>
+<td>DNS</td>
+<td>cada nombre que resuelves</td>
+</tr>
+<tr class="odd">
+<td><strong>80</strong> / <strong>443</strong></td>
+<td>web sin cifrar / cifrada (https)</td>
+<td>cada página que abres</td>
+</tr>
+<tr class="even">
+<td><strong>8888</strong></td>
+<td>Jupyter</td>
+<td>el caso estrella del capítulo 12</td>
+</tr>
+</tbody>
+</table>
+<div id="fig-puertos" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Una máquina con varias puertas numeradas; solo la 22, SSH, está abierta">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-puertos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap10/fig-puertos.svg" class="img-fluid figure-img" alt="Una máquina con varias puertas numeradas; solo la 22, SSH, está abierta">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-puertos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.3: Los puertos de tu servidor: una sola puerta abierta, la que dejaste en la instalación.
+</figcaption>
+</figure>
+</div>
+<p>Y puedes <em>mirar</em> las puertas. Desde dentro, <code>ss</code> (<em>socket statistics</em>) lista lo que escucha; desde fuera, el <code>nmap</code> que instalaste ayer toca a la puerta de cada una:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ss -tln</span>
+<span class="t-out">State   Recv-Q  Send-Q  Local Address:Port  Peer Address:Port</span>
+<span class="t-out">LISTEN  0       128           0.0.0.0:22         0.0.0.0:*</span></code></pre>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">nmap 192.168.122.15</span>
+<span class="t-out">PORT   STATE SERVICE</span>
+<span class="t-out">22/tcp open  ssh</span></code></pre>
+<p>Tu servidor, visto desde dentro y desde fuera, cuenta lo mismo: una puerta abierta, la 22, y detrás el servidor SSH que marcaste en el instalador. Mañana entrarás por ella.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · TCP y UDP en diez minutos</strong></p>
+<p>Los paquetes viajan de dos maneras. <strong>TCP</strong> es correo certificado: antes de enviar se establece una conexión, cada paquete se confirma, los perdidos se reenvían y todo llega en orden — más lento, pero fiable. SSH, la web y el correo van así. <strong>UDP</strong> es una postal: se envía y ya, sin conexión ni confirmación — rapidísimo, y si una se pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos van así: prefieren perder un paquete a esperar. Por eso <code>nmap</code> decía <code>22/tcp</code>: el puerto 22 <em>de TCP</em>. Los dos sistemas conviven en la misma dirección con números independientes.</p>
+</div>
+<div class="truco">
+<p><strong>✚ Truco · El cortafuegos, en una frase</strong></p>
+<p>Un <strong>cortafuegos</strong> (<em>firewall</em>) es un portero que decide qué puertas se ven desde fuera. Tu router lo es sin que lo sepas: gracias al NAT del capítulo 9, ninguna puerta de tu casa es visible desde internet salvo que la abras a propósito. En Linux, <code>ufw</code> hace ese papel en una máquina concreta (<code>sudo ufw status</code> te dirá que en tu Mint está inactivo — no hace falta activarlo hoy). En el servidor de la universidad, en cambio, el portero existirá y será estricto: si un día «no puedes conectar», la pregunta es siempre «¿qué puerta hay abierta y quién la vigila?».</p>
+</div>
+</section>
+<section id="sec-cable-wifi" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</h2>
+<p>Un dato práctico que separa el portátil del servidor: por Wi-Fi, los paquetes comparten el aire con los vecinos, se pierden y tardan más de forma <em>irregular</em>; por cable, no. Y como todo aquí, se mide. Tu tarjeta Wi-Fi te dice cuánta señal recibe — en dBm, una unidad que reconoces:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">iw dev wlp3s0 link | grep signal</span>
+<span class="t-out">        signal: -58 dBm</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 20 192.168.1.1 | tail -2</span>
+<span class="t-out">20 packets transmitted, 19 received, 5% packet loss, time 19031ms</span>
+<span class="t-out">rtt min/avg/max/mdev = 1.9/6.4/48.2/11.7 ms</span></code></pre>
+<p>Un −58 dBm es buena señal (−30 sería pegado al router; −80, cobertura mala). Y fíjate en la línea de <code>ping</code>: un paquete perdido de veinte, y un tiempo que oscila entre 2 y 48 ms — ese <code>mdev</code> es la desviación típica, y por Wi-Fi es grande. Por cable serían 20 de 20, 1 ms, y <code>mdev</code> de décimas. Moraleja para el futuro: <strong>un servidor va por cable</strong>; y si tu <code>debian-lab</code> un día vive en un PC físico, ese PC tendrá un cable.</p>
+</section>
+<section id="sec-cambios" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</h2>
+<p>Hoy tocas el router por primera vez, y lo haces con un método que vale para cualquier sistema que no tenga instantáneas — es decir, para casi todo en la vida real:</p>
+<ol type="1">
+<li><strong>Anota el valor actual</strong> — captura de pantalla o línea en el cuaderno. Sin esto, no hay vuelta atrás posible.</li>
+<li><strong>Escribe la vuelta atrás</strong> <em>antes</em> de tocar: «para deshacer, ir a X y poner Y».</li>
+<li><strong>Cambia una sola cosa.</strong></li>
+<li><strong>Verifica</strong> con un comando que el cambio hizo lo que esperabas.</li>
+<li><strong>Decide</strong>: se queda, o se ejecuta la vuelta atrás.</li>
+</ol>
+<p>Los cambios de hoy son dos, elegidos por útiles y reversibles: una <strong>reserva de dirección</strong> — pedirle al DHCP del router que a tu portátil le dé siempre la misma IP, identificándolo por su MAC — y el <strong>servidor DNS</strong> que el router reparte a la casa. Y uno previo, si procede: si la contraseña de administración del router sigue siendo la de la pegatina, cámbiala — apuntando la nueva en un sitio seguro <em>antes</em> de pulsar guardar. Lo que <strong>no</strong> se toca hoy: la Wi-Fi, el rango del DHCP, y nada que diga «restablecer».</p>
+<div class="aviso">
+<p><strong>△ Cuidado · Los dos cambios que dejan a la casa sin internet</strong></p>
+<p>Cambiar la dirección del propio router (<code>192.168.1.1</code>) o desactivar su DHCP son cambios <em>legales</em> pero que cortan la red a todos los aparatos hasta que se arregla — y arreglarlo exige saber más de lo que sabes hoy. Ni siquiera con vuelta atrás escrita: no en el piloto. El curso los deja para quien administre un router en serio, con un segundo equipo por cable para rescatarlo.</p>
+</div>
+</section>
+<section id="sec-practica-10" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-practica-10"><span class="header-section-number">10.6</span> Práctica: la guía y las puertas</h2>
+<p>Cuaderno en marcha (<code>script sesion10.log</code>). Los cambios de hoy se hacen con el protocolo: valor actual, vuelta atrás escrita, cambio, verificación.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.1 · El DNS en acción</strong></p>
+<p>Con <code>host</code>, averigua la dirección de <code>uma.es</code>, de <code>debian.org</code> y de <code>google.com</code> (esta última te dará varias: anota cuántas). Averigua también a qué servidor le pregunta tu máquina (<code>resolvectl status</code>). <em>Pista: <code>host nombre</code> a secas; si <code>host</code> no existe, <code>sudo apt install bind9-host</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>host uma.es</code>, <code>host debian.org</code>, <code>host google.com</code> — Google devuelve varias direcciones (y una de tipo IPv6, más larga: es la nueva numeración de internet, que hoy dejamos de lado). El resolver será tu router, <code>192.168.1.1</code>, salvo que tu compañía configure otro.</p>
+<p><strong>Por qué así</strong> — Ver que un nombre tiene <em>varias</em> direcciones desmonta la idea de «la dirección de Google»: son granjas de servidores, y el DNS reparte. Y saber a quién preguntas es el primer paso para cambiarlo con criterio en el 10.5.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.2 · Bautizar a la VM</strong></p>
+<p>Añade a <code>/etc/hosts</code> de tu Mint una línea con la IP de <code>debian-lab</code> (la de <code>ip a</code> dentro de la VM) y su nombre, y comprueba que <code>ping debian-lab</code> funciona. Antes de editar, aplica el protocolo: copia de seguridad del fichero y vuelta atrás escrita. <em>Pista: <code>sudo cp /etc/hosts /etc/hosts.bak</code>, <code>sudo nano /etc/hosts</code>, y una línea como <code>192.168.122.15  debian-lab</code> al final. Vuelta atrás: <code>sudo cp /etc/hosts.bak /etc/hosts</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tras guardar, <code>ping -c 1 debian-lab</code> responde desde <code>192.168.122.15</code> sin haber preguntado a ningún DNS: <code>/etc/hosts</code> se consulta primero. Si la IP de la VM cambiara algún día (el DHCP de libvirt suele mantenerla, pero no lo jura), basta actualizar la línea.</p>
+<p><strong>Por qué así</strong> — Es tu primera edición de un fichero de <code>/etc</code> con <code>sudo</code> — capítulo 4 — hecha con red: copia antes, vuelta atrás escrita. Y el premio llega mañana: <code>ssh debian-lab</code> en vez de una ristra de números.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.3 · El camino a la universidad</strong></p>
+<p>Ejecuta <code>tracepath -n uma.es</code> (o el dominio de tu universidad). ¿Cuántos saltos hay? ¿Cuál es el primero? ¿En qué salto aparece la primera dirección que <em>no</em> es privada — es decir, dónde sale tu paquete a internet? <em>Pista: privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>; repasa la figura del NAT del capítulo 9.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Entre 8 y 15 saltos es lo normal. El primero es <code>192.168.1.1</code>, tu router; a menudo el segundo o tercero sigue siendo privado (la red interna de la compañía), y la primera pública marca la salida real a internet. Algún salto puede aparecer como <code>no reply</code>: routers que no contestan por política — no es un fallo.</p>
+<p><strong>Por qué así</strong> — Tu paquete acaba de contarte su viaje. La próxima vez que «no vaya internet», este comando te dirá en qué salto muere — y por tanto a quién llamar.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.4 · Las puertas de tu servidor</strong></p>
+<p>Desde dentro de <code>debian-lab</code>, lista los puertos que escuchan (<code>ss -tln</code>); desde tu Mint, tócalos desde fuera (<code>nmap debian-lab</code> — ya tiene nombre). ¿Coinciden las dos vistas? <em>Pista: <code>-t</code> TCP, <code>-l</code> solo los que escuchan, <code>-n</code> números en vez de nombres.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Dentro: <code>LISTEN</code> en <code>0.0.0.0:22</code> (y quizá <code>[::]:22</code>, su versión IPv6). Fuera: <code>22/tcp open ssh</code>. Una puerta, dos puntos de vista, el mismo resultado — y <code>nmap</code> funcionando ya por nombre gracias al 10.2.</p>
+<p><strong>Por qué así</strong> — Comparar la vista interior con la exterior es el diagnóstico básico de cualquier servicio: si dentro escucha pero fuera no se ve, hay un portero en medio (cortafuegos o NAT). Hoy no lo hay; en la universidad lo habrá.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.5 · Dos cambios en el router, con vuelta atrás</strong></p>
+<p>Con el protocolo completo (valor actual anotado, vuelta atrás escrita, cambio, verificación): (a) crea una <strong>reserva DHCP</strong> para tu portátil, de modo que siempre reciba la misma dirección — la que tiene ahora vale —; (b) cambia el <strong>servidor DNS</strong> que el router reparte por <code>9.9.9.9</code> (Quad9) o <code>1.1.1.1</code> (Cloudflare). Verifica (a) reconectando la Wi-Fi y mirando <code>ip a</code>, y (b) con <code>resolvectl status</code> tras reconectar. <em>Pista: los menús se llaman «Reserva de dirección», «DHCP estático» o «Asignación fija» en la sección LAN/DHCP; el DNS suele estar en LAN/DHCP o en WAN/Internet. Si no encuentras uno de los dos, deja constancia y sigue: no todos los routers lo exponen.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>La reserva asocia tu MAC (capítulo 9) a una IP; tras reconectar, <code>ip a</code> la muestra, y ahora tu <code>/etc/hosts</code> o el SSH de mañana pueden contar con ella. (b) <code>resolvectl status</code> pasa de <code>192.168.1.1</code> a <code>9.9.9.9</code>; <code>host debian.org</code> sigue resolviendo. Vuelta atrás de cada uno: borrar la reserva; devolver el DNS al valor anotado (a menudo «automático»).</li>
+</ol>
+<p><strong>Por qué así</strong> — Dos cambios pequeños, útiles y deshechos en un minuto si molestan: exactamente el tipo de administración que se hace en una casa. Y el protocolo que has seguido es el mismo con el que tocarás un servidor de verdad — donde tampoco habrá instantáneas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · El reto (opcional)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.6 · Wi-Fi contra cable, con datos</strong></p>
+<p>Si tienes un cable de red a mano: mide con <code>ping -c 30</code> al router por Wi-Fi y por cable, y compara media, máximo, <code>mdev</code> y paquetes perdidos. Añade la señal Wi-Fi en dBm (<code>iw dev … link</code>). Escribe en el cuaderno una conclusión de dos líneas, como en un informe de prácticas. <em>Pista: <code>ip a</code> te dirá qué interfaz está activa en cada caso (<code>wlp…</code> o <code>enp…</code>); desactiva la Wi-Fi mientras mides por cable para no mezclar.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Cable: 30 de 30, ~1 ms, <code>mdev</code> de décimas. Wi-Fi: alguna pérdida posible, media mayor y <code>mdev</code> de varios ms — más cuanto peor la señal (por debajo de −70 dBm empieza a notarse). Conclusión típica: «la media apenas cambia; la <em>dispersión</em> y las pérdidas sí — por eso el servidor va por cable».</p>
+<p><strong>Por qué así</strong> — Media, desviación y pérdidas: el mismo trío que resume cualquier medida de laboratorio. Has convertido una opinión de foro («el cable va mejor») en un resultado con incertidumbre.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-10" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-quiz-10"><span class="header-section-number">10.7</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap10">
+  <div class="qz"><p class="qq" data-n="1">El DNS sirve para…</p>
+    <label><input type="radio" name="z1" value="a"><span>traducir nombres como <code>debian.org</code> en direcciones IP</span></label>
+    <label><input type="radio" name="z1" value="b"><span>repartir direcciones IP a los aparatos de casa</span></label>
+    <label><input type="radio" name="z1" value="c"><span>cifrar la conexión</span></label>
+    <div class="fb good"><b>Correcto.</b> La guía telefónica distribuida. Repartir direcciones es el DHCP (capítulo 9); cifrar es cosa de SSH y https.</div>
+    <div class="fb bad"><b>No exactamente.</b> El DNS traduce nombres a números. Las direcciones las reparte el DHCP; el cifrado es otro asunto.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Añades <code>192.168.122.15 debian-lab</code> a <code>/etc/hosts</code>. Al hacer <code>ping debian-lab</code>…</p>
+    <label><input type="radio" name="z2" value="a"><span>tu máquina pregunta al DNS y falla, porque ese nombre no existe en internet</span></label>
+    <label><input type="radio" name="z2" value="b"><span>tu máquina usa la línea de <code>/etc/hosts</code> sin preguntar a ningún servidor</span></label>
+    <label><input type="radio" name="z2" value="c"><span>el router aprende el nombre</span></label>
+    <div class="fb good"><b>Correcto.</b> <code>/etc/hosts</code> se consulta antes que el DNS: es la guía privada de tu máquina.</div>
+    <div class="fb bad"><b>No exactamente.</b> El fichero local tiene prioridad: el nombre se resuelve ahí y el DNS ni se entera. El router tampoco.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">En <code>tracepath</code>, el primer salto es siempre…</p>
+    <label><input type="radio" name="z3" value="a"><span>el servidor de destino</span></label>
+    <label><input type="radio" name="z3" value="b"><span>tu router, la puerta de enlace</span></label>
+    <label><input type="radio" name="z3" value="c"><span>un servidor de la compañía</span></label>
+    <div class="fb good"><b>Correcto.</b> Todo lo que sale de tu red pasa primero por la puerta de enlace del capítulo 9. Si el salto 1 no responde, el problema está en casa.</div>
+    <div class="fb bad"><b>No exactamente.</b> El salto 1 es tu propio router; la compañía viene después, y el destino, al final.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Un puerto es…</p>
+    <label><input type="radio" name="z4" value="a"><span>un conector físico del ordenador</span></label>
+    <label><input type="radio" name="z4" value="b"><span>un número que identifica un servicio concreto dentro de una dirección</span></label>
+    <label><input type="radio" name="z4" value="c"><span>otro nombre para la dirección IP</span></label>
+    <div class="fb good"><b>Correcto.</b> Dirección:puerto. El 22 es SSH, el 443 la web cifrada — y <code>ss</code> o <code>nmap</code> te enseñan cuáles están abiertos.</div>
+    <div class="fb bad"><b>No exactamente.</b> Nada físico: es la «puerta» numerada por la que escucha un servicio en una máquina. Una dirección, miles de puertas.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">SSH va sobre TCP y no sobre UDP porque…</p>
+    <label><input type="radio" name="z5" value="a"><span>TCP garantiza que todo llega, en orden, reenviando lo perdido</span></label>
+    <label><input type="radio" name="z5" value="b"><span>UDP no funciona en Linux</span></label>
+    <label><input type="radio" name="z5" value="c"><span>TCP es más rápido</span></label>
+    <div class="fb good"><b>Correcto.</b> Correo certificado frente a postal: para una sesión de terminal, perder un carácter es inaceptable. El precio es algo de velocidad.</div>
+    <div class="fb bad"><b>No exactamente.</b> UDP existe y se usa muchísimo (DNS, vídeo). SSH elige TCP por fiabilidad — que cuesta velocidad, no la da.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">El primer paso del protocolo de cambio reversible es…</p>
+    <label><input type="radio" name="z6" value="a"><span>hacer el cambio y ver qué pasa</span></label>
+    <label><input type="radio" name="z6" value="b"><span>anotar el valor actual y escribir la vuelta atrás</span></label>
+    <label><input type="radio" name="z6" value="c"><span>reiniciar el router</span></label>
+    <div class="fb good"><b>Correcto.</b> Sin el valor anterior no hay deshacer. Es la instantánea de los sistemas que no tienen instantáneas.</div>
+    <div class="fb bad"><b>No exactamente.</b> Primero se anota lo que hay y cómo volver; después se cambia una cosa y se verifica. El «a ver qué pasa» es lo que deja a la casa sin internet.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"a", z2:"b", z3:"b", z4:"b", z5:"a", z6:"b"};
+  document.querySelectorAll("#quiz-cap10 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 10.8)</strong> — Respuestas: 1 a · 2 b · 3 b · 4 b · 5 a · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Bloque E: trabajar en remoto. Tienes un servidor con nombre (<code>debian-lab</code>), una puerta abierta (la 22) y, desde hoy, el mapa entero de cómo llegar a ella. En el capítulo 11 entras: SSH, claves en vez de contraseñas, y copiar ficheros entre máquinas con <code>scp</code> y <code>rsync</code> — primero contigo mismo, luego con tu VM, y después con cualquier servidor del mundo. Guarda <code>sesion10.log</code>: bloque D completo.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 10 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion10.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap09.html" class="pagination-link" aria-label="Qué es una red">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

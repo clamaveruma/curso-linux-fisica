@@ -1,0 +1,27 @@
+<svg viewBox="0 0 700 250" width="700" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una dirección IP, muchas puertas: los puertos y los servicios que hay detrás">
+  <g font-family="IBM Plex Mono,monospace">
+    <text x="350" y="30" font-size="12" fill="#6A5F4D" text-anchor="middle">una máquina, una dirección… y hasta 65 535 <tspan font-weight="600" fill="#C4342A">puertas</tspan> numeradas</text>
+    <!-- edificio -->
+    <rect x="60" y="50" width="580" height="130" rx="6" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.5"/>
+    <text x="350" y="72" font-size="11.5" fill="#2B2318" text-anchor="middle" font-weight="600">debian-lab · 192.168.122.15</text>
+    <!-- puertas -->
+    <rect x="85" y="95" width="100" height="70" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.6"/>
+    <text x="135" y="118" font-size="14" fill="#24564B" text-anchor="middle" font-weight="600">22</text>
+    <text x="135" y="136" font-size="10" fill="#2B2318" text-anchor="middle">SSH</text>
+    <text x="135" y="152" font-size="8.5" fill="#6A5F4D" text-anchor="middle">abierta: cap. 8</text>
+    <rect x="215" y="95" width="100" height="70" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="265" y="118" font-size="14" fill="#9C8F79" text-anchor="middle" font-weight="600">80</text>
+    <text x="265" y="136" font-size="10" fill="#6A5F4D" text-anchor="middle">web (http)</text>
+    <text x="265" y="152" font-size="8.5" fill="#9C8F79" text-anchor="middle">cerrada: nadie escucha</text>
+    <rect x="345" y="95" width="100" height="70" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="395" y="118" font-size="14" fill="#9C8F79" text-anchor="middle" font-weight="600">443</text>
+    <text x="395" y="136" font-size="10" fill="#6A5F4D" text-anchor="middle">web (https)</text>
+    <text x="395" y="152" font-size="8.5" fill="#9C8F79" text-anchor="middle">cerrada</text>
+    <rect x="475" y="95" width="100" height="70" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="525" y="118" font-size="14" fill="#9C8F79" text-anchor="middle" font-weight="600">8888</text>
+    <text x="525" y="136" font-size="10" fill="#6A5F4D" text-anchor="middle">Jupyter</text>
+    <text x="525" y="152" font-size="8.5" fill="#9C8F79" text-anchor="middle">cerrada… hasta el cap. 12</text>
+    <text x="350" y="210" font-size="10.5" fill="#6A5F4D" text-anchor="middle">un servicio «escucha» en un puerto; conectar a una máquina es siempre conectar a <tspan font-weight="600">dirección:puerto</tspan></text>
+    <text x="350" y="232" font-size="10" fill="#9C8F79" text-anchor="middle">un cortafuegos es un portero que decide qué puertas se ven desde fuera</text>
+  </g>
+</svg>
