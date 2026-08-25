@@ -449,7 +449,7 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p><code>-a</code> conserva fechas y permisos, <code>-v</code> cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: <strong>la barra final importa</strong>. <code>simulaciones/</code> (con barra) sincroniza <em>el contenido</em> de la carpeta; <code>simulaciones</code> (sin barra) copia <em>la carpeta entera</em> dentro del destino. La segunda vez que ejecutes el mismo <code>rsync</code> tardará un segundo: solo viaja lo nuevo.</p>
 <div class="truco">
 <p><strong>✚ Truco · Arrastrar y soltar por SSH</strong></p>
-<p>El gestor de archivos de Mint sabe hablar SSH: en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe <code>sftp://debian-lab/home/marcos</code> y verás la casa del servidor como una carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el primo de <code>scp</code> que viaja por el mismo túnel. Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día.</p>
+<p>El gestor de archivos de Mint sabe hablar SSH: en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe <code>sftp://debian-lab/home/marcos</code> y verás la casa del servidor como una carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el primo de <code>scp</code> que viaja por el mismo túnel. Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>.</p>
 </div>
 </section>
 <section id="sec-comando-remoto" class="level2" data-number="11.6">
@@ -481,28 +481,38 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Cuenta de la universidad</strong></td>
-<td>el servicio de informática o tu grupo de investigación suelen tener máquinas Linux con SSH para alumnos</td>
-<td>gratis; pídelo</td>
+<td><strong>Universidad o alguien conocido</strong></td>
+<td>el servicio de informática, tu grupo, o el servidor de un profesor: una máquina Linux con SSH</td>
+<td>gratis; pídela — es la mejor opción</td>
 </tr>
 <tr class="even">
-<td><strong>Servidor de un profesor</strong></td>
-<td>acceso temporal a una máquina del departamento</td>
-<td>gratis, con permiso</td>
+<td><strong>Azure for Students / GitHub Student Developer Pack</strong></td>
+<td>con tu correo de la universidad: créditos para VMs <em>reales</em> con IP pública (Azure 100 $, DigitalOcean 200 $ y más), sin tarjeta</td>
+<td>gratis para estudiantes</td>
 </tr>
 <tr class="odd">
-<td><strong>Nube, capa gratuita</strong></td>
-<td>varias nubes regalan una VM pequeña permanente o por meses (Oracle Cloud, Google Cloud, AWS…)</td>
-<td>gratis con tarjeta de por medio: lee la letra pequeña</td>
+<td><strong>Oracle Cloud «Always Free»</strong></td>
+<td>una VM real y permanente (ARM, hasta 4 núcleos) con IP pública</td>
+<td>gratis; pide tarjeta para identificarte, y a veces no hay plazas</td>
 </tr>
 <tr class="even">
-<td><strong>Shell público</strong></td>
-<td>comunidades que ofrecen cuentas SSH gratuitas (SDF, los <em>tildes</em>)</td>
-<td>gratis; para practicar</td>
+<td><strong>tilde.town, SDF</strong></td>
+<td>un servidor Unix compartido por SSH; la cuenta se pide <em>entregando tu clave pública</em> — el ejercicio 11.3 en la vida real</td>
+<td>gratis, sin tarjeta; sin <code>sudo</code>: para practicar</td>
+</tr>
+<tr class="odd">
+<td><strong>GitHub Codespaces</strong></td>
+<td>un contenedor Ubuntu con terminal (60 h/mes en la cuenta gratuita); se entra con <code>gh codespace ssh</code></td>
+<td>gratis; es un contenedor, no una VM</td>
+</tr>
+<tr class="even">
+<td><strong>Google Cloud Shell</strong></td>
+<td>una terminal en el navegador con 5 GB de casa persistente; <code>gcloud cloud-shell ssh</code> desde tu Mint</td>
+<td>gratis, sin tarjeta; la máquina es efímera</td>
 </tr>
 </tbody>
 </table>
-<p>Las diferencias prácticas: la dirección será pública o un nombre DNS; el puerto puede no ser el 22 (<code>-p 2222</code>, o <code>Port</code> en tu <code>config</code>); te pedirán tu <strong>clave pública</strong> por adelantado — la que ya sabes generar — y quizá un segundo factor. Y la lección de seguridad que cierra el capítulo: un servidor a la vista de internet recibe miles de intentos de contraseña al día. Se sobrevive con claves y con la contraseña <em>desactivada</em> — exactamente lo que harás en el ejercicio 11.6, en tu VM y con instantánea.</p>
+<p>(Las condiciones de estos servicios cambian cada pocos meses: comprueba disponibilidad y letra pequeña antes de contar con uno.) Las diferencias prácticas: la dirección será pública o un nombre DNS; el puerto puede no ser el 22 (<code>-p 2222</code>, o <code>Port</code> en tu <code>config</code>); te pedirán tu <strong>clave pública</strong> por adelantado — la que ya sabes generar — y quizá un segundo factor. Y la lección de seguridad que cierra el capítulo: un servidor a la vista de internet recibe miles de intentos de contraseña al día. Se sobrevive con claves y con la contraseña <em>desactivada</em> — exactamente lo que harás en el ejercicio 11.6, en tu VM y con instantánea.</p>
 <div class="aviso">
 <p><strong>△ Cuidado · La clave privada es tu identidad</strong></p>
 <p>Tres reglas sin excepción. Uno: la <strong>privada nunca se copia</strong> a otro sitio — ni al servidor, ni a un correo, ni «para tenerla en el portátil del laboratorio»: allí se genera otro par. Dos: <strong>frase de paso</strong> siempre. Tres: si una huella de servidor conocido <em>cambia</em> de repente, no se acepta a ciegas — se pregunta a quien lo administra. Con esas tres, SSH es hoy la forma más segura que existe de trabajar a distancia; sin ellas, es una puerta abierta con tu nombre.</p>
