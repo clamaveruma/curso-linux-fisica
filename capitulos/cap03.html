@@ -220,11 +220,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-canales" id="toc-sec-canales" class="nav-link active" data-scroll-target="#sec-canales"><span class="header-section-number">3.1</span> Los tres chorros</a></li>
   <li><a href="#sec-redirigir" id="toc-sec-redirigir" class="nav-link" data-scroll-target="#sec-redirigir"><span class="header-section-number">3.2</span> Redirigir: <code>&gt;</code> y <code>&gt;&gt;</code></a></li>
   <li><a href="#sec-tuberia" id="toc-sec-tuberia" class="nav-link" data-scroll-target="#sec-tuberia"><span class="header-section-number">3.3</span> La tubería: <code>|</code></a></li>
-  <li><a href="#sec-herramientas" id="toc-sec-herramientas" class="nav-link" data-scroll-target="#sec-herramientas"><span class="header-section-number">3.4</span> La caja de herramientas</a></li>
-  <li><a href="#sec-analisis" id="toc-sec-analisis" class="nav-link" data-scroll-target="#sec-analisis"><span class="header-section-number">3.5</span> El análisis, pieza a pieza</a></li>
-  <li><a href="#sec-python" id="toc-sec-python" class="nav-link" data-scroll-target="#sec-python"><span class="header-section-number">3.6</span> ¿Y Python?</a></li>
-  <li><a href="#sec-practica-3" id="toc-sec-practica-3" class="nav-link" data-scroll-target="#sec-practica-3"><span class="header-section-number">3.7</span> Práctica: la noche en el laboratorio</a></li>
-  <li><a href="#sec-quiz-3" id="toc-sec-quiz-3" class="nav-link" data-scroll-target="#sec-quiz-3"><span class="header-section-number">3.8</span> Autocomprobación</a></li>
+  <li><a href="#sec-uso-real" id="toc-sec-uso-real" class="nav-link" data-scroll-target="#sec-uso-real"><span class="header-section-number">3.4</span> Lo que usarás de verdad</a></li>
+  <li><a href="#sec-herramientas" id="toc-sec-herramientas" class="nav-link" data-scroll-target="#sec-herramientas"><span class="header-section-number">3.5</span> La caja de herramientas</a></li>
+  <li><a href="#sec-analisis" id="toc-sec-analisis" class="nav-link" data-scroll-target="#sec-analisis"><span class="header-section-number">3.6</span> El análisis, pieza a pieza</a></li>
+  <li><a href="#sec-python" id="toc-sec-python" class="nav-link" data-scroll-target="#sec-python"><span class="header-section-number">3.7</span> ¿Y Python?</a></li>
+  <li><a href="#sec-practica-3" id="toc-sec-practica-3" class="nav-link" data-scroll-target="#sec-practica-3"><span class="header-section-number">3.8</span> Práctica: la noche en el laboratorio</a></li>
+  <li><a href="#sec-quiz-3" id="toc-sec-quiz-3" class="nav-link" data-scroll-target="#sec-quiz-3"><span class="header-section-number">3.9</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -251,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="lede">
-<p>Esta noche tu experimento ha generado un registro de 7 198 líneas. Nadie va a leerlas. Hoy aprendes el gesto que define a Unix desde hace cincuenta años: conectar programas pequeños como conectas aparatos en un montaje experimental, hasta que de un fichero inabarcable sale una respuesta de tres líneas.</p>
+<p>Esta noche tu experimento ha generado un registro de 7 198 líneas. Nadie va a leerlas. Hoy aprendes cómo circula el texto entre programas: de dónde sale, adónde va, cómo se guarda en un fichero y cómo pasa de un programa a otro. Es fontanería, y como toda fontanería se ve poco — pero está debajo de todo lo que harás después: guardar la salida de una simulación, buscar un error en un registro, leer un comando ajeno y entenderlo. El capítulo baja hasta el fondo del mecanismo; hasta dónde bajas tú, lo decides tú.</p>
 </div>
 <div class="chapmeta">
 <p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 1 y 2</strong> · máquina: <strong>tu Linux de diario</strong></p>
@@ -260,11 +261,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
 <li>Qué son los tres canales de todo programa — stdin, stdout, stderr — y por qué esa separación es una idea brillante.</li>
-<li>Guardar la salida de cualquier comando en un fichero con <code>&gt;</code> y <code>&gt;&gt;</code>, sin perder los errores por el camino.</li>
-<li>Encadenar programas con la tubería <code>|</code>: la salida de uno como entrada del siguiente.</li>
-<li>Usar la caja de herramientas del análisis: <code>wc</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code> y <code>cut</code>.</li>
-<li>Construir una tubería pieza a pieza, comprobando cada paso — el método que evita los errores silenciosos.</li>
-<li>Decidir con criterio cuándo resolver algo con tuberías y cuándo abrir Python.</li>
+<li>Guardar la salida de cualquier programa — tu simulación incluida — en un fichero con <code>&gt;</code>, sin perder los errores por el camino.</li>
+<li>Los cuatro gestos de tubería que un físico usa a diario: <code>&gt; fichero</code>, <code>| less</code>, <code>| grep</code> y <code>| tail</code>.</li>
+<li>Leer con soltura cualquier comando encadenado que te encuentres en una documentación, en un foro o en la respuesta de una IA.</li>
+<li>Por dentro, para quien quiera bajar al taller: cómo cinco filtros — <code>wc</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, <code>cut</code> — resuelven un análisis entero, construido pieza a pieza.</li>
+<li>Decidir con criterio qué va en una tubería y qué va en Python.</li>
 </ul>
 </div>
 <section id="sec-canales" class="level2" data-number="3.1">
@@ -332,9 +333,19 @@ Figura&nbsp;3.3: El enchufe entre programas. Es la tercera manera de conectar el
 <p>La tubería tiene padre: Doug McIlroy, jefe del departamento donde nació Unix. En 1964 — cinco años <em>antes</em> de Unix — ya escribía en un memorándum que los programas deberían acoplarse «como los tramos de una manguera de jardín: se enrosca otro segmento cuando hace falta tratar el agua de otra manera». Estuvo casi una década insistiendo, hasta que una noche de 1973 Ken Thompson cedió, la implementó en el kernel, y en una semana el equipo reescribió medio sistema en forma de filtros encadenables. De esa semana sale la <strong>filosofía Unix</strong> que estás usando ahora: haz que cada programa haga una sola cosa bien, y que todos hablen el mismo idioma — texto.</p>
 </div>
 </section>
-<section id="sec-herramientas" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="sec-herramientas"><span class="header-section-number">3.4</span> La caja de herramientas</h2>
-<p>Cinco filtros bastan para el noventa por ciento del trabajo. Todos leen texto por stdin (o de un fichero que les des) y escriben texto por stdout — por eso encajan entre sí en cualquier orden:</p>
+<section id="sec-uso-real" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-uso-real"><span class="header-section-number">3.4</span> Lo que usarás de verdad</h2>
+<p>Seamos francos antes de bajar al mecanismo: <strong>un físico no construye tuberías largas.</strong> Lo que sí hace, todos los días de su vida profesional, son cuatro gestos de fontanería básica — y este es el momento de dejarlos grabados:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">python3 simula.py &gt; resultados.txt</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls -l /usr/share | less</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">history | grep ssh</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">tail -3 resultados.txt</span></code></pre>
+<p>Uno por uno. <strong>La salida de tu programa, a un fichero</strong> (<code>&gt;</code>): cuando la simulación escupe diez mil líneas no quieres verlas, quieres guardarlas — y con un <code>2&gt; errores.txt</code> detrás, las quejas van a otro fichero para leerlas en calma. <strong>Una salida larga, paginada</strong> (<code>| less</code>): cualquier comando que desborde la pantalla se lee con el visor de <code>man</code> del capítulo 1 — su <code>/</code> para buscar, su <code>q</code> para salir. <strong>Buscar dentro de una salida</strong> (<code>| grep</code>): el gesto más frecuente de toda la terminal — ¿estaba ese comando en mi historial?, ¿aparece «usb» en los mensajes del sistema? En los próximos capítulos verás <code>ps aux | grep</code>, <code>lsblk | grep</code>, <code>apt list | grep</code>: siempre el mismo enchufe. Y <strong>solo el final</strong> (<code>| tail</code>, o <code>tail fichero</code>): las últimas líneas de un registro te dicen cómo acabó la cosa.</p>
+<p>Con estos cuatro tienes el noventa por ciento del uso real. Lo que sigue — la caja de herramientas y el análisis completo — es el <em>mecanismo por dentro</em>. No hace falta dominarlo; hace falta haberlo visto una vez, para que ningún comando encadenado te intimide cuando lo leas en una documentación o te lo proponga una IA.</p>
+</section>
+<section id="sec-herramientas" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-herramientas"><span class="header-section-number">3.5</span> La caja de herramientas</h2>
+<p>Bajamos al taller. Estos cinco filtros son las piezas clásicas de Unix — las verás en scripts ajenos y en respuestas de IA más veces de las que las teclearás. Todos leen texto por stdin (o de un fichero que les des) y escriben texto por stdout — por eso encajan entre sí en cualquier orden:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 30%">
@@ -382,9 +393,9 @@ Figura&nbsp;3.3: El enchufe entre programas. Es la tercera manera de conectar el
 <p><code>uniq</code> no busca repetidos por todo el fichero: colapsa líneas iguales <em>consecutivas</em>. Sueltas por ahí, se le escapan. Por eso el dúo inseparable es <code>sort | uniq</code>: primero juntas los iguales, luego colapsas. Si algún día un recuento te sale absurdo, revisa si te faltó el <code>sort</code>.</p>
 </div>
 </section>
-<section id="sec-analisis" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-analisis"><span class="header-section-number">3.5</span> El análisis, pieza a pieza</h2>
-<p>Vamos a responder la pregunta que un físico se hace ante ese log: <strong>¿qué sensor está fallando?</strong> Y vamos a hacerlo con el método profesional: construir la tubería paso a paso, mirando qué sale de cada pieza antes de añadir la siguiente.</p>
+<section id="sec-analisis" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-analisis"><span class="header-section-number">3.6</span> El análisis, pieza a pieza</h2>
+<p>Una demostración completa, para ver el mecanismo entero funcionando una sola vez. Vamos a responder la pregunta que un físico se hace ante ese log: <strong>¿qué sensor está fallando?</strong> Y vamos a hacerlo con el método profesional: construir la tubería paso a paso, mirando qué sale de cada pieza antes de añadir la siguiente.</p>
 <p>Primer paso: aislar los errores y <em>mirar</em> unas cuantas líneas.</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">grep ERROR adquisicion.log | head -3</span>
 <span class="t-out">2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor</span>
@@ -429,8 +440,8 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 <p>En el capítulo 2 renombraste cinco runs a mano y prometimos algo mejor. La verdad completa: las tuberías transforman <em>texto</em>, no ejecutan una orden por cada fichero — para eso hacen falta los bucles del shell, que viven en el anexo de <em>scripting</em>. Pero ya tienes la mitad de la solución: <code>find . -name "*.csv"</code> te fabrica la <strong>lista</strong> sobre la que un bucle trabajaría. La tubería prepara el trabajo; el bucle lo remata. Todo llega.</p>
 </div>
 </section>
-<section id="sec-python" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="sec-python"><span class="header-section-number">3.6</span> ¿Y Python?</h2>
+<section id="sec-python" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-python"><span class="header-section-number">3.7</span> ¿Y Python?</h2>
 <p>La pregunta honesta: tú sabes NumPy — ¿no era más fácil en Python? El mismo recuento, en Python legible:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>recuento <span class="op">=</span> {}</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> linea <span class="kw">in</span> <span class="bu">open</span>(<span class="st">"adquisicion.log"</span>):</span>
@@ -441,17 +452,19 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n, sensor)</span></code></pre></div>
 <p>Ocho líneas, mismo resultado (<code>90 s3 · 15 s1 · 3 s4</code> — comprobado). Entonces, ¿cuándo cada cosa?</p>
 <ul>
-<li><strong>Tubería</strong> cuando la pregunta es exploratoria y la respuesta cabe en pantalla: ¿cuántos?, ¿cuáles?, ¿quién más? Diez segundos, cero ficheros nuevos, y funciona idéntica en el superordenador al que te conectes por SSH — donde quizá no puedas instalar nada.</li>
-<li><strong>Python</strong> cuando empieza el <em>cálculo</em>: estadística, ajustes, gráficas, o cualquier análisis que mañana querrás repetir con otros datos. Un script se documenta y se cita; una tubería se teclea y se olvida.</li>
+<li><strong>Tubería</strong> para el <em>sistema</em>: mirar, contar, buscar, guardar. Preguntas de diez segundos cuya respuesta cabe en pantalla — y que funcionan idénticas en el superordenador al que te conectes por SSH, donde quizá no puedas instalar nada.</li>
+<li><strong>Python</strong> para los <em>datos</em>: el análisis de verdad — estadística, ajustes, gráficas — y todo lo que mañana querrás repetir con otros datos. Un script se documenta y se cita; una tubería se teclea y se olvida.</li>
 </ul>
-<p>El flujo real de un físico computacional es la secuencia de ambos: explorar con tuberías hasta entender qué hay, y entonces escribir el script de Python que lo analiza en serio. Las dos herramientas no compiten: se turnan.</p>
+<p>Para un físico la frontera es clara: las tuberías son la herramienta de <em>administrar</em> — registros, ficheros, comprobaciones — y Python la de <em>investigar</em>. El análisis de este capítulo lo hemos hecho con tuberías para enseñarte el mecanismo; en la vida real lo harías en Python, y las tuberías las reservarías para llegar hasta el fichero, comprobar que es el bueno y guardar el resultado.</p>
 </section>
-<section id="sec-practica-3" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="sec-practica-3"><span class="header-section-number">3.7</span> Práctica: la noche en el laboratorio</h2>
+<section id="sec-practica-3" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-practica-3"><span class="header-section-number">3.8</span> Práctica: la noche en el laboratorio</h2>
 <p>Arranca tu cuaderno (<code>script sesion03.log</code>) y descarga el registro de la noche: <a href="../datos/cap03/adquisicion.log" download="adquisicion.log"><code>adquisicion.log</code></a> (305 KB de texto — ni se te ocurra abrirlo con doble clic: para eso está la sesión de hoy). Trabaja en <code>~/Descargas</code> o muévelo a tu carpeta de física del capítulo 2.</p>
+<p>Los ejercicios van en tres niveles. <strong>Lo esencial</strong> (3.1–3.4) es lo que usarás de verdad: no te saltes ninguno. <strong>El mecanismo</strong> (3.5–3.6) es para entender cómo encajan las piezas. <strong>El reto</strong> (3.7–3.9) encadena tres y cuatro tuberías: es opcional y está ahí para quien disfrute — hasta un informático se lo pensaría dos veces. Cada uno lleva su pista: úsala sin remordimientos.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.1 · Dimensiones del problema</strong></p>
-<p>¿Cuántas líneas tiene el log? ¿Cuántas corresponden al sensor <code>s2</code>? Pista para lo segundo: el patrón de <code>grep</code> puede llevar espacios si lo proteges con comillas — y <code>s2</code> con espacios alrededor evita confundirlo con cualquier otra cosa.</p>
+<p><strong>Ejercicio 3.1 · Recuento de daños (sin tuberías)</strong></p>
+<p>¿Cuántas líneas tiene el log en total? ¿Cuántas son <code>ERROR</code>, y cuántas <code>WARN</code>? <em>Pista: <code>wc -l</code> para lo primero; para lo demás, <code>grep -c</code> cuenta él solo — hoy todavía no necesitas ninguna tubería.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -465,16 +478,16 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>wc -l adquisicion.log</code> → 7 198. Y <code>grep -c " s2 " adquisicion.log</code> → 1 799.</p>
-<p><strong>Por qué así</strong> — Las comillas protegen los espacios del patrón (son los mismos espacios-separadores del capítulo 1). Sin ellos, <code>s2</code> también casaría en cualquier línea que contuviera esa pareja de caracteres en otro sitio. Acotar el patrón es la mitad del oficio de <code>grep</code>.</p>
+<p><code>wc -l adquisicion.log</code> → 7 198. <code>grep -c ERROR adquisicion.log</code> → 108. <code>grep -c WARN adquisicion.log</code> → 357.</p>
+<p><strong>Por qué así</strong> — Tres preguntas, tres comandos de una sola pieza. Muchos filtros llevan incorporados sus propios atajos (<code>-c</code> es «cuenta en vez de mostrar»): antes de encadenar, mira si una pieza sola ya resuelve.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.2 · El primer síntoma</strong></p>
-<p>¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue? Resuélvelo con una tubería que termine en <code>head</code>.</p>
+<p><strong>Ejercicio 3.2 · Tu primera tubería (una <code>|</code>)</strong></p>
+<p>¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue? <em>Pista: el log viene en orden cronológico. Filtra los errores con <code>grep</code> y quédate con la primera línea que salga (<code>head -1</code>).</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -489,15 +502,15 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>grep ERROR adquisicion.log | head -1</code> → <code>2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor</code>. El s3, a las 10:03:00 — tres minutos después de arrancar.</p>
-<p><strong>Por qué así</strong> — El log ya está en orden cronológico, así que «el primer error» es literalmente la primera línea que pase el filtro. Cuando el orden te lo dan hecho, aprovéchalo: ni <code>sort</code> ni nada.</p>
+<p><strong>Por qué así</strong> — «El primer error» es literalmente la primera línea que pase el filtro, porque el orden te lo da hecho el log. Cuando el orden ya existe, aprovéchalo: ni <code>sort</code> ni nada.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.3 · ¿Quién avisa?</strong></p>
-<p>Los <code>WARN</code> son avisos, no fallos. ¿Qué sensores emitieron avisos esta noche? La respuesta debe ser la lista de nombres, sin repetir.</p>
+<p><strong>Ejercicio 3.3 · La salida enorme (lo que harás con tu simulación)</strong></p>
+<p><code>ls -lR /usr/share</code> lista decenas de miles de ficheros: la clase de salida que produce una simulación larga. Primero léela con el paginador: <code>ls -lR /usr/share | less</code> — muévete, busca <code>/png</code> con la barra, sal con <code>q</code>. Después guárdala en un fichero: <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code>, y cuenta con <code>grep -c</code> cuántas líneas contienen <code>.png</code>. <em>Pista: <code>less</code> tiene las mismas teclas que <code>man</code>; el <code>2&gt; /dev/null</code> manda las quejas de permisos a la papelera del sistema; y <code>grep -c</code> acepta el fichero como argumento, sin tubería.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -511,16 +524,16 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq</code> → <code>s2</code>, solo. (Con <code>uniq -c</code> verás además que fueron 357 avisos.)</p>
-<p><strong>Por qué así</strong> — Misma maquinaria que el ranking del capítulo, sin el <code>-c</code>: cuando solo quieres saber <em>quiénes</em>, <code>sort | uniq</code> es la pregunta «¿qué valores distintos hay en esta columna?». Apréndetela como frase hecha: la usarás mil veces.</p>
+<p><code>ls -lR /usr/share | less</code> (la <code>R</code> es <em>recursivo</em>: entra en todas las subcarpetas). Después <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code> y <code>grep -c "\.png" inventario.txt</code> → varios miles, según lo que tengas instalado. (El <code>\.</code> fuerza un punto literal; sin la barra, el punto significa «cualquier carácter» para <code>grep</code> — un matiz que puedes archivar por ahora.)</p>
+<p><strong>Por qué así</strong> — Este es el patrón que repetirás con tu simulación: salida larga → paginador si solo quieres mirar, fichero si quieres conservar, y <code>grep</code> para preguntarle al fichero. Tres reflejos que valen más que cualquier tubería de cinco piezas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.4 · La reconstrucción</strong></p>
-<p>Sin mirar la sección del análisis: reconstruye de memoria la tubería del ranking de errores por sensor, pieza a pieza, comprobando cada paso con <code>head</code>. Compara tu resultado con el del capítulo.</p>
+<p><strong>Ejercicio 3.4 · A fichero (redirección, sin tuberías)</strong></p>
+<p>Crea un fichero <code>errores.txt</code> que contenga solo las líneas de error, y comprueba — con un comando sobre ese fichero — que contiene las 108 que esperabas. <em>Pista: <code>&gt;</code> desvía el stdout al fichero; y <code>wc -l</code> acepta un fichero como argumento, sin tubería.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -534,16 +547,17 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> → <code>90 s3 · 15 s1 · 3 s4</code>.</p>
-<p><strong>Por qué así</strong> — Si te salió a la primera, perfecto. Si no, mejor aún: el objetivo era practicar el método — añadir una pieza, <code>head</code>, mirar, seguir. Una tubería no se escribe: se <em>cultiva</em>. El día que te salga una de seis etapas habrás llegado sin darte cuenta.</p>
+<p><code>grep ERROR adquisicion.log &gt; errores.txt</code> y después <code>wc -l errores.txt</code> → <code>108 errores.txt</code>.</p>
+<p><strong>Por qué así</strong> — Es la figura de la redirección, en vivo: <code>grep</code> trabajó igual que siempre, pero su stdout acabó en el fichero. Fíjate en que el recuento coincide con el <code>grep -c</code> del 3.1: dos caminos distintos a la misma cifra — la comprobación cruzada de toda la vida en el laboratorio.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.5 · Rango de temperaturas</strong></p>
-<p>¿Entre qué mínima y máxima se movieron las lecturas <em>válidas</em> (las líneas <code>INFO</code>)? ¿Y por qué la máxima debe mirarse con lupa?</p>
+<p><strong>Ejercicio 3.5 · La columna del sensor (dos <code>|</code>)</strong></p>
+<p>De las líneas <code>WARN</code>, extrae solo el nombre del sensor y mira los cinco primeros. ¿Se repite alguno? <em>Pista: tres piezas — <code>grep WARN</code>, <code>cut -d' ' -f4</code>, <code>head -5</code> — y antes de decidir el <code>-f</code>, cuenta los campos con los dedos sobre una línea real (ya sabes lo que pasa si no).</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -557,16 +571,16 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Mínima: <code>grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 | sort -n | head -1</code> → 20.45. Máxima: la misma tubería con <code>tail -1</code> → 25.00. Y 25.00 es justo el tope donde s2 satura (los 357 <code>WARN</code>): la «máxima» no es una medida, es el techo del instrumento.</p>
-<p><strong>Por qué así</strong> — <code>sort -n</code> ordena como números (sin <code>-n</code>, <code>9</code> iría después de <code>25</code>, orden alfabético). Y la lección de física: un valor sospechosamente redondo en el extremo del rango huele a saturación, no a dato. La tubería te dio el número; el criterio lo pones tú.</p>
+<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | head -5</code> → <code>s2</code> cinco veces.</p>
+<p><strong>Por qué así</strong> — Es el método del capítulo en miniatura: filtrar, recortar, y un <code>head</code> de comprobación al final. Ese «s2, s2, s2…» ya te está susurrando la respuesta del siguiente ejercicio.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.6 · El informe</strong></p>
-<p>Construye un fichero <code>informe.txt</code> con tres secciones usando solo <code>echo</code> y redirecciones: una línea de título, el total de errores, y el ranking por sensor. Las dos primeras con <code>echo</code> (una crea el fichero, la otra añade); la tercera, añadiendo la salida de tu tubería del 3.4.</p>
+<p><strong>Ejercicio 3.6 · Sin repetidos (tres <code>|</code>)</strong></p>
+<p>Obtén la lista de sensores <em>distintos</em> que emitieron avisos <code>WARN</code> — cada nombre una sola vez. <em>Pista: al ejercicio anterior, quítale el <code>head</code> y añádele la pareja inseparable del capítulo: <code>sort | uniq</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -580,19 +594,89 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq</code> → <code>s2</code>, solo. (Con <code>uniq -c</code> verás además que fueron los 357 del 3.1.)</p>
+<p><strong>Por qué así</strong> — <code>sort | uniq</code> sobre una columna es la pregunta «¿qué valores distintos hay aquí?». Apréndetela como frase hecha: la usarás mil veces. Y fíjate en cómo has llegado: no escribiste tres tuberías de golpe — le añadiste piezas a una que ya funcionaba.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · El reto (opcional)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.7 · El jefe final (cuatro <code>|</code>)</strong></p>
+<p>El reto de la sesión: reconstruye — de memoria si puedes, con las pistas si no — la tubería del ranking de errores por sensor. <em>Pistas, por pasos: (1) filtra las líneas <code>ERROR</code>; (2) recorta el campo 4; (3) junta los iguales; (4) colapsa contando; (5) ordena el recuento de mayor a menor (<code>sort -nr</code>). Y en cada paso, tu <code>head</code> de comprobación antes de añadir el siguiente.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> → <code>90 s3 · 15 s1 · 3 s4</code>.</p>
+<p><strong>Por qué así</strong> — Si te salió, enhorabuena: cuatro tuberías es más de lo que la mayoría encadena en su día a día. Si no, ningún drama: el objetivo era practicar el método — pieza, <code>head</code>, mirar, seguir. Una tubería no se escribe: se <em>cultiva</em>. Y recuerda la caja del capítulo: la que no recuerdes, se pregunta — a <code>man</code>, o a una IA, leyendo siempre lo que te dé.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.8 · El informe (redirecciones + tu tubería)</strong></p>
+<p>Construye <code>informe.txt</code> con tres partes, usando solo <code>echo</code> y redirecciones: una línea de título, el total de errores, y el ranking del ejercicio anterior. <em>Pista: la primera orden con <code>&gt;</code> (estrena el fichero); las siguientes con <code>&gt;&gt;</code> (añaden). La tubería del 3.7 ya la tienes: solo hay que redirigirla.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre><code>echo "Informe de adquisicion - 18 de agosto" &gt; informe.txt
 grep -c ERROR adquisicion.log &gt;&gt; informe.txt
 grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr &gt;&gt; informe.txt</code></pre>
 <p>Comprueba con <code>cat informe.txt</code>: título, <code>108</code>, y las tres líneas del ranking.</p>
-<p><strong>Por qué así</strong> — Primera línea con <code>&gt;</code> (crea o vacía el fichero) y el resto con <code>&gt;&gt;</code> (añaden). Si hubieras usado <code>&gt;</code> en todas, cada orden habría borrado la anterior y el informe tendría solo el ranking. Ese matiz — crear una vez, añadir después — es la gramática de todo informe generado por comandos. Cierra el cuaderno con <code>exit</code> y guarda <code>sesion03.log</code>.</p>
+<p><strong>Por qué así</strong> — Si hubieras usado <code>&gt;</code> en las tres, cada orden habría borrado la anterior y el informe tendría solo el ranking. Crear una vez, añadir después: la gramática de todo informe generado por comandos. Cierra el cuaderno con <code>exit</code> y guarda <code>sesion03.log</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.9 · Para nota (opcional) · El termómetro sospechoso</strong></p>
+<p>Solo si te has quedado con ganas: ¿entre qué mínima y máxima se movieron las lecturas <em>válidas</em> (las líneas <code>INFO</code>)? ¿Y por qué la máxima hay que mirarla con lupa? <em>Pistas: el valor viene tras un <code>=</code>, y <code>cut</code> también sabe cortar por <code>=</code>; <code>sort -n</code> ordena como números; y los extremos de una lista ordenada son <code>head -1</code> y <code>tail -1</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Mínima: <code>grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 | sort -n | head -1</code> → 20.45. Máxima: la misma tubería con <code>tail -1</code> → 25.00. Y 25.00 es justo el tope donde s2 satura (los 357 <code>WARN</code>): la «máxima» no es una medida, es el techo del instrumento.</p>
+<p><strong>Por qué así</strong> — <code>sort -n</code> ordena como números (sin <code>-n</code>, <code>9</code> iría después de <code>25</code>, orden alfabético). Y la lección de física: un valor sospechosamente redondo en el extremo del rango huele a saturación, no a dato. La tubería te dio el número; el criterio lo pones tú.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="sec-quiz-3" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="sec-quiz-3"><span class="header-section-number">3.8</span> Autocomprobación</h2>
+<section id="sec-quiz-3" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-quiz-3"><span class="header-section-number">3.9</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap03">
   <div class="qz"><p class="qq" data-n="1">En <code>grep ERROR log | wc -l</code>, la tubería conecta…</p>
