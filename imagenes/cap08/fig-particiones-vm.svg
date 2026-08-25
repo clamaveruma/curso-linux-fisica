@@ -1,0 +1,30 @@
+<svg viewBox="0 0 700 250" width="700" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan de particionado del disco virtual de 20 GB: EFI, raíz y swap">
+  <g font-family="IBM Plex Mono,monospace">
+    <text x="350" y="32" font-size="12" fill="#6A5F4D" text-anchor="middle" font-weight="600">el disco de la VM · vda · 20 GB — tu plan, decidido antes de tocar el instalador</text>
+    <!-- barra del disco -->
+    <rect x="40" y="55" width="620" height="70" rx="5" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
+    <!-- EFI -->
+    <rect x="42" y="57" width="34" height="66" rx="3" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.4"/>
+    <text x="59" y="94" font-size="9" fill="#9A6A14" text-anchor="middle" font-weight="600">EFI</text>
+    <!-- raiz -->
+    <rect x="80" y="57" width="510" height="66" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.4"/>
+    <text x="335" y="86" font-size="13" fill="#24564B" text-anchor="middle" font-weight="600">/ · ext4 · ~17,5 GB</text>
+    <text x="335" y="105" font-size="9.5" fill="#6A5F4D" text-anchor="middle">el sistema entero y tu casa: Debian sin escritorio cabe en 2 GB</text>
+    <!-- swap -->
+    <rect x="594" y="57" width="64" height="66" rx="3" fill="#FAF6EB" stroke="#C4342A" stroke-width="1.4"/>
+    <text x="626" y="86" font-size="10.5" fill="#C4342A" text-anchor="middle" font-weight="600">swap</text>
+    <text x="626" y="102" font-size="9" fill="#6A5F4D" text-anchor="middle">2 GB</text>
+    <!-- llaves -->
+    <path d="M42 135 v8 h34 v-8" fill="none" stroke="#9A6A14" stroke-width="1.3"/>
+    <text x="59" y="160" font-size="9.5" fill="#9A6A14" text-anchor="middle" font-weight="600">vda1 · 512 MB</text>
+    <text x="59" y="174" font-size="9" fill="#9C8F79" text-anchor="middle">FAT32, /boot/efi</text>
+    <text x="59" y="188" font-size="9" fill="#9C8F79" text-anchor="middle">el buzón del cap. 6</text>
+    <path d="M80 135 v8 h510 v-8" fill="none" stroke="#2F6F62" stroke-width="1.3"/>
+    <text x="335" y="160" font-size="9.5" fill="#2F6F62" text-anchor="middle" font-weight="600">vda2 · el resto</text>
+    <text x="335" y="174" font-size="9" fill="#9C8F79" text-anchor="middle">un solo ext4 para / — sencillo y suficiente; separar /home es opcional</text>
+    <path d="M594 135 v8 h64 v-8" fill="none" stroke="#C4342A" stroke-width="1.3"/>
+    <text x="626" y="160" font-size="9.5" fill="#C4342A" text-anchor="middle" font-weight="600">vda3 · 2 GB</text>
+    <text x="626" y="174" font-size="9" fill="#9C8F79" text-anchor="middle">desahogo de la RAM</text>
+    <text x="350" y="225" font-size="10" fill="#9C8F79" text-anchor="middle">en la VM el disco se llama vda (virtio), no sda ni nvme — mismo mapa, otro nombre</text>
+  </g>
+</svg>

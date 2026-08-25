@@ -1,0 +1,89 @@
+# Instalar en un PC real: la lista de comprobación {#sec-anexo-c1}
+
+Todo lo que ensayaste en la máquina virtual del capítulo 8 vale para
+un ordenador físico. Este anexo es la lista que se lee **antes** de
+empezar y se sigue **durante**, porque aquí no hay instantánea que
+restaurar. Léela entera una vez; el día de la instalación, tenla
+abierta en el móvil.
+
+## Antes de tocar nada
+
+- [ ] **Copia de seguridad** de todo lo que importe del disco de
+  destino — aunque «vayas a dejar Windows». Un error de letra en el
+  particionado no avisa.
+- [ ] **Plan de particiones escrito** (ejercicio 8.1), con una columna
+  más: qué hay ahora en cada partición del disco y qué va a pasarle.
+- [ ] Si vas a **convivir con Windows**: reduce su partición *desde
+  Windows* (Administración de discos → Reducir volumen) antes de
+  arrancar el instalador, y desactiva el «inicio rápido» de Windows,
+  que deja el disco a medio cerrar.
+- [ ] **ISO verificada** con `sha256sum` (capítulo 7). Debian incluye
+  desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst:
+  ya no hace falta la imagen «non-free».
+- [ ] Un **pendrive** de 2 GB o más que puedas borrar por completo, y
+  **cable de red** si es posible: la instalación por cable ahorra
+  sorpresas con la Wi-Fi.
+- [ ] La **tecla del menú de arranque** de tu equipo, buscada antes:
+  suele ser F12 (Dell, Lenovo), F9 (HP), Esc o F2 (ASUS, Acer), Opción
+  (Mac Intel). Se pulsa nada más encender.
+
+## Grabar el pendrive
+
+La ISO se copia al pendrive **byte a byte** — no se «pega» como un
+fichero. Dos vías igual de válidas:
+
+**Con ratón (recomendada la primera vez).** En Mint, aplicación
+**Discos**: selecciona el pendrive en la lista de la izquierda —
+compruébalo por su tamaño y su nombre —, menú (⋮) → *Restaurar imagen
+de disco* → elige la ISO → *Iniciar restauración*. Eliges el destino
+por su nombre, sin letras que confundir.
+
+**Con terminal.** Primero, la regla de oro: `lsblk` *antes* de pinchar
+el pendrive y *después*, para ver qué nombre nuevo aparece (`sda`,
+`sdb`…). Luego, con esa letra y solo con esa:
+
+```terminal
+marcos@portatil:~/Descargas$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda           8:0    1  14,9G  0 disk
+└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON
+nvme0n1     259:0    0 476,9G  0 disk
+marcos@portatil:~/Descargas$ sudo umount /dev/sda1
+marcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress
+```
+
+`dd` copia bloques de `if` (*input file*) a `of` (*output file*) sin
+preguntar nada: **si `of=` apunta a tu disco interno, lo destruye en
+silencio**. Por eso se comprueba la letra dos veces, y por eso el
+destino es el disco entero (`/dev/sda`), no una partición (`sda1`).
+Cuando termine, `sync` y expulsar (capítulo 6).
+
+## Arrancar e instalar
+
+- [ ] Pendrive pinchado, encender, **tecla del menú de arranque**,
+  elegir el pendrive (la entrada que dice *UEFI:* delante — no la
+  otra, si aparecen dos).
+- [ ] Si el equipo no lo ofrece: en la configuración del UEFI,
+  comprueba que el arranque por USB está permitido. **Secure Boot
+  puede quedarse activado**: Debian lo soporta.
+- [ ] Instalador: idénticas pantallas que en la VM. En el
+  **particionado manual**, el disco se llamará `nvme0n1` o `sda` y
+  *tendrá particiones ya*. Con Windows al lado: **no crees una tabla
+  nueva** (borraría todo); crea las particiones de Linux en el espacio
+  libre que dejaste, y reutiliza la partición EFI existente marcándola
+  como *Partición del sistema EFI* sin formatearla.
+- [ ] Contraseña de root vacía → tu usuario con `sudo` (capítulo 8).
+- [ ] Selección de programas: aquí sí querrás probablemente un
+  escritorio — marca el que uses — y, por costumbre, el servidor SSH.
+- [ ] GRUB: en modo UEFI se instala en la partición EFI; si hay
+  Windows, lo detectará y lo añadirá al menú.
+
+## Después del primer arranque
+
+- [ ] `lsblk` y `df -h`: el parte del capítulo 8, sobre hardware real.
+- [ ] `sudo apt update && sudo apt upgrade`.
+- [ ] Wi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar
+  en `lspci | grep -i` (red, VGA, audio) para saber qué chip tienes,
+  y de ahí a la wiki de Debian.
+- [ ] Guarda el plan de particiones y tus notas en el cuaderno del
+  curso: la próxima instalación la harás en la mitad de tiempo.
