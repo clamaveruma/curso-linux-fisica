@@ -292,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
 <li>Qué es una máquina virtual, qué es un hipervisor, y qué se virtualiza exactamente: CPU, memoria, disco y red.</li>
-<li>Instalar el taller de virtualización de Linux — KVM, QEMU, libvirt y <code>virt-manager</code> — con un solo <code>apt</code>.</li>
+<li>Instalar el taller de virtualización de Linux — KVM, QEMU, libvirt y <code>virt-manager</code> — desde el Gestor de software o con un solo <code>apt</code>.</li>
 <li>Descargar la imagen de instalación de Debian y comprobar que no viene corrupta.</li>
 <li>Crear una máquina virtual desde cero, arrancarla y apagarla sin miedo.</li>
 <li>Usar instantáneas: guardar el estado de la máquina y restaurarlo en segundos.</li>
@@ -374,13 +374,15 @@ Figura&nbsp;7.2: Un IBM System/360 modelo 67 en la Universidad de Michigan, haci
 <span class="t-out">8</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lscpu | grep -i virtualiz</span>
 <span class="t-out">Virtualización:                       VT-x</span></code></pre>
-<p>Un número mayor que cero (<code>vmx</code> es Intel, <code>svm</code> es AMD) significa que sí. Si saliera 0, la virtualización suele estar apagada en el UEFI del capítulo 6: se activa allí, en la opción llamada <em>VT-x</em>, <em>AMD-V</em> o <em>SVM Mode</em>. Ahora el taller entero, con el gesto del capítulo 5:</p>
+<p>Un número mayor que cero (<code>vmx</code> es Intel, <code>svm</code> es AMD) significa que sí. Si saliera 0, la virtualización suele estar apagada en el UEFI del capítulo 6: se activa allí, en la opción llamada <em>VT-x</em>, <em>AMD-V</em> o <em>SVM Mode</em>.</p>
+<p>El taller entero se instala como cualquier programa: abre el <strong>Gestor de software</strong> de Mint, busca «Gestor de máquinas virtuales» (o <code>virt-manager</code>) e <strong>Instalar</strong>. Fíjate en la lista que te enseña antes de aceptar: además de la ventana, trae <code>qemu</code>, <code>libvirt</code> y compañía — son las dependencias del capítulo 5, y el gestor las resuelve solo. La misma operación, en una línea de terminal, es el gesto de siempre:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install virt-manager</span>
 <span class="t-out">[sudo] contraseña de marcos:</span>
 <span class="t-out">Se instalarán los siguientes paquetes NUEVOS:</span>
-<span class="t-out">  libvirt-daemon-system qemu-system-x86 virt-manager virt-viewer ...</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo usermod -aG libvirt marcos</span></code></pre>
-<p>La segunda orden te añade al grupo <code>libvirt</code> — capítulo 4: los grupos son bolsas de permisos, y este es el que autoriza a manejar máquinas virtuales sin <code>sudo</code>. Como con todo cambio de grupos, hace efecto al <strong>cerrar sesión y volver a entrar</strong>. Después, la comprobación de que todo respira:</p>
+<span class="t-out">  libvirt-daemon-system qemu-system-x86 virt-manager virt-viewer ...</span></code></pre>
+<p>Al abrir por primera vez el Gestor de máquinas virtuales (menú → Administración) te pedirá tu contraseña: es el sistema comprobando que eres administrador antes de dejarte tocar el hipervisor. Funciona tal cual — pero hay un paso que la instalación gráfica <em>no</em> hace por ti y que conviene dar: añadirte al grupo <code>libvirt</code>.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo usermod -aG libvirt marcos</span></code></pre>
+<p>Capítulo 4: los grupos son bolsas de permisos, y este es el que autoriza a manejar máquinas virtuales sin <code>sudo</code> — virt-manager deja de pedirte la contraseña, y <code>virsh</code>, su cara de terminal, funciona directamente. Como con todo cambio de grupos, hace efecto al <strong>cerrar sesión y volver a entrar</strong>. Después, la comprobación de que todo respira:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">groups</span>
 <span class="t-out">marcos adm cdrom sudo dip plugdev libvirt</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh list --all</span>
@@ -509,7 +511,7 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div class="ejercicio">
 <p><strong>Ejercicio 7.2 · Montar el taller</strong></p>
-<p>Instala <code>virt-manager</code>, añádete al grupo <code>libvirt</code>, cierra y vuelve a abrir sesión, y comprueba con <code>groups</code> y <code>virsh list --all</code> que estás dentro y que el taller responde. <em>Pista: <code>apt install</code> resuelve las dependencias solo; <code>usermod -aG</code> añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.</em></p>
+<p>Instala el Gestor de máquinas virtuales por la vía que prefieras — Gestor de software o <code>apt</code> —, ábrelo una vez (te pedirá la contraseña), añádete al grupo <code>libvirt</code>, cierra y vuelve a abrir sesión, y comprueba con <code>groups</code> y <code>virsh list --all</code> que estás dentro y que el taller responde. <em>Pista: las dos vías instalan exactamente los mismos paquetes; <code>usermod -aG</code> añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -523,7 +525,7 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo apt install virt-manager</code>, <code>sudo usermod -aG libvirt $USER</code>, cerrar sesión y entrar. <code>groups</code> debe listar <code>libvirt</code>; <code>virsh list --all</code> devuelve una tabla vacía sin quejarse. Si protesta con «permiso denegado» hablando de un <em>socket</em>, es que no reiniciaste la sesión.</p>
+<p>Gestor de software → «Gestor de máquinas virtuales» → Instalar (o <code>sudo apt install virt-manager</code>), <code>sudo usermod -aG libvirt $USER</code>, cerrar sesión y entrar. <code>groups</code> debe listar <code>libvirt</code>; <code>virsh list --all</code> devuelve una tabla vacía sin quejarse. Si protesta con «permiso denegado» hablando de un <em>socket</em>, es que no reiniciaste la sesión.</p>
 <p><strong>Por qué así</strong> — Un paquete, un grupo, una comprobación: el capítulo 5 y el 4 trabajando juntos. <code>$USER</code> es la variable de entorno del capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.</p>
 </div>
 </div>
