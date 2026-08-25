@@ -271,12 +271,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -293,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-tmux" id="toc-sec-tmux" class="nav-link" data-scroll-target="#sec-tmux"><span class="header-section-number">12.2</span> <code>tmux</code>: la sesión que no muere</a></li>
   <li><a href="#sec-tunel" id="toc-sec-tunel" class="nav-link" data-scroll-target="#sec-tunel"><span class="header-section-number">12.3</span> El túnel: un servicio remoto en tu navegador</a></li>
   <li><a href="#sec-nube" id="toc-sec-nube" class="nav-link" data-scroll-target="#sec-nube"><span class="header-section-number">12.4</span> Qué es «la nube», en concreto</a></li>
-  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">12.5</span> Cuando te den cuenta en un clúster</a></li>
+  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">12.5</span> Y si algún día te dan un clúster</a></li>
   <li><a href="#sec-practica-12" id="toc-sec-practica-12" class="nav-link" data-scroll-target="#sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</a></li>
   <li><a href="#sec-quiz-12" id="toc-sec-quiz-12" class="nav-link" data-scroll-target="#sec-quiz-12"><span class="header-section-number">12.7</span> Autocomprobación</a></li>
   </ul>
@@ -335,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.</li>
 <li>Ejecutar Jupyter en el servidor con los datos y la CPU de allí, y trabajar desde tu portátil.</li>
 <li>Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.</li>
-<li>Qué es un clúster de cálculo y dónde seguir el día que te den cuenta en uno.</li>
+<li>Qué es un clúster de cálculo, y por qué lo aprendido aquí es lo que su guía dará por sabido.</li>
 </ul>
 </div>
 <section id="sec-sesion-muere" class="level2" data-number="12.1">
@@ -423,8 +417,8 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 </section>
 <section id="sec-cluster" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">12.5</span> Cuando te den cuenta en un clúster</h2>
-<p>Un <strong>clúster</strong> de cálculo — el de la universidad, el de la Red Española de Supercomputación — es la tercera edición del tiempo compartido: miles de máquinas como tu <code>debian-lab</code>, pero físicas y unidas por una red rapidísima, repartidas entre cientos de investigadores por una <strong>cola de trabajos</strong>. Se entra por SSH (este bloque entero aplica), se prepara el trabajo en una máquina de recepción y se le <em>pide</em> a la cola que lo ejecute cuando haya hueco. El gestor de colas más común se llama <strong>SLURM</strong>, y su manual de dos páginas — anatomía del clúster, el <em>job script</em>, enviar, consultar y cancelar — está en el <a href="../anexos/anexo-e2-slurm.html">anexo E2</a>, para el día en que te den el usuario. Hoy no hace falta: con <code>tmux</code> y el túnel ya tienes el noventa por ciento de lo que harás allí.</p>
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">12.5</span> Y si algún día te dan un clúster</h2>
+<p>Un <strong>clúster</strong> de cálculo — el de la universidad, el de la Red Española de Supercomputación — es la tercera edición del tiempo compartido: miles de máquinas como tu <code>debian-lab</code>, pero físicas y unidas por una red rapidísima, repartidas entre cientos de investigadores por una <strong>cola de trabajos</strong>: se entra por SSH, se prepara el trabajo y se le pide a la cola que lo ejecute cuando haya hueco. Cada centro tiene su gestor de colas y su guía de usuario, y esa guía será tu manual el día que toque. Lo que este bloque te ha dado — entrar por SSH con clave, sobrevivir a la desconexión con <code>tmux</code>, mover datos con <code>rsync</code> — es exactamente lo que esa guía dará por sabido.</p>
 </section>
 <section id="sec-practica-12" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</h2>
@@ -594,7 +588,7 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div class="proxima">
 <p><strong>Lo que queda</strong></p>
-<p>Doce sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, la IA como herramienta y no como oráculo, el camino para quien venga de Windows — y SLURM, para el día del clúster. Guarda <code>sesion12.log</code>: son doce medidas.</p>
+<p>Doce sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, montar unidades de todo tipo, la IA como herramienta y no como oráculo, y el camino para quien venga de Windows. Guarda <code>sesion12.log</code>: son doce medidas.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 12 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion12.log</code></p>
