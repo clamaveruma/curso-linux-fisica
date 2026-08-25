@@ -350,7 +350,9 @@ capítulo 12 enseña una vía más elegante para casi todos los casos.
 
 Cuaderno en marcha (`script sesion11.log`). Los cambios de hoy en la
 VM se hacen con instantánea previa; en tu Mint, solo se instala un
-paquete y se crean ficheros en `~/.ssh`.
+paquete y se crean ficheros en `~/.ssh`. Lo esencial son los tres
+primeros ejercicios (con ratón, contigo mismo, el servidor); el nivel
+2 es para quien quiera ir más allá hoy — o dentro de un mes.
 
 **Nivel 1 · Lo esencial**
 
