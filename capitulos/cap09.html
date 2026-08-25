@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Qué es una red – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-c1-pc-real.html" rel="next">
+<link href="../capitulos/cap08.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap09.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Instalar Linux de verdad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap09.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-ip-a" id="toc-sec-ip-a" class="nav-link active" data-scroll-target="#sec-ip-a"><span class="header-section-number">9.1</span> Tu ficha de red: <code>ip a</code></a></li>
+  <li><a href="#sec-mascara" id="toc-sec-mascara" class="nav-link" data-scroll-target="#sec-mascara"><span class="header-section-number">9.2</span> El <code>/24</code>: red y máquina</a></li>
+  <li><a href="#sec-dhcp" id="toc-sec-dhcp" class="nav-link" data-scroll-target="#sec-dhcp"><span class="header-section-number">9.3</span> ¿Quién reparte las direcciones? DHCP</a></li>
+  <li><a href="#sec-ping" id="toc-sec-ping" class="nav-link" data-scroll-target="#sec-ping"><span class="header-section-number">9.4</span> ¿Estás ahí? <code>ping</code></a></li>
+  <li><a href="#sec-nat" id="toc-sec-nat" class="nav-link" data-scroll-target="#sec-nat"><span class="header-section-number">9.5</span> Privada, pública, y el NAT entre medias</a></li>
+  <li><a href="#sec-router" id="toc-sec-router" class="nav-link" data-scroll-target="#sec-router"><span class="header-section-number">9.6</span> El router por dentro (solo lectura)</a></li>
+  <li><a href="#sec-practica-9" id="toc-sec-practica-9" class="nav-link" data-scroll-target="#sec-practica-9"><span class="header-section-number">9.7</span> Práctica: el censo de casa</a></li>
+  <li><a href="#sec-quiz-9" id="toc-sec-quiz-9" class="nav-link" data-scroll-target="#sec-quiz-9"><span class="header-section-number">9.8</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap09" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Tu servidor recién instalado tiene una dirección — <code>192.168.122.15</code> — que todavía no sabes leer. Empieza el bloque D con la pregunta que todo el mundo se hace y casi nadie responde: qué significan esos cuatro números, quién los reparte, por qué tu casa entera sale a internet con una sola dirección, y qué hay dentro de esa caja con lucecitas que te dio la compañía. Hoy la abres — en modo solo lectura — y haces el censo de todos los aparatos que viven en tu red.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 1–8</strong> · máquina: <strong>tu Linux de diario, la VM y el router de casa (solo lectura)</strong></p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Leer tu ficha de red con <code>ip a</code> e <code>ip route</code>: interfaz, dirección MAC, dirección IP, máscara y puerta de enlace.</li>
+<li>Qué significa el <code>/24</code> de una dirección, y cómo decide quién puede hablar con quién directamente.</li>
+<li>Quién reparte las direcciones — DHCP — y por qué tu portátil sabe la suya sin que se la hayas dicho.</li>
+<li>Medir con <code>ping</code> si una máquina responde y cuánto tarda — y qué tiene que ver ese tiempo con la velocidad de la luz.</li>
+<li>La diferencia entre tu dirección privada y la pública, y qué es el NAT que las separa.</li>
+<li>Entrar en la página de administración de tu router, orientarte en ella y hacer el censo de tu red sin tocar nada.</li>
+</ul>
+</div>
+<section id="sec-ip-a" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-ip-a"><span class="header-section-number">9.1</span> Tu ficha de red: <code>ip a</code></h2>
+<p>El comando de este bloque es <code>ip</code>, y su primera pregunta es «¿quién soy en la red?»: <code>ip a</code> (<em>address</em>). La salida asusta la primera vez; léela por bloques, que cada bloque es una <strong>interfaz</strong> — una tarjeta de red, real o virtual:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip a</span>
+<span class="t-out">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 ...</span>
+<span class="t-out">    inet 127.0.0.1/8 scope host lo</span>
+<span class="t-out">2: wlp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 ...</span>
+<span class="t-out">    link/ether a4:34:d9:1c:7e:02 brd ff:ff:ff:ff:ff:ff</span>
+<span class="t-out">    inet 192.168.1.34/24 brd 192.168.1.255 scope global dynamic wlp3s0</span>
+<span class="t-out">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 ...</span>
+<span class="t-out">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span></code></pre>
+<p>Tres interfaces. <code>lo</code> es el <em>loopback</em>: la máquina hablando consigo misma (<code>127.0.0.1</code> siempre eres tú — la usarás en el capítulo 11). <code>wlp3s0</code> es tu Wi-Fi (<code>enp…</code> sería el cable), con dos direcciones distintas: la <strong>MAC</strong> (<code>link/ether a4:34:…</code>, el número de serie grabado en la tarjeta de fábrica) y la <strong>IP</strong> (<code>inet 192.168.1.34/24</code>, la que te ha tocado en esta red). Y <code>virbr0</code> es el router de mentira del capítulo 7 — la red NAT de tus máquinas virtuales. Ese <code>dynamic</code> al final de tu IP es una pista para dentro de dos secciones.</p>
+<div class="truco">
+<p><strong>✚ Truco · La misma ficha, en el icono de red</strong></p>
+<p>El icono de red de tu escritorio (clic → <em>Información de la conexión</em>) muestra exactamente esto: dirección IP, máscara, puerta de enlace, DNS. Es la vía gráfica de <code>ip a</code>, y perfectamente digna para un vistazo. La terminal gana cuando la máquina no tiene escritorio — tu <code>debian-lab</code> — o cuando quieres pegarlo en un correo pidiendo ayuda: «esto es lo que dice <code>ip a</code>» es la frase con la que empiezan todos los diagnósticos de red.</p>
+</div>
+</section>
+<section id="sec-mascara" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-mascara"><span class="header-section-number">9.2</span> El <code>/24</code>: red y máquina</h2>
+<p>Una dirección IP son cuatro números de 0 a 255 — cuatro bytes, tú sabes de esto — y el <code>/24</code> es la <strong>máscara</strong>: dice cuántos bits del principio identifican la <em>red</em> y cuántos quedan para la <em>máquina</em>.</p>
+<div id="fig-ip-mascara" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dirección 192.168.1.34/24 descompuesta en parte de red, parte de máquina y máscara">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ip-mascara-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-ip-mascara.svg" class="img-fluid figure-img" alt="Dirección 192.168.1.34/24 descompuesta en parte de red, parte de máquina y máscara">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ip-mascara-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.1: La anatomía de tu dirección. Los tres primeros números son el «prefijo» que comparte toda la casa; el último es el tuyo.
+</figcaption>
+</figure>
+</div>
+<p>Con <code>/24</code>, los 24 primeros bits — tres números — son la red: <code>192.168.1</code>. Queda un byte para las máquinas: 254 direcciones útiles (la <code>.0</code> nombra a la red y la <code>.255</code> es la de «todos a la vez»). Y la regla que lo explica todo: <strong>dos máquinas de la misma red se hablan directamente; para llegar a otra red hace falta un intermediario</strong>, el <strong>router</strong>, al que tu máquina llama <em>puerta de enlace</em> (<em>gateway</em>). <code>ip route</code> te dice cuál es la tuya:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip route</span>
+<span class="t-out">default via 192.168.1.1 dev wlp3s0 proto dhcp metric 600</span>
+<span class="t-out">192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.34</span>
+<span class="t-out">192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1</span></code></pre>
+<p>Léelo como instrucciones de un GPS: «para <code>192.168.1.0/24</code> (mi casa), sal directo por la Wi-Fi; para <code>192.168.122.0/24</code> (mis VMs), por <code>virbr0</code>; para <em>todo lo demás</em> (<code>default</code>), entrégaselo a <code>192.168.1.1</code>». Ese <code>192.168.1.1</code> es tu router — el que abrirás al final del capítulo.</p>
+</section>
+<section id="sec-dhcp" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-dhcp"><span class="header-section-number">9.3</span> ¿Quién reparte las direcciones? DHCP</h2>
+<p>Nunca le has dicho a tu portátil que es el <code>.34</code>. Se lo dijo el router, mediante <strong>DHCP</strong> (<em>Dynamic Host Configuration Protocol</em>): al conectarte, tu máquina grita a la red «¿alguien me da una dirección?» y el servidor DHCP del router le responde con un <em>préstamo</em> — una dirección libre, la máscara, la puerta de enlace y el servidor de nombres (capítulo 10) — por un tiempo limitado, que se renueva solo. De ahí el <code>dynamic</code> de <code>ip a</code>, y de ahí que tu móvil cambie de número de vez en cuando.</p>
+<p>Y ya lo has visto funcionar dos veces sin saberlo: la red <code>default</code> de libvirt lleva su propio servidor DHCP — por eso <code>debian-lab</code> apareció con <code>192.168.122.15</code> sin configurar nada —, y el instalador de Debian pidió su dirección exactamente así. El mismo mecanismo a tres escalas: tu casa, tu hipervisor, el campus de la universidad.</p>
+<div class="historia">
+<p><strong>◷ Historia · La primera palabra de la red fue «LO»</strong></p>
+<p>El 29 de octubre de 1969, un estudiante de UCLA llamado Charley Kline intentó escribir <code>LOGIN</code> en un ordenador de Stanford, a 500 km, a través de dos armarios llamados IMP — los primeros routers de la historia, fabricados por BBN a partir de un miniordenador Honeywell blindado para uso militar. Tecleó la L, llegó. Tecleó la O, llegó. Al teclear la G, el sistema de Stanford se cayó. La primera palabra transmitida por la red que acabaría siendo internet fue, por accidente, «LO». Aquella red, ARPANET, tenía cuatro nodos; las reglas que inventó para que máquinas distintas se entendieran — trocear los mensajes en paquetes, darle a cada máquina una dirección, dejar que los intermediarios decidan el camino — son las que tu <code>ip route</code> está aplicando ahora mismo.</p>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-imp" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Armario del Interface Message Processor de ARPANET, el primer router">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/arpanet-imp.jpg" class="img-fluid figure-img" alt="Armario del Interface Message Processor de ARPANET, el primer router">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.2: El primer IMP de ARPANET (1969), el abuelo de la caja con lucecitas de tu salón. <em>Foto: Steve Jurvetson, CC BY 2.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-log-lo" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página manuscrita del registro del IMP de UCLA anotando la primera conexión">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-log-lo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/arpanet-log-lo.jpg" class="img-fluid figure-img" alt="Página manuscrita del registro del IMP de UCLA anotando la primera conexión">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-lo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.3: La página del cuaderno de UCLA con el registro de aquel «LO», 22:30 del 29 de octubre de 1969. <em>Dominio público, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-ping" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-ping"><span class="header-section-number">9.4</span> ¿Estás ahí? <code>ping</code></h2>
+<p><code>ping</code> manda un paquete diminuto a una dirección y cronometra la respuesta. Es el estetoscopio de las redes: responde a «¿esa máquina existe y me oye?» y de propina mide <em>cuánto tarda</em>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 3 192.168.1.1</span>
+<span class="t-out">PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.</span>
+<span class="t-out">64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=2.31 ms</span>
+<span class="t-out">64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=2.08 ms</span>
+<span class="t-out">64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=2.44 ms</span>
+<span class="t-out">--- 192.168.1.1 ping statistics ---</span>
+<span class="t-out">3 packets transmitted, 3 received, 0% packet loss, time 2003ms</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 3 192.168.122.15</span>
+<span class="t-out">64 bytes from 192.168.122.15: icmp_seq=1 ttl=64 time=0.41 ms</span>
+<span class="t-out">...</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 3 8.8.8.8</span>
+<span class="t-out">64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=14.7 ms</span>
+<span class="t-out">...</span></code></pre>
+<p>Tres medidas, tres escalas: el router de casa a 2 ms, la máquina virtual a 0,4 ms (no hay cable que recorrer: está dentro de tu RAM), y un servidor de Google a 15 ms. <code>-c 3</code> limita a tres paquetes — sin él, <code>ping</code> sigue hasta que lo pares con <kbd>Ctrl</kbd>+<kbd>C</kbd> (la señal del capítulo 5). Y ese <code>8.8.8.8</code> sin nombre es a propósito: hoy hablamos con números; los nombres llegan en el capítulo 10.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · <code>ping</code> y la velocidad de la luz</strong></p>
+<p>Ese tiempo es de <em>ida y vuelta</em>, y tiene un mínimo físico que puedes calcular. En fibra la luz va a unos dos tercios de <em>c</em> — 200 000 km/s —, así que cada milisegundo de ida y vuelta corresponde como mucho a 100 km de distancia. Un servidor a 15 ms está, como mínimo, en un radio de 1 500 km; uno a 150 ms está seguro al otro lado de un océano, y nada lo bajará de ahí — ni la fibra más cara. Es la razón por la que los centros de datos se construyen cerca de sus usuarios, y por la que un clúster «en la nube» a 5 000 km nunca se sentirá tan inmediato como la máquina de al lado. Pocas veces un comando de terminal te deja medir una constante fundamental.</p>
+</div>
+</section>
+<section id="sec-nat" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-nat"><span class="header-section-number">9.5</span> Privada, pública, y el NAT entre medias</h2>
+<p>Hay algo raro en tu <code>192.168.1.34</code>: millones de casas del mundo tienen exactamente esa misma dirección. No es un error: las redes <code>192.168.x.x</code>, <code>10.x.x.x</code> y <code>172.16–31.x.x</code> son <strong>direcciones privadas</strong>, reservadas para uso interno y repetidas en cada casa, oficina o laboratorio. Internet nunca las ve. Lo que internet ve es la <strong>dirección pública</strong> de tu router — una sola para toda la casa — y la traducción entre ambas es el <strong>NAT</strong> (<em>Network Address Translation</em>):</p>
+<div id="fig-nat" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-nat-casa.svg" class="img-fluid figure-img" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.4: Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.
+</figcaption>
+</figure>
+</div>
+<p>Puedes ver las dos caras desde tu terminal: la privada en <code>ip a</code>, y la pública preguntándole a un servidor de fuera qué dirección ve:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">curl ifconfig.me</span>
+<span class="t-out">83.44.120.9</span></code></pre>
+<p>Esa es tu casa vista desde internet — y coincidirá con la que el router llama <em>WAN</em> en su página. Dos consecuencias que dan forma a los tres capítulos siguientes. La cómoda: <strong>desde fuera nadie puede entrar en tus aparatos sin invitación</strong>, porque no tienen dirección pública que apuntar. La incómoda: cuando <em>quieras</em> que alguien entre — tú mismo, por SSH desde la universidad —, tendrás que pedirle al router que abra una puerta concreta (capítulo 10). Y fíjate en el detalle elegante: tu <code>debian-lab</code> vive detrás de <em>dos</em> NAT — el de libvirt y el de casa. Las muñecas rusas de la sección anterior, otra vez.</p>
+</section>
+<section id="sec-router" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-router"><span class="header-section-number">9.6</span> El router por dentro (solo lectura)</h2>
+<p>El <code>192.168.1.1</code> de <code>ip route</code> no es solo una dirección: es una <strong>página web</strong>. Escríbela en el navegador y aparecerá la administración de tu router — usuario y contraseña suelen estar en la pegatina de la caja (y si son los de fábrica, el capítulo 10 tendrá algo que decir). Cada compañía diseña la suya, pero todas tienen los mismos cajones; tu tarea hoy es <em>encontrarlos sin tocar nada</em>:</p>
+<ul>
+<li><strong>Estado / Información</strong>: la dirección WAN (compárala con <code>curl ifconfig.me</code>), el tiempo encendido, la versión del firmware.</li>
+<li><strong>Red local / LAN</strong>: la dirección del router (<code>192.168.1.1</code>), y la configuración del <strong>servidor DHCP</strong> — el rango de direcciones que reparte (algo como <code>.2</code> a <code>.254</code>) y la duración de los préstamos.</li>
+<li><strong>Dispositivos conectados / Tabla DHCP / Lista de clientes</strong>: el tesoro del capítulo. Cada aparato con su nombre, su IP y su MAC — el censo de tu red.</li>
+<li><strong>Wi-Fi</strong>: nombre de la red (SSID), canal, tipo de cifrado.</li>
+</ul>
+<div class="aviso">
+<p><strong>△ Cuidado · Hoy se mira; el capítulo 10 se toca</strong></p>
+<p>La regla de seguridad del curso, aplicada al router: esta sesión es <strong>de solo lectura</strong>. No cambies contraseñas, no reinicies, no toques el DHCP ni la Wi-Fi — un clic de más deja a toda la casa sin internet, y no hay instantánea que restaurar. En el capítulo 10 harás cambios <em>reversibles</em>, cada uno con su procedimiento de vuelta atrás escrito antes de tocar. Hoy, si te pica el dedo: <code>ip a</code> en la terminal, que no rompe nada.</p>
+</div>
+<p>¿Y si tu router no enseña la tabla de dispositivos, o la enseña a medias? Tu propia máquina lleva un censo parcial: <code>ip neigh</code> (<em>los vecinos</em>) lista las máquinas de tu red con las que has hablado últimamente, con sus MAC:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip neigh</span>
+<span class="t-out">192.168.1.1 dev wlp3s0 lladdr 3c:84:6a:b2:10:f1 REACHABLE</span>
+<span class="t-out">192.168.1.57 dev wlp3s0 lladdr 8e:12:5b:0a:77:c3 STALE</span>
+<span class="t-out">192.168.122.15 dev virbr0 lladdr 52:54:00:9a:4e:21 REACHABLE</span></code></pre>
+<p>Y para un censo completo por tu cuenta existe <code>nmap</code>, el explorador de redes: <code>sudo apt install nmap</code> y <code>nmap -sn 192.168.1.0/24</code> toca a la puerta de las 254 direcciones y lista quién responde. Es una herramienta legítima <strong>sobre tu propia red</strong>; usarla sobre redes ajenas es, según dónde, un delito. Aquí, en casa, es tu censo de respaldo.</p>
+</section>
+<section id="sec-practica-9" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-practica-9"><span class="header-section-number">9.7</span> Práctica: el censo de casa</h2>
+<p>Cuaderno en marcha (<code>script sesion09.log</code>). Todo lo de hoy es lectura: ni un cambio en el router, ni un cambio en tu máquina.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.1 · Tu ficha de red</strong></p>
+<p>Con <code>ip a</code> e <code>ip route</code>, rellena en tu cuaderno la ficha de tu portátil: nombre de la interfaz, dirección MAC, dirección IP, máscara y puerta de enlace. Después contrástala con la <em>Información de la conexión</em> del icono de red. <em>Pista: la MAC es la línea <code>link/ether</code>; la IP y la máscara van juntas en <code>inet</code>; la puerta de enlace es el <code>default via</code> de <code>ip route</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Algo como: <code>wlp3s0</code> · <code>a4:34:d9:1c:7e:02</code> · <code>192.168.1.34</code> · <code>/24</code> · <code>192.168.1.1</code>. El icono de red dice lo mismo con otras palabras («máscara de subred 255.255.255.0» es el <code>/24</code> escrito en decimal).</p>
+<p><strong>Por qué así</strong> — Esta ficha es lo primero que te pedirá cualquiera a quien pidas ayuda con la red, y lo primero que tú pedirás cuando seas el que ayuda. Dos vías, una ficha: el principio de siempre.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.2 · Tres distancias</strong></p>
+<p>Haz <code>ping -c 5</code> a tu router, a tu <code>debian-lab</code> (arráncala si está apagada) y a <code>8.8.8.8</code>. Anota el tiempo medio de cada uno, y con la regla de «100 km por milisegundo» estima a qué distancia <em>máxima</em> está ese servidor de Google. <em>Pista: la línea final <code>rtt min/avg/max</code> te da la media sin calcular nada.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Típicamente: router 1–5 ms, VM &lt; 1 ms, <code>8.8.8.8</code> 10–30 ms. Con 15 ms de ida y vuelta, el servidor está como mucho a unos 1 500 km — y probablemente mucho más cerca, porque el tiempo incluye el trabajo de cada router del camino, no solo el vuelo de la luz.</p>
+<p><strong>Por qué así</strong> — <code>ping</code> mide; la física acota. Distinguir «el mínimo que impone <em>c</em>» del «tiempo real con sus retrasos» es exactamente lo que hace un físico con cualquier medida — y te será útil cuando un clúster remoto «vaya lento»: primero, ¿cuánto tarda el <code>ping</code>?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.3 · Las dos caras</strong></p>
+<p>Averigua tu dirección pública con <code>curl ifconfig.me</code> y compárala con la privada de <code>ip a</code>. Después, en la página del router, localiza la dirección <em>WAN</em> y comprueba que coincide con la pública. <em>Pista: si <code>curl</code> no está instalado, ya sabes: <code>sudo apt install curl</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Privada <code>192.168.1.x</code>; pública algo como <code>83.44.120.9</code>, idéntica a la WAN del router. Si la WAN del router es <em>también</em> del tipo <code>100.64.x.x</code> o <code>10.x.x.x</code>, tu compañía te tiene detrás de un NAT adicional (se llama CG-NAT), y eso condicionará el capítulo 10.</p>
+<p><strong>Por qué así</strong> — Ver las dos direcciones con tus propios ojos convierte el NAT de concepto en hecho: toda la casa, un número.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.4 · El censo</strong></p>
+<p>En la página del router, encuentra la tabla de dispositivos conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato. Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y anota los que no reconozcas. <em>Pista: si el router no la muestra o está incompleta, <code>ip neigh</code> en tu Mint es el plan B, y <code>nmap -sn</code> sobre tu <code>/24</code>, el plan C.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Una tabla de entre 5 y 20 filas es lo normal en una casa. Los aparatos «misteriosos» suelen ser el propio router, un enchufe inteligente, la consola o el móvil de alguien de visita — los tres primeros bytes de la MAC identifican al fabricante, y buscarlos en internet («MAC lookup») resuelve casi todos.</p>
+<p><strong>Por qué así</strong> — Es el ejercicio central del capítulo: saber quién vive en tu red es el principio de saber administrarla. En el capítulo 10, con esta lista, podrás hacer los cambios con criterio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.5 · La VM en el mapa</strong></p>
+<p>Dentro de <code>debian-lab</code>, ejecuta <code>ip a</code> e <code>ip route</code>. Compara con tu Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede hacer <code>ping</code> a tu Mint y a <code>8.8.8.8</code>, pero el router de casa no la tiene en su censo? <em>Pista: mira el <code>default via</code> de la VM y búscalo en el <code>ip a</code> de tu Mint.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Puerta de enlace de la VM: <code>192.168.122.1</code> — que es <code>virbr0</code>, tu propio Mint. La VM está en la red privada de libvirt; tu Mint hace de router y NAT para ella, igual que el de casa hace para tu Mint. El router de casa solo ve salir paquetes de <code>192.168.1.34</code>: la VM está escondida detrás, en un segundo NAT.</p>
+<p><strong>Por qué así</strong> — Es la figura del NAT aplicada dos veces, y la demostración de que un «router» no es una caja: es un <em>papel</em> que cualquier máquina Linux puede hacer. Tu Mint lleva haciéndolo desde el capítulo 7.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · El reto (opcional)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 9.6 · Leer máscaras</strong></p>
+<p>Sin ejecutar nada: (a) ¿cuántas máquinas caben en una red <code>/8</code> como <code>10.0.0.0/8</code>? (b) ¿Y en una <code>/30</code>? (c) <code>192.168.1.34/24</code> y <code>192.168.2.10/24</code>, ¿se hablan directamente o necesitan un router? <em>Pista: bits para máquinas = 32 − máscara; caben 2 elevado a eso, menos las dos direcciones reservadas.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>32 − 8 = 24 bits → 2²⁴ − 2 = 16 777 214 máquinas — el tamaño de una multinacional. (b) 32 − 30 = 2 bits → 4 − 2 = 2 máquinas: la red mínima, típica de un enlace punto a punto. (c) Con <code>/24</code>, sus redes son <code>192.168.1</code> y <code>192.168.2</code>: distintas → necesitan un router aunque estén en la misma mesa.</li>
+</ol>
+<p><strong>Por qué así</strong> — La máscara es aritmética binaria, que dominas de la asignatura de computación; solo cambia el vocabulario. Y la (c) es la avería de red más común del mundo: dos máquinas «al lado» que no se ven porque alguien escribió mal un número.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-9" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="sec-quiz-9"><span class="header-section-number">9.8</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap09">
+  <div class="qz"><p class="qq" data-n="1">En <code>192.168.1.34/24</code>, el <code>/24</code> indica…</p>
+    <label><input type="radio" name="z1" value="a"><span>que hay 24 máquinas en la red</span></label>
+    <label><input type="radio" name="z1" value="b"><span>que los 24 primeros bits (tres números) identifican la red</span></label>
+    <label><input type="radio" name="z1" value="c"><span>el número de saltos hasta internet</span></label>
+    <div class="fb good"><b>Correcto.</b> Red <code>192.168.1</code>, máquina <code>.34</code>, y 254 direcciones útiles para los vecinos.</div>
+    <div class="fb bad"><b>No exactamente.</b> La máscara reparte los 32 bits entre red y máquina: <code>/24</code> deja tres números para la red y uno para las máquinas.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Tu portátil sabe su dirección IP porque…</p>
+    <label><input type="radio" name="z2" value="a"><span>viene grabada de fábrica, como la MAC</span></label>
+    <label><input type="radio" name="z2" value="b"><span>el servidor DHCP del router se la prestó al conectarse</span></label>
+    <label><input type="radio" name="z2" value="c"><span>la eligió al azar</span></label>
+    <div class="fb good"><b>Correcto.</b> Un préstamo con caducidad, junto con la máscara, la puerta de enlace y el DNS. Lo grabado de fábrica es la MAC.</div>
+    <div class="fb bad"><b>No exactamente.</b> La MAC es de fábrica; la IP es un préstamo del DHCP del router — por eso <code>ip a</code> la marca como <code>dynamic</code>.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">La «puerta de enlace» (<code>default via</code> en <code>ip route</code>) es…</p>
+    <label><input type="radio" name="z3" value="a"><span>la máquina a la que se entregan los paquetes que van a otras redes</span></label>
+    <label><input type="radio" name="z3" value="b"><span>el servidor de nombres</span></label>
+    <label><input type="radio" name="z3" value="c"><span>tu propia dirección</span></label>
+    <div class="fb good"><b>Correcto.</b> En casa, el router. Misma red → directo; otra red → a la puerta de enlace.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es el router: el intermediario para todo lo que no está en tu propia red. Los nombres son otro asunto (capítulo 10).</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">¿Cuál de estas es una dirección privada?</p>
+    <label><input type="radio" name="z4" value="a"><span><code>8.8.8.8</code></span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>10.20.30.40</code></span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>83.44.120.9</code></span></label>
+    <div class="fb good"><b>Correcto.</b> <code>10.x.x.x</code>, <code>192.168.x.x</code> y <code>172.16–31.x.x</code> son privadas: repetidas en millones de redes, invisibles desde internet.</div>
+    <div class="fb bad"><b>No exactamente.</b> Las privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>. Las otras dos son públicas: únicas en el mundo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Gracias al NAT del router…</p>
+    <label><input type="radio" name="z5" value="a"><span>cada aparato de casa tiene su propia dirección pública</span></label>
+    <label><input type="radio" name="z5" value="b"><span>toda la casa sale con una sola dirección pública, y desde fuera nadie entra sin invitación</span></label>
+    <label><input type="radio" name="z5" value="c"><span>internet va más rápido</span></label>
+    <div class="fb good"><b>Correcto.</b> Traducción de direcciones: una pública para todos. La contrapartida — abrir puertas cuando sí quieres que entren — es del capítulo 10.</div>
+    <div class="fb bad"><b>No exactamente.</b> El NAT es justo lo contrario de «una pública por aparato»: una para toda la casa, con el router traduciendo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Un <code>ping</code> de 150 ms a un servidor te dice que…</p>
+    <label><input type="radio" name="z6" value="a"><span>tu Wi-Fi está estropeada</span></label>
+    <label><input type="radio" name="z6" value="b"><span>el servidor está, como poco, a miles de kilómetros: ninguna mejora lo bajará mucho</span></label>
+    <label><input type="radio" name="z6" value="c"><span>el servidor está apagado</span></label>
+    <div class="fb good"><b>Correcto.</b> Ida y vuelta a 200 000 km/s: 150 ms es del orden de un océano. La física impone un mínimo que ninguna tarifa mejora.</div>
+    <div class="fb bad"><b>No exactamente.</b> El servidor responde (si no, no habría tiempo). 150 ms de ida y vuelta es distancia: la luz en fibra no da para más.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"b", z3:"a", z4:"b", z5:"b", z6:"b"};
+  document.querySelectorAll("#quiz-cap09 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 9.8)</strong> — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 b · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Hoy has hablado con números; el capítulo 10 les pone nombre: qué pasa exactamente al escribir <code>debian.org</code> — el DNS, la guía telefónica de internet —, el camino paquete a paquete hasta la universidad con <code>traceroute</code>, por qué SSH es el puerto 22 y la web el 443, y los primeros cambios <em>reversibles</em> en el router, con su vuelta atrás escrita antes de tocar. Guarda <code>sesion09.log</code>.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 9 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion09.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap08.html" class="pagination-link" aria-label="Instalar Linux de verdad">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Instalar Linux de verdad</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
