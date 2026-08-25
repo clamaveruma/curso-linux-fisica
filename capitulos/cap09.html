@@ -328,7 +328,65 @@ Figura&nbsp;9.1: La anatomía de tu dirección. Los tres primeros números son e
 </figcaption>
 </figure>
 </div>
-<p>Con <code>/24</code>, los 24 primeros bits — tres números — son la red: <code>192.168.1</code>. Queda un byte para las máquinas: 254 direcciones útiles (la <code>.0</code> nombra a la red y la <code>.255</code> es la de «todos a la vez»). Y la regla que lo explica todo: <strong>dos máquinas de la misma red se hablan directamente; para llegar a otra red hace falta un intermediario</strong>, el <strong>router</strong>, al que tu máquina llama <em>puerta de enlace</em> (<em>gateway</em>). <code>ip route</code> te dice cuál es la tuya:</p>
+<p>Con <code>/24</code>, los 24 primeros bits — tres números — son la red: <code>192.168.1</code>. Queda un byte para las máquinas: 254 direcciones útiles (la <code>.0</code> nombra a la red y la <code>.255</code> es la de «todos a la vez»).</p>
+<p>La misma máscara se escribe de tres maneras, y te encontrarás las tres: la <strong>barra</strong> (<code>/24</code>) que usa <code>ip a</code>; la <strong>decimal con puntos</strong> (<code>255.255.255.0</code>) que enseñan el icono de red y el router; y la <strong>binaria</strong>, que es lo que la máquina usa de verdad — unos donde hay red, ceros donde hay máquina. Basta con escribirla en binario una vez para que las otras dos dejen de ser arbitrarias:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 30%">
+<col style="width: 13%">
+<col style="width: 26%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Barra</th>
+<th>Decimal con puntos</th>
+<th>Binario</th>
+<th>Máquinas útiles</th>
+<th>Típico de…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/24</code></td>
+<td><code>255.255.255.0</code></td>
+<td><code>11111111.11111111.11111111.00000000</code></td>
+<td>254</td>
+<td>tu casa, un laboratorio</td>
+</tr>
+<tr class="even">
+<td><code>/16</code></td>
+<td><code>255.255.0.0</code></td>
+<td><code>11111111.11111111.00000000.00000000</code></td>
+<td>65 534</td>
+<td>un campus</td>
+</tr>
+<tr class="odd">
+<td><code>/8</code></td>
+<td><code>255.0.0.0</code></td>
+<td><code>11111111.00000000.00000000.00000000</code></td>
+<td>16 777 214</td>
+<td>la red <code>10.x.x.x</code> de una multinacional</td>
+</tr>
+<tr class="even">
+<td><code>/25</code></td>
+<td><code>255.255.255.128</code></td>
+<td><code>11111111.11111111.11111111.10000000</code></td>
+<td>126</td>
+<td>media casa: la máscara ya no cae en un punto</td>
+</tr>
+<tr class="odd">
+<td><code>/30</code></td>
+<td><code>255.255.255.252</code></td>
+<td><code>11111111.11111111.11111111.11111100</code></td>
+<td>2</td>
+<td>un enlace entre dos routers</td>
+</tr>
+</tbody>
+</table>
+<p>Dos ejemplos leídos del todo. <code>192.168.1.34/24</code>: máscara <code>255.255.255.0</code>, en binario 24 unos y 8 ceros; red <code>192.168.1.0</code>, máquina <code>34</code>, vecinos del <code>.1</code> al <code>.254</code>. Y <code>10.20.30.40/8</code>: máscara <code>255.0.0.0</code>, 8 unos y 24 ceros; red <code>10.0.0.0</code>, y los otros tres números — <code>20.30.40</code> — identifican la máquina entre casi 17 millones. El <code>/25</code> es el que delata a quien no ha visto el binario: el <code>128</code> de <code>255.255.255.128</code> es simplemente <code>10000000</code> — un bit más de red, robado a las máquinas.</p>
+<p>Y la regla que lo explica todo: <strong>dos máquinas de la misma red se hablan directamente; para llegar a otra red hace falta un intermediario</strong>, el <strong>router</strong>, al que tu máquina llama <em>puerta de enlace</em> (<em>gateway</em>). <code>ip route</code> te dice cuál es la tuya:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip route</span>
 <span class="t-out">default via 192.168.1.1 dev wlp3s0 proto dhcp metric 600</span>
 <span class="t-out">192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.34</span>
