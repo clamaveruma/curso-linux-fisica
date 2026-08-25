@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Tu primera máquina virtual – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../capitulos/cap06.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f905219a99b525b35e5033ffd9a85ff1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap07.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-que-es-vm" id="toc-sec-que-es-vm" class="nav-link active" data-scroll-target="#sec-que-es-vm"><span class="header-section-number">7.1</span> Un ordenador dentro del ordenador</a></li>
+  <li><a href="#sec-instalar-taller" id="toc-sec-instalar-taller" class="nav-link" data-scroll-target="#sec-instalar-taller"><span class="header-section-number">7.2</span> Montar el taller</a></li>
+  <li><a href="#sec-iso" id="toc-sec-iso" class="nav-link" data-scroll-target="#sec-iso"><span class="header-section-number">7.3</span> La imagen de instalación</a></li>
+  <li><a href="#sec-crear-vm" id="toc-sec-crear-vm" class="nav-link" data-scroll-target="#sec-crear-vm"><span class="header-section-number">7.4</span> Crear la máquina</a></li>
+  <li><a href="#sec-instantaneas" id="toc-sec-instantaneas" class="nav-link" data-scroll-target="#sec-instantaneas"><span class="header-section-number">7.5</span> El superpoder: instantáneas</a></li>
+  <li><a href="#sec-redes-vm" id="toc-sec-redes-vm" class="nav-link" data-scroll-target="#sec-redes-vm"><span class="header-section-number">7.6</span> Dos formas de conectarla: NAT y puente</a></li>
+  <li><a href="#sec-vm-remota" id="toc-sec-vm-remota" class="nav-link" data-scroll-target="#sec-vm-remota"><span class="header-section-number">7.7</span> Qué te dan cuando te dan «una VM»</a></li>
+  <li><a href="#sec-practica-7" id="toc-sec-practica-7" class="nav-link" data-scroll-target="#sec-practica-7"><span class="header-section-number">7.8</span> Práctica: el taller en marcha</a></li>
+  <li><a href="#sec-quiz-7" id="toc-sec-quiz-7" class="nav-link" data-scroll-target="#sec-quiz-7"><span class="header-section-number">7.9</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap07" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Empieza el bloque C, y con él la parte del curso en la que por fin está permitido romper cosas. Hoy construyes un ordenador de mentira dentro de tu ordenador de verdad — con su procesador, su memoria, su disco y su cable de red, todos fingidos — y conoces el superpoder que la vida real no tiene: guardar el estado de una máquina y volver a él cuando algo salga mal. Es el laboratorio de riesgo cero donde harás la instalación del capítulo 8 y los experimentos de red de los bloques D y E.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 1–6</strong> · máquina: <strong>tu Linux de diario</strong> (8 GB de RAM y 25 GB libres recomendados)</p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Qué es una máquina virtual, qué es un hipervisor, y qué se virtualiza exactamente: CPU, memoria, disco y red.</li>
+<li>Instalar el taller de virtualización de Linux — KVM, QEMU, libvirt y <code>virt-manager</code> — con un solo <code>apt</code>.</li>
+<li>Descargar la imagen de instalación de Debian y comprobar que no viene corrupta.</li>
+<li>Crear una máquina virtual desde cero, arrancarla y apagarla sin miedo.</li>
+<li>Usar instantáneas: guardar el estado de la máquina y restaurarlo en segundos.</li>
+<li>Distinguir las dos formas de conectar la VM a la red — NAT y puente — y por qué importarán en los bloques D y E.</li>
+<li>Entender qué te están dando cuando te asignen «una máquina virtual» en la universidad o en una nube.</li>
+</ul>
+</div>
+<section id="sec-que-es-vm" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-que-es-vm"><span class="header-section-number">7.1</span> Un ordenador dentro del ordenador</h2>
+<p>Una <strong>máquina virtual</strong> (VM) es un ordenador completo que existe solo como software: arranca, instala un sistema operativo, se conecta a la red, se cuelga y se reinicia — todo dentro de una ventana de tu escritorio. El programa que hace el truco es el <strong>hipervisor</strong>: toma el hardware real de tu máquina — el <strong>anfitrión</strong> (<em>host</em>) — y le presenta al sistema invitado — el <strong>huésped</strong> (<em>guest</em>) — un hardware de mentira que este cree suyo.</p>
+<div id="fig-hipervisor" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del anfitrión con su hardware real, la capa del hipervisor y la máquina virtual con CPU, memoria, disco y red virtuales">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hipervisor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap07/fig-hipervisor.svg" class="img-fluid figure-img" alt="Esquema del anfitrión con su hardware real, la capa del hipervisor y la máquina virtual con CPU, memoria, disco y red virtuales">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hipervisor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.1: Qué se virtualiza. El detalle que más sorprende: el «disco duro» de la VM es un fichero normal en tu disco.
+</figcaption>
+</figure>
+</div>
+<p>Cuatro cosas se fingen. <strong>CPU</strong>: la VM recibe un par de núcleos prestados — no simulados: el procesador real ejecuta sus instrucciones directamente, por eso va rápido. <strong>Memoria</strong>: un trozo de tu RAM reservado para ella. <strong>Disco</strong>: un fichero en tu casa que la VM cree que es un disco físico — con sus particiones, su sistema de ficheros, su GRUB, todo lo del capítulo 6 dentro. <strong>Red</strong>: una tarjeta de red virtual, conectada a un cable virtual que llega hasta tu conexión real. Mientras tanto tu escritorio sigue funcionando al lado: la VM es una ventana más.</p>
+<p>En Linux, el taller de virtualización viene de serie y se llama por sus piezas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 37%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pieza</th>
+<th>Qué hace</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>KVM</strong></td>
+<td>el hipervisor, dentro del propio kernel: presta la CPU real</td>
+<td>el motor</td>
+</tr>
+<tr class="even">
+<td><strong>QEMU</strong></td>
+<td>finge los dispositivos: disco, red, pantalla</td>
+<td>la carrocería</td>
+</tr>
+<tr class="odd">
+<td><strong>libvirt</strong></td>
+<td>el gestor: define, arranca, guarda y vigila las máquinas</td>
+<td>el cuadro de mandos</td>
+</tr>
+<tr class="even">
+<td><strong>virt-manager</strong></td>
+<td>la ventana gráfica sobre libvirt (y <code>virsh</code>, su CLI)</td>
+<td>el volante</td>
+</tr>
+</tbody>
+</table>
+<p>Nada que descargar de una web ajena, nada que se rompa con la próxima actualización del kernel: KVM <em>es</em> parte de Linux. Y es exactamente lo que hay debajo de la mayoría de las nubes del mundo — dato que cobrará sentido al final del capítulo.</p>
+<div class="historia">
+<p><strong>◷ Historia · Ordenadores de mentira desde 1967</strong></p>
+<p>La virtualización es más vieja que Unix. En 1967, en el centro de investigación de IBM en Cambridge, un equipo escribió CP-67 para el mainframe System/360-67: un sistema que en vez de repartir <em>tiempo</em> de un ordenador entre muchos usuarios — el tiempo compartido del capítulo 4 — le daba a cada uno un ordenador <em>entero</em> de mentira, con su propio sistema operativo dentro. La idea funcionó tan bien que IBM la vendió durante décadas como VM/370. Luego el PC la olvidó casi treinta años: resucitó en 1999 con VMware y en 2007 entró en el kernel de Linux con el nombre de KVM. Hoy, cuando alquilas «un servidor en la nube», estás alquilando una máquina de mentira exactamente en el sentido de 1967.</p>
+</div>
+<div id="fig-360" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Operador sentado ante la consola de un mainframe IBM System/360-67">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-360-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap07/ibm-360-67-michigan.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Operador sentado ante la consola de un mainframe IBM System/360-67">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-360-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.2: Un IBM System/360 modelo 67 en la Universidad de Michigan, hacia 1968: la máquina para la que se escribió el primer hipervisor. Todo lo que hagas hoy en una ventana ocupaba esta sala. <em>Foto: Dave Mills, dominio público, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-instalar-taller" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-instalar-taller"><span class="header-section-number">7.2</span> Montar el taller</h2>
+<p>Primero, comprueba que tu procesador sabe virtualizar — casi todos los de la última década saben, pero preguntar cuesta un segundo, y lo haces con las herramientas de los capítulos 3 y 4:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">grep -c -E 'vmx|svm' /proc/cpuinfo</span>
+<span class="t-out">8</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lscpu | grep -i virtualiz</span>
+<span class="t-out">Virtualización:                       VT-x</span></code></pre>
+<p>Un número mayor que cero (<code>vmx</code> es Intel, <code>svm</code> es AMD) significa que sí. Si saliera 0, la virtualización suele estar apagada en el UEFI del capítulo 6: se activa allí, en la opción llamada <em>VT-x</em>, <em>AMD-V</em> o <em>SVM Mode</em>. Ahora el taller entero, con el gesto del capítulo 5:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install virt-manager</span>
+<span class="t-out">[sudo] contraseña de marcos:</span>
+<span class="t-out">Se instalarán los siguientes paquetes NUEVOS:</span>
+<span class="t-out">  libvirt-daemon-system qemu-system-x86 virt-manager virt-viewer ...</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo usermod -aG libvirt marcos</span></code></pre>
+<p>La segunda orden te añade al grupo <code>libvirt</code> — capítulo 4: los grupos son bolsas de permisos, y este es el que autoriza a manejar máquinas virtuales sin <code>sudo</code>. Como con todo cambio de grupos, hace efecto al <strong>cerrar sesión y volver a entrar</strong>. Después, la comprobación de que todo respira:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">groups</span>
+<span class="t-out">marcos adm cdrom sudo dip plugdev libvirt</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh list --all</span>
+<span class="t-out"> Id   Nombre   Estado</span>
+<span class="t-out">------------------------</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh net-list --all</span>
+<span class="t-out"> Nombre    Estado   Inicio automático   Persistente</span>
+<span class="t-out">----------------------------------------------------</span>
+<span class="t-out"> default   activo   sí                  sí</span></code></pre>
+<p><code>virsh</code> es la cara CLI de libvirt — el mismo cuadro de mandos que <code>virt-manager</code> enseña con ventanas. Una lista vacía de máquinas y una red <code>default</code> activa: el taller está montado.</p>
+<div class="truco">
+<p><strong>✚ Truco · Si tu anfitrión es Windows o macOS</strong></p>
+<p>KVM vive en el kernel de Linux, así que en otros sistemas no existe. Su equivalente allí es <strong>VirtualBox</strong>, gratuito y muy parecido en la práctica: las mismas ideas de este capítulo — hipervisor, disco como fichero, instantáneas, NAT frente a puente — con otros nombres en los menús. Si sigues el curso desde el anexo «Vengo de Windows», lee este capítulo con VirtualBox abierto al lado: te reconocerás en cada paso.</p>
+</div>
+</section>
+<section id="sec-iso" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-iso"><span class="header-section-number">7.3</span> La imagen de instalación</h2>
+<p>Para instalar un sistema en una máquina — real o virtual — hace falta el medio de instalación. Antes era un CD; hoy es un fichero <strong>ISO</strong>: la imagen exacta, byte a byte, de aquel disco. En un PC real se graba en un pendrive (capítulo 8); en una VM, el fichero <em>es</em> el disco, y se «inserta» sin más.</p>
+<p>Descarga la imagen <em>netinst</em> de Debian desde <a href="https://www.debian.org/distrib/">debian.org</a> — unos 700 MB: lo mínimo para arrancar el instalador, que después descargará el resto de la red — y guárdala en <code>~/Descargas</code>. Y antes de usarla, un hábito de físico: comprueba que llegó intacta. Junto a la ISO, Debian publica un fichero <code>SHA256SUMS</code> con la <strong>huella digital</strong> de cada imagen — un número que cambia si cambia un solo bit del fichero:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sha256sum debian-13.1.0-amd64-netinst.iso</span>
+<span class="t-out">9b6f1e0c…  debian-13.1.0-amd64-netinst.iso</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">grep netinst SHA256SUMS</span>
+<span class="t-out">9b6f1e0c…  debian-13.1.0-amd64-netinst.iso</span></code></pre>
+<p>Si las dos huellas coinciden, el fichero es exactamente el que Debian publicó (el número de versión será el que toque cuando lo descargues). Si no, se descarga de nuevo — nunca se instala desde una imagen sospechosa. Es la misma lógica que verificar la calibración antes de medir.</p>
+</section>
+<section id="sec-crear-vm" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-crear-vm"><span class="header-section-number">7.4</span> Crear la máquina</h2>
+<p>Abre <code>virt-manager</code> (menú → Administración → Gestor de máquinas virtuales, o tecléalo en la terminal). La ventana muestra la conexión <code>QEMU/KVM</code> con la lista vacía. Pulsa <strong>Archivo → Nueva máquina virtual</strong> y sigue el asistente — es un formulario de cinco pasos, y cada uno es una decisión que ya entiendes:</p>
+<ol type="1">
+<li><strong>Medio de instalación local (imagen ISO)</strong> → <em>Explorar</em> → <em>Buscar local</em> → tu <code>debian-13.x-amd64-netinst.iso</code>. Comprobará solo que es Debian.</li>
+<li><strong>Memoria y CPU</strong>: 4096 MB y 2 CPU es un buen taller. Regla: nunca más de la mitad de tu RAM real — la otra mitad la necesita tu Mint para seguir vivo al lado.</li>
+<li><strong>Disco</strong>: 20 GB. Es el fichero de la figura. Y un detalle elegante: el fichero <em>crece según se usa</em> — hoy ocupará unos cientos de MB aunque diga 20 GB.</li>
+<li><strong>Nombre</strong>: <code>debian-lab</code>. Sin espacios (capítulo 1: los espacios importan). <strong>Selección de red</strong>: <em>Red virtual ‘default’: NAT</em> — la opción por defecto, y la correcta hoy.</li>
+<li><strong>Finalizar.</strong> La máquina arranca sola: verás en su ventana una pantalla azul con el menú del instalador de Debian.</li>
+</ol>
+<p><strong>Y aquí paras.</strong> La instalación es la sesión del capítulo 8 entera; hoy solo querías ver la máquina <em>nacer</em>. Apágala desde el menú de su ventana: <strong>Máquina virtual → Apagar → Forzar apagado</strong>. En un PC real, cortar la corriente a un instalador a medias sería una barbaridad; aquí no hay nada instalado que perder — primer aviso de que las reglas dentro de la VM son otras.</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh list --all</span>
+<span class="t-out"> Id   Nombre       Estado</span>
+<span class="t-out">----------------------------</span>
+<span class="t-out"> -    debian-lab   apagado</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ls -lh /var/lib/libvirt/images/</span>
+<span class="t-out">-rw------- 1 root root 20G ago 25 12:40 debian-lab.qcow2</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo du -h /var/lib/libvirt/images/debian-lab.qcow2</span>
+<span class="t-out">197M    /var/lib/libvirt/images/debian-lab.qcow2</span></code></pre>
+<p>Ahí está el ordenador entero, en un fichero de <code>/var</code> — el directorio de «lo que varía», capítulo 4 — que dice 20 GB pero ocupa 197 MB de verdad. Ese <code>du</code> frente a <code>ls -l</code> es el capítulo 6 enseñándote tamaño nominal frente a espacio real: el fichero es <strong>disperso</strong> (<em>sparse</em>), y solo consume disco a medida que la VM escribe en él.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · Lo que vale y lo que no vale en la máquina de mentira</strong></p>
+<p>Dentro de la VM, todo vale: particionar, formatear, borrar <code>/etc</code>, reinstalar — para eso está. Pero dos cosas siguen siendo reales. Su <strong>consumo</strong>: mientras corre, se lleva la RAM y los núcleos que le diste (por eso se apaga cuando no se usa). Y su <strong>fichero</strong>: borrarlo es borrar la máquina; si un día quieres deshacerte de ella, se hace desde virt-manager (<em>Eliminar</em>, marcando borrar el disco) — no con un <code>rm</code> a ciegas en <code>/var/lib/libvirt/images</code>. Y la ISO no es la máquina: es el CD de instalación; puede borrarse cuando ya no la necesites.</p>
+</div>
+</section>
+<section id="sec-instantaneas" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="sec-instantaneas"><span class="header-section-number">7.5</span> El superpoder: instantáneas</h2>
+<p>Una <strong>instantánea</strong> (<em>snapshot</em>) guarda el estado completo de la máquina virtual — su disco, y si está encendida, también su memoria — con un nombre. Después puedes hacer lo que quieras y <strong>volver a ese estado exacto en segundos</strong>. Es el «deshacer» que un ordenador real no tiene, y cambia por completo cómo se aprende: el miedo a romper desaparece, porque romper cuesta cinco segundos de arreglar.</p>
+<div id="fig-instantaneas" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Línea de tiempo de una máquina virtual con una instantánea guardada, experimentos, una rotura y la vuelta atrás a la instantánea">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-instantaneas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap07/fig-instantaneas.svg" class="img-fluid figure-img" alt="Línea de tiempo de una máquina virtual con una instantánea guardada, experimentos, una rotura y la vuelta atrás a la instantánea">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-instantaneas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.3: El flujo que usarás durante todo el bloque C: instantánea del estado bueno, experimentar, romper, restaurar.
+</figcaption>
+</figure>
+</div>
+<p>En virt-manager: abre la ventana de la máquina, <strong>Ver → Instantáneas</strong>, y el botón <strong>+</strong> crea una nueva con el nombre que le pongas. Para volver: selecciónala y pulsa <strong>Ejecutar instantánea seleccionada</strong>. En la CLI es igual de sencillo:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh snapshot-create-as debian-lab vm-recien-creada</span>
+<span class="t-out">Instantánea de dominio vm-recien-creada creada</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh snapshot-list debian-lab</span>
+<span class="t-out"> Nombre              Hora de creación             Estado</span>
+<span class="t-out">--------------------------------------------------------</span>
+<span class="t-out"> vm-recien-creada    2026-08-25 12:52:10 +0200    shutoff</span></code></pre>
+<p>El protocolo del curso, a partir del capítulo 8: en cuanto Debian esté instalado y funcionando, instantánea «recién instalado». Cada experimento arriesgado, instantánea antes. Todo lo que se rompa, se restaura. Nunca más reinstalar por un error — salvo cuando reinstalar sea el ejercicio.</p>
+</section>
+<section id="sec-redes-vm" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="sec-redes-vm"><span class="header-section-number">7.6</span> Dos formas de conectarla: NAT y puente</h2>
+<p>Al crear la máquina elegiste <em>Red virtual ‘default’: NAT</em>. Conviene entender qué elegiste, porque los bloques D y E se apoyan en ello.</p>
+<div id="fig-redes-vm" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparación entre red NAT, donde la máquina virtual se esconde tras el anfitrión, y red puente, donde recibe su propia dirección del router">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-redes-vm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap07/fig-redes-vm.svg" class="img-fluid figure-img" alt="Comparación entre red NAT, donde la máquina virtual se esconde tras el anfitrión, y red puente, donde recibe su propia dirección del router">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-redes-vm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando quieras que la VM sea un aparato más de tu casa.
+</figcaption>
+</figure>
+</div>
+<p>Con <strong>NAT</strong>, libvirt monta una red privada minúscula dentro de tu máquina — la <code>default</code>, con direcciones <code>192.168.122.x</code> — y hace de router entre ella y el mundo: la VM sale a internet sin configurar nada, tu Mint puede hablar con ella (lo harás por SSH en el capítulo 11), y el resto de la casa ni sabe que existe. Con un <strong>puente</strong> (<em>bridge</em>), la VM se conecta directamente a tu red doméstica y el router de casa le da una dirección como a cualquier portátil o móvil: aparecería en el censo de dispositivos del bloque D. Es más «real» y también más delicado — en portátiles con Wi-Fi da guerra —, así que el curso trabaja en NAT y deja el puente como experimento opcional. Puedes ver la red <code>default</code> desde el anfitrión, con un comando que será el protagonista del capítulo 9:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip a | grep virbr0</span>
+<span class="t-out">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 ...</span>
+<span class="t-out">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span></code></pre>
+<p>Tu Mint tiene ahora una segunda tarjeta de red — virtual — con la dirección <code>192.168.122.1</code>: es el router de la red de mentira. Guarda este dato; cuando en el capítulo 9 hablemos de direcciones y máscaras, ya tendrás una red propia sobre la que experimentar.</p>
+</section>
+<section id="sec-vm-remota" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="sec-vm-remota"><span class="header-section-number">7.7</span> Qué te dan cuando te dan «una VM»</h2>
+<p>La escena que el diseño de este curso tenía en mente: el grupo de investigación o el servicio de informática te dice «te hemos creado una máquina virtual». Ahora sabes exactamente qué es: lo mismo que acabas de hacer, sobre un anfitrión grande de la universidad o de una nube, con KVM o un primo suyo debajo. Te darán una dirección, un usuario y probablemente una clave SSH (capítulo 11), y no verás ninguna ventana con su pantalla: la máquina existe, pero solo hablarás con ella por la red. Los núcleos y la memoria que tiene son «prestados» como los de tu <code>debian-lab</code>, y compartes el anfitrión con otros — el tiempo compartido de 1967, otra vez. Y si te hablan de <strong>contenedores</strong> (Docker y compañía): son el primo ligero — no fingen un ordenador entero, comparten el kernel del anfitrión y aíslan solo un programa. Más rápidos, menos independientes. Vocabulario para reconocerlos; el curso se queda con las máquinas virtuales.</p>
+<div class="truco">
+<p><strong>✚ Truco · Ventanas o comandos, la misma máquina</strong></p>
+<p><code>virt-manager</code> y <code>virsh</code> son dos caras de libvirt: todo lo que haces con clics tiene su orden. Para crear y explorar, la ventana es más amable; para el servidor sin escritorio del bloque E — donde gestionarás máquinas solo por SSH — <code>virsh</code> es la única cara que hay. El principio de siempre: aprende el concepto una vez, y elige la puerta según el momento.</p>
+</div>
+</section>
+<section id="sec-practica-7" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="sec-practica-7"><span class="header-section-number">7.8</span> Práctica: el taller en marcha</h2>
+<p>Cuaderno en marcha (<code>script sesion07.log</code>). Hoy instalas software y creas tu laboratorio — nada de lo que hagas toca tu sistema más allá de instalar paquetes y crear un fichero grande en <code>/var</code>.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.1 · ¿Sabe virtualizar tu procesador?</strong></p>
+<p>Comprueba de dos formas que tu CPU tiene soporte de virtualización, y anota en el cuaderno cuál de las dos tecnologías tiene (Intel o AMD). <em>Pista: <code>/proc/cpuinfo</code> con <code>grep -c</code>, y <code>lscpu</code> con <code>grep -i</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>grep -c -E 'vmx|svm' /proc/cpuinfo</code> (un número &gt; 0) y <code>lscpu | grep -i virtualiz</code> (<code>VT-x</code> para Intel, <code>AMD-V</code> para AMD). Si sale 0 o vacío, la opción está apagada en el UEFI: reinicia, entra en la configuración (capítulo 6) y actívala.</p>
+<p><strong>Por qué así</strong> — Dos instrumentos distintos para la misma medida, como siempre. Y fíjate en <code>/proc</code>: el capítulo 4 te enseñó que ahí el kernel te cuenta lo que sabe del hardware — hoy le preguntas por una capacidad concreta de la CPU.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.2 · Montar el taller</strong></p>
+<p>Instala <code>virt-manager</code>, añádete al grupo <code>libvirt</code>, cierra y vuelve a abrir sesión, y comprueba con <code>groups</code> y <code>virsh list --all</code> que estás dentro y que el taller responde. <em>Pista: <code>apt install</code> resuelve las dependencias solo; <code>usermod -aG</code> añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo apt install virt-manager</code>, <code>sudo usermod -aG libvirt $USER</code>, cerrar sesión y entrar. <code>groups</code> debe listar <code>libvirt</code>; <code>virsh list --all</code> devuelve una tabla vacía sin quejarse. Si protesta con «permiso denegado» hablando de un <em>socket</em>, es que no reiniciaste la sesión.</p>
+<p><strong>Por qué así</strong> — Un paquete, un grupo, una comprobación: el capítulo 5 y el 4 trabajando juntos. <code>$USER</code> es la variable de entorno del capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.3 · La imagen, verificada</strong></p>
+<p>Descarga la ISO <em>netinst</em> de Debian para amd64 y su fichero <code>SHA256SUMS</code>, y comprueba que la huella coincide. <em>Pista: <code>sha256sum fichero.iso</code> calcula; <code>grep netinst SHA256SUMS</code> te aísla la línea correcta para compararla a ojo — o deja que <code>sha256sum -c SHA256SUMS 2&gt; /dev/null | grep netinst</code> lo compare por ti.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Las dos huellas deben ser idénticas carácter a carácter. Con <code>sha256sum -c</code>, la línea buena dice <code>debian-13.x-amd64-netinst.iso: La suma coincide</code>; el <code>2&gt; /dev/null</code> silencia las quejas por las otras imágenes del fichero que no descargaste.</p>
+<p><strong>Por qué así</strong> — Nunca se instala desde una imagen sin verificar: una descarga cortada o manipulada produce instalaciones que fallan de formas misteriosas. El <code>2&gt;</code> del capítulo 3 y el <code>grep</code> de siempre te dan la comprobación en una línea.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.4 · Nace <code>debian-lab</code></strong></p>
+<p>Crea la máquina con el asistente (4 GB, 2 CPU, 20 GB, red NAT), deja que arranque hasta el menú del instalador, mírala un minuto — y apágala con <em>Forzar apagado</em>. Comprueba con <code>virsh</code> que existe y está apagada. <em>Pista: el asistente son cinco pantallas; si algo no encaja con el capítulo, avanza igual — cualquier decisión se cambia después en la configuración de la máquina.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>virsh list --all</code> → <code>debian-lab   apagado</code>. Si la máquina no arranca con un error sobre KVM, vuelve al 7.1: la virtualización está apagada en el UEFI. Si el asistente no encuentra la ISO, pulsa <em>Buscar local</em> y navega hasta <code>~/Descargas</code>.</p>
+<p><strong>Por qué así</strong> — Acabas de hacer, con clics, exactamente lo que el servicio de informática hace cuando te «da una VM». La única diferencia es la escala del anfitrión.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.5 · Un disco de 20 GB que pesa 200 MB</strong></p>
+<p>Localiza el fichero de disco de tu máquina y mide su tamaño de las dos maneras del capítulo 6: el nominal (<code>ls -lh</code>) y el real (<code>du -h</code>). Explica en tu cuaderno la diferencia. <em>Pista: los discos de libvirt viven en <code>/var/lib/libvirt/images/</code>, y ese directorio es de root.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo ls -lh /var/lib/libvirt/images/</code> dice 20G; <code>sudo du -h /var/lib/libvirt/images/debian-lab.qcow2</code> dice unos cientos de MB. El fichero es <em>disperso</em>: reserva 20 GB de tamaño lógico pero solo ocupa lo que la VM ha escrito de verdad. Crecerá durante la instalación del capítulo 8.</p>
+<p><strong>Por qué así</strong> — Tamaño nominal frente a ocupación real: un físico distingue una capacidad de una medida sin pestañear. Y <code>sudo</code> porque el directorio es del sistema (<code>/var</code>, capítulo 4): las máquinas de todos los usuarios viven ahí.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.6 · La primera instantánea</strong></p>
+<p>Con la máquina apagada, crea una instantánea llamada <code>vm-recien-creada</code> desde virt-manager, y compruébala desde la terminal. Después, borra esa instantánea (será inútil en cuanto instales Debian) y verifica que desapareció. <em>Pista: <code>virsh snapshot-list debian-lab</code> lista; <code>virsh snapshot-delete debian-lab NOMBRE</code> borra.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En virt-manager: ventana de la máquina → Ver → Instantáneas → <strong>+</strong>. En terminal: <code>virsh snapshot-list debian-lab</code> la muestra; <code>virsh snapshot-delete debian-lab vm-recien-creada</code> la elimina, y la lista vuelve a estar vacía.</p>
+<p><strong>Por qué así</strong> — Has recorrido el ciclo completo — crear, comprobar, borrar — con las dos caras de libvirt. El que importa, «recién instalado», lo harás al final del capítulo 8, y será el punto de retorno de todo el resto del curso.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · Para curiosos (opcional)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.7 · La máquina, por dentro de libvirt</strong></p>
+<p>libvirt guarda la definición de cada máquina como texto. Con <code>virsh dumpxml debian-lab</code> y las tuberías esenciales del capítulo 3, averigua cuánta memoria tiene asignada, cuántas CPU, y dónde está su disco. <em>Pista: <code>| grep -i memory</code>, <code>| grep vcpu</code>, <code>| grep -i qcow2</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>virsh dumpxml debian-lab | grep -i memory</code> → <code>&lt;memory unit='KiB'&gt;4194304&lt;/memory&gt;</code> (4 GB en KiB); <code>| grep vcpu</code> → <code>2</code>; <code>| grep qcow2</code> → la ruta en <code>/var/lib/libvirt/images/</code>.</p>
+<p><strong>Por qué así</strong> — «Todo es un fichero de texto» llega hasta aquí: tu ordenador de mentira es, en última instancia, un documento XML que describe su hardware. Cambiar la RAM de la máquina es editar un número — y <code>grep</code> es tu lupa para encontrarlo. Cierra el cuaderno: <code>exit</code>, <code>sesion07.log</code> a la colección.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-7" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="sec-quiz-7"><span class="header-section-number">7.9</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap07">
+  <div class="qz"><p class="qq" data-n="1">El hipervisor es…</p>
+    <label><input type="radio" name="z1" value="a"><span>el sistema operativo que instalas dentro de la VM</span></label>
+    <label><input type="radio" name="z1" value="b"><span>el programa que reparte el hardware real y presenta hardware de mentira al huésped</span></label>
+    <label><input type="radio" name="z1" value="c"><span>la ventana donde se ve la máquina virtual</span></label>
+    <div class="fb good"><b>Correcto.</b> En Linux se llama KVM y vive en el kernel; la ventana es virt-manager, y lo que instalas dentro es el huésped.</div>
+    <div class="fb bad"><b>No exactamente.</b> El hipervisor es la capa intermedia: toma el hardware del anfitrión y finge el de la VM. Vuelve a la figura de las capas.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">El disco duro de tu máquina virtual es…</p>
+    <label><input type="radio" name="z2" value="a"><span>una partición que se crea en tu disco real</span></label>
+    <label><input type="radio" name="z2" value="b"><span>un fichero (<code>.qcow2</code>) en <code>/var/lib/libvirt/images</code></span></label>
+    <label><input type="radio" name="z2" value="c"><span>un trozo de la RAM</span></label>
+    <div class="fb good"><b>Correcto.</b> Un fichero disperso que crece según se usa: 20 GB nominales, unos cientos de MB reales hasta que instales algo.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es un fichero normal en <code>/var</code>. Ni particiones nuevas ni RAM — por eso crear y borrar máquinas es tan barato.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">Una instantánea sirve para…</p>
+    <label><input type="radio" name="z3" value="a"><span>guardar el estado de la VM y volver a él cuando quieras</span></label>
+    <label><input type="radio" name="z3" value="b"><span>hacer una captura de pantalla de la VM</span></label>
+    <label><input type="radio" name="z3" value="c"><span>copiar la VM a otro ordenador</span></label>
+    <div class="fb good"><b>Correcto.</b> El «deshacer» que la vida real no tiene: el protocolo del bloque C es instantánea antes de cada experimento arriesgado.</div>
+    <div class="fb bad"><b>No exactamente.</b> Guarda disco (y memoria, si está encendida) con un nombre, y permite restaurarlo en segundos. Nada de fotos ni copias a otro sitio.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Con la red NAT por defecto de libvirt…</p>
+    <label><input type="radio" name="z4" value="a"><span>la VM recibe una IP del router de casa como cualquier otro aparato</span></label>
+    <label><input type="radio" name="z4" value="b"><span>la VM sale a internet y el anfitrión puede hablar con ella, pero el resto de la casa no la ve</span></label>
+    <label><input type="radio" name="z4" value="c"><span>la VM no tiene red</span></label>
+    <div class="fb good"><b>Correcto.</b> Red privada <code>192.168.122.x</code> dentro de tu máquina, con tu Mint como router. Lo de recibir IP del router de casa es el modo puente.</div>
+    <div class="fb bad"><b>No exactamente.</b> NAT esconde la VM detrás del anfitrión: internet sí, anfitrión↔VM sí, resto de la casa no. Que la vea el router es el puente.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Te añaden al grupo <code>libvirt</code> y <code>virsh</code> sigue dando «permiso denegado». Lo más probable:</p>
+    <label><input type="radio" name="z5" value="a"><span>hay que reinstalar virt-manager</span></label>
+    <label><input type="radio" name="z5" value="b"><span>no has cerrado y vuelto a abrir sesión: los grupos nuevos no se aplican hasta entonces</span></label>
+    <label><input type="radio" name="z5" value="c"><span>necesitas usar <code>sudo</code> siempre con <code>virsh</code></span></label>
+    <div class="fb good"><b>Correcto.</b> La pertenencia a grupos se lee al iniciar sesión (capítulo 4). Cierra sesión, entra, y <code>groups</code> te lo confirmará.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es el clásico de los grupos: se aplican al iniciar sesión. Ni reinstalar ni <code>sudo</code> permanente — reinicia la sesión.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Un contenedor (Docker) se diferencia de una VM en que…</p>
+    <label><input type="radio" name="z6" value="a"><span>es lo mismo con otro nombre</span></label>
+    <label><input type="radio" name="z6" value="b"><span>comparte el kernel del anfitrión y aísla solo un programa, en vez de fingir un ordenador entero</span></label>
+    <label><input type="radio" name="z6" value="c"><span>necesita hardware especial</span></label>
+    <div class="fb good"><b>Correcto.</b> El primo ligero: más rápido, menos independiente. El curso trabaja con VMs porque son el ordenador completo que quieres aprender a instalar.</div>
+    <div class="fb bad"><b>No exactamente.</b> Un contenedor no tiene kernel propio: usa el del anfitrión y aísla un programa. Una VM finge la máquina entera, kernel incluido.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"b", z3:"a", z4:"b", z5:"b", z6:"b"};
+  document.querySelectorAll("#quiz-cap07 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación (test de la sección 7.9)</strong> — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 b · 6 b.</p>
+</div>
+<div class="proxima">
+<p><strong>La próxima sesión</strong></p>
+<p>Tienes una máquina vacía con el instalador de Debian esperando en su bandeja. En el capítulo 8 la instalas de verdad — y no con el botón de «siguiente, siguiente»: particionando a mano con lo que aprendiste en el capítulo 6, eligiendo dónde va la partición EFI, viendo a GRUB instalarse. Después la romperás y la reinstalarás hasta que aburra, y saldrás con la lista de comprobación para el día en que lo hagas en un PC real. Guarda <code>sesion07.log</code>.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 7 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion07.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap06.html" class="pagination-link" aria-label="Discos, particiones y arranque">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
