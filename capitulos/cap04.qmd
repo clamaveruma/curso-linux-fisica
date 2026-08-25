@@ -231,7 +231,7 @@ servidor sin escritorio, que es tu futuro próximo.
 
 ## La expedición de las configuraciones {#sec-configs}
 
-El ancla práctica del capítulo, y una pregunta que te harás mil veces:
+El caso práctico del capítulo, y una pregunta que te harás mil veces:
 *¿dónde guarda su configuración este programa?* La respuesta tiene un
 patrón — la del **sistema** en `/etc`, la **tuya** en dotfiles de tu
 casa — y ya tienes herramientas para verificarlo:

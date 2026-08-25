@@ -2,10 +2,13 @@
 
 ::: {.lede}
 Esta noche tu experimento ha generado un registro de 7 198 líneas.
-Nadie va a leerlas. Hoy aprendes el gesto que define a Unix desde hace
-cincuenta años: conectar programas pequeños como conectas aparatos en
-un montaje experimental, hasta que de un fichero inabarcable sale una
-respuesta de tres líneas.
+Nadie va a leerlas. Hoy aprendes cómo circula el texto entre programas:
+de dónde sale, adónde va, cómo se guarda en un fichero y cómo pasa de
+un programa a otro. Es fontanería, y como toda fontanería se ve poco —
+pero está debajo de todo lo que harás después: guardar la salida de
+una simulación, buscar un error en un registro, leer un comando ajeno
+y entenderlo. El capítulo baja hasta el fondo del mecanismo; hasta
+dónde bajas tú, lo decides tú.
 :::
 
 ::: {.chapmeta}
@@ -16,11 +19,11 @@ respuesta de tres líneas.
 **Al terminar esta sesión sabrás**
 
 - Qué son los tres canales de todo programa — stdin, stdout, stderr — y por qué esa separación es una idea brillante.
-- Guardar la salida de cualquier comando en un fichero con `>` y `>>`, sin perder los errores por el camino.
-- Encadenar programas con la tubería `|`: la salida de uno como entrada del siguiente.
-- Usar la caja de herramientas del análisis: `wc`, `grep`, `sort`, `uniq` y `cut`.
-- Construir una tubería pieza a pieza, comprobando cada paso — el método que evita los errores silenciosos.
-- Decidir con criterio cuándo resolver algo con tuberías y cuándo abrir Python.
+- Guardar la salida de cualquier programa — tu simulación incluida — en un fichero con `>`, sin perder los errores por el camino.
+- Los cuatro gestos de tubería que un físico usa a diario: `> fichero`, `| less`, `| grep` y `| tail`.
+- Leer con soltura cualquier comando encadenado que te encuentres en una documentación, en un foro o en la respuesta de una IA.
+- Por dentro, para quien quiera bajar al taller: cómo cinco filtros — `wc`, `grep`, `sort`, `uniq`, `cut` — resuelven un análisis entero, construido pieza a pieza.
+- Decidir con criterio qué va en una tubería y qué va en Python.
 :::
 
 ## Los tres chorros {#sec-canales}
@@ -108,11 +111,46 @@ estás usando ahora: haz que cada programa haga una sola cosa bien, y
 que todos hablen el mismo idioma — texto.
 :::
 
+## Lo que usarás de verdad {#sec-uso-real}
+
+Seamos francos antes de bajar al mecanismo: **un físico no construye
+tuberías largas.** Lo que sí hace, todos los días de su vida
+profesional, son cuatro gestos de fontanería básica — y este es el
+momento de dejarlos grabados:
+
+```terminal
+marcos@portatil:~/fisica$ python3 simula.py > resultados.txt
+marcos@portatil:~/fisica$ ls -l /usr/share | less
+marcos@portatil:~/fisica$ history | grep ssh
+marcos@portatil:~/fisica$ tail -3 resultados.txt
+```
+
+Uno por uno. **La salida de tu programa, a un fichero** (`>`): cuando
+la simulación escupe diez mil líneas no quieres verlas, quieres
+guardarlas — y con un `2> errores.txt` detrás, las quejas van a otro
+fichero para leerlas en calma. **Una salida larga, paginada**
+(`| less`): cualquier comando que desborde la pantalla se lee con el
+visor de `man` del capítulo 1 — su `/` para buscar, su `q` para
+salir. **Buscar dentro de una salida** (`| grep`): el gesto más
+frecuente de toda la terminal — ¿estaba ese comando en mi historial?,
+¿aparece «usb» en los mensajes del sistema? En los próximos capítulos
+verás `ps aux | grep`, `lsblk | grep`, `apt list | grep`: siempre el
+mismo enchufe. Y **solo el final** (`| tail`, o `tail fichero`): las
+últimas líneas de un registro te dicen cómo acabó la cosa.
+
+Con estos cuatro tienes el noventa por ciento del uso real. Lo que
+sigue — la caja de herramientas y el análisis completo — es el
+*mecanismo por dentro*. No hace falta dominarlo; hace falta haberlo
+visto una vez, para que ningún comando encadenado te intimide cuando
+lo leas en una documentación o te lo proponga una IA.
+
 ## La caja de herramientas {#sec-herramientas}
 
-Cinco filtros bastan para el noventa por ciento del trabajo. Todos
-leen texto por stdin (o de un fichero que les des) y escriben texto
-por stdout — por eso encajan entre sí en cualquier orden:
+Bajamos al taller. Estos cinco filtros son las piezas clásicas de Unix
+— las verás en scripts ajenos y en respuestas de IA más veces de las
+que las teclearás. Todos leen texto por stdin (o de un fichero que les
+des) y escriben texto por stdout — por eso encajan entre sí en
+cualquier orden:
 
 | Herramienta | Qué hace | La opción estrella |
 |-------------|----------|--------------------|
@@ -137,8 +175,9 @@ faltó el `sort`.
 
 ## El análisis, pieza a pieza {#sec-analisis}
 
-Vamos a responder la pregunta que un físico se hace ante ese log:
-**¿qué sensor está fallando?** Y vamos a hacerlo con el método
+Una demostración completa, para ver el mecanismo entero funcionando
+una sola vez. Vamos a responder la pregunta que un físico se hace ante
+ese log: **¿qué sensor está fallando?** Y vamos a hacerlo con el método
 profesional: construir la tubería paso a paso, mirando qué sale de
 cada pieza antes de añadir la siguiente.
 
@@ -255,19 +294,21 @@ for sensor, n in sorted(recuento.items(), key=lambda kv: -kv[1]):
 Ocho líneas, mismo resultado (`90 s3 · 15 s1 · 3 s4` — comprobado).
 Entonces, ¿cuándo cada cosa?
 
-- **Tubería** cuando la pregunta es exploratoria y la respuesta cabe
-  en pantalla: ¿cuántos?, ¿cuáles?, ¿quién más? Diez segundos, cero
-  ficheros nuevos, y funciona idéntica en el superordenador al que te
-  conectes por SSH — donde quizá no puedas instalar nada.
-- **Python** cuando empieza el *cálculo*: estadística, ajustes,
-  gráficas, o cualquier análisis que mañana querrás repetir con otros
+- **Tubería** para el *sistema*: mirar, contar, buscar, guardar.
+  Preguntas de diez segundos cuya respuesta cabe en pantalla — y que
+  funcionan idénticas en el superordenador al que te conectes por
+  SSH, donde quizá no puedas instalar nada.
+- **Python** para los *datos*: el análisis de verdad — estadística,
+  ajustes, gráficas — y todo lo que mañana querrás repetir con otros
   datos. Un script se documenta y se cita; una tubería se teclea y se
   olvida.
 
-El flujo real de un físico computacional es la secuencia de ambos:
-explorar con tuberías hasta entender qué hay, y entonces escribir el
-script de Python que lo analiza en serio. Las dos herramientas no
-compiten: se turnan.
+Para un físico la frontera es clara: las tuberías son la herramienta
+de *administrar* — registros, ficheros, comprobaciones — y Python la
+de *investigar*. El análisis de este capítulo lo hemos hecho con
+tuberías para enseñarte el mecanismo; en la vida real lo harías en
+Python, y las tuberías las reservarías para llegar hasta el fichero,
+comprobar que es el bueno y guardar el resultado.
 
 ## Práctica: la noche en el laboratorio {#sec-practica-3}
 
@@ -288,33 +329,41 @@ clic: para eso está la sesión de hoy). Trabaja en `~/Descargas` o
 muévelo a tu carpeta de física del capítulo 2.
 :::
 
-::: {.ejercicio}
-**Ejercicio 3.1 · Dimensiones del problema**
+Los ejercicios van en tres niveles. **Lo esencial** (3.1–3.4) es lo
+que usarás de verdad: no te saltes ninguno. **El mecanismo** (3.5–3.6)
+es para entender cómo encajan las piezas. **El reto** (3.7–3.9)
+encadena tres y cuatro tuberías: es opcional y está ahí para quien
+disfrute — hasta un informático se lo pensaría dos veces. Cada uno
+lleva su pista: úsala sin remordimientos.
 
-¿Cuántas líneas tiene el log? ¿Cuántas corresponden al sensor `s2`?
-Pista para lo segundo: el patrón de `grep` puede llevar espacios si lo
-proteges con comillas — y ` s2 ` con espacios alrededor evita
-confundirlo con cualquier otra cosa.
+**Nivel 1 · Lo esencial**
+
+::: {.ejercicio}
+**Ejercicio 3.1 · Recuento de daños (sin tuberías)**
+
+¿Cuántas líneas tiene el log en total? ¿Cuántas son `ERROR`, y cuántas
+`WARN`? *Pista: `wc -l` para lo primero; para lo demás, `grep -c`
+cuenta él solo — hoy todavía no necesitas ninguna tubería.*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
-`wc -l adquisicion.log` → 7 198. Y `grep -c " s2 " adquisicion.log` →
-1 799.
+`wc -l adquisicion.log` → 7 198. `grep -c ERROR adquisicion.log` →
+108. `grep -c WARN adquisicion.log` → 357.
 
-**Por qué así** — Las comillas protegen los espacios del patrón (son
-los mismos espacios-separadores del capítulo 1). Sin ellos, `s2`
-también casaría en cualquier línea que contuviera esa pareja de
-caracteres en otro sitio. Acotar el patrón es la mitad del oficio de
-`grep`.
+**Por qué así** — Tres preguntas, tres comandos de una sola pieza.
+Muchos filtros llevan incorporados sus propios atajos (`-c` es
+«cuenta en vez de mostrar»): antes de encadenar, mira si una pieza
+sola ya resuelve.
 :::
 ::::
 :::
 
 ::: {.ejercicio}
-**Ejercicio 3.2 · El primer síntoma**
+**Ejercicio 3.2 · Tu primera tubería (una `|`)**
 
 ¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue?
-Resuélvelo con una tubería que termine en `head`.
+*Pista: el log viene en orden cronológico. Filtra los errores con
+`grep` y quédate con la primera línea que salga (`head -1`).*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -322,57 +371,170 @@ Resuélvelo con una tubería que termine en `head`.
 `2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor`. El s3, a las
 10:03:00 — tres minutos después de arrancar.
 
-**Por qué así** — El log ya está en orden cronológico, así que «el
-primer error» es literalmente la primera línea que pase el filtro.
-Cuando el orden te lo dan hecho, aprovéchalo: ni `sort` ni nada.
+**Por qué así** — «El primer error» es literalmente la primera línea
+que pase el filtro, porque el orden te lo da hecho el log. Cuando el
+orden ya existe, aprovéchalo: ni `sort` ni nada.
 :::
 ::::
 :::
 
 ::: {.ejercicio}
-**Ejercicio 3.3 · ¿Quién avisa?**
+**Ejercicio 3.3 · La salida enorme (lo que harás con tu simulación)**
 
-Los `WARN` son avisos, no fallos. ¿Qué sensores emitieron avisos esta
-noche? La respuesta debe ser la lista de nombres, sin repetir.
+`ls -lR /usr/share` lista decenas de miles de ficheros: la clase de
+salida que produce una simulación larga. Primero léela con el
+paginador: `ls -lR /usr/share | less` — muévete, busca `/png` con la
+barra, sal con `q`. Después guárdala en un fichero:
+`ls -lR /usr/share > inventario.txt 2> /dev/null`, y cuenta con
+`grep -c` cuántas líneas contienen `.png`. *Pista: `less` tiene las
+mismas teclas que `man`; el `2> /dev/null` manda las quejas de
+permisos a la papelera del sistema; y `grep -c` acepta el fichero como
+argumento, sin tubería.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`ls -lR /usr/share | less` (la `R` es *recursivo*: entra en todas las
+subcarpetas). Después `ls -lR /usr/share > inventario.txt 2> /dev/null`
+y `grep -c "\.png" inventario.txt` → varios miles, según lo que tengas
+instalado. (El `\.` fuerza un punto literal; sin la barra, el punto
+significa «cualquier carácter» para `grep` — un matiz que puedes
+archivar por ahora.)
+
+**Por qué así** — Este es el patrón que repetirás con tu simulación:
+salida larga → paginador si solo quieres mirar, fichero si quieres
+conservar, y `grep` para preguntarle al fichero. Tres reflejos que
+valen más que cualquier tubería de cinco piezas.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.4 · A fichero (redirección, sin tuberías)**
+
+Crea un fichero `errores.txt` que contenga solo las líneas de error, y
+comprueba — con un comando sobre ese fichero — que contiene las 108
+que esperabas. *Pista: `>` desvía el stdout al fichero; y `wc -l`
+acepta un fichero como argumento, sin tubería.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`grep ERROR adquisicion.log > errores.txt` y después
+`wc -l errores.txt` → `108 errores.txt`.
+
+**Por qué así** — Es la figura de la redirección, en vivo: `grep`
+trabajó igual que siempre, pero su stdout acabó en el fichero. Fíjate
+en que el recuento coincide con el `grep -c` del 3.1: dos caminos
+distintos a la misma cifra — la comprobación cruzada de toda la vida
+en el laboratorio.
+:::
+::::
+:::
+
+**Nivel 2 · El mecanismo**
+
+::: {.ejercicio}
+**Ejercicio 3.5 · La columna del sensor (dos `|`)**
+
+De las líneas `WARN`, extrae solo el nombre del sensor y mira los
+cinco primeros. ¿Se repite alguno? *Pista: tres piezas — `grep WARN`,
+`cut -d' ' -f4`, `head -5` — y antes de decidir el `-f`, cuenta los
+campos con los dedos sobre una línea real (ya sabes lo que pasa si
+no).*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`grep WARN adquisicion.log | cut -d' ' -f4 | head -5` → `s2` cinco
+veces.
+
+**Por qué así** — Es el método del capítulo en miniatura: filtrar,
+recortar, y un `head` de comprobación al final. Ese «s2, s2, s2…» ya
+te está susurrando la respuesta del siguiente ejercicio.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.6 · Sin repetidos (tres `|`)**
+
+Obtén la lista de sensores *distintos* que emitieron avisos `WARN` —
+cada nombre una sola vez. *Pista: al ejercicio anterior, quítale el
+`head` y añádele la pareja inseparable del capítulo: `sort | uniq`.*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq` → `s2`,
-solo. (Con `uniq -c` verás además que fueron 357 avisos.)
+solo. (Con `uniq -c` verás además que fueron los 357 del 3.1.)
 
-**Por qué así** — Misma maquinaria que el ranking del capítulo, sin el
-`-c`: cuando solo quieres saber *quiénes*, `sort | uniq` es la
-pregunta «¿qué valores distintos hay en esta columna?». Apréndetela
-como frase hecha: la usarás mil veces.
+**Por qué así** — `sort | uniq` sobre una columna es la pregunta «¿qué
+valores distintos hay aquí?». Apréndetela como frase hecha: la usarás
+mil veces. Y fíjate en cómo has llegado: no escribiste tres tuberías
+de golpe — le añadiste piezas a una que ya funcionaba.
 :::
 ::::
 :::
 
-::: {.ejercicio}
-**Ejercicio 3.4 · La reconstrucción**
+**Nivel 3 · El reto (opcional)**
 
-Sin mirar la sección del análisis: reconstruye de memoria la tubería
-del ranking de errores por sensor, pieza a pieza, comprobando cada
-paso con `head`. Compara tu resultado con el del capítulo.
+::: {.ejercicio}
+**Ejercicio 3.7 · El jefe final (cuatro `|`)**
+
+El reto de la sesión: reconstruye — de memoria si puedes, con las
+pistas si no — la tubería del ranking de errores por sensor. *Pistas,
+por pasos: (1) filtra las líneas `ERROR`; (2) recorta el campo 4;
+(3) junta los iguales; (4) colapsa contando; (5) ordena el recuento de
+mayor a menor (`sort -nr`). Y en cada paso, tu `head` de comprobación
+antes de añadir el siguiente.*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr`
 → `90 s3 · 15 s1 · 3 s4`.
 
-**Por qué así** — Si te salió a la primera, perfecto. Si no, mejor
-aún: el objetivo era practicar el método — añadir una pieza, `head`,
-mirar, seguir. Una tubería no se escribe: se *cultiva*. El día que te
-salga una de seis etapas habrás llegado sin darte cuenta.
+**Por qué así** — Si te salió, enhorabuena: cuatro tuberías es más de
+lo que la mayoría encadena en su día a día. Si no, ningún drama: el
+objetivo era practicar el método — pieza, `head`, mirar, seguir. Una
+tubería no se escribe: se *cultiva*. Y recuerda la caja del capítulo:
+la que no recuerdes, se pregunta — a `man`, o a una IA, leyendo
+siempre lo que te dé.
 :::
 ::::
 :::
 
 ::: {.ejercicio}
-**Ejercicio 3.5 · Rango de temperaturas**
+**Ejercicio 3.8 · El informe (redirecciones + tu tubería)**
 
-¿Entre qué mínima y máxima se movieron las lecturas *válidas* (las
-líneas `INFO`)? ¿Y por qué la máxima debe mirarse con lupa?
+Construye `informe.txt` con tres partes, usando solo `echo` y
+redirecciones: una línea de título, el total de errores, y el ranking
+del ejercicio anterior. *Pista: la primera orden con `>` (estrena el
+fichero); las siguientes con `>>` (añaden). La tubería del 3.7 ya la
+tienes: solo hay que redirigirla.*
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+```
+echo "Informe de adquisicion - 18 de agosto" > informe.txt
+grep -c ERROR adquisicion.log >> informe.txt
+grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr >> informe.txt
+```
+Comprueba con `cat informe.txt`: título, `108`, y las tres líneas del
+ranking.
+
+**Por qué así** — Si hubieras usado `>` en las tres, cada orden habría
+borrado la anterior y el informe tendría solo el ranking. Crear una
+vez, añadir después: la gramática de todo informe generado por
+comandos. Cierra el cuaderno con `exit` y guarda `sesion03.log`.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 3.9 · Para nota (opcional) · El termómetro sospechoso**
+
+Solo si te has quedado con ganas: ¿entre qué mínima y máxima se
+movieron las lecturas *válidas* (las líneas `INFO`)? ¿Y por qué la
+máxima hay que mirarla con lupa? *Pistas: el valor viene tras un `=`,
+y `cut` también sabe cortar por `=`; `sort -n` ordena como números; y
+los extremos de una lista ordenada son `head -1` y `tail -1`.*
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -385,34 +547,6 @@ sort -n | head -1` → 20.45. Máxima: la misma tubería con `tail -1` →
 después de `25`, orden alfabético). Y la lección de física: un valor
 sospechosamente redondo en el extremo del rango huele a saturación,
 no a dato. La tubería te dio el número; el criterio lo pones tú.
-:::
-::::
-:::
-
-::: {.ejercicio}
-**Ejercicio 3.6 · El informe**
-
-Construye un fichero `informe.txt` con tres secciones usando solo
-`echo` y redirecciones: una línea de título, el total de errores, y el
-ranking por sensor. Las dos primeras con `echo` (una crea el fichero,
-la otra añade); la tercera, añadiendo la salida de tu tubería del 3.4.
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-```
-echo "Informe de adquisicion - 18 de agosto" > informe.txt
-grep -c ERROR adquisicion.log >> informe.txt
-grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr >> informe.txt
-```
-Comprueba con `cat informe.txt`: título, `108`, y las tres líneas del
-ranking.
-
-**Por qué así** — Primera línea con `>` (crea o vacía el fichero) y el
-resto con `>>` (añaden). Si hubieras usado `>` en todas, cada orden
-habría borrado la anterior y el informe tendría solo el ranking. Ese
-matiz — crear una vez, añadir después — es la gramática de todo
-informe generado por comandos. Cierra el cuaderno con `exit` y guarda
-`sesion03.log`.
 :::
 ::::
 :::

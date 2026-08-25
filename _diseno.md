@@ -29,7 +29,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 **Regla de seguridad transversal:** nada destructivo se practica en la máquina de trabajo. Particionar, instalar y romper se hace en la VM. Los cambios en el router de casa se dividen en exploración (solo lectura), reversibles (con procedimiento de vuelta atrás) y avanzados (opcionales).
 
-**Terminal y herramientas gráficas** *(añadido 2026-08-23)*: la terminal es el eje del curso, pero sin menospreciar la vía gráfica. Cuando exista un equivalente gráfico de uso común, se menciona en una línea o caja al cierre de la sección («esto mismo, con ratón»), señalando qué aporta cada vía. Anclas concretas en el temario:
+**Terminal y herramientas gráficas** *(añadido 2026-08-23)*: la terminal es el eje del curso, pero sin menospreciar la vía gráfica. Cuando exista un equivalente gráfico de uso común, se menciona en una línea o caja al cierre de la sección («esto mismo, con ratón»), señalando qué aporta cada vía. Ubicaciones concretas en el temario:
 
 - Cap. 5: los gestores gráficos de paquetes (Gestor de software de Mint, Synaptic) como cara visible de `apt`; y un apartado breve sobre **qué es una distro de verdad** (kernel + paquetes + escritorio) con panorama de escritorios (Cinnamon, GNOME, KDE…).
 - Cap. 6: **Disks (gnome-disks) y GParted** junto a `lsblk`/`mount` — GParted reaparece como herramienta estándar en la instalación del cap. 8.
