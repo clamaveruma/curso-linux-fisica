@@ -111,8 +111,6 @@ esta tarde `apt` te resuelva un árbol de dependencias en un segundo,
 levanta la vista un momento: estás viendo el invento de Ian.
 :::
 
-![Ian Murdock (1973–2015), fundador de Debian, en 2008. Todo lo que instale tu Mint pasa por la arquitectura que él empezó. *Foto: Ilya Schurov, CC BY-SA 2.0, Wikimedia Commons.*](../imagenes/cap05/ian-murdock-2008.jpg){#fig-murdock fig-alt="Ian Murdock hablando en una conferencia en 2008" width="70%"}
-
 ## Qué está pasando ahora mismo: procesos {#sec-procesos}
 
 Un **proceso** es un programa *en ejecución*: el fichero ejecutable
@@ -180,6 +178,8 @@ importa: es apagar la centrífuga con su rampa de frenado frente a
 cortarle la corriente. La segunda funciona siempre, pero lo que
 hubiera a medio escribir se queda a medias. Protocolo: primero `kill`,
 cinco segundos de cortesía, y solo entonces `kill -9`.
+
+![La vida de un proceso. Nace del shell, corre en primer o segundo plano, y termina cuando acaba — o cuando una señal se lo pide.](../imagenes/cap05/fig-procesos.svg){#fig-procesos fig-alt="Un proceso lanzado por el shell, con las señales SIGINT, SIGTERM y SIGKILL llegando a él, y su terminación"}
 
 ## Segundo plano: el `&` {#sec-background}
 

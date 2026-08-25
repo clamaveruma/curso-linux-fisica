@@ -1,0 +1,38 @@
+<svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La vida de un proceso: nace del shell, corre en primer o segundo plano, y termina por una señal">
+  <defs>
+    <marker id="fpr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+    <marker id="fpk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#C4342A"/></marker>
+    <marker id="fpt" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#9A6A14"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <!-- shell -->
+    <rect x="30" y="110" width="130" height="60" rx="5" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.4"/>
+    <text x="95" y="134" font-size="11.5" fill="#24564B" text-anchor="middle" font-weight="600">tu shell</text>
+    <text x="95" y="152" font-size="9" fill="#6A5F4D" text-anchor="middle">PID 2210</text>
+    <!-- lanzamiento -->
+    <line x1="165" y1="140" x2="240" y2="140" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fpr)"/>
+    <text x="202" y="130" font-size="9.5" fill="#6A5F4D" text-anchor="middle">python3 analisis.py</text>
+    <!-- proceso -->
+    <rect x="248" y="95" width="190" height="90" rx="5" fill="#0E1512"/>
+    <text x="343" y="120" font-size="12" fill="#6BD6BC" text-anchor="middle" font-weight="600">el proceso · PID 9204</text>
+    <text x="343" y="140" font-size="9.5" fill="#D8E6E0" text-anchor="middle">dueño: marcos · CPU 98 %</text>
+    <text x="343" y="158" font-size="9" fill="#9FB4AC" text-anchor="middle">primer plano: ocupa la terminal</text>
+    <text x="343" y="173" font-size="9" fill="#9FB4AC" text-anchor="middle">con «&amp;»: segundo plano, prompt libre</text>
+    <!-- señales -->
+    <line x1="343" y1="40" x2="343" y2="90" stroke="#9A6A14" stroke-width="1.6" marker-end="url(#fpt)"/>
+    <text x="343" y="30" font-size="10" fill="#9A6A14" text-anchor="middle" font-weight="600">Ctrl+C → SIGINT «interrúmpete»</text>
+    <line x1="520" y1="120" x2="444" y2="120" stroke="#9A6A14" stroke-width="1.6" marker-end="url(#fpt)"/>
+    <text x="600" y="112" font-size="10" fill="#9A6A14" text-anchor="middle" font-weight="600">kill 9204 → SIGTERM</text>
+    <text x="600" y="126" font-size="8.5" fill="#6A5F4D" text-anchor="middle">«termina, por favor»: puede</text>
+    <text x="600" y="138" font-size="8.5" fill="#6A5F4D" text-anchor="middle">cerrar ficheros y despedirse</text>
+    <line x1="520" y1="165" x2="444" y2="165" stroke="#C4342A" stroke-width="2" marker-end="url(#fpk)"/>
+    <text x="600" y="160" font-size="10" fill="#C4342A" text-anchor="middle" font-weight="600">kill -9 9204 → SIGKILL</text>
+    <text x="600" y="174" font-size="8.5" fill="#6A5F4D" text-anchor="middle">el kernel lo elimina en seco:</text>
+    <text x="600" y="186" font-size="8.5" fill="#6A5F4D" text-anchor="middle">lo a medias se queda a medias</text>
+    <!-- fin -->
+    <line x1="343" y1="190" x2="343" y2="230" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fpr)"/>
+    <rect x="268" y="236" width="150" height="34" rx="4" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2"/>
+    <text x="343" y="258" font-size="10" fill="#6A5F4D" text-anchor="middle">termina · el PID se libera</text>
+    <text x="350" y="292" font-size="10" fill="#9C8F79" text-anchor="middle">protocolo: primero el educado, cinco segundos de cortesía, y solo entonces el definitivo</text>
+  </g>
+</svg>
