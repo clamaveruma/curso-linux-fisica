@@ -99,7 +99,7 @@ uso claro cuando faltan argumentos.
 
 ```default
 #!/bin/bash
-# organiza.sh — mueve a datos/ los CSV de un run y anota el registro
+# organiza.sh — mueve a datos/ los CSV de una serie y anota el registro
 set -e
 if [ $# -ne 1 ]; then
     echo "uso: $0 CARPETA_DEL_EXPERIMENTO"

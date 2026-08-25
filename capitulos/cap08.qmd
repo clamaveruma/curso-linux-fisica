@@ -549,11 +549,11 @@ Responde de memoria; las respuestas están al final del capítulo.
 **La próxima sesión**
 
 Tienes un servidor instalado por ti, con una dirección `192.168.122.x`
-que todavía no sabes leer. El bloque D empieza ahí: qué es una
-dirección IP, qué es esa máscara `/24`, quién reparte las direcciones
-en tu casa — y la expedición al router de la compañía, en modo solo
-lectura, para hacer el censo de todos los aparatos que viven en tu
-red. Guarda `sesion08.log`: bloque C completo.
+que todavía no sabes leer. El bloque D empieza ahí: aprenderás qué es
+una dirección IP, qué es esa máscara `/24` y quién reparte las
+direcciones en tu casa, y harás la expedición al router de la
+compañía, en modo solo lectura, para censar todos los aparatos que
+viven en tu red. Guarda `sesion08.log`: bloque C completo.
 :::
 
 ::: {.pie-piloto}

@@ -524,10 +524,11 @@ Responde de memoria; las respuestas están al final del capítulo.
 ::: {.proxima}
 **La próxima sesión**
 
-Último capítulo del bloque B, y el que abre la puerta a todo lo demás:
-discos y particiones — `lsblk`, montar y desmontar, qué es esa
-partición EFI —, y la película completa de lo que pasa entre el botón
-de encendido y tu escritorio: UEFI, GRUB, kernel. Es el prerrequisito
+El capítulo 6 es el último del bloque B y el que abre la puerta a
+todo lo demás: verás discos y particiones — `lsblk`, montar y
+desmontar, qué es esa partición EFI — y la película completa de lo que
+pasa entre el botón de encendido y tu escritorio: UEFI, GRUB, kernel.
+Es el prerrequisito
 directo de la instalación del bloque C: entender el quirófano antes de
 operar. Guarda `sesion05.log`.
 :::

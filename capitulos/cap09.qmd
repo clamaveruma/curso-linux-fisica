@@ -522,12 +522,12 @@ Responde de memoria; las respuestas están al final del capítulo.
 ::: {.proxima}
 **La próxima sesión**
 
-Hoy has hablado con números; el capítulo 10 les pone nombre: qué pasa
-exactamente al escribir `debian.org` — el DNS, la guía telefónica de
-internet —, el camino paquete a paquete hasta la universidad con
-`traceroute`, por qué SSH es el puerto 22 y la web el 443, y los
-primeros cambios *reversibles* en el router, con su vuelta atrás
-escrita antes de tocar. Guarda `sesion09.log`.
+Hoy has hablado con números; el capítulo 10 les pone nombre. Verás
+qué pasa exactamente al escribir `debian.org` — el DNS, la guía
+telefónica de internet —, seguirás el camino paquete a paquete hasta
+la universidad con `tracepath`, entenderás por qué SSH es el puerto 22
+y la web el 443, y harás los primeros cambios *reversibles* en el
+router, con su vuelta atrás escrita antes de tocar. Guarda `sesion09.log`.
 :::
 
 ::: {.pie-piloto}

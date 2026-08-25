@@ -267,7 +267,7 @@ saturar.
 ::: {.por-dentro}
 **◉ Por dentro · ¿Y aquel renombrado en lote?**
 
-En el capítulo 2 renombraste cinco runs a mano y prometimos algo
+En el capítulo 2 renombraste cinco series a mano y prometimos algo
 mejor. La verdad completa: las tuberías transforman *texto*, no
 ejecutan una orden por cada fichero — para eso hacen falta los bucles
 del shell, que viven en el anexo de *scripting*. Pero ya tienes la
@@ -662,10 +662,11 @@ Responde de memoria; las respuestas están al final del capítulo.
 **La próxima sesión**
 
 Con el bloque A completo, ya *hablas* con la máquina. En el capítulo 4
-empieza el bloque B: abrir el capó. El mapa completo del árbol — qué
-vive de verdad en `/etc`, `/var`, `/usr` —, quién es `root`, qué
-significa exactamente ese `sudo` que tecleas con fe, y el sistema de
-permisos `rwx` que llevas viendo en cada `ls -l` sin leerlo. Guarda
+empieza el bloque B: abrir el capó. Recorrerás el mapa completo del
+árbol — qué vive de verdad en `/etc`, `/var`, `/usr` —, sabrás quién
+es `root` y qué significa exactamente ese `sudo` que tecleas con fe, y
+aprenderás a leer el sistema de permisos `rwx` que llevas viendo en
+cada `ls -l` sin entenderlo. Guarda
 `sesion03.log`: tres medidas ya en tu cuaderno.
 :::
 

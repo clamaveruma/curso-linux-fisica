@@ -515,9 +515,9 @@ Responde de memoria; las respuestas están al final del capítulo.
 
 Sabes quién puede tocar qué; el capítulo 5 pregunta *qué está pasando
 ahora mismo*: procesos, `top`, señales y el arte de matar un programa
-colgado. Y la otra mitad del capó: qué hace de verdad el gestor de
-software de Mint por debajo — `apt`, repositorios, dependencias — y el
-misterio de por qué a veces `python` no es el Python que crees. Guarda
+colgado. Y verás la otra mitad del capó: qué hace de verdad el gestor
+de software de Mint por debajo — `apt`, repositorios, dependencias — y
+por qué a veces `python` no es el Python que crees. Guarda
 `sesion04.log`.
 :::
 

@@ -507,12 +507,12 @@ Responde de memoria; las respuestas están al final del capítulo.
 ::: {.proxima}
 **La próxima sesión**
 
-Bloque E: trabajar en remoto. Tienes un servidor con nombre
-(`debian-lab`), una puerta abierta (la 22) y, desde hoy, el mapa
-entero de cómo llegar a ella. En el capítulo 11 entras: SSH, claves
-en vez de contraseñas, y copiar ficheros entre máquinas con `scp` y
-`rsync` — primero contigo mismo, luego con tu VM, y después con
-cualquier servidor del mundo. Guarda `sesion10.log`: bloque D
+Empieza el bloque E: trabajar en remoto. Tienes un servidor con
+nombre (`debian-lab`), una puerta abierta (la 22) y, desde hoy, el
+mapa entero de cómo llegar a ella. En el capítulo 11 entras: usarás
+SSH, sustituirás las contraseñas por claves y copiarás ficheros entre
+máquinas con `scp` y `rsync` — primero contigo mismo, luego con tu
+VM, y después con cualquier servidor del mundo. Guarda `sesion10.log`: bloque D
 completo.
 :::
 

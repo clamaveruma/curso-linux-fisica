@@ -540,9 +540,10 @@ Doce sesiones: sabes hablar con la máquina, abrirle el capó,
 instalarla, conectarla y trabajar en ella desde lejos. Queda el
 ensayo general: el **proyecto final**, en el que montas de cero un
 servidor — VM, instalación, red, SSH con clave, dataset, análisis en
-tmux — sin más guía que una lista de objetivos. Y los anexos para
-cuando los necesites: scripting con bucles, la IA como herramienta y
-no como oráculo, y el camino para quien venga de Windows. Guarda
+tmux — sin más guía que una lista de objetivos. Y quedan los anexos
+para cuando los necesites: scripting con bucles, la IA como
+herramienta y no como oráculo, y el camino para quien venga de
+Windows. Guarda
 `sesion12.log`: son doce medidas.
 :::
 

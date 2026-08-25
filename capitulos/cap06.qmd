@@ -446,7 +446,8 @@ Responde de memoria; las respuestas están al final del capítulo.
 ::: {.proxima}
 **La próxima sesión**
 
-Bloque C: por fin, romper cosas. En el capítulo 7 creas tu primera
+Empieza el bloque C, y por fin está permitido romper cosas. En el
+capítulo 7 creas tu primera
 máquina virtual con el taller que Linux trae de serie — KVM y
 virt-manager: CPU, RAM, disco y red *de mentira* dentro de tu máquina
 de verdad — y conoces el superpoder que lo cambia todo: las

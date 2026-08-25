@@ -578,9 +578,10 @@ Responde de memoria; las respuestas están al final del capítulo.
 
 Tienes un fichero de medidas esperando en `~/Descargas` y todavía no
 sabes abrirlo, copiarlo ni ponerlo a salvo. En el capítulo 2 los
-ficheros dejan de ser intocables: leerlos, copiarlos, moverlos,
-organizarlos en lote — y el primer comando capaz de destruir, con su
-red de seguridad correspondiente. Cierra tu cuaderno con `exit` y
+ficheros dejan de ser intocables: aprenderás a leerlos, copiarlos,
+moverlos y organizarlos en lote, y conocerás el primer comando capaz
+de destruir — con su red de seguridad correspondiente. Cierra tu
+cuaderno con `exit` y
 guarda `sesion01.log`: es tu primera medida experimental de este curso.
 :::
 
