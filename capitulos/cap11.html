@@ -271,6 +271,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -283,15 +289,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#sec-cliente-servidor" id="toc-sec-cliente-servidor" class="nav-link active" data-scroll-target="#sec-cliente-servidor"><span class="header-section-number">11.1</span> Cliente y servidor</a></li>
-  <li><a href="#sec-nivel-0" id="toc-sec-nivel-0" class="nav-link" data-scroll-target="#sec-nivel-0"><span class="header-section-number">11.2</span> Nivel 0: tu propia máquina como servidor</a></li>
-  <li><a href="#sec-claves" id="toc-sec-claves" class="nav-link" data-scroll-target="#sec-claves"><span class="header-section-number">11.3</span> Claves en vez de contraseñas</a></li>
-  <li><a href="#sec-config" id="toc-sec-config" class="nav-link" data-scroll-target="#sec-config"><span class="header-section-number">11.4</span> Un nombre para cada servidor: <code>~/.ssh/config</code></a></li>
-  <li><a href="#sec-copiar" id="toc-sec-copiar" class="nav-link" data-scroll-target="#sec-copiar"><span class="header-section-number">11.5</span> Mover ficheros: <code>scp</code> y <code>rsync</code></a></li>
-  <li><a href="#sec-comando-remoto" id="toc-sec-comando-remoto" class="nav-link" data-scroll-target="#sec-comando-remoto"><span class="header-section-number">11.6</span> Ejecutar allí, sin quedarse</a></li>
-  <li><a href="#sec-nivel-2" id="toc-sec-nivel-2" class="nav-link" data-scroll-target="#sec-nivel-2"><span class="header-section-number">11.7</span> Nivel 2: cuando el servidor es de verdad</a></li>
-  <li><a href="#sec-practica-11" id="toc-sec-practica-11" class="nav-link" data-scroll-target="#sec-practica-11"><span class="header-section-number">11.8</span> Práctica: la escalera</a></li>
-  <li><a href="#sec-quiz-11" id="toc-sec-quiz-11" class="nav-link" data-scroll-target="#sec-quiz-11"><span class="header-section-number">11.9</span> Autocomprobación</a></li>
+  <li><a href="#sec-con-raton" id="toc-sec-con-raton" class="nav-link active" data-scroll-target="#sec-con-raton"><span class="header-section-number">11.1</span> Primero con ratón: otro ordenador en tu gestor de archivos</a></li>
+  <li><a href="#sec-cliente-servidor" id="toc-sec-cliente-servidor" class="nav-link" data-scroll-target="#sec-cliente-servidor"><span class="header-section-number">11.2</span> Cliente y servidor</a></li>
+  <li><a href="#sec-nivel-0" id="toc-sec-nivel-0" class="nav-link" data-scroll-target="#sec-nivel-0"><span class="header-section-number">11.3</span> Nivel 0: tu propia máquina como servidor</a></li>
+  <li><a href="#sec-claves" id="toc-sec-claves" class="nav-link" data-scroll-target="#sec-claves"><span class="header-section-number">11.4</span> Claves en vez de contraseñas</a></li>
+  <li><a href="#sec-config" id="toc-sec-config" class="nav-link" data-scroll-target="#sec-config"><span class="header-section-number">11.5</span> Un nombre para cada servidor: <code>~/.ssh/config</code></a></li>
+  <li><a href="#sec-copiar" id="toc-sec-copiar" class="nav-link" data-scroll-target="#sec-copiar"><span class="header-section-number">11.6</span> Mover ficheros: <code>scp</code> y <code>rsync</code></a></li>
+  <li><a href="#sec-comando-remoto" id="toc-sec-comando-remoto" class="nav-link" data-scroll-target="#sec-comando-remoto"><span class="header-section-number">11.7</span> Ejecutar allí, sin quedarse</a></li>
+  <li><a href="#sec-nivel-2" id="toc-sec-nivel-2" class="nav-link" data-scroll-target="#sec-nivel-2"><span class="header-section-number">11.8</span> Nivel 2: cuando el servidor es de verdad</a></li>
+  <li><a href="#sec-practica-11" id="toc-sec-practica-11" class="nav-link" data-scroll-target="#sec-practica-11"><span class="header-section-number">11.9</span> Práctica: la escalera</a></li>
+  <li><a href="#sec-quiz-11" id="toc-sec-quiz-11" class="nav-link" data-scroll-target="#sec-quiz-11"><span class="header-section-number">11.10</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -321,11 +328,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Bloque E: trabajar en remoto. Todo lo anterior conducía aquí — un servidor instalado por ti, con nombre, con una puerta abierta, y el mapa de cómo llegar. Hoy entras por esa puerta. Aprendes el comando con el que un físico computacional pasa media vida, sustituyes las contraseñas por claves — más seguras y más cómodas a la vez —, y mueves ficheros entre máquinas como si estuvieran en la misma mesa. Primero contigo mismo, luego con tu VM, y después con cualquier servidor del mundo.</p>
 </div>
 <div class="chapmeta">
-<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 8 y 10</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong></p>
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 8 y 10</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong> · nivel: <strong>el capítulo más avanzado del curso — lo esencial cabe en las dos primeras secciones</strong></p>
 </div>
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
+<li>Conectarte a otro ordenador <em>con ratón</em>, desde el gestor de archivos: SSH, Samba, FTP y NFS por el mismo diálogo.</li>
 <li>Qué son el cliente y el servidor SSH, y qué pasa exactamente al conectar por primera vez (la huella, <code>known_hosts</code>).</li>
 <li>Convertir tu propia máquina en servidor con <code>openssh-server</code>, y entrar en ella desde ella misma.</li>
 <li>Crear un par de claves ed25519, instalarlo en el servidor con <code>ssh-copy-id</code> y no volver a teclear una contraseña.</li>
@@ -335,8 +343,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Qué cambia cuando el servidor es de verdad: la universidad, una nube, o tu casa desde fuera.</li>
 </ul>
 </div>
-<section id="sec-cliente-servidor" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="sec-cliente-servidor"><span class="header-section-number">11.1</span> Cliente y servidor</h2>
+<div class="aviso">
+<p><strong>△ Aviso · Este capítulo tiene dos velocidades</strong></p>
+<p>Lo <strong>esencial</strong> — y suficiente para el proyecto final — son las dos primeras secciones: conectarte a otro ordenador con el gestor de archivos, y abrir una sesión SSH con tu contraseña. Todo lo demás — claves, agenda, <code>rsync</code>, comandos remotos, endurecer el servidor — es lo que usa un profesional a diario, pero es <strong>avanzado</strong>: si en algún punto te pierdes, quédate con lo esencial, sigue al capítulo 12 (que solo necesita saber entrar) y vuelve aquí cuando el resto te haga falta. Nadie aprende SSH entero en una tarde.</p>
+</div>
+<section id="sec-con-raton" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-con-raton"><span class="header-section-number">11.1</span> Primero con ratón: otro ordenador en tu gestor de archivos</h2>
+<p>Antes de teclear un solo comando, la versión que ya sabes usar. Tu gestor de archivos — Nemo en Mint (Caja, Nautilus o Thunar en otros escritorios) — sabe abrir carpetas que viven en <em>otra máquina</em>, y lo hace con un solo diálogo para todos los protocolos que te vas a encontrar. Menú <strong>Archivo → Conectar al servidor…</strong> y verás un desplegable con el tipo de conexión:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 20%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Qué es</th>
+<th>Cuándo te lo encontrarás</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SSH</strong> (SFTP)</td>
+<td>ficheros a través de una sesión SSH cifrada</td>
+<td>cualquier máquina Linux con SSH — tu <code>debian-lab</code>, el clúster</td>
+</tr>
+<tr class="even">
+<td><strong>Windows / Samba</strong> (SMB)</td>
+<td>el «compartir carpeta» de Windows y de los NAS</td>
+<td>la impresora de casa, el disco de red, el PC con Windows</td>
+</tr>
+<tr class="odd">
+<td><strong>FTP</strong></td>
+<td>el protocolo veterano de transferir ficheros, sin cifrar</td>
+<td>servidores públicos de datos, alojamientos web antiguos</td>
+</tr>
+<tr class="even">
+<td><strong>WebDAV</strong></td>
+<td>ficheros sobre una web</td>
+<td>nubes universitarias, Nextcloud</td>
+</tr>
+<tr class="odd">
+<td><strong>NFS</strong> (escribiendo <code>nfs://…</code> en la barra de dirección)</td>
+<td>el compartir de Unix</td>
+<td>laboratorios y clústeres (anexo B2)</td>
+</tr>
+</tbody>
+</table>
+<p>Pruébalo ahora con lo que ya tienes: tipo <strong>SSH</strong>, servidor <code>debian-lab</code> (el nombre que le diste en el capítulo 10), carpeta <code>/home/marcos</code>, usuario <code>marcos</code>, y tu contraseña. La casa del servidor aparece en la barra lateral como una carpeta más: arrastra un fichero, ábrelo, edítalo, bórralo — todo viaja por el servidor SSH que dejaste instalado en el capítulo 8. Eso que acaba de pasar <em>es</em> SSH; el resto del capítulo es el mismo mecanismo visto desde la terminal, donde además de mover ficheros podrás <em>ejecutar</em> cosas en la otra máquina. Si hoy no pasas de esta sección, ya sabes conectarte a otro ordenador — que era el objetivo.</p>
+</section>
+<section id="sec-cliente-servidor" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-cliente-servidor"><span class="header-section-number">11.2</span> Cliente y servidor</h2>
 <p><strong>SSH</strong> (<em>Secure Shell</em>) es un shell — el del capítulo 1 — que corre en <em>otra</em> máquina, con tu teclado y tu pantalla conectados a él por la red, cifrado de punta a punta. Tiene dos mitades: el <strong>servidor</strong> (<code>sshd</code>, el que escucha en el puerto 22 que viste ayer) y el <strong>cliente</strong> (<code>ssh</code>, el comando que tecleas). Tu <code>debian-lab</code> lleva el servidor desde la instalación; tu Mint trae el cliente de serie. Y gracias al <code>/etc/hosts</code> de ayer, la máquina tiene nombre:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@debian-lab</span>
 <span class="t-out">The authenticity of host 'debian-lab (192.168.122.15)' can't be established.</span>
@@ -366,8 +424,8 @@ Figura&nbsp;11.1: Un acoplador acústico de los años 70: el auricular del telé
 </figure>
 </div>
 </section>
-<section id="sec-nivel-0" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="sec-nivel-0"><span class="header-section-number">11.2</span> Nivel 0: tu propia máquina como servidor</h2>
+<section id="sec-nivel-0" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-nivel-0"><span class="header-section-number">11.3</span> Nivel 0: tu propia máquina como servidor</h2>
 <p>Antes de irte lejos, el experimento más corto posible: convertir tu Mint en servidor y entrar en él <em>desde él mismo</em>. Suena absurdo, pero tiene dos utilidades — practicar sin red de por medio, y abrir tu portátil a otras máquinas de tu casa (o a tu móvil, con cualquier app de SSH):</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install openssh-server</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">systemctl status ssh | head -3</span>
@@ -389,8 +447,8 @@ Figura&nbsp;11.2: Los tres niveles del capítulo. El curso se escribe contra el 
 </figure>
 </div>
 </section>
-<section id="sec-claves" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="sec-claves"><span class="header-section-number">11.3</span> Claves en vez de contraseñas</h2>
+<section id="sec-claves" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-claves"><span class="header-section-number">11.4</span> Claves en vez de contraseñas</h2>
 <p>Teclear la contraseña en cada conexión es incómodo, y en un servidor expuesto a internet es peligroso: hay robots probando contraseñas en el puerto 22 de todas las máquinas del mundo, a todas horas. La solución es a la vez más cómoda y más segura, y es física de la buena: un <strong>par de claves</strong>. La <strong>privada</strong> se queda en tu máquina y no sale de ella jamás; la <strong>pública</strong> se regala a cada servidor en el que quieras entrar. El servidor te lanza un reto que solo la privada puede resolver, comprueba la respuesta con la pública, y te deja pasar. Ninguna contraseña viaja; ningún secreto se copia.</p>
 <div id="fig-ssh-claves" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del par de claves SSH: la privada permanece en el cliente, la pública se copia al servidor en authorized_keys">
 <figure class="quarto-float quarto-float-fig figure">
@@ -420,8 +478,8 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p>Mira en <code>debian-lab</code>: <code>ls -la ~/.ssh</code> → <code>drwx------</code> para la carpeta y <code>-rw-------</code> para <code>authorized_keys</code>. Y en tu Mint, <code>ls -l ~/.ssh/id_ed25519</code> → <code>-rw-------</code>. SSH <strong>se niega a usar claves que otros puedan leer</strong>: si un día tu clave «deja de funcionar» tras copiarla o restaurarla, el diagnóstico es casi siempre <code>chmod 600</code> sobre la privada y <code>chmod 700</code> sobre <code>~/.ssh</code>. El capítulo 4 no era teoría: es la razón por la que tu llave está a salvo de los demás usuarios de la máquina.</p>
 </div>
 </section>
-<section id="sec-config" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="sec-config"><span class="header-section-number">11.4</span> Un nombre para cada servidor: <code>~/.ssh/config</code></h2>
+<section id="sec-config" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-config"><span class="header-section-number">11.5</span> Un nombre para cada servidor: <code>~/.ssh/config</code></h2>
 <p>Con varias máquinas — la VM, la universidad, un servidor de cálculo — recordar usuarios, direcciones y puertos cansa. <code>~/.ssh/config</code> es la agenda de SSH: un fichero de texto (¿qué si no?) que crea alias. <code>nano ~/.ssh/config</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Host lab</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    HostName debian-lab</span>
@@ -433,8 +491,8 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Port 22</span></code></pre></div>
 <p>Desde ahora, <code>ssh lab</code> basta — y también vale para <code>scp</code> y <code>rsync</code>. Cuando la universidad te dé una cuenta, será una entrada más en esta agenda, y todo lo que sigue funcionará igual con <code>uni</code> que con <code>lab</code>.</p>
 </section>
-<section id="sec-copiar" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="sec-copiar"><span class="header-section-number">11.5</span> Mover ficheros: <code>scp</code> y <code>rsync</code></h2>
+<section id="sec-copiar" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="sec-copiar"><span class="header-section-number">11.6</span> Mover ficheros: <code>scp</code> y <code>rsync</code></h2>
 <p>Copiar entre máquinas usa la misma gramática que <code>cp</code> del capítulo 2, con un <code>máquina:</code> delante de la ruta remota:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp adquisicion.log lab:~/</span>
 <span class="t-out">adquisicion.log                          100%  298KB  41.2MB/s   00:00</span>
@@ -448,12 +506,12 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <span class="t-out">sent 1,204,589 bytes  received 42 bytes  2,409,262.00 bytes/sec</span></code></pre>
 <p><code>-a</code> conserva fechas y permisos, <code>-v</code> cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: <strong>la barra final importa</strong>. <code>simulaciones/</code> (con barra) sincroniza <em>el contenido</em> de la carpeta; <code>simulaciones</code> (sin barra) copia <em>la carpeta entera</em> dentro del destino. La segunda vez que ejecutes el mismo <code>rsync</code> tardará un segundo: solo viaja lo nuevo.</p>
 <div class="truco">
-<p><strong>✚ Truco · Arrastrar y soltar por SSH</strong></p>
-<p>El gestor de archivos de Mint sabe hablar SSH: en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>) escribe <code>sftp://debian-lab/home/marcos</code> y verás la casa del servidor como una carpeta más — arrastra ficheros, ábrelos, edítalos. Es SFTP, el primo de <code>scp</code> que viaja por el mismo túnel. Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>.</p>
+<p><strong>✚ Truco · Arrastrar y soltar sigue valiendo</strong></p>
+<p>La conexión con ratón de la primera sección es SFTP — el primo de <code>scp</code> que viaja por el mismo túnel — y también se abre escribiendo <code>sftp://debian-lab/home/marcos</code> en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>). Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>.</p>
 </div>
 </section>
-<section id="sec-comando-remoto" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="sec-comando-remoto"><span class="header-section-number">11.6</span> Ejecutar allí, sin quedarse</h2>
+<section id="sec-comando-remoto" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-comando-remoto"><span class="header-section-number">11.7</span> Ejecutar allí, sin quedarse</h2>
 <p>El detalle que convierte SSH de «terminal lejana» en herramienta de trabajo: puedes pedirle a otra máquina que ejecute <strong>un comando</strong> y te devuelva la salida, sin abrir sesión:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab hostname</span>
 <span class="t-out">debian-lab</span>
@@ -463,8 +521,8 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <span class="t-out">/dev/vda2         17G   1,4G   15G   9% /</span></code></pre>
 <p>Ahí están los tres bloques anteriores dándose la mano: el <code>grep</code> del capítulo 3 corriendo en el servidor del capítulo 8, con el resultado llegando a tu terminal por la red del bloque D — y ese <code>| tail -1</code> se ejecuta <em>en tu Mint</em>, sobre lo que el servidor devolvió. Cuando tengas una simulación en un clúster, «¿ha terminado?» será <code>ssh cluster ls resultados/</code>, sin moverte de tu editor.</p>
 </section>
-<section id="sec-nivel-2" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="sec-nivel-2"><span class="header-section-number">11.7</span> Nivel 2: cuando el servidor es de verdad</h2>
+<section id="sec-nivel-2" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="sec-nivel-2"><span class="header-section-number">11.8</span> Nivel 2: cuando el servidor es de verdad</h2>
 <p>Todo lo anterior funciona idéntico con un servidor a mil kilómetros; solo cambia lo que hay después de la <code>@</code>. Dónde conseguir uno, mientras el curso se escribe (comprueba disponibilidad y condiciones, que cambian):</p>
 <table class="caption-top table">
 <colgroup>
@@ -522,13 +580,13 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p>¿Y entrar en tu Mint desde la universidad? Ayer viste por qué no se puede sin más: tu casa está detrás del NAT. Haría falta pedirle al router que <em>reenvíe</em> el puerto 22 de su dirección pública a tu Mint («reenvío de puertos» o <em>port forwarding</em>, en la sección WAN) — un cambio reversible más, que abriría una puerta de tu casa a todo internet. Solo tiene sentido con claves y contraseña desactivada, y si tu compañía te tiene tras un CG-NAT (ejercicio 9.3), ni así. Lo dejamos como experimento avanzado para quien lo necesite; el capítulo 12 enseña una vía más elegante para casi todos los casos.</p>
 </div>
 </section>
-<section id="sec-practica-11" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="sec-practica-11"><span class="header-section-number">11.8</span> Práctica: la escalera</h2>
+<section id="sec-practica-11" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="sec-practica-11"><span class="header-section-number">11.9</span> Práctica: la escalera</h2>
 <p>Cuaderno en marcha (<code>script sesion11.log</code>). Los cambios de hoy en la VM se hacen con instantánea previa; en tu Mint, solo se instala un paquete y se crean ficheros en <code>~/.ssh</code>.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.1 · Nivel 0: contigo mismo</strong></p>
-<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 10, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal. <em>Pista: <code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</em></p>
+<p><strong>Ejercicio 11.0 · Con ratón</strong></p>
+<p>Desde el gestor de archivos, conéctate a <code>debian-lab</code> por SSH con el diálogo <em>Conectar al servidor…</em>, copia un fichero cualquiera de tu Mint a la casa del servidor arrastrándolo, y comprueba en la barra lateral que la conexión queda como marcador. Después desconéctala (botón ⏏ junto al marcador). <em>Pista: tipo SSH, servidor <code>debian-lab</code>, usuario <code>marcos</code>; si pide aceptar una «identidad» desconocida, es la huella que explica la sección siguiente — acepta.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -542,16 +600,16 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
-<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 12, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
+<p>Archivo → Conectar al servidor → SSH · <code>debian-lab</code> · <code>/home/marcos</code> · <code>marcos</code> → contraseña → la carpeta aparece; arrastrar el fichero; ⏏ para desconectar. Desde la VM, <code>ls ~</code> muestra el fichero copiado.</p>
+<p><strong>Por qué así</strong> — Es exactamente <code>scp</code> con ratón, y para mucha gente es <em>toda</em> la SSH que necesitan. El resto del capítulo existe para cuando el ratón se queda corto: ejecutar cosas allí, automatizar, o entrar en máquinas sin ventanas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.2 · Nivel 1: el servidor</strong></p>
-<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir. <em>Pista: <code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</em></p>
+<p><strong>Ejercicio 11.1 · Nivel 0: contigo mismo</strong></p>
+<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 10, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal. <em>Pista: <code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -565,16 +623,16 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
-<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
+<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
+<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 12, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.3 · Las claves</strong></p>
-<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos. <em>Pista: <code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</em></p>
+<p><strong>Ejercicio 11.2 · Nivel 1: el servidor</strong></p>
+<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir. <em>Pista: <code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -588,16 +646,17 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
-<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
+<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
+<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p><strong>Nivel 2 · Avanzado (pero muy útil)</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.4 · Alias, copia y comando remoto</strong></p>
-<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas). <em>Pista: <code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</em></p>
+<p><strong>Ejercicio 11.3 · Las claves</strong></p>
+<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos. <em>Pista: <code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -611,17 +670,16 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
-<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
+<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
+<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.5 · <code>rsync</code> y la barra</strong></p>
-<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja. <em>Pista: <code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</em></p>
+<p><strong>Ejercicio 11.4 · Alias, copia y comando remoto</strong></p>
+<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas). <em>Pista: <code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -635,16 +693,16 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
-<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
+<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.6 · Cerrar la puerta a las contraseñas</strong></p>
-<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza. <em>Pista: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</em></p>
+<p><strong>Ejercicio 11.5 · <code>rsync</code> y la barra</strong></p>
+<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja. <em>Pista: <code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -657,6 +715,29 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
+<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.6 · Cerrar la puerta a las contraseñas</strong></p>
+<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza. <em>Pista: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La línea suele venir comentada (<code>#PasswordAuthentication yes</code>): descoméntala y ponla a <code>no</code>. Tras el reinicio del servicio, <code>ssh lab</code> entra por clave; <code>ssh -o PubkeyAuthentication=no lab</code> devuelve <code>Permission denied (publickey)</code>. Vuelta atrás: restaurar el <code>.bak</code> y reiniciar <code>ssh</code> — o la instantánea.</p>
 <p><strong>Por qué así</strong> — Es <em>el</em> endurecimiento básico de cualquier servidor expuesto, y lo has hecho con todas las redes: instantánea, copia, sesión abierta de reserva. La regla de oro de los administradores — «nunca cierres la sesión que funciona hasta probar la nueva» — acaba de entrar en tu repertorio.</p>
@@ -671,7 +752,7 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p>Si dispones de una cuenta en un servidor real (universidad, nube o shell público): añádelo a tu <code>~/.ssh/config</code>, instala tu clave pública por la vía que te indiquen, entra, y repite el parte de «¿dónde estoy?» del 11.2 más un <code>ping</code> de vuelta a tu casa desde allí — para ver la distancia con los ojos del capítulo 9. <em>Pista: si el puerto no es el 22, <code>Port</code> en la agenda; si te dan solo un formulario web para la clave, el contenido a pegar es tu <code>id_ed25519.pub</code> completo.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -680,7 +761,7 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La experiencia es idéntica a <code>debian-lab</code> con dos diferencias visibles: el <code>ping</code> de vuelta a tu IP pública tarda decenas de milisegundos (kilómetros reales), y probablemente <code>sudo</code> no funcione — no eres administrador allí, y ahora entiendes exactamente qué significa eso.</p>
 <p><strong>Por qué así</strong> — El curso se escribió para que llegaras aquí sin necesitar este ejercicio; hacerlo cierra el círculo: la escalera de tres niveles era la misma máquina a tres distancias.</p>
@@ -690,8 +771,8 @@ Figura&nbsp;11.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 </div>
 </section>
-<section id="sec-quiz-11" class="level2" data-number="11.9">
-<h2 data-number="11.9" class="anchored" data-anchor-id="sec-quiz-11"><span class="header-section-number">11.9</span> Autocomprobación</h2>
+<section id="sec-quiz-11" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="sec-quiz-11"><span class="header-section-number">11.10</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap11">
   <div class="qz"><p class="qq" data-n="1">Al conectar por primera vez a un servidor, SSH te pregunta si aceptas su huella porque…</p>

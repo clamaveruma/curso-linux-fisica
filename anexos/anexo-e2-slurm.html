@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice A — Vengo de Windows (o de macOS) – Bendito maldito Linux</title>
+<title>Apéndice F — SLURM en dos páginas: el día del clúster – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-c1-pc-real.html" rel="next">
-<link href="../capitulos/proyecto-final.html" rel="prev">
+<link href="../anexos/anexo-e1-ia.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e2-slurm.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -208,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link active">
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
@@ -238,7 +272,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link">
+  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></span></a>
   </div>
 </li>
@@ -254,24 +288,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#los-dos-caminos" id="toc-los-dos-caminos" class="nav-link active" data-scroll-target="#los-dos-caminos">Los dos caminos</a></li>
-  <li><a href="#camino-a-mint-en-virtualbox" id="toc-camino-a-mint-en-virtualbox" class="nav-link" data-scroll-target="#camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</a></li>
-  <li><a href="#camino-b-wsl2" id="toc-camino-b-wsl2" class="nav-link" data-scroll-target="#camino-b-wsl2">Camino B: WSL2</a></li>
-  <li><a href="#dos-caminos-más-el-usb-persistente-y-el-arranque-dual" id="toc-dos-caminos-más-el-usb-persistente-y-el-arranque-dual" class="nav-link" data-scroll-target="#dos-caminos-más-el-usb-persistente-y-el-arranque-dual">Dos caminos más: el USB persistente y el arranque dual</a>
-  <ul class="collapse">
-  <li><a href="#camino-c-un-linux-live-en-un-pendrive-con-persistencia" id="toc-camino-c-un-linux-live-en-un-pendrive-con-persistencia" class="nav-link" data-scroll-target="#camino-c-un-linux-live-en-un-pendrive-con-persistencia">Camino C · Un Linux <em>live</em> en un pendrive, con persistencia</a></li>
-  <li><a href="#camino-d-arranque-dual-solo-con-alguien-que-sepa" id="toc-camino-d-arranque-dual-solo-con-alguien-que-sepa" class="nav-link" data-scroll-target="#camino-d-arranque-dual-solo-con-alguien-que-sepa">Camino D · Arranque dual: solo con alguien que sepa</a></li>
-  </ul></li>
-  <li><a href="#lo-que-no-cambia" id="toc-lo-que-no-cambia" class="nav-link" data-scroll-target="#lo-que-no-cambia">Lo que no cambia</a></li>
+  <li><a href="#práctica" id="toc-práctica" class="nav-link active" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e2-slurm.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-windows" class="quarto-section-identifier">Apéndice A — Vengo de Windows (o de macOS)</span></h1>
+<h1 class="title"><span id="sec-anexo-e2" class="quarto-section-identifier">Apéndice F — SLURM en dos páginas: el día del clúster</span></h1>
 </div>
 
 
@@ -288,141 +314,87 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>El curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.</p>
-<section id="los-dos-caminos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="los-dos-caminos">Los dos caminos</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>A · Un Mint completo en VirtualBox</strong></th>
-<th><strong>B · WSL2 (Ubuntu dentro de Windows)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Qué es</td>
-<td>una máquina virtual con Linux Mint entero, escritorio incluido</td>
-<td>una terminal Ubuntu integrada en Windows, sin escritorio</td>
-</tr>
-<tr class="even">
-<td>Instalar</td>
-<td>30–40 min; ISO de Mint + VirtualBox</td>
-<td>5 min; una orden en PowerShell</td>
-</tr>
-<tr class="odd">
-<td>Bloques A y B (caps. 1–6)</td>
-<td>✔ todo</td>
-<td>✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica</td>
-</tr>
-<tr class="even">
-<td>Bloque C (caps. 7–8)</td>
-<td>✔ con un matiz (abajo)</td>
-<td>✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado</td>
-</tr>
-<tr class="odd">
-<td>Bloques D y E (caps. 9–12)</td>
-<td>✔</td>
-<td>✔ (la red es la de Windows; SSH funciona igual)</td>
-</tr>
-<tr class="even">
-<td>Recomendado para</td>
-<td>seguir el curso entero como está escrito</td>
-<td>empezar hoy con la terminal, o si tu PC va justo de RAM</td>
-</tr>
-</tbody>
-</table>
-<p>Si puedes, el <strong>camino A</strong>: es un Linux de verdad — con su <code>apt</code>, su <code>systemd</code>, su <code>lsblk</code> — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es <strong>UTM</strong> (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).</p>
-</section>
-<section id="camino-a-mint-en-virtualbox" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-a-mint-en-virtualbox">Camino A: Mint en VirtualBox</h2>
-<ol type="1">
-<li>Descarga <strong>VirtualBox</strong> (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de <strong>Linux Mint</strong> (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: <code>Get-FileHash linuxmint-22.iso -Algorithm SHA256</code>.</li>
-<li><strong>Nueva máquina</strong>: nombre <code>mint</code>, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.</li>
-<li>Arranca. Mint entra en modo <em>live</em> — un escritorio de prueba —; el icono <strong>Install Linux Mint</strong> lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.</li>
-<li>Tras reiniciar, en el menú <em>Dispositivos → Insertar imagen de CD de las Guest Additions</em> e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.</li>
-<li>Ya estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox <em>Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado</em> para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.</li>
-</ol>
-</section>
-<section id="camino-b-wsl2" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="camino-b-wsl2">Camino B: WSL2</h2>
-<p>En PowerShell como administrador: <code>wsl --install</code> — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación <em>Ubuntu</em> del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (<code>sudo apt install</code>, <code>nano</code>, tuberías, permisos, <code>htop</code>). Tres avisos honestos: tus ficheros de Windows están en <code>/mnt/c/…</code>, más lentos que tu casa Linux; <code>lsblk</code> y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.</p>
-</section>
-<section id="dos-caminos-más-el-usb-persistente-y-el-arranque-dual" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="dos-caminos-más-el-usb-persistente-y-el-arranque-dual">Dos caminos más: el USB persistente y el arranque dual</h2>
-<p>Hay otras dos formas de tener un Linux <em>de verdad</em> en tu ordenador sin renunciar a Windows. Una es limpia y fácil; la otra no es para principiantes.</p>
-<section id="camino-c-un-linux-live-en-un-pendrive-con-persistencia" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="camino-c-un-linux-live-en-un-pendrive-con-persistencia">Camino C · Un Linux <em>live</em> en un pendrive, con persistencia</h3>
-<p>Cualquier ISO de Mint arranca «en vivo» desde un pendrive: un escritorio completo que no toca tu disco… y que olvida todo al apagar. La <strong>persistencia</strong> arregla eso: una partición extra en el mismo pendrive donde se guardan tus ficheros, tu configuración y lo que instales con <code>apt</code>. Desde Windows, la forma más sencilla es <strong>Rufus</strong> (rufus.ie, gratuito):</p>
-<ol type="1">
-<li>Un pendrive <strong>USB 3 de 32 GB</strong> (16 como mínimo) que puedas borrar; cuanto más rápido, mejor: es tu disco duro durante el curso.</li>
-<li>Rufus → elige el pendrive y la ISO de Mint → aparece el control <strong>«Tamaño de la partición persistente»</strong>: dale todo lo que quepa (16–24 GB) → Empezar. Rufus crea la partición <code>casper-rw</code> de persistencia por ti.</li>
-<li>Reinicia con la tecla del menú de arranque (anexo C1) y elige el pendrive. Mint arranca en vivo; lo que hagas, se queda.</li>
-</ol>
-<p>Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema <em>live</em>) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en <code>lsblk</code>, el tuyo y el de Windows, que es incluso más instructivo. Los <em>peros</em>, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (<code>apt upgrade</code> sí, pero el sistema <em>live</em> arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 11 y anexo B1: <code>rsync</code> con <code>cron</code>). Para quien quiera varias ISO en un mismo pendrive existe <strong>Ventoy</strong>, con persistencia configurable por fichero; es más potente y más liado — para más adelante.</p>
-<p>Y una variante con más recorrido: en vez de un sistema <em>live</em>, <strong>instalar Linux entero en un SSD externo por USB</strong> — con el instalador del capítulo 8, eligiendo ese disco como destino y poniendo en él la partición EFI. Es un Linux completo, rápido y permanente que arranca en cualquier PC desde el menú de arranque. La única pega es seria: al elegir el disco de destino, equivocarse destruye Windows. Es el camino perfecto <em>después</em> del capítulo 8 y del anexo C1, con el plan escrito y <code>lsblk</code> delante — no antes.</p>
-</section>
-<section id="camino-d-arranque-dual-solo-con-alguien-que-sepa" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="camino-d-arranque-dual-solo-con-alguien-que-sepa">Camino D · Arranque dual: solo con alguien que sepa</h3>
-<p>Instalar Linux en una partición del disco interno, junto a Windows, y elegir al encender. Es lo que hace mucha gente y lo que cubre el anexo C1 — pero <strong>no es para hacerlo a solas el primer día</strong>. Las implicaciones que hay que entender antes: reducir la partición de Windows (desde Windows, con su «inicio rápido» y BitLocker desactivados), que GRUB pase a gestionar el arranque de los dos sistemas, que una actualización grande de Windows puede pisar ese arranque y dejarte «sin Linux» hasta repararlo, y que deshacerlo requiere saber restaurar el cargador de Windows. Si tienes a alguien que lo haya hecho varias veces y te lo explique mientras lo hace, adelante — con copia de seguridad. Si no, el camino C te da el mismo Linux sin ninguno de esos riesgos, y el capítulo 8 te enseñará a hacer el dual tú mismo cuando toque.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Cubre el curso</th>
-<th>Riesgo para Windows</th>
-<th>Para quién</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>A</strong> Mint en VirtualBox</td>
-<td>todo (bloque C con virtualización anidada)</td>
-<td>ninguno</td>
-<td>la opción por defecto</td>
-</tr>
-<tr class="even">
-<td><strong>B</strong> WSL2</td>
-<td>terminal y redes; no discos ni instalación</td>
-<td>ninguno</td>
-<td>empezar hoy mismo</td>
-</tr>
-<tr class="odd">
-<td><strong>C</strong> USB persistente (Rufus)</td>
-<td>todo, a la velocidad del pendrive</td>
-<td>ninguno</td>
-<td>quien quiere Linux «real» sin tocar el disco</td>
-</tr>
-<tr class="even">
-<td><strong>C’</strong> instalación en SSD externo</td>
-<td>todo, rápido</td>
-<td>alto al instalar, ninguno después</td>
-<td>tras el capítulo 8 y el anexo C1</td>
-</tr>
-<tr class="odd">
-<td><strong>D</strong> arranque dual</td>
-<td>todo</td>
-<td>medio, y permanente</td>
-<td>solo acompañado por alguien que sepa</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="lo-que-no-cambia" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="lo-que-no-cambia">Lo que no cambia</h2>
-<p>Sea cual sea el camino: cuaderno con <code>script</code>, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM (y con el USB persistente, además, copia periódica de tu carpeta al servidor). La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.</p>
+<p>Este anexo es para un día concreto: el día que te den un usuario en el clúster de la universidad o de la Red Española de Supercomputación. No hace falta antes — y sin los capítulos 11 y 12 (SSH y tmux) no se entiende. Es la parte más avanzada del curso, y por eso vive aquí y no en el cuerpo: léela cuando tengas dónde probarla.</p>
+<p>En un clúster no ejecutas nada: <strong>pides</strong>. Entras por SSH en el <em>nodo de acceso</em> (<em>login node</em>), describes tu trabajo en un fichero, se lo entregas a la cola, y cuando SLURM encuentra hueco en los nodos de cálculo, lo ejecuta y te deja los resultados. Tres reglas que todo administrador agradecerá que sepas antes de llegar: en el nodo de acceso no se calcula (se edita, se envía, se consulta); se pide lo que se necesita — pedir de más retrasa tu turno; y los resultados van a donde te digan (<code>scratch</code>, normalmente), no a tu casa.</p>
+<div id="fig-slurm" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-slurm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap12/fig-slurm.svg" class="img-fluid figure-img" alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-slurm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;F.1: La anatomía de un clúster. Tú solo tocas el nodo de la izquierda; SLURM reparte el resto.
+</figcaption>
+</figure>
+</div>
+<p>El fichero que se entrega es un <strong>job script</strong> — y ya sabes escribirlo: es un script de bash del capítulo 4, con unas líneas de comentario que SLURM lee como instrucciones:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=pendulo</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>#SBATCH --cpus-per-task=4</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>#SBATCH --mem=8G</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>#SBATCH --time=02:00:00</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=pendulo_%j.log</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>module load python/3.12</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cd $HOME/pendulo</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>python3 simula.py --pasos 1000000 &gt; resultados.csv</span></code></pre></div>
+<p>Cada <code>#SBATCH</code> es una petición: nombre, núcleos, memoria, tiempo máximo, dónde escribir la salida (<code>%j</code> se sustituye por el número de trabajo). Para bash son comentarios — el script se puede probar localmente con <code>bash trabajo.sh</code> —; para SLURM son el contrato. El <code>module load</code> es el mecanismo con que los clústeres ofrecen versiones de software sin pisarse: cada <code>module</code> ajusta tu <code>$PATH</code> del capítulo 5. Y el ciclo entero son cuatro comandos:</p>
+<pre class="terminal"><code><span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sbatch trabajo.sh</span>
+<span class="t-out">Submitted batch job 48213</span>
+<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">squeue -u usuario</span>
+<span class="t-out">  JOBID PARTITION     NAME     USER ST  TIME  NODES NODELIST(REASON)</span>
+<span class="t-out">  48213   general  pendulo  usuario PD  0:00      1 (Priority)</span>
+<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">squeue -u usuario</span>
+<span class="t-out">  48213   general  pendulo  usuario  R  4:12      1 nodo03</span>
+<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">scancel 48213</span></code></pre>
+<p><code>sbatch</code> entrega; <code>squeue</code> consulta — <code>PD</code> es <em>pendiente</em> en la cola, <code>R</code> es <em>corriendo</em>, y la columna final dice por qué espera o dónde corre —; <code>scancel</code> retira. Cuando termine, <code>pendulo_48213.log</code> tendrá lo que el script escribiera por pantalla, y <code>resultados.csv</code> estará donde lo dejaste. Para pruebas cortas existe <code>srun --pty bash</code>: te da una terminal <em>dentro</em> de un nodo de cálculo durante un rato, para probar antes de enviar en serio. Con esto, el primer día de doctorado tendrás más recorrido que la mayoría de los que llevan un año.</p>
+<section id="práctica" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
+<div class="ejercicio">
+<p><strong>Ejercicio E2.1 · Leer un job script</strong></p>
+<p>Sin ejecutar nada (no tienes SLURM… todavía): lee el script de arriba y responde en el cuaderno — ¿cuántos núcleos pide?, ¿cuánto tiempo máximo?, ¿dónde quedará lo que el programa imprima por pantalla si el trabajo recibe el número 48213?, ¿qué pasa si el programa tarda tres horas?, ¿y por qué <code>bash trabajo.sh</code> lo ejecutaría igualmente en tu portátil? <em>Pista: las líneas <code>#SBATCH</code> son comentarios para bash y contrato para SLURM.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>4 núcleos; 2 horas; en <code>pendulo_48213.log</code>; si excede el tiempo, SLURM lo mata sin contemplaciones (y por eso se pide con margen, pero no de más); y bash ignora las líneas <code>#</code>, así que ejecuta el <code>cd</code> y el <code>python3</code> sin más — salvo <code>module load</code>, que solo existe en el clúster.</p>
+<p><strong>Por qué así</strong> — Leer con soltura un job script antes de tener acceso a un clúster es exactamente la ventaja que este curso quería darte. El resto — particiones, colas con nombre, GPU — son variantes de estas cinco líneas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio E2.2 · Tu propio job script, ensayado en local</strong></p>
+<p>Escribe <code>trabajo.sh</code> para tu <code>simula.py</code> con cabecera <code>#SBATCH</code> (nombre, 1 núcleo, 512 MB, 15 minutos, salida <code>simula_%j.log</code>), hazlo ejecutable, y <em>ensáyalo</em> en <code>debian-lab</code> con <code>bash trabajo.sh</code> — sin SLURM, las peticiones se ignoran y el script corre igual. Verifica que produce <code>progreso.txt</code>. <em>Pista: quita el <code>module load</code> (no existe en tu VM) y usa rutas absolutas, como en el capítulo 1: en un nodo de cálculo no sabes desde dónde te ejecutan.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un script con shebang, cinco <code>#SBATCH</code>, <code>cd /home/marcos</code> y <code>python3 simula.py</code>. <code>chmod u+x trabajo.sh</code> y <code>bash trabajo.sh</code> lo ejecuta igual que lo haría un nodo de cálculo. El día que tengas cuenta en un clúster, este fichero — más el <code>module load</code> que allí te indiquen — es lo primero que enviarás con <code>sbatch</code>.</p>
+<p><strong>Por qué así</strong> — Has cerrado el círculo del curso: un script de bash (cap. 4) con rutas absolutas (cap. 1), lanzado en un servidor (cap. 8) al que entras por SSH con clave (cap. 11), preparado para una cola (cap. 12). Doce sesiones, un físico que sabe dónde está parado. Guarda <code>sesion12.log</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -768,14 +740,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Proyecto final: tu primer servidor</span>
+      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA como herramienta, no como oráculo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

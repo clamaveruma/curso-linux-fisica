@@ -271,6 +271,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -287,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-tmux" id="toc-sec-tmux" class="nav-link" data-scroll-target="#sec-tmux"><span class="header-section-number">12.2</span> <code>tmux</code>: la sesión que no muere</a></li>
   <li><a href="#sec-tunel" id="toc-sec-tunel" class="nav-link" data-scroll-target="#sec-tunel"><span class="header-section-number">12.3</span> El túnel: un servicio remoto en tu navegador</a></li>
   <li><a href="#sec-nube" id="toc-sec-nube" class="nav-link" data-scroll-target="#sec-nube"><span class="header-section-number">12.4</span> Qué es «la nube», en concreto</a></li>
-  <li><a href="#sec-slurm" id="toc-sec-slurm" class="nav-link" data-scroll-target="#sec-slurm"><span class="header-section-number">12.5</span> SLURM en dos páginas</a></li>
+  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">12.5</span> Cuando te den cuenta en un clúster</a></li>
   <li><a href="#sec-practica-12" id="toc-sec-practica-12" class="nav-link" data-scroll-target="#sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</a></li>
   <li><a href="#sec-quiz-12" id="toc-sec-quiz-12" class="nav-link" data-scroll-target="#sec-quiz-12"><span class="header-section-number">12.7</span> Autocomprobación</a></li>
   </ul>
@@ -316,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="lede">
-<p>Última sesión numerada, y la que junta todo. Ya entras y sales de tu servidor; hoy aprendes a <em>quedarte</em> sin estar: lanzar una simulación, cerrar el portátil, volver mañana desde otra ciudad y encontrarla terminada. Después, el truco favorito del físico computacional — un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil por un túnel cifrado. Y de postre, dos cosas que te van a nombrar el primer día del doctorado: qué es «la nube» en términos concretos, y qué es SLURM, la cola de trabajos de todos los clústeres del mundo.</p>
+<p>Última sesión numerada, y la que junta todo. Ya entras y sales de tu servidor; hoy aprendes a <em>quedarte</em> sin estar: lanzar una simulación, cerrar el portátil, volver mañana desde otra ciudad y encontrarla terminada. Después, el truco favorito del físico computacional — un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil por un túnel cifrado. Y de postre, qué es «la nube» en términos concretos — y por dónde seguir el día que te den cuenta en un clúster.</p>
 </div>
 <div class="chapmeta">
 <p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 11</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong></p>
@@ -329,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.</li>
 <li>Ejecutar Jupyter en el servidor con los datos y la CPU de allí, y trabajar desde tu portátil.</li>
 <li>Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.</li>
-<li>La anatomía de un clúster y de un <em>job script</em> de SLURM: enviar, consultar, cancelar.</li>
+<li>Qué es un clúster de cálculo y dónde seguir el día que te den cuenta en uno.</li>
 </ul>
 </div>
 <section id="sec-sesion-muere" class="level2" data-number="12.1">
@@ -416,40 +422,9 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </figure>
 </div>
 </section>
-<section id="sec-slurm" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="sec-slurm"><span class="header-section-number">12.5</span> SLURM en dos páginas</h2>
-<p>En un clúster no ejecutas nada: <strong>pides</strong>. Entras por SSH en el <em>nodo de acceso</em> (<em>login node</em>), describes tu trabajo en un fichero, se lo entregas a la cola, y cuando SLURM encuentra hueco en los nodos de cálculo, lo ejecuta y te deja los resultados. Tres reglas que todo administrador agradecerá que sepas antes de llegar: en el nodo de acceso no se calcula (se edita, se envía, se consulta); se pide lo que se necesita — pedir de más retrasa tu turno; y los resultados van a donde te digan (<code>scratch</code>, normalmente), no a tu casa.</p>
-<div id="fig-slurm" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-slurm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap12/fig-slurm.svg" class="img-fluid figure-img" alt="Nodo de acceso, cola de trabajos gestionada por SLURM y nodos de cálculo">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-slurm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.4: La anatomía de un clúster. Tú solo tocas el nodo de la izquierda; SLURM reparte el resto.
-</figcaption>
-</figure>
-</div>
-<p>El fichero que se entrega es un <strong>job script</strong> — y ya sabes escribirlo: es un script de bash del capítulo 4, con unas líneas de comentario que SLURM lee como instrucciones:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>#SBATCH --job-name=pendulo</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>#SBATCH --cpus-per-task=4</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>#SBATCH --mem=8G</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>#SBATCH --time=02:00:00</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>#SBATCH --output=pendulo_%j.log</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>module load python/3.12</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cd $HOME/pendulo</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>python3 simula.py --pasos 1000000 &gt; resultados.csv</span></code></pre></div>
-<p>Cada <code>#SBATCH</code> es una petición: nombre, núcleos, memoria, tiempo máximo, dónde escribir la salida (<code>%j</code> se sustituye por el número de trabajo). Para bash son comentarios — el script se puede probar localmente con <code>bash trabajo.sh</code> —; para SLURM son el contrato. El <code>module load</code> es el mecanismo con que los clústeres ofrecen versiones de software sin pisarse: cada <code>module</code> ajusta tu <code>$PATH</code> del capítulo 5. Y el ciclo entero son cuatro comandos:</p>
-<pre class="terminal"><code><span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sbatch trabajo.sh</span>
-<span class="t-out">Submitted batch job 48213</span>
-<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">squeue -u usuario</span>
-<span class="t-out">  JOBID PARTITION     NAME     USER ST  TIME  NODES NODELIST(REASON)</span>
-<span class="t-out">  48213   general  pendulo  usuario PD  0:00      1 (Priority)</span>
-<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">squeue -u usuario</span>
-<span class="t-out">  48213   general  pendulo  usuario  R  4:12      1 nodo03</span>
-<span class="t-p">usuario@login1</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">scancel 48213</span></code></pre>
-<p><code>sbatch</code> entrega; <code>squeue</code> consulta — <code>PD</code> es <em>pendiente</em> en la cola, <code>R</code> es <em>corriendo</em>, y la columna final dice por qué espera o dónde corre —; <code>scancel</code> retira. Cuando termine, <code>pendulo_48213.log</code> tendrá lo que el script escribiera por pantalla, y <code>resultados.csv</code> estará donde lo dejaste. Para pruebas cortas existe <code>srun --pty bash</code>: te da una terminal <em>dentro</em> de un nodo de cálculo durante un rato, para probar antes de enviar en serio. Con esto, el primer día de doctorado tendrás más recorrido que la mayoría de los que llevan un año.</p>
+<section id="sec-cluster" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">12.5</span> Cuando te den cuenta en un clúster</h2>
+<p>Un <strong>clúster</strong> de cálculo — el de la universidad, el de la Red Española de Supercomputación — es la tercera edición del tiempo compartido: miles de máquinas como tu <code>debian-lab</code>, pero físicas y unidas por una red rapidísima, repartidas entre cientos de investigadores por una <strong>cola de trabajos</strong>. Se entra por SSH (este bloque entero aplica), se prepara el trabajo en una máquina de recepción y se le <em>pide</em> a la cola que lo ejecute cuando haya hueco. El gestor de colas más común se llama <strong>SLURM</strong>, y su manual de dos páginas — anatomía del clúster, el <em>job script</em>, enviar, consultar y cancelar — está en el <a href="../anexos/anexo-e2-slurm.html">anexo E2</a>, para el día en que te den el usuario. Hoy no hace falta: con <code>tmux</code> y el túnel ya tienes el noventa por ciento de lo que harás allí.</p>
 </section>
 <section id="sec-practica-12" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</h2>
@@ -481,12 +456,12 @@ Figura&nbsp;12.4: La anatomía de un clúster. Tú solo tocas el nodo de la izqu
 <div class="ejercicio">
 <p><strong>Ejercicio 12.2 · La simulación que sobrevive</strong></p>
 <p>Crea en <code>debian-lab</code> un <code>simula.py</code> de diez minutos (abajo), lánzalo dentro de una sesión tmux llamada <code>simulacion</code>, desengánchate, cierra SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba el progreso — sin engancharte, con <code>ssh lab "tail -2 progreso.txt"</code> — y luego engánchate para verlo terminar. <em>Pista: con <code>nano simula.py</code>:</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -554,53 +529,6 @@ Figura&nbsp;12.4: La anatomía de un clúster. Tú solo tocas el nodo de la izqu
 </div>
 </div>
 </div>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.5 · Leer un job script</strong></p>
-<p>Sin ejecutar nada (no tienes SLURM… todavía): lee el script de la sección y responde en el cuaderno — ¿cuántos núcleos pide?, ¿cuánto tiempo máximo?, ¿dónde quedará lo que el programa imprima por pantalla si el trabajo recibe el número 48213?, ¿qué pasa si el programa tarda tres horas?, ¿y por qué <code>bash trabajo.sh</code> lo ejecutaría igualmente en tu portátil? <em>Pista: las líneas <code>#SBATCH</code> son comentarios para bash y contrato para SLURM.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>4 núcleos; 2 horas; en <code>pendulo_48213.log</code>; si excede el tiempo, SLURM lo mata sin contemplaciones (y por eso se pide con margen, pero no de más); y bash ignora las líneas <code>#</code>, así que ejecuta el <code>cd</code> y el <code>python3</code> sin más — salvo <code>module load</code>, que solo existe en el clúster.</p>
-<p><strong>Por qué así</strong> — Leer con soltura un job script antes de tener acceso a un clúster es exactamente la ventaja que este curso quería darte. El resto — particiones, colas con nombre, GPU — son variantes de estas cinco líneas.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p><strong>Nivel 3 · El reto (opcional)</strong></p>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.6 · Tu propio job script, ensayado en local</strong></p>
-<p>Escribe <code>trabajo.sh</code> para tu <code>simula.py</code> con cabecera <code>#SBATCH</code> (nombre, 1 núcleo, 512 MB, 15 minutos, salida <code>simula_%j.log</code>), hazlo ejecutable, y <em>ensáyalo</em> en <code>debian-lab</code> con <code>bash trabajo.sh</code> — sin SLURM, las peticiones se ignoran y el script corre igual. Verifica que produce <code>progreso.txt</code>. <em>Pista: quita el <code>module load</code> (no existe en tu VM) y usa rutas absolutas, como en el capítulo 1: en un nodo de cálculo no sabes desde dónde te ejecutan.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Un script con shebang, cinco <code>#SBATCH</code>, <code>cd /home/marcos</code> y <code>python3 simula.py</code>. <code>chmod u+x trabajo.sh</code> y <code>bash trabajo.sh</code> lo ejecuta igual que lo haría un nodo de cálculo. El día que tengas cuenta en un clúster, este fichero — más el <code>module load</code> que allí te indiquen — es lo primero que enviarás con <code>sbatch</code>.</p>
-<p><strong>Por qué así</strong> — Has cerrado el círculo del curso: un script de bash (cap. 4) con rutas absolutas (cap. 1), lanzado en un servidor (cap. 8) al que entras por SSH con clave (cap. 11), preparado para una cola (cap. 12). Doce sesiones, un físico que sabe dónde está parado. Guarda <code>sesion12.log</code>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="sec-quiz-12" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="sec-quiz-12"><span class="header-section-number">12.7</span> Autocomprobación</h2>
@@ -634,24 +562,24 @@ Figura&nbsp;12.4: La anatomía de un clúster. Tú solo tocas el nodo de la izqu
     <div class="fb good"><b>Correcto.</b> Te dan una IP, un usuario y dónde pegar tu clave pública; a partir de ahí, todo el bloque E sin cambiar una coma.</div>
     <div class="fb bad"><b>No exactamente.</b> Es el capítulo 7 en el edificio de otro: una máquina virtual con sistema operativo completo, que se paga por tiempo encendida.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="5">En un clúster con SLURM, el nodo de acceso sirve para…</p>
-    <label><input type="radio" name="z5" value="a"><span>ejecutar la simulación</span></label>
-    <label><input type="radio" name="z5" value="b"><span>editar, enviar a la cola y consultar; el cálculo va a los nodos de cálculo</span></label>
-    <label><input type="radio" name="z5" value="c"><span>nada: es solo un cortafuegos</span></label>
-    <div class="fb good"><b>Correcto.</b> La regla número uno de todo clúster. Calcular en el nodo de acceso es la forma más rápida de recibir un correo del administrador.</div>
-    <div class="fb bad"><b>No exactamente.</b> El nodo de acceso es la recepción: se prepara y se envía con <code>sbatch</code>. El trabajo corre donde SLURM decida.</div>
+  <div class="qz"><p class="qq" data-n="5">Lanzaste Jupyter en el servidor dentro de tmux y cerraste el portátil. Al día siguiente…</p>
+    <label><input type="radio" name="z5" value="a"><span>el cuaderno y su kernel siguen vivos: basta abrir un túnel nuevo</span></label>
+    <label><input type="radio" name="z5" value="b"><span>Jupyter murió al cerrarse el túnel</span></label>
+    <label><input type="radio" name="z5" value="c"><span>hay que reinstalar Jupyter</span></label>
+    <div class="fb good"><b>Correcto.</b> El túnel es solo el camino; lo que vive es la sesión tmux del servidor. Túnel nuevo, misma URL, todo donde estaba.</div>
+    <div class="fb bad"><b>No exactamente.</b> El túnel se cierra con la conexión, pero Jupyter corre dentro de tmux, en el servidor: sobrevive. Abre otro túnel y sigue.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="6">Las líneas <code>#SBATCH --time=02:00:00</code> de un job script son…</p>
-    <label><input type="radio" name="z6" value="a"><span>comentarios para bash, instrucciones para SLURM</span></label>
-    <label><input type="radio" name="z6" value="b"><span>errores de sintaxis que bash ignora por suerte</span></label>
-    <label><input type="radio" name="z6" value="c"><span>obligatorias para que el script funcione en tu portátil</span></label>
-    <div class="fb good"><b>Correcto.</b> Por eso un job script se ensaya con <code>bash</code> en cualquier máquina y se entrega con <code>sbatch</code> en el clúster: mismo fichero, dos lectores.</div>
-    <div class="fb bad"><b>No exactamente.</b> Para bash empiezan por <code>#</code>: comentarios. SLURM las lee como el contrato del trabajo. En tu portátil no hacen falta ni estorban.</div>
+  <div class="qz"><p class="qq" data-n="6"><code>tmux attach || tmux new</code> significa…</p>
+    <label><input type="radio" name="z6" value="a"><span>engánchate a tu sesión si existe; si no, crea una</span></label>
+    <label><input type="radio" name="z6" value="b"><span>crea siempre una sesión nueva</span></label>
+    <label><input type="radio" name="z6" value="c"><span>cierra todas las sesiones</span></label>
+    <div class="fb good"><b>Correcto.</b> El <code>||</code> del capítulo 5: «y si lo anterior falla, entonces…». Es lo primero que se teclea en un servidor ajeno.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>||</code> ejecuta la segunda orden solo si la primera falla: intenta engancharte, y crea la sesión únicamente si no había ninguna.</div>
   </div>
 </div>
 <script>
 (function(){
-  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"b", z6:"a"};
+  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"a", z6:"a"};
   document.querySelectorAll("#quiz-cap12 .qz input").forEach(i => {
     i.addEventListener("change", () => {
       const qz = i.closest(".qz");
@@ -662,11 +590,11 @@ Figura&nbsp;12.4: La anatomía de un clúster. Tú solo tocas el nodo de la izqu
 })();
 </script>
 <div class="solucion-final">
-<p><strong>Autocomprobación (test de la sección 12.8)</strong> — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 b · 6 a.</p>
+<p><strong>Autocomprobación (test de la sección 12.8)</strong> — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 a · 6 a.</p>
 </div>
 <div class="proxima">
 <p><strong>Lo que queda</strong></p>
-<p>Doce sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, la IA como herramienta y no como oráculo, y el camino para quien venga de Windows. Guarda <code>sesion12.log</code>: son doce medidas.</p>
+<p>Doce sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, la IA como herramienta y no como oráculo, el camino para quien venga de Windows — y SLURM, para el día del clúster. Guarda <code>sesion12.log</code>: son doce medidas.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 12 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion12.log</code></p>

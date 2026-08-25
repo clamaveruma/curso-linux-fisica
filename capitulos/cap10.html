@@ -236,6 +236,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e2-slurm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">SLURM en dos páginas: el día del clúster</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -427,7 +433,7 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <p>Tu sesión SSH con la VM y una pestaña del navegador, cada una con su puerto efímero. Un último detalle que conecta con el capítulo 4: los puertos <strong>por debajo del 1024</strong> — los de los servicios clásicos — solo puede reservarlos <code>root</code>. Así, un usuario cualquiera no puede poner un programa suyo a escuchar en el 22 y hacerse pasar por el SSH de la máquina.</p>
 <div class="por-dentro">
 <p><strong>◉ Por dentro · TCP y UDP en diez minutos</strong></p>
-<p>Los paquetes viajan de dos maneras. <strong>TCP</strong> es correo certificado: antes de enviar nada, los dos extremos se saludan en tres pasos — «¿estás?», «estoy, ¿y tú?», «aquí» (el <em>handshake</em>: SYN, SYN-ACK, ACK) — y a partir de ahí cada paquete va numerado, el receptor confirma lo que recibe, lo que se pierde se reenvía y todo se entrega en orden. Más lento, pero fiable: SSH, la web y el correo van así. <strong>UDP</strong> es una postal: se envía y ya, sin conexión ni confirmación — rapidísimo, y si una se pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos van así: prefieren perder un paquete a esperar. Por eso <code>nmap</code> decía <code>22/tcp</code>: el puerto 22 <em>de TCP</em>. Los dos sistemas conviven en la misma dirección con números independientes.</p>
+<p>Los paquetes viajan de dos maneras. <strong>TCP</strong> es correo certificado: antes de enviar nada, los dos extremos se saludan en tres pasos — «¿estás?», «estoy, ¿y tú?», «aquí» (el <em>handshake</em>: SYN, SYN-ACK, ACK) — y a partir de ahí cada paquete va numerado, el receptor confirma lo que recibe, lo que se pierde se reenvía y todo se entrega en orden. Más lento, pero fiable: SSH, la web y el correo van así. <strong>UDP</strong> es una postal: se envía y ya, sin conexión ni confirmación — rapidísimo, y si una se pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos van así: prefieren perder un paquete a esperar. Por eso <code>nmap</code> decía <code>22/tcp</code>: el puerto 22 <em>de TCP</em>. Los dos sistemas conviven en la misma dirección con numeraciones independientes — el 53 de UDP (DNS) y el 53 de TCP son puertas distintas, aunque el mismo programa suela atender las dos.</p>
 </div>
 <div class="truco">
 <p><strong>✚ Truco · El cortafuegos, en una frase</strong></p>
