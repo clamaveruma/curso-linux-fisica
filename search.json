@@ -1140,6 +1140,66 @@
     ]
   },
   {
+    "objectID": "capitulos/proyecto-final.html",
+    "href": "capitulos/proyecto-final.html",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "",
+    "text": "Las reglas",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
+    "objectID": "capitulos/proyecto-final.html#las-reglas",
+    "href": "capitulos/proyecto-final.html#las-reglas",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "",
+    "text": "Desde cero. Crea una VM nueva llamada servidor (o borra debian-lab y empieza limpio). Que el músculo se acuerde sin el capítulo delante.\nTodo por terminal, salvo la creación de la VM y sus instantáneas, que se hacen en virt-manager.\nCuaderno obligatorio: script proyecto.log en tu Mint antes de empezar. Anota el tiempo de cada hito y qué te atascó: es el dato que el curso quiere.\nCada hito se verifica con un comando, no con una sensación. La hoja del final dice cuál.\nSi te atascas: primero el capítulo indicado; después man; y si sigues atascado, pide el comando a una IA con la disciplina del curso — léelo entero, verifica lo que no reconozcas, jamás un sudo o un rm a ciegas.\n\n\n\n\n\n\n\nFigura 1: La arquitectura que vas a montar. Cada caja y cada flecha es un capítulo.",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
+    "objectID": "capitulos/proyecto-final.html#los-hitos",
+    "href": "capitulos/proyecto-final.html#los-hitos",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "Los hitos",
+    "text": "Los hitos\n1. La máquina (capítulo 7). VM servidor: 2 CPU, 4 GB, disco de 20 GB, red NAT, con la ISO de Debian verificada en la bandeja.\n2. La instalación (capítulos 6 y 8). Debian sin escritorio, con servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te atreves, /home separado. Contraseña de root vacía. Al terminar, apaga desde dentro e instantánea recien-instalado.\n3. La red (capítulos 9 y 10). Averigua la IP del servidor, bautízalo en el /etc/hosts de tu Mint como servidor, y comprueba que responde por nombre. De propina: ¿qué puerta tiene abierta?\n4. El acceso (capítulo 11). Tu clave pública en el servidor, alias servidor en ~/.ssh/config, entrada sin contraseña. Después, cierra la puerta a las contraseñas en sshd_config — con copia del fichero y sesión de reserva abierta — y demuestra que te rechaza sin clave.\n5. El sistema (capítulos 4 y 5). Actualízalo. Instala lo que el análisis necesita: tmux, htop, tree. Comprueba con which que están, y con df -h cuánto disco queda.\n6. Los datos (capítulos 2 y 11). Crea en el servidor ~/proyecto/datos y ~/proyecto/resultados. Sube con rsync el adquisicion.log del capítulo 3 y la carpeta experimento-pendulo del capítulo 2. tree ~/proyecto debe enseñar el orden.\n7. El análisis (capítulos 3, 4 y 12). Escribe en el servidor analisis.py (abajo tienes uno de partida) y un analiza.sh con shebang que lo lance y anote la fecha en resultados/registro.txt. Hazlo ejecutable. Lánzalo dentro de una sesión tmux analisis, desengánchate, cierra la conexión y apaga la Wi-Fi un minuto. Vuelve, engánchate, y mira si ha terminado.\n8. La recogida (capítulo 11). Trae resultados/ a tu Mint con rsync, y abre el informe. Repite el rsync: debe no transferir nada.\n9. Propina (capítulo 12). Jupyter en el servidor a través de un túnel, abriendo el informe desde el navegador. Y un du -h del disco de la VM antes y después de todo: ¿cuánto ha crecido?",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
+    "objectID": "capitulos/proyecto-final.html#el-análisis-de-partida",
+    "href": "capitulos/proyecto-final.html#el-análisis-de-partida",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "El análisis de partida",
+    "text": "El análisis de partida\nSin NumPy — un servidor recién instalado no lo tiene, y no lo necesita para esto —. Solo biblioteca estándar, como en el capítulo 3:\n# analisis.py — recuento de errores por sensor y rango de temperaturas\nfrom collections import Counter\n\nerrores = Counter()\ntemps = []\nwith open(\"datos/adquisicion.log\") as f:\n    for linea in f:\n        campos = linea.split()\n        nivel, sensor = campos[2], campos[3]\n        if nivel == \"ERROR\":\n            errores[sensor] += 1\n        elif nivel == \"INFO\" and \"temp_C=\" in linea:\n            temps.append(float(linea.split(\"temp_C=\")[1]))\n\nwith open(\"resultados/informe.txt\", \"w\") as out:\n    out.write(\"Errores por sensor:\\n\")\n    for sensor, n in errores.most_common():\n        out.write(f\"  {sensor}: {n}\\n\")\n    out.write(f\"Temperatura minima: {min(temps):.2f}\\n\")\n    out.write(f\"Temperatura maxima: {max(temps):.2f}\\n\")\nprint(\"informe escrito en resultados/informe.txt\")\nSi el informe dice s3: 90, s1: 15, s4: 3 y un rango de 20,45 a 25,00, el análisis coincide con las tuberías del capítulo 3 — dos métodos, un resultado, como debe ser. Y si te sobra tiempo: que analisis.py genere también un CSV con errores por minuto, y grafícalo en tu Mint.",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
+    "objectID": "capitulos/proyecto-final.html#hoja-de-verificación",
+    "href": "capitulos/proyecto-final.html#hoja-de-verificación",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "Hoja de verificación",
+    "text": "Hoja de verificación\n\n\n\n\n\n\n\n\nHito\nComando (desde tu Mint salvo indicación)\nLo que debe salir\n\n\n\n\n1\nvirsh list --all\nservidor en la lista\n\n\n2\nssh servidor lsblk\nEFI en /boot/efi, raíz en /, [SWAP]\n\n\n2\nvirsh snapshot-list servidor\nrecien-instalado\n\n\n3\nping -c 1 servidor\nrespuesta desde 192.168.122.x\n\n\n3\nnmap servidor\nsolo 22/tcp open\n\n\n4\nssh servidor hostname\nservidor, sin pedir contraseña\n\n\n4\nssh -o PubkeyAuthentication=no servidor\nPermission denied (publickey)\n\n\n5\nssh servidor \"which tmux htop tree\"\ntres rutas\n\n\n6\nssh servidor tree ~/proyecto\ndatos/ con el log y el experimento; resultados/ vacío\n\n\n7\nssh servidor tmux ls\nla sesión analisis\n\n\n7\nssh servidor cat ~/proyecto/resultados/informe.txt\nel informe con s3: 90\n\n\n8\nrsync -av servidor:~/proyecto/resultados/ ~/resultados/ (2.ª vez)\nsent … bytes, ningún fichero listado\n\n\n9\ndu -sh del .qcow2 (con sudo)\nmás que en el capítulo 7",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
+    "objectID": "capitulos/proyecto-final.html#después",
+    "href": "capitulos/proyecto-final.html#después",
+    "title": "Proyecto final: tu primer servidor",
+    "section": "Después",
+    "text": "Después\nEscribe en el cuaderno, para ti, tres respuestas: qué hito te costó más y por qué; qué harías distinto la segunda vez; y cuánto tardaste en total. Esas tres líneas y proyecto.log son la medida del curso.\nY luego, el paso que ya no es un ejercicio: pide una cuenta en el clúster de tu universidad — o mira qué horas tiene tu grupo en la Red Española de Supercomputación. Cuando te la den, entra por SSH con tu clave, teclea tmux attach || tmux new, y empieza a trabajar. Ya sabes dónde estás parado.\n\nproyecto final v0.1 · piloto — el cuaderno proyecto.log con tiempos por hito es el dato más valioso que puedes devolver al curso",
+    "crumbs": [
+      "Proyecto final: tu primer servidor"
+    ]
+  },
+  {
     "objectID": "anexos/anexo-c1-pc-real.html",
     "href": "anexos/anexo-c1-pc-real.html",
     "title": "Apéndice A — Instalar en un PC real: la lista de comprobación",
