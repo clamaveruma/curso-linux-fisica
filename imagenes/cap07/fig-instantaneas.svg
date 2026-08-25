@@ -1,0 +1,25 @@
+<svg viewBox="0 0 700 250" width="700" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Instantáneas: guardar el estado de la máquina virtual y volver a él">
+  <defs>
+    <marker id="fsn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6A5F4D"/></marker>
+    <marker id="fsr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2F6F62"/></marker>
+  </defs>
+  <g font-family="IBM Plex Mono,monospace">
+    <line x1="40" y1="90" x2="660" y2="90" stroke="#C9B995" stroke-width="1.5"/>
+    <!-- estados -->
+    <circle cx="90" cy="90" r="7" fill="#9C8F79"/>
+    <text x="90" y="62" font-size="10.5" fill="#6A5F4D" text-anchor="middle">VM recién creada</text>
+    <circle cx="240" cy="90" r="9" fill="#2F6F62"/>
+    <text x="240" y="55" font-size="11" fill="#24564B" text-anchor="middle" font-weight="600">📷 instantánea</text>
+    <text x="240" y="70" font-size="9.5" fill="#6A5F4D" text-anchor="middle">«Debian recién instalado»</text>
+    <circle cx="400" cy="90" r="7" fill="#9A6A14"/>
+    <text x="400" y="62" font-size="10.5" fill="#9A6A14" text-anchor="middle">experimentos</text>
+    <circle cx="540" cy="90" r="7" fill="#C4342A"/>
+    <text x="540" y="55" font-size="10.5" fill="#C4342A" text-anchor="middle" font-weight="600">💥 rota</text>
+    <text x="540" y="70" font-size="9.5" fill="#6A5F4D" text-anchor="middle">(borraste /etc, o algo peor)</text>
+    <!-- vuelta atrás -->
+    <path d="M540 105 C 520 175, 300 175, 250 108" fill="none" stroke="#2F6F62" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#fsr)"/>
+    <text x="395" y="170" font-size="11" fill="#24564B" text-anchor="middle" font-weight="600">«restaurar instantánea» · 5 segundos</text>
+    <text x="395" y="188" font-size="9.5" fill="#6A5F4D" text-anchor="middle">la máquina vuelve exactamente al estado guardado — como si nada hubiera pasado</text>
+    <text x="350" y="228" font-size="10.5" fill="#9C8F79" text-anchor="middle">el «deshacer» que la vida real no tiene: por eso aquí se puede romper sin miedo</text>
+  </g>
+</svg>

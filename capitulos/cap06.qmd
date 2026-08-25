@@ -444,9 +444,10 @@ Responde de memoria; las respuestas están al final del capítulo.
 **La próxima sesión**
 
 Bloque C: por fin, romper cosas. En el capítulo 7 creas tu primera
-máquina virtual con VirtualBox — CPU, RAM, disco y red *de mentira*
-dentro de tu máquina de verdad — y conoces el superpoder que lo cambia
-todo: las instantáneas, el «deshacer» que la vida real no tiene. Es el
+máquina virtual con el taller que Linux trae de serie — KVM y
+virt-manager: CPU, RAM, disco y red *de mentira* dentro de tu máquina
+de verdad — y conoces el superpoder que lo cambia todo: las
+instantáneas, el «deshacer» que la vida real no tiene. Es el
 laboratorio de riesgo cero donde harás la instalación del capítulo 8 y
 los experimentos de red de los bloques D y E. Guarda `sesion06.log`.
 :::

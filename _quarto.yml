@@ -34,7 +34,8 @@ book:
     - capitulos/cap04.qmd
     - capitulos/cap05.qmd
     - capitulos/cap06.qmd
-    # - capitulos/cap07.qmd   # ← descomentar según se escriban
+    - capitulos/cap07.qmd
+    # - capitulos/cap08.qmd   # ← descomentar según se escriban
   appendices:
     - anexos/anexo-windows.qmd
 

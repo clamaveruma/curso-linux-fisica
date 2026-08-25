@@ -37,9 +37,11 @@ los materiales.
 [Vengo de Windows](anexos/anexo-windows.qmd) te preparará un Linux
 dentro de tu sistema (pendiente de redacción durante el piloto).
 
-Algunos bloques pedirán algo más, y se avisará al llegar: VirtualBox en
-el bloque C (virtualización e instalación) y acceso al router de tu
-casa en el bloque D (redes) — nada que comprar, nada que arriesgar.
+Algunos bloques pedirán algo más, y se avisará al llegar: unos 8 GB
+de RAM y 25 GB libres para la máquina virtual del bloque C
+(virtualización e instalación; el software, KVM y virt-manager, viene
+en los repositorios de tu Linux) y acceso al router de tu casa en el
+bloque D (redes) — nada que comprar, nada que arriesgar.
 
 ::: {.pie-piloto}
 © 2026 Claudio M. Martínez Velasco. El texto de este curso se publica

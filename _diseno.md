@@ -61,7 +61,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 ### Bloque C — Virtualización e instalación (2 sesiones, ~5 h)
 
-**7. VirtualBox en serio.** Qué se virtualiza: CPU, RAM, disco y red virtuales. Crear una VM desde cero. Instantáneas como superpoder: romper sin miedo. Redes NAT y puente — siembra deliberada para los bloques D y E. Qué te están dando cuando te asignan «una máquina virtual» en remoto.
+**7. Tu primera máquina virtual** *(herramienta decidida el 2026-08-25: **KVM + virt-manager**, nativo de Linux, en vez de VirtualBox — razones: es lo que hay debajo de las VM que le darán en la universidad/nube, se instala con `apt`, sin módulos externos ni problemas de Secure Boot, y su red NAT permite SSH anfitrión→VM sin configurar; VirtualBox se menciona como equivalente para anfitriones Windows/macOS).* Qué se virtualiza: CPU, RAM, disco y red virtuales. Crear una VM desde cero. Instantáneas como superpoder: romper sin miedo. Redes NAT y puente — siembra deliberada para los bloques D y E. Qué te están dando cuando te asignan «una máquina virtual» en remoto.
 
 **8. Instalar Linux de verdad.** Preparar un USB de arranque; en la VM, la ISO hace ese papel. Instalación completa de Debian con particionado manual aplicando el capítulo 6. Post-instalación. Romperla y reinstalar hasta que aburra.
 *Anexo C1:* checklist de la instalación física en un PC real, para el día del estreno.
@@ -96,7 +96,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 | Nivel | Host | Quién lo tiene |
 |---|---|---|
 | 0 | `ssh localhost` en su propia máquina | Todos |
-| 1 | La VM del bloque C, por red puente | Todos los que sigan el curso |
+| 1 | La VM del bloque C, por la red NAT de libvirt (el anfitrión la alcanza sin configurar nada; puente opcional) | Todos los que sigan el curso |
 | 2 | Host real: cuenta de la universidad, servidor del profesor con acceso temporal, capa gratuita de nube o shell público | Recomendado, no requisito |
 
 El curso se escribe contra el nivel 1: nadie queda excluido y la experiencia es funcionalmente idéntica a un servidor real. El capítulo 11 lista las vías del nivel 2 con una nota: verificar disponibilidad y condiciones de las opciones gratuitas en el momento de redactarlo, porque cambian.
