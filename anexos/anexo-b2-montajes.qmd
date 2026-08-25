@@ -1,0 +1,284 @@
+# Montar de todo: discos, pendrives y unidades remotas {#sec-anexo-b2}
+
+El capítulo 6 enseñó la idea — un disco se *engancha* en un directorio
+del árbol único — y Mint la aplica sola cada vez que pinchas un
+pendrive. Este anexo la lleva hasta el final: montar a mano, montar
+discos de otros formatos, hacer un montaje permanente, y enganchar
+carpetas que viven en *otra máquina* — por SSH, por el protocolo de
+Windows y por el de los laboratorios. Todo por terminal y todo por
+ventanas, porque aquí las dos vías se usan de verdad. Requiere los
+capítulos 6 y 11.
+
+## Ver qué hay montado {.unnumbered}
+
+Dos comandos que ya conoces y uno nuevo: `lsblk -f` (con `-f`, enseña
+el sistema de ficheros y la etiqueta de cada partición), `df -h` (lo
+montado, con su espacio), y `findmnt`, que dibuja el árbol de
+montajes entero — útil cuando `df` es demasiado largo:
+
+```terminal
+marcos@portatil:~$ lsblk -f
+NAME        FSTYPE FSVER LABEL     UUID                                 MOUNTPOINTS
+sdb           
+└─sdb1      exfat  1.0   VIAJE     6A3F-1B2C                            /media/marcos/VIAJE
+nvme0n1
+├─nvme0n1p1 vfat   FAT32           7C21-9E04                            /boot/efi
+└─nvme0n1p2 ext4   1.0             3f8a2c1e-…                           /
+marcos@portatil:~$ findmnt /media/marcos/VIAJE
+TARGET               SOURCE    FSTYPE OPTIONS
+/media/marcos/VIAJE  /dev/sdb1 exfat  rw,nosuid,nodev,relatime,uid=1000,gid=1000
+```
+
+Fíjate en el **UUID**: el identificador único de cada partición.
+Los nombres `sdb1` cambian según el orden en que enchufes las cosas;
+el UUID no. Por eso los montajes permanentes se escriben con él.
+
+## Montar a mano un disco que conectas {.unnumbered}
+
+Mint monta los pendrives en `/media/tu_usuario/ETIQUETA`. En un
+servidor sin escritorio no hay nadie que lo haga, y a veces en el
+portátil quieres controlarlo — montar solo lectura un disco antiguo,
+por ejemplo, para no tocar nada. El gesto: un directorio vacío como
+punto de montaje, `mount`, `umount`:
+
+```terminal
+marcos@portatil:~$ sudo mkdir -p /mnt/viejo
+marcos@portatil:~$ sudo mount -o ro /dev/sdb1 /mnt/viejo
+marcos@portatil:~$ ls /mnt/viejo
+tesis_2019  fotos  backup_windows
+marcos@portatil:~$ sudo umount /mnt/viejo
+```
+
+`-o ro` (*read-only*) es el seguro: nada de lo que hagas podrá
+escribir en ese disco. `/mnt` es el sitio tradicional para montajes
+manuales — `/media` es de los automáticos. Y **otros formatos**
+funcionan igual: `mount` detecta solo NTFS (el de Windows; Mint trae
+el controlador), exFAT y FAT32, y los ext4 de otro Linux. Con ext4
+ajeno verás una curiosidad del capítulo 4: los ficheros aparecen con
+el *número* de usuario que tenían allí (`uid 1001`, quizá sin nombre)
+— los permisos viajan con el disco, los nombres no. Si `mount`
+protesta con «tipo de sistema de ficheros desconocido», falta el
+paquete del formato (`exfatprogs`, `ntfs-3g`); `apt` lo resuelve.
+
+::: {.truco}
+**✚ Truco · La aplicación «Discos»**
+
+Menú → Accesorios → **Discos** (`gnome-disks`) es la cara gráfica de
+todo este anexo, y muy buena: elige el disco a la izquierda, la
+partición en el dibujo, y los botones ▶ / ■ montan y desmontan.
+El icono de engranaje tiene *Editar opciones de montaje*, que es —
+literalmente — la forma con ratón de escribir la línea de `fstab` de
+la sección siguiente, con el UUID puesto por ti y sin riesgo de
+errata. También formatea y comprueba discos. Para un disco suelto en
+tu portátil, empieza por aquí; la terminal es para el servidor y para
+entender qué hizo el botón.
+:::
+
+## Montaje permanente: `/etc/fstab` {.unnumbered}
+
+Un montaje a mano dura hasta el reinicio. Para que un disco de datos
+aparezca *siempre* en el mismo sitio, se apunta en `/etc/fstab`
+(*file system table*) — un fichero de texto de `/etc`, cómo no —
+con el protocolo del capítulo 10: copia antes, vuelta atrás escrita.
+Cada línea son seis campos:
+
+```default
+# dispositivo (por UUID)                  punto de montaje  tipo   opciones          dump pass
+UUID=3f8a2c1e-…                            /                 ext4   errors=remount-ro 0    1
+UUID=7C21-9E04                             /boot/efi         vfat   umask=0077        0    1
+UUID=9d4b7e20-…                            /datos            ext4   defaults,nofail   0    2
+```
+
+Las dos primeras las escribió el instalador del capítulo 8 — ahora
+puedes leerlas. La tercera es tuya: un segundo disco interno con tus
+datos, montado en `/datos` en cada arranque. Dos reglas que evitan la
+avería clásica: **`nofail`** — si el disco no está, el sistema arranca
+igual en vez de quedarse esperando —, y **probar sin reiniciar** con
+`sudo mount -a`, que monta todo lo de `fstab` que no esté montado y
+te enseña el error si te has equivocado. Una línea mal escrita sin
+`nofail` puede dejar el arranque en modo de emergencia; con la copia
+de seguridad y `mount -a`, nunca llegarás ahí.
+
+## Carpetas de otra máquina, I: SSHFS {.unnumbered}
+
+Aquí entra el capítulo 11. Si puedes entrar en una máquina por SSH,
+puedes montar cualquier carpeta suya en tu árbol como si fuera un
+disco — sin administrar nada en el servidor:
+
+```terminal
+marcos@portatil:~$ sudo apt install sshfs
+marcos@portatil:~$ mkdir ~/lab
+marcos@portatil:~$ sshfs lab:/home/marcos ~/lab
+marcos@portatil:~$ ls ~/lab
+adquisicion.log  proyecto  simula.py
+marcos@portatil:~$ fusermount -u ~/lab
+```
+
+Desde ese momento tu editor, tu Python, tu gestor de archivos ven
+`~/lab` como una carpeta local — cada lectura y escritura viaja por
+SSH con tu clave. Se desmonta con `fusermount -u` (no hace falta
+`sudo`: el montaje es tuyo). Es la herramienta perfecta para editar
+cómodamente ficheros de un servidor donde no tienes más que SSH — un
+clúster incluido —; a cambio, es lento para carpetas grandes.
+
+## Carpetas de otra máquina, II: SMB y NFS {.unnumbered}
+
+Dos protocolos más, cada uno con su mundo. **SMB** (también llamado
+CIFS o «compartir de Windows») es lo que hablan los NAS domésticos,
+las impresoras y los PC con Windows. **NFS** es el de Unix: es lo que
+hay debajo cuando en el laboratorio o el clúster tu casa «aparece»
+en todas las máquinas a la vez.
+
+Por ventanas, los dos son un solo gesto: en el gestor de archivos
+(Nemo en tu Mint; Caja, Nautilus o Thunar en otros escritorios),
+*Archivo → Conectar al servidor…* y una dirección: `smb://nas/datos`,
+`sftp://lab/home/marcos`, `nfs://servidor/export`. La carpeta aparece
+en la barra lateral y todo es arrastrar y soltar. Por terminal, cada
+uno tiene su paquete y su `-t`:
+
+```terminal
+marcos@portatil:~$ sudo apt install cifs-utils nfs-common
+marcos@portatil:~$ sudo mkdir -p /mnt/nas /mnt/lab
+marcos@portatil:~$ sudo mount -t cifs //nas/datos /mnt/nas -o username=marcos,uid=1000,gid=1000
+Password for marcos@//nas/datos: ********
+marcos@portatil:~$ sudo mount -t nfs debian-lab:/home/marcos/proyecto /mnt/lab
+marcos@portatil:~$ findmnt -t cifs,nfs
+```
+
+En SMB, `uid=1000,gid=1000` hace que los ficheros aparezcan como
+tuyos (el protocolo no entiende de usuarios Linux); en NFS los
+permisos viajan de verdad, así que tu usuario debe tener **el mismo
+número** en las dos máquinas — `id`, capítulo 4 — o verás ficheros
+ajenos. Para hacerlos permanentes, `fstab` con dos opciones más:
+`_netdev` («espera a la red») y, en SMB, un fichero de credenciales
+con permisos `600` en vez de la contraseña a la vista:
+
+```default
+//nas/datos                       /mnt/nas  cifs  credentials=/etc/smb-nas,uid=1000,gid=1000,nofail,_netdev  0 0
+debian-lab:/home/marcos/proyecto  /mnt/lab  nfs   defaults,nofail,_netdev                                    0 0
+```
+
+¿Cuál usar? **SSHFS** cuando solo tienes SSH y no administras el
+servidor. **SMB** cuando el otro lado es un NAS, un Windows o la
+impresora de casa. **NFS** cuando tú (o el laboratorio) administráis
+ambos lados y quieres rendimiento y permisos de verdad. Y por
+ventanas, los tres son la misma pantalla de *Conectar al servidor*.
+
+## Servir una carpeta desde tu VM por NFS {.unnumbered}
+
+Para ver NFS entero, el servidor lo puedes montar tú en `debian-lab`
+— con instantánea antes, como siempre:
+
+```terminal
+marcos@debian-lab:~$ sudo apt install nfs-kernel-server
+marcos@debian-lab:~$ echo "/home/marcos/proyecto 192.168.122.0/24(rw,sync,no_subtree_check)" | sudo tee -a /etc/exports
+marcos@debian-lab:~$ sudo exportfs -ra
+marcos@debian-lab:~$ sudo exportfs -v
+/home/marcos/proyecto  192.168.122.0/24(rw,sync,no_subtree_check)
+```
+
+`/etc/exports` dice qué carpeta se comparte y con quién — aquí, con
+toda la red NAT del capítulo 7 —; `exportfs -ra` la publica. Desde tu
+Mint, el `mount -t nfs` de la sección anterior la engancha, y con el
+mismo `uid 1000` en ambas máquinas, lo que escribas en `/mnt/lab`
+aparece en la VM como tuyo. Es exactamente lo que verás en un clúster:
+tu casa está en un servidor NFS, y cada nodo de cálculo la monta.
+
+## Práctica {.unnumbered}
+
+::: {.ejercicio}
+**Ejercicio B2.1 · A mano y solo lectura**
+
+Con un pendrive: desmóntalo desde el gestor de archivos, móntalo a
+mano en `/mnt/usb` en modo solo lectura, intenta crear un fichero
+dentro (debe fallar), desmonta, y vuelve a montar sin `ro`. Observa
+`findmnt /mnt/usb` en cada estado.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`sudo mkdir -p /mnt/usb`, `sudo mount -o ro /dev/sdb1 /mnt/usb`
+(tu letra según `lsblk`), `touch /mnt/usb/prueba` → «sistema de
+ficheros de solo lectura»; `sudo umount /mnt/usb`; `sudo mount
+/dev/sdb1 /mnt/usb` y el `touch` funciona (en FAT/exFAT, con los
+permisos `rwxrwxrwx` del capítulo 6).
+
+**Por qué así** — El montaje de solo lectura es el gesto con el que
+se examina un disco ajeno o dañado sin riesgo. Y verlo fallar al
+escribir es la mejor demostración de que la opción manda.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio B2.2 · Permanente, por las dos vías**
+
+Si tienes una partición de datos (o el propio pendrive, para
+practicar): añádele un montaje permanente primero con «Discos →
+Editar opciones de montaje», y mira qué línea ha escrito en
+`/etc/fstab` (`cat`). Después bórrala con `nano`, escríbela tú a mano
+con `nofail`, y compruébala con `sudo mount -a`. Copia de `fstab`
+antes de todo.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+«Discos» escribe algo como `UUID=… /mnt/datos auto nosuid,nodev,
+nofail,x-gvfs-show 0 0`. La tuya a mano: `UUID=… /mnt/datos ext4
+defaults,nofail 0 2` (o `exfat` con `uid=1000,gid=1000` para un
+pendrive). `sudo mount -a` sin quejas y `findmnt /mnt/datos` la
+confirma.
+
+**Por qué así** — Ver la línea que genera la aplicación gráfica y
+escribir la tuya después es la forma honesta de aprender `fstab`:
+entiendes cada campo y pierdes el miedo. `nofail` y `mount -a` son
+la red de seguridad que te separa del arranque en modo emergencia.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio B2.3 · La VM como carpeta**
+
+Monta la casa de `debian-lab` con SSHFS en `~/lab`, edita desde tu
+Mint (con el editor que quieras) el `informe.txt` del proyecto, y
+comprueba desde dentro de la VM (`ssh lab cat …`) que el cambio está
+allí. Desmonta.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+`sshfs lab:/home/marcos ~/lab`, editar `~/lab/proyecto/resultados/
+informe.txt`, `ssh lab cat proyecto/resultados/informe.txt` muestra
+el cambio, `fusermount -u ~/lab`.
+
+**Por qué así** — Cada escritura viajó por SSH con tu clave: el
+mismo túnel de `scp`, presentado como un directorio. Es la forma más
+cómoda de trabajar con ficheros de un servidor donde no administras
+nada.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio B2.4 · NFS de punta a punta (opcional)**
+
+Con instantánea de la VM: exporta `~/proyecto` de `debian-lab` por
+NFS, móntalo en tu Mint en `/mnt/lab`, crea un fichero desde cada
+lado y comprueba con `ls -l` que ambos aparecen como `marcos` en las
+dos máquinas. Hazlo permanente en `fstab` con `nofail,_netdev` y
+verifica con `mount -a`.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Servidor: `nfs-kernel-server`, línea en `/etc/exports`, `exportfs -ra`.
+Cliente: `nfs-common`, `sudo mount -t nfs debian-lab:/home/marcos/
+proyecto /mnt/lab`. Los ficheros son de `marcos` a ambos lados
+porque los dos usuarios tienen `uid 1000`. Línea de `fstab` con
+`_netdev` y `nofail`; `sudo umount /mnt/lab && sudo mount -a` la
+prueba.
+
+**Por qué así** — Has montado la infraestructura de un laboratorio en
+miniatura: una casa compartida por red con permisos reales. El día
+que en el clúster te digan «tu `$HOME` está en NFS», sabrás
+exactamente qué significa — y por qué tu `uid` importa.
+:::
+::::
+:::
