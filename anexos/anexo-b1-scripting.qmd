@@ -203,7 +203,7 @@ su hora definitiva.
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `crontab -e` y una línea como `15 22 * * * rsync -a /home/marcos/fisica/
 lab:~/copia_fisica/ >> /home/marcos/copia.log 2>&1`. La prueba «dentro
-de dos minutos» confirma que la clave SSH (capítulo 11) funciona sin
+de dos minutos» confirma que la clave SSH (capítulo 12) funciona sin
 ti — `cron` no puede teclear frases de paso, así que si pusiste una,
 hará falta un agente de claves o una clave sin frase solo para esto.
 

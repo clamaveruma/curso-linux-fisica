@@ -19,7 +19,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 ## 2. Parámetros de diseño
 
-**Extensión:** ~30 horas efectivas en 12 sesiones de 2–3 h, pensadas para dos semanas intensivas o un mes tranquilo. Cada sesión debe cerrar con una victoria visible.
+**Extensión:** ~30 horas efectivas en 12 sesiones de 2–3 h *(desde el 2026-08-26, 13: el bloque D pasa a tres capítulos)*, pensadas para dos semanas intensivas o un mes tranquilo. Cada sesión debe cerrar con una victoria visible.
 
 **Tono:** español con términos técnicos en inglés. Teoría integrada como cajas «Por dentro» al final de cada sección práctica — primero funciona, luego se entiende por qué. Vocabulario profesional introducido sobre la marcha y en contexto (CLI, GUI, REPL, shell, prompt…), con su expansión la primera vez *(añadido 2026-08-24)*.
 
@@ -68,7 +68,7 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 **8. Instalar Linux de verdad.** Preparar un USB de arranque; en la VM, la ISO hace ese papel. Instalación completa de Debian con particionado manual aplicando el capítulo 6. Post-instalación. Romperla y reinstalar hasta que aburra.
 *Anexo C1:* checklist de la instalación física en un PC real, para el día del estreno.
 
-### Bloque D — La red de casa (2 sesiones, ~5 h)
+### Bloque D — La red de casa (2 sesiones, ~5 h) *(dividido el 2026-08-26 en tres capítulos por decisión de Claudio — «muy denso para un principiante»: 9 «Qué es una red», 10 «Tu red de casa: el router por dentro», 11 «Nombres, puertos y protocolos»; SSH pasa a ser el 12 y «Vivir en remoto» el 13)*
 
 **9. Qué es una red.** IP, máscara y el famoso /24. DHCP. El router de la compañía por dentro: la página de administración como territorio a explorar (solo lectura). NAT, IP pública frente a privada. `ip a`, `ping`.
 *Práctica:* censo de todos los dispositivos de casa leyendo la tabla DHCP del router.

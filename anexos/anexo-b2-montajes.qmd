@@ -104,7 +104,7 @@ de seguridad y `mount -a`, nunca llegarás ahí.
 
 ## Carpetas de otra máquina, I: SSHFS {.unnumbered}
 
-Aquí entra el capítulo 11. Si puedes entrar en una máquina por SSH,
+Aquí entra el capítulo 12. Si puedes entrar en una máquina por SSH,
 puedes montar cualquier carpeta suya en tu árbol como si fuera un
 disco — sin administrar nada en el servidor:
 
@@ -172,7 +172,7 @@ ventanas, los tres son la misma pantalla de *Conectar al servidor*.
 Los dos casos que más se preguntan, resueltos con lo anterior. **De
 Windows a tu Linux y al revés**: Windows 10 y 11 traen el cliente
 OpenSSH de serie, así que desde PowerShell funcionan los mismos
-`scp` y `sftp` del capítulo 11 contra tu Mint (con `openssh-server`
+`scp` y `sftp` del capítulo 12 contra tu Mint (con `openssh-server`
 instalado, ejercicio 11.1) o contra `debian-lab`:
 
 ```default

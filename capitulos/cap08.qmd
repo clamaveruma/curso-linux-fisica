@@ -38,7 +38,7 @@ hasta que sea rutina.
 
 Lo que instalas: **Debian 13** — la madre de tu Mint (capítulo 5) —,
 imagen *netinst*, **sin escritorio**. Sí, sin escritorio: un servidor
-al que hablarás por terminal y, a partir del capítulo 11, por SSH.
+al que hablarás por terminal y, a partir del capítulo 12, por SSH.
 Es lo que te encontrarás en el clúster y en la nube, y es lo que
 construye el proyecto final. Nombre de la máquina: `debian-lab`.
 Usuario: el tuyo.
@@ -79,7 +79,7 @@ decisión más importante del día:
    en internet con más éxito; para el curso, español, que es como
    verás los mensajes en los ejemplos.)
 2. **Red**: la VM recibe dirección sola de la red NAT — es el DHCP del
-   capítulo 9, adelantado. Nombre de la máquina: `debian-lab`. Dominio:
+   capítulo 10, adelantado. Nombre de la máquina: `debian-lab`. Dominio:
    vacío.
 3. **Contraseña de root: déjala vacía.** No es un descuido, es un
    truco documentado de Debian: si `root` queda sin contraseña, el
@@ -179,7 +179,7 @@ Léelo como el parte de un experimento que ha salido bien: las tres
 particiones montadas donde las pusiste; un sistema completo que ocupa
 1,3 GB; una dirección `192.168.122.x` — la red NAT del capítulo 7,
 repartida por tu Mint —; y un servidor SSH ya activo, esperando al
-capítulo 11. Pon la instalación al día con el gesto del capítulo 5
+capítulo 12. Pon la instalación al día con el gesto del capítulo 5
 (`sudo apt update && sudo apt upgrade`) — y fíjate en que `sudo`
 funciona: el truco de la contraseña vacía de root ha hecho su efecto.
 
@@ -472,7 +472,7 @@ Marca una respuesta por pregunta; la corrección es inmediata.
     <label><input type="radio" name="z4" value="b"><span>que la máquina acepte conexiones remotas desde tu Mint (bloque E)</span></label>
     <label><input type="radio" name="z4" value="c"><span>acelerar la instalación</span></label>
     <div class="fb good"><b>Correcto.</b> Un servidor sin escritorio se administra por SSH; instalarlo desde el primer día es lo que hace cualquier administrador.</div>
-    <div class="fb bad"><b>No exactamente.</b> SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 11.</div>
+    <div class="fb bad"><b>No exactamente.</b> SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 12.</div>
   </div>
   <div class="qz"><p class="qq" data-n="5">Tras <code>sudo rm -rf /boot</code>, el sistema sigue funcionando hasta reiniciar porque…</p>
     <label><input type="radio" name="z5" value="a"><span>el kernel ya estaba cargado en RAM; solo falta al arrancar</span></label>

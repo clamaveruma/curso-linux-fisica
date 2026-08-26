@@ -317,7 +317,7 @@ investigación o el servicio de informática te dice «te hemos creado
 una máquina virtual». Ahora sabes exactamente qué es: lo mismo que
 acabas de hacer, sobre un anfitrión grande de la universidad o de una
 nube, con KVM o un primo suyo debajo. Te darán una dirección, un
-usuario y probablemente una clave SSH (capítulo 11), y no verás
+usuario y probablemente una clave SSH (capítulo 12), y no verás
 ninguna ventana con su pantalla: la máquina existe, pero solo hablarás
 con ella por la red. Los núcleos y la memoria que tiene son
 «prestados» como los de tu `debian-lab`, y compartes el anfitrión con

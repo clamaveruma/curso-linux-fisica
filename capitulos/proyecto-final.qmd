@@ -1,7 +1,7 @@
 # Proyecto final: tu primer servidor {.unnumbered #sec-proyecto}
 
 ::: {.lede}
-El ensayo general. Durante doce sesiones cada pieza vino con su
+El ensayo general. Durante trece sesiones cada pieza vino con su
 explicación y su solución plegada; hoy no hay solución: hay una lista
 de objetivos, la referencia al capítulo donde vive cada pieza, y una
 hoja de verificación. Montas de cero un servidor Linux, lo conectas,
@@ -44,11 +44,11 @@ servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te
 atreves, `/home` separado. Contraseña de root vacía. Al terminar,
 apaga desde dentro e instantánea `recien-instalado`.
 
-**3. La red** *(capítulos 9 y 10)*. Averigua la IP del servidor,
+**3. La red** *(capítulos 9–11)*. Averigua la IP del servidor,
 bautízalo en el `/etc/hosts` de tu Mint como `servidor`, y comprueba
 que responde por nombre. De propina: ¿qué puerta tiene abierta?
 
-**4. El acceso** *(capítulo 11)*. Tu clave pública en el servidor,
+**4. El acceso** *(capítulo 12)*. Tu clave pública en el servidor,
 alias `servidor` en `~/.ssh/config`, entrada sin contraseña. Después,
 cierra la puerta a las contraseñas en `sshd_config` — con copia del
 fichero y sesión de reserva abierta — y demuestra que te rechaza sin
@@ -70,11 +70,11 @@ Hazlo ejecutable. Lánzalo dentro de una sesión tmux `analisis`,
 desengánchate, **cierra la conexión y apaga la Wi-Fi un minuto**.
 Vuelve, engánchate, y mira si ha terminado.
 
-**8. La recogida** *(capítulo 11)*. Trae `resultados/` a tu Mint con
+**8. La recogida** *(capítulo 12)*. Trae `resultados/` a tu Mint con
 `rsync`, y abre el informe. Repite el `rsync`: debe no transferir
 nada.
 
-**9. Propina** *(capítulo 12)*. Jupyter en el servidor a través de un
+**9. Propina** *(capítulo 13)*. Jupyter en el servidor a través de un
 túnel, abriendo el informe desde el navegador. Y un `du -h` del disco
 de la VM antes y después de todo: ¿cuánto ha crecido?
 

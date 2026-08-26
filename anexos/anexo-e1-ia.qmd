@@ -73,7 +73,7 @@ de un buen jefe:
 
 Las tareas de este curso que más tiempo comen — y donde un agente es
 una ayuda inestimable — son las de *montaje*: configurar la conexión
-SSH con claves y agenda (capítulo 11), escribir la línea de `fstab`
+SSH con claves y agenda (capítulo 12), escribir la línea de `fstab`
 correcta (anexo B2), preparar el `rsync` con las opciones justas, leer
 un `journalctl` de tres mil líneas para encontrar por qué no arranca
 un servicio, o escribir el script de bash del anexo B1 que renombra

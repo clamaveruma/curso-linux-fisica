@@ -199,7 +199,7 @@ comando ya lanzado te está reteniendo, <kbd>Ctrl</kbd>+<kbd>Z</kbd> lo
 pausa y `bg` lo reanuda detrás. Para una simulación de diez minutos
 mientras sigues trabajando, esto basta. Para una de diez *horas* en un
 servidor remoto hará falta algo más robusto — se llama `tmux`, y es el
-plato fuerte del capítulo 12. El `&` de hoy es su semilla.
+plato fuerte del capítulo 13. El `&` de hoy es su semilla.
 
 ## El `$PATH`: la deuda del `./` {#sec-path}
 

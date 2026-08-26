@@ -1,11 +1,11 @@
 # Bienvenida {.unnumbered}
 
 ::: {.chapmeta}
-Terminal · sistemas · redes · trabajo remoto — **12 sesiones prácticas**
+Terminal · sistemas · redes · trabajo remoto — **13 sesiones prácticas**
 :::
 
 Llevas años usando Linux sin haber hablado nunca con él directamente.
-Este curso es esa conversación: doce sesiones para pasar de usuario de
+Este curso es esa conversación: trece sesiones para pasar de usuario de
 escritorio a alguien que instala su sistema, entiende su red y trabaja
 con soltura en un servidor remoto.
 

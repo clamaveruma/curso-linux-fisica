@@ -90,7 +90,7 @@ del pendrive (un USB 2 barato desespera); no actualices el kernel
 (`apt upgrade` sí, pero el sistema *live* arranca siempre con el
 suyo); y como con cualquier pendrive, si lo arrancas de un tirón en
 mal momento la persistencia puede corromperse — copia tu carpeta de
-física al servidor de vez en cuando (capítulo 11 y anexo B1: `rsync`
+física al servidor de vez en cuando (capítulo 12 y anexo B1: `rsync`
 con `cron`). Para quien quiera varias ISO en un mismo pendrive
 existe **Ventoy**, con persistencia configurable por fichero; es más
 potente y más liado — para más adelante.

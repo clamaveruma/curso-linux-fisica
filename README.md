@@ -1,13 +1,13 @@
 # Bendito maldito Linux
 
 Curso introductorio para físicos: terminal, sistema, virtualización,
-redes y trabajo remoto. 12 sesiones + proyecto final. En fase piloto.
+redes y trabajo remoto. 13 sesiones + proyecto final. En fase piloto.
 Web: https://clamaveruma.github.io/curso-linux-fisica/
 
 ## Estructura
 - `_quarto.yml` — configuración: libro con salida web y PDF descargable
 - `_diseno.md` — documento de diseño: perfil del alumno, temario de las
-  12 sesiones y parámetros del curso (no se compila)
+  13 sesiones y parámetros del curso (no se compila)
 - `capitulos/` — un .qmd por capítulo; `_cap01-prototipo-original.html`
   es el prototipo visual validado (los ficheros con `_` no se compilan)
 - `tema/curso.scss` — paleta sepia y componentes (cajas, terminal, kbd,

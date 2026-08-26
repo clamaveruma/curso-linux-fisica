@@ -2,28 +2,25 @@
 
 ::: {.lede}
 Tu servidor recién instalado tiene una dirección — `192.168.122.15` —
-que todavía no sabes leer. Empieza el bloque D con la pregunta que
-todo el mundo se hace y casi nadie responde: qué significan esos
-cuatro números, quién los reparte, por qué tu casa entera sale a
-internet con una sola dirección, y qué hay dentro de esa caja con
-lucecitas que te dio la compañía. Hoy la abres — en modo solo lectura
-— y haces el censo de todos los aparatos que viven en tu red.
+que todavía no sabes leer. Este es el primero de tres capítulos sobre
+redes, y se ocupa de lo más básico y lo más importante: cómo se hablan
+dos ordenadores, qué significan esos cuatro números y la barra que
+los sigue, quién es tu router, y cómo saber si una máquina está ahí —
+y a qué distancia. Nada de configurar todavía: hoy se aprende a leer.
 :::
 
 ::: {.chapmeta}
-⏱ **2–3 h** con ejercicios · requisitos: **capítulos 1–8** · máquina: **tu Linux de diario, la VM y el router de casa (solo lectura)**
+⏱ **2 h** con ejercicios · requisitos: **capítulos 1–8** · máquina: **tu Linux de diario y la VM**
 :::
 
 ::: {.objetivos}
 **Al terminar esta sesión sabrás**
 
 - Cómo se hablan dos ordenadores: el modelo de capas, qué sobre pone cada una, y por qué la MAC no sale de tu casa mientras la IP recorre el mundo.
+- Qué hace un switch y qué hace un router — y por qué la caja de tu compañía es varias cosas a la vez.
 - Leer tu ficha de red con `ip a` e `ip route`: interfaz, dirección MAC, dirección IP, máscara y puerta de enlace.
-- Qué significa el `/24` de una dirección, y cómo decide quién puede hablar con quién directamente.
-- Quién reparte las direcciones — DHCP — y por qué tu portátil sabe la suya sin que se la hayas dicho.
+- Qué significa el `/24` de una dirección, en sus tres notaciones, y cómo decide quién puede hablar con quién directamente.
 - Medir con `ping` si una máquina responde y cuánto tarda — y qué tiene que ver ese tiempo con la velocidad de la luz.
-- La diferencia entre tu dirección privada y la pública, y cómo el router traduce entre ambas con su tabla NAT — paso a paso, con la respuesta de vuelta incluida.
-- Entrar en la página de administración de tu router, orientarte en ella y hacer el censo de tu red sin tocar nada.
 :::
 
 ## Cómo se hablan dos ordenadores {#sec-capas}
@@ -40,8 +37,8 @@ cinco, y son estas:
 
 | Capa | Qué resuelve | Con qué | Dónde la verás |
 |------|--------------|---------|----------------|
-| **Aplicación** | qué se dice | HTTP, SSH, DNS | capítulos 10–12 |
-| **Transporte** | a qué *programa* de la máquina va, y si llega entero y en orden | TCP, UDP, los **puertos** | capítulo 10 |
+| **Aplicación** | qué se dice | HTTP, SSH, DNS | capítulos 11–13 |
+| **Transporte** | a qué *programa* de la máquina va, y si llega entero y en orden | TCP, UDP, los **puertos** | capítulo 11 |
 | **Red** | a qué *máquina* del mundo va, aunque esté a diez saltos | **IP**, direcciones, routers | este capítulo |
 | **Enlace** | al vecino de al lado, por este cable o esta Wi-Fi | Ethernet, Wi-Fi, direcciones **MAC** | `ip a`, línea `link/ether` |
 | **Física** | bits convertidos en voltios, luz o radio | cobre, fibra, aire | tu asignatura |
@@ -59,7 +56,7 @@ la calle del siguiente, y vuelve a envolver para el siguiente
 repartidor. Por eso la MAC **solo importa dentro de tu casa** y la IP
 importa en todo el mundo; por eso un **router** no es más que una
 máquina que lee el sobre IP y decide por qué puerta sale; y por eso
-los puertos, que verás en el capítulo 10, son el número de piso que
+los puertos, que verás en el capítulo 11, son el número de piso que
 hace posible que una dirección sirva a muchos programas — y, como
 descubrirás dentro de un rato, a muchas casas.
 
@@ -81,7 +78,7 @@ router.**
 La «caja del router» de tu salón es en realidad cuatro o cinco
 aparatos en uno: un switch (las bocas amarillas de detrás), un punto
 de acceso Wi-Fi, un router, un servidor DHCP y un pequeño servidor de
-nombres — y un cortafuegos (capítulo 10). Cuando su página web te
+nombres — y un cortafuegos (capítulo 11). Cuando su página web te
 enseñe pestañas separadas para LAN, Wi-Fi, WAN y DHCP, estás viendo
 esos papeles por separado. Si algún día necesitas más bocas de cable,
 lo que compras es un switch de veinte euros: se enchufa al router y
@@ -106,7 +103,7 @@ marcos@portatil:~$ ip a
 ```
 
 Tres interfaces. `lo` es el *loopback*: la máquina hablando consigo
-misma (`127.0.0.1` siempre eres tú — la usarás en el capítulo 11).
+misma (`127.0.0.1` siempre eres tú — la usarás en el capítulo 12).
 `wlp3s0` es tu Wi-Fi (`enp…` sería el cable), con dos direcciones
 distintas — una por capa: la **MAC** (`link/ether a4:34:…`, el número
 de serie grabado en la tarjeta de fábrica: capa de enlace, el sobre
@@ -181,97 +178,6 @@ sal directo por la Wi-Fi; para `192.168.122.0/24` (mis VMs), por
 `192.168.1.1`». Ese `192.168.1.1` es tu router — el que abrirás al
 final del capítulo.
 
-## ¿Quién reparte las direcciones? DHCP {#sec-dhcp}
-
-Nunca le has dicho a tu portátil que es el `.34`. Se lo dijo el
-router, mediante **DHCP** (*Dynamic Host Configuration Protocol*): al
-conectarte, tu máquina grita a la red «¿alguien me da una dirección?»
-y el servidor DHCP del router le responde con un *préstamo* — una
-dirección libre, la máscara, la puerta de enlace y el servidor de
-nombres (capítulo 10) — por un tiempo limitado, que se renueva solo.
-De ahí el `dynamic` de `ip a`, y de ahí que tu móvil cambie de número
-de vez en cuando.
-
-Y ya lo has visto funcionar dos veces sin saberlo: la red `default`
-de libvirt lleva su propio servidor DHCP — por eso `debian-lab`
-apareció con `192.168.122.15` sin configurar nada —, y el instalador
-de Debian pidió su dirección exactamente así. El mismo mecanismo a
-tres escalas: tu casa, tu hipervisor, el campus de la universidad.
-
-Lo que reparte un DHCP es siempre el mismo lote, y son los cuatro o
-cinco parámetros que verás en cualquier pantalla de red del mundo:
-
-| Parámetro | Ejemplo | Para qué |
-|-----------|---------|----------|
-| **Dirección IP** | `192.168.1.34` | tu número en la red |
-| **Máscara** | `/24` = `255.255.255.0` | hasta dónde llega «mi red» |
-| **Puerta de enlace** | `192.168.1.1` | a quién dar lo que va a otra red: el router |
-| **Servidor DNS** | `192.168.1.1` o `9.9.9.9` | quién traduce nombres (capítulo 10) |
-| **Duración del préstamo** | 24 h | cada cuánto se renueva |
-
-Y con eso ya puedes leer — y en el capítulo 10, tocar — la pestaña
-DHCP de tu router, que tiene siempre la misma forma: la dirección del
-propio router, un **rango** de direcciones que reparte (algo como
-`192.168.1.100` a `.200`), la duración, y una lista de **reservas**:
-«a esta MAC, siempre esta IP». Lo usual en una casa bien puesta es
-dejar el rango para lo que va y viene (móviles, visitas) y reservar
-direcciones fijas para lo que debe encontrarse siempre en el mismo
-sitio: la impresora, un NAS, tu `debian-lab` si algún día vive en un
-PC físico. Lo que no se toca sin motivo: la dirección del router y la
-máscara.
-
-¿Y por qué `192.168.1.x` en casi todas las casas? Porque hay tres
-bloques de direcciones reservados para uso privado, y los fabricantes
-eligen del más pequeño:
-
-| Bloque privado | Cuántas redes /24 caben | Dónde lo verás |
-|----------------|-------------------------|----------------|
-| `192.168.0.0/16` | 256 | casas y oficinas pequeñas (`192.168.0.x`, `192.168.1.x`) |
-| `172.16.0.0/12` | 4 096 | empresas, y la red interna de Docker |
-| `10.0.0.0/8` | 65 536 | universidades, multinacionales, redes de la compañía |
-
-Si dos casas usan `192.168.1.x` no chocan: cada una está detrás de su
-propio NAT, que es la siguiente sección. Y si un día montas una VPN
-con la universidad y las dos redes se llaman igual, sabrás por qué
-no funciona — y que la solución es cambiar la tuya a `192.168.37.x`,
-cualquier número que nadie use.
-
-::: {.truco}
-**✚ Truco · Los mismos parámetros, en la ventana de red**
-
-El icono de red de Mint → *Configuración de red* (o *Editar
-conexiones*) → tu Wi-Fi → pestaña **IPv4**: ahí están, con botones,
-los cinco parámetros de la tabla. *Automático (DHCP)* es lo normal;
-*Manual* te deja escribir IP, máscara, puerta de enlace y DNS a mano
-— lo que necesitarías en un laboratorio sin DHCP. Para que tu portátil
-tenga siempre la misma dirección en casa, la vía limpia no es
-*Manual* aquí sino una reserva en el router (capítulo 10): así la
-decisión vive en un solo sitio y no choca con el reparto del DHCP.
-:::
-
-::: {.historia}
-**◷ Historia · La primera palabra de la red fue «LO»**
-
-El 29 de octubre de 1969, un estudiante de UCLA llamado Charley Kline
-intentó escribir `LOGIN` en un ordenador de Stanford, a 500 km, a
-través de dos armarios llamados IMP — los primeros routers de la
-historia, fabricados por BBN a partir de un miniordenador Honeywell
-blindado para uso militar. Tecleó la L, llegó. Tecleó la O, llegó. Al
-teclear la G, el sistema de Stanford se cayó. La primera palabra
-transmitida por la red que acabaría siendo internet fue, por
-accidente, «LO». Aquella red, ARPANET, tenía cuatro nodos; las reglas
-que inventó para que máquinas distintas se entendieran — trocear los
-mensajes en paquetes, darle a cada máquina una dirección, dejar que
-los intermediarios decidan el camino — son las que tu `ip route` está
-aplicando ahora mismo.
-:::
-
-::: {layout-ncol=2}
-![El primer IMP de ARPANET (1969), el abuelo de la caja con lucecitas de tu salón. *Foto: Steve Jurvetson, CC BY 2.0, Wikimedia Commons.*](../imagenes/cap09/arpanet-imp.jpg){#fig-imp fig-alt="Armario del Interface Message Processor de ARPANET, el primer router"}
-
-![La página del cuaderno de UCLA con el registro de aquel «LO», 22:30 del 29 de octubre de 1969. *Dominio público, Wikimedia Commons.*](../imagenes/cap09/arpanet-log-lo.jpg){#fig-log-lo fig-alt="Página manuscrita del registro del IMP de UCLA anotando la primera conexión"}
-:::
-
 ## ¿Estás ahí? `ping` {#sec-ping}
 
 `ping` manda un paquete diminuto a una dirección y cronometra la
@@ -299,7 +205,7 @@ virtual a 0,4 ms (no hay cable que recorrer: está dentro de tu RAM), y
 un servidor de Google a 15 ms. `-c 3` limita a tres paquetes —
 sin él, `ping` sigue hasta que lo pares con <kbd>Ctrl</kbd>+<kbd>C</kbd>
 (la señal del capítulo 5). Y ese `8.8.8.8` sin nombre es a propósito:
-hoy hablamos con números; los nombres llegan en el capítulo 10.
+hoy hablamos con números; los nombres llegan en el capítulo 11.
 
 ::: {.por-dentro}
 **◉ Por dentro · `ping` y la velocidad de la luz**
@@ -316,127 +222,33 @@ inmediato como la máquina de al lado. Pocas veces un comando de
 terminal te deja medir una constante fundamental.
 :::
 
-## Privada, pública, y el NAT entre medias {#sec-nat}
+::: {.historia}
+**◷ Historia · La primera palabra de la red fue «LO»**
 
-Hay algo raro en tu `192.168.1.34`: millones de casas del mundo tienen
-exactamente esa misma dirección. No es un error: las redes
-`192.168.x.x`, `10.x.x.x` y `172.16–31.x.x` son **direcciones
-privadas**, reservadas para uso interno y repetidas en cada casa,
-oficina o laboratorio. Internet nunca las ve. Lo que internet ve es
-la **dirección pública** de tu router — una sola para toda la casa —
-y la traducción entre ambas es el **NAT** (*Network Address
-Translation*):
-
-![Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.](../imagenes/cap09/fig-nat-casa.svg){#fig-nat fig-alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública"}
-
-¿Cómo puede una sola dirección servir a toda la casa? Con los sobres
-de la primera sección, paso a paso. Tu portátil pide una página web:
-sale un paquete que dice *«de 192.168.1.34, puerto 51234 → a
-151.101.66.132, puerto 443»*. El router lo intercepta antes de que
-salga a internet y hace dos cosas: **reescribe el remitente** — ahora
-dice *«de 83.44.120.9, puerto 51234»*, su dirección pública — y
-**apunta una línea en su libreta**: «lo que vuelva dirigido a
-83.44.120.9:51234 es en realidad para 192.168.1.34:51234». El servidor
-responde a la única dirección que conoce, la pública; el router recibe
-la respuesta, busca la línea, y **reescribe el destinatario**: → a
-192.168.1.34:51234. Tu portátil recibe su página y nunca supo que le
-cambiaron el nombre. Mientras, tu móvil hace lo mismo con otro puerto
-(58001) y tiene su propia línea. Esa libreta es la **tabla NAT**:
-
-| Dentro (privado) | Fuera (público) | Hablando con |
-|------------------|-----------------|--------------|
-| `192.168.1.34:51234` | `83.44.120.9:51234` | `151.101.66.132:443` |
-| `192.168.1.57:58001` | `83.44.120.9:58001` | `142.250.184.14:443` |
-
-![La libreta del router. Cada conversación que sale deja una línea; cada respuesta que vuelve se busca en ella. Lo que llega sin línea, se tira.](../imagenes/cap09/fig-nat-tabla.svg){#fig-nat-tabla fig-alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta"}
-
-De esta libreta salen todas las consecuencias que importan. Un
-paquete que llega desde internet *sin que nadie de casa lo haya
-pedido* — alguien probando suerte en tu puerto 22 — no tiene línea en
-la tabla: el router no sabe a quién dárselo y lo descarta. Por eso
-**desde fuera nadie entra sin invitación**. Cuando *quieras* que
-alguien entre — tú mismo por SSH desde la universidad —, tendrás que
-escribir a mano una línea permanente: «lo que llegue al puerto 22
-público, dáselo siempre a 192.168.1.34» — es el *reenvío de puertos*
-del capítulo 10. Y fíjate en el detalle que explica el capítulo
-siguiente: la traducción funciona **gracias a los puertos**. La
-dirección pública es la calle; los puertos son los pisos, y el router
-puede permitirse una sola calle porque tiene sesenta y cinco mil
-pisos que repartir entre las conversaciones de toda la casa.
-
-Puedes ver las dos caras desde tu terminal: la privada en `ip a`, y la
-pública preguntándole a un servidor de fuera qué dirección ve:
-
-```terminal
-marcos@portatil:~$ curl ifconfig.me
-83.44.120.9
-```
-
-Esa es tu casa vista desde internet — y coincidirá con la que el
-router llama *WAN* en su página. Dos remates. Tu `debian-lab` vive
-detrás de *dos* libretas — la de tu Mint (para la red `192.168.122.x`)
-y la del router —: cada paquete suyo cambia de remitente dos veces al
-salir y de destinatario dos veces al volver. Y algunas compañías
-añaden una tercera libreta en sus propias instalaciones para miles de
-casas a la vez (el CG-NAT del ejercicio 9.3): entonces ni la línea
-escrita a mano en tu router sirve, porque el intruso — o tú desde la
-universidad — nunca llega a tu router. Muñecas rusas, todas con la
-misma lógica.
-
-## El router por dentro (solo lectura) {#sec-router}
-
-El `192.168.1.1` de `ip route` no es solo una dirección: es una
-**página web**. Escríbela en el navegador y aparecerá la
-administración de tu router — usuario y contraseña suelen estar en la
-pegatina de la caja (y si son los de fábrica, el capítulo 10 tendrá
-algo que decir). Cada compañía diseña la suya, pero todas tienen los
-mismos cajones; tu tarea hoy es *encontrarlos sin tocar nada*:
-
-- **Estado / Información**: la dirección WAN (compárala con
-  `curl ifconfig.me`), el tiempo encendido, la versión del firmware.
-- **Red local / LAN**: la dirección del router (`192.168.1.1`), y la
-  configuración del **servidor DHCP** — el rango de direcciones que
-  reparte (algo como `.2` a `.254`) y la duración de los préstamos.
-- **Dispositivos conectados / Tabla DHCP / Lista de clientes**: el
-  tesoro del capítulo. Cada aparato con su nombre, su IP y su MAC —
-  el censo de tu red.
-- **Wi-Fi**: nombre de la red (SSID), canal, tipo de cifrado.
-
-::: {.aviso}
-**△ Cuidado · Hoy se mira; el capítulo 10 se toca**
-
-La regla de seguridad del curso, aplicada al router: esta sesión es
-**de solo lectura**. No cambies contraseñas, no reinicies, no toques
-el DHCP ni la Wi-Fi — un clic de más deja a toda la casa sin
-internet, y no hay instantánea que restaurar. En el capítulo 10 harás
-cambios *reversibles*, cada uno con su procedimiento de vuelta atrás
-escrito antes de tocar. Hoy, si te pica el dedo: `ip a` en la
-terminal, que no rompe nada.
+El 29 de octubre de 1969, un estudiante de UCLA llamado Charley Kline
+intentó escribir `LOGIN` en un ordenador de Stanford, a 500 km, a
+través de dos armarios llamados IMP — los primeros routers de la
+historia, fabricados por BBN a partir de un miniordenador Honeywell
+blindado para uso militar. Tecleó la L, llegó. Tecleó la O, llegó. Al
+teclear la G, el sistema de Stanford se cayó. La primera palabra
+transmitida por la red que acabaría siendo internet fue, por
+accidente, «LO». Aquella red, ARPANET, tenía cuatro nodos; las reglas
+que inventó para que máquinas distintas se entendieran — trocear los
+mensajes en paquetes, darle a cada máquina una dirección, dejar que
+los intermediarios decidan el camino — son las que tu `ip route` está
+aplicando ahora mismo.
 :::
 
-¿Y si tu router no enseña la tabla de dispositivos, o la enseña a
-medias? Tu propia máquina lleva un censo parcial: `ip neigh` (*los
-vecinos*) lista las máquinas de tu red con las que has hablado
-últimamente, con sus MAC:
+::: {layout-ncol=2}
+![El primer IMP de ARPANET (1969), el abuelo de la caja con lucecitas de tu salón. *Foto: Steve Jurvetson, CC BY 2.0, Wikimedia Commons.*](../imagenes/cap09/arpanet-imp.jpg){#fig-imp fig-alt="Armario del Interface Message Processor de ARPANET, el primer router"}
 
-```terminal
-marcos@portatil:~$ ip neigh
-192.168.1.1 dev wlp3s0 lladdr 3c:84:6a:b2:10:f1 REACHABLE
-192.168.1.57 dev wlp3s0 lladdr 8e:12:5b:0a:77:c3 STALE
-192.168.122.15 dev virbr0 lladdr 52:54:00:9a:4e:21 REACHABLE
-```
+![La página del cuaderno de UCLA con el registro de aquel «LO», 22:30 del 29 de octubre de 1969. *Dominio público, Wikimedia Commons.*](../imagenes/cap09/arpanet-log-lo.jpg){#fig-log-lo fig-alt="Página manuscrita del registro del IMP de UCLA anotando la primera conexión"}
+:::
 
-Y para un censo completo por tu cuenta existe `nmap`, el explorador de
-redes: `sudo apt install nmap` y `nmap -sn 192.168.1.0/24` toca a la
-puerta de las 254 direcciones y lista quién responde. Es una
-herramienta legítima **sobre tu propia red**; usarla sobre redes
-ajenas es, según dónde, un delito. Aquí, en casa, es tu censo de
-respaldo.
+## Práctica: leer la red {#sec-practica-9}
 
-## Práctica: el censo de casa {#sec-practica-9}
-
-Cuaderno en marcha (`script sesion09.log`). Todo lo de hoy es
-lectura: ni un cambio en el router, ni un cambio en tu máquina.
+Cuaderno en marcha (`script sesion09.log`). Todo lo de hoy es lectura:
+ni un cambio en tu máquina.
 
 **Nivel 1 · Lo esencial**
 
@@ -487,83 +299,10 @@ clúster remoto «vaya lento»: primero, ¿cuánto tarda el `ping`?
 ::::
 :::
 
-::: {.ejercicio}
-**Ejercicio 9.3 · Las dos caras**
-
-Averigua tu dirección pública con `curl ifconfig.me` y compárala con
-la privada de `ip a`. Después, en la página del router, localiza la
-dirección *WAN* y comprueba que coincide con la pública. *Pista: si
-`curl` no está instalado, ya sabes: `sudo apt install curl`.*
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-Privada `192.168.1.x`; pública algo como `83.44.120.9`, idéntica a la
-WAN del router. Si la WAN del router es *también* del tipo
-`100.64.x.x` o `10.x.x.x`, tu compañía te tiene detrás de un NAT
-adicional (se llama CG-NAT), y eso condicionará el capítulo 10.
-
-**Por qué así** — Ver las dos direcciones con tus propios ojos
-convierte el NAT de concepto en hecho: toda la casa, un número.
-:::
-::::
-:::
-
-::: {.ejercicio}
-**Ejercicio 9.4 · El censo**
-
-En la página del router, encuentra la tabla de dispositivos
-conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato.
-Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y
-anota los que no reconozcas. *Pista: si el router no la muestra o está
-incompleta, `ip neigh` en tu Mint es el plan B, y `nmap -sn` sobre tu
-`/24`, el plan C.*
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-Una tabla de entre 5 y 20 filas es lo normal en una casa. Los
-aparatos «misteriosos» suelen ser el propio router, un enchufe
-inteligente, la consola o el móvil de alguien de visita — los tres
-primeros bytes de la MAC identifican al fabricante, y buscarlos en
-internet («MAC lookup») resuelve casi todos.
-
-**Por qué así** — Es el ejercicio central del capítulo: saber quién
-vive en tu red es el principio de saber administrarla. En el capítulo
-10, con esta lista, podrás hacer los cambios con criterio.
-:::
-::::
-:::
-
-**Nivel 2 · El mecanismo**
-
-::: {.ejercicio}
-**Ejercicio 9.5 · La VM en el mapa**
-
-Dentro de `debian-lab`, ejecuta `ip a` e `ip route`. Compara con tu
-Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede
-hacer `ping` a tu Mint y a `8.8.8.8`, pero el router de casa no la
-tiene en su censo? *Pista: mira el `default via` de la VM y búscalo
-en el `ip a` de tu Mint.*
-
-:::: {.solucion}
-::: {.callout-tip collapse="true" title="Solución razonada"}
-Puerta de enlace de la VM: `192.168.122.1` — que es `virbr0`, tu
-propio Mint. La VM está en la red privada de libvirt; tu Mint hace
-de router y NAT para ella, igual que el de casa hace para tu Mint. El
-router de casa solo ve salir paquetes de `192.168.1.34`: la VM está
-escondida detrás, en un segundo NAT.
-
-**Por qué así** — Es la figura del NAT aplicada dos veces, y la
-demostración de que un «router» no es una caja: es un *papel* que
-cualquier máquina Linux puede hacer. Tu Mint lleva haciéndolo desde
-el capítulo 7.
-:::
-::::
-:::
-
 **Nivel 3 · El reto (opcional)**
 
 ::: {.ejercicio}
-**Ejercicio 9.6 · Leer máscaras**
+**Ejercicio 9.3 · Leer máscaras**
 
 Sin ejecutar nada: (a) ¿cuántas máquinas caben en una red `/8` como
 `10.0.0.0/8`? (b) ¿Y en una `/30`? (c) `192.168.1.34/24` y
@@ -587,7 +326,7 @@ ven porque alguien escribió mal un número.
 ::::
 :::
 
-## Autocomprobación {#sec-quiz-9}
+## Autocomprobación {#sec-quiz-cap09}
 
 ::: {.content-visible when-format="html"}
 
@@ -595,52 +334,52 @@ Marca una respuesta por pregunta; la corrección es inmediata.
 
 ```{=html}
 <div class="quiz" id="quiz-cap09">
-  <div class="qz"><p class="qq" data-n="1">En <code>192.168.1.34/24</code>, el <code>/24</code> indica…</p>
-    <label><input type="radio" name="z1" value="a"><span>que hay 24 máquinas en la red</span></label>
-    <label><input type="radio" name="z1" value="b"><span>que los 24 primeros bits (tres números) identifican la red</span></label>
-    <label><input type="radio" name="z1" value="c"><span>el número de saltos hasta internet</span></label>
-    <div class="fb good"><b>Correcto.</b> Red <code>192.168.1</code>, máquina <code>.34</code>, y 254 direcciones útiles para los vecinos.</div>
+  <div class="qz"><p class="qq" data-n="1">La dirección MAC de tu portátil…</p>
+    <label><input type="radio" name="z1" value="a"><span>viaja en cada paquete hasta el servidor de destino</span></label>
+    <label><input type="radio" name="z1" value="b"><span>solo importa dentro de tu propia red: es el sobre del barrio</span></label>
+    <label><input type="radio" name="z1" value="c"><span>es lo mismo que la dirección IP</span></label>
+    <div class="fb good"><b>Correcto.</b> Cada router del camino abre el sobre de enlace y lo sustituye por uno nuevo. Lo que llega al otro extremo es el sobre IP.</div>
+    <div class="fb bad"><b>No exactamente.</b> La MAC es la capa de enlace: identifica aparatos <em>en tu red</em>. Para cruzar redes se usa la IP; la MAC se queda en casa.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Dos máquinas de la misma red se hablan…</p>
+    <label><input type="radio" name="z2" value="a"><span>a través del router, siempre</span></label>
+    <label><input type="radio" name="z2" value="b"><span>directamente, a través del switch o la Wi-Fi</span></label>
+    <label><input type="radio" name="z2" value="c"><span>solo si tienen IP pública</span></label>
+    <div class="fb good"><b>Correcto.</b> Misma red, switch; otra red, router. El router solo entra en juego cuando el destino está fuera de tu red.</div>
+    <div class="fb bad"><b>No exactamente.</b> Si comparten red, el switch (o el punto Wi-Fi) reparte por MAC sin que el router intervenga. El router es para salir del barrio.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3">En <code>192.168.1.34/24</code>, el <code>/24</code> indica…</p>
+    <label><input type="radio" name="z3" value="a"><span>que hay 24 máquinas en la red</span></label>
+    <label><input type="radio" name="z3" value="b"><span>que los 24 primeros bits (tres números) identifican la red</span></label>
+    <label><input type="radio" name="z3" value="c"><span>el número de saltos hasta internet</span></label>
+    <div class="fb good"><b>Correcto.</b> Red <code>192.168.1</code>, máquina <code>.34</code>, y 254 direcciones útiles para los vecinos. En decimal, <code>255.255.255.0</code>.</div>
     <div class="fb bad"><b>No exactamente.</b> La máscara reparte los 32 bits entre red y máquina: <code>/24</code> deja tres números para la red y uno para las máquinas.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="2">Tu portátil sabe su dirección IP porque…</p>
-    <label><input type="radio" name="z2" value="a"><span>viene grabada de fábrica, como la MAC</span></label>
-    <label><input type="radio" name="z2" value="b"><span>el servidor DHCP del router se la prestó al conectarse</span></label>
-    <label><input type="radio" name="z2" value="c"><span>la eligió al azar</span></label>
-    <div class="fb good"><b>Correcto.</b> Un préstamo con caducidad, junto con la máscara, la puerta de enlace y el DNS. Lo grabado de fábrica es la MAC.</div>
-    <div class="fb bad"><b>No exactamente.</b> La MAC es de fábrica; la IP es un préstamo del DHCP del router — por eso <code>ip a</code> la marca como <code>dynamic</code>.</div>
-  </div>
-  <div class="qz"><p class="qq" data-n="3">La «puerta de enlace» (<code>default via</code> en <code>ip route</code>) es…</p>
-    <label><input type="radio" name="z3" value="a"><span>la máquina a la que se entregan los paquetes que van a otras redes</span></label>
-    <label><input type="radio" name="z3" value="b"><span>el servidor de nombres</span></label>
-    <label><input type="radio" name="z3" value="c"><span>tu propia dirección</span></label>
+  <div class="qz"><p class="qq" data-n="4">La «puerta de enlace» (<code>default via</code> en <code>ip route</code>) es…</p>
+    <label><input type="radio" name="z4" value="a"><span>la máquina a la que se entregan los paquetes que van a otras redes</span></label>
+    <label><input type="radio" name="z4" value="b"><span>el servidor de nombres</span></label>
+    <label><input type="radio" name="z4" value="c"><span>tu propia dirección</span></label>
     <div class="fb good"><b>Correcto.</b> En casa, el router. Misma red → directo; otra red → a la puerta de enlace.</div>
-    <div class="fb bad"><b>No exactamente.</b> Es el router: el intermediario para todo lo que no está en tu propia red. Los nombres son otro asunto (capítulo 10).</div>
+    <div class="fb bad"><b>No exactamente.</b> Es el router: el intermediario para todo lo que no está en tu propia red. Los nombres son otro asunto (capítulo 11).</div>
   </div>
-  <div class="qz"><p class="qq" data-n="4">¿Cuál de estas es una dirección privada?</p>
-    <label><input type="radio" name="z4" value="a"><span><code>8.8.8.8</code></span></label>
-    <label><input type="radio" name="z4" value="b"><span><code>10.20.30.40</code></span></label>
-    <label><input type="radio" name="z4" value="c"><span><code>83.44.120.9</code></span></label>
-    <div class="fb good"><b>Correcto.</b> <code>10.x.x.x</code>, <code>192.168.x.x</code> y <code>172.16–31.x.x</code> son privadas: repetidas en millones de redes, invisibles desde internet.</div>
-    <div class="fb bad"><b>No exactamente.</b> Las privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>. Las otras dos son públicas: únicas en el mundo.</div>
-  </div>
-  <div class="qz"><p class="qq" data-n="5">Gracias al NAT del router…</p>
-    <label><input type="radio" name="z5" value="a"><span>cada aparato de casa tiene su propia dirección pública</span></label>
-    <label><input type="radio" name="z5" value="b"><span>toda la casa sale con una sola dirección pública, y desde fuera nadie entra sin invitación</span></label>
-    <label><input type="radio" name="z5" value="c"><span>internet va más rápido</span></label>
-    <div class="fb good"><b>Correcto.</b> Traducción de direcciones: una pública para todos. La contrapartida — abrir puertas cuando sí quieres que entren — es del capítulo 10.</div>
-    <div class="fb bad"><b>No exactamente.</b> El NAT es justo lo contrario de «una pública por aparato»: una para toda la casa, con el router traduciendo.</div>
-  </div>
-  <div class="qz"><p class="qq" data-n="6">Un <code>ping</code> de 150 ms a un servidor te dice que…</p>
-    <label><input type="radio" name="z6" value="a"><span>tu Wi-Fi está estropeada</span></label>
-    <label><input type="radio" name="z6" value="b"><span>el servidor está, como poco, a miles de kilómetros: ninguna mejora lo bajará mucho</span></label>
-    <label><input type="radio" name="z6" value="c"><span>el servidor está apagado</span></label>
+  <div class="qz"><p class="qq" data-n="5">Un <code>ping</code> de 150 ms a un servidor te dice que…</p>
+    <label><input type="radio" name="z5" value="a"><span>tu Wi-Fi está estropeada</span></label>
+    <label><input type="radio" name="z5" value="b"><span>el servidor está, como poco, a miles de kilómetros: ninguna mejora lo bajará mucho</span></label>
+    <label><input type="radio" name="z5" value="c"><span>el servidor está apagado</span></label>
     <div class="fb good"><b>Correcto.</b> Ida y vuelta a 200 000 km/s: 150 ms es del orden de un océano. La física impone un mínimo que ninguna tarifa mejora.</div>
     <div class="fb bad"><b>No exactamente.</b> El servidor responde (si no, no habría tiempo). 150 ms de ida y vuelta es distancia: la luz en fibra no da para más.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6">Un router del camino, al recibir un paquete tuyo…</p>
+    <label><input type="radio" name="z6" value="a"><span>abre todos los sobres y lee tus datos</span></label>
+    <label><input type="radio" name="z6" value="b"><span>abre solo el sobre de enlace, lee el destino IP y reenvía</span></label>
+    <label><input type="radio" name="z6" value="c"><span>lo devuelve si no es para él</span></label>
+    <div class="fb good"><b>Correcto.</b> Lee la calle, no la carta. Los datos y el sobre TCP solo los abre la máquina de destino — y el programa del puerto correspondiente.</div>
+    <div class="fb bad"><b>No exactamente.</b> Los routers trabajan en la capa de red: leen la IP de destino para decidir por dónde sale. Ni miran el puerto ni leen los datos.</div>
   </div>
 </div>
 <script>
 (function(){
-  const OK = {z1:"b", z2:"b", z3:"a", z4:"b", z5:"b", z6:"b"};
+  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"b", z6:"b"};
   document.querySelectorAll("#quiz-cap09 .qz input").forEach(i => {
     i.addEventListener("change", () => {
       const qz = i.closest(".qz");
@@ -658,53 +397,53 @@ Marca una respuesta por pregunta; la corrección es inmediata.
 
 Responde de memoria; las respuestas están al final del capítulo.
 
-1.  En `192.168.1.34/24`, el `/24` indica…
+1.  La dirección MAC de tu portátil…
+    a)  viaja en cada paquete hasta el servidor de destino
+    b)  solo importa dentro de tu propia red: es el sobre del barrio
+    c)  es lo mismo que la dirección IP
+
+2.  Dos máquinas de la misma red se hablan…
+    a)  a través del router, siempre
+    b)  directamente, a través del switch o la Wi-Fi
+    c)  solo si tienen IP pública
+
+3.  En `192.168.1.34/24`, el `/24` indica…
     a)  que hay 24 máquinas en la red
     b)  que los 24 primeros bits (tres números) identifican la red
     c)  el número de saltos hasta internet
 
-2.  Tu portátil sabe su dirección IP porque…
-    a)  viene grabada de fábrica, como la MAC
-    b)  el servidor DHCP del router se la prestó al conectarse
-    c)  la eligió al azar
-
-3.  La «puerta de enlace» es…
+4.  La «puerta de enlace» (`default via` en `ip route`) es…
     a)  la máquina a la que se entregan los paquetes que van a otras redes
     b)  el servidor de nombres
     c)  tu propia dirección
 
-4.  ¿Cuál de estas es una dirección privada?
-    a)  `8.8.8.8`
-    b)  `10.20.30.40`
-    c)  `83.44.120.9`
-
-5.  Gracias al NAT del router…
-    a)  cada aparato de casa tiene su propia dirección pública
-    b)  toda la casa sale con una sola dirección pública, y desde fuera nadie entra sin invitación
-    c)  internet va más rápido
-
-6.  Un `ping` de 150 ms a un servidor te dice que…
+5.  Un `ping` de 150 ms a un servidor te dice que…
     a)  tu Wi-Fi está estropeada
-    b)  el servidor está, como poco, a miles de kilómetros
+    b)  el servidor está, como poco, a miles de kilómetros: ninguna mejora lo bajará mucho
     c)  el servidor está apagado
+
+6.  Un router del camino, al recibir un paquete tuyo…
+    a)  abre todos los sobres y lee tus datos
+    b)  abre solo el sobre de enlace, lee el destino IP y reenvía
+    c)  lo devuelve si no es para él
 
 ::::
 
 ::: {.solucion-final}
-**Autocomprobación (test de la sección 9.8)** — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 b · 6 b.
+**Autocomprobación** — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 b · 6 b.
 :::
 
 ::: {.proxima}
 **La próxima sesión**
 
-Hoy has hablado con números; el capítulo 10 les pone nombre. Verás
-qué pasa exactamente al escribir `debian.org` — el DNS, la guía
-telefónica de internet —, seguirás el camino paquete a paquete hasta
-la universidad con `tracepath`, entenderás por qué SSH es el puerto 22
-y la web el 443, y harás los primeros cambios *reversibles* en el
-router, con su vuelta atrás escrita antes de tocar. Guarda `sesion09.log`.
+Ya sabes leer una dirección y medir una distancia. En el capítulo 10
+abres la caja con lucecitas: verás quién reparte las direcciones en
+tu casa y con qué parámetros, entenderás por qué todos tus aparatos
+salen a internet con un solo número — el NAT, paso a paso —, harás el
+censo de todo lo que vive en tu red, y tocarás el router por primera
+vez con un cambio reversible. Guarda `sesion09.log`.
 :::
 
 ::: {.pie-piloto}
-cap. 9 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu `sesion09.log`
+cap. 9 v0.2 · piloto — anota tiempo real invertido, dudas y erratas junto a tu `sesion09.log`
 :::
