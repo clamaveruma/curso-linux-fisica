@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Nombres y caminos – Bendito maldito Linux</title>
+<title>10&nbsp; Tu red de casa: el router por dentro – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -176,19 +176,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -248,15 +254,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#sec-dns" id="toc-sec-dns" class="nav-link active" data-scroll-target="#sec-dns"><span class="header-section-number">10.1</span> Qué pasa al escribir un nombre: DNS</a></li>
-  <li><a href="#sec-tracepath" id="toc-sec-tracepath" class="nav-link" data-scroll-target="#sec-tracepath"><span class="header-section-number">10.2</span> El camino: <code>tracepath</code></a></li>
-  <li><a href="#sec-puertos" id="toc-sec-puertos" class="nav-link" data-scroll-target="#sec-puertos"><span class="header-section-number">10.3</span> Una dirección, muchas puertas: los puertos</a></li>
-  <li><a href="#sec-cortafuegos" id="toc-sec-cortafuegos" class="nav-link" data-scroll-target="#sec-cortafuegos"><span class="header-section-number">10.4</span> Cortafuegos, lo básico</a></li>
-  <li><a href="#sec-protocolos" id="toc-sec-protocolos" class="nav-link" data-scroll-target="#sec-protocolos"><span class="header-section-number">10.5</span> Qué habla cada puerta: los protocolos que usarás</a></li>
-  <li><a href="#sec-cable-wifi" id="toc-sec-cable-wifi" class="nav-link" data-scroll-target="#sec-cable-wifi"><span class="header-section-number">10.6</span> Cable o Wi-Fi</a></li>
-  <li><a href="#sec-cambios" id="toc-sec-cambios" class="nav-link" data-scroll-target="#sec-cambios"><span class="header-section-number">10.7</span> El protocolo del cambio reversible</a></li>
-  <li><a href="#sec-practica-10" id="toc-sec-practica-10" class="nav-link" data-scroll-target="#sec-practica-10"><span class="header-section-number">10.8</span> Práctica: la guía y las puertas</a></li>
-  <li><a href="#sec-quiz-10" id="toc-sec-quiz-10" class="nav-link" data-scroll-target="#sec-quiz-10"><span class="header-section-number">10.9</span> Autocomprobación</a></li>
+  <li><a href="#sec-dhcp" id="toc-sec-dhcp" class="nav-link active" data-scroll-target="#sec-dhcp"><span class="header-section-number">10.1</span> ¿Quién reparte las direcciones? DHCP</a></li>
+  <li><a href="#sec-nat" id="toc-sec-nat" class="nav-link" data-scroll-target="#sec-nat"><span class="header-section-number">10.2</span> Privada, pública, y el NAT entre medias</a></li>
+  <li><a href="#sec-router" id="toc-sec-router" class="nav-link" data-scroll-target="#sec-router"><span class="header-section-number">10.3</span> El router por dentro (solo lectura)</a></li>
+  <li><a href="#sec-cable-wifi" id="toc-sec-cable-wifi" class="nav-link" data-scroll-target="#sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</a></li>
+  <li><a href="#sec-cambios" id="toc-sec-cambios" class="nav-link" data-scroll-target="#sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</a></li>
+  <li><a href="#sec-practica-10" id="toc-sec-practica-10" class="nav-link" data-scroll-target="#sec-practica-10"><span class="header-section-number">10.6</span> Práctica: el censo de casa</a></li>
+  <li><a href="#sec-quiz-cap10" id="toc-sec-quiz-cap10" class="nav-link" data-scroll-target="#sec-quiz-cap10"><span class="header-section-number">10.7</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -265,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-cap10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></h1>
+<h1 class="title"><span id="sec-cap10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></h1>
 </div>
 
 
@@ -283,237 +287,180 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="lede">
-<p>Ayer hablaste con la red por números. Hoy descubres todo lo que pasa en el segundo que transcurre entre escribir <code>debian.org</code> y ver la página: la guía telefónica de internet, el camino que recorren tus paquetes salto a salto hasta la universidad, y por qué una máquina tiene una dirección pero miles de puertas. Y por primera vez tocas el router — con cambios reversibles, cada uno con su vuelta atrás escrita antes de tocar nada.</p>
+<p>Ya sabes leer una dirección. Hoy abres la caja con lucecitas que te dio la compañía: quién reparte las direcciones en tu casa y con qué parámetros, por qué todos tus aparatos salen a internet con un solo número, y cómo hacer el censo de tu red sin tocar nada. Y, por primera vez, tocas el router — un solo cambio, útil, con su vuelta atrás escrita antes de pulsar guardar.</p>
 </div>
 <div class="chapmeta">
-<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 9</strong> · máquina: <strong>tu Linux de diario, la VM y el router (cambios reversibles)</strong></p>
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 9</strong> · máquina: <strong>tu Linux de diario, la VM y el router (solo lectura, y un cambio reversible)</strong></p>
 </div>
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
-<li>Qué es el DNS, quién responde cuando preguntas por un nombre, y cómo ver la respuesta con <code>host</code>.</li>
-<li>El fichero <code>/etc/hosts</code>: la guía telefónica más antigua, y cómo usarla para bautizar a tu máquina virtual.</li>
-<li>Seguir el camino de tus paquetes hasta la universidad con <code>tracepath</code>, salto a salto.</li>
-<li>Qué es exactamente un puerto TCP, qué cuatro números identifican una conexión, por qué SSH es el 22 y la web el 443, y cómo ver qué puertas tiene abiertas una máquina.</li>
-<li>TCP frente a UDP en diez minutos, y qué es un cortafuegos.</li>
+<li>Quién reparte las direcciones — DHCP —, los cinco parámetros que entrega, y qué son el rango y las reservas de tu router.</li>
+<li>Por qué casi todas las casas usan <code>192.168.1.x</code>: los tres bloques de direcciones privadas.</li>
+<li>La diferencia entre tu dirección privada y la pública, y cómo el router traduce entre ambas con su tabla NAT — paso a paso, con la respuesta de vuelta incluida.</li>
+<li>Entrar en la página de administración de tu router, orientarte en ella y hacer el censo de tu red.</li>
 <li>Por qué el cable gana a la Wi-Fi para un servidor — y medirlo.</li>
-<li>El protocolo de cambio reversible: anotar, escribir la vuelta atrás, cambiar, verificar.</li>
+<li>El protocolo del cambio reversible: anotar, escribir la vuelta atrás, cambiar, verificar — aplicado a una reserva DHCP.</li>
 </ul>
 </div>
-<section id="sec-dns" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="sec-dns"><span class="header-section-number">10.1</span> Qué pasa al escribir un nombre: DNS</h2>
-<p>Tu máquina solo sabe hablar con números; tú solo recuerdas nombres. Entre ambos está el <strong>DNS</strong> (<em>Domain Name System</em>): un servicio distribuido por todo el planeta que traduce <code>debian.org</code> en <code>151.101.66.132</code>. Lo usas cada vez que escribes un nombre, y <code>ping</code> te lo enseña sin pedírselo:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ping -c 1 debian.org</span>
-<span class="t-out">PING debian.org (151.101.66.132) 56(84) bytes of data.</span>
-<span class="t-out">64 bytes from 151.101.66.132: icmp_seq=1 ttl=57 time=18.2 ms</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">host debian.org</span>
-<span class="t-out">debian.org has address 151.101.66.132</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">resolvectl status | grep "DNS Servers"</span>
-<span class="t-out">       DNS Servers: 192.168.1.1</span></code></pre>
-<p><code>host</code> hace la pregunta a secas y te da la respuesta. Y <code>resolvectl status</code> te dice <strong>a quién</strong> se la hace tu máquina: a <code>192.168.1.1</code> — el router, que a su vez pregunta a los servidores de tu compañía. Es uno de los datos que el DHCP del capítulo 9 te prestó junto con la dirección.</p>
-<div id="fig-dns" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Tu máquina pregunta al resolver, que consulta en cascada a los servidores raíz, a los de .org y a los de debian.org hasta obtener la dirección">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-dns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap10/fig-dns.svg" class="img-fluid figure-img" alt="Tu máquina pregunta al resolver, que consulta en cascada a los servidores raíz, a los de .org y a los de debian.org hasta obtener la dirección">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;10.1: La cadena de preguntas, de lo general a lo concreto. Nadie sabe todas las direcciones del mundo; cada servidor sabe a quién preguntar.
-</figcaption>
-</figure>
-</div>
-<p>¿Y antes del DNS? Un fichero de texto — en Linux siempre hay un fichero de texto — que sigue existiendo y que tu máquina consulta <em>antes</em> que a cualquier servidor: <code>/etc/hosts</code>.</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">cat /etc/hosts</span>
-<span class="t-out">127.0.0.1       localhost</span>
-<span class="t-out">127.0.1.1       portatil</span></code></pre>
-<p>Dos líneas: <code>localhost</code> eres tú, y <code>portatil</code> también. Lo interesante es lo que puedes <em>añadir</em>: una línea <code>192.168.122.15  debian-lab</code> y, desde ese momento, <code>ping debian-lab</code> — y en el capítulo 11, <code>ssh debian-lab</code> — funciona sin números. Es la guía telefónica privada de tu máquina, y la práctica de hoy la estrena.</p>
-<div class="historia">
-<p><strong>◷ Historia · Cuando internet cabía en un folio</strong></p>
-<p>En los años 70, la «guía» de ARPANET era literalmente un fichero, <code>HOSTS.TXT</code>, que una oficina de Stanford mantenía a mano y que cada máquina de la red descargaba periódicamente: nombre, dirección, y ya. Funcionó mientras internet tenía docenas de máquinas; en 1983, con cientos y creciendo, Paul Mockapetris diseñó el DNS — un sistema <em>distribuido</em> en el que nadie tiene la lista entera y cada uno responde por su parcela. Tu <code>/etc/hosts</code> es el descendiente directo de aquel fichero: la guía de bolsillo que sobrevivió a la guía telefónica.</p>
-</div>
-<div id="fig-arpanet-mapa" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de los nodos y enlaces de ARPANET en 1977">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-arpanet-mapa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap10/arpanet-mapa-1977.png" class="img-fluid figure-img" style="width:80.0%" alt="Diagrama de los nodos y enlaces de ARPANET en 1977">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arpanet-mapa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;10.2: El mapa lógico de ARPANET en marzo de 1977: cada máquina de la red, en una hoja. Hoy no cabría en un país. <em>Dominio público, Wikimedia Commons.</em>
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="sec-tracepath" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="sec-tracepath"><span class="header-section-number">10.2</span> El camino: <code>tracepath</code></h2>
-<p><code>ping</code> te decía <em>cuánto</em> tardaba un paquete; <code>tracepath</code> te enseña <em>por dónde</em> pasa. Cada router del camino es un <strong>salto</strong>, y la herramienta los va descubriendo uno a uno:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tracepath -n uma.es</span>
-<span class="t-out"> 1?: [LOCALHOST]                      pmtu 1500</span>
-<span class="t-out"> 1:  192.168.1.1                        2.104ms</span>
-<span class="t-out"> 2:  10.40.128.1                        9.870ms</span>
-<span class="t-out"> 3:  81.46.12.201                      12.335ms</span>
-<span class="t-out"> ...</span>
-<span class="t-out"> 9:  150.214.40.10                     21.482ms reached</span></code></pre>
-<p>El primer salto es siempre tu router; el segundo ya está en la compañía (fíjate: una dirección <code>10.x</code> — privada, capítulo 9 — que la operadora usa por dentro); y unos saltos después, la universidad. El tiempo crece con cada salto, y el mínimo lo pone la física de ayer. Cuando «no va internet», <code>tracepath</code> te dice <em>hasta dónde</em> llega: si se corta en el salto 1, el problema es tuyo; si en el 2 o el 3, de la compañía. (<code>traceroute</code>, su hermano clásico, hace lo mismo con más opciones — <code>apt install traceroute</code> si lo echas de menos.)</p>
-</section>
-<section id="sec-puertos" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="sec-puertos"><span class="header-section-number">10.3</span> Una dirección, muchas puertas: los puertos</h2>
-<p>Vuelve a la analogía postal del capítulo 9: la IP es la calle; el <strong>puerto</strong> es el número de piso. Es, literalmente, un número de 16 bits — de 0 a 65 535 — escrito en el sobre de la capa de transporte (TCP o UDP), y sirve para que la máquina que recibe el paquete sepa a <em>qué programa</em> dárselo, porque en una máquina hay decenas corriendo a la vez. Un programa que quiere recibir le dice al kernel «lo que llegue al 22, es mío»: eso es <strong>escuchar</strong> en un puerto, y solo un programa puede escuchar en cada número. Conectarse a una máquina es siempre conectarse a <em>dirección:puerto</em>, y los de los servicios clásicos están acordados desde hace décadas:</p>
+<section id="sec-dhcp" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-dhcp"><span class="header-section-number">10.1</span> ¿Quién reparte las direcciones? DHCP</h2>
+<p>Nunca le has dicho a tu portátil que es el <code>.34</code>. Se lo dijo el router, mediante <strong>DHCP</strong> (<em>Dynamic Host Configuration Protocol</em>): al conectarte, tu máquina grita a la red «¿alguien me da una dirección?» y el servidor DHCP del router le responde con un <em>préstamo</em> — una dirección libre, la máscara, la puerta de enlace y el servidor de nombres (capítulo 11) — por un tiempo limitado, que se renueva solo. De ahí el <code>dynamic</code> de <code>ip a</code>, y de ahí que tu móvil cambie de número de vez en cuando.</p>
+<p>Y ya lo has visto funcionar dos veces sin saberlo: la red <code>default</code> de libvirt lleva su propio servidor DHCP — por eso <code>debian-lab</code> apareció con <code>192.168.122.15</code> sin configurar nada —, y el instalador de Debian pidió su dirección exactamente así. El mismo mecanismo a tres escalas: tu casa, tu hipervisor, el campus de la universidad.</p>
+<p>Lo que reparte un DHCP es siempre el mismo lote, y son los cuatro o cinco parámetros que verás en cualquier pantalla de red del mundo:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 29%">
-<col style="width: 47%">
+<col style="width: 36%">
+<col style="width: 30%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Puerto</th>
-<th>Servicio</th>
+<th>Parámetro</th>
+<th>Ejemplo</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Dirección IP</strong></td>
+<td><code>192.168.1.34</code></td>
+<td>tu número en la red</td>
+</tr>
+<tr class="even">
+<td><strong>Máscara</strong></td>
+<td><code>/24</code> = <code>255.255.255.0</code></td>
+<td>hasta dónde llega «mi red»</td>
+</tr>
+<tr class="odd">
+<td><strong>Puerta de enlace</strong></td>
+<td><code>192.168.1.1</code></td>
+<td>a quién dar lo que va a otra red: el router</td>
+</tr>
+<tr class="even">
+<td><strong>Servidor DNS</strong></td>
+<td><code>192.168.1.1</code> o <code>9.9.9.9</code></td>
+<td>quién traduce nombres (capítulo 11)</td>
+</tr>
+<tr class="odd">
+<td><strong>Duración del préstamo</strong></td>
+<td>24 h</td>
+<td>cada cuánto se renueva</td>
+</tr>
+</tbody>
+</table>
+<p>Y con eso ya puedes leer — y al final de este capítulo, tocar — la pestaña DHCP de tu router, que tiene siempre la misma forma: la dirección del propio router, un <strong>rango</strong> de direcciones que reparte (algo como <code>192.168.1.100</code> a <code>.200</code>), la duración, y una lista de <strong>reservas</strong>: «a esta MAC, siempre esta IP». Lo usual en una casa bien puesta es dejar el rango para lo que va y viene (móviles, visitas) y reservar direcciones fijas para lo que debe encontrarse siempre en el mismo sitio: la impresora, un NAS, tu <code>debian-lab</code> si algún día vive en un PC físico. Lo que no se toca sin motivo: la dirección del router y la máscara.</p>
+<p>¿Y por qué <code>192.168.1.x</code> en casi todas las casas? Porque hay tres bloques de direcciones reservados para uso privado, y los fabricantes eligen del más pequeño:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 43%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bloque privado</th>
+<th>Cuántas redes /24 caben</th>
 <th>Dónde lo verás</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>22</strong></td>
-<td>SSH</td>
-<td>el capítulo 11 entero</td>
+<td><code>192.168.0.0/16</code></td>
+<td>256</td>
+<td>casas y oficinas pequeñas (<code>192.168.0.x</code>, <code>192.168.1.x</code>)</td>
 </tr>
 <tr class="even">
-<td><strong>53</strong></td>
-<td>DNS</td>
-<td>cada nombre que resuelves</td>
+<td><code>172.16.0.0/12</code></td>
+<td>4 096</td>
+<td>empresas, y la red interna de Docker</td>
 </tr>
 <tr class="odd">
-<td><strong>80</strong> / <strong>443</strong></td>
-<td>web sin cifrar / cifrada (https)</td>
-<td>cada página que abres</td>
-</tr>
-<tr class="even">
-<td><strong>8888</strong></td>
-<td>Jupyter</td>
-<td>el caso estrella del capítulo 12</td>
+<td><code>10.0.0.0/8</code></td>
+<td>65 536</td>
+<td>universidades, multinacionales, redes de la compañía</td>
 </tr>
 </tbody>
 </table>
-<div id="fig-puertos" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Una máquina con varias puertas numeradas; solo la 22, SSH, está abierta">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-puertos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap10/fig-puertos.svg" class="img-fluid figure-img" alt="Una máquina con varias puertas numeradas; solo la 22, SSH, está abierta">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-puertos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;10.3: Los puertos de tu servidor: una sola puerta abierta, la que dejaste en la instalación.
-</figcaption>
-</figure>
-</div>
-<p>Y puedes <em>mirar</em> las puertas. Desde dentro, <code>ss</code> (<em>socket statistics</em>) lista lo que escucha; desde fuera, el <code>nmap</code> que instalaste ayer toca a la puerta de cada una:</p>
-<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ss -tln</span>
-<span class="t-out">State   Recv-Q  Send-Q  Local Address:Port  Peer Address:Port</span>
-<span class="t-out">LISTEN  0       128           0.0.0.0:22         0.0.0.0:*</span></code></pre>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">nmap 192.168.122.15</span>
-<span class="t-out">PORT   STATE SERVICE</span>
-<span class="t-out">22/tcp open  ssh</span></code></pre>
-<p>Tu servidor, visto desde dentro y desde fuera, cuenta lo mismo: una puerta abierta, la 22, y detrás el servidor SSH que marcaste en el instalador. Mañana entrarás por ella.</p>
-<p>Queda la pregunta que desconcierta a todo el mundo: si <code>sshd</code> escucha en <em>un</em> puerto, ¿cómo atiende a cien clientes a la vez sin mezclar sus conversaciones? Porque una <strong>conexión</strong> no la identifica un puerto, sino <strong>cuatro números</strong>: la IP y el puerto de <em>cada</em> extremo. El servidor pone los suyos (<code>192.168.122.15</code>, <code>22</code>); el cliente pone su IP y elige, para cada conexión, un puerto <strong>efímero</strong> libre y alto — el <code>51234</code> de la tabla NAT del capítulo 9 era exactamente eso. Dos terminales tuyas conectadas al mismo servidor son dos cuartetos distintos (<code>…:51234 → …:22</code> y <code>…:51240 → …:22</code>), y el kernel del servidor reparte cada paquete a la conversación correcta por su cuarteto. Es también lo que permite que tu navegador tenga diez pestañas abiertas contra el mismo servidor, y lo que hacía posible la libreta del router: sin puertos distintos, el NAT no tendría cómo distinguir tu portátil de tu móvil.</p>
-<div id="fig-conexion-tcp" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dos conexiones desde la misma máquina cliente al puerto 22 del mismo servidor, distinguidas por el puerto efímero de origen">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-conexion-tcp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap10/fig-conexion-tcp.svg" class="img-fluid figure-img" alt="Dos conexiones desde la misma máquina cliente al puerto 22 del mismo servidor, distinguidas por el puerto efímero de origen">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-conexion-tcp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; el cliente estrena un puerto efímero cada vez.
-</figcaption>
-</figure>
-</div>
-<p>Y se ve en vivo: <code>ss -tn</code> (sin la <code>l</code>) lista las conexiones <em>establecidas</em> con sus dos extremos, cuarteto completo:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ss -tn</span>
-<span class="t-out">State  Recv-Q Send-Q Local Address:Port    Peer Address:Port</span>
-<span class="t-out">ESTAB  0      0      192.168.122.1:51234   192.168.122.15:22</span>
-<span class="t-out">ESTAB  0      0      192.168.1.34:44810    151.101.66.132:443</span></code></pre>
-<p>Tu sesión SSH con la VM y una pestaña del navegador, cada una con su puerto efímero. Un último detalle que conecta con el capítulo 4: los puertos <strong>por debajo del 1024</strong> — los de los servicios clásicos — solo puede reservarlos <code>root</code>. Así, un usuario cualquiera no puede poner un programa suyo a escuchar en el 22 y hacerse pasar por el SSH de la máquina.</p>
-<div class="por-dentro">
-<p><strong>◉ Por dentro · TCP y UDP en diez minutos</strong></p>
-<p>Los paquetes viajan de dos maneras. <strong>TCP</strong> es correo certificado: antes de enviar nada, los dos extremos se saludan en tres pasos — «¿estás?», «estoy, ¿y tú?», «aquí» (el <em>handshake</em>: SYN, SYN-ACK, ACK) — y a partir de ahí cada paquete va numerado, el receptor confirma lo que recibe, lo que se pierde se reenvía y todo se entrega en orden. Más lento, pero fiable: SSH, la web y el correo van así. <strong>UDP</strong> es una postal: se envía y ya, sin conexión ni confirmación — rapidísimo, y si una se pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos van así: prefieren perder un paquete a esperar. Por eso <code>nmap</code> decía <code>22/tcp</code>: el puerto 22 <em>de TCP</em>. Los dos sistemas conviven en la misma dirección con numeraciones independientes — el 53 de UDP (DNS) y el 53 de TCP son puertas distintas, aunque el mismo programa suela atender las dos.</p>
-</div>
-</section>
-<section id="sec-cortafuegos" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cortafuegos"><span class="header-section-number">10.4</span> Cortafuegos, lo básico</h2>
-<p>Un <strong>cortafuegos</strong> (<em>firewall</em>) es un portero: mira cada paquete que llega y decide, por reglas, si pasa. Tienes dos, y conviene saber qué hace cada uno.</p>
-<p>El <strong>del router</strong> lo llevas puesto sin saberlo: la libreta NAT del capítulo 9 ya deja fuera todo lo que nadie pidió, y encima el router lleva un cortafuegos que vigila el <em>estado</em> de cada conversación (lo llaman SPI): solo entra lo que es respuesta a algo que salió. Abrir una puerta desde fuera es escribir una regla — el reenvío de puertos — y hacerlo a conciencia. Para una casa, ese portero basta.</p>
-<p>El <strong>de cada máquina</strong> es la segunda línea, y en Linux se llama <code>ufw</code> (<em>uncomplicated firewall</em>): una lista de reglas del tipo «lo que entre, se rechaza, salvo lo que yo diga». En tu Mint viene instalado y apagado — detrás del router no hace falta. En un servidor con dirección pública, en cambio, es obligatorio, y la forma de ponerlo es siempre la misma, <strong>en este orden</strong>:</p>
-<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install ufw</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw allow OpenSSH</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw enable</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw status verbose</span>
-<span class="t-out">Status: active</span>
-<span class="t-out">Default: deny (incoming), allow (outgoing)</span>
-<span class="t-out">To                         Action      From</span>
-<span class="t-out">--                         ------      ----</span>
-<span class="t-out">22/tcp (OpenSSH)           ALLOW IN    Anywhere</span></code></pre>
-<p>Primero se abre la puerta por la que entras — SSH —, <em>después</em> se enciende: al revés, te dejas fuera de tu propio servidor. La política por defecto lo dice todo: entrar, nada salvo lo permitido; salir, todo. Cada servicio nuevo será una línea (<code>sudo ufw allow 8888/tcp</code> si algún día abres un Jupyter a la red, que no lo harás: capítulo 12). Y <code>nmap</code> desde tu Mint es la comprobación: la 22 abierta, el resto <code>filtered</code>, que es el portero diciendo que no.</p>
+<p>Si dos casas usan <code>192.168.1.x</code> no chocan: cada una está detrás de su propio NAT, que es la siguiente sección. Y si un día montas una VPN con la universidad y las dos redes se llaman igual, sabrás por qué no funciona — y que la solución es cambiar la tuya a <code>192.168.37.x</code>, cualquier número que nadie use.</p>
 <div class="truco">
-<p><strong>✚ Truco · El cortafuegos con ventana</strong></p>
-<p>Mint trae la cara gráfica de <code>ufw</code>: menú → Preferencias → <strong>Configuración del cortafuegos</strong> (<code>gufw</code>). Un interruptor de encendido, tres perfiles (casa, oficina, público) y una lista de reglas donde se añade «permitir SSH» eligiéndolo de una lista de aplicaciones. Es exactamente el mismo <code>ufw</code> — las reglas que crees ahí las verás con <code>sudo ufw status</code> — y para un portátil que se conecta a la Wi-Fi de una cafetería, activarlo con el perfil <em>público</em> es un gesto razonable y reversible.</p>
+<p><strong>✚ Truco · Los mismos parámetros, en la ventana de red</strong></p>
+<p>El icono de red de Mint → <em>Configuración de red</em> (o <em>Editar conexiones</em>) → tu Wi-Fi → pestaña <strong>IPv4</strong>: ahí están, con botones, los cinco parámetros de la tabla. <em>Automático (DHCP)</em> es lo normal; <em>Manual</em> te deja escribir IP, máscara, puerta de enlace y DNS a mano — lo que necesitarías en un laboratorio sin DHCP. Para que tu portátil tenga siempre la misma dirección en casa, la vía limpia no es <em>Manual</em> aquí sino una reserva en el router (al final de este capítulo): así la decisión vive en un solo sitio y no choca con el reparto del DHCP.</p>
 </div>
 </section>
-<section id="sec-protocolos" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="sec-protocolos"><span class="header-section-number">10.5</span> Qué habla cada puerta: los protocolos que usarás</h2>
-<p>Detrás de cada puerto hay un <strong>protocolo</strong>: el idioma acordado entre los dos extremos. Para un físico, la pregunta práctica es «¿cómo paso datos de aquí a allí?», y la respuesta depende de qué hay en el otro extremo. Esta es la tabla que resuelve el noventa por ciento de los casos, con el capítulo o anexo donde se practica cada uno:</p>
+<section id="sec-nat" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-nat"><span class="header-section-number">10.2</span> Privada, pública, y el NAT entre medias</h2>
+<p>Hay algo raro en tu <code>192.168.1.34</code>: millones de casas del mundo tienen exactamente esa misma dirección. No es un error: las redes <code>192.168.x.x</code>, <code>10.x.x.x</code> y <code>172.16–31.x.x</code> son <strong>direcciones privadas</strong>, reservadas para uso interno y repetidas en cada casa, oficina o laboratorio. Internet nunca las ve. Lo que internet ve es la <strong>dirección pública</strong> de tu router — una sola para toda la casa — y la traducción entre ambas es el <strong>NAT</strong> (<em>Network Address Translation</em>):</p>
+<div id="fig-nat" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-nat-casa.svg" class="img-fluid figure-img" alt="Red doméstica con portátil, móvil y televisor con direcciones privadas, un router que traduce, e internet que solo ve una dirección pública">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.1: Tres aparatos dentro, una dirección fuera. El router reescribe cada paquete al salir y recuerda a quién devolver la respuesta.
+</figcaption>
+</figure>
+</div>
+<p>¿Cómo puede una sola dirección servir a toda la casa? Con los sobres de la primera sección, paso a paso. Tu portátil pide una página web: sale un paquete que dice <em>«de 192.168.1.34, puerto 51234 → a 151.101.66.132, puerto 443»</em>. El router lo intercepta antes de que salga a internet y hace dos cosas: <strong>reescribe el remitente</strong> — ahora dice <em>«de 83.44.120.9, puerto 51234»</em>, su dirección pública — y <strong>apunta una línea en su libreta</strong>: «lo que vuelva dirigido a 83.44.120.9:51234 es en realidad para 192.168.1.34:51234». El servidor responde a la única dirección que conoce, la pública; el router recibe la respuesta, busca la línea, y <strong>reescribe el destinatario</strong>: → a 192.168.1.34:51234. Tu portátil recibe su página y nunca supo que le cambiaron el nombre. Mientras, tu móvil hace lo mismo con otro puerto (58001) y tiene su propia línea. Esa libreta es la <strong>tabla NAT</strong>:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 12%">
-<col style="width: 31%">
-<col style="width: 28%">
-<col style="width: 10%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Protocolo</th>
-<th>Puerto</th>
-<th>Otro extremo típico</th>
-<th>Con qué lo usarás</th>
-<th>Dónde</th>
+<th>Dentro (privado)</th>
+<th>Fuera (público)</th>
+<th>Hablando con</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>SSH / SFTP</strong></td>
-<td>22</td>
-<td>otro Linux, un servidor, la nube — y un Windows moderno</td>
-<td>terminal, <code>scp</code>, <code>rsync</code>, «Conectar al servidor», WinSCP</td>
-<td>caps. 11–12, anexo B2</td>
+<td><code>192.168.1.34:51234</code></td>
+<td><code>83.44.120.9:51234</code></td>
+<td><code>151.101.66.132:443</code></td>
 </tr>
 <tr class="even">
-<td><strong>SMB</strong></td>
-<td>445</td>
-<td>un PC con Windows, un NAS, una impresora</td>
-<td>«Conectar al servidor» (<code>smb://</code>), montar por <code>cifs</code></td>
-<td>anexo B2</td>
-</tr>
-<tr class="odd">
-<td><strong>NFS</strong></td>
-<td>2049</td>
-<td>otro Linux, el laboratorio, un clúster</td>
-<td>montar con <code>-t nfs</code></td>
-<td>anexo B2</td>
-</tr>
-<tr class="even">
-<td><strong>HTTP / HTTPS</strong></td>
-<td>80 / 443</td>
-<td>la web, la nube, Nextcloud, Jupyter</td>
-<td>el navegador, <code>curl</code>, <code>rclone</code></td>
-<td>caps. 9, 12, anexo B2</td>
-</tr>
-<tr class="odd">
-<td><strong>FTP</strong></td>
-<td>21</td>
-<td>servidores antiguos de datos públicos</td>
-<td>«Conectar al servidor» (<code>ftp://</code>)</td>
-<td>— sin cifrar: solo lectura y solo si no hay otra</td>
+<td><code>192.168.1.57:58001</code></td>
+<td><code>83.44.120.9:58001</code></td>
+<td><code>142.250.184.14:443</code></td>
 </tr>
 </tbody>
 </table>
-<p>Una regla para elegir: <strong>si hay SSH en el otro extremo, usa SSH</strong> — sirve para terminal y para ficheros, va cifrado, y lo hablan hoy hasta los Windows. SMB es el idioma de Windows y de los NAS; NFS, el del laboratorio; HTTPS, el de la nube. Todo lo demás son variantes.</p>
+<div id="fig-nat-tabla" class="quarto-float quarto-figure quarto-figure-center anchored" alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nat-tabla-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap09/fig-nat-tabla.svg" class="img-fluid figure-img" alt="El router reescribe el remitente de los paquetes que salen, anota la correspondencia en una tabla y la usa para devolver las respuestas; un paquete no solicitado desde internet se descarta">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nat-tabla-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una línea; cada respuesta que vuelve se busca en ella. Lo que llega sin línea, se tira.
+</figcaption>
+</figure>
+</div>
+<p>De esta libreta salen todas las consecuencias que importan. Un paquete que llega desde internet <em>sin que nadie de casa lo haya pedido</em> — alguien probando suerte en tu puerto 22 — no tiene línea en la tabla: el router no sabe a quién dárselo y lo descarta. Por eso <strong>desde fuera nadie entra sin invitación</strong>. Cuando <em>quieras</em> que alguien entre — tú mismo por SSH desde la universidad —, tendrás que escribir a mano una línea permanente: «lo que llegue al puerto 22 público, dáselo siempre a 192.168.1.34» — es el <em>reenvío de puertos</em> del capítulo 11. Y fíjate en el detalle que explica el capítulo siguiente: la traducción funciona <strong>gracias a los puertos</strong>. La dirección pública es la calle; los puertos son los pisos, y el router puede permitirse una sola calle porque tiene sesenta y cinco mil pisos que repartir entre las conversaciones de toda la casa.</p>
+<p>Puedes ver las dos caras desde tu terminal: la privada en <code>ip a</code>, y la pública preguntándole a un servidor de fuera qué dirección ve:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">curl ifconfig.me</span>
+<span class="t-out">83.44.120.9</span></code></pre>
+<p>Esa es tu casa vista desde internet — y coincidirá con la que el router llama <em>WAN</em> en su página. Dos remates. Tu <code>debian-lab</code> vive detrás de <em>dos</em> libretas — la de tu Mint (para la red <code>192.168.122.x</code>) y la del router —: cada paquete suyo cambia de remitente dos veces al salir y de destinatario dos veces al volver. Y algunas compañías añaden una tercera libreta en sus propias instalaciones para miles de casas a la vez (el CG-NAT del ejercicio 9.3): entonces ni la línea escrita a mano en tu router sirve, porque el intruso — o tú desde la universidad — nunca llega a tu router. Muñecas rusas, todas con la misma lógica.</p>
 </section>
-<section id="sec-cable-wifi" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="sec-cable-wifi"><span class="header-section-number">10.6</span> Cable o Wi-Fi</h2>
+<section id="sec-router" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-router"><span class="header-section-number">10.3</span> El router por dentro (solo lectura)</h2>
+<p>El <code>192.168.1.1</code> de <code>ip route</code> no es solo una dirección: es una <strong>página web</strong>. Escríbela en el navegador y aparecerá la administración de tu router — usuario y contraseña suelen estar en la pegatina de la caja (y si son los de fábrica, el final de este capítulo tendrá algo que decir). Cada compañía diseña la suya, pero todas tienen los mismos cajones; tu tarea hoy es <em>encontrarlos sin tocar nada</em>:</p>
+<ul>
+<li><strong>Estado / Información</strong>: la dirección WAN (compárala con <code>curl ifconfig.me</code>), el tiempo encendido, la versión del firmware.</li>
+<li><strong>Red local / LAN</strong>: la dirección del router (<code>192.168.1.1</code>), y la configuración del <strong>servidor DHCP</strong> — el rango de direcciones que reparte (algo como <code>.2</code> a <code>.254</code>) y la duración de los préstamos.</li>
+<li><strong>Dispositivos conectados / Tabla DHCP / Lista de clientes</strong>: el tesoro del capítulo. Cada aparato con su nombre, su IP y su MAC — el censo de tu red.</li>
+<li><strong>Wi-Fi</strong>: nombre de la red (SSID), canal, tipo de cifrado.</li>
+</ul>
+<div class="aviso">
+<p><strong>△ Cuidado · Primero se mira; al final, se toca</strong></p>
+<p>La regla de seguridad del curso, aplicada al router: esta sección es <strong>de solo lectura</strong>. No cambies contraseñas, no reinicies, no toques el DHCP ni la Wi-Fi — un clic de más deja a toda la casa sin internet, y no hay instantánea que restaurar. Al final del capítulo harás cambios <em>reversibles</em>, cada uno con su procedimiento de vuelta atrás escrito antes de tocar. Hoy, si te pica el dedo: <code>ip a</code> en la terminal, que no rompe nada.</p>
+</div>
+<p>¿Y si tu router no enseña la tabla de dispositivos, o la enseña a medias? Tu propia máquina lleva un censo parcial: <code>ip neigh</code> (<em>los vecinos</em>) lista las máquinas de tu red con las que has hablado últimamente, con sus MAC:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip neigh</span>
+<span class="t-out">192.168.1.1 dev wlp3s0 lladdr 3c:84:6a:b2:10:f1 REACHABLE</span>
+<span class="t-out">192.168.1.57 dev wlp3s0 lladdr 8e:12:5b:0a:77:c3 STALE</span>
+<span class="t-out">192.168.122.15 dev virbr0 lladdr 52:54:00:9a:4e:21 REACHABLE</span></code></pre>
+<p>Y para un censo completo por tu cuenta existe <code>nmap</code>, el explorador de redes: <code>sudo apt install nmap</code> y <code>nmap -sn 192.168.1.0/24</code> toca a la puerta de las 254 direcciones y lista quién responde. Es una herramienta legítima <strong>sobre tu propia red</strong>; usarla sobre redes ajenas es, según dónde, un delito. Aquí, en casa, es tu censo de respaldo.</p>
+</section>
+<section id="sec-cable-wifi" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</h2>
 <p>Un dato práctico que separa el portátil del servidor: por Wi-Fi, los paquetes comparten el aire con los vecinos, se pierden y tardan más de forma <em>irregular</em>; por cable, no. Y como todo aquí, se mide. Tu tarjeta Wi-Fi te dice cuánta señal recibe — en dBm, una unidad que reconoces:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">iw dev wlp3s0 link | grep signal</span>
 <span class="t-out">        signal: -58 dBm</span>
@@ -522,8 +469,8 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <span class="t-out">rtt min/avg/max/mdev = 1.9/6.4/48.2/11.7 ms</span></code></pre>
 <p>Un −58 dBm es buena señal (−30 sería pegado al router; −80, cobertura mala). Y fíjate en la línea de <code>ping</code>: un paquete perdido de veinte, y un tiempo que oscila entre 2 y 48 ms — ese <code>mdev</code> es la desviación típica, y por Wi-Fi es grande. Por cable serían 20 de 20, 1 ms, y <code>mdev</code> de décimas. Moraleja para el futuro: <strong>un servidor va por cable</strong>; y si tu <code>debian-lab</code> un día vive en un PC físico, ese PC tendrá un cable.</p>
 </section>
-<section id="sec-cambios" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="sec-cambios"><span class="header-section-number">10.7</span> El protocolo del cambio reversible</h2>
+<section id="sec-cambios" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</h2>
 <p>Hoy tocas el router por primera vez, y lo haces con un método que vale para cualquier sistema que no tenga instantáneas — es decir, para casi todo en la vida real:</p>
 <ol type="1">
 <li><strong>Anota el valor actual</strong> — captura de pantalla o línea en el cuaderno. Sin esto, no hay vuelta atrás posible.</li>
@@ -532,19 +479,19 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <li><strong>Verifica</strong> con un comando que el cambio hizo lo que esperabas.</li>
 <li><strong>Decide</strong>: se queda, o se ejecuta la vuelta atrás.</li>
 </ol>
-<p>Los cambios de hoy son dos, elegidos por útiles y reversibles: una <strong>reserva de dirección</strong> — pedirle al DHCP del router que a tu portátil le dé siempre la misma IP, identificándolo por su MAC — y el <strong>servidor DNS</strong> que el router reparte a la casa. Y uno previo, si procede: si la contraseña de administración del router sigue siendo la de la pegatina, cámbiala — apuntando la nueva en un sitio seguro <em>antes</em> de pulsar guardar. Lo que <strong>no</strong> se toca hoy: la Wi-Fi, el rango del DHCP, y nada que diga «restablecer».</p>
+<p>El cambio de hoy es uno, elegido por útil y reversible: una <strong>reserva de dirección</strong> — pedirle al DHCP del router que a tu portátil le dé siempre la misma IP, identificándolo por su MAC (en el capítulo 11 harás el segundo: el servidor de nombres que el router reparte a la casa). Y uno previo, si procede: si la contraseña de administración del router sigue siendo la de la pegatina, cámbiala — apuntando la nueva en un sitio seguro <em>antes</em> de pulsar guardar. Lo que <strong>no</strong> se toca hoy: la Wi-Fi, el rango del DHCP, y nada que diga «restablecer».</p>
 <div class="aviso">
 <p><strong>△ Cuidado · Los dos cambios que dejan a la casa sin internet</strong></p>
 <p>Cambiar la dirección del propio router (<code>192.168.1.1</code>) o desactivar su DHCP son cambios <em>legales</em> pero que cortan la red a todos los aparatos hasta que se arregla — y arreglarlo exige saber más de lo que sabes hoy. Ni siquiera con vuelta atrás escrita: no en el piloto. El curso los deja para quien administre un router en serio, con un segundo equipo por cable para rescatarlo.</p>
 </div>
 </section>
-<section id="sec-practica-10" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="sec-practica-10"><span class="header-section-number">10.8</span> Práctica: la guía y las puertas</h2>
-<p>Cuaderno en marcha (<code>script sesion10.log</code>). Los cambios de hoy se hacen con el protocolo: valor actual, vuelta atrás escrita, cambio, verificación.</p>
+<section id="sec-practica-10" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-practica-10"><span class="header-section-number">10.6</span> Práctica: el censo de casa</h2>
+<p>Cuaderno en marcha (<code>script sesion10.log</code>). Todo es lectura salvo el ejercicio 10.4, que sigue el protocolo del cambio reversible.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.1 · El DNS en acción</strong></p>
-<p>Con <code>host</code>, averigua la dirección de <code>uma.es</code>, de <code>debian.org</code> y de <code>google.com</code> (esta última te dará varias: anota cuántas). Averigua también a qué servidor le pregunta tu máquina (<code>resolvectl status</code>). <em>Pista: <code>host nombre</code> a secas; si <code>host</code> no existe, <code>sudo apt install bind9-host</code>.</em></p>
+<p><strong>Ejercicio 10.1 · Las dos caras</strong></p>
+<p>Averigua tu dirección pública con <code>curl ifconfig.me</code> y compárala con la privada de <code>ip a</code>. Después, en la página del router, localiza la dirección <em>WAN</em> y comprueba que coincide con la pública. <em>Pista: si <code>curl</code> no está instalado, ya sabes: <code>sudo apt install curl</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -558,16 +505,16 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>host uma.es</code>, <code>host debian.org</code>, <code>host google.com</code> — Google devuelve varias direcciones (y una de tipo IPv6, más larga: es la nueva numeración de internet, que hoy dejamos de lado). El resolver será tu router, <code>192.168.1.1</code>, salvo que tu compañía configure otro.</p>
-<p><strong>Por qué así</strong> — Ver que un nombre tiene <em>varias</em> direcciones desmonta la idea de «la dirección de Google»: son granjas de servidores, y el DNS reparte. Y saber a quién preguntas es el primer paso para cambiarlo con criterio en el 10.5.</p>
+<p>Privada <code>192.168.1.x</code>; pública algo como <code>83.44.120.9</code>, idéntica a la WAN del router. Si la WAN del router es <em>también</em> del tipo <code>100.64.x.x</code> o <code>10.x.x.x</code>, tu compañía te tiene detrás de un NAT adicional (se llama CG-NAT), y eso condicionará el reenvío de puertos del capítulo 11.</p>
+<p><strong>Por qué así</strong> — Ver las dos direcciones con tus propios ojos convierte el NAT de concepto en hecho: toda la casa, un número.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.2 · Bautizar a la VM</strong></p>
-<p>Añade a <code>/etc/hosts</code> de tu Mint una línea con la IP de <code>debian-lab</code> (la de <code>ip a</code> dentro de la VM) y su nombre, y comprueba que <code>ping debian-lab</code> funciona. Antes de editar, aplica el protocolo: copia de seguridad del fichero y vuelta atrás escrita. <em>Pista: <code>sudo cp /etc/hosts /etc/hosts.bak</code>, <code>sudo nano /etc/hosts</code>, y una línea como <code>192.168.122.15  debian-lab</code> al final. Vuelta atrás: <code>sudo cp /etc/hosts.bak /etc/hosts</code>.</em></p>
+<p><strong>Ejercicio 10.2 · El censo</strong></p>
+<p>En la página del router, encuentra la tabla de dispositivos conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato. Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y anota los que no reconozcas. <em>Pista: si el router no la muestra o está incompleta, <code>ip neigh</code> en tu Mint es el plan B, y <code>nmap -sn</code> sobre tu <code>/24</code>, el plan C.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -581,16 +528,17 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tras guardar, <code>ping -c 1 debian-lab</code> responde desde <code>192.168.122.15</code> sin haber preguntado a ningún DNS: <code>/etc/hosts</code> se consulta primero. Si la IP de la VM cambiara algún día (el DHCP de libvirt suele mantenerla, pero no lo jura), basta actualizar la línea.</p>
-<p><strong>Por qué así</strong> — Es tu primera edición de un fichero de <code>/etc</code> con <code>sudo</code> — capítulo 4 — hecha con red: copia antes, vuelta atrás escrita. Y el premio llega mañana: <code>ssh debian-lab</code> en vez de una ristra de números.</p>
+<p>Una tabla de entre 5 y 20 filas es lo normal en una casa. Los aparatos «misteriosos» suelen ser el propio router, un enchufe inteligente, la consola o el móvil de alguien de visita — los tres primeros bytes de la MAC identifican al fabricante, y buscarlos en internet («MAC lookup») resuelve casi todos.</p>
+<p><strong>Por qué así</strong> — Es el ejercicio central del capítulo: saber quién vive en tu red es el principio de saber administrarla. En el capítulo 10, con esta lista, podrás hacer los cambios con criterio.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.3 · El camino a la universidad</strong></p>
-<p>Ejecuta <code>tracepath -n uma.es</code> (o el dominio de tu universidad). ¿Cuántos saltos hay? ¿Cuál es el primero? ¿En qué salto aparece la primera dirección que <em>no</em> es privada — es decir, dónde sale tu paquete a internet? <em>Pista: privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>; repasa la figura del NAT del capítulo 9.</em></p>
+<p><strong>Ejercicio 10.3 · La VM en el mapa</strong></p>
+<p>Dentro de <code>debian-lab</code>, ejecuta <code>ip a</code> e <code>ip route</code>. Compara con tu Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede hacer <code>ping</code> a tu Mint y a <code>8.8.8.8</code>, pero el router de casa no la tiene en su censo? <em>Pista: mira el <code>default via</code> de la VM y búscalo en el <code>ip a</code> de tu Mint.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -604,16 +552,16 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Entre 8 y 15 saltos es lo normal. El primero es <code>192.168.1.1</code>, tu router; a menudo el segundo o tercero sigue siendo privado (la red interna de la compañía), y la primera pública marca la salida real a internet. Algún salto puede aparecer como <code>no reply</code>: routers que no contestan por política — no es un fallo.</p>
-<p><strong>Por qué así</strong> — Tu paquete acaba de contarte su viaje. La próxima vez que «no vaya internet», este comando te dirá en qué salto muere — y por tanto a quién llamar.</p>
+<p>Puerta de enlace de la VM: <code>192.168.122.1</code> — que es <code>virbr0</code>, tu propio Mint. La VM está en la red privada de libvirt; tu Mint hace de router y NAT para ella, igual que el de casa hace para tu Mint. El router de casa solo ve salir paquetes de <code>192.168.1.34</code>: la VM está escondida detrás, en un segundo NAT.</p>
+<p><strong>Por qué así</strong> — Es la figura del NAT aplicada dos veces, y la demostración de que un «router» no es una caja: es un <em>papel</em> que cualquier máquina Linux puede hacer. Tu Mint lleva haciéndolo desde el capítulo 7.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.4 · Las puertas de tu servidor</strong></p>
-<p>Desde dentro de <code>debian-lab</code>, lista los puertos que escuchan (<code>ss -tln</code>); desde tu Mint, tócalos desde fuera (<code>nmap debian-lab</code> — ya tiene nombre). ¿Coinciden las dos vistas? <em>Pista: <code>-t</code> TCP, <code>-l</code> solo los que escuchan, <code>-n</code> números en vez de nombres.</em></p>
+<p><strong>Ejercicio 10.4 · Una reserva en el router, con vuelta atrás</strong></p>
+<p>Con el protocolo completo — valor actual anotado, vuelta atrás escrita, cambio, verificación —: crea en el router una <strong>reserva DHCP</strong> para tu portátil, de modo que siempre reciba la misma dirección (la que tiene ahora vale). Verifica reconectando la Wi-Fi y mirando <code>ip a</code>. <em>Pista: el menú se llama «Reserva de dirección», «DHCP estático» o «Asignación fija», en la sección LAN/DHCP; necesita tu MAC (<code>ip a</code>, línea <code>link/ether</code>). Si tu router no lo ofrece, deja constancia en el cuaderno y sigue: no todos lo exponen.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -627,17 +575,17 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Dentro: <code>LISTEN</code> en <code>0.0.0.0:22</code> (y quizá <code>[::]:22</code>, su versión IPv6). Fuera: <code>22/tcp open ssh</code>. Una puerta, dos puntos de vista, el mismo resultado — y <code>nmap</code> funcionando ya por nombre gracias al 10.2.</p>
-<p><strong>Por qué así</strong> — Comparar la vista interior con la exterior es el diagnóstico básico de cualquier servicio: si dentro escucha pero fuera no se ve, hay un portero en medio (cortafuegos o NAT). Hoy no lo hay; en la universidad lo habrá.</p>
+<p>La reserva asocia tu MAC a una IP; tras reconectar, <code>ip a</code> la muestra — y a partir de ahora tu <code>/etc/hosts</code> (capítulo 11) o el SSH del capítulo 12 pueden contar con ella. Vuelta atrás: borrar la reserva; tu portátil volverá a coger la que le toque del rango.</p>
+<p><strong>Por qué así</strong> — Un cambio pequeño, útil y deshecho en un minuto si molesta: exactamente el tipo de administración que se hace en una casa. Y el protocolo que has seguido es el mismo con el que tocarás un servidor de verdad — donde tampoco habrá instantáneas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
+<p><strong>Nivel 3 · El reto (opcional)</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.5 · Dos cambios en el router, con vuelta atrás</strong></p>
-<p>Con el protocolo completo (valor actual anotado, vuelta atrás escrita, cambio, verificación): (a) crea una <strong>reserva DHCP</strong> para tu portátil, de modo que siempre reciba la misma dirección — la que tiene ahora vale —; (b) cambia el <strong>servidor DNS</strong> que el router reparte por <code>9.9.9.9</code> (Quad9) o <code>1.1.1.1</code> (Cloudflare). Verifica (a) reconectando la Wi-Fi y mirando <code>ip a</code>, y (b) con <code>resolvectl status</code> tras reconectar. <em>Pista: los menús se llaman «Reserva de dirección», «DHCP estático» o «Asignación fija» en la sección LAN/DHCP; el DNS suele estar en LAN/DHCP o en WAN/Internet. Si no encuentras uno de los dos, deja constancia y sigue: no todos los routers lo exponen.</em></p>
+<p><strong>Ejercicio 10.5 · Wi-Fi contra cable, con datos</strong></p>
+<p>Si tienes un cable de red a mano: mide con <code>ping -c 30</code> al router por Wi-Fi y por cable, y compara media, máximo, <code>mdev</code> y paquetes perdidos. Añade la señal Wi-Fi en dBm (<code>iw dev … link</code>). Escribe en el cuaderno una conclusión de dos líneas, como en un informe de prácticas. <em>Pista: <code>ip a</code> te dirá qué interfaz está activa en cada caso (<code>wlp…</code> o <code>enp…</code>); desactiva la Wi-Fi mientras mides por cable para no mezclar.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -651,32 +599,6 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="a">
-<li>La reserva asocia tu MAC (capítulo 9) a una IP; tras reconectar, <code>ip a</code> la muestra, y ahora tu <code>/etc/hosts</code> o el SSH de mañana pueden contar con ella. (b) <code>resolvectl status</code> pasa de <code>192.168.1.1</code> a <code>9.9.9.9</code>; <code>host debian.org</code> sigue resolviendo. Vuelta atrás de cada uno: borrar la reserva; devolver el DNS al valor anotado (a menudo «automático»).</li>
-</ol>
-<p><strong>Por qué así</strong> — Dos cambios pequeños, útiles y deshechos en un minuto si molestan: exactamente el tipo de administración que se hace en una casa. Y el protocolo que has seguido es el mismo con el que tocarás un servidor de verdad — donde tampoco habrá instantáneas.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p><strong>Nivel 3 · El reto (opcional)</strong></p>
-<div class="ejercicio">
-<p><strong>Ejercicio 10.6 · Wi-Fi contra cable, con datos</strong></p>
-<p>Si tienes un cable de red a mano: mide con <code>ping -c 30</code> al router por Wi-Fi y por cable, y compara media, máximo, <code>mdev</code> y paquetes perdidos. Añade la señal Wi-Fi en dBm (<code>iw dev … link</code>). Escribe en el cuaderno una conclusión de dos líneas, como en un informe de prácticas. <em>Pista: <code>ip a</code> te dirá qué interfaz está activa en cada caso (<code>wlp…</code> o <code>enp…</code>); desactiva la Wi-Fi mientras mides por cable para no mezclar.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
 <p>Cable: 30 de 30, ~1 ms, <code>mdev</code> de décimas. Wi-Fi: alguna pérdida posible, media mayor y <code>mdev</code> de varios ms — más cuanto peor la señal (por debajo de −70 dBm empieza a notarse). Conclusión típica: «la media apenas cambia; la <em>dispersión</em> y las pérdidas sí — por eso el servidor va por cable».</p>
 <p><strong>Por qué así</strong> — Media, desviación y pérdidas: el mismo trío que resume cualquier medida de laboratorio. Has convertido una opinión de foro («el cable va mejor») en un resultado con incertidumbre.</p>
 </div>
@@ -685,44 +607,44 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 </div>
 </section>
-<section id="sec-quiz-10" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="sec-quiz-10"><span class="header-section-number">10.9</span> Autocomprobación</h2>
+<section id="sec-quiz-cap10" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-quiz-cap10"><span class="header-section-number">10.7</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap10">
-  <div class="qz"><p class="qq" data-n="1">El DNS sirve para…</p>
-    <label><input type="radio" name="z1" value="a"><span>traducir nombres como <code>debian.org</code> en direcciones IP</span></label>
-    <label><input type="radio" name="z1" value="b"><span>repartir direcciones IP a los aparatos de casa</span></label>
-    <label><input type="radio" name="z1" value="c"><span>cifrar la conexión</span></label>
-    <div class="fb good"><b>Correcto.</b> La guía telefónica distribuida. Repartir direcciones es el DHCP (capítulo 9); cifrar es cosa de SSH y https.</div>
-    <div class="fb bad"><b>No exactamente.</b> El DNS traduce nombres a números. Las direcciones las reparte el DHCP; el cifrado es otro asunto.</div>
+  <div class="qz"><p class="qq" data-n="1">Tu portátil sabe su dirección IP porque…</p>
+    <label><input type="radio" name="z1" value="a"><span>viene grabada de fábrica, como la MAC</span></label>
+    <label><input type="radio" name="z1" value="b"><span>el servidor DHCP del router se la prestó al conectarse</span></label>
+    <label><input type="radio" name="z1" value="c"><span>la eligió al azar</span></label>
+    <div class="fb good"><b>Correcto.</b> Un préstamo con caducidad, junto con la máscara, la puerta de enlace y el DNS. Lo grabado de fábrica es la MAC.</div>
+    <div class="fb bad"><b>No exactamente.</b> La MAC es de fábrica; la IP es un préstamo del DHCP del router — por eso <code>ip a</code> la marca como <code>dynamic</code>.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="2">Añades <code>192.168.122.15 debian-lab</code> a <code>/etc/hosts</code>. Al hacer <code>ping debian-lab</code>…</p>
-    <label><input type="radio" name="z2" value="a"><span>tu máquina pregunta al DNS y falla, porque ese nombre no existe en internet</span></label>
-    <label><input type="radio" name="z2" value="b"><span>tu máquina usa la línea de <code>/etc/hosts</code> sin preguntar a ningún servidor</span></label>
-    <label><input type="radio" name="z2" value="c"><span>el router aprende el nombre</span></label>
-    <div class="fb good"><b>Correcto.</b> <code>/etc/hosts</code> se consulta antes que el DNS: es la guía privada de tu máquina.</div>
-    <div class="fb bad"><b>No exactamente.</b> El fichero local tiene prioridad: el nombre se resuelve ahí y el DNS ni se entera. El router tampoco.</div>
+  <div class="qz"><p class="qq" data-n="2">Una «reserva» en el DHCP del router sirve para…</p>
+    <label><input type="radio" name="z2" value="a"><span>que un aparato reciba siempre la misma dirección, identificándolo por su MAC</span></label>
+    <label><input type="radio" name="z2" value="b"><span>acelerar la Wi-Fi</span></label>
+    <label><input type="radio" name="z2" value="c"><span>dar dirección pública a un aparato</span></label>
+    <div class="fb good"><b>Correcto.</b> La forma limpia de fijar la dirección de la impresora, el NAS o tu servidor: la decisión vive en el router, no en cada aparato.</div>
+    <div class="fb bad"><b>No exactamente.</b> La reserva asocia una MAC a una IP fija dentro del rango privado. Ni velocidad ni direcciones públicas: solo estabilidad.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="3">En <code>tracepath</code>, el primer salto es siempre…</p>
-    <label><input type="radio" name="z3" value="a"><span>el servidor de destino</span></label>
-    <label><input type="radio" name="z3" value="b"><span>tu router, la puerta de enlace</span></label>
-    <label><input type="radio" name="z3" value="c"><span>un servidor de la compañía</span></label>
-    <div class="fb good"><b>Correcto.</b> Todo lo que sale de tu red pasa primero por la puerta de enlace del capítulo 9. Si el salto 1 no responde, el problema está en casa.</div>
-    <div class="fb bad"><b>No exactamente.</b> El salto 1 es tu propio router; la compañía viene después, y el destino, al final.</div>
+  <div class="qz"><p class="qq" data-n="3">¿Cuál de estas es una dirección privada?</p>
+    <label><input type="radio" name="z3" value="a"><span><code>8.8.8.8</code></span></label>
+    <label><input type="radio" name="z3" value="b"><span><code>10.20.30.40</code></span></label>
+    <label><input type="radio" name="z3" value="c"><span><code>83.44.120.9</code></span></label>
+    <div class="fb good"><b>Correcto.</b> <code>10.x.x.x</code>, <code>192.168.x.x</code> y <code>172.16–31.x.x</code> son privadas: repetidas en millones de redes, invisibles desde internet.</div>
+    <div class="fb bad"><b>No exactamente.</b> Las privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>. Las otras dos son públicas: únicas en el mundo.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="4">Un puerto es…</p>
-    <label><input type="radio" name="z4" value="a"><span>un conector físico del ordenador</span></label>
-    <label><input type="radio" name="z4" value="b"><span>un número que identifica un servicio concreto dentro de una dirección</span></label>
-    <label><input type="radio" name="z4" value="c"><span>otro nombre para la dirección IP</span></label>
-    <div class="fb good"><b>Correcto.</b> Dirección:puerto. El 22 es SSH, el 443 la web cifrada — y <code>ss</code> o <code>nmap</code> te enseñan cuáles están abiertos.</div>
-    <div class="fb bad"><b>No exactamente.</b> Nada físico: es la «puerta» numerada por la que escucha un servicio en una máquina. Una dirección, miles de puertas.</div>
+  <div class="qz"><p class="qq" data-n="4">Gracias al NAT del router…</p>
+    <label><input type="radio" name="z4" value="a"><span>cada aparato de casa tiene su propia dirección pública</span></label>
+    <label><input type="radio" name="z4" value="b"><span>toda la casa sale con una sola dirección pública, y desde fuera nadie entra sin invitación</span></label>
+    <label><input type="radio" name="z4" value="c"><span>internet va más rápido</span></label>
+    <div class="fb good"><b>Correcto.</b> Traducción de direcciones: una pública para todos, y una libreta que recuerda cada conversación. Lo que llega sin línea en la libreta, se descarta.</div>
+    <div class="fb bad"><b>No exactamente.</b> El NAT es justo lo contrario de «una pública por aparato»: una para toda la casa, con el router reescribiendo remitentes y apuntando.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="5">SSH va sobre TCP y no sobre UDP porque…</p>
-    <label><input type="radio" name="z5" value="a"><span>TCP garantiza que todo llega, en orden, reenviando lo perdido</span></label>
-    <label><input type="radio" name="z5" value="b"><span>UDP no funciona en Linux</span></label>
-    <label><input type="radio" name="z5" value="c"><span>TCP es más rápido</span></label>
-    <div class="fb good"><b>Correcto.</b> Correo certificado frente a postal: para una sesión de terminal, perder un carácter es inaceptable. El precio es algo de velocidad.</div>
-    <div class="fb bad"><b>No exactamente.</b> UDP existe y se usa muchísimo (DNS, vídeo). SSH elige TCP por fiabilidad — que cuesta velocidad, no la da.</div>
+  <div class="qz"><p class="qq" data-n="5">El router de casa no ve a tu máquina virtual en su censo porque…</p>
+    <label><input type="radio" name="z5" value="a"><span>las VM no tienen red</span></label>
+    <label><input type="radio" name="z5" value="b"><span>está detrás de un segundo NAT: el de tu Mint, que hace de router para ella</span></label>
+    <label><input type="radio" name="z5" value="c"><span>el router bloquea a Debian</span></label>
+    <div class="fb good"><b>Correcto.</b> Muñecas rusas: tu Mint tiene su propia libreta para la red <code>192.168.122.x</code>. El router solo ve salir paquetes de tu Mint.</div>
+    <div class="fb bad"><b>No exactamente.</b> La VM tiene red y sale a internet; lo que pasa es que su tráfico sale con el remitente de tu Mint. Doble NAT.</div>
   </div>
   <div class="qz"><p class="qq" data-n="6">El primer paso del protocolo de cambio reversible es…</p>
     <label><input type="radio" name="z6" value="a"><span>hacer el cambio y ver qué pasa</span></label>
@@ -734,7 +656,7 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <script>
 (function(){
-  const OK = {z1:"a", z2:"b", z3:"b", z4:"b", z5:"a", z6:"b"};
+  const OK = {z1:"b", z2:"a", z3:"b", z4:"b", z5:"b", z6:"b"};
   document.querySelectorAll("#quiz-cap10 .qz input").forEach(i => {
     i.addEventListener("change", () => {
       const qz = i.closest(".qz");
@@ -745,14 +667,14 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 })();
 </script>
 <div class="solucion-final">
-<p><strong>Autocomprobación (test de la sección 10.8)</strong> — Respuestas: 1 a · 2 b · 3 b · 4 b · 5 a · 6 b.</p>
+<p><strong>Autocomprobación</strong> — Respuestas: 1 b · 2 a · 3 b · 4 b · 5 b · 6 b.</p>
 </div>
 <div class="proxima">
 <p><strong>La próxima sesión</strong></p>
-<p>Empieza el bloque E: trabajar en remoto. Tienes un servidor con nombre (<code>debian-lab</code>), una puerta abierta (la 22) y, desde hoy, el mapa entero de cómo llegar a ella. En el capítulo 11 entras: usarás SSH, sustituirás las contraseñas por claves y copiarás ficheros entre máquinas con <code>scp</code> y <code>rsync</code> — primero contigo mismo, luego con tu VM, y después con cualquier servidor del mundo. Guarda <code>sesion10.log</code>: bloque D completo.</p>
+<p>Hoy has hablado con números; el capítulo 11 les pone nombre. Verás qué pasa exactamente al escribir <code>debian.org</code> — el DNS, la guía telefónica de internet —, seguirás el camino paquete a paquete hasta la universidad con <code>tracepath</code>, entenderás qué es exactamente un puerto y por qué SSH es el 22 y la web el 443, pondrás un cortafuegos básico, y harás el segundo cambio reversible en el router: el servidor de nombres. Guarda <code>sesion10.log</code>.</p>
 </div>
 <div class="pie-piloto">
-<p>cap. 10 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion10.log</code></p>
+<p>cap. 10 v0.2 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion10.log</code></p>
 </div>
 
 
@@ -1104,8 +1026,8 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../capitulos/cap11.html" class="pagination-link" aria-label="SSH: entrar en otra máquina">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../capitulos/cap11.html" class="pagination-link" aria-label="Nombres, puertos y protocolos">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

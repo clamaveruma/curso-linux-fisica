@@ -211,19 +211,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -460,7 +466,7 @@ done</code></pre>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>crontab -e</code> y una línea como <code>15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&amp;1</code>. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 11) funciona sin ti — <code>cron</code> no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.</p>
+<p><code>crontab -e</code> y una línea como <code>15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&amp;1</code>. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 12) funciona sin ti — <code>cron</code> no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.</p>
 <p><strong>Por qué así</strong> — Es el primer proceso <em>automático</em> de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.</p>
 </div>
 </div>

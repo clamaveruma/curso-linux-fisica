@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Vivir en remoto – Bendito maldito Linux</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/proyecto-final.html" rel="next">
+<link href="../capitulos/cap12.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d79405beb835686e9c5d3a777281271a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap13.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bendito maldito Linux</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abrir la caja negra</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ficheros: tocar sin romper</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">El flujo de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">El árbol y los permisos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paquetes y procesos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Discos, particiones y arranque</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tu primera máquina virtual</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Instalar Linux de verdad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Qué es una red</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/proyecto-final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyecto final: tu primer servidor</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-sesion-muere" id="toc-sec-sesion-muere" class="nav-link active" data-scroll-target="#sec-sesion-muere"><span class="header-section-number">13.1</span> La sesión que muere</a></li>
+  <li><a href="#sec-tmux" id="toc-sec-tmux" class="nav-link" data-scroll-target="#sec-tmux"><span class="header-section-number">13.2</span> <code>tmux</code>: la sesión que no muere</a></li>
+  <li><a href="#sec-tunel" id="toc-sec-tunel" class="nav-link" data-scroll-target="#sec-tunel"><span class="header-section-number">13.3</span> El túnel: un servicio remoto en tu navegador</a></li>
+  <li><a href="#sec-nube" id="toc-sec-nube" class="nav-link" data-scroll-target="#sec-nube"><span class="header-section-number">13.4</span> Qué es «la nube», en concreto</a></li>
+  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">13.5</span> Y si algún día te dan un clúster</a></li>
+  <li><a href="#sec-practica-13" id="toc-sec-practica-13" class="nav-link" data-scroll-target="#sec-practica-13"><span class="header-section-number">13.6</span> Práctica: vivir en el servidor</a></li>
+  <li><a href="#sec-quiz-13" id="toc-sec-quiz-13" class="nav-link" data-scroll-target="#sec-quiz-13"><span class="header-section-number">13.7</span> Autocomprobación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-cap13" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lede">
+<p>Última sesión numerada, y la que junta todo. Ya entras y sales de tu servidor; hoy aprendes a <em>quedarte</em> sin estar: lanzar una simulación, cerrar el portátil, volver mañana desde otra ciudad y encontrarla terminada. Después, el truco favorito del físico computacional — un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil por un túnel cifrado. Y de postre, qué es «la nube» en términos concretos — y por dónde seguir el día que te den cuenta en un clúster.</p>
+</div>
+<div class="chapmeta">
+<p>⏱ <strong>2 h</strong> (lo esencial) · requisitos: <strong>capítulo 12</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong> · nivel: <strong>avanzado — para conocer</strong></p>
+</div>
+<div class="aviso">
+<p><strong>△ Cómo leer este capítulo · conocer, no dominar</strong></p>
+<p>Este capítulo es el más avanzado del curso, y se lee con otra actitud: lo esencial es entender el <em>problema</em> (un programa lanzado por SSH muere con la conexión) y saber que existen dos soluciones — <code>tmux</code> y los túneles — y para qué sirve cada una. Usarlas con soltura es cosa de quien las necesite, y ese día tendrás una IA al lado que te dé los comandos (anexo E1): lo que este capítulo te da es entenderlos. Haz los ejercicios 12.1 a 12.3, que son cortos; el 12.4 es opcional.</p>
+</div>
+<div class="objetivos">
+<p><strong>Al terminar esta sesión sabrás</strong></p>
+<ul>
+<li>Por qué un programa lanzado por SSH muere al cerrar la conexión — y cómo evitarlo.</li>
+<li>Qué es <code>tmux</code> y sus cuatro gestos: crear una sesión, desconectarte, listar, volver a engancharla.</li>
+<li>Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.</li>
+<li>Que Jupyter puede correr en el servidor con los datos y la CPU de allí mientras tú trabajas desde tu portátil — y cómo se monta, para el día que lo necesites.</li>
+<li>Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.</li>
+<li>Qué es un clúster de cálculo, y por qué lo aprendido aquí es lo que su guía dará por sabido.</li>
+</ul>
+</div>
+<section id="sec-sesion-muere" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-sesion-muere"><span class="header-section-number">13.1</span> La sesión que muere</h2>
+<p>Un experimento de treinta segundos que explica el capítulo. Entra en <code>debian-lab</code>, lanza algo largo en segundo plano (capítulo 5), y cierra la conexión:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sleep 600 &amp;</span>
+<span class="t-out">[1] 1204</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab "ps aux | grep sleep"</span>
+<span class="t-out">marcos      1231  0.0  0.0   6612  2200 ?  Ss  20:02  0:00 grep sleep</span></code></pre>
+<p>El <code>sleep</code> ha desaparecido: al cerrar la sesión, el shell envía a todos sus hijos la señal SIGHUP — «se ha colgado la línea», nombre heredado de los módems del capítulo 12 — y los procesos terminan. Tu simulación de diez horas moriría a la primera caída de Wi-Fi. Hay parches (<code>nohup</code>, el <code>&amp;</code> con <code>disown</code>), pero la solución que usa todo el mundo es otra idea: que la sesión viva <em>en el servidor</em>, y que tú te enganches y desenganches de ella.</p>
+</section>
+<section id="sec-tmux" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sec-tmux"><span class="header-section-number">13.2</span> <code>tmux</code>: la sesión que no muere</h2>
+<p><code>tmux</code> (<em>terminal multiplexer</em>) crea sesiones de terminal que pertenecen al servidor, no a tu conexión. Te desconectas y siguen; vuelves — desde el mismo portátil o desde otro — y las recuperas tal como las dejaste.</p>
+<div id="fig-tmux" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Una sesión tmux en el servidor con una simulación en marcha; el portátil se desconecta el lunes y vuelve a engancharse el martes">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tmux-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap12/fig-tmux.svg" class="img-fluid figure-img" alt="Una sesión tmux en el servidor con una simulación en marcha; el portátil se desconecta el lunes y vuelve a engancharse el martes">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tmux-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13.1: Lunes lanzas, martes recoges. La sesión y todo lo que corre dentro viven en el servidor.
+</figcaption>
+</figure>
+</div>
+<p>Instálalo en <code>debian-lab</code> (<code>sudo apt install tmux</code>) y repite el experimento, esta vez dentro de una sesión con nombre:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux new -s simulacion</span></code></pre>
+<p>La pantalla cambia: una barra verde abajo con el nombre de la sesión. Estás <em>dentro</em> de tmux. Lanza tu trabajo largo — el <code>simula.py</code> de la práctica, o el <code>sleep 600</code> de antes — y ahora el gesto clave: <kbd>Ctrl</kbd>+<kbd>b</kbd> y luego <kbd>d</kbd> (<em>detach</em>, desenganchar). Vuelves a tu prompt normal; la sesión sigue viva detrás. Cierra SSH, apaga la Wi-Fi si quieres, y vuelve:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux ls</span>
+<span class="t-out">simulacion: 1 windows (created Tue Aug 25 20:10:41 2026)</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux attach -t simulacion</span></code></pre>
+<p>Ahí está, con su <code>sleep</code> todavía contando. Todo lo que hay que saber de tmux para vivir en remoto cabe en cuatro gestos: <code>tmux new -s nombre</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>tmux ls</code>, <code>tmux attach -t nombre</code>. (Cuando quieras más: <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>c</kbd> abre otra ventana en la misma sesión, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>%</kbd> parte la pantalla en dos, y <code>exit</code> dentro de la última ventana cierra la sesión.)</p>
+<div class="truco">
+<p><strong>✚ Truco · La regla de los servidores</strong></p>
+<p>En un servidor ajeno, <strong>lo primero que se teclea tras entrar es <code>tmux attach || tmux new</code></strong>: engánchate a tu sesión si existe, crea una si no. Así, cada trabajo lanzado sobrevive a tu conexión, y cuando el administrador pregunte «¿lo tienes en tmux?», la respuesta será siempre sí. Su hermano mayor, <code>screen</code>, hace lo mismo y lo encontrarás en máquinas antiguas: <code>screen -S nombre</code>, <kbd>Ctrl</kbd>+<kbd>a</kbd> <kbd>d</kbd>, <code>screen -r nombre</code>.</p>
+</div>
+</section>
+<section id="sec-tunel" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="sec-tunel"><span class="header-section-number">13.3</span> El túnel: un servicio remoto en tu navegador</h2>
+<p>Segunda idea del capítulo, y la más elegante del curso. En el capítulo 11 viste que un servicio escucha en un puerto, y que un puerto solo abierto a <code>localhost</code> es invisible desde fuera. SSH puede <strong>tender un túnel</strong>: hacer que un puerto de <em>tu</em> máquina desemboque en un puerto del servidor, cifrado, sin abrir nada a la red.</p>
+<div id="fig-tunel" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Túnel SSH que conecta el puerto 8888 del portátil con el 8888 del servidor donde corre Jupyter">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tunel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap12/fig-tunel.svg" class="img-fluid figure-img" alt="Túnel SSH que conecta el puerto 8888 del portátil con el 8888 del servidor donde corre Jupyter">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tunel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13.2: La opción <code>-L</code>: puerto local, dos puntos, destino visto desde el servidor. Tu navegador no sabe que está hablando con otra máquina.
+</figcaption>
+</figure>
+</div>
+<p>La prueba más simple no necesita instalar nada: Python trae un servidor web de juguete. En <code>debian-lab</code>, dentro de tmux:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">python3 -m http.server 8000 --bind 127.0.0.1</span>
+<span class="t-out">Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/) ...</span></code></pre>
+<p>Escucha solo en <code>127.0.0.1</code>: desde tu Mint, <code>nmap debian-lab</code> no lo vería. Ahora, desde tu Mint, la conexión con túnel:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh -L 8000:localhost:8000 lab</span></code></pre>
+<p>Y en tu navegador, <code>http://localhost:8000</code>: la lista de ficheros de la casa de <code>debian-lab</code>, servida por una máquina que no tiene ese puerto abierto. <code>-L 8000:localhost:8000</code> se lee «mi puerto 8000 → lo que el servidor llama <code>localhost:8000</code>». Mientras esa sesión SSH esté abierta, el túnel existe; al cerrarla, desaparece.</p>
+<p>Y ahora el caso estrella: <strong>Jupyter en el servidor</strong>. Los datos pesados, la CPU de cálculo y el entorno de Python viven allí; tu portátil solo pone el navegador:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install jupyter-notebook</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">jupyter notebook --no-browser --port 8888</span>
+<span class="t-out">    http://localhost:8888/tree?token=4f2a9c…</span></code></pre>
+<p>Con <code>ssh -L 8888:localhost:8888 lab</code> abierto en tu Mint, esa URL — copiada con su <em>token</em> — funciona en tu navegador. Lo que ves es un Jupyter normal; lo que pasa es que cada celda se ejecuta a kilómetros. Lánzalo dentro de tmux y sobrevivirá a tus desconexiones: mañana, nuevo túnel, misma sesión, todo donde estaba. Este flujo — tmux + túnel + Jupyter — es, literalmente, cómo trabaja la física computacional en 2026.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · Por qué el túnel y no «abrir el puerto»</strong></p>
+<p>La tentación es lanzar Jupyter escuchando en todas las interfaces y entrar directo por <code>http://debian-lab:8888</code>. Funcionaría — y dejaría un intérprete de Python con tus permisos abierto a toda la red, sin cifrar. En el servidor de la universidad, además, el portero del capítulo 11 no te dejaría. El túnel resuelve las dos cosas: nada se abre, todo va cifrado, y solo tú — con tu clave — lo ves.</p>
+</div>
+</section>
+<section id="sec-nube" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="sec-nube"><span class="header-section-number">13.4</span> Qué es «la nube», en concreto</h2>
+<p>Con el curso hecho, la palabra deja de ser humo. <strong>Una máquina en la nube es una VM como tu <code>debian-lab</code>, en un anfitrión de KVM (capítulo 7) que vive en un edificio de otro</strong> — y que alquilas por horas. Te dan exactamente tres cosas: una dirección IP <em>pública</em> (capítulo 10: sin NAT delante), un usuario, y un sitio donde pegar tu clave pública (capítulo 12). Desde ese momento es <code>ssh usuario@ip</code>, y todo este bloque aplica sin cambiar una coma. Lo que se paga es el tiempo encendida, el disco y el tráfico que sale — por eso el primer hábito de la nube es apagar lo que no se usa. Y la física de la sección de <code>ping</code> decide dónde: una máquina en Fráncfort responde a 30 ms; la misma en Virginia, a 100.</p>
+<div class="historia">
+<p><strong>◷ Historia · Tiempo compartido, tercera edición</strong></p>
+<p>El curso ha contado la misma historia tres veces. En los 70, muchos usuarios compartían <em>un</em> ordenador por turnos de milisegundos (capítulo 4). En 1967, IBM les dio a cada uno un ordenador de mentira (capítulo 7). Y hoy, un <strong>clúster</strong> de cálculo — miles de nodos como tu <code>debian-lab</code>, pero físicos, unidos por una red rapidísima y compartidos por cientos de investigadores — reparte esos nodos con una cola de trabajos. MareNostrum 4, en la capilla de Torre Girona de Barcelona, tenía 3 456 nodos y 165 888 núcleos; su sucesor multiplica eso. Las cuentas de la Red Española de Supercomputación se piden por convocatoria, y tu grupo probablemente ya tenga horas: el día que te den un usuario, este capítulo será tu primera semana.</p>
+</div>
+<div id="fig-marenostrum" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-marenostrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap12/marenostrum-4.jpg" class="img-fluid figure-img" style="width:80.0%" alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-marenostrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona: miles de <code>debian-lab</code> físicos compartidos por una cola. <em>Foto: Gemmaribasmaspoch, CC BY-SA 4.0, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-cluster" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">13.5</span> Y si algún día te dan un clúster</h2>
+<p>Un <strong>clúster</strong> de cálculo — el de la universidad, el de la Red Española de Supercomputación — es la tercera edición del tiempo compartido: miles de máquinas como tu <code>debian-lab</code>, pero físicas y unidas por una red rapidísima, repartidas entre cientos de investigadores por una <strong>cola de trabajos</strong>: se entra por SSH, se prepara el trabajo y se le pide a la cola que lo ejecute cuando haya hueco. Cada centro tiene su gestor de colas y su guía de usuario, y esa guía será tu manual el día que toque. Lo que este bloque te ha dado — entrar por SSH con clave, sobrevivir a la desconexión con <code>tmux</code>, mover datos con <code>rsync</code> — es exactamente lo que esa guía dará por sabido.</p>
+</section>
+<section id="sec-practica-13" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="sec-practica-13"><span class="header-section-number">13.6</span> Práctica: vivir en el servidor</h2>
+<p>Cuaderno en marcha (<code>script sesion13.log</code>). Los ejercicios de hoy son el flujo de trabajo que usarás en la vida real; hazlos en orden.</p>
+<p><strong>Nivel 1 · Lo esencial</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.1 · La muerte de la sesión</strong></p>
+<p>Reproduce el experimento del capítulo: <code>sleep 600 &amp;</code> dentro de una sesión SSH, <code>exit</code>, y comprueba desde fuera si sigue vivo. Repite con tmux — y comprueba de nuevo. <em>Pista: <code>ssh lab "ps aux | grep sleep"</code> es la comprobación sin entrar; la primera vez desaparecerá, la segunda seguirá ahí.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sin tmux, el <code>grep</code> solo se encuentra a sí mismo: SIGHUP mató al <code>sleep</code>. Con <code>tmux new -s prueba</code>, <code>sleep 600 &amp;</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>exit</code>, la comprobación muestra el <code>sleep</code> vivo — y <code>tmux attach -t prueba</code> te lo devuelve.</p>
+<p><strong>Por qué así</strong> — Ver morir el proceso una vez vale más que cualquier explicación: a partir de hoy el reflejo «¿lo tengo en tmux?» te saldrá solo antes de lanzar nada que dure más que un café.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.2 · La simulación que sobrevive</strong></p>
+<p>Crea en <code>debian-lab</code> un <code>simula.py</code> de diez minutos (abajo), lánzalo dentro de una sesión tmux llamada <code>simulacion</code>, desengánchate, cierra SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba el progreso — sin engancharte, con <code>ssh lab "tail -2 progreso.txt"</code> — y luego engánchate para verlo terminar. <em>Pista: con <code>nano simula.py</code>:</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>tmux new -s simulacion</code>, <code>python3 simula.py</code>, desenganchar, <code>exit</code>. Minutos después: <code>ssh lab "tail -2 progreso.txt"</code> muestra un paso avanzado; <code>ssh lab</code> + <code>tmux attach -t simulacion</code> enseña la cuenta en directo. El programa nunca supo que te fuiste.</p>
+<p><strong>Por qué así</strong> — Es el flujo del físico computacional entero en miniatura: lanzar, irse, consultar sin entrar (el comando remoto del capítulo 12), volver. Sustituye <code>simula.py</code> por tu código de verdad y <code>600</code> por doce horas: el gesto es idéntico.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.3 · Tu primer túnel</strong></p>
+<p>En <code>debian-lab</code> (dentro de tmux), sirve tu casa con <code>python3 -m http.server 8000 --bind 127.0.0.1</code>. Comprueba desde tu Mint que el puerto <em>no</em> está abierto (<code>nmap debian-lab</code>), abre el túnel con <code>ssh -L 8000:localhost:8000 lab</code>, y visita <code>http://localhost:8000</code> en tu navegador. Cierra la sesión SSH y recarga la página. <em>Pista: el túnel solo existe mientras esa conexión SSH esté abierta.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>nmap</code> sigue viendo solo el 22 — el 8000 es privado del servidor. Con el túnel abierto, el navegador muestra el listado de ficheros de la VM (ahí estará <code>progreso.txt</code>). Al cerrar SSH, la página deja de cargar: el túnel murió con la conexión.</p>
+<p><strong>Por qué así</strong> — Has visto las tres propiedades del túnel: no abre puertas, va por SSH, y vive lo que vive la conexión. Todo lo que sigue (Jupyter, y cualquier panel web de un servidor) es este mismo gesto con otro número.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · Opcional (para quien lo vaya a usar — con una IA al lado si quieres)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.4 · Jupyter a distancia</strong></p>
+<p>Instala <code>jupyter-notebook</code> en <code>debian-lab</code>, lánzalo dentro de tmux con <code>--no-browser --port 8888</code>, abre el túnel del 8888 y trabaja desde tu navegador: crea un cuaderno que lea <code>progreso.txt</code> y cuente sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue donde estaba. <em>Pista: la URL con el <code>token</code> la imprime Jupyter al arrancar; si la pierdes, <code>jupyter notebook list</code> la repite.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo apt install jupyter-notebook</code>; en tmux: <code>jupyter notebook --no-browser --port 8888</code>; en Mint: <code>ssh -L 8888:localhost:8888 lab</code> y la URL con token en el navegador. El cuaderno con <code>len(open("progreso.txt").readlines())</code> da 600. Tras cerrar y reabrir túnel, el cuaderno y su kernel siguen vivos: viven en tmux.</p>
+<p><strong>Por qué así</strong> — Este es el montaje completo: los datos y el cálculo en la máquina remota, tu comodidad en la local. En un clúster el patrón es el mismo, con Jupyter lanzado en una máquina de cálculo — pregúntalo allí: casi todos tienen una receta escrita para exactamente esto.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quiz-13" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="sec-quiz-13"><span class="header-section-number">13.7</span> Autocomprobación</h2>
+<p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
+<div class="quiz" id="quiz-cap13">
+  <div class="qz"><p class="qq" data-n="1">Lanzas <code>python3 simula.py</code> por SSH y se corta la Wi-Fi. Sin tmux, el programa…</p>
+    <label><input type="radio" name="z1" value="a"><span>sigue corriendo en el servidor</span></label>
+    <label><input type="radio" name="z1" value="b"><span>muere: el cierre de la sesión le envía SIGHUP</span></label>
+    <label><input type="radio" name="z1" value="c"><span>se pausa hasta que vuelvas</span></label>
+    <div class="fb good"><b>Correcto.</b> «Se ha colgado la línea», la señal heredada de los módems. Por eso la sesión debe vivir en el servidor: tmux.</div>
+    <div class="fb bad"><b>No exactamente.</b> Al cerrarse la sesión, sus procesos reciben SIGHUP y terminan. La solución no es rezar por la Wi-Fi: es tmux.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="2">Para desengancharte de una sesión tmux dejándola viva:</p>
+    <label><input type="radio" name="z2" value="a"><span><kbd>Ctrl</kbd>+<kbd>C</kbd></span></label>
+    <label><input type="radio" name="z2" value="b"><span><kbd>Ctrl</kbd>+<kbd>b</kbd> y después <kbd>d</kbd></span></label>
+    <label><input type="radio" name="z2" value="c"><span>cerrar la ventana de la terminal</span></label>
+    <div class="fb good"><b>Correcto.</b> <em>Detach</em>. Y de vuelta, <code>tmux attach -t nombre</code>. <kbd>Ctrl</kbd>+<kbd>C</kbd> mataría el programa que corre dentro.</div>
+    <div class="fb bad"><b>No exactamente.</b> El gesto es el prefijo <kbd>Ctrl</kbd>+<kbd>b</kbd> seguido de <kbd>d</kbd>. Cerrar la ventana también funciona por accidente (la sesión sobrevive), pero <kbd>Ctrl</kbd>+<kbd>C</kbd> interrumpe el trabajo.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="3"><code>ssh -L 8888:localhost:8888 lab</code> hace que…</p>
+    <label><input type="radio" name="z3" value="a"><span>el puerto 8888 del servidor se abra a toda la red</span></label>
+    <label><input type="radio" name="z3" value="b"><span>tu puerto 8888 local desemboque, cifrado, en el 8888 del servidor</span></label>
+    <label><input type="radio" name="z3" value="c"><span>Jupyter se instale en tu portátil</span></label>
+    <div class="fb good"><b>Correcto.</b> Un túnel privado que vive lo que vive la conexión. Tu navegador habla con <code>localhost</code>; el trabajo ocurre lejos.</div>
+    <div class="fb bad"><b>No exactamente.</b> Nada se abre en el servidor: el túnel conecta tu puerto local con el suyo por dentro de SSH. Es justo la alternativa a abrir puertos.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="4">Una «máquina en la nube» es, en concreto…</p>
+    <label><input type="radio" name="z4" value="a"><span>una VM como <code>debian-lab</code> en un anfitrión ajeno, con IP pública, alquilada por horas</span></label>
+    <label><input type="radio" name="z4" value="b"><span>un ordenador que no necesita sistema operativo</span></label>
+    <label><input type="radio" name="z4" value="c"><span>un disco duro en internet</span></label>
+    <div class="fb good"><b>Correcto.</b> Te dan una IP, un usuario y dónde pegar tu clave pública; a partir de ahí, todo el bloque E sin cambiar una coma.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es el capítulo 7 en el edificio de otro: una máquina virtual con sistema operativo completo, que se paga por tiempo encendida.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="5">Lanzaste Jupyter en el servidor dentro de tmux y cerraste el portátil. Al día siguiente…</p>
+    <label><input type="radio" name="z5" value="a"><span>el cuaderno y su kernel siguen vivos: basta abrir un túnel nuevo</span></label>
+    <label><input type="radio" name="z5" value="b"><span>Jupyter murió al cerrarse el túnel</span></label>
+    <label><input type="radio" name="z5" value="c"><span>hay que reinstalar Jupyter</span></label>
+    <div class="fb good"><b>Correcto.</b> El túnel es solo el camino; lo que vive es la sesión tmux del servidor. Túnel nuevo, misma URL, todo donde estaba.</div>
+    <div class="fb bad"><b>No exactamente.</b> El túnel se cierra con la conexión, pero Jupyter corre dentro de tmux, en el servidor: sobrevive. Abre otro túnel y sigue.</div>
+  </div>
+  <div class="qz"><p class="qq" data-n="6"><code>tmux attach || tmux new</code> significa…</p>
+    <label><input type="radio" name="z6" value="a"><span>engánchate a tu sesión si existe; si no, crea una</span></label>
+    <label><input type="radio" name="z6" value="b"><span>crea siempre una sesión nueva</span></label>
+    <label><input type="radio" name="z6" value="c"><span>cierra todas las sesiones</span></label>
+    <div class="fb good"><b>Correcto.</b> El <code>||</code> del capítulo 5: «y si lo anterior falla, entonces…». Es lo primero que se teclea en un servidor ajeno.</div>
+    <div class="fb bad"><b>No exactamente.</b> <code>||</code> ejecuta la segunda orden solo si la primera falla: intenta engancharte, y crea la sesión únicamente si no había ninguna.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"a", z6:"a"};
+  document.querySelectorAll("#quiz-cap13 .qz input").forEach(i => {
+    i.addEventListener("change", () => {
+      const qz = i.closest(".qz");
+      qz.classList.remove("ok","ko");
+      qz.classList.add(i.value === OK[i.name] ? "ok" : "ko");
+    });
+  });
+})();
+</script>
+<div class="solucion-final">
+<p><strong>Autocomprobación</strong> — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 a · 6 a.</p>
+</div>
+<div class="proxima">
+<p><strong>Lo que queda</strong></p>
+<p>Trece sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, montar unidades de todo tipo, la IA como herramienta y no como oráculo, y el camino para quien venga de Windows. Guarda <code>sesion13.log</code>: son doce medidas.</p>
+</div>
+<div class="pie-piloto">
+<p>cap. 13 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion13.log</code></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/cap12.html" class="pagination-link" aria-label="SSH: entrar en otra máquina">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
+        <span class="nav-page-text">Proyecto final: tu primer servidor</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Claudio M. Martínez Velasco · Texto bajo licencia CC BY-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

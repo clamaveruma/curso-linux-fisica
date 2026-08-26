@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../anexos/anexo-windows.html" rel="next">
-<link href="../capitulos/cap12.html" rel="prev">
+<link href="../capitulos/cap13.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -211,19 +211,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -314,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="lede">
-<p>El ensayo general. Durante doce sesiones cada pieza vino con su explicación y su solución plegada; hoy no hay solución: hay una lista de objetivos, la referencia al capítulo donde vive cada pieza, y una hoja de verificación. Montas de cero un servidor Linux, lo conectas, lo aseguras, le subes un dataset, lanzas un análisis que sobrevive a tu ausencia y recoges los resultados. Es, pieza a pieza, el flujo de trabajo remoto de un físico computacional — y al terminar sabrás que sabes hacerlo, que es distinto de haberlo leído.</p>
+<p>El ensayo general. Durante trece sesiones cada pieza vino con su explicación y su solución plegada; hoy no hay solución: hay una lista de objetivos, la referencia al capítulo donde vive cada pieza, y una hoja de verificación. Montas de cero un servidor Linux, lo conectas, lo aseguras, le subes un dataset, lanzas un análisis que sobrevive a tu ausencia y recoges los resultados. Es, pieza a pieza, el flujo de trabajo remoto de un físico computacional — y al terminar sabrás que sabes hacerlo, que es distinto de haberlo leído.</p>
 </div>
 <div class="chapmeta">
 <p>⏱ <strong>~3 h</strong> · requisitos: <strong>los doce capítulos</strong> · máquina: <strong>tu Linux de diario y una VM nueva</strong></p>
@@ -343,13 +349,13 @@ Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un c
 <h2 class="unnumbered anchored" data-anchor-id="los-hitos">Los hitos</h2>
 <p><strong>1. La máquina</strong> <em>(capítulo 7)</em>. VM <code>servidor</code>: 2 CPU, 4 GB, disco de 20 GB, red NAT, con la ISO de Debian verificada en la bandeja.</p>
 <p><strong>2. La instalación</strong> <em>(capítulos 6 y 8)</em>. Debian sin escritorio, con servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te atreves, <code>/home</code> separado. Contraseña de root vacía. Al terminar, apaga desde dentro e instantánea <code>recien-instalado</code>.</p>
-<p><strong>3. La red</strong> <em>(capítulos 9 y 10)</em>. Averigua la IP del servidor, bautízalo en el <code>/etc/hosts</code> de tu Mint como <code>servidor</code>, y comprueba que responde por nombre. De propina: ¿qué puerta tiene abierta?</p>
-<p><strong>4. El acceso</strong> <em>(capítulo 11)</em>. Tu clave pública en el servidor, alias <code>servidor</code> en <code>~/.ssh/config</code>, entrada sin contraseña. Después, cierra la puerta a las contraseñas en <code>sshd_config</code> — con copia del fichero y sesión de reserva abierta — y demuestra que te rechaza sin clave.</p>
+<p><strong>3. La red</strong> <em>(capítulos 9–11)</em>. Averigua la IP del servidor, bautízalo en el <code>/etc/hosts</code> de tu Mint como <code>servidor</code>, y comprueba que responde por nombre. De propina: ¿qué puerta tiene abierta?</p>
+<p><strong>4. El acceso</strong> <em>(capítulo 12)</em>. Tu clave pública en el servidor, alias <code>servidor</code> en <code>~/.ssh/config</code>, entrada sin contraseña. Después, cierra la puerta a las contraseñas en <code>sshd_config</code> — con copia del fichero y sesión de reserva abierta — y demuestra que te rechaza sin clave.</p>
 <p><strong>5. El sistema</strong> <em>(capítulos 4 y 5)</em>. Actualízalo. Instala lo que el análisis necesita: <code>tmux</code>, <code>htop</code>, <code>tree</code>. Comprueba con <code>which</code> que están, y con <code>df -h</code> cuánto disco queda.</p>
 <p><strong>6. Los datos</strong> <em>(capítulos 2 y 11)</em>. Crea en el servidor <code>~/proyecto/datos</code> y <code>~/proyecto/resultados</code>. Sube con <code>rsync</code> el <code>adquisicion.log</code> del capítulo 3 y la carpeta <code>experimento-pendulo</code> del capítulo 2. <code>tree ~/proyecto</code> debe enseñar el orden.</p>
 <p><strong>7. El análisis</strong> <em>(capítulos 3, 4 y 12)</em>. Escribe en el servidor <code>analisis.py</code> (abajo tienes uno de partida) y un <code>analiza.sh</code> con shebang que lo lance y anote la fecha en <code>resultados/registro.txt</code>. Hazlo ejecutable. Lánzalo dentro de una sesión tmux <code>analisis</code>, desengánchate, <strong>cierra la conexión y apaga la Wi-Fi un minuto</strong>. Vuelve, engánchate, y mira si ha terminado.</p>
-<p><strong>8. La recogida</strong> <em>(capítulo 11)</em>. Trae <code>resultados/</code> a tu Mint con <code>rsync</code>, y abre el informe. Repite el <code>rsync</code>: debe no transferir nada.</p>
-<p><strong>9. Propina</strong> <em>(capítulo 12)</em>. Jupyter en el servidor a través de un túnel, abriendo el informe desde el navegador. Y un <code>du -h</code> del disco de la VM antes y después de todo: ¿cuánto ha crecido?</p>
+<p><strong>8. La recogida</strong> <em>(capítulo 12)</em>. Trae <code>resultados/</code> a tu Mint con <code>rsync</code>, y abre el informe. Repite el <code>rsync</code>: debe no transferir nada.</p>
+<p><strong>9. Propina</strong> <em>(capítulo 13)</em>. Jupyter en el servidor a través de un túnel, abriendo el informe desde el navegador. Y un <code>du -h</code> del disco de la VM antes y después de todo: ¿cuánto ha crecido?</p>
 </section>
 <section id="el-análisis-de-partida" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="el-análisis-de-partida">El análisis de partida</h2>
@@ -813,8 +819,8 @@ Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un c
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/cap12.html" class="pagination-link" aria-label="Vivir en remoto">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span>
+      <a href="../capitulos/cap13.html" class="pagination-link" aria-label="Vivir en remoto">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

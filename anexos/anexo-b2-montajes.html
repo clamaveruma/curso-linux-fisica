@@ -211,19 +211,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -357,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="carpetas-de-otra-máquina-i-sshfs" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="carpetas-de-otra-máquina-i-sshfs">Carpetas de otra máquina, I: SSHFS</h2>
-<p>Aquí entra el capítulo 11. Si puedes entrar en una máquina por SSH, puedes montar cualquier carpeta suya en tu árbol como si fuera un disco — sin administrar nada en el servidor:</p>
+<p>Aquí entra el capítulo 12. Si puedes entrar en una máquina por SSH, puedes montar cualquier carpeta suya en tu árbol como si fuera un disco — sin administrar nada en el servidor:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install sshfs</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">mkdir ~/lab</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sshfs lab:/home/marcos ~/lab</span>
@@ -383,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="windows-y-la-nube" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="windows-y-la-nube">Windows y la nube</h2>
-<p>Los dos casos que más se preguntan, resueltos con lo anterior. <strong>De Windows a tu Linux y al revés</strong>: Windows 10 y 11 traen el cliente OpenSSH de serie, así que desde PowerShell funcionan los mismos <code>scp</code> y <code>sftp</code> del capítulo 11 contra tu Mint (con <code>openssh-server</code> instalado, ejercicio 11.1) o contra <code>debian-lab</code>:</p>
+<p>Los dos casos que más se preguntan, resueltos con lo anterior. <strong>De Windows a tu Linux y al revés</strong>: Windows 10 y 11 traen el cliente OpenSSH de serie, así que desde PowerShell funcionan los mismos <code>scp</code> y <code>sftp</code> del capítulo 12 contra tu Mint (con <code>openssh-server</code> instalado, ejercicio 11.1) o contra <code>debian-lab</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>PS C:\Users\Marcos&gt; scp .\medidas.csv marcos@192.168.1.34:~/fisica/</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>PS C:\Users\Marcos&gt; sftp marcos@192.168.1.34</span></code></pre></div>
 <p>Con ratón, en Windows, <strong>WinSCP</strong> (gratuito) es el «Conectar al servidor» del otro lado: arrastrar y soltar por SFTP. En sentido contrario, la vía natural es SMB: compartir una carpeta de Windows (propiedades → Compartir) y montarla desde Linux como en la sección anterior — o compartir una carpeta de tu Linux desde Nemo (clic derecho → <em>Opciones de compartición</em>; Mint instala Samba la primera vez) para que Windows la vea en «Red». <strong>Con la nube</strong>: el navegador siempre vale (Drive, Dropbox, OneDrive, el Nextcloud de la universidad); para hacerlo desde la terminal o montarla como carpeta existe <strong><code>rclone</code></strong> (<code>sudo apt install rclone</code>, <code>rclone config</code> te guía para conectar la cuenta, y después <code>rclone copy</code> o <code>rclone mount</code>), sin <code>sudo</code> ni permanencia — el mismo espíritu que SSHFS, con la nube al otro lado.</p>

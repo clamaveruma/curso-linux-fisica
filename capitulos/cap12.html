@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Vivir en remoto – Bendito maldito Linux</title>
+<title>12&nbsp; SSH: entrar en otra máquina – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../capitulos/proyecto-final.html" rel="next">
+<link href="../capitulos/cap13.html" rel="next">
 <link href="../capitulos/cap11.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap12.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/cap12.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -211,19 +211,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -283,13 +289,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#sec-sesion-muere" id="toc-sec-sesion-muere" class="nav-link active" data-scroll-target="#sec-sesion-muere"><span class="header-section-number">12.1</span> La sesión que muere</a></li>
-  <li><a href="#sec-tmux" id="toc-sec-tmux" class="nav-link" data-scroll-target="#sec-tmux"><span class="header-section-number">12.2</span> <code>tmux</code>: la sesión que no muere</a></li>
-  <li><a href="#sec-tunel" id="toc-sec-tunel" class="nav-link" data-scroll-target="#sec-tunel"><span class="header-section-number">12.3</span> El túnel: un servicio remoto en tu navegador</a></li>
-  <li><a href="#sec-nube" id="toc-sec-nube" class="nav-link" data-scroll-target="#sec-nube"><span class="header-section-number">12.4</span> Qué es «la nube», en concreto</a></li>
-  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">12.5</span> Y si algún día te dan un clúster</a></li>
-  <li><a href="#sec-practica-12" id="toc-sec-practica-12" class="nav-link" data-scroll-target="#sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</a></li>
-  <li><a href="#sec-quiz-12" id="toc-sec-quiz-12" class="nav-link" data-scroll-target="#sec-quiz-12"><span class="header-section-number">12.7</span> Autocomprobación</a></li>
+  <li><a href="#sec-con-raton" id="toc-sec-con-raton" class="nav-link active" data-scroll-target="#sec-con-raton"><span class="header-section-number">12.1</span> Primero con ratón: otro ordenador en tu gestor de archivos</a></li>
+  <li><a href="#sec-cliente-servidor" id="toc-sec-cliente-servidor" class="nav-link" data-scroll-target="#sec-cliente-servidor"><span class="header-section-number">12.2</span> Cliente y servidor</a></li>
+  <li><a href="#sec-nivel-0" id="toc-sec-nivel-0" class="nav-link" data-scroll-target="#sec-nivel-0"><span class="header-section-number">12.3</span> Nivel 0: tu propia máquina como servidor</a></li>
+  <li><a href="#sec-claves" id="toc-sec-claves" class="nav-link" data-scroll-target="#sec-claves"><span class="header-section-number">12.4</span> Claves en vez de contraseñas</a></li>
+  <li><a href="#sec-config" id="toc-sec-config" class="nav-link" data-scroll-target="#sec-config"><span class="header-section-number">12.5</span> Un nombre para cada servidor: <code>~/.ssh/config</code></a></li>
+  <li><a href="#sec-copiar" id="toc-sec-copiar" class="nav-link" data-scroll-target="#sec-copiar"><span class="header-section-number">12.6</span> Mover ficheros: <code>scp</code> y <code>rsync</code></a></li>
+  <li><a href="#sec-comando-remoto" id="toc-sec-comando-remoto" class="nav-link" data-scroll-target="#sec-comando-remoto"><span class="header-section-number">12.7</span> Ejecutar allí, sin quedarse</a></li>
+  <li><a href="#sec-nivel-2" id="toc-sec-nivel-2" class="nav-link" data-scroll-target="#sec-nivel-2"><span class="header-section-number">12.8</span> Nivel 2: cuando el servidor es de verdad</a></li>
+  <li><a href="#sec-practica-12" id="toc-sec-practica-12" class="nav-link" data-scroll-target="#sec-practica-12"><span class="header-section-number">12.9</span> Práctica: la escalera</a></li>
+  <li><a href="#sec-quiz-12" id="toc-sec-quiz-12" class="nav-link" data-scroll-target="#sec-quiz-12"><span class="header-section-number">12.10</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -298,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-cap12" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></h1>
+<h1 class="title"><span id="sec-cap12" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></h1>
 </div>
 
 
@@ -316,121 +325,268 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="lede">
-<p>Última sesión numerada, y la que junta todo. Ya entras y sales de tu servidor; hoy aprendes a <em>quedarte</em> sin estar: lanzar una simulación, cerrar el portátil, volver mañana desde otra ciudad y encontrarla terminada. Después, el truco favorito del físico computacional — un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil por un túnel cifrado. Y de postre, qué es «la nube» en términos concretos — y por dónde seguir el día que te den cuenta en un clúster.</p>
+<p>Bloque E: trabajar en remoto. Todo lo anterior conducía aquí — un servidor instalado por ti, con nombre, con una puerta abierta, y el mapa de cómo llegar. Hoy entras por esa puerta. Aprendes el comando con el que un físico computacional pasa media vida, sustituyes las contraseñas por claves — más seguras y más cómodas a la vez —, y mueves ficheros entre máquinas como si estuvieran en la misma mesa. Primero contigo mismo, luego con tu VM, y después con cualquier servidor del mundo.</p>
 </div>
 <div class="chapmeta">
-<p>⏱ <strong>2 h</strong> (lo esencial) · requisitos: <strong>capítulo 11</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong> · nivel: <strong>avanzado — para conocer</strong></p>
-</div>
-<div class="aviso">
-<p><strong>△ Cómo leer este capítulo · conocer, no dominar</strong></p>
-<p>Este capítulo es el más avanzado del curso, y se lee con otra actitud: lo esencial es entender el <em>problema</em> (un programa lanzado por SSH muere con la conexión) y saber que existen dos soluciones — <code>tmux</code> y los túneles — y para qué sirve cada una. Usarlas con soltura es cosa de quien las necesite, y ese día tendrás una IA al lado que te dé los comandos (anexo E1): lo que este capítulo te da es entenderlos. Haz los ejercicios 12.1 a 12.3, que son cortos; el 12.4 es opcional.</p>
+<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulos 8 y 10</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong> · nivel: <strong>el capítulo más avanzado del curso — lo esencial cabe en las dos primeras secciones</strong></p>
 </div>
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
-<li>Por qué un programa lanzado por SSH muere al cerrar la conexión — y cómo evitarlo.</li>
-<li>Qué es <code>tmux</code> y sus cuatro gestos: crear una sesión, desconectarte, listar, volver a engancharla.</li>
-<li>Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.</li>
-<li>Que Jupyter puede correr en el servidor con los datos y la CPU de allí mientras tú trabajas desde tu portátil — y cómo se monta, para el día que lo necesites.</li>
-<li>Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.</li>
-<li>Qué es un clúster de cálculo, y por qué lo aprendido aquí es lo que su guía dará por sabido.</li>
+<li>Conectarte a otro ordenador <em>con ratón</em>, desde el gestor de archivos: SSH, Samba, FTP y NFS por el mismo diálogo.</li>
+<li>Qué son el cliente y el servidor SSH, y qué pasa exactamente al conectar por primera vez (la huella, <code>known_hosts</code>).</li>
+<li>Convertir tu propia máquina en servidor con <code>openssh-server</code>, y entrar en ella desde ella misma.</li>
+<li>Crear un par de claves ed25519, instalarlo en el servidor con <code>ssh-copy-id</code> y no volver a teclear una contraseña.</li>
+<li>Bautizar servidores en <code>~/.ssh/config</code> para conectar con una palabra.</li>
+<li>Copiar ficheros entre máquinas con <code>scp</code> y sincronizar carpetas con <code>rsync</code>.</li>
+<li>Ejecutar un comando en otra máquina sin abrir sesión — y por qué eso cambia tu forma de trabajar.</li>
+<li>Qué cambia cuando el servidor es de verdad: la universidad, una nube, o tu casa desde fuera.</li>
 </ul>
 </div>
-<section id="sec-sesion-muere" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="sec-sesion-muere"><span class="header-section-number">12.1</span> La sesión que muere</h2>
-<p>Un experimento de treinta segundos que explica el capítulo. Entra en <code>debian-lab</code>, lanza algo largo en segundo plano (capítulo 5), y cierra la conexión:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sleep 600 &amp;</span>
-<span class="t-out">[1] 1204</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab "ps aux | grep sleep"</span>
-<span class="t-out">marcos      1231  0.0  0.0   6612  2200 ?  Ss  20:02  0:00 grep sleep</span></code></pre>
-<p>El <code>sleep</code> ha desaparecido: al cerrar la sesión, el shell envía a todos sus hijos la señal SIGHUP — «se ha colgado la línea», nombre heredado de los módems del capítulo 11 — y los procesos terminan. Tu simulación de diez horas moriría a la primera caída de Wi-Fi. Hay parches (<code>nohup</code>, el <code>&amp;</code> con <code>disown</code>), pero la solución que usa todo el mundo es otra idea: que la sesión viva <em>en el servidor</em>, y que tú te enganches y desenganches de ella.</p>
-</section>
-<section id="sec-tmux" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="sec-tmux"><span class="header-section-number">12.2</span> <code>tmux</code>: la sesión que no muere</h2>
-<p><code>tmux</code> (<em>terminal multiplexer</em>) crea sesiones de terminal que pertenecen al servidor, no a tu conexión. Te desconectas y siguen; vuelves — desde el mismo portátil o desde otro — y las recuperas tal como las dejaste.</p>
-<div id="fig-tmux" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Una sesión tmux en el servidor con una simulación en marcha; el portátil se desconecta el lunes y vuelve a engancharse el martes">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-tmux-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap12/fig-tmux.svg" class="img-fluid figure-img" alt="Una sesión tmux en el servidor con una simulación en marcha; el portátil se desconecta el lunes y vuelve a engancharse el martes">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tmux-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.1: Lunes lanzas, martes recoges. La sesión y todo lo que corre dentro viven en el servidor.
-</figcaption>
-</figure>
-</div>
-<p>Instálalo en <code>debian-lab</code> (<code>sudo apt install tmux</code>) y repite el experimento, esta vez dentro de una sesión con nombre:</p>
-<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux new -s simulacion</span></code></pre>
-<p>La pantalla cambia: una barra verde abajo con el nombre de la sesión. Estás <em>dentro</em> de tmux. Lanza tu trabajo largo — el <code>simula.py</code> de la práctica, o el <code>sleep 600</code> de antes — y ahora el gesto clave: <kbd>Ctrl</kbd>+<kbd>b</kbd> y luego <kbd>d</kbd> (<em>detach</em>, desenganchar). Vuelves a tu prompt normal; la sesión sigue viva detrás. Cierra SSH, apaga la Wi-Fi si quieres, y vuelve:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux ls</span>
-<span class="t-out">simulacion: 1 windows (created Tue Aug 25 20:10:41 2026)</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">tmux attach -t simulacion</span></code></pre>
-<p>Ahí está, con su <code>sleep</code> todavía contando. Todo lo que hay que saber de tmux para vivir en remoto cabe en cuatro gestos: <code>tmux new -s nombre</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>tmux ls</code>, <code>tmux attach -t nombre</code>. (Cuando quieras más: <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>c</kbd> abre otra ventana en la misma sesión, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>%</kbd> parte la pantalla en dos, y <code>exit</code> dentro de la última ventana cierra la sesión.)</p>
-<div class="truco">
-<p><strong>✚ Truco · La regla de los servidores</strong></p>
-<p>En un servidor ajeno, <strong>lo primero que se teclea tras entrar es <code>tmux attach || tmux new</code></strong>: engánchate a tu sesión si existe, crea una si no. Así, cada trabajo lanzado sobrevive a tu conexión, y cuando el administrador pregunte «¿lo tienes en tmux?», la respuesta será siempre sí. Su hermano mayor, <code>screen</code>, hace lo mismo y lo encontrarás en máquinas antiguas: <code>screen -S nombre</code>, <kbd>Ctrl</kbd>+<kbd>a</kbd> <kbd>d</kbd>, <code>screen -r nombre</code>.</p>
-</div>
-</section>
-<section id="sec-tunel" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="sec-tunel"><span class="header-section-number">12.3</span> El túnel: un servicio remoto en tu navegador</h2>
-<p>Segunda idea del capítulo, y la más elegante del curso. En el capítulo 10 viste que un servicio escucha en un puerto, y que un puerto solo abierto a <code>localhost</code> es invisible desde fuera. SSH puede <strong>tender un túnel</strong>: hacer que un puerto de <em>tu</em> máquina desemboque en un puerto del servidor, cifrado, sin abrir nada a la red.</p>
-<div id="fig-tunel" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Túnel SSH que conecta el puerto 8888 del portátil con el 8888 del servidor donde corre Jupyter">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-tunel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap12/fig-tunel.svg" class="img-fluid figure-img" alt="Túnel SSH que conecta el puerto 8888 del portátil con el 8888 del servidor donde corre Jupyter">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tunel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.2: La opción <code>-L</code>: puerto local, dos puntos, destino visto desde el servidor. Tu navegador no sabe que está hablando con otra máquina.
-</figcaption>
-</figure>
-</div>
-<p>La prueba más simple no necesita instalar nada: Python trae un servidor web de juguete. En <code>debian-lab</code>, dentro de tmux:</p>
-<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">python3 -m http.server 8000 --bind 127.0.0.1</span>
-<span class="t-out">Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/) ...</span></code></pre>
-<p>Escucha solo en <code>127.0.0.1</code>: desde tu Mint, <code>nmap debian-lab</code> no lo vería. Ahora, desde tu Mint, la conexión con túnel:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh -L 8000:localhost:8000 lab</span></code></pre>
-<p>Y en tu navegador, <code>http://localhost:8000</code>: la lista de ficheros de la casa de <code>debian-lab</code>, servida por una máquina que no tiene ese puerto abierto. <code>-L 8000:localhost:8000</code> se lee «mi puerto 8000 → lo que el servidor llama <code>localhost:8000</code>». Mientras esa sesión SSH esté abierta, el túnel existe; al cerrarla, desaparece.</p>
-<p>Y ahora el caso estrella: <strong>Jupyter en el servidor</strong>. Los datos pesados, la CPU de cálculo y el entorno de Python viven allí; tu portátil solo pone el navegador:</p>
-<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install jupyter-notebook</span>
-<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">jupyter notebook --no-browser --port 8888</span>
-<span class="t-out">    http://localhost:8888/tree?token=4f2a9c…</span></code></pre>
-<p>Con <code>ssh -L 8888:localhost:8888 lab</code> abierto en tu Mint, esa URL — copiada con su <em>token</em> — funciona en tu navegador. Lo que ves es un Jupyter normal; lo que pasa es que cada celda se ejecuta a kilómetros. Lánzalo dentro de tmux y sobrevivirá a tus desconexiones: mañana, nuevo túnel, misma sesión, todo donde estaba. Este flujo — tmux + túnel + Jupyter — es, literalmente, cómo trabaja la física computacional en 2026.</p>
 <div class="aviso">
-<p><strong>△ Cuidado · Por qué el túnel y no «abrir el puerto»</strong></p>
-<p>La tentación es lanzar Jupyter escuchando en todas las interfaces y entrar directo por <code>http://debian-lab:8888</code>. Funcionaría — y dejaría un intérprete de Python con tus permisos abierto a toda la red, sin cifrar. En el servidor de la universidad, además, el portero del capítulo 10 no te dejaría. El túnel resuelve las dos cosas: nada se abre, todo va cifrado, y solo tú — con tu clave — lo ves.</p>
+<p><strong>△ Aviso · Este capítulo tiene dos velocidades</strong></p>
+<p>Lo <strong>esencial</strong> — y suficiente para el proyecto final — son las dos primeras secciones: conectarte a otro ordenador con el gestor de archivos, y abrir una sesión SSH con tu contraseña. Todo lo demás — claves, agenda, <code>rsync</code>, comandos remotos, endurecer el servidor — es lo que usa un profesional a diario, pero es <strong>avanzado</strong>: si en algún punto te pierdes, quédate con lo esencial, sigue al capítulo 13 (que solo necesita saber entrar) y vuelve aquí cuando el resto te haga falta. Nadie aprende SSH entero en una tarde — y cuando vuelvas, hazlo con una IA al lado, como cuenta el <a href="../anexos/anexo-e1-ia.html">anexo E1</a>: lo avanzado se conoce para entender lo que la IA te proponga, no para teclearlo de memoria.</p>
 </div>
+<section id="sec-con-raton" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-con-raton"><span class="header-section-number">12.1</span> Primero con ratón: otro ordenador en tu gestor de archivos</h2>
+<p>Antes de teclear un solo comando, la versión que ya sabes usar. Tu gestor de archivos — Nemo en Mint (Caja, Nautilus o Thunar en otros escritorios) — sabe abrir carpetas que viven en <em>otra máquina</em>, y lo hace con un solo diálogo para todos los protocolos que te vas a encontrar. Menú <strong>Archivo → Conectar al servidor…</strong> y verás un desplegable con el tipo de conexión:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 20%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Qué es</th>
+<th>Cuándo te lo encontrarás</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SSH</strong> (SFTP)</td>
+<td>ficheros a través de una sesión SSH cifrada</td>
+<td>cualquier máquina Linux con SSH — tu <code>debian-lab</code>, el clúster</td>
+</tr>
+<tr class="even">
+<td><strong>Windows / Samba</strong> (SMB)</td>
+<td>el «compartir carpeta» de Windows y de los NAS</td>
+<td>la impresora de casa, el disco de red, el PC con Windows</td>
+</tr>
+<tr class="odd">
+<td><strong>FTP</strong></td>
+<td>el protocolo veterano de transferir ficheros, sin cifrar</td>
+<td>servidores públicos de datos, alojamientos web antiguos</td>
+</tr>
+<tr class="even">
+<td><strong>WebDAV</strong></td>
+<td>ficheros sobre una web</td>
+<td>nubes universitarias, Nextcloud</td>
+</tr>
+<tr class="odd">
+<td><strong>NFS</strong> (escribiendo <code>nfs://…</code> en la barra de dirección)</td>
+<td>el compartir de Unix</td>
+<td>laboratorios y clústeres (anexo B2)</td>
+</tr>
+</tbody>
+</table>
+<p>Pruébalo ahora con lo que ya tienes: tipo <strong>SSH</strong>, servidor <code>debian-lab</code> (el nombre que le diste en el capítulo 11), carpeta <code>/home/marcos</code>, usuario <code>marcos</code>, y tu contraseña. La casa del servidor aparece en la barra lateral como una carpeta más: arrastra un fichero, ábrelo, edítalo, bórralo — todo viaja por el servidor SSH que dejaste instalado en el capítulo 8. Eso que acaba de pasar <em>es</em> SSH; el resto del capítulo es el mismo mecanismo visto desde la terminal, donde además de mover ficheros podrás <em>ejecutar</em> cosas en la otra máquina. Si hoy no pasas de esta sección, ya sabes conectarte a otro ordenador — que era el objetivo.</p>
 </section>
-<section id="sec-nube" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="sec-nube"><span class="header-section-number">12.4</span> Qué es «la nube», en concreto</h2>
-<p>Con el curso hecho, la palabra deja de ser humo. <strong>Una máquina en la nube es una VM como tu <code>debian-lab</code>, en un anfitrión de KVM (capítulo 7) que vive en un edificio de otro</strong> — y que alquilas por horas. Te dan exactamente tres cosas: una dirección IP <em>pública</em> (capítulo 9: sin NAT delante), un usuario, y un sitio donde pegar tu clave pública (capítulo 11). Desde ese momento es <code>ssh usuario@ip</code>, y todo este bloque aplica sin cambiar una coma. Lo que se paga es el tiempo encendida, el disco y el tráfico que sale — por eso el primer hábito de la nube es apagar lo que no se usa. Y la física de la sección de <code>ping</code> decide dónde: una máquina en Fráncfort responde a 30 ms; la misma en Virginia, a 100.</p>
+<section id="sec-cliente-servidor" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-cliente-servidor"><span class="header-section-number">12.2</span> Cliente y servidor</h2>
+<p><strong>SSH</strong> (<em>Secure Shell</em>) es un shell — el del capítulo 1 — que corre en <em>otra</em> máquina, con tu teclado y tu pantalla conectados a él por la red, cifrado de punta a punta. Tiene dos mitades: el <strong>servidor</strong> (<code>sshd</code>, el que escucha en el puerto 22 que viste ayer) y el <strong>cliente</strong> (<code>ssh</code>, el comando que tecleas). Tu <code>debian-lab</code> lleva el servidor desde la instalación; tu Mint trae el cliente de serie. Y gracias al <code>/etc/hosts</code> de ayer, la máquina tiene nombre:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@debian-lab</span>
+<span class="t-out">The authenticity of host 'debian-lab (192.168.122.15)' can't be established.</span>
+<span class="t-out">ED25519 key fingerprint is SHA256:kX9v2Lm4pQ7rT1sW8yZaBcDeFgHiJkLmNoPqRsTuVwX.</span>
+<span class="t-out">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span>
+<span class="t-out">Warning: Permanently added 'debian-lab' (ED25519) to the list of known hosts.</span>
+<span class="t-out">marcos@debian-lab's password:</span>
+<span class="t-out">Linux debian-lab 6.12.0-amd64 #1 SMP Debian 6.12.41-1 x86_64</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">hostname</span>
+<span class="t-out">debian-lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span>
+<span class="t-out">Connection to debian-lab closed.</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span></code></pre>
+<p>Léelo con calma, porque cada línea enseña algo. La pregunta de la <strong>huella</strong> (<em>fingerprint</em>) solo aparece la primera vez: SSH no conoce a esa máquina y te pide que confirmes que es quien dice ser; al decir <code>yes</code>, apunta su huella en <code>~/.ssh/known_hosts</code> y a partir de ahí la reconoce sola. (Si algún día esa huella <em>cambia</em>, SSH se negará a conectar con un aviso en mayúsculas: o han reinstalado el servidor, o alguien se está haciendo pasar por él. Nunca se ignora.) Después, la contraseña de tu usuario <em>en el servidor</em>, y el prompt cambia: <strong><code>marcos@debian-lab</code></strong>. Tu terminal está ahora en la otra máquina — cada comando que teclees se ejecuta allí, con sus ficheros, sus permisos, su <code>apt</code>. <code>exit</code> te devuelve a casa. Ese cambio de prompt es tu brújula del bloque E: mira siempre dónde estás antes de teclear.</p>
 <div class="historia">
-<p><strong>◷ Historia · Tiempo compartido, tercera edición</strong></p>
-<p>El curso ha contado la misma historia tres veces. En los 70, muchos usuarios compartían <em>un</em> ordenador por turnos de milisegundos (capítulo 4). En 1967, IBM les dio a cada uno un ordenador de mentira (capítulo 7). Y hoy, un <strong>clúster</strong> de cálculo — miles de nodos como tu <code>debian-lab</code>, pero físicos, unidos por una red rapidísima y compartidos por cientos de investigadores — reparte esos nodos con una cola de trabajos. MareNostrum 4, en la capilla de Torre Girona de Barcelona, tenía 3 456 nodos y 165 888 núcleos; su sucesor multiplica eso. Las cuentas de la Red Española de Supercomputación se piden por convocatoria, y tu grupo probablemente ya tenga horas: el día que te den un usuario, este capítulo será tu primera semana.</p>
+<p><strong>◷ Historia · Del teléfono al cifrado</strong></p>
+<p>Entrar en un ordenador lejano es más viejo que internet: en los 70 se hacía colgando el auricular del teléfono en un <em>acoplador acústico</em> que convertía los bits en pitidos, a 300 bits por segundo — un folio de texto por minuto. Los protocolos de entonces, <code>telnet</code> y <code>rlogin</code>, enviaban tu contraseña tal cual por la línea; nadie pensó que importara hasta que importó: en 1995, tras descubrir que alguien había pinchado la red de la Universidad de Helsinki y estaba recolectando contraseñas, el investigador Tatu Ylönen escribió en unos meses un sustituto cifrado y lo liberó. Lo llamó Secure Shell. Cuatro años después el proyecto OpenBSD lo reescribió como software libre — OpenSSH — y es el que corre hoy en tu <code>debian-lab</code>, en el clúster de la universidad y en cada servidor de cada nube.</p>
 </div>
-<div id="fig-marenostrum" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal">
+<div id="fig-acoplador" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Acoplador acústico con un auricular de teléfono apoyado">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-marenostrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap12/marenostrum-4.jpg" class="img-fluid figure-img" style="width:80.0%" alt="Filas de armarios del supercomputador MareNostrum dentro de una capilla de cristal">
+<div aria-describedby="fig-acoplador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/acoplador-acustico.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Acoplador acústico con un auricular de teléfono apoyado">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-marenostrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona: miles de <code>debian-lab</code> físicos compartidos por una cola. <em>Foto: Gemmaribasmaspoch, CC BY-SA 4.0, Wikimedia Commons.</em>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoplador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12.1: Un acoplador acústico de los años 70: el auricular del teléfono se encajaba en las dos ventosas, y por ahí viajaba tu sesión — a 300 bits por segundo y sin cifrar. <em>Foto: G. Edward Johnson, dominio público, Wikimedia Commons.</em>
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="sec-cluster" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">12.5</span> Y si algún día te dan un clúster</h2>
-<p>Un <strong>clúster</strong> de cálculo — el de la universidad, el de la Red Española de Supercomputación — es la tercera edición del tiempo compartido: miles de máquinas como tu <code>debian-lab</code>, pero físicas y unidas por una red rapidísima, repartidas entre cientos de investigadores por una <strong>cola de trabajos</strong>: se entra por SSH, se prepara el trabajo y se le pide a la cola que lo ejecute cuando haya hueco. Cada centro tiene su gestor de colas y su guía de usuario, y esa guía será tu manual el día que toque. Lo que este bloque te ha dado — entrar por SSH con clave, sobrevivir a la desconexión con <code>tmux</code>, mover datos con <code>rsync</code> — es exactamente lo que esa guía dará por sabido.</p>
+<section id="sec-nivel-0" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-nivel-0"><span class="header-section-number">12.3</span> Nivel 0: tu propia máquina como servidor</h2>
+<p>Antes de irte lejos, el experimento más corto posible: convertir tu Mint en servidor y entrar en él <em>desde él mismo</em>. Suena absurdo, pero tiene dos utilidades — practicar sin red de por medio, y abrir tu portátil a otras máquinas de tu casa (o a tu móvil, con cualquier app de SSH):</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install openssh-server</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">systemctl status ssh | head -3</span>
+<span class="t-out">● ssh.service - OpenBSD Secure Shell server</span>
+<span class="t-out">     Loaded: loaded (/usr/lib/systemd/system/ssh.service; enabled)</span>
+<span class="t-out">     Active: active (running) since Tue 2026-08-25 18:40:02 CEST</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@localhost</span>
+<span class="t-out">marcos@localhost's password:</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">exit</span></code></pre>
+<p><code>localhost</code> es el <code>127.0.0.1</code> del capítulo 9: tú mismo. El prompt no cambia — estás en la misma máquina — pero la sesión es una sesión SSH completa, cifrada y con servidor en medio.</p>
+<div id="fig-tres-niveles" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Escalera de tres niveles: localhost, la máquina virtual debian-lab y un host real de la universidad">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tres-niveles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/fig-tres-niveles.svg" class="img-fluid figure-img" alt="Escalera de tres niveles: localhost, la máquina virtual debian-lab y un host real de la universidad">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tres-niveles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12.2: Los tres niveles del capítulo. El curso se escribe contra el nivel 1; el 2 es para quien tenga dónde.
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="sec-practica-12" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="sec-practica-12"><span class="header-section-number">12.6</span> Práctica: vivir en el servidor</h2>
-<p>Cuaderno en marcha (<code>script sesion12.log</code>). Los ejercicios de hoy son el flujo de trabajo que usarás en la vida real; hazlos en orden.</p>
+<section id="sec-claves" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-claves"><span class="header-section-number">12.4</span> Claves en vez de contraseñas</h2>
+<p>Teclear la contraseña en cada conexión es incómodo, y en un servidor expuesto a internet es peligroso: hay robots probando contraseñas en el puerto 22 de todas las máquinas del mundo, a todas horas. La solución es a la vez más cómoda y más segura, y es física de la buena: un <strong>par de claves</strong>. La <strong>privada</strong> se queda en tu máquina y no sale de ella jamás; la <strong>pública</strong> se regala a cada servidor en el que quieras entrar. El servidor te lanza un reto que solo la privada puede resolver, comprueba la respuesta con la pública, y te deja pasar. Ninguna contraseña viaja; ningún secreto se copia.</p>
+<div id="fig-ssh-claves" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Esquema del par de claves SSH: la privada permanece en el cliente, la pública se copia al servidor en authorized_keys">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ssh-claves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap11/fig-ssh-claves.svg" class="img-fluid figure-img" alt="Esquema del par de claves SSH: la privada permanece en el cliente, la pública se copia al servidor en authorized_keys">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ssh-claves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comparte; la llave, nunca.
+</figcaption>
+</figure>
+</div>
+<p>Tres comandos y no vuelves a teclear una contraseña:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh-keygen -t ed25519 -C "marcos@portatil"</span>
+<span class="t-out">Generating public/private ed25519 key pair.</span>
+<span class="t-out">Enter file in which to save the key (/home/marcos/.ssh/id_ed25519):</span>
+<span class="t-out">Enter passphrase (empty for no passphrase):</span>
+<span class="t-out">Your identification has been saved in /home/marcos/.ssh/id_ed25519</span>
+<span class="t-out">Your public key has been saved in /home/marcos/.ssh/id_ed25519.pub</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh-copy-id marcos@debian-lab</span>
+<span class="t-out">marcos@debian-lab's password:</span>
+<span class="t-out">Number of key(s) added: 1</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh marcos@debian-lab</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span></code></pre>
+<p><code>ssh-keygen</code> crea el par (<code>ed25519</code> es el algoritmo moderno: claves cortas, rápidas, seguras). Pon una <strong>frase de paso</strong> (<em>passphrase</em>) cuando la pida: es la contraseña <em>de la clave</em>, por si alguien te roba el portátil; tu escritorio la recuerda durante la sesión, así que solo la escribirás una vez al día. <code>ssh-copy-id</code> hace el reparto: entra con tu contraseña una última vez y deja tu clave pública en el servidor, en <code>~/.ssh/authorized_keys</code>. Y la tercera línea es el premio: dentro sin preguntar nada.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Los permisos vuelven a mandar</strong></p>
+<p>Mira en <code>debian-lab</code>: <code>ls -la ~/.ssh</code> → <code>drwx------</code> para la carpeta y <code>-rw-------</code> para <code>authorized_keys</code>. Y en tu Mint, <code>ls -l ~/.ssh/id_ed25519</code> → <code>-rw-------</code>. SSH <strong>se niega a usar claves que otros puedan leer</strong>: si un día tu clave «deja de funcionar» tras copiarla o restaurarla, el diagnóstico es casi siempre <code>chmod 600</code> sobre la privada y <code>chmod 700</code> sobre <code>~/.ssh</code>. El capítulo 4 no era teoría: es la razón por la que tu llave está a salvo de los demás usuarios de la máquina.</p>
+</div>
+</section>
+<section id="sec-config" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-config"><span class="header-section-number">12.5</span> Un nombre para cada servidor: <code>~/.ssh/config</code></h2>
+<p>Con varias máquinas — la VM, la universidad, un servidor de cálculo — recordar usuarios, direcciones y puertos cansa. <code>~/.ssh/config</code> es la agenda de SSH: un fichero de texto (¿qué si no?) que crea alias. <code>nano ~/.ssh/config</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Host lab</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    HostName debian-lab</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    User marcos</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Host uni</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    HostName servidor.uma.es</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    User m.garcia</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Port 22</span></code></pre></div>
+<p>Desde ahora, <code>ssh lab</code> basta — y también vale para <code>scp</code> y <code>rsync</code>. Cuando la universidad te dé una cuenta, será una entrada más en esta agenda, y todo lo que sigue funcionará igual con <code>uni</code> que con <code>lab</code>.</p>
+</section>
+<section id="sec-copiar" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-copiar"><span class="header-section-number">12.6</span> Mover ficheros: <code>scp</code> y <code>rsync</code></h2>
+<p>Copiar entre máquinas usa la misma gramática que <code>cp</code> del capítulo 2, con un <code>máquina:</code> delante de la ruta remota:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp adquisicion.log lab:~/</span>
+<span class="t-out">adquisicion.log                          100%  298KB  41.2MB/s   00:00</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp -r experimento-pendulo lab:~/</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">scp lab:~/informe.txt .</span></code></pre>
+<p>Subir, subir una carpeta (<code>-r</code>), bajar: tres formas del mismo gesto. Para carpetas grandes que cambian — los resultados de una simulación que vas recogiendo — el profesional es <strong><code>rsync</code></strong>: copia solo lo que ha cambiado, se puede interrumpir y reanudar, y muestra el progreso:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">rsync -av --progress simulaciones/ lab:~/simulaciones/</span>
+<span class="t-out">sending incremental file list</span>
+<span class="t-out">run07.csv</span>
+<span class="t-out">        1,204,112 100%   38.12MB/s    0:00:00</span>
+<span class="t-out">sent 1,204,589 bytes  received 42 bytes  2,409,262.00 bytes/sec</span></code></pre>
+<p><code>-a</code> conserva fechas y permisos, <code>-v</code> cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: <strong>la barra final importa</strong>. <code>simulaciones/</code> (con barra) sincroniza <em>el contenido</em> de la carpeta; <code>simulaciones</code> (sin barra) copia <em>la carpeta entera</em> dentro del destino. La segunda vez que ejecutes el mismo <code>rsync</code> tardará un segundo: solo viaja lo nuevo.</p>
+<div class="truco">
+<p><strong>✚ Truco · Arrastrar y soltar sigue valiendo</strong></p>
+<p>La conexión con ratón de la primera sección es SFTP — el primo de <code>scp</code> que viaja por el mismo túnel — y también se abre escribiendo <code>sftp://debian-lab/home/marcos</code> en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>). Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>.</p>
+</div>
+</section>
+<section id="sec-comando-remoto" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-comando-remoto"><span class="header-section-number">12.7</span> Ejecutar allí, sin quedarse</h2>
+<p>El detalle que convierte SSH de «terminal lejana» en herramienta de trabajo: puedes pedirle a otra máquina que ejecute <strong>un comando</strong> y te devuelva la salida, sin abrir sesión:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab hostname</span>
+<span class="t-out">debian-lab</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab "grep -c ERROR adquisicion.log"</span>
+<span class="t-out">108</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab df -h / | tail -1</span>
+<span class="t-out">/dev/vda2         17G   1,4G   15G   9% /</span></code></pre>
+<p>Ahí están los tres bloques anteriores dándose la mano: el <code>grep</code> del capítulo 3 corriendo en el servidor del capítulo 8, con el resultado llegando a tu terminal por la red del bloque D — y ese <code>| tail -1</code> se ejecuta <em>en tu Mint</em>, sobre lo que el servidor devolvió. Cuando tengas una simulación en un clúster, «¿ha terminado?» será <code>ssh cluster ls resultados/</code>, sin moverte de tu editor.</p>
+</section>
+<section id="sec-nivel-2" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="sec-nivel-2"><span class="header-section-number">12.8</span> Nivel 2: cuando el servidor es de verdad</h2>
+<p>Todo lo anterior funciona idéntico con un servidor a mil kilómetros; solo cambia lo que hay después de la <code>@</code>. Dónde conseguir uno, mientras el curso se escribe (comprueba disponibilidad y condiciones, que cambian):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 40%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vía</th>
+<th>Qué es</th>
+<th>Coste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Universidad o alguien conocido</strong></td>
+<td>el servicio de informática, tu grupo, o el servidor de un profesor: una máquina Linux con SSH</td>
+<td>gratis; pídela — es la mejor opción</td>
+</tr>
+<tr class="even">
+<td><strong>Azure for Students / GitHub Student Developer Pack</strong></td>
+<td>con tu correo de la universidad: créditos para VMs <em>reales</em> con IP pública (Azure 100 $, DigitalOcean 200 $ y más), sin tarjeta</td>
+<td>gratis para estudiantes</td>
+</tr>
+<tr class="odd">
+<td><strong>Oracle Cloud «Always Free»</strong></td>
+<td>una VM real y permanente (ARM, hasta 4 núcleos) con IP pública</td>
+<td>gratis; pide tarjeta para identificarte, y a veces no hay plazas</td>
+</tr>
+<tr class="even">
+<td><strong>tilde.town, SDF</strong></td>
+<td>un servidor Unix compartido por SSH; la cuenta se pide <em>entregando tu clave pública</em> — el ejercicio 12.3 en la vida real</td>
+<td>gratis, sin tarjeta; sin <code>sudo</code>: para practicar</td>
+</tr>
+<tr class="odd">
+<td><strong>GitHub Codespaces</strong></td>
+<td>un contenedor Ubuntu con terminal (60 h/mes en la cuenta gratuita); se entra con <code>gh codespace ssh</code></td>
+<td>gratis; es un contenedor, no una VM</td>
+</tr>
+<tr class="even">
+<td><strong>Google Cloud Shell</strong></td>
+<td>una terminal en el navegador con 5 GB de casa persistente; <code>gcloud cloud-shell ssh</code> desde tu Mint</td>
+<td>gratis, sin tarjeta; la máquina es efímera</td>
+</tr>
+</tbody>
+</table>
+<p>(Las condiciones de estos servicios cambian cada pocos meses: comprueba disponibilidad y letra pequeña antes de contar con uno.) Las diferencias prácticas: la dirección será pública o un nombre DNS; el puerto puede no ser el 22 (<code>-p 2222</code>, o <code>Port</code> en tu <code>config</code>); te pedirán tu <strong>clave pública</strong> por adelantado — la que ya sabes generar — y quizá un segundo factor. Y la lección de seguridad que cierra el capítulo: un servidor a la vista de internet recibe miles de intentos de contraseña al día. Se sobrevive con claves y con la contraseña <em>desactivada</em> — exactamente lo que harás en el ejercicio 11.6, en tu VM y con instantánea.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · La clave privada es tu identidad</strong></p>
+<p>Tres reglas sin excepción. Uno: la <strong>privada nunca se copia</strong> a otro sitio — ni al servidor, ni a un correo, ni «para tenerla en el portátil del laboratorio»: allí se genera otro par. Dos: <strong>frase de paso</strong> siempre. Tres: si una huella de servidor conocido <em>cambia</em> de repente, no se acepta a ciegas — se pregunta a quien lo administra. Con esas tres, SSH es hoy la forma más segura que existe de trabajar a distancia; sin ellas, es una puerta abierta con tu nombre.</p>
+</div>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · El camino inverso: tu casa desde fuera (opcional)</strong></p>
+<p>¿Y entrar en tu Mint desde la universidad? Ayer viste por qué no se puede sin más: tu casa está detrás del NAT. Haría falta pedirle al router que <em>reenvíe</em> el puerto 22 de su dirección pública a tu Mint («reenvío de puertos» o <em>port forwarding</em>, en la sección WAN) — un cambio reversible más, que abriría una puerta de tu casa a todo internet. Solo tiene sentido con claves y contraseña desactivada, y si tu compañía te tiene tras un CG-NAT (ejercicio 10.1), ni así. Lo dejamos como experimento avanzado para quien lo necesite; el capítulo 13 enseña una vía más elegante para casi todos los casos.</p>
+</div>
+</section>
+<section id="sec-practica-12" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="sec-practica-12"><span class="header-section-number">12.9</span> Práctica: la escalera</h2>
+<p>Cuaderno en marcha (<code>script sesion12.log</code>). Los cambios de hoy en la VM se hacen con instantánea previa; en tu Mint, solo se instala un paquete y se crean ficheros en <code>~/.ssh</code>. Lo esencial son los tres primeros ejercicios (con ratón, contigo mismo, el servidor); el nivel 2 es para quien quiera ir más allá hoy — o dentro de un mes.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.1 · La muerte de la sesión</strong></p>
-<p>Reproduce el experimento del capítulo: <code>sleep 600 &amp;</code> dentro de una sesión SSH, <code>exit</code>, y comprueba desde fuera si sigue vivo. Repite con tmux — y comprueba de nuevo. <em>Pista: <code>ssh lab "ps aux | grep sleep"</code> es la comprobación sin entrar; la primera vez desaparecerá, la segunda seguirá ahí.</em></p>
+<p><strong>Ejercicio 12.0 · Con ratón</strong></p>
+<p>Desde el gestor de archivos, conéctate a <code>debian-lab</code> por SSH con el diálogo <em>Conectar al servidor…</em>, copia un fichero cualquiera de tu Mint a la casa del servidor arrastrándolo, y comprueba en la barra lateral que la conexión queda como marcador. Después desconéctala (botón ⏏ junto al marcador). <em>Pista: tipo SSH, servidor <code>debian-lab</code>, usuario <code>marcos</code>; si pide aceptar una «identidad» desconocida, es la huella que explica la sección siguiente — acepta.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -444,22 +600,16 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Sin tmux, el <code>grep</code> solo se encuentra a sí mismo: SIGHUP mató al <code>sleep</code>. Con <code>tmux new -s prueba</code>, <code>sleep 600 &amp;</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>exit</code>, la comprobación muestra el <code>sleep</code> vivo — y <code>tmux attach -t prueba</code> te lo devuelve.</p>
-<p><strong>Por qué así</strong> — Ver morir el proceso una vez vale más que cualquier explicación: a partir de hoy el reflejo «¿lo tengo en tmux?» te saldrá solo antes de lanzar nada que dure más que un café.</p>
+<p>Archivo → Conectar al servidor → SSH · <code>debian-lab</code> · <code>/home/marcos</code> · <code>marcos</code> → contraseña → la carpeta aparece; arrastrar el fichero; ⏏ para desconectar. Desde la VM, <code>ls ~</code> muestra el fichero copiado.</p>
+<p><strong>Por qué así</strong> — Es exactamente <code>scp</code> con ratón, y para mucha gente es <em>toda</em> la SSH que necesitan. El resto del capítulo existe para cuando el ratón se queda corto: ejecutar cosas allí, automatizar, o entrar en máquinas sin ventanas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.2 · La simulación que sobrevive</strong></p>
-<p>Crea en <code>debian-lab</code> un <code>simula.py</code> de diez minutos (abajo), lánzalo dentro de una sesión tmux llamada <code>simulacion</code>, desengánchate, cierra SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba el progreso — sin engancharte, con <code>ssh lab "tail -2 progreso.txt"</code> — y luego engánchate para verlo terminar. <em>Pista: con <code>nano simula.py</code>:</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
+<p><strong>Ejercicio 12.1 · Nivel 0: contigo mismo</strong></p>
+<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 11, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal. <em>Pista: <code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -473,16 +623,16 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>tmux new -s simulacion</code>, <code>python3 simula.py</code>, desenganchar, <code>exit</code>. Minutos después: <code>ssh lab "tail -2 progreso.txt"</code> muestra un paso avanzado; <code>ssh lab</code> + <code>tmux attach -t simulacion</code> enseña la cuenta en directo. El programa nunca supo que te fuiste.</p>
-<p><strong>Por qué así</strong> — Es el flujo del físico computacional entero en miniatura: lanzar, irse, consultar sin entrar (el comando remoto del capítulo 11), volver. Sustituye <code>simula.py</code> por tu código de verdad y <code>600</code> por doce horas: el gesto es idéntico.</p>
+<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
+<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 13, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.3 · Tu primer túnel</strong></p>
-<p>En <code>debian-lab</code> (dentro de tmux), sirve tu casa con <code>python3 -m http.server 8000 --bind 127.0.0.1</code>. Comprueba desde tu Mint que el puerto <em>no</em> está abierto (<code>nmap debian-lab</code>), abre el túnel con <code>ssh -L 8000:localhost:8000 lab</code>, y visita <code>http://localhost:8000</code> en tu navegador. Cierra la sesión SSH y recarga la página. <em>Pista: el túnel solo existe mientras esa conexión SSH esté abierta.</em></p>
+<p><strong>Ejercicio 12.2 · Nivel 1: el servidor</strong></p>
+<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir. <em>Pista: <code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -496,17 +646,17 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>nmap</code> sigue viendo solo el 22 — el 8000 es privado del servidor. Con el túnel abierto, el navegador muestra el listado de ficheros de la VM (ahí estará <code>progreso.txt</code>). Al cerrar SSH, la página deja de cargar: el túnel murió con la conexión.</p>
-<p><strong>Por qué así</strong> — Has visto las tres propiedades del túnel: no abre puertas, va por SSH, y vive lo que vive la conexión. Todo lo que sigue (Jupyter, y cualquier panel web de un servidor) es este mismo gesto con otro número.</p>
+<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
+<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 3 · Opcional (para quien lo vaya a usar — con una IA al lado si quieres)</strong></p>
+<p><strong>Nivel 2 · Avanzado (pero muy útil)</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.4 · Jupyter a distancia</strong></p>
-<p>Instala <code>jupyter-notebook</code> en <code>debian-lab</code>, lánzalo dentro de tmux con <code>--no-browser --port 8888</code>, abre el túnel del 8888 y trabaja desde tu navegador: crea un cuaderno que lea <code>progreso.txt</code> y cuente sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue donde estaba. <em>Pista: la URL con el <code>token</code> la imprime Jupyter al arrancar; si la pierdes, <code>jupyter notebook list</code> la repite.</em></p>
+<p><strong>Ejercicio 12.3 · Las claves</strong></p>
+<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos. <em>Pista: <code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -520,64 +670,157 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo apt install jupyter-notebook</code>; en tmux: <code>jupyter notebook --no-browser --port 8888</code>; en Mint: <code>ssh -L 8888:localhost:8888 lab</code> y la URL con token en el navegador. El cuaderno con <code>len(open("progreso.txt").readlines())</code> da 600. Tras cerrar y reabrir túnel, el cuaderno y su kernel siguen vivos: viven en tmux.</p>
-<p><strong>Por qué así</strong> — Este es el montaje completo: los datos y el cálculo en la máquina remota, tu comodidad en la local. En un clúster el patrón es el mismo, con Jupyter lanzado en una máquina de cálculo — pregúntalo allí: casi todos tienen una receta escrita para exactamente esto.</p>
+<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
+<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.4 · Alias, copia y comando remoto</strong></p>
+<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas). <em>Pista: <code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
+<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.5 · <code>rsync</code> y la barra</strong></p>
+<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja. <em>Pista: <code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
+<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.6 · Cerrar la puerta a las contraseñas</strong></p>
+<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza. <em>Pista: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La línea suele venir comentada (<code>#PasswordAuthentication yes</code>): descoméntala y ponla a <code>no</code>. Tras el reinicio del servicio, <code>ssh lab</code> entra por clave; <code>ssh -o PubkeyAuthentication=no lab</code> devuelve <code>Permission denied (publickey)</code>. Vuelta atrás: restaurar el <code>.bak</code> y reiniciar <code>ssh</code> — o la instantánea.</p>
+<p><strong>Por qué así</strong> — Es <em>el</em> endurecimiento básico de cualquier servidor expuesto, y lo has hecho con todas las redes: instantánea, copia, sesión abierta de reserva. La regla de oro de los administradores — «nunca cierres la sesión que funciona hasta probar la nueva» — acaba de entrar en tu repertorio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · Opcional · el host real</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.7 · Nivel 2, si tienes dónde</strong></p>
+<p>Si dispones de una cuenta en un servidor real (universidad, nube o shell público): añádelo a tu <code>~/.ssh/config</code>, instala tu clave pública por la vía que te indiquen, entra, y repite el parte de «¿dónde estoy?» del 11.2 más un <code>ping</code> de vuelta a tu casa desde allí — para ver la distancia con los ojos del capítulo 9. <em>Pista: si el puerto no es el 22, <code>Port</code> en la agenda; si te dan solo un formulario web para la clave, el contenido a pegar es tu <code>id_ed25519.pub</code> completo.</em></p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La experiencia es idéntica a <code>debian-lab</code> con dos diferencias visibles: el <code>ping</code> de vuelta a tu IP pública tarda decenas de milisegundos (kilómetros reales), y probablemente <code>sudo</code> no funcione — no eres administrador allí, y ahora entiendes exactamente qué significa eso.</p>
+<p><strong>Por qué así</strong> — El curso se escribió para que llegaras aquí sin necesitar este ejercicio; hacerlo cierra el círculo: la escalera de tres niveles era la misma máquina a tres distancias.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="sec-quiz-12" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="sec-quiz-12"><span class="header-section-number">12.7</span> Autocomprobación</h2>
+<section id="sec-quiz-12" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="sec-quiz-12"><span class="header-section-number">12.10</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap12">
-  <div class="qz"><p class="qq" data-n="1">Lanzas <code>python3 simula.py</code> por SSH y se corta la Wi-Fi. Sin tmux, el programa…</p>
-    <label><input type="radio" name="z1" value="a"><span>sigue corriendo en el servidor</span></label>
-    <label><input type="radio" name="z1" value="b"><span>muere: el cierre de la sesión le envía SIGHUP</span></label>
-    <label><input type="radio" name="z1" value="c"><span>se pausa hasta que vuelvas</span></label>
-    <div class="fb good"><b>Correcto.</b> «Se ha colgado la línea», la señal heredada de los módems. Por eso la sesión debe vivir en el servidor: tmux.</div>
-    <div class="fb bad"><b>No exactamente.</b> Al cerrarse la sesión, sus procesos reciben SIGHUP y terminan. La solución no es rezar por la Wi-Fi: es tmux.</div>
+  <div class="qz"><p class="qq" data-n="1">Al conectar por primera vez a un servidor, SSH te pregunta si aceptas su huella porque…</p>
+    <label><input type="radio" name="z1" value="a"><span>todavía no conoce esa máquina y quiere que confirmes que es quien dice ser</span></label>
+    <label><input type="radio" name="z1" value="b"><span>tu contraseña es incorrecta</span></label>
+    <label><input type="radio" name="z1" value="c"><span>el servidor no tiene clave</span></label>
+    <div class="fb good"><b>Correcto.</b> Al aceptar, la apunta en <code>known_hosts</code>. Si esa huella cambia algún día, el aviso en mayúsculas significa «reinstalado… o suplantado».</div>
+    <div class="fb bad"><b>No exactamente.</b> Es la presentación: una máquina nueva para tu cliente. Solo pasa la primera vez, y se guarda en <code>~/.ssh/known_hosts</code>.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="2">Para desengancharte de una sesión tmux dejándola viva:</p>
-    <label><input type="radio" name="z2" value="a"><span><kbd>Ctrl</kbd>+<kbd>C</kbd></span></label>
-    <label><input type="radio" name="z2" value="b"><span><kbd>Ctrl</kbd>+<kbd>b</kbd> y después <kbd>d</kbd></span></label>
-    <label><input type="radio" name="z2" value="c"><span>cerrar la ventana de la terminal</span></label>
-    <div class="fb good"><b>Correcto.</b> <em>Detach</em>. Y de vuelta, <code>tmux attach -t nombre</code>. <kbd>Ctrl</kbd>+<kbd>C</kbd> mataría el programa que corre dentro.</div>
-    <div class="fb bad"><b>No exactamente.</b> El gesto es el prefijo <kbd>Ctrl</kbd>+<kbd>b</kbd> seguido de <kbd>d</kbd>. Cerrar la ventana también funciona por accidente (la sesión sobrevive), pero <kbd>Ctrl</kbd>+<kbd>C</kbd> interrumpe el trabajo.</div>
+  <div class="qz"><p class="qq" data-n="2">¿Qué fichero se copia al servidor con <code>ssh-copy-id</code>?</p>
+    <label><input type="radio" name="z2" value="a"><span>la clave privada, <code>id_ed25519</code></span></label>
+    <label><input type="radio" name="z2" value="b"><span>la clave pública, <code>id_ed25519.pub</code>, a <code>authorized_keys</code></span></label>
+    <label><input type="radio" name="z2" value="c"><span>tu contraseña cifrada</span></label>
+    <div class="fb good"><b>Correcto.</b> La cerradura se reparte; la llave se queda en casa. La privada no viaja nunca, a ningún sitio.</div>
+    <div class="fb bad"><b>No exactamente.</b> Solo la pública, que es la que se puede regalar. Copiar la privada a cualquier parte es la regla que nunca se rompe.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="3"><code>ssh -L 8888:localhost:8888 lab</code> hace que…</p>
-    <label><input type="radio" name="z3" value="a"><span>el puerto 8888 del servidor se abra a toda la red</span></label>
-    <label><input type="radio" name="z3" value="b"><span>tu puerto 8888 local desemboque, cifrado, en el 8888 del servidor</span></label>
-    <label><input type="radio" name="z3" value="c"><span>Jupyter se instale en tu portátil</span></label>
-    <div class="fb good"><b>Correcto.</b> Un túnel privado que vive lo que vive la conexión. Tu navegador habla con <code>localhost</code>; el trabajo ocurre lejos.</div>
-    <div class="fb bad"><b>No exactamente.</b> Nada se abre en el servidor: el túnel conecta tu puerto local con el suyo por dentro de SSH. Es justo la alternativa a abrir puertos.</div>
+  <div class="qz"><p class="qq" data-n="3">¿Qué hace <code>ssh lab "grep -c ERROR datos.log"</code>?</p>
+    <label><input type="radio" name="z3" value="a"><span>abre una sesión interactiva en <code>lab</code></span></label>
+    <label><input type="radio" name="z3" value="b"><span>ejecuta ese comando en <code>lab</code> y te devuelve la salida, sin abrir sesión</span></label>
+    <label><input type="radio" name="z3" value="c"><span>copia <code>datos.log</code> a tu máquina y lo cuenta aquí</span></label>
+    <div class="fb good"><b>Correcto.</b> Los datos y el cálculo allí, el resultado aquí. Es la forma de preguntar «¿ha terminado mi simulación?» sin moverte.</div>
+    <div class="fb bad"><b>No exactamente.</b> Con un comando detrás, SSH lo ejecuta en el servidor y vuelve. Nada se copia; la sesión ni se abre.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="4">Una «máquina en la nube» es, en concreto…</p>
-    <label><input type="radio" name="z4" value="a"><span>una VM como <code>debian-lab</code> en un anfitrión ajeno, con IP pública, alquilada por horas</span></label>
-    <label><input type="radio" name="z4" value="b"><span>un ordenador que no necesita sistema operativo</span></label>
-    <label><input type="radio" name="z4" value="c"><span>un disco duro en internet</span></label>
-    <div class="fb good"><b>Correcto.</b> Te dan una IP, un usuario y dónde pegar tu clave pública; a partir de ahí, todo el bloque E sin cambiar una coma.</div>
-    <div class="fb bad"><b>No exactamente.</b> Es el capítulo 7 en el edificio de otro: una máquina virtual con sistema operativo completo, que se paga por tiempo encendida.</div>
+  <div class="qz"><p class="qq" data-n="4">Para subir la carpeta <code>datos</code> entera a <code>lab</code>:</p>
+    <label><input type="radio" name="z4" value="a"><span><code>scp datos lab:~/</code></span></label>
+    <label><input type="radio" name="z4" value="b"><span><code>scp -r datos lab:~/</code></span></label>
+    <label><input type="radio" name="z4" value="c"><span><code>ssh datos lab</code></span></label>
+    <div class="fb good"><b>Correcto.</b> Como <code>cp</code>: las carpetas piden <code>-r</code>. Y el <code>máquina:</code> delante de la ruta es lo único nuevo.</div>
+    <div class="fb bad"><b>No exactamente.</b> Es la gramática de <code>cp</code> con destino remoto: carpeta → <code>-r</code>. Sin él, <code>scp</code> se niega.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="5">Lanzaste Jupyter en el servidor dentro de tmux y cerraste el portátil. Al día siguiente…</p>
-    <label><input type="radio" name="z5" value="a"><span>el cuaderno y su kernel siguen vivos: basta abrir un túnel nuevo</span></label>
-    <label><input type="radio" name="z5" value="b"><span>Jupyter murió al cerrarse el túnel</span></label>
-    <label><input type="radio" name="z5" value="c"><span>hay que reinstalar Jupyter</span></label>
-    <div class="fb good"><b>Correcto.</b> El túnel es solo el camino; lo que vive es la sesión tmux del servidor. Túnel nuevo, misma URL, todo donde estaba.</div>
-    <div class="fb bad"><b>No exactamente.</b> El túnel se cierra con la conexión, pero Jupyter corre dentro de tmux, en el servidor: sobrevive. Abre otro túnel y sigue.</div>
+  <div class="qz"><p class="qq" data-n="5">La ventaja de <code>rsync</code> sobre <code>scp</code> para una carpeta que cambia es que…</p>
+    <label><input type="radio" name="z5" value="a"><span>va cifrado y <code>scp</code> no</span></label>
+    <label><input type="radio" name="z5" value="b"><span>solo transfiere lo que ha cambiado, y se puede reanudar</span></label>
+    <label><input type="radio" name="z5" value="c"><span>no necesita SSH</span></label>
+    <div class="fb good"><b>Correcto.</b> La segunda ejecución tarda un segundo. Y ojo con la barra final: contenido de la carpeta frente a la carpeta entera.</div>
+    <div class="fb bad"><b>No exactamente.</b> Ambos van por SSH y cifrados. <code>rsync</code> gana por incremental y reanudable: ideal para resultados que se van acumulando.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="6"><code>tmux attach || tmux new</code> significa…</p>
-    <label><input type="radio" name="z6" value="a"><span>engánchate a tu sesión si existe; si no, crea una</span></label>
-    <label><input type="radio" name="z6" value="b"><span>crea siempre una sesión nueva</span></label>
-    <label><input type="radio" name="z6" value="c"><span>cierra todas las sesiones</span></label>
-    <div class="fb good"><b>Correcto.</b> El <code>||</code> del capítulo 5: «y si lo anterior falla, entonces…». Es lo primero que se teclea en un servidor ajeno.</div>
-    <div class="fb bad"><b>No exactamente.</b> <code>||</code> ejecuta la segunda orden solo si la primera falla: intenta engancharte, y crea la sesión únicamente si no había ninguna.</div>
+  <div class="qz"><p class="qq" data-n="6">Tras <code>PasswordAuthentication no</code> en el servidor…</p>
+    <label><input type="radio" name="z6" value="a"><span>ya nadie puede entrar</span></label>
+    <label><input type="radio" name="z6" value="b"><span>solo entra quien tenga una clave privada cuya pública esté en <code>authorized_keys</code></span></label>
+    <label><input type="radio" name="z6" value="c"><span>las contraseñas se vuelven más largas</span></label>
+    <div class="fb good"><b>Correcto.</b> Los robots que prueban contraseñas se quedan fuera; tú, con tu clave, dentro. El endurecimiento básico de todo servidor expuesto.</div>
+    <div class="fb bad"><b>No exactamente.</b> Se cierra la puerta a las contraseñas, no a las claves: entra quien demuestre tener la privada. Por eso se prueba la clave <em>antes</em> de cerrar la sesión de reserva.</div>
   </div>
 </div>
 <script>
 (function(){
-  const OK = {z1:"b", z2:"b", z3:"b", z4:"a", z5:"a", z6:"a"};
+  const OK = {z1:"a", z2:"b", z3:"b", z4:"b", z5:"b", z6:"b"};
   document.querySelectorAll("#quiz-cap12 .qz input").forEach(i => {
     i.addEventListener("change", () => {
       const qz = i.closest(".qz");
@@ -588,11 +831,11 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 })();
 </script>
 <div class="solucion-final">
-<p><strong>Autocomprobación (test de la sección 12.8)</strong> — Respuestas: 1 b · 2 b · 3 b · 4 a · 5 a · 6 a.</p>
+<p><strong>Autocomprobación</strong> — Respuestas: 1 a · 2 b · 3 b · 4 b · 5 b · 6 b.</p>
 </div>
 <div class="proxima">
-<p><strong>Lo que queda</strong></p>
-<p>Doce sesiones: sabes hablar con la máquina, abrirle el capó, instalarla, conectarla y trabajar en ella desde lejos. Queda el ensayo general: el <strong>proyecto final</strong>, en el que montas de cero un servidor — VM, instalación, red, SSH con clave, dataset, análisis en tmux — sin más guía que una lista de objetivos. Y quedan los anexos para cuando los necesites: scripting con bucles, montar unidades de todo tipo, la IA como herramienta y no como oráculo, y el camino para quien venga de Windows. Guarda <code>sesion12.log</code>: son doce medidas.</p>
+<p><strong>La próxima sesión</strong></p>
+<p>Ya entras y sales de tu servidor. El capítulo 13 es vivir en él: lanzar una simulación, cerrar el portátil, volver mañana y encontrarla terminada — <code>tmux</code>, la sesión que no muere. Y llega el caso estrella del físico computacional: un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil a través de un túnel SSH. De postre sabrás qué es «la nube» en dos párrafos, y qué es un clúster en dos frases. Guarda <code>sesion12.log</code>.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 12 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion12.log</code></p>
@@ -942,13 +1185,13 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../capitulos/cap11.html" class="pagination-link" aria-label="SSH: entrar en otra máquina">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span>
+      <a href="../capitulos/cap11.html" class="pagination-link" aria-label="Nombres, puertos y protocolos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
-        <span class="nav-page-text">Proyecto final: tu primer servidor</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../capitulos/cap13.html" class="pagination-link" aria-label="Vivir en remoto">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

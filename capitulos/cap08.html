@@ -176,19 +176,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -302,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="sec-plan" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="sec-plan"><span class="header-section-number">8.1</span> El plan, antes que el instalador</h2>
 <p>Los instaladores modernos permiten no pensar: «usar el disco entero», siguiente, siguiente. Hoy no vas a pulsar ese botón, y la razón es la misma por la que un físico no arranca un montaje sin un esquema: <strong>cuando lo hagas en tu PC de verdad, con un Windows al lado o un disco con datos, «usar el disco entero» será exactamente lo que no quieres.</strong> Se decide el plan en papel, se ejecuta en la VM, se repite hasta que sea rutina.</p>
-<p>Lo que instalas: <strong>Debian 13</strong> — la madre de tu Mint (capítulo 5) —, imagen <em>netinst</em>, <strong>sin escritorio</strong>. Sí, sin escritorio: un servidor al que hablarás por terminal y, a partir del capítulo 11, por SSH. Es lo que te encontrarás en el clúster y en la nube, y es lo que construye el proyecto final. Nombre de la máquina: <code>debian-lab</code>. Usuario: el tuyo.</p>
+<p>Lo que instalas: <strong>Debian 13</strong> — la madre de tu Mint (capítulo 5) —, imagen <em>netinst</em>, <strong>sin escritorio</strong>. Sí, sin escritorio: un servidor al que hablarás por terminal y, a partir del capítulo 12, por SSH. Es lo que te encontrarás en el clúster y en la nube, y es lo que construye el proyecto final. Nombre de la máquina: <code>debian-lab</code>. Usuario: el tuyo.</p>
 <div id="fig-particiones" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Disco virtual de 20 GB dividido en partición EFI de 512 MB, raíz ext4 con casi todo el espacio, y swap de 2 GB">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-particiones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -341,7 +347,7 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <p>Las primeras pantallas son las fáciles, y una de ellas esconde la decisión más importante del día:</p>
 <ol type="1">
 <li><strong>Idioma, país, teclado</strong>: español, España, español. (Un profesional a veces deja el <em>sistema</em> en inglés para buscar errores en internet con más éxito; para el curso, español, que es como verás los mensajes en los ejemplos.)</li>
-<li><strong>Red</strong>: la VM recibe dirección sola de la red NAT — es el DHCP del capítulo 9, adelantado. Nombre de la máquina: <code>debian-lab</code>. Dominio: vacío.</li>
+<li><strong>Red</strong>: la VM recibe dirección sola de la red NAT — es el DHCP del capítulo 10, adelantado. Nombre de la máquina: <code>debian-lab</code>. Dominio: vacío.</li>
 <li><strong>Contraseña de root: déjala vacía.</strong> No es un descuido, es un truco documentado de Debian: si <code>root</code> queda sin contraseña, el instalador <strong>desactiva la cuenta de root y añade a tu usuario al grupo <code>sudo</code></strong> — exactamente el modelo de tu Mint, el del capítulo
 <ol start="4" type="1">
 <li>Si pones contraseña, tendrás un root activo y un usuario <em>sin</em> sudo, y el primer <code>sudo apt</code> te dará un disgusto.</li>
@@ -395,7 +401,7 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <span class="t-out">● ssh.service - OpenBSD Secure Shell server</span>
 <span class="t-out">     Loaded: loaded (/lib/systemd/system/ssh.service; enabled)</span>
 <span class="t-out">     Active: active (running) since Tue 2026-08-25 19:02:11 CEST</span></code></pre>
-<p>Léelo como el parte de un experimento que ha salido bien: las tres particiones montadas donde las pusiste; un sistema completo que ocupa 1,3 GB; una dirección <code>192.168.122.x</code> — la red NAT del capítulo 7, repartida por tu Mint —; y un servidor SSH ya activo, esperando al capítulo 11. Pon la instalación al día con el gesto del capítulo 5 (<code>sudo apt update &amp;&amp; sudo apt upgrade</code>) — y fíjate en que <code>sudo</code> funciona: el truco de la contraseña vacía de root ha hecho su efecto.</p>
+<p>Léelo como el parte de un experimento que ha salido bien: las tres particiones montadas donde las pusiste; un sistema completo que ocupa 1,3 GB; una dirección <code>192.168.122.x</code> — la red NAT del capítulo 7, repartida por tu Mint —; y un servidor SSH ya activo, esperando al capítulo 12. Pon la instalación al día con el gesto del capítulo 5 (<code>sudo apt update &amp;&amp; sudo apt upgrade</code>) — y fíjate en que <code>sudo</code> funciona: el truco de la contraseña vacía de root ha hecho su efecto.</p>
 <p>Y ahora, el protocolo del capítulo 7. Apaga la máquina con <code>sudo poweroff</code> — un servidor se apaga desde dentro, no desde el botón —, y en virt-manager crea la instantánea <strong><code>recien-instalado</code></strong>. Es el punto de retorno del resto del curso.</p>
 <div class="truco">
 <p><strong>✚ Truco · Dos cosas que verás y no te esperabas</strong></p>
@@ -638,7 +644,7 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
     <label><input type="radio" name="z4" value="b"><span>que la máquina acepte conexiones remotas desde tu Mint (bloque E)</span></label>
     <label><input type="radio" name="z4" value="c"><span>acelerar la instalación</span></label>
     <div class="fb good"><b>Correcto.</b> Un servidor sin escritorio se administra por SSH; instalarlo desde el primer día es lo que hace cualquier administrador.</div>
-    <div class="fb bad"><b>No exactamente.</b> SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 11.</div>
+    <div class="fb bad"><b>No exactamente.</b> SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 12.</div>
   </div>
   <div class="qz"><p class="qq" data-n="5">Tras <code>sudo rm -rf /boot</code>, el sistema sigue funcionando hasta reiniciar porque…</p>
     <label><input type="radio" name="z5" value="a"><span>el kernel ya estaba cargado en RAM; solo falta al arrancar</span></label>

@@ -176,19 +176,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -476,7 +482,7 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </section>
 <section id="sec-vm-remota" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="sec-vm-remota"><span class="header-section-number">7.7</span> Qué te dan cuando te dan «una VM»</h2>
-<p>La escena que el diseño de este curso tenía en mente: el grupo de investigación o el servicio de informática te dice «te hemos creado una máquina virtual». Ahora sabes exactamente qué es: lo mismo que acabas de hacer, sobre un anfitrión grande de la universidad o de una nube, con KVM o un primo suyo debajo. Te darán una dirección, un usuario y probablemente una clave SSH (capítulo 11), y no verás ninguna ventana con su pantalla: la máquina existe, pero solo hablarás con ella por la red. Los núcleos y la memoria que tiene son «prestados» como los de tu <code>debian-lab</code>, y compartes el anfitrión con otros — el tiempo compartido de 1967, otra vez. Y si te hablan de <strong>contenedores</strong> (Docker y compañía): son el primo ligero — no fingen un ordenador entero, comparten el kernel del anfitrión y aíslan solo un programa. Más rápidos, menos independientes. Vocabulario para reconocerlos; el curso se queda con las máquinas virtuales.</p>
+<p>La escena que el diseño de este curso tenía en mente: el grupo de investigación o el servicio de informática te dice «te hemos creado una máquina virtual». Ahora sabes exactamente qué es: lo mismo que acabas de hacer, sobre un anfitrión grande de la universidad o de una nube, con KVM o un primo suyo debajo. Te darán una dirección, un usuario y probablemente una clave SSH (capítulo 12), y no verás ninguna ventana con su pantalla: la máquina existe, pero solo hablarás con ella por la red. Los núcleos y la memoria que tiene son «prestados» como los de tu <code>debian-lab</code>, y compartes el anfitrión con otros — el tiempo compartido de 1967, otra vez. Y si te hablan de <strong>contenedores</strong> (Docker y compañía): son el primo ligero — no fingen un ordenador entero, comparten el kernel del anfitrión y aíslan solo un programa. Más rápidos, menos independientes. Vocabulario para reconocerlos; el curso se queda con las máquinas virtuales.</p>
 <div class="truco">
 <p><strong>✚ Truco · Ventanas o comandos, la misma máquina</strong></p>
 <p><code>virt-manager</code> y <code>virsh</code> son dos caras de libvirt: todo lo que haces con clics tiene su orden. Para crear y explorar, la ventana es más amable; para el servidor sin escritorio del bloque E — donde gestionarás máquinas solo por SSH — <code>virsh</code> es la única cara que hay. El principio de siempre: aprende el concepto una vez, y elige la puerta según el momento.</p>

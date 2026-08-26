@@ -176,19 +176,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Nombres y caminos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tu red de casa: el router por dentro</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Nombres, puertos y protocolos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SSH: entrar en otra máquina</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vivir en remoto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -358,7 +364,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Rufus → elige el pendrive y la ISO de Mint → aparece el control <strong>«Tamaño de la partición persistente»</strong>: dale todo lo que quepa (16–24 GB) → Empezar. Rufus crea la partición <code>casper-rw</code> de persistencia por ti.</li>
 <li>Reinicia con la tecla del menú de arranque (anexo C1) y elige el pendrive. Mint arranca en vivo; lo que hagas, se queda.</li>
 </ol>
-<p>Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema <em>live</em>) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en <code>lsblk</code>, el tuyo y el de Windows, que es incluso más instructivo. Los <em>peros</em>, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (<code>apt upgrade</code> sí, pero el sistema <em>live</em> arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 11 y anexo B1: <code>rsync</code> con <code>cron</code>). Para quien quiera varias ISO en un mismo pendrive existe <strong>Ventoy</strong>, con persistencia configurable por fichero; es más potente y más liado — para más adelante.</p>
+<p>Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema <em>live</em>) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en <code>lsblk</code>, el tuyo y el de Windows, que es incluso más instructivo. Los <em>peros</em>, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (<code>apt upgrade</code> sí, pero el sistema <em>live</em> arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 12 y anexo B1: <code>rsync</code> con <code>cron</code>). Para quien quiera varias ISO en un mismo pendrive existe <strong>Ventoy</strong>, con persistencia configurable por fichero; es más potente y más liado — para más adelante.</p>
 <p>Y una variante con más recorrido: en vez de un sistema <em>live</em>, <strong>instalar Linux entero en un SSD externo por USB</strong> — con el instalador del capítulo 8, eligiendo ese disco como destino y poniendo en él la partición EFI. Es un Linux completo, rápido y permanente que arranca en cualquier PC desde el menú de arranque. La única pega es seria: al elegir el disco de destino, equivocarse destruye Windows. Es el camino perfecto <em>después</em> del capítulo 8 y del anexo C1, con el plan escrito y <code>lsblk</code> delante — no antes.</p>
 </section>
 <section id="camino-d-arranque-dual-solo-con-alguien-que-sepa" class="level3 unnumbered">
