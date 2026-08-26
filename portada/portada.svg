@@ -1,0 +1,26 @@
+<svg viewBox="0 0 1600 2400" width="1600" height="2400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="gridmin" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="rgba(80,105,160,0.10)" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="gridmaj" width="200" height="200" patternUnits="userSpaceOnUse">
+      <path d="M200 0 H0 V200" fill="none" stroke="rgba(80,105,160,0.20)" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="2400" fill="#F2ECDF"/>
+  <rect width="1600" height="2400" fill="url(#gridmin)"/>
+  <rect width="1600" height="2400" fill="url(#gridmaj)"/>
+  <!-- cabecera -->
+  <text x="800" y="190" font-family="IBM Plex Mono, DejaVu Sans Mono, monospace" font-size="34" letter-spacing="8" fill="#2F6F62" text-anchor="middle">LINUX · REDES · SISTEMAS · PARA FÍSICOS</text>
+  <text x="800" y="360" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="150" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-3">Bendito</text>
+  <text x="800" y="520" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="150" font-weight="700" fill="#C4342A" text-anchor="middle" letter-spacing="-3">maldito</text>
+  <text x="800" y="690" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="190" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-4">Linux</text>
+  <!-- hueco ilustración -->
+  <rect x="206" y="796" width="1188" height="1188" rx="18" fill="#FAF6EB" stroke="#9C8F79" stroke-width="3"/>
+  <image x="210" y="800" width="1180" height="1180" href="ilustracion-editada.png" preserveAspectRatio="xMidYMid slice" clip-path="inset(0 round 14px)"/>
+  <!-- subtítulo -->
+  <text x="800" y="2090" font-family="IBM Plex Sans, DejaVu Sans, sans-serif" font-size="44" fill="#6A5F4D" text-anchor="middle">Trabajar en Linux y conceptos de redes, explicado tan fácil</text>
+  <text x="800" y="2150" font-family="IBM Plex Sans, DejaVu Sans, sans-serif" font-size="44" fill="#6A5F4D" text-anchor="middle">que hasta un físico lo puede entender</text>
+  <line x1="640" y1="2215" x2="960" y2="2215" stroke="#2F6F62" stroke-width="3"/>
+  <text x="800" y="2290" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="52" fill="#2B2318" text-anchor="middle">Claudio M. Martínez Velasco</text>
+</svg>
