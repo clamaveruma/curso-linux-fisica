@@ -16,6 +16,26 @@ el flujo de trabajo real de la física computacional.
 **Regla única e innegociable:** no copies y pegues los comandos.
 Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.
 
+## Cómo leer este curso: lo básico, lo avanzado y la IA {.unnumbered}
+
+Cada capítulo distingue dos niveles, y conviene tenerlos claros desde
+el principio. **Lo básico** es lo que un físico usa de verdad en su
+día a día y debe salir con soltura: moverse por el sistema, instalar
+Linux en un PC, entender particiones, sistemas de ficheros y
+formateo, mover información entre Linux, Windows, la nube y otros
+ordenadores, leer su red de casa — direcciones, DHCP, router, NAT y
+cortafuegos — y entrar en otra máquina. **Lo avanzado** — claves SSH,
+`rsync`, sesiones que sobreviven a la desconexión, túneles — hay que
+*conocerlo*, no dominarlo: saber que existe, para qué sirve y qué
+puede romper. La razón es de 2026: esas tareas las harás con una IA
+al lado que te dé las instrucciones, y solo quien conoce las
+herramientas mantiene el control de lo que la IA le propone. El
+[anexo E1](anexos/anexo-e1-ia.qmd) — cómo instalar un agente de IA en
+tu terminal y cómo seguir mandando tú — es, en ese sentido, la otra
+mitad de este curso. Los ejercicios llevan siempre el nivel marcado:
+los esenciales no se saltan; los avanzados se leen, y se hacen si
+apetece.
+
 ## Qué necesitas para empezar {.unnumbered}
 
 **Lo que suponemos que ya sabes.** Manejar un ordenador con soltura por

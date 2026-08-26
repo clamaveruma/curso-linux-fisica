@@ -204,19 +204,79 @@ dirección con numeraciones independientes — el 53 de UDP (DNS) y el
 atender las dos.
 :::
 
-::: {.truco}
-**✚ Truco · El cortafuegos, en una frase**
+## Cortafuegos, lo básico {#sec-cortafuegos}
 
-Un **cortafuegos** (*firewall*) es un portero que decide qué puertas
-se ven desde fuera. Tu router lo es sin que lo sepas: gracias al NAT
-del capítulo 9, ninguna puerta de tu casa es visible desde internet
-salvo que la abras a propósito. En Linux, `ufw` hace ese papel en una
-máquina concreta (`sudo ufw status` te dirá que en tu Mint está
-inactivo — no hace falta activarlo hoy). En el servidor de la
-universidad, en cambio, el portero existirá y será estricto: si un
-día «no puedes conectar», la pregunta es siempre «¿qué puerta hay
-abierta y quién la vigila?».
+Un **cortafuegos** (*firewall*) es un portero: mira cada paquete que
+llega y decide, por reglas, si pasa. Tienes dos, y conviene saber qué
+hace cada uno.
+
+El **del router** lo llevas puesto sin saberlo: la libreta NAT del
+capítulo 9 ya deja fuera todo lo que nadie pidió, y encima el router
+lleva un cortafuegos que vigila el *estado* de cada conversación (lo
+llaman SPI): solo entra lo que es respuesta a algo que salió. Abrir
+una puerta desde fuera es escribir una regla — el reenvío de puertos
+— y hacerlo a conciencia. Para una casa, ese portero basta.
+
+El **de cada máquina** es la segunda línea, y en Linux se llama
+`ufw` (*uncomplicated firewall*): una lista de reglas del tipo «lo
+que entre, se rechaza, salvo lo que yo diga». En tu Mint viene
+instalado y apagado — detrás del router no hace falta. En un
+servidor con dirección pública, en cambio, es obligatorio, y la forma
+de ponerlo es siempre la misma, **en este orden**:
+
+```terminal
+marcos@debian-lab:~$ sudo apt install ufw
+marcos@debian-lab:~$ sudo ufw allow OpenSSH
+marcos@debian-lab:~$ sudo ufw enable
+marcos@debian-lab:~$ sudo ufw status verbose
+Status: active
+Default: deny (incoming), allow (outgoing)
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere
+```
+
+Primero se abre la puerta por la que entras — SSH —, *después* se
+enciende: al revés, te dejas fuera de tu propio servidor. La política
+por defecto lo dice todo: entrar, nada salvo lo permitido; salir,
+todo. Cada servicio nuevo será una línea (`sudo ufw allow 8888/tcp`
+si algún día abres un Jupyter a la red, que no lo harás: capítulo
+12). Y `nmap` desde tu Mint es la comprobación: la 22 abierta, el
+resto `filtered`, que es el portero diciendo que no.
+
+::: {.truco}
+**✚ Truco · El cortafuegos con ventana**
+
+Mint trae la cara gráfica de `ufw`: menú → Preferencias →
+**Configuración del cortafuegos** (`gufw`). Un interruptor de
+encendido, tres perfiles (casa, oficina, público) y una lista de
+reglas donde se añade «permitir SSH» eligiéndolo de una lista de
+aplicaciones. Es exactamente el mismo `ufw` — las reglas que crees
+ahí las verás con `sudo ufw status` — y para un portátil que se
+conecta a la Wi-Fi de una cafetería, activarlo con el perfil
+*público* es un gesto razonable y reversible.
 :::
+
+## Qué habla cada puerta: los protocolos que usarás {#sec-protocolos}
+
+Detrás de cada puerto hay un **protocolo**: el idioma acordado entre
+los dos extremos. Para un físico, la pregunta práctica es «¿cómo paso
+datos de aquí a allí?», y la respuesta depende de qué hay en el otro
+extremo. Esta es la tabla que resuelve el noventa por ciento de los
+casos, con el capítulo o anexo donde se practica cada uno:
+
+| Protocolo | Puerto | Otro extremo típico | Con qué lo usarás | Dónde |
+|-----------|--------|---------------------|-------------------|-------|
+| **SSH / SFTP** | 22 | otro Linux, un servidor, la nube — y un Windows moderno | terminal, `scp`, `rsync`, «Conectar al servidor», WinSCP | caps. 11–12, anexo B2 |
+| **SMB** | 445 | un PC con Windows, un NAS, una impresora | «Conectar al servidor» (`smb://`), montar por `cifs` | anexo B2 |
+| **NFS** | 2049 | otro Linux, el laboratorio, un clúster | montar con `-t nfs` | anexo B2 |
+| **HTTP / HTTPS** | 80 / 443 | la web, la nube, Nextcloud, Jupyter | el navegador, `curl`, `rclone` | caps. 9, 12, anexo B2 |
+| **FTP** | 21 | servidores antiguos de datos públicos | «Conectar al servidor» (`ftp://`) | — sin cifrar: solo lectura y solo si no hay otra |
+
+Una regla para elegir: **si hay SSH en el otro extremo, usa SSH** —
+sirve para terminal y para ficheros, va cifrado, y lo hablan hoy
+hasta los Windows. SMB es el idioma de Windows y de los NAS; NFS, el
+del laboratorio; HTTPS, el de la nube. Todo lo demás son variantes.
 
 ## Cable o Wi-Fi {#sec-cable-wifi}
 

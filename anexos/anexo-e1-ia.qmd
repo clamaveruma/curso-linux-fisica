@@ -1,83 +1,114 @@
-# La IA como herramienta, no como oráculo {#sec-anexo-e1}
+# La IA en la terminal: ayudante, no piloto {#sec-anexo-e1}
 
-Este anexo nace de una frase de la encuesta con la que se diseñó el
-curso: «cuando algo falla, le pregunto a una IA y copio-pego sin
-entender». No hay nada malo en preguntar — este propio curso te ha
-animado a hacerlo en el capítulo 3. Lo malo es el *copiar-pegar sin
-entender*, y contra eso tienes ahora doce capítulos de munición. Aquí
-está el protocolo.
+Este anexo es la otra mitad del curso. Todo lo que has aprendido —
+qué es un proceso, qué hace `sudo`, qué significa montar, qué es un
+puerto — no es para que teclees comandos de memoria: es para que
+**entiendas lo que una IA te proponga** y decidas tú. En 2026, un
+físico que administra su portátil, su servidor y su red trabaja con
+una IA al lado; la diferencia entre el que manda y el que copia y pega
+a ciegas es exactamente el contenido de este curso.
 
-## Por qué no se copia a ciegas {.unnumbered}
+## Dos formas de usar la IA {.unnumbered}
 
-Una IA no ve tu máquina. No sabe qué distro tienes, qué versión, qué
-hay en ese directorio, si ese disco es el tuyo. Genera comandos
-*plausibles* — y a veces inventa opciones que no existen, o mezcla la
-sintaxis de dos herramientas. Tres consecuencias reales que este curso
-te ha enseñado a reconocer: un `rm -rf` con la ruta equivocada
-(capítulo 2), un `sudo` que no entiendes (capítulo 4), y un
-`curl … | bash` — descargar un script de internet y ejecutarlo sin
-mirarlo — que es, literalmente, dejar que un desconocido teclee en tu
-terminal con tus permisos.
+**Preguntar** es la forma que ya conoces: describes el problema en un
+chat, te devuelve comandos, los tecleas tú. Funciona, y la disciplina
+es la del capítulo 3: *lee* cada comando, verifica con `man` o
+`--help` lo que no reconozcas, y nunca ejecutes a ciegas nada con
+`sudo`, `rm`, `dd` o `mkfs` (ya sabes por qué cada uno).
 
-## El protocolo {.unnumbered}
+**Delegar** es lo nuevo: un **agente** — un programa que ejecuta un
+modelo de IA *con acceso a tu terminal*. Le describes la tarea («monta
+la carpeta `proyecto` de `debian-lab` en `~/lab` por NFS y hazlo
+permanente»), y él mismo lee tus ficheros, propone los comandos, te
+pide permiso, los ejecuta, mira el resultado y corrige. Los más usados
+hoy son **Claude Code** (Anthropic) y **Codex CLI** (OpenAI); hay
+otros, y cambian cada pocos meses. Se instalan como cualquier
+programa de terminal, y trabajan desde el directorio en el que los
+abres.
 
-1. **Pregunta con contexto.** «Linux Mint 22, quiero renombrar todos
-   los `.csv` de esta carpeta quitando `_final`; he probado `mv` uno a
-   uno». Cuanto más concreto, menos inventa.
-2. **Lee el comando con la anatomía del capítulo 1**: programa,
-   opciones, argumentos. Si hay una tubería, pieza a pieza (capítulo
-   3). Si hay `sudo`, `rm`, `dd`, `>` o `|`, subraya cada uno.
-3. **Verifica lo que no reconozcas** con `man` o `--help` (capítulo 1).
-   Una opción que no aparece en `man` no existe — la IA la inventó.
-4. **Clasifica el riesgo**: *lectura* (`ls`, `grep`, `cat`, `df`…) —
-   ejecuta; *escritura* (`mv`, `cp`, `>`, `chmod`) — copia de seguridad
-   o ensayo en seco con `echo`; *destructivo o privilegiado* (`rm -r`,
-   `sudo`, `dd`, `mkfs`, `curl | bash`) — solo si lo entiendes entero,
-   y la primera vez en la VM (capítulo 7).
-5. **Ejecuta en el sitio adecuado** y **contrasta el resultado** con lo
-   que esperabas — `ls` después de un `mv`, `df` después de limpiar. Si
-   no cuadra, para: no pidas «otro comando» hasta saber qué pasó.
+## Instalar un agente (con la disciplina del curso) {.unnumbered}
 
-## Para qué es excelente {.unnumbered}
+La mayoría se instalan con un instalador descargado de la web, y ahí
+aparece el reflejo que este curso te entrenó: **jamás `curl … | bash`
+sin leer**. La versión con red de seguridad:
 
-- **Explicar un comando ajeno.** Al revés de lo habitual: pega el
-  comando de un foro y pregunta «¿qué hace exactamente, pieza a
-  pieza?». Contrasta con `man`.
-- **Traducir un mensaje de error.** Pega la salida completa (el
-  `2>` del capítulo 3 sirve para guardarla) y pregunta qué significa —
-  no «cómo lo arreglo».
-- **Construir tuberías y expresiones** que no recuerdas: «`grep` de
-  las líneas que empiezan por fecha y tienen ERROR». Luego, `head`
-  para comprobar (capítulo 3).
-- **Recordar sintaxis**: el `for` de bash, los campos de `cron`, las
-  opciones de `rsync`. Es el `man` con lenguaje natural.
+```terminal
+marcos@portatil:~$ curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh
+marcos@portatil:~$ less instalar-claude.sh
+marcos@portatil:~$ bash instalar-claude.sh
+marcos@portatil:~$ claude --version
+```
 
-## Para qué no {.unnumbered}
+Descargar, *mirar* (¿qué escribe, dónde, pide `sudo`?), y solo
+entonces ejecutar. Codex se instala con `npm install -g @openai/codex`
+(pide Node.js: `sudo apt install npm`). Ambos requieren una cuenta y
+un inicio de sesión la primera vez; la URL y el comando exactos
+cámbialos por los de la documentación oficial del día — este anexo
+envejece más deprisa que el resto del curso.
 
-- **Saber el estado de tu sistema.** Eso lo sabes tú con `ip a`,
-  `lsblk`, `df`, `which python`. Pregunta después de mirar, no antes.
-- **Tomar decisiones irreversibles.** «¿Borro esta partición?» no se
-  le pregunta a nadie que no vea tu `lsblk`.
-- **Sustituir el cuaderno.** Un comando que funcionó y no anotaste es
-  un comando que volverás a pedir.
+## Las reglas para seguir mandando tú {.unnumbered}
 
-::: {.aviso}
-**△ Cuidado · Las tres frases que deben encender la alarma**
+Un agente es un becario brillante, rapidísimo y sin miedo. Las reglas
+de un buen jefe:
 
-«Ejecuta esto con `sudo` y debería funcionar» — sin explicar qué
-hace. «Copia esto en la terminal: `curl … | sudo bash`» — un script
-remoto con todos los poderes. Y «prueba `rm -rf` en esa carpeta para
-limpiar» — sin haber visto qué contiene. Ante cualquiera de las tres,
-el protocolo entero, sin saltarse pasos. El curso no te ha dado
-comandos: te ha dado el criterio para leerlos. Úsalo.
-:::
+1. **Trabaja en un sitio acotado.** Abre el agente dentro de la
+   carpeta del proyecto, no en `~`: puede leer todo lo que hay debajo.
+2. **Modo «pregunta antes».** Todos permiten ejecutar cada comando con
+   tu confirmación; déjalo así hasta que lleves semanas. Lee lo que
+   propone *como lo que es*: un comando que ya sabes leer.
+3. **`sudo` lo tecleas tú.** Que el agente prepare la orden y tú la
+   ejecutes en tu terminal es un buen reparto; lo destructivo
+   (particionar, formatear, `rm -rf`) nunca sale de tus manos.
+4. **Instantánea antes** (capítulo 7) si el agente va a tocar la VM;
+   **copia y vuelta atrás escrita** (capítulo 10) si va a tocar tu
+   máquina real o el router.
+5. **Ni claves ni contraseñas en el chat.** Tu `id_ed25519` (capítulo
+   11), los ficheros de credenciales, los *tokens*: el agente puede
+   necesitar *usarlos* desde tu máquina, no *leerlos* para ti.
+6. **Pídele que explique.** «¿Qué hace cada opción de ese `rsync`?»
+   es una pregunta legítima, y la respuesta la puedes contrastar con
+   `man`. Si no entiendes lo que va a hacer, no se ejecuta.
 
-## Un ejemplo completo {.unnumbered}
+## Para qué sirve de verdad {.unnumbered}
 
-Pregunta: «Debian 13 sin escritorio, quiero ver qué carpetas de mi
-casa ocupan más espacio». Respuesta típica: `du -sh ~/* | sort -rh |
-head`. Lectura: `du` (capítulo 6) con `-s` y `-h`; tubería a `sort`
-con `-r` y `-h` — `man sort` confirma que `-h` ordena magnitudes
-humanas —; `head` para diez líneas. Riesgo: lectura pura. Ejecutas.
-Contrastas: las cifras cuadran con `df`. Treinta segundos, entendido,
-anotado en el cuaderno. Así se usa una IA cuando se sabe Linux.
+Las tareas de este curso que más tiempo comen — y donde un agente es
+una ayuda inestimable — son las de *montaje*: configurar la conexión
+SSH con claves y agenda (capítulo 11), escribir la línea de `fstab`
+correcta (anexo B2), preparar el `rsync` con las opciones justas, leer
+un `journalctl` de tres mil líneas para encontrar por qué no arranca
+un servicio, o escribir el script de bash del anexo B1 que renombra
+doscientos ficheros. También funciona *a distancia*: el agente puede
+ejecutar `ssh lab …` por ti, y entonces lo que administra es tu
+servidor — con las mismas reglas, y con más motivo la número 4.
+
+Un ejemplo completo del reparto de papeles, con la tarea del anexo
+B2:
+
+> **Tú:** «Quiero montar `/home/marcos/proyecto` de `debian-lab` en
+> `~/lab` por SSHFS, y que se desmonte limpio. Explícame cada comando
+> antes de ejecutarlo.»
+>
+> **Agente:** propone `sudo apt install sshfs` (tú: lo entiendes, capítulo
+> 5, lo ejecutas), `mkdir ~/lab`, `sshfs lab:/home/marcos/proyecto
+> ~/lab` (tú: reconoces el alias `lab` de tu `~/.ssh/config`), y
+> `fusermount -u ~/lab` para desmontar. Te explica por qué no hace
+> falta `sudo` para el montaje.
+>
+> **Tú:** verificas con `findmnt ~/lab` — capítulo 6 — y das por buena
+> la tarea.
+
+Fíjate en lo que ha pasado: no has memorizado la sintaxis de `sshfs`,
+pero has entendido cada paso, has sabido qué comprobar y habrías
+detectado un `sudo` fuera de sitio. Eso es lo que este curso te ha
+dado — y la razón por la que lo *avanzado* de cada capítulo había que
+conocerlo aunque no dominarlo: para que, cuando la IA te lo ponga
+delante, sepas qué es, para qué sirve y qué puede romper.
+
+## Lo que la IA no sustituye {.unnumbered}
+
+El cuaderno (`script`), la instantánea, la copia antes de editar, el
+`lsblk` antes de `dd`. Un agente se equivoca con la misma seguridad
+con la que acierta, y no tiene manera de saber que ese disco `sdb`
+era el de las fotos de tu abuela. Las redes de seguridad de este
+curso están pensadas para humanos y para agentes por igual — y con un
+agente al lado, las necesitas más, no menos.

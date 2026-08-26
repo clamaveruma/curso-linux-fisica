@@ -27,6 +27,8 @@ Motivación alta (más de 8 h/semana, formato intensivo de dos semanas), teoría
 
 **Entorno:** el equipo propio del alumno con Linux (piloto: Mint). Para la versión publicada, un Anexo 0 cubrirá a quien venga de Windows (VirtualBox o WSL) sin engordar el cuerpo del curso.
 
+**Dos niveles: dominar y conocer** *(reorientación de Claudio, 2026-08-26)*: lo básico (instalar Linux, particiones/sistemas de ficheros/formateo, mover información entre Linux–Windows–nube–otros hosts, redes de casa: direcciones, DHCP, router, NAT y cortafuegos básicos, entrar por SSH) se domina; lo avanzado (claves, rsync, tmux, túneles) se *conoce* — para mantener el control cuando una IA dé las instrucciones. Cada capítulo y cada práctica marca el nivel; los ejercicios muy difíciles para alguien sin formación informática pasan a opcionales. El anexo E1 pasa a ser central: instalar un agente de IA local (Claude Code, Codex) que maneje el shell, y las reglas para no perder el control. Redes: ampliar aunque el curso crezca (nivel 2/3, switches y routers, DHCP doméstico con parámetros y rangos, NAT y cortafuegos básicos, protocolos para mover datos entre mundos).
+
 **Regla de seguridad transversal:** nada destructivo se practica en la máquina de trabajo. Particionar, instalar y romper se hace en la VM. Los cambios en el router de casa se dividen en exploración (solo lectura), reversibles (con procedimiento de vuelta atrás) y avanzados (opcionales).
 
 **Terminal y herramientas gráficas** *(añadido 2026-08-23)*: la terminal es el eje del curso, pero sin menospreciar la vía gráfica. Cuando exista un equivalente gráfico de uso común, se menciona en una línea o caja al cierre de la sección («esto mismo, con ratón»), señalando qué aporta cada vía. Ubicaciones concretas en el temario:

@@ -63,6 +63,30 @@ los puertos, que verás en el capítulo 10, son el número de piso que
 hace posible que una dirección sirva a muchos programas — y, como
 descubrirás dentro de un rato, a muchas casas.
 
+## Nivel 2 y nivel 3: switches y routers {#sec-switch-router}
+
+Dos de esas capas tienen aparato propio, y conviene distinguirlos
+porque en la caja de tu compañía van juntos. Un **switch** trabaja en
+el nivel 2, el de enlace: tiene varias bocas de cable, aprende qué
+MAC hay detrás de cada una y reparte los sobres *dentro de tu red*
+sin mirar la IP — es el repartidor del barrio. El punto de acceso
+Wi-Fi es un switch sin cables. Un **router** trabaja en el nivel 3, el
+de red: tiene una pata en cada red, lee el sobre IP y decide por cuál
+sale el paquete — es el que te saca del barrio. La regla que ya
+conoces, dicha con los aparatos: **misma red, switch; otra red,
+router.**
+
+![Dos papeles, una caja. En casa van juntos en el aparato de la compañía; en un campus verás decenas de switches y unos pocos routers.](../imagenes/cap09/fig-switch-router.svg){#fig-switch-router fig-alt="Portátil, móvil e impresora conectados a un switch que reparte por MAC dentro de la red; un router al lado conecta esa red con otras por IP"}
+
+La «caja del router» de tu salón es en realidad cuatro o cinco
+aparatos en uno: un switch (las bocas amarillas de detrás), un punto
+de acceso Wi-Fi, un router, un servidor DHCP y un pequeño servidor de
+nombres — y un cortafuegos (capítulo 10). Cuando su página web te
+enseñe pestañas separadas para LAN, Wi-Fi, WAN y DHCP, estás viendo
+esos papeles por separado. Si algún día necesitas más bocas de cable,
+lo que compras es un switch de veinte euros: se enchufa al router y
+todo sigue siendo una sola red.
+
 ## Tu ficha de red: `ip a` {#sec-ip-a}
 
 El comando de este bloque es `ip`, y su primera pregunta es
@@ -173,6 +197,57 @@ de libvirt lleva su propio servidor DHCP — por eso `debian-lab`
 apareció con `192.168.122.15` sin configurar nada —, y el instalador
 de Debian pidió su dirección exactamente así. El mismo mecanismo a
 tres escalas: tu casa, tu hipervisor, el campus de la universidad.
+
+Lo que reparte un DHCP es siempre el mismo lote, y son los cuatro o
+cinco parámetros que verás en cualquier pantalla de red del mundo:
+
+| Parámetro | Ejemplo | Para qué |
+|-----------|---------|----------|
+| **Dirección IP** | `192.168.1.34` | tu número en la red |
+| **Máscara** | `/24` = `255.255.255.0` | hasta dónde llega «mi red» |
+| **Puerta de enlace** | `192.168.1.1` | a quién dar lo que va a otra red: el router |
+| **Servidor DNS** | `192.168.1.1` o `9.9.9.9` | quién traduce nombres (capítulo 10) |
+| **Duración del préstamo** | 24 h | cada cuánto se renueva |
+
+Y con eso ya puedes leer — y en el capítulo 10, tocar — la pestaña
+DHCP de tu router, que tiene siempre la misma forma: la dirección del
+propio router, un **rango** de direcciones que reparte (algo como
+`192.168.1.100` a `.200`), la duración, y una lista de **reservas**:
+«a esta MAC, siempre esta IP». Lo usual en una casa bien puesta es
+dejar el rango para lo que va y viene (móviles, visitas) y reservar
+direcciones fijas para lo que debe encontrarse siempre en el mismo
+sitio: la impresora, un NAS, tu `debian-lab` si algún día vive en un
+PC físico. Lo que no se toca sin motivo: la dirección del router y la
+máscara.
+
+¿Y por qué `192.168.1.x` en casi todas las casas? Porque hay tres
+bloques de direcciones reservados para uso privado, y los fabricantes
+eligen del más pequeño:
+
+| Bloque privado | Cuántas redes /24 caben | Dónde lo verás |
+|----------------|-------------------------|----------------|
+| `192.168.0.0/16` | 256 | casas y oficinas pequeñas (`192.168.0.x`, `192.168.1.x`) |
+| `172.16.0.0/12` | 4 096 | empresas, y la red interna de Docker |
+| `10.0.0.0/8` | 65 536 | universidades, multinacionales, redes de la compañía |
+
+Si dos casas usan `192.168.1.x` no chocan: cada una está detrás de su
+propio NAT, que es la siguiente sección. Y si un día montas una VPN
+con la universidad y las dos redes se llaman igual, sabrás por qué
+no funciona — y que la solución es cambiar la tuya a `192.168.37.x`,
+cualquier número que nadie use.
+
+::: {.truco}
+**✚ Truco · Los mismos parámetros, en la ventana de red**
+
+El icono de red de Mint → *Configuración de red* (o *Editar
+conexiones*) → tu Wi-Fi → pestaña **IPv4**: ahí están, con botones,
+los cinco parámetros de la tabla. *Automático (DHCP)* es lo normal;
+*Manual* te deja escribir IP, máscara, puerta de enlace y DNS a mano
+— lo que necesitarías en un laboratorio sin DHCP. Para que tu portátil
+tenga siempre la misma dirección en casa, la vía limpia no es
+*Manual* aquí sino una reserva en el router (capítulo 10): así la
+decisión vive en un solo sitio y no choca con el reparto del DHCP.
+:::
 
 ::: {.historia}
 **◷ Historia · La primera palabra de la red fue «LO»**

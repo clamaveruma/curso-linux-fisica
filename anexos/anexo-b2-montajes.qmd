@@ -167,6 +167,33 @@ impresora de casa. **NFS** cuando tú (o el laboratorio) administráis
 ambos lados y quieres rendimiento y permisos de verdad. Y por
 ventanas, los tres son la misma pantalla de *Conectar al servidor*.
 
+## Windows y la nube {.unnumbered}
+
+Los dos casos que más se preguntan, resueltos con lo anterior. **De
+Windows a tu Linux y al revés**: Windows 10 y 11 traen el cliente
+OpenSSH de serie, así que desde PowerShell funcionan los mismos
+`scp` y `sftp` del capítulo 11 contra tu Mint (con `openssh-server`
+instalado, ejercicio 11.1) o contra `debian-lab`:
+
+```default
+PS C:\Users\Marcos> scp .\medidas.csv marcos@192.168.1.34:~/fisica/
+PS C:\Users\Marcos> sftp marcos@192.168.1.34
+```
+
+Con ratón, en Windows, **WinSCP** (gratuito) es el «Conectar al
+servidor» del otro lado: arrastrar y soltar por SFTP. En sentido
+contrario, la vía natural es SMB: compartir una carpeta de Windows
+(propiedades → Compartir) y montarla desde Linux como en la sección
+anterior — o compartir una carpeta de tu Linux desde Nemo (clic
+derecho → *Opciones de compartición*; Mint instala Samba la primera
+vez) para que Windows la vea en «Red». **Con la nube**: el navegador
+siempre vale (Drive, Dropbox, OneDrive, el Nextcloud de la
+universidad); para hacerlo desde la terminal o montarla como carpeta
+existe **`rclone`** (`sudo apt install rclone`, `rclone config` te
+guía para conectar la cuenta, y después `rclone copy` o
+`rclone mount`), sin `sudo` ni permanencia — el mismo espíritu que
+SSHFS, con la nube al otro lado.
+
 ## Servir una carpeta desde tu VM por NFS {.unnumbered}
 
 Para ver NFS entero, el servidor lo puedes montar tú en `debian-lab`
