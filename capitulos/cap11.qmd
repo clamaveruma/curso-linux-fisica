@@ -38,7 +38,10 @@ claves, agenda, `rsync`, comandos remotos, endurecer el servidor — es
 lo que usa un profesional a diario, pero es **avanzado**: si en algún
 punto te pierdes, quédate con lo esencial, sigue al capítulo 12 (que
 solo necesita saber entrar) y vuelve aquí cuando el resto te haga
-falta. Nadie aprende SSH entero en una tarde.
+falta. Nadie aprende SSH entero en una tarde — y cuando vuelvas,
+hazlo con una IA al lado, como cuenta el
+[anexo E1](../anexos/anexo-e1-ia.qmd): lo avanzado se conoce para
+entender lo que la IA te proponga, no para teclearlo de memoria.
 :::
 
 ## Primero con ratón: otro ordenador en tu gestor de archivos {#sec-con-raton}
