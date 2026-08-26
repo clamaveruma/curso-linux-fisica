@@ -233,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
   </div>
 </li>
       </ul>
@@ -251,10 +251,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sec-dns" id="toc-sec-dns" class="nav-link active" data-scroll-target="#sec-dns"><span class="header-section-number">10.1</span> Qué pasa al escribir un nombre: DNS</a></li>
   <li><a href="#sec-tracepath" id="toc-sec-tracepath" class="nav-link" data-scroll-target="#sec-tracepath"><span class="header-section-number">10.2</span> El camino: <code>tracepath</code></a></li>
   <li><a href="#sec-puertos" id="toc-sec-puertos" class="nav-link" data-scroll-target="#sec-puertos"><span class="header-section-number">10.3</span> Una dirección, muchas puertas: los puertos</a></li>
-  <li><a href="#sec-cable-wifi" id="toc-sec-cable-wifi" class="nav-link" data-scroll-target="#sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</a></li>
-  <li><a href="#sec-cambios" id="toc-sec-cambios" class="nav-link" data-scroll-target="#sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</a></li>
-  <li><a href="#sec-practica-10" id="toc-sec-practica-10" class="nav-link" data-scroll-target="#sec-practica-10"><span class="header-section-number">10.6</span> Práctica: la guía y las puertas</a></li>
-  <li><a href="#sec-quiz-10" id="toc-sec-quiz-10" class="nav-link" data-scroll-target="#sec-quiz-10"><span class="header-section-number">10.7</span> Autocomprobación</a></li>
+  <li><a href="#sec-cortafuegos" id="toc-sec-cortafuegos" class="nav-link" data-scroll-target="#sec-cortafuegos"><span class="header-section-number">10.4</span> Cortafuegos, lo básico</a></li>
+  <li><a href="#sec-protocolos" id="toc-sec-protocolos" class="nav-link" data-scroll-target="#sec-protocolos"><span class="header-section-number">10.5</span> Qué habla cada puerta: los protocolos que usarás</a></li>
+  <li><a href="#sec-cable-wifi" id="toc-sec-cable-wifi" class="nav-link" data-scroll-target="#sec-cable-wifi"><span class="header-section-number">10.6</span> Cable o Wi-Fi</a></li>
+  <li><a href="#sec-cambios" id="toc-sec-cambios" class="nav-link" data-scroll-target="#sec-cambios"><span class="header-section-number">10.7</span> El protocolo del cambio reversible</a></li>
+  <li><a href="#sec-practica-10" id="toc-sec-practica-10" class="nav-link" data-scroll-target="#sec-practica-10"><span class="header-section-number">10.8</span> Práctica: la guía y las puertas</a></li>
+  <li><a href="#sec-quiz-10" id="toc-sec-quiz-10" class="nav-link" data-scroll-target="#sec-quiz-10"><span class="header-section-number">10.9</span> Autocomprobación</a></li>
   </ul>
 </nav>
     </div>
@@ -429,13 +431,89 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <p><strong>◉ Por dentro · TCP y UDP en diez minutos</strong></p>
 <p>Los paquetes viajan de dos maneras. <strong>TCP</strong> es correo certificado: antes de enviar nada, los dos extremos se saludan en tres pasos — «¿estás?», «estoy, ¿y tú?», «aquí» (el <em>handshake</em>: SYN, SYN-ACK, ACK) — y a partir de ahí cada paquete va numerado, el receptor confirma lo que recibe, lo que se pierde se reenvía y todo se entrega en orden. Más lento, pero fiable: SSH, la web y el correo van así. <strong>UDP</strong> es una postal: se envía y ya, sin conexión ni confirmación — rapidísimo, y si una se pierde, se pierde. Las consultas DNS, el vídeo en directo y los juegos van así: prefieren perder un paquete a esperar. Por eso <code>nmap</code> decía <code>22/tcp</code>: el puerto 22 <em>de TCP</em>. Los dos sistemas conviven en la misma dirección con numeraciones independientes — el 53 de UDP (DNS) y el 53 de TCP son puertas distintas, aunque el mismo programa suela atender las dos.</p>
 </div>
+</section>
+<section id="sec-cortafuegos" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cortafuegos"><span class="header-section-number">10.4</span> Cortafuegos, lo básico</h2>
+<p>Un <strong>cortafuegos</strong> (<em>firewall</em>) es un portero: mira cada paquete que llega y decide, por reglas, si pasa. Tienes dos, y conviene saber qué hace cada uno.</p>
+<p>El <strong>del router</strong> lo llevas puesto sin saberlo: la libreta NAT del capítulo 9 ya deja fuera todo lo que nadie pidió, y encima el router lleva un cortafuegos que vigila el <em>estado</em> de cada conversación (lo llaman SPI): solo entra lo que es respuesta a algo que salió. Abrir una puerta desde fuera es escribir una regla — el reenvío de puertos — y hacerlo a conciencia. Para una casa, ese portero basta.</p>
+<p>El <strong>de cada máquina</strong> es la segunda línea, y en Linux se llama <code>ufw</code> (<em>uncomplicated firewall</em>): una lista de reglas del tipo «lo que entre, se rechaza, salvo lo que yo diga». En tu Mint viene instalado y apagado — detrás del router no hace falta. En un servidor con dirección pública, en cambio, es obligatorio, y la forma de ponerlo es siempre la misma, <strong>en este orden</strong>:</p>
+<pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install ufw</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw allow OpenSSH</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw enable</span>
+<span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo ufw status verbose</span>
+<span class="t-out">Status: active</span>
+<span class="t-out">Default: deny (incoming), allow (outgoing)</span>
+<span class="t-out">To                         Action      From</span>
+<span class="t-out">--                         ------      ----</span>
+<span class="t-out">22/tcp (OpenSSH)           ALLOW IN    Anywhere</span></code></pre>
+<p>Primero se abre la puerta por la que entras — SSH —, <em>después</em> se enciende: al revés, te dejas fuera de tu propio servidor. La política por defecto lo dice todo: entrar, nada salvo lo permitido; salir, todo. Cada servicio nuevo será una línea (<code>sudo ufw allow 8888/tcp</code> si algún día abres un Jupyter a la red, que no lo harás: capítulo 12). Y <code>nmap</code> desde tu Mint es la comprobación: la 22 abierta, el resto <code>filtered</code>, que es el portero diciendo que no.</p>
 <div class="truco">
-<p><strong>✚ Truco · El cortafuegos, en una frase</strong></p>
-<p>Un <strong>cortafuegos</strong> (<em>firewall</em>) es un portero que decide qué puertas se ven desde fuera. Tu router lo es sin que lo sepas: gracias al NAT del capítulo 9, ninguna puerta de tu casa es visible desde internet salvo que la abras a propósito. En Linux, <code>ufw</code> hace ese papel en una máquina concreta (<code>sudo ufw status</code> te dirá que en tu Mint está inactivo — no hace falta activarlo hoy). En el servidor de la universidad, en cambio, el portero existirá y será estricto: si un día «no puedes conectar», la pregunta es siempre «¿qué puerta hay abierta y quién la vigila?».</p>
+<p><strong>✚ Truco · El cortafuegos con ventana</strong></p>
+<p>Mint trae la cara gráfica de <code>ufw</code>: menú → Preferencias → <strong>Configuración del cortafuegos</strong> (<code>gufw</code>). Un interruptor de encendido, tres perfiles (casa, oficina, público) y una lista de reglas donde se añade «permitir SSH» eligiéndolo de una lista de aplicaciones. Es exactamente el mismo <code>ufw</code> — las reglas que crees ahí las verás con <code>sudo ufw status</code> — y para un portátil que se conecta a la Wi-Fi de una cafetería, activarlo con el perfil <em>público</em> es un gesto razonable y reversible.</p>
 </div>
 </section>
-<section id="sec-cable-wifi" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cable-wifi"><span class="header-section-number">10.4</span> Cable o Wi-Fi</h2>
+<section id="sec-protocolos" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-protocolos"><span class="header-section-number">10.5</span> Qué habla cada puerta: los protocolos que usarás</h2>
+<p>Detrás de cada puerto hay un <strong>protocolo</strong>: el idioma acordado entre los dos extremos. Para un físico, la pregunta práctica es «¿cómo paso datos de aquí a allí?», y la respuesta depende de qué hay en el otro extremo. Esta es la tabla que resuelve el noventa por ciento de los casos, con el capítulo o anexo donde se practica cada uno:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 31%">
+<col style="width: 28%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Protocolo</th>
+<th>Puerto</th>
+<th>Otro extremo típico</th>
+<th>Con qué lo usarás</th>
+<th>Dónde</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SSH / SFTP</strong></td>
+<td>22</td>
+<td>otro Linux, un servidor, la nube — y un Windows moderno</td>
+<td>terminal, <code>scp</code>, <code>rsync</code>, «Conectar al servidor», WinSCP</td>
+<td>caps. 11–12, anexo B2</td>
+</tr>
+<tr class="even">
+<td><strong>SMB</strong></td>
+<td>445</td>
+<td>un PC con Windows, un NAS, una impresora</td>
+<td>«Conectar al servidor» (<code>smb://</code>), montar por <code>cifs</code></td>
+<td>anexo B2</td>
+</tr>
+<tr class="odd">
+<td><strong>NFS</strong></td>
+<td>2049</td>
+<td>otro Linux, el laboratorio, un clúster</td>
+<td>montar con <code>-t nfs</code></td>
+<td>anexo B2</td>
+</tr>
+<tr class="even">
+<td><strong>HTTP / HTTPS</strong></td>
+<td>80 / 443</td>
+<td>la web, la nube, Nextcloud, Jupyter</td>
+<td>el navegador, <code>curl</code>, <code>rclone</code></td>
+<td>caps. 9, 12, anexo B2</td>
+</tr>
+<tr class="odd">
+<td><strong>FTP</strong></td>
+<td>21</td>
+<td>servidores antiguos de datos públicos</td>
+<td>«Conectar al servidor» (<code>ftp://</code>)</td>
+<td>— sin cifrar: solo lectura y solo si no hay otra</td>
+</tr>
+</tbody>
+</table>
+<p>Una regla para elegir: <strong>si hay SSH en el otro extremo, usa SSH</strong> — sirve para terminal y para ficheros, va cifrado, y lo hablan hoy hasta los Windows. SMB es el idioma de Windows y de los NAS; NFS, el del laboratorio; HTTPS, el de la nube. Todo lo demás son variantes.</p>
+</section>
+<section id="sec-cable-wifi" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-cable-wifi"><span class="header-section-number">10.6</span> Cable o Wi-Fi</h2>
 <p>Un dato práctico que separa el portátil del servidor: por Wi-Fi, los paquetes comparten el aire con los vecinos, se pierden y tardan más de forma <em>irregular</em>; por cable, no. Y como todo aquí, se mide. Tu tarjeta Wi-Fi te dice cuánta señal recibe — en dBm, una unidad que reconoces:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">iw dev wlp3s0 link | grep signal</span>
 <span class="t-out">        signal: -58 dBm</span>
@@ -444,8 +522,8 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <span class="t-out">rtt min/avg/max/mdev = 1.9/6.4/48.2/11.7 ms</span></code></pre>
 <p>Un −58 dBm es buena señal (−30 sería pegado al router; −80, cobertura mala). Y fíjate en la línea de <code>ping</code>: un paquete perdido de veinte, y un tiempo que oscila entre 2 y 48 ms — ese <code>mdev</code> es la desviación típica, y por Wi-Fi es grande. Por cable serían 20 de 20, 1 ms, y <code>mdev</code> de décimas. Moraleja para el futuro: <strong>un servidor va por cable</strong>; y si tu <code>debian-lab</code> un día vive en un PC físico, ese PC tendrá un cable.</p>
 </section>
-<section id="sec-cambios" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="sec-cambios"><span class="header-section-number">10.5</span> El protocolo del cambio reversible</h2>
+<section id="sec-cambios" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-cambios"><span class="header-section-number">10.7</span> El protocolo del cambio reversible</h2>
 <p>Hoy tocas el router por primera vez, y lo haces con un método que vale para cualquier sistema que no tenga instantáneas — es decir, para casi todo en la vida real:</p>
 <ol type="1">
 <li><strong>Anota el valor actual</strong> — captura de pantalla o línea en el cuaderno. Sin esto, no hay vuelta atrás posible.</li>
@@ -460,8 +538,8 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 <p>Cambiar la dirección del propio router (<code>192.168.1.1</code>) o desactivar su DHCP son cambios <em>legales</em> pero que cortan la red a todos los aparatos hasta que se arregla — y arreglarlo exige saber más de lo que sabes hoy. Ni siquiera con vuelta atrás escrita: no en el piloto. El curso los deja para quien administre un router en serio, con un segundo equipo por cable para rescatarlo.</p>
 </div>
 </section>
-<section id="sec-practica-10" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="sec-practica-10"><span class="header-section-number">10.6</span> Práctica: la guía y las puertas</h2>
+<section id="sec-practica-10" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="sec-practica-10"><span class="header-section-number">10.8</span> Práctica: la guía y las puertas</h2>
 <p>Cuaderno en marcha (<code>script sesion10.log</code>). Los cambios de hoy se hacen con el protocolo: valor actual, vuelta atrás escrita, cambio, verificación.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
@@ -607,8 +685,8 @@ Figura&nbsp;10.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 </div>
 </section>
-<section id="sec-quiz-10" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="sec-quiz-10"><span class="header-section-number">10.7</span> Autocomprobación</h2>
+<section id="sec-quiz-10" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="sec-quiz-10"><span class="header-section-number">10.9</span> Autocomprobación</h2>
 <p>Marca una respuesta por pregunta; la corrección es inmediata.</p>
 <div class="quiz" id="quiz-cap10">
   <div class="qz"><p class="qq" data-n="1">El DNS sirve para…</p>

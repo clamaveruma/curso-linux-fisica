@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
   </div>
 </li>
       </ul>
@@ -319,15 +319,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Última sesión numerada, y la que junta todo. Ya entras y sales de tu servidor; hoy aprendes a <em>quedarte</em> sin estar: lanzar una simulación, cerrar el portátil, volver mañana desde otra ciudad y encontrarla terminada. Después, el truco favorito del físico computacional — un Jupyter corriendo en el servidor, abierto en el navegador de tu portátil por un túnel cifrado. Y de postre, qué es «la nube» en términos concretos — y por dónde seguir el día que te den cuenta en un clúster.</p>
 </div>
 <div class="chapmeta">
-<p>⏱ <strong>2–3 h</strong> con ejercicios · requisitos: <strong>capítulo 11</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong></p>
+<p>⏱ <strong>2 h</strong> (lo esencial) · requisitos: <strong>capítulo 11</strong> · máquina: <strong>tu Linux de diario y <code>debian-lab</code></strong> · nivel: <strong>avanzado — para conocer</strong></p>
+</div>
+<div class="aviso">
+<p><strong>△ Cómo leer este capítulo · conocer, no dominar</strong></p>
+<p>Este capítulo es el más avanzado del curso, y se lee con otra actitud: lo esencial es entender el <em>problema</em> (un programa lanzado por SSH muere con la conexión) y saber que existen dos soluciones — <code>tmux</code> y los túneles — y para qué sirve cada una. Usarlas con soltura es cosa de quien las necesite, y ese día tendrás una IA al lado que te dé los comandos (anexo E1): lo que este capítulo te da es entenderlos. Haz los ejercicios 12.1 a 12.3, que son cortos; el 12.4 es opcional.</p>
 </div>
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
 <li>Por qué un programa lanzado por SSH muere al cerrar la conexión — y cómo evitarlo.</li>
-<li>Usar <code>tmux</code>: crear una sesión, desconectarte de ella, volver a engancharla desde cualquier sitio.</li>
+<li>Qué es <code>tmux</code> y sus cuatro gestos: crear una sesión, desconectarte, listar, volver a engancharla.</li>
 <li>Abrir un túnel SSH y ver en tu navegador un servicio que solo existe dentro del servidor.</li>
-<li>Ejecutar Jupyter en el servidor con los datos y la CPU de allí, y trabajar desde tu portátil.</li>
+<li>Que Jupyter puede correr en el servidor con los datos y la CPU de allí mientras tú trabajas desde tu portátil — y cómo se monta, para el día que lo necesites.</li>
 <li>Qué es exactamente «una máquina en la nube», qué te dan y qué se paga.</li>
 <li>Qué es un clúster de cálculo, y por qué lo aprendido aquí es lo que su guía dará por sabido.</li>
 </ul>
@@ -499,7 +503,7 @@ Figura&nbsp;12.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
+<p><strong>Nivel 3 · Opcional (para quien lo vaya a usar — con una IA al lado si quieres)</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 12.4 · Jupyter a distancia</strong></p>
 <p>Instala <code>jupyter-notebook</code> en <code>debian-lab</code>, lánzalo dentro de tmux con <code>--no-browser --port 8888</code>, abre el túnel del 8888 y trabaja desde tu navegador: crea un cuaderno que lea <code>progreso.txt</code> y cuente sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue donde estaba. <em>Pista: la URL con el <code>token</code> la imprime Jupyter al arrancar; si la pierdes, <code>jupyter notebook list</code> la repite.</em></p>

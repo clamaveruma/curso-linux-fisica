@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
   </div>
 </li>
       </ul>
@@ -288,6 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#montaje-permanente-etcfstab" id="toc-montaje-permanente-etcfstab" class="nav-link" data-scroll-target="#montaje-permanente-etcfstab">Montaje permanente: <code>/etc/fstab</code></a></li>
   <li><a href="#carpetas-de-otra-máquina-i-sshfs" id="toc-carpetas-de-otra-máquina-i-sshfs" class="nav-link" data-scroll-target="#carpetas-de-otra-máquina-i-sshfs">Carpetas de otra máquina, I: SSHFS</a></li>
   <li><a href="#carpetas-de-otra-máquina-ii-smb-y-nfs" id="toc-carpetas-de-otra-máquina-ii-smb-y-nfs" class="nav-link" data-scroll-target="#carpetas-de-otra-máquina-ii-smb-y-nfs">Carpetas de otra máquina, II: SMB y NFS</a></li>
+  <li><a href="#windows-y-la-nube" id="toc-windows-y-la-nube" class="nav-link" data-scroll-target="#windows-y-la-nube">Windows y la nube</a></li>
   <li><a href="#servir-una-carpeta-desde-tu-vm-por-nfs" id="toc-servir-una-carpeta-desde-tu-vm-por-nfs" class="nav-link" data-scroll-target="#servir-una-carpeta-desde-tu-vm-por-nfs">Servir una carpeta desde tu VM por NFS</a></li>
   <li><a href="#práctica" id="toc-práctica" class="nav-link" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
@@ -379,6 +380,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>//nas/datos                       /mnt/nas  cifs  credentials=/etc/smb-nas,uid=1000,gid=1000,nofail,_netdev  0 0</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>debian-lab:/home/marcos/proyecto  /mnt/lab  nfs   defaults,nofail,_netdev                                    0 0</span></code></pre></div>
 <p>¿Cuál usar? <strong>SSHFS</strong> cuando solo tienes SSH y no administras el servidor. <strong>SMB</strong> cuando el otro lado es un NAS, un Windows o la impresora de casa. <strong>NFS</strong> cuando tú (o el laboratorio) administráis ambos lados y quieres rendimiento y permisos de verdad. Y por ventanas, los tres son la misma pantalla de <em>Conectar al servidor</em>.</p>
+</section>
+<section id="windows-y-la-nube" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="windows-y-la-nube">Windows y la nube</h2>
+<p>Los dos casos que más se preguntan, resueltos con lo anterior. <strong>De Windows a tu Linux y al revés</strong>: Windows 10 y 11 traen el cliente OpenSSH de serie, así que desde PowerShell funcionan los mismos <code>scp</code> y <code>sftp</code> del capítulo 11 contra tu Mint (con <code>openssh-server</code> instalado, ejercicio 11.1) o contra <code>debian-lab</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>PS C:\Users\Marcos&gt; scp .\medidas.csv marcos@192.168.1.34:~/fisica/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>PS C:\Users\Marcos&gt; sftp marcos@192.168.1.34</span></code></pre></div>
+<p>Con ratón, en Windows, <strong>WinSCP</strong> (gratuito) es el «Conectar al servidor» del otro lado: arrastrar y soltar por SFTP. En sentido contrario, la vía natural es SMB: compartir una carpeta de Windows (propiedades → Compartir) y montarla desde Linux como en la sección anterior — o compartir una carpeta de tu Linux desde Nemo (clic derecho → <em>Opciones de compartición</em>; Mint instala Samba la primera vez) para que Windows la vea en «Red». <strong>Con la nube</strong>: el navegador siempre vale (Drive, Dropbox, OneDrive, el Nextcloud de la universidad); para hacerlo desde la terminal o montarla como carpeta existe <strong><code>rclone</code></strong> (<code>sudo apt install rclone</code>, <code>rclone config</code> te guía para conectar la cuenta, y después <code>rclone copy</code> o <code>rclone mount</code>), sin <code>sudo</code> ni permanencia — el mismo espíritu que SSHFS, con la nube al otro lado.</p>
 </section>
 <section id="servir-una-carpeta-desde-tu-vm-por-nfs" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="servir-una-carpeta-desde-tu-vm-por-nfs">Servir una carpeta desde tu VM por NFS</h2>
@@ -834,8 +842,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA como herramienta, no como oráculo">
-        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA como herramienta, no como oráculo</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA en la terminal: ayudante, no piloto">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
