@@ -29,8 +29,8 @@ abres.
 ## Instalar un agente (con la disciplina del curso) {.unnumbered}
 
 (Para un paso a paso con una herramienta concreta y gratuita —
-Antigravity de Google, configurado para que proponga y explique en vez
-de ejecutar — ve al [anexo E2](anexo-e2-antigravity.qmd).)
+Antigravity CLI de Google, configurado para que proponga y explique en
+vez de ejecutar — ve al [anexo E2](anexo-e2-antigravity.qmd).)
 
 La mayoría se instalan con un instalador descargado de la web, y ahí
 aparece el reflejo que este curso te entrenó: **jamás `curl … | bash`

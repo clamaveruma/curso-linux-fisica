@@ -1,8 +1,8 @@
-# Un ayudante de IA en tu terminal: Antigravity de Google {#sec-anexo-e2}
+# Un ayudante de IA en tu terminal: Antigravity CLI de Google {#sec-anexo-e2}
 
 El anexo E1 da las reglas para trabajar con una IA sin perder el
 control. Este es el paso a paso con una herramienta concreta y
-gratuita: **Antigravity**, el entorno de agentes de Google. Con una
+gratuita: **Antigravity CLI**, el agente de Google para la terminal. Con una
 cuenta de Google tienes el acceso básico, que para este curso sobra —
 lo vas a usar para una sola cosa: **que te proponga y te explique
 comandos, no que los ejecute.** Configurado así desde el primer día,
@@ -27,9 +27,8 @@ instantánea a mano.
 
 ## Instalar {.unnumbered}
 
-Antigravity tiene una versión de **línea de comandos** que vive
-directamente en tu terminal, y se instala con un guion que Google
-publica en su web. La instrucción oficial, hoy, es esta:
+Antigravity CLI vive directamente en tu terminal — sin ventanas ni
+editor — y se instala con un guion que Google publica en su web. La instrucción oficial, hoy, es esta:
 
 ```default
 curl -fsSL https://antigravity.google/cli/install.sh | bash
@@ -55,7 +54,7 @@ con tu cuenta de Google; con eso tienes el plan gratuito.
 Un consejo más importante que la línea exacta: **estas instrucciones
 cambian**. La forma más robusta de instalar cualquier herramienta de
 IA es preguntarle a una IA en línea — o a la propia web de Google —
-«cómo instalo Antigravity en Linux desde bash», y aplicar a la
+«cómo instalo Antigravity CLI en Linux desde bash», y aplicar a la
 respuesta la misma disciplina de arriba: leer el guion antes de
 ejecutarlo. Es, además, un ensayo perfecto del anexo E1: pedir
 instrucciones a una IA y mantener el control.
@@ -137,7 +136,7 @@ comandos propuestos y explicados, y los tecleas tú.
 ::: {.ejercicio}
 **Ejercicio E2.1 · Domar al fontanero**
 
-Instala Antigravity (guion descargado, leído y ejecutado), inicia
+Instala Antigravity CLI (guion descargado, leído y ejecutado), inicia
 sesión, pon la ejecución de comandos en modo «pedir confirmación» y
 pega tu instrucción de aprendizaje.
 Después plantéale el problema del capítulo 3 con `adquisicion.log`
