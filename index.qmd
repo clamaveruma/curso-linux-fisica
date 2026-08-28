@@ -1,7 +1,7 @@
 # Bienvenida {.unnumbered}
 
 ::: {.chapmeta}
-Terminal · sistemas · redes · trabajo remoto — **13 sesiones prácticas**
+Terminal · sistemas · redes · trabajo remoto — **13 sesiones prácticas** · **versión agosto 2026**
 :::
 
 Llevas años usando Linux sin haber hablado nunca con él directamente.
@@ -64,6 +64,11 @@ en los repositorios de tu Linux) y acceso al router de tu casa en el
 bloque D (redes) — nada que comprar, nada que arriesgar.
 
 ::: {.pie-piloto}
+**Versión: agosto 2026.** Este libro va a evolucionar — la inteligencia
+artificial cambia lo que un científico necesita saber, y lo que cuenten
+sus lectores cambiará lo que aquí se explica. Cada versión lleva mes y
+año; si lo citas o lo compartes, indica cuál.
+
 © 2026 Claudio M. Martínez Velasco. El texto de este curso se publica
 bajo licencia [Creative Commons Atribución–CompartirIgual 4.0
 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).

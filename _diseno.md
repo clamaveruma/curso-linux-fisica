@@ -114,6 +114,10 @@ El curso se escribe contra el nivel 1: nadie queda excluido y la experiencia es 
 
 Fuente única en Markdown con Quarto. Dos salidas por capítulo o bloque: HTML autocontenido (`embed-resources: true`, soluciones en bloques plegables, tests interactivos) y PDF vía LaTeX (soluciones como apéndice final). Repositorio en GitHub; los datasets de ejercicios versionados junto al texto para que texto y soluciones no se desincronicen jamás.
 
+## 6b. Versionado *(decidido 2026-08-28)*
+
+El libro evoluciona con la IA y con la realimentación de los lectores. Cada versión se identifica por **mes y año**, visible en la portada, la Bienvenida y el pie de página. Versión actual: **agosto 2026**. La cabecera de la portada dice «para jóvenes científicos» (no «para físicos»).
+
 ## 7. Pendiente de decidir
 
 - Portada bonita para el libro (web y PDF; Quarto admite `cover-image`) — se hará más adelante.

@@ -1,7 +1,7 @@
 # Bendito maldito Linux
 
 Curso introductorio para físicos: terminal, sistema, virtualización,
-redes y trabajo remoto. 13 sesiones + proyecto final. En fase piloto.
+redes y trabajo remoto. 13 sesiones + proyecto final. **Versión: agosto 2026** (las versiones llevan mes y año; el libro evoluciona con la IA y con la realimentación de los lectores).
 Web: https://clamaveruma.github.io/curso-linux-fisica/
 
 ## Estructura
