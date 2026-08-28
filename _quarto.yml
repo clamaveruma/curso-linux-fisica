@@ -19,6 +19,8 @@ book:
   title: "Bendito maldito Linux"
   subtitle: "Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender"
   author: "Claudio M. Martínez Velasco"
+  cover-image: portada/portada-web.png
+  cover-image-alt: "Portada: un pingüino con bata de laboratorio ante una pizarra con la ecuación de Schrödinger, un osciloscopio y un teletipo"
   date: 2026-08-01
   date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»
   # El botón de descarga del PDF sale de aquí. Desactivado durante la

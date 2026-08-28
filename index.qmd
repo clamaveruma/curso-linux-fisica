@@ -1,5 +1,7 @@
 # Bienvenida {.unnumbered}
 
+![](portada/portada-web.png){.portada-inline fig-alt="Portada del libro"}
+
 ::: {.chapmeta}
 Terminal · sistemas · redes · trabajo remoto — **13 sesiones prácticas** · **versión agosto 2026**
 :::

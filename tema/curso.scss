@@ -283,3 +283,11 @@ kbd {
   border-radius: 3px;
   padding: 1px 6px;
 }
+
+// Portada en la Bienvenida: pequeña, flotando a la derecha del texto
+.portada-inline img {
+  float: right; max-width: 260px; margin: 0 0 1rem 1.6rem;
+  border: 1px solid rgba(122,94,58,.25); border-radius: 4px; padding: 0;
+  box-shadow: 0 3px 10px rgba(43,35,24,.18);
+}
+@media (max-width: 700px) { .portada-inline img { float: none; display: block; margin: 0 auto 1rem; } }
