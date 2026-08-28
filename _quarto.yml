@@ -50,6 +50,7 @@ book:
     - anexos/anexo-b1-scripting.qmd
     - anexos/anexo-b2-montajes.qmd
     - anexos/anexo-e1-ia.qmd
+    - anexos/anexo-e2-antigravity.qmd
 
 format:
   html:
@@ -86,6 +87,24 @@ format:
           \begin{titlepage}\thispagestyle{empty}%
           \AddToShipoutPictureBG*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{portada/portada.png}}}%
           \null\end{titlepage}\clearpage}
+    # página de créditos (copyright, licencia, versión) tras la portada tipográfica
+    include-before-body:
+      text: |
+        \clearpage\thispagestyle{empty}
+        \vspace*{\fill}
+        {\small\noindent
+        \textbf{Bendito maldito Linux}\\
+        Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender\\[1em]
+        Versión: agosto 2026. Las versiones de este libro se identifican por mes y año.\\[1em]
+        \textcopyright{} 2026 Claudio M. Martínez Velasco\\[0.5em]
+        El texto de este libro se publica bajo licencia Creative Commons Atribución--CompartirIgual 4.0 Internacional (CC BY-SA 4.0): puedes copiarlo, redistribuirlo y adaptarlo, citando al autor y manteniendo la misma licencia.\\
+        \url{https://creativecommons.org/licenses/by-sa/4.0/deed.es}\\[0.5em]
+        Las fotografías conservan las licencias indicadas en su pie de figura (Wikimedia Commons y dominio público); las capturas del instalador de Debian son GPL.\\[1em]
+        Edición web, con ejercicios interactivos y datos descargables:\\
+        \url{https://clamaveruma.github.io/curso-linux-fisica/}\\[1em]
+        Compuesto con Quarto y \LaTeX{}.
+        }
+        \clearpage
 
 execute:
   freeze: auto
