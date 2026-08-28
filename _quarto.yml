@@ -45,12 +45,11 @@ book:
     - capitulos/cap13.qmd
     - capitulos/proyecto-final.qmd
   appendices:
-    - anexos/anexo-windows.qmd
-    - anexos/anexo-c1-pc-real.qmd
-    - anexos/anexo-b1-scripting.qmd
-    - anexos/anexo-b2-montajes.qmd
-    - anexos/anexo-e1-ia.qmd
-    - anexos/anexo-e2-antigravity.qmd
+    - anexos/anexo-e1-ia.qmd        # A · la IA en la terminal
+    - anexos/anexo-windows.qmd      # B · vengo de Windows
+    - anexos/anexo-c1-pc-real.qmd   # C · instalar en un PC real
+    - anexos/anexo-b1-scripting.qmd # D · scripting
+    - anexos/anexo-b2-montajes.qmd  # E · montar de todo
 
 format:
   html:

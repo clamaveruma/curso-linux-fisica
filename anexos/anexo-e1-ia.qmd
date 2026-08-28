@@ -4,51 +4,94 @@ Este anexo es la otra mitad del curso. Todo lo que has aprendido —
 qué es un proceso, qué hace `sudo`, qué significa montar, qué es un
 puerto — no es para que teclees comandos de memoria: es para que
 **entiendas lo que una IA te proponga** y decidas tú. En 2026, un
-físico que administra su portátil, su servidor y su red trabaja con
-una IA al lado; la diferencia entre el que manda y el que copia y pega
-a ciegas es exactamente el contenido de este curso.
+científico que administra su portátil, su servidor y su red trabaja
+con una IA al lado; la diferencia entre el que manda y el que copia y
+pega a ciegas es exactamente el contenido de este curso. Aquí están
+las reglas, y el paso a paso con una herramienta concreta y gratuita:
+**Antigravity CLI**, el agente de Google para la terminal.
 
-## Dos formas de usar la IA {.unnumbered}
+## El fontanero {.unnumbered}
 
-**Preguntar** es la forma que ya conoces: describes el problema en un
-chat, te devuelve comandos, los tecleas tú. Funciona, y la disciplina
-es la del capítulo 3: *lee* cada comando, verifica con `man` o
-`--help` lo que no reconozcas, y nunca ejecutes a ciegas nada con
-`sudo`, `rm`, `dd` o `mkfs` (ya sabes por qué cada uno).
+Cuando llamas a un fontanero tienes dos maneras de tratarlo. La
+primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado.
+Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se
+arregla. La segunda: te quedas al lado, le preguntas por cada
+herramienta y cada técnica que va a usar, y le pides que te indique
+cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta
+llamarle. Está claro cuál de las dos vías es la de aprender.
 
-**Delegar** es lo nuevo: un **agente** — un programa que ejecuta un
-modelo de IA *con acceso a tu terminal*. Le describes la tarea («monta
-la carpeta `proyecto` de `debian-lab` en `~/lab` por NFS y hazlo
-permanente»), y él mismo lee tus ficheros, propone los comandos, te
-pide permiso, los ejecuta, mira el resultado y corrige. Los más usados
-hoy son **Claude Code** (Anthropic) y **Codex CLI** (OpenAI); hay
-otros, y cambian cada pocos meses. Se instalan como cualquier
-programa de terminal, y trabajan desde el directorio en el que los
-abres.
+Un **agente** de IA — un programa que ejecuta un modelo de IA *con
+acceso a tu terminal* — es ese fontanero, y el trato lo eliges tú. Le
+describes la tarea («monta la carpeta `proyecto` de `debian-lab` en
+`~/lab` por NFS y hazlo permanente»), y puede leer tus ficheros,
+proponer los comandos, ejecutarlos, mirar el resultado y corregir.
+Durante este curso, la segunda vía es la única: el agente
+**propone**, tú lees, preguntas, verificas con `man` (capítulo 1) y
+**tecleas**. Cuando el curso termine y estés administrando un
+servidor con prisa, ya decidirás cuándo dejarle hacer — con las
+reglas de más abajo y una instantánea a mano.
 
-## Instalar un agente (con la disciplina del curso) {.unnumbered}
+## Instalar Antigravity CLI {.unnumbered}
 
-(Para un paso a paso con una herramienta concreta y gratuita —
-Antigravity CLI de Google, configurado para que proponga y explique en
-vez de ejecutar — ve al [anexo E2](anexo-e2-antigravity.qmd).)
+Antigravity CLI vive directamente en tu terminal — sin ventanas ni
+editor —, funciona con una cuenta de Google (el acceso básico sobra
+para este curso) y se instala con un guion que Google publica en su
+web. La instrucción oficial, hoy, es esta:
 
-La mayoría se instalan con un instalador descargado de la web, y ahí
-aparece el reflejo que este curso te entrenó: **jamás `curl … | bash`
-sin leer**. La versión con red de seguridad:
-
-```terminal
-marcos@portatil:~$ curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh
-marcos@portatil:~$ less instalar-claude.sh
-marcos@portatil:~$ bash instalar-claude.sh
-marcos@portatil:~$ claude --version
+```default
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 ```
 
-Descargar, *mirar* (¿qué escribe, dónde, pide `sudo`?), y solo
-entonces ejecutar. Codex se instala con `npm install -g @openai/codex`
-(pide Node.js: `sudo apt install npm`). Ambos requieren una cuenta y
-un inicio de sesión la primera vez; la URL y el comando exactos
-cámbialos por los de la documentación oficial del día — este anexo
-envejece más deprisa que el resto del curso.
+Y aquí aparece el reflejo que este curso te ha entrenado: esa línea
+descarga un programa de internet y lo ejecuta *sin que lo hayas
+visto*. Funciona, y millones de personas la teclean tal cual — pero
+tú ya sabes hacerlo con red de seguridad, y cuesta diez segundos más:
+
+```terminal
+marcos@portatil:~$ curl -fsSL https://antigravity.google/cli/install.sh -o instalar-antigravity.sh
+marcos@portatil:~$ less instalar-antigravity.sh
+marcos@portatil:~$ bash instalar-antigravity.sh
+```
+
+Descargar, *mirar* (¿dónde escribe?, ¿pide `sudo`?, ¿de qué dirección
+descarga el programa?), y solo entonces ejecutar. Al terminar, el
+instalador te dice con qué comando se arranca y cómo iniciar sesión
+con tu cuenta de Google.
+
+Un consejo más importante que la línea exacta: **estas instrucciones
+cambian**. La forma más robusta de instalar cualquier herramienta de
+IA es preguntarle a una IA en línea — o a la propia web de Google —
+«cómo instalo Antigravity CLI en Linux desde bash», y aplicar a la
+respuesta la misma disciplina: leer el guion antes de ejecutarlo. Es,
+de paso, el primer ensayo de todo este anexo: pedir instrucciones a
+una IA y mantener el control.
+
+## Configurarlo para aprender, desde el principio {.unnumbered}
+
+Antes de pedirle nada, dos ajustes. El primero, en la configuración
+del agente: la **ejecución de comandos** tiene varios modos, desde
+«ejecuta lo que consideres» hasta «pide permiso cada vez» (el nombre
+exacto de la opción cambia con las versiones; búscala en la ayuda o
+pregúntale al propio agente cómo se configura). Ponla en el modo que
+**pide confirmación siempre** — nunca en automático. Así, aunque un
+día le dejes hacer, nada correrá sin que tú lo hayas leído y
+aceptado.
+
+El segundo es de trato, no de menú: la primera instrucción que le das
+en cada sesión fija las reglas del juego. Guárdala en un fichero
+(`~/fisica/notas/ia.txt`, capítulo 2) y pégala al empezar:
+
+```default
+Estoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame
+qué hace cada opción; los teclearé yo. Si un comando puede destruir
+datos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),
+avísamelo explícitamente antes. Cuando no entienda algo, dímelo con
+un ejemplo pequeño que pueda probar.
+```
+
+Con eso el agente pasa de fontanero-que-arregla a
+fontanero-que-enseña. Muchos agentes permiten guardar esa instrucción
+como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.
 
 ## Las reglas para seguir mandando tú {.unnumbered}
 
@@ -57,8 +100,7 @@ de un buen jefe:
 
 1. **Trabaja en un sitio acotado.** Abre el agente dentro de la
    carpeta del proyecto, no en `~`: puede leer todo lo que hay debajo.
-2. **Modo «pregunta antes».** Todos permiten ejecutar cada comando con
-   tu confirmación; déjalo así hasta que lleves semanas. Lee lo que
+2. **Modo «pregunta antes»**, como acabas de configurar. Lee lo que
    propone *como lo que es*: un comando que ya sabes leer.
 3. **`sudo` lo tecleas tú.** Que el agente prepare la orden y tú la
    ejecutes en tu terminal es un buen reparto; lo destructivo
@@ -67,36 +109,53 @@ de un buen jefe:
    **copia y vuelta atrás escrita** (capítulo 10) si va a tocar tu
    máquina real o el router.
 5. **Ni claves ni contraseñas en el chat.** Tu `id_ed25519` (capítulo
-   11), los ficheros de credenciales, los *tokens*: el agente puede
+   12), los ficheros de credenciales, los *tokens*: el agente puede
    necesitar *usarlos* desde tu máquina, no *leerlos* para ti.
 6. **Pídele que explique.** «¿Qué hace cada opción de ese `rsync`?»
    es una pregunta legítima, y la respuesta la puedes contrastar con
    `man`. Si no entiendes lo que va a hacer, no se ejecuta.
 
-## Para qué sirve de verdad {.unnumbered}
+## Cómo pedirle las cosas {.unnumbered}
 
-Las tareas de este curso que más tiempo comen — y donde un agente es
-una ayuda inestimable — son las de *montaje*: configurar la conexión
-SSH con claves y agenda (capítulo 12), escribir la línea de `fstab`
-correcta (anexo B2), preparar el `rsync` con las opciones justas, leer
-un `journalctl` de tres mil líneas para encontrar por qué no arranca
-un servicio, o escribir el script de bash del anexo B1 que renombra
-doscientos ficheros. También funciona *a distancia*: el agente puede
-ejecutar `ssh lab …` por ti, y entonces lo que administra es tu
-servidor — con las mismas reglas, y con más motivo la número 4.
+La pregunta buena describe el objetivo, no el comando que crees que
+necesitas. Compara: «dame un `grep`» frente a «tengo un registro de
+adquisición con líneas `2026-08-18 10:03:00 ERROR s3 …`; quiero saber
+qué sensor tiene más errores». Con la segunda, el agente te devuelve
+la tubería del capítulo 3 — y aquí empieza tu trabajo:
 
-Un ejemplo completo del reparto de papeles, con la tarea del anexo
-B2:
+1. **Léela pieza a pieza.** Cada programa lo reconoces (o lo buscas en
+   `man`); cada opción debe tener sentido.
+2. **Pídele que la explique**: «explícame ese `cut -d' ' -f4`». Su
+   respuesta la contrastas con el manual; si no coinciden, gana el
+   manual.
+3. **Pruébala en pequeño** antes de en grande — un `head`, un fichero
+   de prueba, la máquina virtual.
+4. **Tecléala tú.** Los dedos aprenden lo que los ojos solo
+   reconocen: la regla del primer día vale también con la IA delante.
+
+Y las preguntas que más rinden son las de después: «¿por qué has
+usado `sort` antes de `uniq`?», «¿qué habría pasado sin las comillas?»,
+«¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de
+este curso contado otra vez, a tu ritmo y sobre tu problema.
+
+Las tareas del curso que más tiempo comen — y donde un agente ayuda de
+verdad — son las de *montaje*: configurar la conexión SSH con claves
+y agenda (capítulo 12), escribir la línea de `fstab` correcta (anexo
+B2), preparar el `rsync` con las opciones justas, leer un `journalctl`
+de tres mil líneas para encontrar por qué no arranca un servicio, o
+escribir el script de bash del anexo D que renombra doscientos
+ficheros. Un ejemplo completo del reparto de papeles, con la tarea del
+anexo E:
 
 > **Tú:** «Quiero montar `/home/marcos/proyecto` de `debian-lab` en
 > `~/lab` por SSHFS, y que se desmonte limpio. Explícame cada comando
-> antes de ejecutarlo.»
+> antes de proponerlo.»
 >
-> **Agente:** propone `sudo apt install sshfs` (tú: lo entiendes, capítulo
-> 5, lo ejecutas), `mkdir ~/lab`, `sshfs lab:/home/marcos/proyecto
-> ~/lab` (tú: reconoces el alias `lab` de tu `~/.ssh/config`), y
-> `fusermount -u ~/lab` para desmontar. Te explica por qué no hace
-> falta `sudo` para el montaje.
+> **Agente:** propone `sudo apt install sshfs` (tú: lo entiendes,
+> capítulo 5, lo ejecutas), `mkdir ~/lab`, `sshfs
+> lab:/home/marcos/proyecto ~/lab` (tú: reconoces el alias `lab` de
+> tu `~/.ssh/config`), y `fusermount -u ~/lab` para desmontar. Te
+> explica por qué no hace falta `sudo` para el montaje.
 >
 > **Tú:** verificas con `findmnt ~/lab` — capítulo 6 — y das por buena
 > la tarea.
@@ -108,6 +167,16 @@ dado — y la razón por la que lo *avanzado* de cada capítulo había que
 conocerlo aunque no dominarlo: para que, cuando la IA te lo ponga
 delante, sepas qué es, para qué sirve y qué puede romper.
 
+::: {.aviso}
+**△ Cuidado · Lo que no se le pide y lo que no se le da**
+
+No le pidas que ejecute «para ver qué pasa» en tu máquina real: para
+eso está `debian-lab` con su instantánea. No le pegues claves
+privadas, contraseñas ni ficheros con datos personales: el agente lee
+lo que le enseñas. Y no aceptes un `sudo` que no entiendas — la regla
+del capítulo 4, que no cambia porque quien lo proponga sea una IA.
+:::
+
 ## Lo que la IA no sustituye {.unnumbered}
 
 El cuaderno (`script`), la instantánea, la copia antes de editar, el
@@ -116,3 +185,71 @@ con la que acierta, y no tiene manera de saber que ese disco `sdb`
 era el de las fotos de tu abuela. Las redes de seguridad de este
 curso están pensadas para humanos y para agentes por igual — y con un
 agente al lado, las necesitas más, no menos.
+
+::: {.truco}
+**✚ Truco · Otros agentes, mismas reglas**
+
+Antigravity CLI no es el único. La misma cuenta de Google sirve para
+**Gemini CLI** (`sudo apt install npm` y `sudo npm install -g
+@google/gemini-cli`, se arranca con `gemini`), y existen **Claude
+Code** (Anthropic) y **Codex CLI** (OpenAI), con cuenta de pago o
+créditos. Cambian los nombres y los planes cada pocos meses; no cambia
+nada de lo que has leído aquí: instalador leído antes de ejecutar,
+modo «pregunta antes», instrucción de aprendizaje, y los comandos en
+tus manos. Y todos funcionan también a distancia — el agente puede
+ejecutar `ssh lab …` por ti, y entonces lo que administra es tu
+servidor, con las mismas reglas y más motivo para la número 4.
+:::
+
+## Práctica {.unnumbered}
+
+::: {.ejercicio}
+**Ejercicio A.1 · Domar al fontanero**
+
+Instala Antigravity CLI (guion descargado, leído y ejecutado), inicia
+sesión, pon la ejecución de comandos en modo «pedir confirmación» y
+pega tu instrucción de aprendizaje. Después plantéale el problema del
+capítulo 3 con `adquisicion.log` (qué sensor falla más) *sin*
+mencionar ningún comando. Compara lo que te propone con la tubería del
+capítulo, pídele que te explique la pieza que menos entiendas,
+verifícala en `man`, y ejecútala tú.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Casi seguro te propondrá `grep ERROR adquisicion.log | cut -d' ' -f4 |
+sort | uniq -c | sort -nr` o una variante equivalente (quizá con
+`awk`, un programa que este curso no cubre: buena ocasión para
+preguntarle qué es y por qué lo prefiere). El resultado debe coincidir
+con el tuyo: `90 s3 · 15 s1 · 3 s4`.
+
+**Por qué así** — Has hecho el ciclo completo del fontanero que
+enseña: problema en tus palabras, propuesta suya, comprensión tuya
+pieza a pieza, verificación en el manual, y las teclas en tus manos.
+Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en
+muleta.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio A.2 · Que te explique una línea que ya tienes**
+
+Dale una línea de `/etc/fstab` de tu máquina (`cat /etc/fstab`, sin
+tocarla) y pídele que te explique campo a campo qué hace, y qué
+pasaría si faltara `nofail`. Contrasta con el anexo E.
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+Debería identificar dispositivo (UUID), punto de montaje, tipo,
+opciones y los dos números finales, y explicar que sin `nofail` un
+disco ausente puede detener el arranque. Si algo no cuadra con el
+anexo E, pregúntale otra vez con la cita del anexo delante: los
+agentes se equivocan con seguridad, y saber dudar de ellos con
+criterio es exactamente lo que este curso te ha dado.
+
+**Por qué así** — Explicar lo que ya existe es el uso más rentable de
+un agente para quien aprende: cero riesgo, y cada respuesta es una
+clase sobre tu propio sistema.
+:::
+::::
+:::

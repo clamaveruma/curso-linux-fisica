@@ -217,7 +217,7 @@ tu casa está en un servidor NFS, y cada nodo de cálculo la monta.
 ## Práctica {.unnumbered}
 
 ::: {.ejercicio}
-**Ejercicio B2.1 · A mano y solo lectura**
+**Ejercicio E.1 · A mano y solo lectura**
 
 Con un pendrive: desmóntalo desde el gestor de archivos, móntalo a
 mano en `/mnt/usb` en modo solo lectura, intenta crear un fichero
@@ -240,7 +240,7 @@ escribir es la mejor demostración de que la opción manda.
 :::
 
 ::: {.ejercicio}
-**Ejercicio B2.2 · Permanente, por las dos vías**
+**Ejercicio E.2 · Permanente, por las dos vías**
 
 Si tienes una partición de datos (o el propio pendrive, para
 practicar): añádele un montaje permanente primero con «Discos →
@@ -266,7 +266,7 @@ la red de seguridad que te separa del arranque en modo emergencia.
 :::
 
 ::: {.ejercicio}
-**Ejercicio B2.3 · La VM como carpeta**
+**Ejercicio E.3 · La VM como carpeta**
 
 Monta la casa de `debian-lab` con SSHFS en `~/lab`, edita desde tu
 Mint (con el editor que quieras) el `informe.txt` del proyecto, y
@@ -288,7 +288,7 @@ nada.
 :::
 
 ::: {.ejercicio}
-**Ejercicio B2.4 · NFS de punta a punta (opcional)**
+**Ejercicio E.4 · NFS de punta a punta (opcional)**
 
 Con instantánea de la VM: exporta `~/proyecto` de `debian-lab` por
 NFS, móntalo en tu Mint en `/mnt/lab`, crea un fichero desde cada

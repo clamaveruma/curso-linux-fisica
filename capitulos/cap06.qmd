@@ -76,7 +76,7 @@ gráficas que conviene conocer por su nombre, porque las verás en
 cualquier foro. **Discos** (menú → Accesorios; `gnome-disks`) viene
 con Mint: enseña cada disco con sus particiones como una barra de
 colores, monta y desmonta con un botón, formatea un pendrive y edita
-las opciones de montaje (anexo B2). **GParted** (`sudo apt install
+las opciones de montaje (anexo E). **GParted** (`sudo apt install
 gparted`, y viene de serie en el pendrive *live* de Mint) es *el*
 editor de particiones: crea, borra, redimensiona y mueve particiones
 — es la herramienta con la que se le hace sitio a Linux junto a
@@ -103,7 +103,7 @@ La versión manual es `mount` (montar) y `umount` (desmontar; sí, sin
 la primera *n*), y la usarás en el servidor sin escritorio. Hoy te
 basta con saber *leerlo* — montar a mano discos de otros formatos,
 hacerlo permanente y enganchar carpetas de otras máquinas es el
-[anexo B2](../anexos/anexo-b2-montajes.qmd), para cuando hayas visto
+[anexo E](../anexos/anexo-b2-montajes.qmd), para cuando hayas visto
 SSH:
 
 ```terminal

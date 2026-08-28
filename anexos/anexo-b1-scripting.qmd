@@ -147,7 +147,7 @@ los *timers* — que verás en servidores; la idea es la misma.
 ## Práctica {.unnumbered}
 
 ::: {.ejercicio}
-**Ejercicio B1.1 · La deuda del capítulo 2**
+**Ejercicio D.1 · La deuda del capítulo 2**
 
 Crea una carpeta con `touch run0{1..5}_final.csv` (las llaves son otro
 truco de bash: generan la secuencia) y renómbralos en lote quitando
@@ -166,7 +166,7 @@ renombrados en el capítulo 2; con cinco mil costaría lo mismo.
 :::
 
 ::: {.ejercicio}
-**Ejercicio B1.2 · Un script con criterio**
+**Ejercicio D.2 · Un script con criterio**
 
 Escribe `resumen.sh` que reciba un fichero de log como argumento,
 compruebe que existe (y proteste si no), y escriba cuántas líneas
@@ -191,7 +191,7 @@ comprobación con salida de error, y bucle con una tubería dentro.
 :::
 
 ::: {.ejercicio}
-**Ejercicio B1.3 · Copia nocturna (opcional)**
+**Ejercicio D.3 · Copia nocturna (opcional)**
 
 Programa con `cron` una copia diaria de tu carpeta de física a
 `debian-lab` con `rsync`, a una hora en la que el portátil suela estar

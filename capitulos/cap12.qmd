@@ -40,7 +40,7 @@ punto te pierdes, quédate con lo esencial, sigue al capítulo 13 (que
 solo necesita saber entrar) y vuelve aquí cuando el resto te haga
 falta. Nadie aprende SSH entero en una tarde — y cuando vuelvas,
 hazlo con una IA al lado, como cuenta el
-[anexo E1](../anexos/anexo-e1-ia.qmd): lo avanzado se conoce para
+[anexo A](../anexos/anexo-e1-ia.qmd): lo avanzado se conoce para
 entender lo que la IA te proponga, no para teclearlo de memoria.
 :::
 
@@ -59,7 +59,7 @@ desplegable con el tipo de conexión:
 | **Windows / Samba** (SMB) | el «compartir carpeta» de Windows y de los NAS | la impresora de casa, el disco de red, el PC con Windows |
 | **FTP** | el protocolo veterano de transferir ficheros, sin cifrar | servidores públicos de datos, alojamientos web antiguos |
 | **WebDAV** | ficheros sobre una web | nubes universitarias, Nextcloud |
-| **NFS** (escribiendo `nfs://…` en la barra de dirección) | el compartir de Unix | laboratorios y clústeres (anexo B2) |
+| **NFS** (escribiendo `nfs://…` en la barra de dirección) | el compartir de Unix | laboratorios y clústeres (anexo E) |
 
 Pruébalo ahora con lo que ya tienes: tipo **SSH**, servidor
 `debian-lab` (el nombre que le diste en el capítulo 11), carpeta
@@ -271,7 +271,7 @@ La conexión con ratón de la primera sección es SFTP — el primo de
 día. Y si prefieres que la casa del servidor aparezca
 como una carpeta *de verdad* en tu árbol — para abrirla desde
 cualquier programa —, eso se llama montar por SSHFS, y está en el
-[anexo B2](../anexos/anexo-b2-montajes.qmd).
+[anexo E](../anexos/anexo-b2-montajes.qmd).
 :::
 
 ## Ejecutar allí, sin quedarse {#sec-comando-remoto}

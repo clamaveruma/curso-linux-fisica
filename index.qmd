@@ -9,6 +9,15 @@ Este curso es esa conversación: trece sesiones para pasar de usuario de
 escritorio a alguien que instala su sistema, entiende su red y trabaja
 con soltura en un servidor remoto.
 
+**Por qué tú.** No eres un usuario normal de un ordenador: eres un
+científico, y no puedes conformarte con el manejo básico — tener una
+herramienta tan potente y no saber usarla es un desperdicio. Pero
+tampoco eres informático, ni tienes tiempo de dominar un sistema
+operativo: eso lleva años. Así que hay que ponerse en medio, y ese
+punto medio es este libro: con él aventajas, y con mucho, al común de
+los mortales; a partir de ahí decides tú cuánto más quieres aprender.
+Dedicarle unos días es una muy buena inversión de tu tiempo.
+
 Escrito para estudiantes de ciencias e ingeniería — física,
 matemáticas, química, cualquier ingeniería — con los ejemplos tomados
 de la física: los ejercicios usan datos de laboratorio, las analogías
@@ -32,7 +41,7 @@ cortafuegos — y entrar en otra máquina. **Lo avanzado** — claves SSH,
 puede romper. La razón es de 2026: esas tareas las harás con una IA
 al lado que te dé las instrucciones, y solo quien conoce las
 herramientas mantiene el control de lo que la IA le propone. El
-[anexo E1](anexos/anexo-e1-ia.qmd) — cómo instalar un agente de IA en
+[anexo A](anexos/anexo-e1-ia.qmd) — cómo instalar un agente de IA en
 tu terminal y cómo seguir mandando tú — es, en ese sentido, la otra
 mitad de este curso. Los ejercicios llevan siempre el nivel marcado:
 los esenciales no se saltan; los avanzados se leen, y se hacen si

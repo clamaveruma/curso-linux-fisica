@@ -79,7 +79,7 @@ que instales con `apt`. Desde Windows, la forma más sencilla es
    **«Tamaño de la partición persistente»**: dale todo lo que quepa
    (16–24 GB) → Empezar. Rufus crea la partición `casper-rw` de
    persistencia por ti.
-3. Reinicia con la tecla del menú de arranque (anexo C1) y elige el
+3. Reinicia con la tecla del menú de arranque (anexo C) y elige el
    pendrive. Mint arranca en vivo; lo que hagas, se queda.
 
 Lo que cubre: todo el curso salvo matices — el bloque C (KVM en un
@@ -90,7 +90,7 @@ del pendrive (un USB 2 barato desespera); no actualices el kernel
 (`apt upgrade` sí, pero el sistema *live* arranca siempre con el
 suyo); y como con cualquier pendrive, si lo arrancas de un tirón en
 mal momento la persistencia puede corromperse — copia tu carpeta de
-física al servidor de vez en cuando (capítulo 12 y anexo B1: `rsync`
+física al servidor de vez en cuando (capítulo 12 y anexo D: `rsync`
 con `cron`). Para quien quiera varias ISO en un mismo pendrive
 existe **Ventoy**, con persistencia configurable por fichero; es más
 potente y más liado — para más adelante.
@@ -102,13 +102,13 @@ poniendo en él la partición EFI. Es un Linux completo, rápido y
 permanente que arranca en cualquier PC desde el menú de arranque.
 La única pega es seria: al elegir el disco de destino, equivocarse
 destruye Windows. Es el camino perfecto *después* del capítulo 8 y
-del anexo C1, con el plan escrito y `lsblk` delante — no antes.
+del anexo C, con el plan escrito y `lsblk` delante — no antes.
 
 ### Camino D · Arranque dual: solo con alguien que sepa {.unnumbered}
 
 Instalar Linux en una partición del disco interno, junto a Windows,
 y elegir al encender. Es lo que hace mucha gente y lo que cubre el
-anexo C1 — pero **no es para hacerlo a solas el primer día**. Las
+anexo C — pero **no es para hacerlo a solas el primer día**. Las
 implicaciones que hay que entender antes: reducir la partición de
 Windows (desde Windows, con su «inicio rápido» y BitLocker
 desactivados), que GRUB pase a gestionar el arranque de los dos
@@ -125,7 +125,7 @@ enseñará a hacer el dual tú mismo cuando toque.
 | **A** Mint en VirtualBox | todo (bloque C con virtualización anidada) | ninguno | la opción por defecto |
 | **B** WSL2 | terminal y redes; no discos ni instalación | ninguno | empezar hoy mismo |
 | **C** USB persistente (Rufus) | todo, a la velocidad del pendrive | ninguno | quien quiere Linux «real» sin tocar el disco |
-| **C'** instalación en SSD externo | todo, rápido | alto al instalar, ninguno después | tras el capítulo 8 y el anexo C1 |
+| **C'** instalación en SSD externo | todo, rápido | alto al instalar, ninguno después | tras el capítulo 8 y el anexo C |
 | **D** arranque dual | todo | medio, y permanente | solo acompañado por alguien que sepa |
 
 ## Lo que no cambia {.unnumbered}
@@ -135,4 +135,4 @@ y la regla de seguridad — lo destructivo, en una VM (y con el USB
 persistente, además, copia periódica de tu carpeta al servidor). La única
 diferencia real es que, además de aprender Linux, aprenderás dónde
 termina Windows y dónde empieza la máquina de mentira. Y cuando
-quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.
+quieras dar el paso de verdad, el anexo C te espera con el pendrive.

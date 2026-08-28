@@ -232,7 +232,7 @@ Todo lo que has hecho hoy es, paso a paso, lo que harás el día que
 instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en
 un pendrive, el disco tiene nombre real y quizá un Windows dentro, y
 no hay instantánea que te salve — y por eso existe el
-[anexo C1](../anexos/anexo-c1-pc-real.qmd): la lista de comprobación
+[anexo C](../anexos/anexo-c1-pc-real.qmd): la lista de comprobación
 completa para ese día, con la grabación del pendrive por la vía
 gráfica y por terminal.
 
@@ -411,7 +411,7 @@ criterio propio, que es lo único que cuenta.
 ::: {.ejercicio}
 **Ejercicio 8.7 · El pendrive de arranque (sin instalar nada)**
 
-Siguiendo el anexo C1, graba la ISO en un pendrive que puedas borrar,
+Siguiendo el anexo C, graba la ISO en un pendrive que puedas borrar,
 arranca tu portátil desde él hasta el menú del instalador — **y sal
 sin elegir nada**: apaga y arranca de nuevo tu Mint. Objetivo: haber
 visto el menú de arranque del UEFI y el instalador en hardware real
@@ -485,7 +485,7 @@ Marca una respuesta por pregunta; la corrección es inmediata.
     <label><input type="radio" name="z6" value="a"><span>que el instalador es distinto</span></label>
     <label><input type="radio" name="z6" value="b"><span>que en el PC real hay discos con datos y no hay instantánea que restaurar</span></label>
     <label><input type="radio" name="z6" value="c"><span>que en el PC real no se puede particionar a mano</span></label>
-    <div class="fb good"><b>Correcto.</b> Mismo instalador, mismas decisiones — pero el «¿desea escribir los cambios?» es irreversible. De ahí el plan escrito y la lista del anexo C1.</div>
+    <div class="fb good"><b>Correcto.</b> Mismo instalador, mismas decisiones — pero el «¿desea escribir los cambios?» es irreversible. De ahí el plan escrito y la lista del anexo C.</div>
     <div class="fb bad"><b>No exactamente.</b> El instalador y el particionado son idénticos. Lo que cambia es el riesgo: datos reales, disco real, sin deshacer.</div>
   </div>
 </div>

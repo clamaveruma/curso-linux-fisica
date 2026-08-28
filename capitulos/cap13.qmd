@@ -22,7 +22,7 @@ actitud: lo esencial es entender el *problema* (un programa lanzado
 por SSH muere con la conexión) y saber que existen dos soluciones —
 `tmux` y los túneles — y para qué sirve cada una. Usarlas con soltura
 es cosa de quien las necesite, y ese día tendrás una IA al lado que
-te dé los comandos (anexo E1): lo que este capítulo te da es
+te dé los comandos (anexo A): lo que este capítulo te da es
 entenderlos. Haz los ejercicios 12.1 a 12.3, que son cortos; el 12.4
 es opcional.
 :::

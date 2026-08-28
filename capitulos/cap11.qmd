@@ -266,10 +266,10 @@ casos, con el capítulo o anexo donde se practica cada uno:
 
 | Protocolo | Puerto | Otro extremo típico | Con qué lo usarás | Dónde |
 |-----------|--------|---------------------|-------------------|-------|
-| **SSH / SFTP** | 22 | otro Linux, un servidor, la nube — y un Windows moderno | terminal, `scp`, `rsync`, «Conectar al servidor», WinSCP | caps. 11–12, anexo B2 |
-| **SMB** | 445 | un PC con Windows, un NAS, una impresora | «Conectar al servidor» (`smb://`), montar por `cifs` | anexo B2 |
-| **NFS** | 2049 | otro Linux, el laboratorio, un clúster | montar con `-t nfs` | anexo B2 |
-| **HTTP / HTTPS** | 80 / 443 | la web, la nube, Nextcloud, Jupyter | el navegador, `curl`, `rclone` | caps. 9, 12, anexo B2 |
+| **SSH / SFTP** | 22 | otro Linux, un servidor, la nube — y un Windows moderno | terminal, `scp`, `rsync`, «Conectar al servidor», WinSCP | caps. 11–12, anexo E |
+| **SMB** | 445 | un PC con Windows, un NAS, una impresora | «Conectar al servidor» (`smb://`), montar por `cifs` | anexo E |
+| **NFS** | 2049 | otro Linux, el laboratorio, un clúster | montar con `-t nfs` | anexo E |
+| **HTTP / HTTPS** | 80 / 443 | la web, la nube, Nextcloud, Jupyter | el navegador, `curl`, `rclone` | caps. 9, 12, anexo E |
 | **FTP** | 21 | servidores antiguos de datos públicos | «Conectar al servidor» (`ftp://`) | — sin cifrar: solo lectura y solo si no hay otra |
 
 Una regla para elegir: **si hay SSH en el otro extremo, usa SSH** —
