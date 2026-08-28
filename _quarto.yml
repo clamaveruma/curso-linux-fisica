@@ -17,7 +17,7 @@ filters:
 
 book:
   title: "Bendito maldito Linux"
-  subtitle: "Trabajar en Linux y conceptos de redes, explicado tan fácil que hasta un físico lo puede entender"
+  subtitle: "Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender"
   author: "Claudio M. Martínez Velasco"
   date: 2026-08-01
   date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»

@@ -17,7 +17,7 @@
   <text x="800" y="690" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="190" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-4">Linux</text>
   <rect x="160" y="800" width="1280" height="1180" rx="18" fill="#FAF6EB" stroke="#9C8F79" stroke-width="3"/>
   <!-- subtítulo -->
-  <text x="800" y="2090" font-family="IBM Plex Sans, DejaVu Sans, sans-serif" font-size="44" fill="#6A5F4D" text-anchor="middle">Trabajar en Linux y conceptos de redes, explicado tan fácil</text>
+  <text x="800" y="2090" font-family="IBM Plex Sans, DejaVu Sans, sans-serif" font-size="44" fill="#6A5F4D" text-anchor="middle">Trabajar en Linux y conceptos de redes, explicado tan «fácil»</text>
   <text x="800" y="2150" font-family="IBM Plex Sans, DejaVu Sans, sans-serif" font-size="44" fill="#6A5F4D" text-anchor="middle">que hasta un físico lo puede entender</text>
   <line x1="640" y1="2215" x2="960" y2="2215" stroke="#2F6F62" stroke-width="3"/>
   <text x="800" y="2290" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="52" fill="#2B2318" text-anchor="middle">Claudio M. Martínez Velasco</text>

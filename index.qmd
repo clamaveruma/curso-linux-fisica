@@ -38,12 +38,18 @@ apetece.
 
 ## Qué necesitas para empezar {.unnumbered}
 
-**Lo que suponemos que ya sabes.** Manejar un ordenador con soltura por
-la vía gráfica: ventanas, carpetas, navegador, instalar un programa.
-Nada más. No hace falta haber abierto una terminal en tu vida — ese es
-justo el punto de partida. Saber programar (Python, C…) ayuda en los
-ejercicios de análisis de las últimas sesiones, pero no es requisito
-para empezar.
+**Lo que suponemos que ya sabes — y para quién es «fácil».** El
+subtítulo lleva la palabra entre comillas a propósito. Este curso está
+pensado para un perfil concreto: estudiante de **ciencias, matemáticas
+o ingeniería** que ha cursado y aprobado la asignatura de programación
+que suele haber en primero de grado, y preferiblemente que esté en
+segundo curso o lo haya pasado. Para ese perfil, el curso es fácil:
+manejas un ordenador con soltura por la vía gráfica — ventanas,
+carpetas, navegador, instalar un programa — y no te asusta una
+variable ni un bucle. No hace falta haber abierto una terminal en tu
+vida: ese es justo el punto de partida. Con menos formación se puede
+seguir, pero te costará más y algunas partes te parecerán complicadas;
+el curso no lo esconde.
 
 **Lo que necesitas tener instalado.** Un Linux de escritorio
 funcionando. El curso está escrito y probado sobre **Linux Mint**, y
