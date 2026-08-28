@@ -27,31 +27,49 @@ instantánea a mano.
 
 ## Instalar {.unnumbered}
 
-Antigravity se descarga de su web (`antigravity.google`) como un
-paquete `.deb` para Linux — el formato de tu Mint, capítulo 5 — y se
-instala como cualquier programa: doble clic sobre el fichero abre el
-Gestor de software, o desde la terminal:
+Antigravity tiene una versión de **línea de comandos** que vive
+directamente en tu terminal, y se instala con un guion que Google
+publica en su web. La instrucción oficial, hoy, es esta:
 
-```terminal
-marcos@portatil:~/Descargas$ sudo apt install ./antigravity*.deb
+```default
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 ```
 
-Al abrirlo por primera vez pide iniciar sesión con tu cuenta de
-Google, y con eso entras en el plan gratuito. Verás un entorno
-parecido a un editor de código con un panel para el agente y una
-terminal integrada — el agente trabaja *dentro* de esa terminal, y
-ahí es donde vas a domesticarlo. (La interfaz cambia a menudo; los
-nombres exactos de menús y opciones de este anexo pueden variar
-respecto a lo que veas. El criterio, no.)
+Y aquí aparece el reflejo que este curso te ha entrenado (anexo E1):
+esa línea descarga un programa de internet y lo ejecuta *sin que lo
+hayas visto*. Funciona, y millones de personas la teclean tal cual —
+pero tú ya sabes hacerlo con red de seguridad, y cuesta diez segundos
+más:
+
+```terminal
+marcos@portatil:~$ curl -fsSL https://antigravity.google/cli/install.sh -o instalar-antigravity.sh
+marcos@portatil:~$ less instalar-antigravity.sh
+marcos@portatil:~$ bash instalar-antigravity.sh
+```
+
+Descargar, *mirar* (¿dónde escribe?, ¿pide `sudo`?, ¿de qué dirección
+descarga el programa?), y solo entonces ejecutar. Al terminar, el
+instalador te dice con qué comando se arranca y cómo iniciar sesión
+con tu cuenta de Google; con eso tienes el plan gratuito.
+
+Un consejo más importante que la línea exacta: **estas instrucciones
+cambian**. La forma más robusta de instalar cualquier herramienta de
+IA es preguntarle a una IA en línea — o a la propia web de Google —
+«cómo instalo Antigravity en Linux desde bash», y aplicar a la
+respuesta la misma disciplina de arriba: leer el guion antes de
+ejecutarlo. Es, además, un ensayo perfecto del anexo E1: pedir
+instrucciones a una IA y mantener el control.
 
 ## Configurarlo para aprender, desde el principio {.unnumbered}
 
 Antes de pedirle nada, dos ajustes. El primero, en la configuración
-del agente: la **ejecución de comandos en la terminal** tiene varios
-modos, desde «ejecuta lo que consideres» hasta «pide permiso cada
-vez». Ponla en el modo que **pide confirmación siempre** — nunca en
-automático. Así, aunque un día le dejes hacer, nada correrá sin que tú
-lo hayas leído y aceptado.
+del agente: la **ejecución de comandos** tiene varios modos, desde
+«ejecuta lo que consideres» hasta «pide permiso cada vez» (el nombre
+exacto de la opción cambia con las versiones; búscala en la ayuda o
+pregúntale al propio agente cómo se configura). Ponla en el modo que
+**pide confirmación siempre** — nunca en automático. Así, aunque un
+día le dejes hacer, nada correrá sin que tú lo hayas leído y
+aceptado.
 
 El segundo es de trato, no de menú: la primera instrucción que le das
 en cada sesión fija las reglas del juego. Guárdala en un fichero
@@ -119,8 +137,9 @@ comandos propuestos y explicados, y los tecleas tú.
 ::: {.ejercicio}
 **Ejercicio E2.1 · Domar al fontanero**
 
-Instala Antigravity, inicia sesión, pon la ejecución de comandos en
-modo «pedir confirmación» y pega tu instrucción de aprendizaje.
+Instala Antigravity (guion descargado, leído y ejecutado), inicia
+sesión, pon la ejecución de comandos en modo «pedir confirmación» y
+pega tu instrucción de aprendizaje.
 Después plantéale el problema del capítulo 3 con `adquisicion.log`
 (qué sensor falla más) *sin* mencionar ningún comando. Compara lo que
 te propone con la tubería del capítulo, pídele que te explique la
