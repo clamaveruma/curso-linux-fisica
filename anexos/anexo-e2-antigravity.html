@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice C — Scripting: bucles, condiciones y cron – Bendito maldito Linux</title>
+<title>Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-b2-montajes.html" rel="next">
-<link href="../anexos/anexo-c1-pc-real.html" rel="prev">
+<link href="../anexos/anexo-e1-ia.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -123,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e2-antigravity.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity de Google</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -264,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link active">
+  <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
@@ -282,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link">
+  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity de Google</span></span></a>
   </div>
 </li>
@@ -298,12 +297,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#variables-y-sustitución" id="toc-variables-y-sustitución" class="nav-link active" data-scroll-target="#variables-y-sustitución">Variables y sustitución</a></li>
-  <li><a href="#el-bucle-for" id="toc-el-bucle-for" class="nav-link" data-scroll-target="#el-bucle-for">El bucle <code>for</code></a></li>
-  <li><a href="#condiciones-if" id="toc-condiciones-if" class="nav-link" data-scroll-target="#condiciones-if">Condiciones: <code>if</code></a></li>
-  <li><a href="#while-y-leer-línea-a-línea" id="toc-while-y-leer-línea-a-línea" class="nav-link" data-scroll-target="#while-y-leer-línea-a-línea"><code>while</code> y leer línea a línea</a></li>
-  <li><a href="#un-script-completo" id="toc-un-script-completo" class="nav-link" data-scroll-target="#un-script-completo">Un script completo</a></li>
-  <li><a href="#cron-que-se-ejecute-sin-ti" id="toc-cron-que-se-ejecute-sin-ti" class="nav-link" data-scroll-target="#cron-que-se-ejecute-sin-ti"><code>cron</code>: que se ejecute sin ti</a></li>
+  <li><a href="#el-fontanero" id="toc-el-fontanero" class="nav-link active" data-scroll-target="#el-fontanero">El fontanero</a></li>
+  <li><a href="#instalar" id="toc-instalar" class="nav-link" data-scroll-target="#instalar">Instalar</a></li>
+  <li><a href="#configurarlo-para-aprender-desde-el-principio" id="toc-configurarlo-para-aprender-desde-el-principio" class="nav-link" data-scroll-target="#configurarlo-para-aprender-desde-el-principio">Configurarlo para aprender, desde el principio</a></li>
+  <li><a href="#cómo-pedirle-las-cosas" id="toc-cómo-pedirle-las-cosas" class="nav-link" data-scroll-target="#cómo-pedirle-las-cosas">Cómo pedirle las cosas</a></li>
   <li><a href="#práctica" id="toc-práctica" class="nav-link" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
 </nav>
@@ -311,9 +308,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e2-antigravity.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity de Google</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-b1" class="quarto-section-identifier">Apéndice C — Scripting: bucles, condiciones y <code>cron</code></span></h1>
+<h1 class="title"><span id="sec-anexo-e2" class="quarto-section-identifier">Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google</span></h1>
 </div>
 
 
@@ -330,87 +327,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>En el capítulo 2 renombraste cinco ficheros a mano y el curso prometió algo mejor; en el capítulo 3 dijimos que las tuberías transforman texto pero no <em>ejecutan una orden por cada fichero</em>; en el 4 escribiste tu primer script. Este anexo cierra esa deuda: las cuatro piezas de bash que convierten comandos sueltos en programas — y <code>cron</code>, para que se ejecuten sin ti.</p>
-<section id="variables-y-sustitución" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="variables-y-sustitución">Variables y sustitución</h2>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">dir=resultados_$(date +%F)</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">echo "$dir"</span>
-<span class="t-out">resultados_2026-08-26</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">mkdir "$dir"</span></code></pre>
-<p>Dos ideas. Una variable se crea con <code>nombre=valor</code> (sin espacios alrededor del <code>=</code>) y se lee con <code>$nombre</code>. Y <code>$(comando)</code> ejecuta el comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla que evita el noventa por ciento de los sustos: <strong>las variables van siempre entre comillas dobles</strong> — <code>"$dir"</code> — para que un valor con espacios (capítulo 1) no se rompa en dos argumentos.</p>
+<p>El anexo E1 da las reglas para trabajar con una IA sin perder el control. Este es el paso a paso con una herramienta concreta y gratuita: <strong>Antigravity</strong>, el entorno de agentes de Google. Con una cuenta de Google tienes el acceso básico, que para este curso sobra — lo vas a usar para una sola cosa: <strong>que te proponga y te explique comandos, no que los ejecute.</strong> Configurado así desde el primer día, es el mejor profesor particular de Linux que vas a tener.</p>
+<section id="el-fontanero" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="el-fontanero">El fontanero</h2>
+<p>Cuando llamas a un fontanero tienes dos maneras de tratarlo. La primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado. Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se arregla. La segunda: te quedas al lado, le preguntas por cada herramienta y cada técnica que va a usar, y le pides que te indique cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta llamarle. Está claro cuál de las dos vías es la de aprender.</p>
+<p>Un agente de IA en tu terminal es ese fontanero, y elige tú el trato. Durante este curso, la segunda vía es la única: el agente <strong>propone</strong>, tú lees, preguntas, verificas con <code>man</code> (capítulo 1) y <strong>tecleas</strong>. Cuando el curso termine y estés administrando un servidor con prisa, ya decidirás cuándo dejarle hacer — con las reglas del anexo E1 y una instantánea a mano.</p>
 </section>
-<section id="el-bucle-for" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="el-bucle-for">El bucle <code>for</code></h2>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">for f in *.csv; do echo "procesando $f"; done</span>
-<span class="t-out">procesando run01.csv</span>
-<span class="t-out">procesando run02.csv</span>
-<span class="t-out">procesando run03.csv</span></code></pre>
-<p><code>for f in LISTA; do …; done</code> repite el bloque una vez por elemento, con <code>$f</code> valiendo cada uno. La lista puede ser un comodín del capítulo 2 (<code>*.csv</code>), una salida de comando (<code>$(cat lista.txt)</code>) o palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en lote quitando el <code>_final</code>:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
-<span class="t-out">run01_final.csv  run02_final.csv  run03_final.csv</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">for f in *_final.csv; do mv "$f" "${f/_final/}"; done</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/fisica</span><span class="t-dim">$</span> <span class="t-cmd">ls</span>
-<span class="t-out">run01.csv  run02.csv  run03.csv</span></code></pre>
-<p><code>${f/_final/}</code> es una <em>sustitución</em> dentro de la variable: el valor de <code>f</code> con <code>_final</code> cambiado por nada. Hay una familia entera: <code>${f%.csv}</code> quita la extensión, <code>${f#run}</code> quita el prefijo. Antes de un <code>mv</code> en lote, el gesto de seguridad es cambiar <code>mv</code> por <code>echo mv</code> y mirar qué <em>haría</em>: la simulación en seco.</p>
+<section id="instalar" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="instalar">Instalar</h2>
+<p>Antigravity se descarga de su web (<code>antigravity.google</code>) como un paquete <code>.deb</code> para Linux — el formato de tu Mint, capítulo 5 — y se instala como cualquier programa: doble clic sobre el fichero abre el Gestor de software, o desde la terminal:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sudo apt install ./antigravity*.deb</span></code></pre>
+<p>Al abrirlo por primera vez pide iniciar sesión con tu cuenta de Google, y con eso entras en el plan gratuito. Verás un entorno parecido a un editor de código con un panel para el agente y una terminal integrada — el agente trabaja <em>dentro</em> de esa terminal, y ahí es donde vas a domesticarlo. (La interfaz cambia a menudo; los nombres exactos de menús y opciones de este anexo pueden variar respecto a lo que veas. El criterio, no.)</p>
 </section>
-<section id="condiciones-if" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="condiciones-if">Condiciones: <code>if</code></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a># comprueba.sh — ¿existe el fichero que me pasan?</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>if [ -f "$1" ]; then</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    echo "$1 existe y tiene $(wc -l &lt; "$1") líneas"</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>else</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    echo "no encuentro $1"</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    exit 1</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fi</span></code></pre></div>
-<p><code>$1</code> es el primer argumento con que se llamó al script (<code>./comprueba.sh adquisicion.log</code>), <code>$2</code> el segundo, y así. <code>[ -f "$1" ]</code> pregunta «¿es un fichero?»; otros: <code>-d</code> directorio, <code>-z</code> cadena vacía, <code>-gt</code> mayor que para números. <code>exit 1</code> termina con código de error: es el <code>$?</code> que puedes consultar después, y lo que <code>&amp;&amp;</code> (capítulo 5) mira para decidir si continúa. Un script que comprueba sus entradas y falla <em>con mensaje</em> vale el doble que uno que simplemente revienta.</p>
+<section id="configurarlo-para-aprender-desde-el-principio" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="configurarlo-para-aprender-desde-el-principio">Configurarlo para aprender, desde el principio</h2>
+<p>Antes de pedirle nada, dos ajustes. El primero, en la configuración del agente: la <strong>ejecución de comandos en la terminal</strong> tiene varios modos, desde «ejecuta lo que consideres» hasta «pide permiso cada vez». Ponla en el modo que <strong>pide confirmación siempre</strong> — nunca en automático. Así, aunque un día le dejes hacer, nada correrá sin que tú lo hayas leído y aceptado.</p>
+<p>El segundo es de trato, no de menú: la primera instrucción que le das en cada sesión fija las reglas del juego. Guárdala en un fichero (<code>~/fisica/notas/ia.txt</code>, capítulo 2) y pégala al empezar:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Estoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>qué hace cada opción; los teclearé yo. Si un comando puede destruir</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>datos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>avísamelo explícitamente antes. Cuando no entienda algo, dímelo con</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>un ejemplo pequeño que pueda probar.</span></code></pre></div>
+<p>Con eso el agente pasa de fontanero-que-arregla a fontanero-que-enseña. Muchos entornos permiten guardar esa instrucción como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.</p>
 </section>
-<section id="while-y-leer-línea-a-línea" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="while-y-leer-línea-a-línea"><code>while</code> y leer línea a línea</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a># por cada sensor de la lista, cuenta sus errores</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>while read -r sensor; do</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    n=$(grep -c "ERROR $sensor" adquisicion.log)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    echo "$sensor: $n errores"</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>done &lt; sensores.txt</span></code></pre></div>
-<p><code>while read -r linea; do …; done &lt; fichero</code> recorre un fichero línea a línea — la forma correcta de tratar listas que vienen de otro sitio. Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los scripts son el pegamento que convierte comandos sueltos en procedimiento.</p>
-</section>
-<section id="un-script-completo" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="un-script-completo">Un script completo</h2>
-<p>Todo junto, con las dos líneas de cabecera que distinguen a un script serio: <code>set -e</code> (para al primer error, en vez de seguir a ciegas) y un uso claro cuando faltan argumentos.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>#!/bin/bash</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a># organiza.sh — mueve a datos/ los CSV de una serie y anota el registro</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>set -e</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>if [ $# -ne 1 ]; then</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    echo "uso: $0 CARPETA_DEL_EXPERIMENTO"</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    exit 1</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fi</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>cd "$1"</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mkdir -p datos descartes</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>for f in *.csv; do</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    if grep -q "sensor congelado" "$f"; then</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        mv "$f" descartes/</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    else</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        mv "$f" datos/</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    fi</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    echo "$(date +%T) $f" &gt;&gt; registro.log</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>done</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>echo "hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados"</span></code></pre></div>
-<p>Es el ejercicio del capítulo 2 hecho en un segundo y repetible mañana con otro experimento. <code>$#</code> es el número de argumentos; <code>$0</code>, el nombre del propio script. Con <code>chmod u+x</code> y en tu <code>~/bin</code> (capítulo 5), es una herramienta tuya.</p>
-</section>
-<section id="cron-que-se-ejecute-sin-ti" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="cron-que-se-ejecute-sin-ti"><code>cron</code>: que se ejecute sin ti</h2>
-<p><code>cron</code> ejecuta comandos a horas fijas. Tu tabla se edita con <code>crontab -e</code> (la primera vez pregunta qué editor: <code>nano</code>), y cada línea son cinco campos de tiempo y un comando:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a># min hora día mes díasemana   comando</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   0   8   *   *    1          /home/marcos/bin/informe.sh &gt;&gt; /home/marcos/informes.log 2&gt;&amp;1</span></code></pre></div>
-<p>La primera línea copia tu carpeta de física al servidor del capítulo 11 cada noche a las 2:30 — una copia de seguridad que ya no depende de acordarte. La segunda lanza tu informe los lunes a las 8. Tres reglas de <code>cron</code>: <strong>rutas absolutas</strong> (no hay <code>cd</code>, no hay tu <code>PATH</code> de la terminal), <strong>redirige la salida</strong> a un fichero (si no, se pierde o se convierte en correo), y prueba el comando <em>a mano</em> antes de programarlo. En sistemas con <code>systemd</code> existe el equivalente moderno — los <em>timers</em> — que verás en servidores; la idea es la misma.</p>
+<section id="cómo-pedirle-las-cosas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="cómo-pedirle-las-cosas">Cómo pedirle las cosas</h2>
+<p>La pregunta buena describe el objetivo, no el comando que crees que necesitas. Compara: «dame un <code>grep</code>» frente a «tengo un registro de adquisición con líneas <code>2026-08-18 10:03:00 ERROR s3 …</code>; quiero saber qué sensor tiene más errores». Con la segunda, el agente te devuelve la tubería del capítulo 3 — y aquí empieza tu trabajo:</p>
+<ol type="1">
+<li><strong>Léela pieza a pieza.</strong> Cada programa lo reconoces (o lo buscas en <code>man</code>); cada opción debe tener sentido.</li>
+<li><strong>Pídele que la explique</strong>: «explícame ese <code>cut -d' ' -f4</code>». Su respuesta la contrastas con el manual; si no coinciden, gana el manual.</li>
+<li><strong>Pruébala en pequeño</strong> antes de en grande — un <code>head</code>, un fichero de prueba, la máquina virtual.</li>
+<li><strong>Tecléala tú.</strong> Los dedos aprenden lo que los ojos solo reconocen: la regla del primer día vale también con la IA delante.</li>
+</ol>
+<p>Y las preguntas que más rinden son las de después: «¿por qué has usado <code>sort</code> antes de <code>uniq</code>?», «¿qué habría pasado sin las comillas?», «¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de este curso contado otra vez, a tu ritmo y sobre tu problema.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · Lo que no se le pide y lo que no se le da</strong></p>
+<p>No le pidas que ejecute «para ver qué pasa» en tu máquina real: para eso está <code>debian-lab</code> con su instantánea. No le pegues claves privadas, contraseñas ni ficheros con datos personales: el agente lee lo que le enseñas. Y no aceptes un <code>sudo</code> que no entiendas — la regla del capítulo 4, que no cambia porque quien lo proponga sea una IA.</p>
+</div>
+<div class="truco">
+<p><strong>✚ Truco · La misma cuenta, sin ventanas: Gemini CLI</strong></p>
+<p>La cuenta de Google que abre Antigravity sirve también para <strong>Gemini CLI</strong>, el ayudante de Google que vive directamente en la terminal, sin editor ni ventanas — lo que usarás dentro de un servidor por SSH. Se instala con <code>npm</code> (<code>sudo apt install npm</code> y <code>sudo npm install -g @google/gemini-cli</code>), se arranca con <code>gemini</code>, y se trata exactamente igual: primera instrucción con las reglas, comandos propuestos y explicados, y los tecleas tú.</p>
+</div>
 </section>
 <section id="práctica" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
 <div class="ejercicio">
-<p><strong>Ejercicio B1.1 · La deuda del capítulo 2</strong></p>
-<p>Crea una carpeta con <code>touch run0{1..5}_final.csv</code> (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando <code>_final</code> — primero en seco con <code>echo mv</code>, luego de verdad.</p>
+<p><strong>Ejercicio E2.1 · Domar al fontanero</strong></p>
+<p>Instala Antigravity, inicia sesión, pon la ejecución de comandos en modo «pedir confirmación» y pega tu instrucción de aprendizaje. Después plantéale el problema del capítulo 3 con <code>adquisicion.log</code> (qué sensor falla más) <em>sin</em> mencionar ningún comando. Compara lo que te propone con la tubería del capítulo, pídele que te explique la pieza que menos entiendas, verifícala en <code>man</code>, y ejecútala tú.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -424,16 +387,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>for f in *_final.csv; do echo mv "$f" "${f/_final/}"; done</code> enseña las cinco órdenes; sin el <code>echo</code>, las ejecuta. <code>ls</code> confirma.</p>
-<p><strong>Por qué así</strong> — El ensayo en seco es el hábito que convierte un bucle con <code>mv</code> (o <code>rm</code>) de peligro en herramienta. Te costó cinco renombrados en el capítulo 2; con cinco mil costaría lo mismo.</p>
+<p>Casi seguro te propondrá <code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> o una variante equivalente (quizá con <code>awk</code>, un programa que este curso no cubre: buena ocasión para preguntarle qué es y por qué lo prefiere). El resultado debe coincidir con el tuyo: <code>90 s3 · 15 s1 · 3 s4</code>.</p>
+<p><strong>Por qué así</strong> — Has hecho el ciclo completo del fontanero que enseña: problema en tus palabras, propuesta suya, comprensión tuya pieza a pieza, verificación en el manual, y las teclas en tus manos. Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en muleta.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio B1.2 · Un script con criterio</strong></p>
-<p>Escribe <code>resumen.sh</code> que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas <code>ERROR</code>, <code>WARN</code> e <code>INFO</code> tiene — con un bucle sobre los tres niveles.</p>
+<p><strong>Ejercicio E2.2 · Que te explique una línea que ya tienes</strong></p>
+<p>Dale una línea de <code>/etc/fstab</code> de tu máquina (<code>cat /etc/fstab</code>, sin tocarla) y pídele que te explique campo a campo qué hace, y qué pasaría si faltara <code>nofail</code>. Contrasta con el anexo B2.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -447,36 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre><code>#!/bin/bash
-set -e
-[ -f "$1" ] || { echo "uso: $0 FICHERO.log"; exit 1; }
-for nivel in ERROR WARN INFO; do
-    echo "$nivel: $(grep -c " $nivel " "$1")"
-done</code></pre>
-<p><strong>Por qué así</strong> — Tres piezas del anexo en ocho líneas: argumento, comprobación con salida de error, y bucle con una tubería dentro. <code>[ … ] || { …; }</code> es la forma compacta de «si no, protesta y sal».</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio B1.3 · Copia nocturna (opcional)</strong></p>
-<p>Programa con <code>cron</code> una copia diaria de tu carpeta de física a <code>debian-lab</code> con <code>rsync</code>, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que <code>cron</code> lo ejecuta, y déjalo en su hora definitiva.</p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>crontab -e</code> y una línea como <code>15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&amp;1</code>. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 12) funciona sin ti — <code>cron</code> no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.</p>
-<p><strong>Por qué así</strong> — Es el primer proceso <em>automático</em> de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.</p>
+<p>Debería identificar dispositivo (UUID), punto de montaje, tipo, opciones y los dos números finales, y explicar que sin <code>nofail</code> un disco ausente puede detener el arranque. Si algo no cuadra con el anexo B2, pregúntale otra vez con la cita del anexo delante: los agentes se equivocan con seguridad, y saber dudar de ellos con criterio es exactamente lo que este curso te ha dado.</p>
+<p><strong>Por qué así</strong> — Explicar lo que ya existe es el uso más rentable de un agente para quien aprende: cero riesgo, y cada respuesta es una clase sobre tu propio sistema.</p>
 </div>
 </div>
 </div>
@@ -827,14 +762,11 @@ done</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span>
+      <a href="../anexos/anexo-e1-ia.html" class="pagination-link" aria-label="La IA en la terminal: ayudante, no piloto">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-b2-montajes.html" class="pagination-link" aria-label="Montar de todo: discos, pendrives y unidades remotas">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

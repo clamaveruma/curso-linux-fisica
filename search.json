@@ -1613,7 +1613,7 @@
     "href": "anexos/anexo-e1-ia.html#instalar-un-agente-con-la-disciplina-del-curso",
     "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
     "section": "Instalar un agente (con la disciplina del curso)",
-    "text": "Instalar un agente (con la disciplina del curso)\nLa mayoría se instalan con un instalador descargado de la web, y ahí aparece el reflejo que este curso te entrenó: jamás curl … | bash sin leer. La versión con red de seguridad:\nmarcos@portatil:~$ curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh\nmarcos@portatil:~$ less instalar-claude.sh\nmarcos@portatil:~$ bash instalar-claude.sh\nmarcos@portatil:~$ claude --version\nDescargar, mirar (¿qué escribe, dónde, pide sudo?), y solo entonces ejecutar. Codex se instala con npm install -g @openai/codex (pide Node.js: sudo apt install npm). Ambos requieren una cuenta y un inicio de sesión la primera vez; la URL y el comando exactos cámbialos por los de la documentación oficial del día — este anexo envejece más deprisa que el resto del curso.",
+    "text": "Instalar un agente (con la disciplina del curso)\n(Para un paso a paso con una herramienta concreta y gratuita — Antigravity de Google, configurado para que proponga y explique en vez de ejecutar — ve al anexo E2.)\nLa mayoría se instalan con un instalador descargado de la web, y ahí aparece el reflejo que este curso te entrenó: jamás curl … | bash sin leer. La versión con red de seguridad:\nmarcos@portatil:~$ curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh\nmarcos@portatil:~$ less instalar-claude.sh\nmarcos@portatil:~$ bash instalar-claude.sh\nmarcos@portatil:~$ claude --version\nDescargar, mirar (¿qué escribe, dónde, pide sudo?), y solo entonces ejecutar. Codex se instala con npm install -g @openai/codex (pide Node.js: sudo apt install npm). Ambos requieren una cuenta y un inicio de sesión la primera vez; la URL y el comando exactos cámbialos por los de la documentación oficial del día — este anexo envejece más deprisa que el resto del curso.",
     "crumbs": [
       "Apéndices",
       "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
@@ -1650,6 +1650,61 @@
     "crumbs": [
       "Apéndices",
       "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e2-antigravity.html",
+    "href": "anexos/anexo-e2-antigravity.html",
+    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google",
+    "section": "",
+    "text": "El fontanero\nEl anexo E1 da las reglas para trabajar con una IA sin perder el control. Este es el paso a paso con una herramienta concreta y gratuita: Antigravity, el entorno de agentes de Google. Con una cuenta de Google tienes el acceso básico, que para este curso sobra — lo vas a usar para una sola cosa: que te proponga y te explique comandos, no que los ejecute. Configurado así desde el primer día, es el mejor profesor particular de Linux que vas a tener.\nCuando llamas a un fontanero tienes dos maneras de tratarlo. La primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado. Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se arregla. La segunda: te quedas al lado, le preguntas por cada herramienta y cada técnica que va a usar, y le pides que te indique cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta llamarle. Está claro cuál de las dos vías es la de aprender.\nUn agente de IA en tu terminal es ese fontanero, y elige tú el trato. Durante este curso, la segunda vía es la única: el agente propone, tú lees, preguntas, verificas con man (capítulo 1) y tecleas. Cuando el curso termine y estés administrando un servidor con prisa, ya decidirás cuándo dejarle hacer — con las reglas del anexo E1 y una instantánea a mano.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity de Google</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e2-antigravity.html#instalar",
+    "href": "anexos/anexo-e2-antigravity.html#instalar",
+    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google",
+    "section": "Instalar",
+    "text": "Instalar\nAntigravity se descarga de su web (antigravity.google) como un paquete .deb para Linux — el formato de tu Mint, capítulo 5 — y se instala como cualquier programa: doble clic sobre el fichero abre el Gestor de software, o desde la terminal:\nmarcos@portatil:~/Descargas$ sudo apt install ./antigravity*.deb\nAl abrirlo por primera vez pide iniciar sesión con tu cuenta de Google, y con eso entras en el plan gratuito. Verás un entorno parecido a un editor de código con un panel para el agente y una terminal integrada — el agente trabaja dentro de esa terminal, y ahí es donde vas a domesticarlo. (La interfaz cambia a menudo; los nombres exactos de menús y opciones de este anexo pueden variar respecto a lo que veas. El criterio, no.)",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity de Google</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e2-antigravity.html#configurarlo-para-aprender-desde-el-principio",
+    "href": "anexos/anexo-e2-antigravity.html#configurarlo-para-aprender-desde-el-principio",
+    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google",
+    "section": "Configurarlo para aprender, desde el principio",
+    "text": "Configurarlo para aprender, desde el principio\nAntes de pedirle nada, dos ajustes. El primero, en la configuración del agente: la ejecución de comandos en la terminal tiene varios modos, desde «ejecuta lo que consideres» hasta «pide permiso cada vez». Ponla en el modo que pide confirmación siempre — nunca en automático. Así, aunque un día le dejes hacer, nada correrá sin que tú lo hayas leído y aceptado.\nEl segundo es de trato, no de menú: la primera instrucción que le das en cada sesión fija las reglas del juego. Guárdala en un fichero (~/fisica/notas/ia.txt, capítulo 2) y pégala al empezar:\nEstoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame\nqué hace cada opción; los teclearé yo. Si un comando puede destruir\ndatos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),\navísamelo explícitamente antes. Cuando no entienda algo, dímelo con\nun ejemplo pequeño que pueda probar.\nCon eso el agente pasa de fontanero-que-arregla a fontanero-que-enseña. Muchos entornos permiten guardar esa instrucción como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity de Google</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e2-antigravity.html#cómo-pedirle-las-cosas",
+    "href": "anexos/anexo-e2-antigravity.html#cómo-pedirle-las-cosas",
+    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google",
+    "section": "Cómo pedirle las cosas",
+    "text": "Cómo pedirle las cosas\nLa pregunta buena describe el objetivo, no el comando que crees que necesitas. Compara: «dame un grep» frente a «tengo un registro de adquisición con líneas 2026-08-18 10:03:00 ERROR s3 …; quiero saber qué sensor tiene más errores». Con la segunda, el agente te devuelve la tubería del capítulo 3 — y aquí empieza tu trabajo:\n\nLéela pieza a pieza. Cada programa lo reconoces (o lo buscas en man); cada opción debe tener sentido.\nPídele que la explique: «explícame ese cut -d' ' -f4». Su respuesta la contrastas con el manual; si no coinciden, gana el manual.\nPruébala en pequeño antes de en grande — un head, un fichero de prueba, la máquina virtual.\nTecléala tú. Los dedos aprenden lo que los ojos solo reconocen: la regla del primer día vale también con la IA delante.\n\nY las preguntas que más rinden son las de después: «¿por qué has usado sort antes de uniq?», «¿qué habría pasado sin las comillas?», «¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de este curso contado otra vez, a tu ritmo y sobre tu problema.\n\n△ Cuidado · Lo que no se le pide y lo que no se le da\nNo le pidas que ejecute «para ver qué pasa» en tu máquina real: para eso está debian-lab con su instantánea. No le pegues claves privadas, contraseñas ni ficheros con datos personales: el agente lee lo que le enseñas. Y no aceptes un sudo que no entiendas — la regla del capítulo 4, que no cambia porque quien lo proponga sea una IA.\n\n\n✚ Truco · La misma cuenta, sin ventanas: Gemini CLI\nLa cuenta de Google que abre Antigravity sirve también para Gemini CLI, el ayudante de Google que vive directamente en la terminal, sin editor ni ventanas — lo que usarás dentro de un servidor por SSH. Se instala con npm (sudo apt install npm y sudo npm install -g @google/gemini-cli), se arranca con gemini, y se trata exactamente igual: primera instrucción con las reglas, comandos propuestos y explicados, y los tecleas tú.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity de Google</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e2-antigravity.html#práctica",
+    "href": "anexos/anexo-e2-antigravity.html#práctica",
+    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity de Google",
+    "section": "Práctica",
+    "text": "Práctica\n\nEjercicio E2.1 · Domar al fontanero\nInstala Antigravity, inicia sesión, pon la ejecución de comandos en modo «pedir confirmación» y pega tu instrucción de aprendizaje. Después plantéale el problema del capítulo 3 con adquisicion.log (qué sensor falla más) sin mencionar ningún comando. Compara lo que te propone con la tubería del capítulo, pídele que te explique la pieza que menos entiendas, verifícala en man, y ejecútala tú.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nCasi seguro te propondrá grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr o una variante equivalente (quizá con awk, un programa que este curso no cubre: buena ocasión para preguntarle qué es y por qué lo prefiere). El resultado debe coincidir con el tuyo: 90 s3 · 15 s1 · 3 s4.\nPor qué así — Has hecho el ciclo completo del fontanero que enseña: problema en tus palabras, propuesta suya, comprensión tuya pieza a pieza, verificación en el manual, y las teclas en tus manos. Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en muleta.\n\n\n\n\n\n\nEjercicio E2.2 · Que te explique una línea que ya tienes\nDale una línea de /etc/fstab de tu máquina (cat /etc/fstab, sin tocarla) y pídele que te explique campo a campo qué hace, y qué pasaría si faltara nofail. Contrasta con el anexo B2.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nDebería identificar dispositivo (UUID), punto de montaje, tipo, opciones y los dos números finales, y explicar que sin nofail un disco ausente puede detener el arranque. Si algo no cuadra con el anexo B2, pregúntale otra vez con la cita del anexo delante: los agentes se equivocan con seguridad, y saber dudar de ellos con criterio es exactamente lo que este curso te ha dado.\nPor qué así — Explicar lo que ya existe es el uso más rentable de un agente para quien aprende: cero riesgo, y cada respuesta es una clase sobre tu propio sistema.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity de Google</span>"
     ]
   }
 ]
