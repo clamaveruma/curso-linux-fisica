@@ -25,7 +25,7 @@ book:
   date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»
   # El botón de descarga del PDF sale de aquí. Desactivado durante la
   # redacción («deja el PDF para cuando acabemos»); reactivar al final:
-  # downloads: [pdf]
+  downloads: [pdf]
   page-footer:
     center: "Bendito maldito Linux · versión agosto 2026 · © 2026 Claudio M. Martínez Velasco · CC BY-SA 4.0"
   chapters:
@@ -64,21 +64,28 @@ format:
     number-sections: true
     code-copy: false        # regla del curso: no copies, teclea
     fontsize: 16.5px
-  # PDF desactivado durante la redacción; reactivar al terminar el curso
-  # (pendiente entonces: colorear los bloques de terminal en tema claro).
-  # Para probarlo en local basta descomentar y `quarto render --to pdf`.
-  # pdf:
-  #   documentclass: scrreprt
-  #   papersize: a4
-  #   toc: true
-  #   number-sections: true
-  #   colorlinks: true
-  #   # Fondo gris de los bloques de terminal (los usa tema/terminal.lua):
-  #   include-in-header:
-  #     text: |
-  #       \usepackage{framed}
-  #       \usepackage{fancyvrb}
-  #       \definecolor{shadecolor}{RGB}{240,237,230}
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    toc: true
+    number-sections: true
+    colorlinks: true
+    include-in-header:
+      text: |
+        \usepackage{framed}
+        \usepackage{fancyvrb}
+        \usepackage{eso-pic}
+        % caja y colores de los bloques de terminal (tema/terminal.lua)
+        \definecolor{shadecolor}{HTML}{F1EDE4}
+        \definecolor{tprompt}{HTML}{2F6F62}
+        \definecolor{tpath}{HTML}{9A6A14}
+        \definecolor{tdim}{HTML}{8A7A5A}
+        \definecolor{tout}{HTML}{5A4D3A}
+        % portada gráfica como primera página, antes de la portada tipográfica
+        \AtBeginDocument{%
+          \begin{titlepage}\thispagestyle{empty}%
+          \AddToShipoutPictureBG*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{portada/portada.png}}}%
+          \null\end{titlepage}\clearpage}
 
 execute:
   freeze: auto
