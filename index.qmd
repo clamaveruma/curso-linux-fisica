@@ -1,7 +1,5 @@
 # Bienvenida {.unnumbered}
 
-![](portada/portada-web.png){.portada-inline fig-alt="Portada del libro"}
-
 ::: {.chapmeta}
 Terminal · sistemas · redes · trabajo remoto — **13 sesiones prácticas** · **versión agosto 2026**
 :::
@@ -11,9 +9,11 @@ Este curso es esa conversación: trece sesiones para pasar de usuario de
 escritorio a alguien que instala su sistema, entiende su red y trabaja
 con soltura en un servidor remoto.
 
-Escrito para estudiantes de física: los ejercicios usan datos de
-laboratorio, las analogías vienen de la mecánica, y el destino final es
-el flujo de trabajo real de la física computacional.
+Escrito para estudiantes de ciencias e ingeniería — física,
+matemáticas, química, cualquier ingeniería — con los ejemplos tomados
+de la física: los ejercicios usan datos de laboratorio, las analogías
+vienen de la mecánica, y el destino final es el flujo de trabajo real
+del cálculo científico.
 
 **Regla única e innegociable:** no copies y pegues los comandos.
 Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.
