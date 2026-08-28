@@ -116,7 +116,7 @@ Fuente única en Markdown con Quarto. Dos salidas por capítulo o bloque: HTML a
 
 ## 6b. Versionado *(decidido 2026-08-28)*
 
-El libro evoluciona con la IA y con la realimentación de los lectores. Cada versión se identifica por **mes y año**, visible en la portada, la Bienvenida y el pie de página. Versión actual: **agosto 2026**. La cabecera de la portada dice «para jóvenes científicos» (no «para físicos»).
+El libro evoluciona con la IA y con la realimentación de los lectores. Cada versión se identifica por **mes y año**, visible en la portada, la cabecera y el pie de la Bienvenida, y el pie de página (el párrafo explicativo sobre la evolución del libro se retiró el 2026-08-28: es interno). Versión actual: **agosto 2026**. La cabecera de la portada dice «para jóvenes científicos» (no «para físicos»).
 
 ## 7. Pendiente de decidir
 
