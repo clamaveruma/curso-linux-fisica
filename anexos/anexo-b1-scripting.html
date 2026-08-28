@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice C — Scripting: bucles, condiciones y cron – Bendito maldito Linux</title>
+<title>Apéndice D — Scripting: bucles, condiciones y cron – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -252,38 +252,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity CLI de Google</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
   </div>
 </li>
       </ul>
@@ -311,9 +305,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-b1-scripting.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-b1" class="quarto-section-identifier">Apéndice C — Scripting: bucles, condiciones y <code>cron</code></span></h1>
+<h1 class="title"><span id="sec-anexo-b1" class="quarto-section-identifier">Apéndice D — Scripting: bucles, condiciones y <code>cron</code></span></h1>
 </div>
 
 
@@ -409,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="práctica" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
 <div class="ejercicio">
-<p><strong>Ejercicio B1.1 · La deuda del capítulo 2</strong></p>
+<p><strong>Ejercicio D.1 · La deuda del capítulo 2</strong></p>
 <p>Crea una carpeta con <code>touch run0{1..5}_final.csv</code> (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando <code>_final</code> — primero en seco con <code>echo mv</code>, luego de verdad.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
@@ -432,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio B1.2 · Un script con criterio</strong></p>
+<p><strong>Ejercicio D.2 · Un script con criterio</strong></p>
 <p>Escribe <code>resumen.sh</code> que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas <code>ERROR</code>, <code>WARN</code> e <code>INFO</code> tiene — con un bucle sobre los tres niveles.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
@@ -460,7 +454,7 @@ done</code></pre>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio B1.3 · Copia nocturna (opcional)</strong></p>
+<p><strong>Ejercicio D.3 · Copia nocturna (opcional)</strong></p>
 <p>Programa con <code>cron</code> una copia diaria de tu carpeta de física a <code>debian-lab</code> con <code>rsync</code>, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que <code>cron</code> lo ejecuta, y déjalo en su hora definitiva.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
@@ -828,12 +822,12 @@ done</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../anexos/anexo-c1-pc-real.html" class="pagination-link" aria-label="Instalar en un PC real: la lista de comprobación">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../anexos/anexo-b2-montajes.html" class="pagination-link" aria-label="Montar de todo: discos, pendrives y unidades remotas">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

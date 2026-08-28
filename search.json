@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Bendito maldito Linux",
     "section": "",
-    "text": "Bienvenida\nLlevas años usando Linux sin haber hablado nunca con él directamente. Este curso es esa conversación: trece sesiones para pasar de usuario de escritorio a alguien que instala su sistema, entiende su red y trabaja con soltura en un servidor remoto.\nEscrito para estudiantes de ciencias e ingeniería — física, matemáticas, química, cualquier ingeniería — con los ejemplos tomados de la física: los ejercicios usan datos de laboratorio, las analogías vienen de la mecánica, y el destino final es el flujo de trabajo real del cálculo científico.\nRegla única e innegociable: no copies y pegues los comandos. Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.",
+    "text": "Bienvenida\nLlevas años usando Linux sin haber hablado nunca con él directamente. Este curso es esa conversación: trece sesiones para pasar de usuario de escritorio a alguien que instala su sistema, entiende su red y trabaja con soltura en un servidor remoto.\nPor qué tú. No eres un usuario normal de un ordenador: eres un científico, y no puedes conformarte con el manejo básico — tener una herramienta tan potente y no saber usarla es un desperdicio. Pero tampoco eres informático, ni tienes tiempo de dominar un sistema operativo: eso lleva años. Así que hay que ponerse en medio, y ese punto medio es este libro: con él aventajas, y con mucho, al común de los mortales; a partir de ahí decides tú cuánto más quieres aprender. Dedicarle unos días es una muy buena inversión de tu tiempo.\nEscrito para estudiantes de ciencias e ingeniería — física, matemáticas, química, cualquier ingeniería — con los ejemplos tomados de la física: los ejercicios usan datos de laboratorio, las analogías vienen de la mecánica, y el destino final es el flujo de trabajo real del cálculo científico.\nRegla única e innegociable: no copies y pegues los comandos. Tecléalos. Los dedos aprenden lo que los ojos solo reconocen.",
     "crumbs": [
       "Bienvenida"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#cómo-leer-este-curso-lo-básico-lo-avanzado-y-la-ia",
     "title": "Bendito maldito Linux",
     "section": "Cómo leer este curso: lo básico, lo avanzado y la IA",
-    "text": "Cómo leer este curso: lo básico, lo avanzado y la IA\nCada capítulo distingue dos niveles, y conviene tenerlos claros desde el principio. Lo básico es lo que un físico usa de verdad en su día a día y debe salir con soltura: moverse por el sistema, instalar Linux en un PC, entender particiones, sistemas de ficheros y formateo, mover información entre Linux, Windows, la nube y otros ordenadores, leer su red de casa — direcciones, DHCP, router, NAT y cortafuegos — y entrar en otra máquina. Lo avanzado — claves SSH, rsync, sesiones que sobreviven a la desconexión, túneles — hay que conocerlo, no dominarlo: saber que existe, para qué sirve y qué puede romper. La razón es de 2026: esas tareas las harás con una IA al lado que te dé las instrucciones, y solo quien conoce las herramientas mantiene el control de lo que la IA le propone. El anexo E1 — cómo instalar un agente de IA en tu terminal y cómo seguir mandando tú — es, en ese sentido, la otra mitad de este curso. Los ejercicios llevan siempre el nivel marcado: los esenciales no se saltan; los avanzados se leen, y se hacen si apetece.",
+    "text": "Cómo leer este curso: lo básico, lo avanzado y la IA\nCada capítulo distingue dos niveles, y conviene tenerlos claros desde el principio. Lo básico es lo que un físico usa de verdad en su día a día y debe salir con soltura: moverse por el sistema, instalar Linux en un PC, entender particiones, sistemas de ficheros y formateo, mover información entre Linux, Windows, la nube y otros ordenadores, leer su red de casa — direcciones, DHCP, router, NAT y cortafuegos — y entrar en otra máquina. Lo avanzado — claves SSH, rsync, sesiones que sobreviven a la desconexión, túneles — hay que conocerlo, no dominarlo: saber que existe, para qué sirve y qué puede romper. La razón es de 2026: esas tareas las harás con una IA al lado que te dé las instrucciones, y solo quien conoce las herramientas mantiene el control de lo que la IA le propone. El anexo A — cómo instalar un agente de IA en tu terminal y cómo seguir mandando tú — es, en ese sentido, la otra mitad de este curso. Los ejercicios llevan siempre el nivel marcado: los esenciales no se saltan; los avanzados se leen, y se hacen si apetece.",
     "crumbs": [
       "Bienvenida"
     ]
@@ -544,7 +544,7 @@
     "href": "capitulos/cap06.html#sec-filesystems",
     "title": "6  Discos, particiones y arranque",
     "section": "6.2 Sistemas de ficheros: el orden dentro del bloque",
-    "text": "6.2 Sistemas de ficheros: el orden dentro del bloque\nUn disco recién salido de fábrica es solo una pizarra de bloques vacíos. Para que haya ficheros — con nombres, carpetas, permisos, fechas — hace falta imponerle una estructura: el sistema de ficheros. Formatear una partición es exactamente eso: estrenar su estructura (borrando lo anterior, de ahí el respeto).\n\n\n\n\n\n\n\n\nSistema\nDónde lo verás\nLo esencial\n\n\n\n\next4\ntu /, todo Linux\nrobusto, con permisos y dueños (cap. 4)\n\n\nFAT32\nla partición EFI, pendrives viejos\nantiguo y universal; sin permisos, ficheros de 4 GB máximo\n\n\nexFAT\npendrives y tarjetas SD modernas\nel FAT sin límite de tamaño; ideal para compartir\n\n\nNTFS\ndiscos con Windows\nel de Windows; Linux lo lee y escribe sin drama\n\n\n\nLa tabla explica media convivencia con Windows: un pendrive exFAT lo leen ambos mundos; tu ext4, Windows ni lo ve. Y fíjate en el detalle del capítulo 4: los permisos rwx son una prestación del sistema de ficheros — por eso un pendrive FAT no los tiene, y todo aparece como rwxrwxrwx cuando lo montas.\n\n✚ Truco · El mapa con ratón: «Discos» y GParted\nTodo lo que lsblk te cuenta en texto lo dibujan dos aplicaciones gráficas que conviene conocer por su nombre, porque las verás en cualquier foro. Discos (menú → Accesorios; gnome-disks) viene con Mint: enseña cada disco con sus particiones como una barra de colores, monta y desmonta con un botón, formatea un pendrive y edita las opciones de montaje (anexo B2). GParted (sudo apt install gparted, y viene de serie en el pendrive live de Mint) es el editor de particiones: crea, borra, redimensiona y mueve particiones — es la herramienta con la que se le hace sitio a Linux junto a Windows, y su hermano de texto es lo que usarás en el instalador del capítulo 8. Hoy, por la regla del curso, las abres solo para mirar: GParted sobre tu disco real es tan destructivo como potente. Para tocar, la máquina virtual del bloque C o un pendrive que puedas borrar.",
+    "text": "6.2 Sistemas de ficheros: el orden dentro del bloque\nUn disco recién salido de fábrica es solo una pizarra de bloques vacíos. Para que haya ficheros — con nombres, carpetas, permisos, fechas — hace falta imponerle una estructura: el sistema de ficheros. Formatear una partición es exactamente eso: estrenar su estructura (borrando lo anterior, de ahí el respeto).\n\n\n\n\n\n\n\n\nSistema\nDónde lo verás\nLo esencial\n\n\n\n\next4\ntu /, todo Linux\nrobusto, con permisos y dueños (cap. 4)\n\n\nFAT32\nla partición EFI, pendrives viejos\nantiguo y universal; sin permisos, ficheros de 4 GB máximo\n\n\nexFAT\npendrives y tarjetas SD modernas\nel FAT sin límite de tamaño; ideal para compartir\n\n\nNTFS\ndiscos con Windows\nel de Windows; Linux lo lee y escribe sin drama\n\n\n\nLa tabla explica media convivencia con Windows: un pendrive exFAT lo leen ambos mundos; tu ext4, Windows ni lo ve. Y fíjate en el detalle del capítulo 4: los permisos rwx son una prestación del sistema de ficheros — por eso un pendrive FAT no los tiene, y todo aparece como rwxrwxrwx cuando lo montas.\n\n✚ Truco · El mapa con ratón: «Discos» y GParted\nTodo lo que lsblk te cuenta en texto lo dibujan dos aplicaciones gráficas que conviene conocer por su nombre, porque las verás en cualquier foro. Discos (menú → Accesorios; gnome-disks) viene con Mint: enseña cada disco con sus particiones como una barra de colores, monta y desmonta con un botón, formatea un pendrive y edita las opciones de montaje (anexo E). GParted (sudo apt install gparted, y viene de serie en el pendrive live de Mint) es el editor de particiones: crea, borra, redimensiona y mueve particiones — es la herramienta con la que se le hace sitio a Linux junto a Windows, y su hermano de texto es lo que usarás en el instalador del capítulo 8. Hoy, por la regla del curso, las abres solo para mirar: GParted sobre tu disco real es tan destructivo como potente. Para tocar, la máquina virtual del bloque C o un pendrive que puedas borrar.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Discos, particiones y arranque</span>"
     ]
@@ -554,7 +554,7 @@
     "href": "capitulos/cap06.html#sec-montar",
     "title": "6  Discos, particiones y arranque",
     "section": "6.3 Montar: enganchar discos al árbol",
-    "text": "6.3 Montar: enganchar discos al árbol\nY aquí se cierra por fin el círculo abierto el primer día, cuando te dijimos «no hay unidades C: y D:». En Linux, un disco no aparece como una isla con su letra: se monta — se engancha — en un directorio del árbol único, su punto de montaje, y desde ese momento su contenido es esa rama.\n\n\n\n\n\n\nFigura 6.1: El árbol único, con sus enganches. La columna MOUNTPOINTS de lsblk es exactamente esto.\n\n\n\nCuando pinchas un pendrive, Mint lo monta solo en /media/tu_usuario/NOMBRE y te abre la ventana — cómodo y correcto. La versión manual es mount (montar) y umount (desmontar; sí, sin la primera n), y la usarás en el servidor sin escritorio. Hoy te basta con saber leerlo — montar a mano discos de otros formatos, hacerlo permanente y enganchar carpetas de otras máquinas es el anexo B2, para cuando hayas visto SSH:\nmarcos@portatil:~$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  28,9G  0 disk\n└─sda1        8:1    1  28,9G  0 part /media/marcos/PRACTICAS\nnvme0n1     259:0    0 476,9G  0 disk\n...\n\n◉ Por dentro · Por qué «expulsar» no es superstición\nEscribir en disco es lento, así que el sistema hace trampa legal: apunta tus cambios en RAM — la caché — y los vuelca al dispositivo cuando le conviene. Si arrancas el pendrive del puerto justo después de copiar, puede que parte siga en la caché: fichero corrupto. «Expulsar con seguridad» (o umount) significa «vuelca todo lo pendiente y cierra». Es un compromiso físico clásico: velocidad a cambio de un protocolo de salida. Respétalo como respetas la rampa de frenado de la centrífuga.",
+    "text": "6.3 Montar: enganchar discos al árbol\nY aquí se cierra por fin el círculo abierto el primer día, cuando te dijimos «no hay unidades C: y D:». En Linux, un disco no aparece como una isla con su letra: se monta — se engancha — en un directorio del árbol único, su punto de montaje, y desde ese momento su contenido es esa rama.\n\n\n\n\n\n\nFigura 6.1: El árbol único, con sus enganches. La columna MOUNTPOINTS de lsblk es exactamente esto.\n\n\n\nCuando pinchas un pendrive, Mint lo monta solo en /media/tu_usuario/NOMBRE y te abre la ventana — cómodo y correcto. La versión manual es mount (montar) y umount (desmontar; sí, sin la primera n), y la usarás en el servidor sin escritorio. Hoy te basta con saber leerlo — montar a mano discos de otros formatos, hacerlo permanente y enganchar carpetas de otras máquinas es el anexo E, para cuando hayas visto SSH:\nmarcos@portatil:~$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  28,9G  0 disk\n└─sda1        8:1    1  28,9G  0 part /media/marcos/PRACTICAS\nnvme0n1     259:0    0 476,9G  0 disk\n...\n\n◉ Por dentro · Por qué «expulsar» no es superstición\nEscribir en disco es lento, así que el sistema hace trampa legal: apunta tus cambios en RAM — la caché — y los vuelca al dispositivo cuando le conviene. Si arrancas el pendrive del puerto justo después de copiar, puede que parte siga en la caché: fichero corrupto. «Expulsar con seguridad» (o umount) significa «vuelca todo lo pendiente y cierra». Es un compromiso físico clásico: velocidad a cambio de un protocolo de salida. Respétalo como respetas la rampa de frenado de la centrífuga.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Discos, particiones y arranque</span>"
     ]
@@ -774,7 +774,7 @@
     "href": "capitulos/cap08.html#sec-pc-real",
     "title": "8  Instalar Linux de verdad",
     "section": "8.7 Del ensayo al ordenador de verdad",
-    "text": "8.7 Del ensayo al ordenador de verdad\nTodo lo que has hecho hoy es, paso a paso, lo que harás el día que instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en un pendrive, el disco tiene nombre real y quizá un Windows dentro, y no hay instantánea que te salve — y por eso existe el anexo C1: la lista de comprobación completa para ese día, con la grabación del pendrive por la vía gráfica y por terminal.\n\n\n\n\n\n\nFigura 8.4: Una misma imagen, dos destinos. Lo que ensayas en la VM es exactamente lo que ejecutarás en el PC real.\n\n\n\n\n◷ Historia · De ochenta disquetes a un pendrive\nInstalar Linux en 1994 empezaba por descargar decenas de imágenes de disquete — Slackware llegó a necesitar más de cincuenta, en series con nombres como A, AP, D, N — y grabarlas una a una, rezando para que ninguna viniera mal. El CD (1995) lo redujo a un disco; el pendrive de arranque, a un fichero copiado byte a byte. Lo que no ha cambiado en treinta años es la parte que hoy has practicado: decidir las particiones, elegir el cargador de arranque, y aguantar el pulso en el «¿desea escribir los cambios?». Los soportes se encogen; las decisiones son las mismas.\n\n\n\n\n\n\n\nFigura 8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con más de cien veces la capacidad de toda la caja. Una instalación de los 90 cabía justo en una caja así. Foto: JIP, CC BY-SA 3.0, Wikimedia Commons.",
+    "text": "8.7 Del ensayo al ordenador de verdad\nTodo lo que has hecho hoy es, paso a paso, lo que harás el día que instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en un pendrive, el disco tiene nombre real y quizá un Windows dentro, y no hay instantánea que te salve — y por eso existe el anexo C: la lista de comprobación completa para ese día, con la grabación del pendrive por la vía gráfica y por terminal.\n\n\n\n\n\n\nFigura 8.4: Una misma imagen, dos destinos. Lo que ensayas en la VM es exactamente lo que ejecutarás en el PC real.\n\n\n\n\n◷ Historia · De ochenta disquetes a un pendrive\nInstalar Linux en 1994 empezaba por descargar decenas de imágenes de disquete — Slackware llegó a necesitar más de cincuenta, en series con nombres como A, AP, D, N — y grabarlas una a una, rezando para que ninguna viniera mal. El CD (1995) lo redujo a un disco; el pendrive de arranque, a un fichero copiado byte a byte. Lo que no ha cambiado en treinta años es la parte que hoy has practicado: decidir las particiones, elegir el cargador de arranque, y aguantar el pulso en el «¿desea escribir los cambios?». Los soportes se encogen; las decisiones son las mismas.\n\n\n\n\n\n\n\nFigura 8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con más de cien veces la capacidad de toda la caja. Una instalación de los 90 cabía justo en una caja así. Foto: JIP, CC BY-SA 3.0, Wikimedia Commons.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
     ]
@@ -784,7 +784,7 @@
     "href": "capitulos/cap08.html#sec-practica-8",
     "title": "8  Instalar Linux de verdad",
     "section": "8.8 Práctica: la sala de operaciones",
-    "text": "8.8 Práctica: la sala de operaciones\nCuaderno en marcha en tu Mint (script sesion08.log): anota ahí tus decisiones y tiempos; dentro de la VM no hace falta grabar nada.\nNivel 1 · Lo esencial\n\nEjercicio 8.1 · El plan, por escrito\nAntes de arrancar el instalador, escribe en tu cuaderno la tabla de particiones que vas a crear: nombre de dispositivo, tamaño, sistema de ficheros y punto de montaje de cada una. Y dos decisiones más: nombre de la máquina y contraseña de root (vacía, y por qué). Pista: la figura del plan tiene todo; el «por qué» de root está en la sección de arrancar el instalador.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nvda1 512 MB · FAT32 · /boot/efi (EFI) — vda2 ~17,5 GB · ext4 · / — vda3 2 GB · swap. Máquina debian-lab. Root vacío: Debian desactiva root y da sudo a tu usuario, como en Mint.\nPor qué así — El plan escrito es lo que separa una instalación de una apuesta. En el PC real añadirás una columna: «¿qué había antes en esa partición?» — y ahí es donde el hábito te salvará los datos.\n\n\n\n\n\n\nEjercicio 8.2 · La instalación\nEjecuta la instalación completa siguiendo las secciones del capítulo — particionado manual, sin escritorio, con servidor SSH — y anota en el cuaderno cuánto ha tardado y en qué pantalla dudaste. Pista: si en el particionado te pierdes, «Deshacer los cambios realizados a las particiones» vuelve al principio sin coste; y si algo sale mal de verdad, Forzar apagado* y volver a arrancar la VM reinicia el instalador desde cero.*\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEntre 20 y 40 minutos la primera vez, gran parte esperando descargas del espejo. Las dudas típicas: la pantalla de root (vacío), el tamaño de la raíz (lo que quede menos el swap) y la selección de programas (desmarcar el escritorio). Al terminar, el login: en consola de texto es la señal de éxito.\nPor qué así — La primera instalación siempre es lenta y torpe; la segunda (ejercicio 8.5) es donde se nota que has aprendido. Por eso el diseño de este capítulo insiste en repetir.\n\n\n\n\n\n\nEjercicio 8.3 · El parte del primer arranque\nEntra en debian-lab y ejecuta la revisión del capítulo: lsblk, df -h /, ip a | grep \"inet \" y systemctl status ssh. Copia los cuatro resultados al cuaderno y compáralos con tu plan del 8.1. Después, actualiza el sistema con apt. Pista: son exactamente los comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nLas tres particiones montadas según el plan; alrededor de 1,3 GB usados; una dirección 192.168.122.x; y ssh.service en active (running). sudo apt update && sudo apt upgrade debe funcionar sin pedir nada raro: la prueba de que el truco de root funcionó.\nPor qué así — Cada comando verifica una decisión del instalador: particiones, tamaño, red, SSH. Un físico no da por bueno un montaje sin medirlo; tú tampoco das por buena una instalación.\n\n\n\n\n\n\nEjercicio 8.4 · La instantánea que importa\nApaga la VM desde dentro (sudo poweroff) y crea la instantánea recien-instalado. Compruébala con virsh desde tu Mint. Pista: capítulo 7, sección de instantáneas — con la máquina apagada, la instantánea guarda el disco y es la más limpia de restaurar.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nVer → Instantáneas → + → nombre recien-instalado. En Mint: virsh snapshot-list debian-lab la muestra con estado shutoff.\nPor qué así — Es el punto de retorno de todo lo que queda de curso: los experimentos de red del bloque D y el servidor del bloque E parten de aquí. Restaurarla es siempre una opción legítima.\n\n\n\n\n\nNivel 2 · El reto\n\nEjercicio 8.5 · Romper el arranque\nCon la instantánea a salvo: borra /boot, reinicia, y observa exactamente dónde se rompe la cadena del capítulo 6. Describe la pantalla en el cuaderno. Después restaura la instantánea y comprueba que /boot está de vuelta. Pista: la orden está en la sección «Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe decir debian-lab.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsudo rm -rf /boot, sudo reboot → GRUB arranca (su llave sigue en la partición EFI, que no has tocado) pero no encuentra el kernel: te deja en grub&gt; o en un error de «file not found». Forzar apagado → restaurar recien-instalado → ls /boot muestra el kernel (vmlinuz-…) y la carpeta grub como si nada.\nPor qué así — Ver romperse un eslabón concreto de la cadena convierte «no arranca» en «falta el kernel, GRUB sigue ahí»: un diagnóstico. Y la restauración es la demostración práctica de para qué sirve el bloque C.\n\n\n\n\n\n\nEjercicio 8.6 · La segunda instalación, cronometrada\nBorra la máquina entera desde virt-manager (Eliminar, marcando borrar el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala Debian desde cero — esta vez con /home en su propia partición de 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el tiempo. Pista: el plan cambia en una línea: la raíz se queda con ~12,5 GB y /home recibe 5 GB, ext4, punto de montaje /home. Crea las cuatro particiones en orden: EFI, raíz, home, swap.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nNormalmente la mitad del tiempo de la primera vez, y lsblk mostrará vda3 montado en /home. Renueva la instantánea recien-instalado sobre esta máquina — es la definitiva.\nPor qué así — «Romperla y reinstalar hasta que aburra» era el objetivo declarado del capítulo. La variante del /home separado enseña el matiz que más se discute en foros — y te deja decidir con criterio propio, que es lo único que cuenta.\n\n\n\n\n\nNivel 3 · Opcional · el pendrive real\n\nEjercicio 8.7 · El pendrive de arranque (sin instalar nada)\nSiguiendo el anexo C1, graba la ISO en un pendrive que puedas borrar, arranca tu portátil desde él hasta el menú del instalador — y sal sin elegir nada: apaga y arranca de nuevo tu Mint. Objetivo: haber visto el menú de arranque del UEFI y el instalador en hardware real sin tocar un solo byte de tu disco. Pista: en el anexo tienes las dos vías — la aplicación «Discos» de Mint y la orden dd — y la regla de oro: lsblk antes y después de pinchar el pendrive para estar seguro de su nombre.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEl pendrive aparece como sda (o sdb) al pinchar; se graba con «Discos → Restaurar imagen de disco» o con sudo dd if=debian….iso of=/dev/sdX bs=4M status=progress (con la X correcta, verificada dos veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o Esc según la marca) y se elige el pendrive. Verás el mismo menú que en la VM; Ctrl+Alt+Supr o apagar te devuelve a Mint intacto.\nPor qué así — Es el ensayo general con el vestuario de verdad, y la única parte del capítulo con un riesgo real: equivocar la letra del pendrive en dd borra el disco equivocado. Por eso la vía gráfica es perfectamente honorable — elige por su nombre y tamaño, sin letras — y por eso el anexo insiste en comprobar dos veces.",
+    "text": "8.8 Práctica: la sala de operaciones\nCuaderno en marcha en tu Mint (script sesion08.log): anota ahí tus decisiones y tiempos; dentro de la VM no hace falta grabar nada.\nNivel 1 · Lo esencial\n\nEjercicio 8.1 · El plan, por escrito\nAntes de arrancar el instalador, escribe en tu cuaderno la tabla de particiones que vas a crear: nombre de dispositivo, tamaño, sistema de ficheros y punto de montaje de cada una. Y dos decisiones más: nombre de la máquina y contraseña de root (vacía, y por qué). Pista: la figura del plan tiene todo; el «por qué» de root está en la sección de arrancar el instalador.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nvda1 512 MB · FAT32 · /boot/efi (EFI) — vda2 ~17,5 GB · ext4 · / — vda3 2 GB · swap. Máquina debian-lab. Root vacío: Debian desactiva root y da sudo a tu usuario, como en Mint.\nPor qué así — El plan escrito es lo que separa una instalación de una apuesta. En el PC real añadirás una columna: «¿qué había antes en esa partición?» — y ahí es donde el hábito te salvará los datos.\n\n\n\n\n\n\nEjercicio 8.2 · La instalación\nEjecuta la instalación completa siguiendo las secciones del capítulo — particionado manual, sin escritorio, con servidor SSH — y anota en el cuaderno cuánto ha tardado y en qué pantalla dudaste. Pista: si en el particionado te pierdes, «Deshacer los cambios realizados a las particiones» vuelve al principio sin coste; y si algo sale mal de verdad, Forzar apagado* y volver a arrancar la VM reinicia el instalador desde cero.*\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEntre 20 y 40 minutos la primera vez, gran parte esperando descargas del espejo. Las dudas típicas: la pantalla de root (vacío), el tamaño de la raíz (lo que quede menos el swap) y la selección de programas (desmarcar el escritorio). Al terminar, el login: en consola de texto es la señal de éxito.\nPor qué así — La primera instalación siempre es lenta y torpe; la segunda (ejercicio 8.5) es donde se nota que has aprendido. Por eso el diseño de este capítulo insiste en repetir.\n\n\n\n\n\n\nEjercicio 8.3 · El parte del primer arranque\nEntra en debian-lab y ejecuta la revisión del capítulo: lsblk, df -h /, ip a | grep \"inet \" y systemctl status ssh. Copia los cuatro resultados al cuaderno y compáralos con tu plan del 8.1. Después, actualiza el sistema con apt. Pista: son exactamente los comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nLas tres particiones montadas según el plan; alrededor de 1,3 GB usados; una dirección 192.168.122.x; y ssh.service en active (running). sudo apt update && sudo apt upgrade debe funcionar sin pedir nada raro: la prueba de que el truco de root funcionó.\nPor qué así — Cada comando verifica una decisión del instalador: particiones, tamaño, red, SSH. Un físico no da por bueno un montaje sin medirlo; tú tampoco das por buena una instalación.\n\n\n\n\n\n\nEjercicio 8.4 · La instantánea que importa\nApaga la VM desde dentro (sudo poweroff) y crea la instantánea recien-instalado. Compruébala con virsh desde tu Mint. Pista: capítulo 7, sección de instantáneas — con la máquina apagada, la instantánea guarda el disco y es la más limpia de restaurar.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nVer → Instantáneas → + → nombre recien-instalado. En Mint: virsh snapshot-list debian-lab la muestra con estado shutoff.\nPor qué así — Es el punto de retorno de todo lo que queda de curso: los experimentos de red del bloque D y el servidor del bloque E parten de aquí. Restaurarla es siempre una opción legítima.\n\n\n\n\n\nNivel 2 · El reto\n\nEjercicio 8.5 · Romper el arranque\nCon la instantánea a salvo: borra /boot, reinicia, y observa exactamente dónde se rompe la cadena del capítulo 6. Describe la pantalla en el cuaderno. Después restaura la instantánea y comprueba que /boot está de vuelta. Pista: la orden está en la sección «Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe decir debian-lab.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsudo rm -rf /boot, sudo reboot → GRUB arranca (su llave sigue en la partición EFI, que no has tocado) pero no encuentra el kernel: te deja en grub&gt; o en un error de «file not found». Forzar apagado → restaurar recien-instalado → ls /boot muestra el kernel (vmlinuz-…) y la carpeta grub como si nada.\nPor qué así — Ver romperse un eslabón concreto de la cadena convierte «no arranca» en «falta el kernel, GRUB sigue ahí»: un diagnóstico. Y la restauración es la demostración práctica de para qué sirve el bloque C.\n\n\n\n\n\n\nEjercicio 8.6 · La segunda instalación, cronometrada\nBorra la máquina entera desde virt-manager (Eliminar, marcando borrar el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala Debian desde cero — esta vez con /home en su propia partición de 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el tiempo. Pista: el plan cambia en una línea: la raíz se queda con ~12,5 GB y /home recibe 5 GB, ext4, punto de montaje /home. Crea las cuatro particiones en orden: EFI, raíz, home, swap.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nNormalmente la mitad del tiempo de la primera vez, y lsblk mostrará vda3 montado en /home. Renueva la instantánea recien-instalado sobre esta máquina — es la definitiva.\nPor qué así — «Romperla y reinstalar hasta que aburra» era el objetivo declarado del capítulo. La variante del /home separado enseña el matiz que más se discute en foros — y te deja decidir con criterio propio, que es lo único que cuenta.\n\n\n\n\n\nNivel 3 · Opcional · el pendrive real\n\nEjercicio 8.7 · El pendrive de arranque (sin instalar nada)\nSiguiendo el anexo C, graba la ISO en un pendrive que puedas borrar, arranca tu portátil desde él hasta el menú del instalador — y sal sin elegir nada: apaga y arranca de nuevo tu Mint. Objetivo: haber visto el menú de arranque del UEFI y el instalador en hardware real sin tocar un solo byte de tu disco. Pista: en el anexo tienes las dos vías — la aplicación «Discos» de Mint y la orden dd — y la regla de oro: lsblk antes y después de pinchar el pendrive para estar seguro de su nombre.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nEl pendrive aparece como sda (o sdb) al pinchar; se graba con «Discos → Restaurar imagen de disco» o con sudo dd if=debian….iso of=/dev/sdX bs=4M status=progress (con la X correcta, verificada dos veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o Esc según la marca) y se elige el pendrive. Verás el mismo menú que en la VM; Ctrl+Alt+Supr o apagar te devuelve a Mint intacto.\nPor qué así — Es el ensayo general con el vestuario de verdad, y la única parte del capítulo con un riesgo real: equivocar la letra del pendrive en dd borra el disco equivocado. Por eso la vía gráfica es perfectamente honorable — elige por su nombre y tamaño, sin letras — y por eso el anexo insiste en comprobar dos veces.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
     ]
@@ -794,7 +794,7 @@
     "href": "capitulos/cap08.html#sec-quiz-8",
     "title": "8  Instalar Linux de verdad",
     "section": "8.9 Autocomprobación",
-    "text": "8.9 Autocomprobación\nMarca una respuesta por pregunta; la corrección es inmediata.\n\n  La imagen «netinst» de Debian…\n    contiene el sistema completo con escritorio\n    contiene solo lo mínimo para arrancar el instalador; el resto lo descarga del espejo\n    solo sirve para máquinas virtuales\n    Correcto. Por eso pesa 700 MB y por eso el instalador pregunta por la «réplica»: el repositorio del capítulo 5 hace el resto.\n    No exactamente. Es la imagen mínima: arranca el instalador y descarga lo demás de la red. Vale para VM y para PC real por igual.\n  \n  Dejar vacía la contraseña de root en el instalador de Debian…\n    es un fallo de seguridad grave\n    desactiva root y da sudo a tu usuario, como en Mint\n    hace que el instalador se detenga\n    Correcto. Es el comportamiento documentado de Debian y el modelo del capítulo 4: poderes de administrador orden a orden, con recibo.\n    No exactamente. Con root vacío, Debian bloquea esa cuenta y mete a tu usuario en el grupo sudo. Con contraseña, tendrías root activo y un usuario sin sudo.\n  \n  En una instalación UEFI, GRUB deja su llave de arranque en…\n    la partición EFI (FAT32, montada en /boot/efi)\n    la swap\n    el sector cero del disco, siempre\n    Correcto. El buzón del capítulo 6. Por eso la EFI es la primera partición del plan, y por eso borrar /boot rompe el kernel pero no a GRUB.\n    No exactamente. El UEFI busca cargadores en la partición EFI: ahí va GRUB. El «sector cero» era el mundo antiguo (BIOS/MBR).\n  \n  Marcaste «Servidor SSH» en la selección de programas para…\n    poder navegar por internet desde la VM\n    que la máquina acepte conexiones remotas desde tu Mint (bloque E)\n    acelerar la instalación\n    Correcto. Un servidor sin escritorio se administra por SSH; instalarlo desde el primer día es lo que hace cualquier administrador.\n    No exactamente. SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 12.\n  \n  Tras sudo rm -rf /boot, el sistema sigue funcionando hasta reiniciar porque…\n    el kernel ya estaba cargado en RAM; solo falta al arrancar\n    Linux protege /boot y no lo borra de verdad\n    GRUB tiene una copia\n    Correcto. Lo cargado en memoria no depende ya del disco. Al reiniciar, GRUB busca el kernel en /boot y no lo encuentra: cadena rota en el segundo eslabón.\n    No exactamente. Con sudo, rm borra de verdad. Lo que te mantiene vivo es que el kernel ya está en RAM — hasta el próximo arranque.\n  \n  La diferencia más peligrosa entre instalar en la VM y en un PC real es…\n    que el instalador es distinto\n    que en el PC real hay discos con datos y no hay instantánea que restaurar\n    que en el PC real no se puede particionar a mano\n    Correcto. Mismo instalador, mismas decisiones — pero el «¿desea escribir los cambios?» es irreversible. De ahí el plan escrito y la lista del anexo C1.\n    No exactamente. El instalador y el particionado son idénticos. Lo que cambia es el riesgo: datos reales, disco real, sin deshacer.\n  \n\n\n\nAutocomprobación (test de la sección 8.9) — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 a · 6 b.\n\n\nLa próxima sesión\nTienes un servidor instalado por ti, con una dirección 192.168.122.x que todavía no sabes leer. El bloque D empieza ahí: aprenderás qué es una dirección IP, qué es esa máscara /24 y quién reparte las direcciones en tu casa, y harás la expedición al router de la compañía, en modo solo lectura, para censar todos los aparatos que viven en tu red. Guarda sesion08.log: bloque C completo.\n\n\ncap. 8 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu sesion08.log",
+    "text": "8.9 Autocomprobación\nMarca una respuesta por pregunta; la corrección es inmediata.\n\n  La imagen «netinst» de Debian…\n    contiene el sistema completo con escritorio\n    contiene solo lo mínimo para arrancar el instalador; el resto lo descarga del espejo\n    solo sirve para máquinas virtuales\n    Correcto. Por eso pesa 700 MB y por eso el instalador pregunta por la «réplica»: el repositorio del capítulo 5 hace el resto.\n    No exactamente. Es la imagen mínima: arranca el instalador y descarga lo demás de la red. Vale para VM y para PC real por igual.\n  \n  Dejar vacía la contraseña de root en el instalador de Debian…\n    es un fallo de seguridad grave\n    desactiva root y da sudo a tu usuario, como en Mint\n    hace que el instalador se detenga\n    Correcto. Es el comportamiento documentado de Debian y el modelo del capítulo 4: poderes de administrador orden a orden, con recibo.\n    No exactamente. Con root vacío, Debian bloquea esa cuenta y mete a tu usuario en el grupo sudo. Con contraseña, tendrías root activo y un usuario sin sudo.\n  \n  En una instalación UEFI, GRUB deja su llave de arranque en…\n    la partición EFI (FAT32, montada en /boot/efi)\n    la swap\n    el sector cero del disco, siempre\n    Correcto. El buzón del capítulo 6. Por eso la EFI es la primera partición del plan, y por eso borrar /boot rompe el kernel pero no a GRUB.\n    No exactamente. El UEFI busca cargadores en la partición EFI: ahí va GRUB. El «sector cero» era el mundo antiguo (BIOS/MBR).\n  \n  Marcaste «Servidor SSH» en la selección de programas para…\n    poder navegar por internet desde la VM\n    que la máquina acepte conexiones remotas desde tu Mint (bloque E)\n    acelerar la instalación\n    Correcto. Un servidor sin escritorio se administra por SSH; instalarlo desde el primer día es lo que hace cualquier administrador.\n    No exactamente. SSH es la puerta remota: permite que tu Mint entre en la VM por la red. Es la semilla del capítulo 12.\n  \n  Tras sudo rm -rf /boot, el sistema sigue funcionando hasta reiniciar porque…\n    el kernel ya estaba cargado en RAM; solo falta al arrancar\n    Linux protege /boot y no lo borra de verdad\n    GRUB tiene una copia\n    Correcto. Lo cargado en memoria no depende ya del disco. Al reiniciar, GRUB busca el kernel en /boot y no lo encuentra: cadena rota en el segundo eslabón.\n    No exactamente. Con sudo, rm borra de verdad. Lo que te mantiene vivo es que el kernel ya está en RAM — hasta el próximo arranque.\n  \n  La diferencia más peligrosa entre instalar en la VM y en un PC real es…\n    que el instalador es distinto\n    que en el PC real hay discos con datos y no hay instantánea que restaurar\n    que en el PC real no se puede particionar a mano\n    Correcto. Mismo instalador, mismas decisiones — pero el «¿desea escribir los cambios?» es irreversible. De ahí el plan escrito y la lista del anexo C.\n    No exactamente. El instalador y el particionado son idénticos. Lo que cambia es el riesgo: datos reales, disco real, sin deshacer.\n  \n\n\n\nAutocomprobación (test de la sección 8.9) — Respuestas: 1 b · 2 b · 3 a · 4 b · 5 a · 6 b.\n\n\nLa próxima sesión\nTienes un servidor instalado por ti, con una dirección 192.168.122.x que todavía no sabes leer. El bloque D empieza ahí: aprenderás qué es una dirección IP, qué es esa máscara /24 y quién reparte las direcciones en tu casa, y harás la expedición al router de la compañía, en modo solo lectura, para censar todos los aparatos que viven en tu red. Guarda sesion08.log: bloque C completo.\n\n\ncap. 8 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu sesion08.log",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Instalar Linux de verdad</span>"
     ]
@@ -1014,7 +1014,7 @@
     "href": "capitulos/cap11.html#sec-protocolos",
     "title": "11  Nombres, puertos y protocolos",
     "section": "11.5 Qué habla cada puerta: los protocolos que usarás",
-    "text": "11.5 Qué habla cada puerta: los protocolos que usarás\nDetrás de cada puerto hay un protocolo: el idioma acordado entre los dos extremos. Para un físico, la pregunta práctica es «¿cómo paso datos de aquí a allí?», y la respuesta depende de qué hay en el otro extremo. Esta es la tabla que resuelve el noventa por ciento de los casos, con el capítulo o anexo donde se practica cada uno:\n\n\n\n\n\n\n\n\n\n\nProtocolo\nPuerto\nOtro extremo típico\nCon qué lo usarás\nDónde\n\n\n\n\nSSH / SFTP\n22\notro Linux, un servidor, la nube — y un Windows moderno\nterminal, scp, rsync, «Conectar al servidor», WinSCP\ncaps. 11–12, anexo B2\n\n\nSMB\n445\nun PC con Windows, un NAS, una impresora\n«Conectar al servidor» (smb://), montar por cifs\nanexo B2\n\n\nNFS\n2049\notro Linux, el laboratorio, un clúster\nmontar con -t nfs\nanexo B2\n\n\nHTTP / HTTPS\n80 / 443\nla web, la nube, Nextcloud, Jupyter\nel navegador, curl, rclone\ncaps. 9, 12, anexo B2\n\n\nFTP\n21\nservidores antiguos de datos públicos\n«Conectar al servidor» (ftp://)\n— sin cifrar: solo lectura y solo si no hay otra\n\n\n\nUna regla para elegir: si hay SSH en el otro extremo, usa SSH — sirve para terminal y para ficheros, va cifrado, y lo hablan hoy hasta los Windows. SMB es el idioma de Windows y de los NAS; NFS, el del laboratorio; HTTPS, el de la nube. Todo lo demás son variantes.",
+    "text": "11.5 Qué habla cada puerta: los protocolos que usarás\nDetrás de cada puerto hay un protocolo: el idioma acordado entre los dos extremos. Para un físico, la pregunta práctica es «¿cómo paso datos de aquí a allí?», y la respuesta depende de qué hay en el otro extremo. Esta es la tabla que resuelve el noventa por ciento de los casos, con el capítulo o anexo donde se practica cada uno:\n\n\n\n\n\n\n\n\n\n\nProtocolo\nPuerto\nOtro extremo típico\nCon qué lo usarás\nDónde\n\n\n\n\nSSH / SFTP\n22\notro Linux, un servidor, la nube — y un Windows moderno\nterminal, scp, rsync, «Conectar al servidor», WinSCP\ncaps. 11–12, anexo E\n\n\nSMB\n445\nun PC con Windows, un NAS, una impresora\n«Conectar al servidor» (smb://), montar por cifs\nanexo E\n\n\nNFS\n2049\notro Linux, el laboratorio, un clúster\nmontar con -t nfs\nanexo E\n\n\nHTTP / HTTPS\n80 / 443\nla web, la nube, Nextcloud, Jupyter\nel navegador, curl, rclone\ncaps. 9, 12, anexo E\n\n\nFTP\n21\nservidores antiguos de datos públicos\n«Conectar al servidor» (ftp://)\n— sin cifrar: solo lectura y solo si no hay otra\n\n\n\nUna regla para elegir: si hay SSH en el otro extremo, usa SSH — sirve para terminal y para ficheros, va cifrado, y lo hablan hoy hasta los Windows. SMB es el idioma de Windows y de los NAS; NFS, el del laboratorio; HTTPS, el de la nube. Todo lo demás son variantes.",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Nombres, puertos y protocolos</span>"
     ]
@@ -1054,7 +1054,7 @@
     "href": "capitulos/cap12.html#sec-con-raton",
     "title": "12  SSH: entrar en otra máquina",
     "section": "",
-    "text": "Tipo\nQué es\nCuándo te lo encontrarás\n\n\n\n\nSSH (SFTP)\nficheros a través de una sesión SSH cifrada\ncualquier máquina Linux con SSH — tu debian-lab, el clúster\n\n\nWindows / Samba (SMB)\nel «compartir carpeta» de Windows y de los NAS\nla impresora de casa, el disco de red, el PC con Windows\n\n\nFTP\nel protocolo veterano de transferir ficheros, sin cifrar\nservidores públicos de datos, alojamientos web antiguos\n\n\nWebDAV\nficheros sobre una web\nnubes universitarias, Nextcloud\n\n\nNFS (escribiendo nfs://… en la barra de dirección)\nel compartir de Unix\nlaboratorios y clústeres (anexo B2)",
+    "text": "Tipo\nQué es\nCuándo te lo encontrarás\n\n\n\n\nSSH (SFTP)\nficheros a través de una sesión SSH cifrada\ncualquier máquina Linux con SSH — tu debian-lab, el clúster\n\n\nWindows / Samba (SMB)\nel «compartir carpeta» de Windows y de los NAS\nla impresora de casa, el disco de red, el PC con Windows\n\n\nFTP\nel protocolo veterano de transferir ficheros, sin cifrar\nservidores públicos de datos, alojamientos web antiguos\n\n\nWebDAV\nficheros sobre una web\nnubes universitarias, Nextcloud\n\n\nNFS (escribiendo nfs://… en la barra de dirección)\nel compartir de Unix\nlaboratorios y clústeres (anexo E)",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>SSH: entrar en otra máquina</span>"
     ]
@@ -1104,7 +1104,7 @@
     "href": "capitulos/cap12.html#sec-copiar",
     "title": "12  SSH: entrar en otra máquina",
     "section": "12.6 Mover ficheros: scp y rsync",
-    "text": "12.6 Mover ficheros: scp y rsync\nCopiar entre máquinas usa la misma gramática que cp del capítulo 2, con un máquina: delante de la ruta remota:\nmarcos@portatil:~/Descargas$ scp adquisicion.log lab:~/\nadquisicion.log                          100%  298KB  41.2MB/s   00:00\nmarcos@portatil:~/Descargas$ scp -r experimento-pendulo lab:~/\nmarcos@portatil:~/Descargas$ scp lab:~/informe.txt .\nSubir, subir una carpeta (-r), bajar: tres formas del mismo gesto. Para carpetas grandes que cambian — los resultados de una simulación que vas recogiendo — el profesional es rsync: copia solo lo que ha cambiado, se puede interrumpir y reanudar, y muestra el progreso:\nmarcos@portatil:~$ rsync -av --progress simulaciones/ lab:~/simulaciones/\nsending incremental file list\nrun07.csv\n        1,204,112 100%   38.12MB/s    0:00:00\nsent 1,204,589 bytes  received 42 bytes  2,409,262.00 bytes/sec\n-a conserva fechas y permisos, -v cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: la barra final importa. simulaciones/ (con barra) sincroniza el contenido de la carpeta; simulaciones (sin barra) copia la carpeta entera dentro del destino. La segunda vez que ejecutes el mismo rsync tardará un segundo: solo viaja lo nuevo.\n\n✚ Truco · Arrastrar y soltar sigue valiendo\nLa conexión con ratón de la primera sección es SFTP — el primo de scp que viaja por el mismo túnel — y también se abre escribiendo sftp://debian-lab/home/marcos en la barra de direcciones (Ctrl+L). Para un fichero suelto es perfecto; rsync gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta de verdad en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el anexo B2.",
+    "text": "12.6 Mover ficheros: scp y rsync\nCopiar entre máquinas usa la misma gramática que cp del capítulo 2, con un máquina: delante de la ruta remota:\nmarcos@portatil:~/Descargas$ scp adquisicion.log lab:~/\nadquisicion.log                          100%  298KB  41.2MB/s   00:00\nmarcos@portatil:~/Descargas$ scp -r experimento-pendulo lab:~/\nmarcos@portatil:~/Descargas$ scp lab:~/informe.txt .\nSubir, subir una carpeta (-r), bajar: tres formas del mismo gesto. Para carpetas grandes que cambian — los resultados de una simulación que vas recogiendo — el profesional es rsync: copia solo lo que ha cambiado, se puede interrumpir y reanudar, y muestra el progreso:\nmarcos@portatil:~$ rsync -av --progress simulaciones/ lab:~/simulaciones/\nsending incremental file list\nrun07.csv\n        1,204,112 100%   38.12MB/s    0:00:00\nsent 1,204,589 bytes  received 42 bytes  2,409,262.00 bytes/sec\n-a conserva fechas y permisos, -v cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: la barra final importa. simulaciones/ (con barra) sincroniza el contenido de la carpeta; simulaciones (sin barra) copia la carpeta entera dentro del destino. La segunda vez que ejecutes el mismo rsync tardará un segundo: solo viaja lo nuevo.\n\n✚ Truco · Arrastrar y soltar sigue valiendo\nLa conexión con ratón de la primera sección es SFTP — el primo de scp que viaja por el mismo túnel — y también se abre escribiendo sftp://debian-lab/home/marcos en la barra de direcciones (Ctrl+L). Para un fichero suelto es perfecto; rsync gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta de verdad en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el anexo E.",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>SSH: entrar en otra máquina</span>"
     ]
@@ -1290,421 +1290,388 @@
     ]
   },
   {
-    "objectID": "anexos/anexo-windows.html",
-    "href": "anexos/anexo-windows.html",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "",
-    "text": "Los dos caminos\nEl curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.\nSi puedes, el camino A: es un Linux de verdad — con su apt, su systemd, su lsblk — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es UTM (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-windows.html#los-dos-caminos",
-    "href": "anexos/anexo-windows.html#los-dos-caminos",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "",
-    "text": "A · Un Mint completo en VirtualBox\nB · WSL2 (Ubuntu dentro de Windows)\n\n\n\n\nQué es\nuna máquina virtual con Linux Mint entero, escritorio incluido\nuna terminal Ubuntu integrada en Windows, sin escritorio\n\n\nInstalar\n30–40 min; ISO de Mint + VirtualBox\n5 min; una orden en PowerShell\n\n\nBloques A y B (caps. 1–6)\n✔ todo\n✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica\n\n\nBloque C (caps. 7–8)\n✔ con un matiz (abajo)\n✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado\n\n\nBloques D y E (caps. 9–12)\n✔\n✔ (la red es la de Windows; SSH funciona igual)\n\n\nRecomendado para\nseguir el curso entero como está escrito\nempezar hoy con la terminal, o si tu PC va justo de RAM",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
-    "href": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "Camino A: Mint en VirtualBox",
-    "text": "Camino A: Mint en VirtualBox\n\nDescarga VirtualBox (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de Linux Mint (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: Get-FileHash linuxmint-22.iso -Algorithm SHA256.\nNueva máquina: nombre mint, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.\nArranca. Mint entra en modo live — un escritorio de prueba —; el icono Install Linux Mint lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.\nTras reiniciar, en el menú Dispositivos → Insertar imagen de CD de las Guest Additions e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.\nYa estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-windows.html#camino-b-wsl2",
-    "href": "anexos/anexo-windows.html#camino-b-wsl2",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "Camino B: WSL2",
-    "text": "Camino B: WSL2\nEn PowerShell como administrador: wsl --install — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación Ubuntu del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (sudo apt install, nano, tuberías, permisos, htop). Tres avisos honestos: tus ficheros de Windows están en /mnt/c/…, más lentos que tu casa Linux; lsblk y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-windows.html#dos-caminos-más-el-usb-persistente-y-el-arranque-dual",
-    "href": "anexos/anexo-windows.html#dos-caminos-más-el-usb-persistente-y-el-arranque-dual",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "Dos caminos más: el USB persistente y el arranque dual",
-    "text": "Dos caminos más: el USB persistente y el arranque dual\nHay otras dos formas de tener un Linux de verdad en tu ordenador sin renunciar a Windows. Una es limpia y fácil; la otra no es para principiantes.\n\nCamino C · Un Linux live en un pendrive, con persistencia\nCualquier ISO de Mint arranca «en vivo» desde un pendrive: un escritorio completo que no toca tu disco… y que olvida todo al apagar. La persistencia arregla eso: una partición extra en el mismo pendrive donde se guardan tus ficheros, tu configuración y lo que instales con apt. Desde Windows, la forma más sencilla es Rufus (rufus.ie, gratuito):\n\nUn pendrive USB 3 de 32 GB (16 como mínimo) que puedas borrar; cuanto más rápido, mejor: es tu disco duro durante el curso.\nRufus → elige el pendrive y la ISO de Mint → aparece el control «Tamaño de la partición persistente»: dale todo lo que quepa (16–24 GB) → Empezar. Rufus crea la partición casper-rw de persistencia por ti.\nReinicia con la tecla del menú de arranque (anexo C1) y elige el pendrive. Mint arranca en vivo; lo que hagas, se queda.\n\nLo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema live) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en lsblk, el tuyo y el de Windows, que es incluso más instructivo. Los peros, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (apt upgrade sí, pero el sistema live arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 12 y anexo B1: rsync con cron). Para quien quiera varias ISO en un mismo pendrive existe Ventoy, con persistencia configurable por fichero; es más potente y más liado — para más adelante.\nY una variante con más recorrido: en vez de un sistema live, instalar Linux entero en un SSD externo por USB — con el instalador del capítulo 8, eligiendo ese disco como destino y poniendo en él la partición EFI. Es un Linux completo, rápido y permanente que arranca en cualquier PC desde el menú de arranque. La única pega es seria: al elegir el disco de destino, equivocarse destruye Windows. Es el camino perfecto después del capítulo 8 y del anexo C1, con el plan escrito y lsblk delante — no antes.\n\n\nCamino D · Arranque dual: solo con alguien que sepa\nInstalar Linux en una partición del disco interno, junto a Windows, y elegir al encender. Es lo que hace mucha gente y lo que cubre el anexo C1 — pero no es para hacerlo a solas el primer día. Las implicaciones que hay que entender antes: reducir la partición de Windows (desde Windows, con su «inicio rápido» y BitLocker desactivados), que GRUB pase a gestionar el arranque de los dos sistemas, que una actualización grande de Windows puede pisar ese arranque y dejarte «sin Linux» hasta repararlo, y que deshacerlo requiere saber restaurar el cargador de Windows. Si tienes a alguien que lo haya hecho varias veces y te lo explique mientras lo hace, adelante — con copia de seguridad. Si no, el camino C te da el mismo Linux sin ninguno de esos riesgos, y el capítulo 8 te enseñará a hacer el dual tú mismo cuando toque.\n\n\n\n\n\n\n\n\n\n\nCubre el curso\nRiesgo para Windows\nPara quién\n\n\n\n\nA Mint en VirtualBox\ntodo (bloque C con virtualización anidada)\nninguno\nla opción por defecto\n\n\nB WSL2\nterminal y redes; no discos ni instalación\nninguno\nempezar hoy mismo\n\n\nC USB persistente (Rufus)\ntodo, a la velocidad del pendrive\nninguno\nquien quiere Linux «real» sin tocar el disco\n\n\nC’ instalación en SSD externo\ntodo, rápido\nalto al instalar, ninguno después\ntras el capítulo 8 y el anexo C1\n\n\nD arranque dual\ntodo\nmedio, y permanente\nsolo acompañado por alguien que sepa",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-windows.html#lo-que-no-cambia",
-    "href": "anexos/anexo-windows.html#lo-que-no-cambia",
-    "title": "Apéndice A — Vengo de Windows (o de macOS)",
-    "section": "Lo que no cambia",
-    "text": "Lo que no cambia\nSea cual sea el camino: cuaderno con script, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM (y con el USB persistente, además, copia periódica de tu carpeta al servidor). La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C1 te espera con el pendrive.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-c1-pc-real.html",
-    "href": "anexos/anexo-c1-pc-real.html",
-    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
-    "section": "",
-    "text": "B.1 Antes de tocar nada\nTodo lo que ensayaste en la máquina virtual del capítulo 8 vale para un ordenador físico. Este anexo es la lista que se lee antes de empezar y se sigue durante, porque aquí no hay instantánea que restaurar. Léela entera una vez; el día de la instalación, tenla abierta en el móvil.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
-    "href": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
-    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
-    "section": "",
-    "text": "Copia de seguridad de todo lo que importe del disco de destino — aunque «vayas a dejar Windows». Un error de letra en el particionado no avisa.\nPlan de particiones escrito (ejercicio 8.1), con una columna más: qué hay ahora en cada partición del disco y qué va a pasarle.\nSi vas a convivir con Windows: reduce su partición desde Windows (Administración de discos → Reducir volumen) antes de arrancar el instalador — o con GParted desde el pendrive live de Mint, que es lo que hace mucha gente; en ambos casos con copia de seguridad hecha —, y desactiva el «inicio rápido» de Windows, que deja el disco a medio cerrar.\nISO verificada con sha256sum (capítulo 7). Debian incluye desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst: ya no hace falta la imagen «non-free».\nUn pendrive de 2 GB o más que puedas borrar por completo, y cable de red si es posible: la instalación por cable ahorra sorpresas con la Wi-Fi.\nLa tecla del menú de arranque de tu equipo, buscada antes: suele ser F12 (Dell, Lenovo), F9 (HP), Esc o F2 (ASUS, Acer), Opción (Mac Intel). Se pulsa nada más encender.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
-    "href": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
-    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
-    "section": "B.2 Grabar el pendrive",
-    "text": "B.2 Grabar el pendrive\nLa ISO se copia al pendrive byte a byte — no se «pega» como un fichero. Dos vías igual de válidas:\nCon ratón (recomendada la primera vez). En Mint, aplicación Discos: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → Restaurar imagen de disco → elige la ISO → Iniciar restauración. Eliges el destino por su nombre, sin letras que confundir.\nCon terminal. Primero, la regla de oro: lsblk antes de pinchar el pendrive y después, para ver qué nombre nuevo aparece (sda, sdb…). Luego, con esa letra y solo con esa:\nmarcos@portatil:~/Descargas$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  14,9G  0 disk\n└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON\nnvme0n1     259:0    0 476,9G  0 disk\nmarcos@portatil:~/Descargas$ sudo umount /dev/sda1\nmarcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress\ndd copia bloques de if (input file) a of (output file) sin preguntar nada: si of= apunta a tu disco interno, lo destruye en silencio. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (/dev/sda), no una partición (sda1). Cuando termine, sync y expulsar (capítulo 6).",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
-    "href": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
-    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
-    "section": "B.3 Arrancar e instalar",
-    "text": "B.3 Arrancar e instalar\n\nPendrive pinchado, encender, tecla del menú de arranque, elegir el pendrive (la entrada que dice UEFI: delante — no la otra, si aparecen dos).\nSi el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. Secure Boot puede quedarse activado: Debian lo soporta.\nInstalador: idénticas pantallas que en la VM. En el particionado manual, el disco se llamará nvme0n1 o sda y tendrá particiones ya. Con Windows al lado: no crees una tabla nueva (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como Partición del sistema EFI sin formatearla.\nContraseña de root vacía → tu usuario con sudo (capítulo 8).\nSelección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.\nGRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
-    "href": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
-    "title": "Apéndice B — Instalar en un PC real: la lista de comprobación",
-    "section": "B.4 Después del primer arranque",
-    "text": "B.4 Después del primer arranque\n\nlsblk y df -h: el parte del capítulo 8, sobre hardware real.\nsudo apt update && sudo apt upgrade.\nWi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar en lspci | grep -i (red, VGA, audio) para saber qué chip tienes, y de ahí a la wiki de Debian.\nGuarda el plan de particiones y tus notas en el cuaderno del curso: la próxima instalación la harás en la mitad de tiempo.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html",
-    "href": "anexos/anexo-b1-scripting.html",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "",
-    "text": "Variables y sustitución\nEn el capítulo 2 renombraste cinco ficheros a mano y el curso prometió algo mejor; en el capítulo 3 dijimos que las tuberías transforman texto pero no ejecutan una orden por cada fichero; en el 4 escribiste tu primer script. Este anexo cierra esa deuda: las cuatro piezas de bash que convierten comandos sueltos en programas — y cron, para que se ejecuten sin ti.\nDos ideas. Una variable se crea con nombre=valor (sin espacios alrededor del =) y se lee con $nombre. Y $(comando) ejecuta el comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla que evita el noventa por ciento de los sustos: las variables van siempre entre comillas dobles — \"$dir\" — para que un valor con espacios (capítulo 1) no se rompa en dos argumentos.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
-    "href": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "",
-    "text": "marcos@portatil:~/fisica$ dir=resultados_$(date +%F)\nmarcos@portatil:~/fisica$ echo \"$dir\"\nresultados_2026-08-26\nmarcos@portatil:~/fisica$ mkdir \"$dir\"",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#el-bucle-for",
-    "href": "anexos/anexo-b1-scripting.html#el-bucle-for",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "El bucle for",
-    "text": "El bucle for\nmarcos@portatil:~/fisica$ for f in *.csv; do echo \"procesando $f\"; done\nprocesando run01.csv\nprocesando run02.csv\nprocesando run03.csv\nfor f in LISTA; do …; done repite el bloque una vez por elemento, con $f valiendo cada uno. La lista puede ser un comodín del capítulo 2 (*.csv), una salida de comando ($(cat lista.txt)) o palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en lote quitando el _final:\nmarcos@portatil:~/fisica$ ls\nrun01_final.csv  run02_final.csv  run03_final.csv\nmarcos@portatil:~/fisica$ for f in *_final.csv; do mv \"$f\" \"${f/_final/}\"; done\nmarcos@portatil:~/fisica$ ls\nrun01.csv  run02.csv  run03.csv\n${f/_final/} es una sustitución dentro de la variable: el valor de f con _final cambiado por nada. Hay una familia entera: ${f%.csv} quita la extensión, ${f#run} quita el prefijo. Antes de un mv en lote, el gesto de seguridad es cambiar mv por echo mv y mirar qué haría: la simulación en seco.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#condiciones-if",
-    "href": "anexos/anexo-b1-scripting.html#condiciones-if",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "Condiciones: if",
-    "text": "Condiciones: if\n#!/bin/bash\n# comprueba.sh — ¿existe el fichero que me pasan?\nif [ -f \"$1\" ]; then\n    echo \"$1 existe y tiene $(wc -l &lt; \"$1\") líneas\"\nelse\n    echo \"no encuentro $1\"\n    exit 1\nfi\n$1 es el primer argumento con que se llamó al script (./comprueba.sh adquisicion.log), $2 el segundo, y así. [ -f \"$1\" ] pregunta «¿es un fichero?»; otros: -d directorio, -z cadena vacía, -gt mayor que para números. exit 1 termina con código de error: es el $? que puedes consultar después, y lo que && (capítulo 5) mira para decidir si continúa. Un script que comprueba sus entradas y falla con mensaje vale el doble que uno que simplemente revienta.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
-    "href": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "while y leer línea a línea",
-    "text": "while y leer línea a línea\n#!/bin/bash\n# por cada sensor de la lista, cuenta sus errores\nwhile read -r sensor; do\n    n=$(grep -c \"ERROR $sensor\" adquisicion.log)\n    echo \"$sensor: $n errores\"\ndone &lt; sensores.txt\nwhile read -r linea; do …; done &lt; fichero recorre un fichero línea a línea — la forma correcta de tratar listas que vienen de otro sitio. Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los scripts son el pegamento que convierte comandos sueltos en procedimiento.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#un-script-completo",
-    "href": "anexos/anexo-b1-scripting.html#un-script-completo",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "Un script completo",
-    "text": "Un script completo\nTodo junto, con las dos líneas de cabecera que distinguen a un script serio: set -e (para al primer error, en vez de seguir a ciegas) y un uso claro cuando faltan argumentos.\n#!/bin/bash\n# organiza.sh — mueve a datos/ los CSV de una serie y anota el registro\nset -e\nif [ $# -ne 1 ]; then\n    echo \"uso: $0 CARPETA_DEL_EXPERIMENTO\"\n    exit 1\nfi\ncd \"$1\"\nmkdir -p datos descartes\nfor f in *.csv; do\n    if grep -q \"sensor congelado\" \"$f\"; then\n        mv \"$f\" descartes/\n    else\n        mv \"$f\" datos/\n    fi\n    echo \"$(date +%T) $f\" &gt;&gt; registro.log\ndone\necho \"hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados\"\nEs el ejercicio del capítulo 2 hecho en un segundo y repetible mañana con otro experimento. $# es el número de argumentos; $0, el nombre del propio script. Con chmod u+x y en tu ~/bin (capítulo 5), es una herramienta tuya.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
-    "href": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "cron: que se ejecute sin ti",
-    "text": "cron: que se ejecute sin ti\ncron ejecuta comandos a horas fijas. Tu tabla se edita con crontab -e (la primera vez pregunta qué editor: nano), y cada línea son cinco campos de tiempo y un comando:\n# min hora día mes díasemana   comando\n  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/\n   0   8   *   *    1          /home/marcos/bin/informe.sh &gt;&gt; /home/marcos/informes.log 2&gt;&1\nLa primera línea copia tu carpeta de física al servidor del capítulo 11 cada noche a las 2:30 — una copia de seguridad que ya no depende de acordarte. La segunda lanza tu informe los lunes a las 8. Tres reglas de cron: rutas absolutas (no hay cd, no hay tu PATH de la terminal), redirige la salida a un fichero (si no, se pierde o se convierte en correo), y prueba el comando a mano antes de programarlo. En sistemas con systemd existe el equivalente moderno — los timers — que verás en servidores; la idea es la misma.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b1-scripting.html#práctica",
-    "href": "anexos/anexo-b1-scripting.html#práctica",
-    "title": "Apéndice C — Scripting: bucles, condiciones y cron",
-    "section": "Práctica",
-    "text": "Práctica\n\nEjercicio B1.1 · La deuda del capítulo 2\nCrea una carpeta con touch run0{1..5}_final.csv (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando _final — primero en seco con echo mv, luego de verdad.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nfor f in *_final.csv; do echo mv \"$f\" \"${f/_final/}\"; done enseña las cinco órdenes; sin el echo, las ejecuta. ls confirma.\nPor qué así — El ensayo en seco es el hábito que convierte un bucle con mv (o rm) de peligro en herramienta. Te costó cinco renombrados en el capítulo 2; con cinco mil costaría lo mismo.\n\n\n\n\n\n\nEjercicio B1.2 · Un script con criterio\nEscribe resumen.sh que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas ERROR, WARN e INFO tiene — con un bucle sobre los tres niveles.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n#!/bin/bash\nset -e\n[ -f \"$1\" ] || { echo \"uso: $0 FICHERO.log\"; exit 1; }\nfor nivel in ERROR WARN INFO; do\n    echo \"$nivel: $(grep -c \" $nivel \" \"$1\")\"\ndone\nPor qué así — Tres piezas del anexo en ocho líneas: argumento, comprobación con salida de error, y bucle con una tubería dentro. [ … ] || { …; } es la forma compacta de «si no, protesta y sal».\n\n\n\n\n\n\nEjercicio B1.3 · Copia nocturna (opcional)\nPrograma con cron una copia diaria de tu carpeta de física a debian-lab con rsync, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que cron lo ejecuta, y déjalo en su hora definitiva.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\ncrontab -e y una línea como 15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&1. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 12) funciona sin ti — cron no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.\nPor qué así — Es el primer proceso automático de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html",
-    "href": "anexos/anexo-b2-montajes.html",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "",
-    "text": "Ver qué hay montado\nEl capítulo 6 enseñó la idea — un disco se engancha en un directorio del árbol único — y Mint la aplica sola cada vez que pinchas un pendrive. Este anexo la lleva hasta el final: montar a mano, montar discos de otros formatos, hacer un montaje permanente, y enganchar carpetas que viven en otra máquina — por SSH, por el protocolo de Windows y por el de los laboratorios. Todo por terminal y todo por ventanas, porque aquí las dos vías se usan de verdad. Requiere los capítulos 6 y 11.\nDos comandos que ya conoces y uno nuevo: lsblk -f (con -f, enseña el sistema de ficheros y la etiqueta de cada partición), df -h (lo montado, con su espacio), y findmnt, que dibuja el árbol de montajes entero — útil cuando df es demasiado largo:\nFíjate en el UUID: el identificador único de cada partición. Los nombres sdb1 cambian según el orden en que enchufes las cosas; el UUID no. Por eso los montajes permanentes se escriben con él.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#ver-qué-hay-montado",
-    "href": "anexos/anexo-b2-montajes.html#ver-qué-hay-montado",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "",
-    "text": "marcos@portatil:~$ lsblk -f\nNAME        FSTYPE FSVER LABEL     UUID                                 MOUNTPOINTS\nsdb           \n└─sdb1      exfat  1.0   VIAJE     6A3F-1B2C                            /media/marcos/VIAJE\nnvme0n1\n├─nvme0n1p1 vfat   FAT32           7C21-9E04                            /boot/efi\n└─nvme0n1p2 ext4   1.0             3f8a2c1e-…                           /\nmarcos@portatil:~$ findmnt /media/marcos/VIAJE\nTARGET               SOURCE    FSTYPE OPTIONS\n/media/marcos/VIAJE  /dev/sdb1 exfat  rw,nosuid,nodev,relatime,uid=1000,gid=1000",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#montar-a-mano-un-disco-que-conectas",
-    "href": "anexos/anexo-b2-montajes.html#montar-a-mano-un-disco-que-conectas",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Montar a mano un disco que conectas",
-    "text": "Montar a mano un disco que conectas\nMint monta los pendrives en /media/tu_usuario/ETIQUETA. En un servidor sin escritorio no hay nadie que lo haga, y a veces en el portátil quieres controlarlo — montar solo lectura un disco antiguo, por ejemplo, para no tocar nada. El gesto: un directorio vacío como punto de montaje, mount, umount:\nmarcos@portatil:~$ sudo mkdir -p /mnt/viejo\nmarcos@portatil:~$ sudo mount -o ro /dev/sdb1 /mnt/viejo\nmarcos@portatil:~$ ls /mnt/viejo\ntesis_2019  fotos  backup_windows\nmarcos@portatil:~$ sudo umount /mnt/viejo\n-o ro (read-only) es el seguro: nada de lo que hagas podrá escribir en ese disco. /mnt es el sitio tradicional para montajes manuales — /media es de los automáticos. Y otros formatos funcionan igual: mount detecta solo NTFS (el de Windows; Mint trae el controlador), exFAT y FAT32, y los ext4 de otro Linux. Con ext4 ajeno verás una curiosidad del capítulo 4: los ficheros aparecen con el número de usuario que tenían allí (uid 1001, quizá sin nombre) — los permisos viajan con el disco, los nombres no. Si mount protesta con «tipo de sistema de ficheros desconocido», falta el paquete del formato (exfatprogs, ntfs-3g); apt lo resuelve.\n\n✚ Truco · La aplicación «Discos»\nMenú → Accesorios → Discos (gnome-disks) es la cara gráfica de todo este anexo, y muy buena: elige el disco a la izquierda, la partición en el dibujo, y los botones ▶ / ■ montan y desmontan. El icono de engranaje tiene Editar opciones de montaje, que es — literalmente — la forma con ratón de escribir la línea de fstab de la sección siguiente, con el UUID puesto por ti y sin riesgo de errata. También formatea y comprueba discos. Para un disco suelto en tu portátil, empieza por aquí; la terminal es para el servidor y para entender qué hizo el botón. Y para cambiar particiones — crear, borrar, redimensionar — la herramienta es GParted (capítulo 6), que va un paso más allá de «Discos» y exige el mismo respeto que dd.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#montaje-permanente-etcfstab",
-    "href": "anexos/anexo-b2-montajes.html#montaje-permanente-etcfstab",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Montaje permanente: /etc/fstab",
-    "text": "Montaje permanente: /etc/fstab\nUn montaje a mano dura hasta el reinicio. Para que un disco de datos aparezca siempre en el mismo sitio, se apunta en /etc/fstab (file system table) — un fichero de texto de /etc, cómo no — con el protocolo del capítulo 10: copia antes, vuelta atrás escrita. Cada línea son seis campos:\n# dispositivo (por UUID)                  punto de montaje  tipo   opciones          dump pass\nUUID=3f8a2c1e-…                            /                 ext4   errors=remount-ro 0    1\nUUID=7C21-9E04                             /boot/efi         vfat   umask=0077        0    1\nUUID=9d4b7e20-…                            /datos            ext4   defaults,nofail   0    2\nLas dos primeras las escribió el instalador del capítulo 8 — ahora puedes leerlas. La tercera es tuya: un segundo disco interno con tus datos, montado en /datos en cada arranque. Dos reglas que evitan la avería clásica: nofail — si el disco no está, el sistema arranca igual en vez de quedarse esperando —, y probar sin reiniciar con sudo mount -a, que monta todo lo de fstab que no esté montado y te enseña el error si te has equivocado. Una línea mal escrita sin nofail puede dejar el arranque en modo de emergencia; con la copia de seguridad y mount -a, nunca llegarás ahí.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-i-sshfs",
-    "href": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-i-sshfs",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Carpetas de otra máquina, I: SSHFS",
-    "text": "Carpetas de otra máquina, I: SSHFS\nAquí entra el capítulo 12. Si puedes entrar en una máquina por SSH, puedes montar cualquier carpeta suya en tu árbol como si fuera un disco — sin administrar nada en el servidor:\nmarcos@portatil:~$ sudo apt install sshfs\nmarcos@portatil:~$ mkdir ~/lab\nmarcos@portatil:~$ sshfs lab:/home/marcos ~/lab\nmarcos@portatil:~$ ls ~/lab\nadquisicion.log  proyecto  simula.py\nmarcos@portatil:~$ fusermount -u ~/lab\nDesde ese momento tu editor, tu Python, tu gestor de archivos ven ~/lab como una carpeta local — cada lectura y escritura viaja por SSH con tu clave. Se desmonta con fusermount -u (no hace falta sudo: el montaje es tuyo). Es la herramienta perfecta para editar cómodamente ficheros de un servidor donde no tienes más que SSH — un clúster incluido —; a cambio, es lento para carpetas grandes.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-ii-smb-y-nfs",
-    "href": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-ii-smb-y-nfs",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Carpetas de otra máquina, II: SMB y NFS",
-    "text": "Carpetas de otra máquina, II: SMB y NFS\nDos protocolos más, cada uno con su mundo. SMB (también llamado CIFS o «compartir de Windows») es lo que hablan los NAS domésticos, las impresoras y los PC con Windows. NFS es el de Unix: es lo que hay debajo cuando en el laboratorio o el clúster tu casa «aparece» en todas las máquinas a la vez.\nPor ventanas, los dos son un solo gesto: en el gestor de archivos (Nemo en tu Mint; Caja, Nautilus o Thunar en otros escritorios), Archivo → Conectar al servidor… y una dirección: smb://nas/datos, sftp://lab/home/marcos, nfs://servidor/export. La carpeta aparece en la barra lateral y todo es arrastrar y soltar. Por terminal, cada uno tiene su paquete y su -t:\nmarcos@portatil:~$ sudo apt install cifs-utils nfs-common\nmarcos@portatil:~$ sudo mkdir -p /mnt/nas /mnt/lab\nmarcos@portatil:~$ sudo mount -t cifs //nas/datos /mnt/nas -o username=marcos,uid=1000,gid=1000\nPassword for marcos@//nas/datos: ********\nmarcos@portatil:~$ sudo mount -t nfs debian-lab:/home/marcos/proyecto /mnt/lab\nmarcos@portatil:~$ findmnt -t cifs,nfs\nEn SMB, uid=1000,gid=1000 hace que los ficheros aparezcan como tuyos (el protocolo no entiende de usuarios Linux); en NFS los permisos viajan de verdad, así que tu usuario debe tener el mismo número en las dos máquinas — id, capítulo 4 — o verás ficheros ajenos. Para hacerlos permanentes, fstab con dos opciones más: _netdev («espera a la red») y, en SMB, un fichero de credenciales con permisos 600 en vez de la contraseña a la vista:\n//nas/datos                       /mnt/nas  cifs  credentials=/etc/smb-nas,uid=1000,gid=1000,nofail,_netdev  0 0\ndebian-lab:/home/marcos/proyecto  /mnt/lab  nfs   defaults,nofail,_netdev                                    0 0\n¿Cuál usar? SSHFS cuando solo tienes SSH y no administras el servidor. SMB cuando el otro lado es un NAS, un Windows o la impresora de casa. NFS cuando tú (o el laboratorio) administráis ambos lados y quieres rendimiento y permisos de verdad. Y por ventanas, los tres son la misma pantalla de Conectar al servidor.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#windows-y-la-nube",
-    "href": "anexos/anexo-b2-montajes.html#windows-y-la-nube",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Windows y la nube",
-    "text": "Windows y la nube\nLos dos casos que más se preguntan, resueltos con lo anterior. De Windows a tu Linux y al revés: Windows 10 y 11 traen el cliente OpenSSH de serie, así que desde PowerShell funcionan los mismos scp y sftp del capítulo 12 contra tu Mint (con openssh-server instalado, ejercicio 11.1) o contra debian-lab:\nPS C:\\Users\\Marcos&gt; scp .\\medidas.csv marcos@192.168.1.34:~/fisica/\nPS C:\\Users\\Marcos&gt; sftp marcos@192.168.1.34\nCon ratón, en Windows, WinSCP (gratuito) es el «Conectar al servidor» del otro lado: arrastrar y soltar por SFTP. En sentido contrario, la vía natural es SMB: compartir una carpeta de Windows (propiedades → Compartir) y montarla desde Linux como en la sección anterior — o compartir una carpeta de tu Linux desde Nemo (clic derecho → Opciones de compartición; Mint instala Samba la primera vez) para que Windows la vea en «Red». Con la nube: el navegador siempre vale (Drive, Dropbox, OneDrive, el Nextcloud de la universidad); para hacerlo desde la terminal o montarla como carpeta existe rclone (sudo apt install rclone, rclone config te guía para conectar la cuenta, y después rclone copy o rclone mount), sin sudo ni permanencia — el mismo espíritu que SSHFS, con la nube al otro lado.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#servir-una-carpeta-desde-tu-vm-por-nfs",
-    "href": "anexos/anexo-b2-montajes.html#servir-una-carpeta-desde-tu-vm-por-nfs",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Servir una carpeta desde tu VM por NFS",
-    "text": "Servir una carpeta desde tu VM por NFS\nPara ver NFS entero, el servidor lo puedes montar tú en debian-lab — con instantánea antes, como siempre:\nmarcos@debian-lab:~$ sudo apt install nfs-kernel-server\nmarcos@debian-lab:~$ echo \"/home/marcos/proyecto 192.168.122.0/24(rw,sync,no_subtree_check)\" | sudo tee -a /etc/exports\nmarcos@debian-lab:~$ sudo exportfs -ra\nmarcos@debian-lab:~$ sudo exportfs -v\n/home/marcos/proyecto  192.168.122.0/24(rw,sync,no_subtree_check)\n/etc/exports dice qué carpeta se comparte y con quién — aquí, con toda la red NAT del capítulo 7 —; exportfs -ra la publica. Desde tu Mint, el mount -t nfs de la sección anterior la engancha, y con el mismo uid 1000 en ambas máquinas, lo que escribas en /mnt/lab aparece en la VM como tuyo. Es exactamente lo que verás en un clúster: tu casa está en un servidor NFS, y cada nodo de cálculo la monta.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-b2-montajes.html#práctica",
-    "href": "anexos/anexo-b2-montajes.html#práctica",
-    "title": "Apéndice D — Montar de todo: discos, pendrives y unidades remotas",
-    "section": "Práctica",
-    "text": "Práctica\n\nEjercicio B2.1 · A mano y solo lectura\nCon un pendrive: desmóntalo desde el gestor de archivos, móntalo a mano en /mnt/usb en modo solo lectura, intenta crear un fichero dentro (debe fallar), desmonta, y vuelve a montar sin ro. Observa findmnt /mnt/usb en cada estado.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsudo mkdir -p /mnt/usb, sudo mount -o ro /dev/sdb1 /mnt/usb (tu letra según lsblk), touch /mnt/usb/prueba → «sistema de ficheros de solo lectura»; sudo umount /mnt/usb; sudo mount /dev/sdb1 /mnt/usb y el touch funciona (en FAT/exFAT, con los permisos rwxrwxrwx del capítulo 6).\nPor qué así — El montaje de solo lectura es el gesto con el que se examina un disco ajeno o dañado sin riesgo. Y verlo fallar al escribir es la mejor demostración de que la opción manda.\n\n\n\n\n\n\nEjercicio B2.2 · Permanente, por las dos vías\nSi tienes una partición de datos (o el propio pendrive, para practicar): añádele un montaje permanente primero con «Discos → Editar opciones de montaje», y mira qué línea ha escrito en /etc/fstab (cat). Después bórrala con nano, escríbela tú a mano con nofail, y compruébala con sudo mount -a. Copia de fstab antes de todo.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n«Discos» escribe algo como UUID=… /mnt/datos auto nosuid,nodev, nofail,x-gvfs-show 0 0. La tuya a mano: UUID=… /mnt/datos ext4 defaults,nofail 0 2 (o exfat con uid=1000,gid=1000 para un pendrive). sudo mount -a sin quejas y findmnt /mnt/datos la confirma.\nPor qué así — Ver la línea que genera la aplicación gráfica y escribir la tuya después es la forma honesta de aprender fstab: entiendes cada campo y pierdes el miedo. nofail y mount -a son la red de seguridad que te separa del arranque en modo emergencia.\n\n\n\n\n\n\nEjercicio B2.3 · La VM como carpeta\nMonta la casa de debian-lab con SSHFS en ~/lab, edita desde tu Mint (con el editor que quieras) el informe.txt del proyecto, y comprueba desde dentro de la VM (ssh lab cat …) que el cambio está allí. Desmonta.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsshfs lab:/home/marcos ~/lab, editar ~/lab/proyecto/resultados/ informe.txt, ssh lab cat proyecto/resultados/informe.txt muestra el cambio, fusermount -u ~/lab.\nPor qué así — Cada escritura viajó por SSH con tu clave: el mismo túnel de scp, presentado como un directorio. Es la forma más cómoda de trabajar con ficheros de un servidor donde no administras nada.\n\n\n\n\n\n\nEjercicio B2.4 · NFS de punta a punta (opcional)\nCon instantánea de la VM: exporta ~/proyecto de debian-lab por NFS, móntalo en tu Mint en /mnt/lab, crea un fichero desde cada lado y comprueba con ls -l que ambos aparecen como marcos en las dos máquinas. Hazlo permanente en fstab con nofail,_netdev y verifica con mount -a.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nServidor: nfs-kernel-server, línea en /etc/exports, exportfs -ra. Cliente: nfs-common, sudo mount -t nfs debian-lab:/home/marcos/ proyecto /mnt/lab. Los ficheros son de marcos a ambos lados porque los dos usuarios tienen uid 1000. Línea de fstab con _netdev y nofail; sudo umount /mnt/lab && sudo mount -a la prueba.\nPor qué así — Has montado la infraestructura de un laboratorio en miniatura: una casa compartida por red con permisos reales. El día que en el clúster te digan «tu $HOME está en NFS», sabrás exactamente qué significa — y por qué tu uid importa.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
-    ]
-  },
-  {
     "objectID": "anexos/anexo-e1-ia.html",
     "href": "anexos/anexo-e1-ia.html",
-    "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
     "section": "",
-    "text": "Dos formas de usar la IA\nEste anexo es la otra mitad del curso. Todo lo que has aprendido — qué es un proceso, qué hace sudo, qué significa montar, qué es un puerto — no es para que teclees comandos de memoria: es para que entiendas lo que una IA te proponga y decidas tú. En 2026, un físico que administra su portátil, su servidor y su red trabaja con una IA al lado; la diferencia entre el que manda y el que copia y pega a ciegas es exactamente el contenido de este curso.\nPreguntar es la forma que ya conoces: describes el problema en un chat, te devuelve comandos, los tecleas tú. Funciona, y la disciplina es la del capítulo 3: lee cada comando, verifica con man o --help lo que no reconozcas, y nunca ejecutes a ciegas nada con sudo, rm, dd o mkfs (ya sabes por qué cada uno).\nDelegar es lo nuevo: un agente — un programa que ejecuta un modelo de IA con acceso a tu terminal. Le describes la tarea («monta la carpeta proyecto de debian-lab en ~/lab por NFS y hazlo permanente»), y él mismo lee tus ficheros, propone los comandos, te pide permiso, los ejecuta, mira el resultado y corrige. Los más usados hoy son Claude Code (Anthropic) y Codex CLI (OpenAI); hay otros, y cambian cada pocos meses. Se instalan como cualquier programa de terminal, y trabajan desde el directorio en el que los abres.",
+    "text": "El fontanero\nEste anexo es la otra mitad del curso. Todo lo que has aprendido — qué es un proceso, qué hace sudo, qué significa montar, qué es un puerto — no es para que teclees comandos de memoria: es para que entiendas lo que una IA te proponga y decidas tú. En 2026, un científico que administra su portátil, su servidor y su red trabaja con una IA al lado; la diferencia entre el que manda y el que copia y pega a ciegas es exactamente el contenido de este curso. Aquí están las reglas, y el paso a paso con una herramienta concreta y gratuita: Antigravity CLI, el agente de Google para la terminal.\nCuando llamas a un fontanero tienes dos maneras de tratarlo. La primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado. Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se arregla. La segunda: te quedas al lado, le preguntas por cada herramienta y cada técnica que va a usar, y le pides que te indique cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta llamarle. Está claro cuál de las dos vías es la de aprender.\nUn agente de IA — un programa que ejecuta un modelo de IA con acceso a tu terminal — es ese fontanero, y el trato lo eliges tú. Le describes la tarea («monta la carpeta proyecto de debian-lab en ~/lab por NFS y hazlo permanente»), y puede leer tus ficheros, proponer los comandos, ejecutarlos, mirar el resultado y corregir. Durante este curso, la segunda vía es la única: el agente propone, tú lees, preguntas, verificas con man (capítulo 1) y tecleas. Cuando el curso termine y estés administrando un servidor con prisa, ya decidirás cuándo dejarle hacer — con las reglas de más abajo y una instantánea a mano.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
     ]
   },
   {
-    "objectID": "anexos/anexo-e1-ia.html#instalar-un-agente-con-la-disciplina-del-curso",
-    "href": "anexos/anexo-e1-ia.html#instalar-un-agente-con-la-disciplina-del-curso",
-    "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
-    "section": "Instalar un agente (con la disciplina del curso)",
-    "text": "Instalar un agente (con la disciplina del curso)\n(Para un paso a paso con una herramienta concreta y gratuita — Antigravity CLI de Google, configurado para que proponga y explique en vez de ejecutar — ve al anexo E2.)\nLa mayoría se instalan con un instalador descargado de la web, y ahí aparece el reflejo que este curso te entrenó: jamás curl … | bash sin leer. La versión con red de seguridad:\nmarcos@portatil:~$ curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh\nmarcos@portatil:~$ less instalar-claude.sh\nmarcos@portatil:~$ bash instalar-claude.sh\nmarcos@portatil:~$ claude --version\nDescargar, mirar (¿qué escribe, dónde, pide sudo?), y solo entonces ejecutar. Codex se instala con npm install -g @openai/codex (pide Node.js: sudo apt install npm). Ambos requieren una cuenta y un inicio de sesión la primera vez; la URL y el comando exactos cámbialos por los de la documentación oficial del día — este anexo envejece más deprisa que el resto del curso.",
+    "objectID": "anexos/anexo-e1-ia.html#instalar-antigravity-cli",
+    "href": "anexos/anexo-e1-ia.html#instalar-antigravity-cli",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
+    "section": "Instalar Antigravity CLI",
+    "text": "Instalar Antigravity CLI\nAntigravity CLI vive directamente en tu terminal — sin ventanas ni editor —, funciona con una cuenta de Google (el acceso básico sobra para este curso) y se instala con un guion que Google publica en su web. La instrucción oficial, hoy, es esta:\ncurl -fsSL https://antigravity.google/cli/install.sh | bash\nY aquí aparece el reflejo que este curso te ha entrenado: esa línea descarga un programa de internet y lo ejecuta sin que lo hayas visto. Funciona, y millones de personas la teclean tal cual — pero tú ya sabes hacerlo con red de seguridad, y cuesta diez segundos más:\nmarcos@portatil:~$ curl -fsSL https://antigravity.google/cli/install.sh -o instalar-antigravity.sh\nmarcos@portatil:~$ less instalar-antigravity.sh\nmarcos@portatil:~$ bash instalar-antigravity.sh\nDescargar, mirar (¿dónde escribe?, ¿pide sudo?, ¿de qué dirección descarga el programa?), y solo entonces ejecutar. Al terminar, el instalador te dice con qué comando se arranca y cómo iniciar sesión con tu cuenta de Google.\nUn consejo más importante que la línea exacta: estas instrucciones cambian. La forma más robusta de instalar cualquier herramienta de IA es preguntarle a una IA en línea — o a la propia web de Google — «cómo instalo Antigravity CLI en Linux desde bash», y aplicar a la respuesta la misma disciplina: leer el guion antes de ejecutarlo. Es, de paso, el primer ensayo de todo este anexo: pedir instrucciones a una IA y mantener el control.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-e1-ia.html#configurarlo-para-aprender-desde-el-principio",
+    "href": "anexos/anexo-e1-ia.html#configurarlo-para-aprender-desde-el-principio",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
+    "section": "Configurarlo para aprender, desde el principio",
+    "text": "Configurarlo para aprender, desde el principio\nAntes de pedirle nada, dos ajustes. El primero, en la configuración del agente: la ejecución de comandos tiene varios modos, desde «ejecuta lo que consideres» hasta «pide permiso cada vez» (el nombre exacto de la opción cambia con las versiones; búscala en la ayuda o pregúntale al propio agente cómo se configura). Ponla en el modo que pide confirmación siempre — nunca en automático. Así, aunque un día le dejes hacer, nada correrá sin que tú lo hayas leído y aceptado.\nEl segundo es de trato, no de menú: la primera instrucción que le das en cada sesión fija las reglas del juego. Guárdala en un fichero (~/fisica/notas/ia.txt, capítulo 2) y pégala al empezar:\nEstoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame\nqué hace cada opción; los teclearé yo. Si un comando puede destruir\ndatos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),\navísamelo explícitamente antes. Cuando no entienda algo, dímelo con\nun ejemplo pequeño que pueda probar.\nCon eso el agente pasa de fontanero-que-arregla a fontanero-que-enseña. Muchos agentes permiten guardar esa instrucción como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-e1-ia.html#las-reglas-para-seguir-mandando-tú",
     "href": "anexos/anexo-e1-ia.html#las-reglas-para-seguir-mandando-tú",
-    "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
     "section": "Las reglas para seguir mandando tú",
-    "text": "Las reglas para seguir mandando tú\nUn agente es un becario brillante, rapidísimo y sin miedo. Las reglas de un buen jefe:\n\nTrabaja en un sitio acotado. Abre el agente dentro de la carpeta del proyecto, no en ~: puede leer todo lo que hay debajo.\nModo «pregunta antes». Todos permiten ejecutar cada comando con tu confirmación; déjalo así hasta que lleves semanas. Lee lo que propone como lo que es: un comando que ya sabes leer.\nsudo lo tecleas tú. Que el agente prepare la orden y tú la ejecutes en tu terminal es un buen reparto; lo destructivo (particionar, formatear, rm -rf) nunca sale de tus manos.\nInstantánea antes (capítulo 7) si el agente va a tocar la VM; copia y vuelta atrás escrita (capítulo 10) si va a tocar tu máquina real o el router.\nNi claves ni contraseñas en el chat. Tu id_ed25519 (capítulo 11), los ficheros de credenciales, los tokens: el agente puede necesitar usarlos desde tu máquina, no leerlos para ti.\nPídele que explique. «¿Qué hace cada opción de ese rsync?» es una pregunta legítima, y la respuesta la puedes contrastar con man. Si no entiendes lo que va a hacer, no se ejecuta.",
+    "text": "Las reglas para seguir mandando tú\nUn agente es un becario brillante, rapidísimo y sin miedo. Las reglas de un buen jefe:\n\nTrabaja en un sitio acotado. Abre el agente dentro de la carpeta del proyecto, no en ~: puede leer todo lo que hay debajo.\nModo «pregunta antes», como acabas de configurar. Lee lo que propone como lo que es: un comando que ya sabes leer.\nsudo lo tecleas tú. Que el agente prepare la orden y tú la ejecutes en tu terminal es un buen reparto; lo destructivo (particionar, formatear, rm -rf) nunca sale de tus manos.\nInstantánea antes (capítulo 7) si el agente va a tocar la VM; copia y vuelta atrás escrita (capítulo 10) si va a tocar tu máquina real o el router.\nNi claves ni contraseñas en el chat. Tu id_ed25519 (capítulo 12), los ficheros de credenciales, los tokens: el agente puede necesitar usarlos desde tu máquina, no leerlos para ti.\nPídele que explique. «¿Qué hace cada opción de ese rsync?» es una pregunta legítima, y la respuesta la puedes contrastar con man. Si no entiendes lo que va a hacer, no se ejecuta.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
     ]
   },
   {
-    "objectID": "anexos/anexo-e1-ia.html#para-qué-sirve-de-verdad",
-    "href": "anexos/anexo-e1-ia.html#para-qué-sirve-de-verdad",
-    "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
-    "section": "Para qué sirve de verdad",
-    "text": "Para qué sirve de verdad\nLas tareas de este curso que más tiempo comen — y donde un agente es una ayuda inestimable — son las de montaje: configurar la conexión SSH con claves y agenda (capítulo 12), escribir la línea de fstab correcta (anexo B2), preparar el rsync con las opciones justas, leer un journalctl de tres mil líneas para encontrar por qué no arranca un servicio, o escribir el script de bash del anexo B1 que renombra doscientos ficheros. También funciona a distancia: el agente puede ejecutar ssh lab … por ti, y entonces lo que administra es tu servidor — con las mismas reglas, y con más motivo la número 4.\nUn ejemplo completo del reparto de papeles, con la tarea del anexo B2:\n\nTú: «Quiero montar /home/marcos/proyecto de debian-lab en ~/lab por SSHFS, y que se desmonte limpio. Explícame cada comando antes de ejecutarlo.»\nAgente: propone sudo apt install sshfs (tú: lo entiendes, capítulo 5, lo ejecutas), mkdir ~/lab, sshfs lab:/home/marcos/proyecto ~/lab (tú: reconoces el alias lab de tu ~/.ssh/config), y fusermount -u ~/lab para desmontar. Te explica por qué no hace falta sudo para el montaje.\nTú: verificas con findmnt ~/lab — capítulo 6 — y das por buena la tarea.\n\nFíjate en lo que ha pasado: no has memorizado la sintaxis de sshfs, pero has entendido cada paso, has sabido qué comprobar y habrías detectado un sudo fuera de sitio. Eso es lo que este curso te ha dado — y la razón por la que lo avanzado de cada capítulo había que conocerlo aunque no dominarlo: para que, cuando la IA te lo ponga delante, sepas qué es, para qué sirve y qué puede romper.",
+    "objectID": "anexos/anexo-e1-ia.html#cómo-pedirle-las-cosas",
+    "href": "anexos/anexo-e1-ia.html#cómo-pedirle-las-cosas",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
+    "section": "Cómo pedirle las cosas",
+    "text": "Cómo pedirle las cosas\nLa pregunta buena describe el objetivo, no el comando que crees que necesitas. Compara: «dame un grep» frente a «tengo un registro de adquisición con líneas 2026-08-18 10:03:00 ERROR s3 …; quiero saber qué sensor tiene más errores». Con la segunda, el agente te devuelve la tubería del capítulo 3 — y aquí empieza tu trabajo:\n\nLéela pieza a pieza. Cada programa lo reconoces (o lo buscas en man); cada opción debe tener sentido.\nPídele que la explique: «explícame ese cut -d' ' -f4». Su respuesta la contrastas con el manual; si no coinciden, gana el manual.\nPruébala en pequeño antes de en grande — un head, un fichero de prueba, la máquina virtual.\nTecléala tú. Los dedos aprenden lo que los ojos solo reconocen: la regla del primer día vale también con la IA delante.\n\nY las preguntas que más rinden son las de después: «¿por qué has usado sort antes de uniq?», «¿qué habría pasado sin las comillas?», «¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de este curso contado otra vez, a tu ritmo y sobre tu problema.\nLas tareas del curso que más tiempo comen — y donde un agente ayuda de verdad — son las de montaje: configurar la conexión SSH con claves y agenda (capítulo 12), escribir la línea de fstab correcta (anexo B2), preparar el rsync con las opciones justas, leer un journalctl de tres mil líneas para encontrar por qué no arranca un servicio, o escribir el script de bash del anexo D que renombra doscientos ficheros. Un ejemplo completo del reparto de papeles, con la tarea del anexo E:\n\nTú: «Quiero montar /home/marcos/proyecto de debian-lab en ~/lab por SSHFS, y que se desmonte limpio. Explícame cada comando antes de proponerlo.»\nAgente: propone sudo apt install sshfs (tú: lo entiendes, capítulo 5, lo ejecutas), mkdir ~/lab, sshfs lab:/home/marcos/proyecto ~/lab (tú: reconoces el alias lab de tu ~/.ssh/config), y fusermount -u ~/lab para desmontar. Te explica por qué no hace falta sudo para el montaje.\nTú: verificas con findmnt ~/lab — capítulo 6 — y das por buena la tarea.\n\nFíjate en lo que ha pasado: no has memorizado la sintaxis de sshfs, pero has entendido cada paso, has sabido qué comprobar y habrías detectado un sudo fuera de sitio. Eso es lo que este curso te ha dado — y la razón por la que lo avanzado de cada capítulo había que conocerlo aunque no dominarlo: para que, cuando la IA te lo ponga delante, sepas qué es, para qué sirve y qué puede romper.\n\n△ Cuidado · Lo que no se le pide y lo que no se le da\nNo le pidas que ejecute «para ver qué pasa» en tu máquina real: para eso está debian-lab con su instantánea. No le pegues claves privadas, contraseñas ni ficheros con datos personales: el agente lee lo que le enseñas. Y no aceptes un sudo que no entiendas — la regla del capítulo 4, que no cambia porque quien lo proponga sea una IA.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
     ]
   },
   {
     "objectID": "anexos/anexo-e1-ia.html#lo-que-la-ia-no-sustituye",
     "href": "anexos/anexo-e1-ia.html#lo-que-la-ia-no-sustituye",
-    "title": "Apéndice E — La IA en la terminal: ayudante, no piloto",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
     "section": "Lo que la IA no sustituye",
-    "text": "Lo que la IA no sustituye\nEl cuaderno (script), la instantánea, la copia antes de editar, el lsblk antes de dd. Un agente se equivoca con la misma seguridad con la que acierta, y no tiene manera de saber que ese disco sdb era el de las fotos de tu abuela. Las redes de seguridad de este curso están pensadas para humanos y para agentes por igual — y con un agente al lado, las necesitas más, no menos.",
+    "text": "Lo que la IA no sustituye\nEl cuaderno (script), la instantánea, la copia antes de editar, el lsblk antes de dd. Un agente se equivoca con la misma seguridad con la que acierta, y no tiene manera de saber que ese disco sdb era el de las fotos de tu abuela. Las redes de seguridad de este curso están pensadas para humanos y para agentes por igual — y con un agente al lado, las necesitas más, no menos.\n\n✚ Truco · Otros agentes, mismas reglas\nAntigravity CLI no es el único. La misma cuenta de Google sirve para Gemini CLI (sudo apt install npm y sudo npm install -g @google/gemini-cli, se arranca con gemini), y existen Claude Code (Anthropic) y Codex CLI (OpenAI), con cuenta de pago o créditos. Cambian los nombres y los planes cada pocos meses; no cambia nada de lo que has leído aquí: instalador leído antes de ejecutar, modo «pregunta antes», instrucción de aprendizaje, y los comandos en tus manos. Y todos funcionan también a distancia — el agente puede ejecutar ssh lab … por ti, y entonces lo que administra es tu servidor, con las mismas reglas y más motivo para la número 4.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>E</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
     ]
   },
   {
-    "objectID": "anexos/anexo-e2-antigravity.html",
-    "href": "anexos/anexo-e2-antigravity.html",
-    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity CLI de Google",
-    "section": "",
-    "text": "El fontanero\nEl anexo E1 da las reglas para trabajar con una IA sin perder el control. Este es el paso a paso con una herramienta concreta y gratuita: Antigravity CLI, el agente de Google para la terminal. Con una cuenta de Google tienes el acceso básico, que para este curso sobra — lo vas a usar para una sola cosa: que te proponga y te explique comandos, no que los ejecute. Configurado así desde el primer día, es el mejor profesor particular de Linux que vas a tener.\nCuando llamas a un fontanero tienes dos maneras de tratarlo. La primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado. Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se arregla. La segunda: te quedas al lado, le preguntas por cada herramienta y cada técnica que va a usar, y le pides que te indique cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta llamarle. Está claro cuál de las dos vías es la de aprender.\nUn agente de IA en tu terminal es ese fontanero, y elige tú el trato. Durante este curso, la segunda vía es la única: el agente propone, tú lees, preguntas, verificas con man (capítulo 1) y tecleas. Cuando el curso termine y estés administrando un servidor con prisa, ya decidirás cuándo dejarle hacer — con las reglas del anexo E1 y una instantánea a mano.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity CLI de Google</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-e2-antigravity.html#instalar",
-    "href": "anexos/anexo-e2-antigravity.html#instalar",
-    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity CLI de Google",
-    "section": "Instalar",
-    "text": "Instalar\nAntigravity CLI vive directamente en tu terminal — sin ventanas ni editor — y se instala con un guion que Google publica en su web. La instrucción oficial, hoy, es esta:\ncurl -fsSL https://antigravity.google/cli/install.sh | bash\nY aquí aparece el reflejo que este curso te ha entrenado (anexo E1): esa línea descarga un programa de internet y lo ejecuta sin que lo hayas visto. Funciona, y millones de personas la teclean tal cual — pero tú ya sabes hacerlo con red de seguridad, y cuesta diez segundos más:\nmarcos@portatil:~$ curl -fsSL https://antigravity.google/cli/install.sh -o instalar-antigravity.sh\nmarcos@portatil:~$ less instalar-antigravity.sh\nmarcos@portatil:~$ bash instalar-antigravity.sh\nDescargar, mirar (¿dónde escribe?, ¿pide sudo?, ¿de qué dirección descarga el programa?), y solo entonces ejecutar. Al terminar, el instalador te dice con qué comando se arranca y cómo iniciar sesión con tu cuenta de Google; con eso tienes el plan gratuito.\nUn consejo más importante que la línea exacta: estas instrucciones cambian. La forma más robusta de instalar cualquier herramienta de IA es preguntarle a una IA en línea — o a la propia web de Google — «cómo instalo Antigravity CLI en Linux desde bash», y aplicar a la respuesta la misma disciplina de arriba: leer el guion antes de ejecutarlo. Es, además, un ensayo perfecto del anexo E1: pedir instrucciones a una IA y mantener el control.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity CLI de Google</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-e2-antigravity.html#configurarlo-para-aprender-desde-el-principio",
-    "href": "anexos/anexo-e2-antigravity.html#configurarlo-para-aprender-desde-el-principio",
-    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity CLI de Google",
-    "section": "Configurarlo para aprender, desde el principio",
-    "text": "Configurarlo para aprender, desde el principio\nAntes de pedirle nada, dos ajustes. El primero, en la configuración del agente: la ejecución de comandos tiene varios modos, desde «ejecuta lo que consideres» hasta «pide permiso cada vez» (el nombre exacto de la opción cambia con las versiones; búscala en la ayuda o pregúntale al propio agente cómo se configura). Ponla en el modo que pide confirmación siempre — nunca en automático. Así, aunque un día le dejes hacer, nada correrá sin que tú lo hayas leído y aceptado.\nEl segundo es de trato, no de menú: la primera instrucción que le das en cada sesión fija las reglas del juego. Guárdala en un fichero (~/fisica/notas/ia.txt, capítulo 2) y pégala al empezar:\nEstoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame\nqué hace cada opción; los teclearé yo. Si un comando puede destruir\ndatos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),\navísamelo explícitamente antes. Cuando no entienda algo, dímelo con\nun ejemplo pequeño que pueda probar.\nCon eso el agente pasa de fontanero-que-arregla a fontanero-que-enseña. Muchos entornos permiten guardar esa instrucción como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity CLI de Google</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-e2-antigravity.html#cómo-pedirle-las-cosas",
-    "href": "anexos/anexo-e2-antigravity.html#cómo-pedirle-las-cosas",
-    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity CLI de Google",
-    "section": "Cómo pedirle las cosas",
-    "text": "Cómo pedirle las cosas\nLa pregunta buena describe el objetivo, no el comando que crees que necesitas. Compara: «dame un grep» frente a «tengo un registro de adquisición con líneas 2026-08-18 10:03:00 ERROR s3 …; quiero saber qué sensor tiene más errores». Con la segunda, el agente te devuelve la tubería del capítulo 3 — y aquí empieza tu trabajo:\n\nLéela pieza a pieza. Cada programa lo reconoces (o lo buscas en man); cada opción debe tener sentido.\nPídele que la explique: «explícame ese cut -d' ' -f4». Su respuesta la contrastas con el manual; si no coinciden, gana el manual.\nPruébala en pequeño antes de en grande — un head, un fichero de prueba, la máquina virtual.\nTecléala tú. Los dedos aprenden lo que los ojos solo reconocen: la regla del primer día vale también con la IA delante.\n\nY las preguntas que más rinden son las de después: «¿por qué has usado sort antes de uniq?», «¿qué habría pasado sin las comillas?», «¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de este curso contado otra vez, a tu ritmo y sobre tu problema.\n\n△ Cuidado · Lo que no se le pide y lo que no se le da\nNo le pidas que ejecute «para ver qué pasa» en tu máquina real: para eso está debian-lab con su instantánea. No le pegues claves privadas, contraseñas ni ficheros con datos personales: el agente lee lo que le enseñas. Y no aceptes un sudo que no entiendas — la regla del capítulo 4, que no cambia porque quien lo proponga sea una IA.\n\n\n✚ Truco · La misma cuenta, sin ventanas: Gemini CLI\nLa cuenta de Google que abre Antigravity sirve también para Gemini CLI, el ayudante de Google que vive directamente en la terminal, sin editor ni ventanas — lo que usarás dentro de un servidor por SSH. Se instala con npm (sudo apt install npm y sudo npm install -g @google/gemini-cli), se arranca con gemini, y se trata exactamente igual: primera instrucción con las reglas, comandos propuestos y explicados, y los tecleas tú.",
-    "crumbs": [
-      "Apéndices",
-      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity CLI de Google</span>"
-    ]
-  },
-  {
-    "objectID": "anexos/anexo-e2-antigravity.html#práctica",
-    "href": "anexos/anexo-e2-antigravity.html#práctica",
-    "title": "Apéndice F — Un ayudante de IA en tu terminal: Antigravity CLI de Google",
+    "objectID": "anexos/anexo-e1-ia.html#práctica",
+    "href": "anexos/anexo-e1-ia.html#práctica",
+    "title": "Apéndice A — La IA en la terminal: ayudante, no piloto",
     "section": "Práctica",
-    "text": "Práctica\n\nEjercicio E2.1 · Domar al fontanero\nInstala Antigravity CLI (guion descargado, leído y ejecutado), inicia sesión, pon la ejecución de comandos en modo «pedir confirmación» y pega tu instrucción de aprendizaje. Después plantéale el problema del capítulo 3 con adquisicion.log (qué sensor falla más) sin mencionar ningún comando. Compara lo que te propone con la tubería del capítulo, pídele que te explique la pieza que menos entiendas, verifícala en man, y ejecútala tú.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nCasi seguro te propondrá grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr o una variante equivalente (quizá con awk, un programa que este curso no cubre: buena ocasión para preguntarle qué es y por qué lo prefiere). El resultado debe coincidir con el tuyo: 90 s3 · 15 s1 · 3 s4.\nPor qué así — Has hecho el ciclo completo del fontanero que enseña: problema en tus palabras, propuesta suya, comprensión tuya pieza a pieza, verificación en el manual, y las teclas en tus manos. Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en muleta.\n\n\n\n\n\n\nEjercicio E2.2 · Que te explique una línea que ya tienes\nDale una línea de /etc/fstab de tu máquina (cat /etc/fstab, sin tocarla) y pídele que te explique campo a campo qué hace, y qué pasaría si faltara nofail. Contrasta con el anexo B2.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nDebería identificar dispositivo (UUID), punto de montaje, tipo, opciones y los dos números finales, y explicar que sin nofail un disco ausente puede detener el arranque. Si algo no cuadra con el anexo B2, pregúntale otra vez con la cita del anexo delante: los agentes se equivocan con seguridad, y saber dudar de ellos con criterio es exactamente lo que este curso te ha dado.\nPor qué así — Explicar lo que ya existe es el uso más rentable de un agente para quien aprende: cero riesgo, y cada respuesta es una clase sobre tu propio sistema.",
+    "text": "Práctica\n\nEjercicio A.1 · Domar al fontanero\nInstala Antigravity CLI (guion descargado, leído y ejecutado), inicia sesión, pon la ejecución de comandos en modo «pedir confirmación» y pega tu instrucción de aprendizaje. Después plantéale el problema del capítulo 3 con adquisicion.log (qué sensor falla más) sin mencionar ningún comando. Compara lo que te propone con la tubería del capítulo, pídele que te explique la pieza que menos entiendas, verifícala en man, y ejecútala tú.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nCasi seguro te propondrá grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr o una variante equivalente (quizá con awk, un programa que este curso no cubre: buena ocasión para preguntarle qué es y por qué lo prefiere). El resultado debe coincidir con el tuyo: 90 s3 · 15 s1 · 3 s4.\nPor qué así — Has hecho el ciclo completo del fontanero que enseña: problema en tus palabras, propuesta suya, comprensión tuya pieza a pieza, verificación en el manual, y las teclas en tus manos. Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en muleta.\n\n\n\n\n\n\nEjercicio A.2 · Que te explique una línea que ya tienes\nDale una línea de /etc/fstab de tu máquina (cat /etc/fstab, sin tocarla) y pídele que te explique campo a campo qué hace, y qué pasaría si faltara nofail. Contrasta con el anexo E.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nDebería identificar dispositivo (UUID), punto de montaje, tipo, opciones y los dos números finales, y explicar que sin nofail un disco ausente puede detener el arranque. Si algo no cuadra con el anexo E, pregúntale otra vez con la cita del anexo delante: los agentes se equivocan con seguridad, y saber dudar de ellos con criterio es exactamente lo que este curso te ha dado.\nPor qué así — Explicar lo que ya existe es el uso más rentable de un agente para quien aprende: cero riesgo, y cada respuesta es una clase sobre tu propio sistema.",
     "crumbs": [
       "Apéndices",
-      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Un ayudante de IA en tu terminal: Antigravity CLI de Google</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>La IA en la terminal: ayudante, no piloto</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html",
+    "href": "anexos/anexo-windows.html",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "",
+    "text": "Los dos caminos\nEl curso está escrito para un Linux de escritorio — Mint, Ubuntu o parientes — instalado en el ordenador. Si tu máquina tiene Windows o macOS, tienes dos caminos para seguirlo sin tocar tu sistema, y conviene elegir bien, porque no cubren lo mismo.\nSi puedes, el camino A: es un Linux de verdad — con su apt, su systemd, su lsblk — y todo el curso encaja. Con Windows en un Mac con chip Apple, el equivalente de VirtualBox es UTM (gratuito) y la ISO de Mint debe ser la de arquitectura ARM64 (o usa Debian, que la publica).",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#los-dos-caminos",
+    "href": "anexos/anexo-windows.html#los-dos-caminos",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "",
+    "text": "A · Un Mint completo en VirtualBox\nB · WSL2 (Ubuntu dentro de Windows)\n\n\n\n\nQué es\nuna máquina virtual con Linux Mint entero, escritorio incluido\nuna terminal Ubuntu integrada en Windows, sin escritorio\n\n\nInstalar\n30–40 min; ISO de Mint + VirtualBox\n5 min; una orden en PowerShell\n\n\nBloques A y B (caps. 1–6)\n✔ todo\n✔ casi todo: el cap. 6 (discos, arranque) se lee, no se practica\n\n\nBloque C (caps. 7–8)\n✔ con un matiz (abajo)\n✘ no hay hipervisor dentro: hazlo con VirtualBox en Windows, con la caja del cap. 7 al lado\n\n\nBloques D y E (caps. 9–12)\n✔\n✔ (la red es la de Windows; SSH funciona igual)\n\n\nRecomendado para\nseguir el curso entero como está escrito\nempezar hoy con la terminal, o si tu PC va justo de RAM",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
+    "href": "anexos/anexo-windows.html#camino-a-mint-en-virtualbox",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "Camino A: Mint en VirtualBox",
+    "text": "Camino A: Mint en VirtualBox\n\nDescarga VirtualBox (virtualbox.org) e instálalo como cualquier programa. Descarga la ISO de Linux Mint (linuxmint.com, edición Cinnamon) y verifica su huella como en el capítulo 7 — en PowerShell: Get-FileHash linuxmint-22.iso -Algorithm SHA256.\nNueva máquina: nombre mint, tipo Linux / Ubuntu (64-bit), 4 GB de RAM (la mitad de la tuya como máximo), 2 CPU, disco de 40 GB. Elige la ISO como medio de arranque.\nArranca. Mint entra en modo live — un escritorio de prueba —; el icono Install Linux Mint lanza el instalador. Aquí sí vale «borrar el disco e instalar»: el disco es el fichero de la VM, y todo lo que aprenderás en el capítulo 8 sobre particionar lo harás después, en otra VM dentro de esta.\nTras reiniciar, en el menú Dispositivos → Insertar imagen de CD de las Guest Additions e instálalas: dan pantalla completa, portapapeles compartido y carpetas compartidas con Windows.\nYa estás en el capítulo 1. Cuando llegues al bloque C, activa en VirtualBox Configuración → Sistema → Procesador → Habilitar VT-x/ AMD-V anidado para que KVM funcione dentro del Mint virtual. Si tu CPU no lo permite, haz los capítulos 7 y 8 con VirtualBox directamente en Windows: los conceptos son idénticos, y la caja «Si tu anfitrión es Windows o macOS» del capítulo 7 te guía.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#camino-b-wsl2",
+    "href": "anexos/anexo-windows.html#camino-b-wsl2",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "Camino B: WSL2",
+    "text": "Camino B: WSL2\nEn PowerShell como administrador: wsl --install — instala WSL2 y un Ubuntu, y pide un usuario y contraseña al primer arranque. Desde ese momento, la aplicación Ubuntu del menú de inicio es tu terminal, y los capítulos 1 a 5 funcionan tal cual (sudo apt install, nano, tuberías, permisos, htop). Tres avisos honestos: tus ficheros de Windows están en /mnt/c/…, más lentos que tu casa Linux; lsblk y el arranque del capítulo 6 no describen tu máquina, sino el disco virtual de WSL — léelo como teoría; y para los bloques C en adelante querrás el camino A.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#dos-caminos-más-el-usb-persistente-y-el-arranque-dual",
+    "href": "anexos/anexo-windows.html#dos-caminos-más-el-usb-persistente-y-el-arranque-dual",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "Dos caminos más: el USB persistente y el arranque dual",
+    "text": "Dos caminos más: el USB persistente y el arranque dual\nHay otras dos formas de tener un Linux de verdad en tu ordenador sin renunciar a Windows. Una es limpia y fácil; la otra no es para principiantes.\n\nCamino C · Un Linux live en un pendrive, con persistencia\nCualquier ISO de Mint arranca «en vivo» desde un pendrive: un escritorio completo que no toca tu disco… y que olvida todo al apagar. La persistencia arregla eso: una partición extra en el mismo pendrive donde se guardan tus ficheros, tu configuración y lo que instales con apt. Desde Windows, la forma más sencilla es Rufus (rufus.ie, gratuito):\n\nUn pendrive USB 3 de 32 GB (16 como mínimo) que puedas borrar; cuanto más rápido, mejor: es tu disco duro durante el curso.\nRufus → elige el pendrive y la ISO de Mint → aparece el control «Tamaño de la partición persistente»: dale todo lo que quepa (16–24 GB) → Empezar. Rufus crea la partición casper-rw de persistencia por ti.\nReinicia con la tecla del menú de arranque (anexo C) y elige el pendrive. Mint arranca en vivo; lo que hagas, se queda.\n\nLo que cubre: todo el curso salvo matices — el bloque C (KVM en un sistema live) funciona si tienes 8 GB de RAM, y el capítulo 6 lo verás con dos discos en lsblk, el tuyo y el de Windows, que es incluso más instructivo. Los peros, honestos: va a la velocidad del pendrive (un USB 2 barato desespera); no actualices el kernel (apt upgrade sí, pero el sistema live arranca siempre con el suyo); y como con cualquier pendrive, si lo arrancas de un tirón en mal momento la persistencia puede corromperse — copia tu carpeta de física al servidor de vez en cuando (capítulo 12 y anexo D: rsync con cron). Para quien quiera varias ISO en un mismo pendrive existe Ventoy, con persistencia configurable por fichero; es más potente y más liado — para más adelante.\nY una variante con más recorrido: en vez de un sistema live, instalar Linux entero en un SSD externo por USB — con el instalador del capítulo 8, eligiendo ese disco como destino y poniendo en él la partición EFI. Es un Linux completo, rápido y permanente que arranca en cualquier PC desde el menú de arranque. La única pega es seria: al elegir el disco de destino, equivocarse destruye Windows. Es el camino perfecto después del capítulo 8 y del anexo C, con el plan escrito y lsblk delante — no antes.\n\n\nCamino D · Arranque dual: solo con alguien que sepa\nInstalar Linux en una partición del disco interno, junto a Windows, y elegir al encender. Es lo que hace mucha gente y lo que cubre el anexo C — pero no es para hacerlo a solas el primer día. Las implicaciones que hay que entender antes: reducir la partición de Windows (desde Windows, con su «inicio rápido» y BitLocker desactivados), que GRUB pase a gestionar el arranque de los dos sistemas, que una actualización grande de Windows puede pisar ese arranque y dejarte «sin Linux» hasta repararlo, y que deshacerlo requiere saber restaurar el cargador de Windows. Si tienes a alguien que lo haya hecho varias veces y te lo explique mientras lo hace, adelante — con copia de seguridad. Si no, el camino C te da el mismo Linux sin ninguno de esos riesgos, y el capítulo 8 te enseñará a hacer el dual tú mismo cuando toque.\n\n\n\n\n\n\n\n\n\n\nCubre el curso\nRiesgo para Windows\nPara quién\n\n\n\n\nA Mint en VirtualBox\ntodo (bloque C con virtualización anidada)\nninguno\nla opción por defecto\n\n\nB WSL2\nterminal y redes; no discos ni instalación\nninguno\nempezar hoy mismo\n\n\nC USB persistente (Rufus)\ntodo, a la velocidad del pendrive\nninguno\nquien quiere Linux «real» sin tocar el disco\n\n\nC’ instalación en SSD externo\ntodo, rápido\nalto al instalar, ninguno después\ntras el capítulo 8 y el anexo C\n\n\nD arranque dual\ntodo\nmedio, y permanente\nsolo acompañado por alguien que sepa",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-windows.html#lo-que-no-cambia",
+    "href": "anexos/anexo-windows.html#lo-que-no-cambia",
+    "title": "Apéndice B — Vengo de Windows (o de macOS)",
+    "section": "Lo que no cambia",
+    "text": "Lo que no cambia\nSea cual sea el camino: cuaderno con script, ejercicios en escalera, y la regla de seguridad — lo destructivo, en una VM (y con el USB persistente, además, copia periódica de tu carpeta al servidor). La única diferencia real es que, además de aprender Linux, aprenderás dónde termina Windows y dónde empieza la máquina de mentira. Y cuando quieras dar el paso de verdad, el anexo C te espera con el pendrive.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Vengo de Windows (o de macOS)</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html",
+    "href": "anexos/anexo-c1-pc-real.html",
+    "title": "Apéndice C — Instalar en un PC real: la lista de comprobación",
+    "section": "",
+    "text": "C.1 Antes de tocar nada\nTodo lo que ensayaste en la máquina virtual del capítulo 8 vale para un ordenador físico. Este anexo es la lista que se lee antes de empezar y se sigue durante, porque aquí no hay instantánea que restaurar. Léela entera una vez; el día de la instalación, tenla abierta en el móvil.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
+    "href": "anexos/anexo-c1-pc-real.html#antes-de-tocar-nada",
+    "title": "Apéndice C — Instalar en un PC real: la lista de comprobación",
+    "section": "",
+    "text": "Copia de seguridad de todo lo que importe del disco de destino — aunque «vayas a dejar Windows». Un error de letra en el particionado no avisa.\nPlan de particiones escrito (ejercicio 8.1), con una columna más: qué hay ahora en cada partición del disco y qué va a pasarle.\nSi vas a convivir con Windows: reduce su partición desde Windows (Administración de discos → Reducir volumen) antes de arrancar el instalador — o con GParted desde el pendrive live de Mint, que es lo que hace mucha gente; en ambos casos con copia de seguridad hecha —, y desactiva el «inicio rápido» de Windows, que deja el disco a medio cerrar.\nISO verificada con sha256sum (capítulo 7). Debian incluye desde la versión 12 el firmware de Wi-Fi y gráficas en la netinst: ya no hace falta la imagen «non-free».\nUn pendrive de 2 GB o más que puedas borrar por completo, y cable de red si es posible: la instalación por cable ahorra sorpresas con la Wi-Fi.\nLa tecla del menú de arranque de tu equipo, buscada antes: suele ser F12 (Dell, Lenovo), F9 (HP), Esc o F2 (ASUS, Acer), Opción (Mac Intel). Se pulsa nada más encender.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
+    "href": "anexos/anexo-c1-pc-real.html#grabar-el-pendrive",
+    "title": "Apéndice C — Instalar en un PC real: la lista de comprobación",
+    "section": "C.2 Grabar el pendrive",
+    "text": "C.2 Grabar el pendrive\nLa ISO se copia al pendrive byte a byte — no se «pega» como un fichero. Dos vías igual de válidas:\nCon ratón (recomendada la primera vez). En Mint, aplicación Discos: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → Restaurar imagen de disco → elige la ISO → Iniciar restauración. Eliges el destino por su nombre, sin letras que confundir.\nCon terminal. Primero, la regla de oro: lsblk antes de pinchar el pendrive y después, para ver qué nombre nuevo aparece (sda, sdb…). Luego, con esa letra y solo con esa:\nmarcos@portatil:~/Descargas$ lsblk\nNAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS\nsda           8:0    1  14,9G  0 disk\n└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON\nnvme0n1     259:0    0 476,9G  0 disk\nmarcos@portatil:~/Descargas$ sudo umount /dev/sda1\nmarcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress\ndd copia bloques de if (input file) a of (output file) sin preguntar nada: si of= apunta a tu disco interno, lo destruye en silencio. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (/dev/sda), no una partición (sda1). Cuando termine, sync y expulsar (capítulo 6).",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
+    "href": "anexos/anexo-c1-pc-real.html#arrancar-e-instalar",
+    "title": "Apéndice C — Instalar en un PC real: la lista de comprobación",
+    "section": "C.3 Arrancar e instalar",
+    "text": "C.3 Arrancar e instalar\n\nPendrive pinchado, encender, tecla del menú de arranque, elegir el pendrive (la entrada que dice UEFI: delante — no la otra, si aparecen dos).\nSi el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. Secure Boot puede quedarse activado: Debian lo soporta.\nInstalador: idénticas pantallas que en la VM. En el particionado manual, el disco se llamará nvme0n1 o sda y tendrá particiones ya. Con Windows al lado: no crees una tabla nueva (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como Partición del sistema EFI sin formatearla.\nContraseña de root vacía → tu usuario con sudo (capítulo 8).\nSelección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.\nGRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
+    "href": "anexos/anexo-c1-pc-real.html#después-del-primer-arranque",
+    "title": "Apéndice C — Instalar en un PC real: la lista de comprobación",
+    "section": "C.4 Después del primer arranque",
+    "text": "C.4 Después del primer arranque\n\nlsblk y df -h: el parte del capítulo 8, sobre hardware real.\nsudo apt update && sudo apt upgrade.\nWi-Fi, pantalla, sonido: si algo falta, la respuesta suele estar en lspci | grep -i (red, VGA, audio) para saber qué chip tienes, y de ahí a la wiki de Debian.\nGuarda el plan de particiones y tus notas en el cuaderno del curso: la próxima instalación la harás en la mitad de tiempo.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Instalar en un PC real: la lista de comprobación</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html",
+    "href": "anexos/anexo-b1-scripting.html",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "",
+    "text": "Variables y sustitución\nEn el capítulo 2 renombraste cinco ficheros a mano y el curso prometió algo mejor; en el capítulo 3 dijimos que las tuberías transforman texto pero no ejecutan una orden por cada fichero; en el 4 escribiste tu primer script. Este anexo cierra esa deuda: las cuatro piezas de bash que convierten comandos sueltos en programas — y cron, para que se ejecuten sin ti.\nDos ideas. Una variable se crea con nombre=valor (sin espacios alrededor del =) y se lee con $nombre. Y $(comando) ejecuta el comando y pone su salida en el sitio: aquí, la fecha de hoy. La regla que evita el noventa por ciento de los sustos: las variables van siempre entre comillas dobles — \"$dir\" — para que un valor con espacios (capítulo 1) no se rompa en dos argumentos.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
+    "href": "anexos/anexo-b1-scripting.html#variables-y-sustitución",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "",
+    "text": "marcos@portatil:~/fisica$ dir=resultados_$(date +%F)\nmarcos@portatil:~/fisica$ echo \"$dir\"\nresultados_2026-08-26\nmarcos@portatil:~/fisica$ mkdir \"$dir\"",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#el-bucle-for",
+    "href": "anexos/anexo-b1-scripting.html#el-bucle-for",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "El bucle for",
+    "text": "El bucle for\nmarcos@portatil:~/fisica$ for f in *.csv; do echo \"procesando $f\"; done\nprocesando run01.csv\nprocesando run02.csv\nprocesando run03.csv\nfor f in LISTA; do …; done repite el bloque una vez por elemento, con $f valiendo cada uno. La lista puede ser un comodín del capítulo 2 (*.csv), una salida de comando ($(cat lista.txt)) o palabras sueltas. Y la deuda del capítulo 2, saldada — renombrar en lote quitando el _final:\nmarcos@portatil:~/fisica$ ls\nrun01_final.csv  run02_final.csv  run03_final.csv\nmarcos@portatil:~/fisica$ for f in *_final.csv; do mv \"$f\" \"${f/_final/}\"; done\nmarcos@portatil:~/fisica$ ls\nrun01.csv  run02.csv  run03.csv\n${f/_final/} es una sustitución dentro de la variable: el valor de f con _final cambiado por nada. Hay una familia entera: ${f%.csv} quita la extensión, ${f#run} quita el prefijo. Antes de un mv en lote, el gesto de seguridad es cambiar mv por echo mv y mirar qué haría: la simulación en seco.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#condiciones-if",
+    "href": "anexos/anexo-b1-scripting.html#condiciones-if",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "Condiciones: if",
+    "text": "Condiciones: if\n#!/bin/bash\n# comprueba.sh — ¿existe el fichero que me pasan?\nif [ -f \"$1\" ]; then\n    echo \"$1 existe y tiene $(wc -l &lt; \"$1\") líneas\"\nelse\n    echo \"no encuentro $1\"\n    exit 1\nfi\n$1 es el primer argumento con que se llamó al script (./comprueba.sh adquisicion.log), $2 el segundo, y así. [ -f \"$1\" ] pregunta «¿es un fichero?»; otros: -d directorio, -z cadena vacía, -gt mayor que para números. exit 1 termina con código de error: es el $? que puedes consultar después, y lo que && (capítulo 5) mira para decidir si continúa. Un script que comprueba sus entradas y falla con mensaje vale el doble que uno que simplemente revienta.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
+    "href": "anexos/anexo-b1-scripting.html#while-y-leer-línea-a-línea",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "while y leer línea a línea",
+    "text": "while y leer línea a línea\n#!/bin/bash\n# por cada sensor de la lista, cuenta sus errores\nwhile read -r sensor; do\n    n=$(grep -c \"ERROR $sensor\" adquisicion.log)\n    echo \"$sensor: $n errores\"\ndone &lt; sensores.txt\nwhile read -r linea; do …; done &lt; fichero recorre un fichero línea a línea — la forma correcta de tratar listas que vienen de otro sitio. Y fíjate en que dentro del bucle vive una tubería del capítulo 3: los scripts son el pegamento que convierte comandos sueltos en procedimiento.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#un-script-completo",
+    "href": "anexos/anexo-b1-scripting.html#un-script-completo",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "Un script completo",
+    "text": "Un script completo\nTodo junto, con las dos líneas de cabecera que distinguen a un script serio: set -e (para al primer error, en vez de seguir a ciegas) y un uso claro cuando faltan argumentos.\n#!/bin/bash\n# organiza.sh — mueve a datos/ los CSV de una serie y anota el registro\nset -e\nif [ $# -ne 1 ]; then\n    echo \"uso: $0 CARPETA_DEL_EXPERIMENTO\"\n    exit 1\nfi\ncd \"$1\"\nmkdir -p datos descartes\nfor f in *.csv; do\n    if grep -q \"sensor congelado\" \"$f\"; then\n        mv \"$f\" descartes/\n    else\n        mv \"$f\" datos/\n    fi\n    echo \"$(date +%T) $f\" &gt;&gt; registro.log\ndone\necho \"hecho: $(ls datos | wc -l) válidos, $(ls descartes | wc -l) descartados\"\nEs el ejercicio del capítulo 2 hecho en un segundo y repetible mañana con otro experimento. $# es el número de argumentos; $0, el nombre del propio script. Con chmod u+x y en tu ~/bin (capítulo 5), es una herramienta tuya.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
+    "href": "anexos/anexo-b1-scripting.html#cron-que-se-ejecute-sin-ti",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "cron: que se ejecute sin ti",
+    "text": "cron: que se ejecute sin ti\ncron ejecuta comandos a horas fijas. Tu tabla se edita con crontab -e (la primera vez pregunta qué editor: nano), y cada línea son cinco campos de tiempo y un comando:\n# min hora día mes díasemana   comando\n  30   2   *   *    *          rsync -a /home/marcos/fisica/ servidor:~/copia_fisica/\n   0   8   *   *    1          /home/marcos/bin/informe.sh &gt;&gt; /home/marcos/informes.log 2&gt;&1\nLa primera línea copia tu carpeta de física al servidor del capítulo 11 cada noche a las 2:30 — una copia de seguridad que ya no depende de acordarte. La segunda lanza tu informe los lunes a las 8. Tres reglas de cron: rutas absolutas (no hay cd, no hay tu PATH de la terminal), redirige la salida a un fichero (si no, se pierde o se convierte en correo), y prueba el comando a mano antes de programarlo. En sistemas con systemd existe el equivalente moderno — los timers — que verás en servidores; la idea es la misma.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b1-scripting.html#práctica",
+    "href": "anexos/anexo-b1-scripting.html#práctica",
+    "title": "Apéndice D — Scripting: bucles, condiciones y cron",
+    "section": "Práctica",
+    "text": "Práctica\n\nEjercicio D.1 · La deuda del capítulo 2\nCrea una carpeta con touch run0{1..5}_final.csv (las llaves son otro truco de bash: generan la secuencia) y renómbralos en lote quitando _final — primero en seco con echo mv, luego de verdad.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nfor f in *_final.csv; do echo mv \"$f\" \"${f/_final/}\"; done enseña las cinco órdenes; sin el echo, las ejecuta. ls confirma.\nPor qué así — El ensayo en seco es el hábito que convierte un bucle con mv (o rm) de peligro en herramienta. Te costó cinco renombrados en el capítulo 2; con cinco mil costaría lo mismo.\n\n\n\n\n\n\nEjercicio D.2 · Un script con criterio\nEscribe resumen.sh que reciba un fichero de log como argumento, compruebe que existe (y proteste si no), y escriba cuántas líneas ERROR, WARN e INFO tiene — con un bucle sobre los tres niveles.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n#!/bin/bash\nset -e\n[ -f \"$1\" ] || { echo \"uso: $0 FICHERO.log\"; exit 1; }\nfor nivel in ERROR WARN INFO; do\n    echo \"$nivel: $(grep -c \" $nivel \" \"$1\")\"\ndone\nPor qué así — Tres piezas del anexo en ocho líneas: argumento, comprobación con salida de error, y bucle con una tubería dentro. [ … ] || { …; } es la forma compacta de «si no, protesta y sal».\n\n\n\n\n\n\nEjercicio D.3 · Copia nocturna (opcional)\nPrograma con cron una copia diaria de tu carpeta de física a debian-lab con rsync, a una hora en la que el portátil suela estar encendido. Prueba primero el comando a mano; después, cambia la hora a «dentro de dos minutos» para ver que cron lo ejecuta, y déjalo en su hora definitiva.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\ncrontab -e y una línea como 15 22 * * * rsync -a /home/marcos/fisica/ lab:~/copia_fisica/ &gt;&gt; /home/marcos/copia.log 2&gt;&1. La prueba «dentro de dos minutos» confirma que la clave SSH (capítulo 12) funciona sin ti — cron no puede teclear frases de paso, así que si pusiste una, hará falta un agente de claves o una clave sin frase solo para esto.\nPor qué así — Es el primer proceso automático de tu vida como administrador: una copia que ocurre aunque lo olvides. El detalle de la frase de paso es el clásico tropiezo de las tareas programadas — y ahora ya lo conoces.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Scripting: bucles, condiciones y `cron`</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html",
+    "href": "anexos/anexo-b2-montajes.html",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "",
+    "text": "Ver qué hay montado\nEl capítulo 6 enseñó la idea — un disco se engancha en un directorio del árbol único — y Mint la aplica sola cada vez que pinchas un pendrive. Este anexo la lleva hasta el final: montar a mano, montar discos de otros formatos, hacer un montaje permanente, y enganchar carpetas que viven en otra máquina — por SSH, por el protocolo de Windows y por el de los laboratorios. Todo por terminal y todo por ventanas, porque aquí las dos vías se usan de verdad. Requiere los capítulos 6 y 11.\nDos comandos que ya conoces y uno nuevo: lsblk -f (con -f, enseña el sistema de ficheros y la etiqueta de cada partición), df -h (lo montado, con su espacio), y findmnt, que dibuja el árbol de montajes entero — útil cuando df es demasiado largo:\nFíjate en el UUID: el identificador único de cada partición. Los nombres sdb1 cambian según el orden en que enchufes las cosas; el UUID no. Por eso los montajes permanentes se escriben con él.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#ver-qué-hay-montado",
+    "href": "anexos/anexo-b2-montajes.html#ver-qué-hay-montado",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "",
+    "text": "marcos@portatil:~$ lsblk -f\nNAME        FSTYPE FSVER LABEL     UUID                                 MOUNTPOINTS\nsdb           \n└─sdb1      exfat  1.0   VIAJE     6A3F-1B2C                            /media/marcos/VIAJE\nnvme0n1\n├─nvme0n1p1 vfat   FAT32           7C21-9E04                            /boot/efi\n└─nvme0n1p2 ext4   1.0             3f8a2c1e-…                           /\nmarcos@portatil:~$ findmnt /media/marcos/VIAJE\nTARGET               SOURCE    FSTYPE OPTIONS\n/media/marcos/VIAJE  /dev/sdb1 exfat  rw,nosuid,nodev,relatime,uid=1000,gid=1000",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#montar-a-mano-un-disco-que-conectas",
+    "href": "anexos/anexo-b2-montajes.html#montar-a-mano-un-disco-que-conectas",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Montar a mano un disco que conectas",
+    "text": "Montar a mano un disco que conectas\nMint monta los pendrives en /media/tu_usuario/ETIQUETA. En un servidor sin escritorio no hay nadie que lo haga, y a veces en el portátil quieres controlarlo — montar solo lectura un disco antiguo, por ejemplo, para no tocar nada. El gesto: un directorio vacío como punto de montaje, mount, umount:\nmarcos@portatil:~$ sudo mkdir -p /mnt/viejo\nmarcos@portatil:~$ sudo mount -o ro /dev/sdb1 /mnt/viejo\nmarcos@portatil:~$ ls /mnt/viejo\ntesis_2019  fotos  backup_windows\nmarcos@portatil:~$ sudo umount /mnt/viejo\n-o ro (read-only) es el seguro: nada de lo que hagas podrá escribir en ese disco. /mnt es el sitio tradicional para montajes manuales — /media es de los automáticos. Y otros formatos funcionan igual: mount detecta solo NTFS (el de Windows; Mint trae el controlador), exFAT y FAT32, y los ext4 de otro Linux. Con ext4 ajeno verás una curiosidad del capítulo 4: los ficheros aparecen con el número de usuario que tenían allí (uid 1001, quizá sin nombre) — los permisos viajan con el disco, los nombres no. Si mount protesta con «tipo de sistema de ficheros desconocido», falta el paquete del formato (exfatprogs, ntfs-3g); apt lo resuelve.\n\n✚ Truco · La aplicación «Discos»\nMenú → Accesorios → Discos (gnome-disks) es la cara gráfica de todo este anexo, y muy buena: elige el disco a la izquierda, la partición en el dibujo, y los botones ▶ / ■ montan y desmontan. El icono de engranaje tiene Editar opciones de montaje, que es — literalmente — la forma con ratón de escribir la línea de fstab de la sección siguiente, con el UUID puesto por ti y sin riesgo de errata. También formatea y comprueba discos. Para un disco suelto en tu portátil, empieza por aquí; la terminal es para el servidor y para entender qué hizo el botón. Y para cambiar particiones — crear, borrar, redimensionar — la herramienta es GParted (capítulo 6), que va un paso más allá de «Discos» y exige el mismo respeto que dd.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#montaje-permanente-etcfstab",
+    "href": "anexos/anexo-b2-montajes.html#montaje-permanente-etcfstab",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Montaje permanente: /etc/fstab",
+    "text": "Montaje permanente: /etc/fstab\nUn montaje a mano dura hasta el reinicio. Para que un disco de datos aparezca siempre en el mismo sitio, se apunta en /etc/fstab (file system table) — un fichero de texto de /etc, cómo no — con el protocolo del capítulo 10: copia antes, vuelta atrás escrita. Cada línea son seis campos:\n# dispositivo (por UUID)                  punto de montaje  tipo   opciones          dump pass\nUUID=3f8a2c1e-…                            /                 ext4   errors=remount-ro 0    1\nUUID=7C21-9E04                             /boot/efi         vfat   umask=0077        0    1\nUUID=9d4b7e20-…                            /datos            ext4   defaults,nofail   0    2\nLas dos primeras las escribió el instalador del capítulo 8 — ahora puedes leerlas. La tercera es tuya: un segundo disco interno con tus datos, montado en /datos en cada arranque. Dos reglas que evitan la avería clásica: nofail — si el disco no está, el sistema arranca igual en vez de quedarse esperando —, y probar sin reiniciar con sudo mount -a, que monta todo lo de fstab que no esté montado y te enseña el error si te has equivocado. Una línea mal escrita sin nofail puede dejar el arranque en modo de emergencia; con la copia de seguridad y mount -a, nunca llegarás ahí.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-i-sshfs",
+    "href": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-i-sshfs",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Carpetas de otra máquina, I: SSHFS",
+    "text": "Carpetas de otra máquina, I: SSHFS\nAquí entra el capítulo 12. Si puedes entrar en una máquina por SSH, puedes montar cualquier carpeta suya en tu árbol como si fuera un disco — sin administrar nada en el servidor:\nmarcos@portatil:~$ sudo apt install sshfs\nmarcos@portatil:~$ mkdir ~/lab\nmarcos@portatil:~$ sshfs lab:/home/marcos ~/lab\nmarcos@portatil:~$ ls ~/lab\nadquisicion.log  proyecto  simula.py\nmarcos@portatil:~$ fusermount -u ~/lab\nDesde ese momento tu editor, tu Python, tu gestor de archivos ven ~/lab como una carpeta local — cada lectura y escritura viaja por SSH con tu clave. Se desmonta con fusermount -u (no hace falta sudo: el montaje es tuyo). Es la herramienta perfecta para editar cómodamente ficheros de un servidor donde no tienes más que SSH — un clúster incluido —; a cambio, es lento para carpetas grandes.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-ii-smb-y-nfs",
+    "href": "anexos/anexo-b2-montajes.html#carpetas-de-otra-máquina-ii-smb-y-nfs",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Carpetas de otra máquina, II: SMB y NFS",
+    "text": "Carpetas de otra máquina, II: SMB y NFS\nDos protocolos más, cada uno con su mundo. SMB (también llamado CIFS o «compartir de Windows») es lo que hablan los NAS domésticos, las impresoras y los PC con Windows. NFS es el de Unix: es lo que hay debajo cuando en el laboratorio o el clúster tu casa «aparece» en todas las máquinas a la vez.\nPor ventanas, los dos son un solo gesto: en el gestor de archivos (Nemo en tu Mint; Caja, Nautilus o Thunar en otros escritorios), Archivo → Conectar al servidor… y una dirección: smb://nas/datos, sftp://lab/home/marcos, nfs://servidor/export. La carpeta aparece en la barra lateral y todo es arrastrar y soltar. Por terminal, cada uno tiene su paquete y su -t:\nmarcos@portatil:~$ sudo apt install cifs-utils nfs-common\nmarcos@portatil:~$ sudo mkdir -p /mnt/nas /mnt/lab\nmarcos@portatil:~$ sudo mount -t cifs //nas/datos /mnt/nas -o username=marcos,uid=1000,gid=1000\nPassword for marcos@//nas/datos: ********\nmarcos@portatil:~$ sudo mount -t nfs debian-lab:/home/marcos/proyecto /mnt/lab\nmarcos@portatil:~$ findmnt -t cifs,nfs\nEn SMB, uid=1000,gid=1000 hace que los ficheros aparezcan como tuyos (el protocolo no entiende de usuarios Linux); en NFS los permisos viajan de verdad, así que tu usuario debe tener el mismo número en las dos máquinas — id, capítulo 4 — o verás ficheros ajenos. Para hacerlos permanentes, fstab con dos opciones más: _netdev («espera a la red») y, en SMB, un fichero de credenciales con permisos 600 en vez de la contraseña a la vista:\n//nas/datos                       /mnt/nas  cifs  credentials=/etc/smb-nas,uid=1000,gid=1000,nofail,_netdev  0 0\ndebian-lab:/home/marcos/proyecto  /mnt/lab  nfs   defaults,nofail,_netdev                                    0 0\n¿Cuál usar? SSHFS cuando solo tienes SSH y no administras el servidor. SMB cuando el otro lado es un NAS, un Windows o la impresora de casa. NFS cuando tú (o el laboratorio) administráis ambos lados y quieres rendimiento y permisos de verdad. Y por ventanas, los tres son la misma pantalla de Conectar al servidor.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#windows-y-la-nube",
+    "href": "anexos/anexo-b2-montajes.html#windows-y-la-nube",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Windows y la nube",
+    "text": "Windows y la nube\nLos dos casos que más se preguntan, resueltos con lo anterior. De Windows a tu Linux y al revés: Windows 10 y 11 traen el cliente OpenSSH de serie, así que desde PowerShell funcionan los mismos scp y sftp del capítulo 12 contra tu Mint (con openssh-server instalado, ejercicio 11.1) o contra debian-lab:\nPS C:\\Users\\Marcos&gt; scp .\\medidas.csv marcos@192.168.1.34:~/fisica/\nPS C:\\Users\\Marcos&gt; sftp marcos@192.168.1.34\nCon ratón, en Windows, WinSCP (gratuito) es el «Conectar al servidor» del otro lado: arrastrar y soltar por SFTP. En sentido contrario, la vía natural es SMB: compartir una carpeta de Windows (propiedades → Compartir) y montarla desde Linux como en la sección anterior — o compartir una carpeta de tu Linux desde Nemo (clic derecho → Opciones de compartición; Mint instala Samba la primera vez) para que Windows la vea en «Red». Con la nube: el navegador siempre vale (Drive, Dropbox, OneDrive, el Nextcloud de la universidad); para hacerlo desde la terminal o montarla como carpeta existe rclone (sudo apt install rclone, rclone config te guía para conectar la cuenta, y después rclone copy o rclone mount), sin sudo ni permanencia — el mismo espíritu que SSHFS, con la nube al otro lado.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#servir-una-carpeta-desde-tu-vm-por-nfs",
+    "href": "anexos/anexo-b2-montajes.html#servir-una-carpeta-desde-tu-vm-por-nfs",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Servir una carpeta desde tu VM por NFS",
+    "text": "Servir una carpeta desde tu VM por NFS\nPara ver NFS entero, el servidor lo puedes montar tú en debian-lab — con instantánea antes, como siempre:\nmarcos@debian-lab:~$ sudo apt install nfs-kernel-server\nmarcos@debian-lab:~$ echo \"/home/marcos/proyecto 192.168.122.0/24(rw,sync,no_subtree_check)\" | sudo tee -a /etc/exports\nmarcos@debian-lab:~$ sudo exportfs -ra\nmarcos@debian-lab:~$ sudo exportfs -v\n/home/marcos/proyecto  192.168.122.0/24(rw,sync,no_subtree_check)\n/etc/exports dice qué carpeta se comparte y con quién — aquí, con toda la red NAT del capítulo 7 —; exportfs -ra la publica. Desde tu Mint, el mount -t nfs de la sección anterior la engancha, y con el mismo uid 1000 en ambas máquinas, lo que escribas en /mnt/lab aparece en la VM como tuyo. Es exactamente lo que verás en un clúster: tu casa está en un servidor NFS, y cada nodo de cálculo la monta.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
+    ]
+  },
+  {
+    "objectID": "anexos/anexo-b2-montajes.html#práctica",
+    "href": "anexos/anexo-b2-montajes.html#práctica",
+    "title": "Apéndice E — Montar de todo: discos, pendrives y unidades remotas",
+    "section": "Práctica",
+    "text": "Práctica\n\nEjercicio E.1 · A mano y solo lectura\nCon un pendrive: desmóntalo desde el gestor de archivos, móntalo a mano en /mnt/usb en modo solo lectura, intenta crear un fichero dentro (debe fallar), desmonta, y vuelve a montar sin ro. Observa findmnt /mnt/usb en cada estado.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsudo mkdir -p /mnt/usb, sudo mount -o ro /dev/sdb1 /mnt/usb (tu letra según lsblk), touch /mnt/usb/prueba → «sistema de ficheros de solo lectura»; sudo umount /mnt/usb; sudo mount /dev/sdb1 /mnt/usb y el touch funciona (en FAT/exFAT, con los permisos rwxrwxrwx del capítulo 6).\nPor qué así — El montaje de solo lectura es el gesto con el que se examina un disco ajeno o dañado sin riesgo. Y verlo fallar al escribir es la mejor demostración de que la opción manda.\n\n\n\n\n\n\nEjercicio E.2 · Permanente, por las dos vías\nSi tienes una partición de datos (o el propio pendrive, para practicar): añádele un montaje permanente primero con «Discos → Editar opciones de montaje», y mira qué línea ha escrito en /etc/fstab (cat). Después bórrala con nano, escríbela tú a mano con nofail, y compruébala con sudo mount -a. Copia de fstab antes de todo.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\n«Discos» escribe algo como UUID=… /mnt/datos auto nosuid,nodev, nofail,x-gvfs-show 0 0. La tuya a mano: UUID=… /mnt/datos ext4 defaults,nofail 0 2 (o exfat con uid=1000,gid=1000 para un pendrive). sudo mount -a sin quejas y findmnt /mnt/datos la confirma.\nPor qué así — Ver la línea que genera la aplicación gráfica y escribir la tuya después es la forma honesta de aprender fstab: entiendes cada campo y pierdes el miedo. nofail y mount -a son la red de seguridad que te separa del arranque en modo emergencia.\n\n\n\n\n\n\nEjercicio E.3 · La VM como carpeta\nMonta la casa de debian-lab con SSHFS en ~/lab, edita desde tu Mint (con el editor que quieras) el informe.txt del proyecto, y comprueba desde dentro de la VM (ssh lab cat …) que el cambio está allí. Desmonta.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nsshfs lab:/home/marcos ~/lab, editar ~/lab/proyecto/resultados/ informe.txt, ssh lab cat proyecto/resultados/informe.txt muestra el cambio, fusermount -u ~/lab.\nPor qué así — Cada escritura viajó por SSH con tu clave: el mismo túnel de scp, presentado como un directorio. Es la forma más cómoda de trabajar con ficheros de un servidor donde no administras nada.\n\n\n\n\n\n\nEjercicio E.4 · NFS de punta a punta (opcional)\nCon instantánea de la VM: exporta ~/proyecto de debian-lab por NFS, móntalo en tu Mint en /mnt/lab, crea un fichero desde cada lado y comprueba con ls -l que ambos aparecen como marcos en las dos máquinas. Hazlo permanente en fstab con nofail,_netdev y verifica con mount -a.\n\n\n\n\n\n\n\nTipSolución razonada\n\n\n\n\n\nServidor: nfs-kernel-server, línea en /etc/exports, exportfs -ra. Cliente: nfs-common, sudo mount -t nfs debian-lab:/home/marcos/ proyecto /mnt/lab. Los ficheros son de marcos a ambos lados porque los dos usuarios tienen uid 1000. Línea de fstab con _netdev y nofail; sudo umount /mnt/lab && sudo mount -a la prueba.\nPor qué así — Has montado la infraestructura de un laboratorio en miniatura: una casa compartida por red con permisos reales. El día que en el clúster te digan «tu $HOME está en NFS», sabrás exactamente qué significa — y por qué tu uid importa.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Montar de todo: discos, pendrives y unidades remotas</span>"
     ]
   }
 ]

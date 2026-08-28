@@ -252,38 +252,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity CLI de Google</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
   </div>
 </li>
       </ul>
@@ -354,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="aviso">
 <p><strong>△ Aviso · Este capítulo tiene dos velocidades</strong></p>
-<p>Lo <strong>esencial</strong> — y suficiente para el proyecto final — son las dos primeras secciones: conectarte a otro ordenador con el gestor de archivos, y abrir una sesión SSH con tu contraseña. Todo lo demás — claves, agenda, <code>rsync</code>, comandos remotos, endurecer el servidor — es lo que usa un profesional a diario, pero es <strong>avanzado</strong>: si en algún punto te pierdes, quédate con lo esencial, sigue al capítulo 13 (que solo necesita saber entrar) y vuelve aquí cuando el resto te haga falta. Nadie aprende SSH entero en una tarde — y cuando vuelvas, hazlo con una IA al lado, como cuenta el <a href="../anexos/anexo-e1-ia.html">anexo E1</a>: lo avanzado se conoce para entender lo que la IA te proponga, no para teclearlo de memoria.</p>
+<p>Lo <strong>esencial</strong> — y suficiente para el proyecto final — son las dos primeras secciones: conectarte a otro ordenador con el gestor de archivos, y abrir una sesión SSH con tu contraseña. Todo lo demás — claves, agenda, <code>rsync</code>, comandos remotos, endurecer el servidor — es lo que usa un profesional a diario, pero es <strong>avanzado</strong>: si en algún punto te pierdes, quédate con lo esencial, sigue al capítulo 13 (que solo necesita saber entrar) y vuelve aquí cuando el resto te haga falta. Nadie aprende SSH entero en una tarde — y cuando vuelvas, hazlo con una IA al lado, como cuenta el <a href="../anexos/anexo-e1-ia.html">anexo A</a>: lo avanzado se conoce para entender lo que la IA te proponga, no para teclearlo de memoria.</p>
 </div>
 <section id="sec-con-raton" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="sec-con-raton"><span class="header-section-number">12.1</span> Primero con ratón: otro ordenador en tu gestor de archivos</h2>
@@ -396,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><strong>NFS</strong> (escribiendo <code>nfs://…</code> en la barra de dirección)</td>
 <td>el compartir de Unix</td>
-<td>laboratorios y clústeres (anexo B2)</td>
+<td>laboratorios y clústeres (anexo E)</td>
 </tr>
 </tbody>
 </table>
@@ -516,7 +510,7 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p><code>-a</code> conserva fechas y permisos, <code>-v</code> cuenta lo que hace. Y un matiz que muerde a todo el mundo una vez: <strong>la barra final importa</strong>. <code>simulaciones/</code> (con barra) sincroniza <em>el contenido</em> de la carpeta; <code>simulaciones</code> (sin barra) copia <em>la carpeta entera</em> dentro del destino. La segunda vez que ejecutes el mismo <code>rsync</code> tardará un segundo: solo viaja lo nuevo.</p>
 <div class="truco">
 <p><strong>✚ Truco · Arrastrar y soltar sigue valiendo</strong></p>
-<p>La conexión con ratón de la primera sección es SFTP — el primo de <code>scp</code> que viaja por el mismo túnel — y también se abre escribiendo <code>sftp://debian-lab/home/marcos</code> en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>). Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>.</p>
+<p>La conexión con ratón de la primera sección es SFTP — el primo de <code>scp</code> que viaja por el mismo túnel — y también se abre escribiendo <code>sftp://debian-lab/home/marcos</code> en la barra de direcciones (<kbd>Ctrl</kbd>+<kbd>L</kbd>). Para un fichero suelto es perfecto; <code>rsync</code> gana cuando son mil ficheros o hay que repetir la copia cada día. Y si prefieres que la casa del servidor aparezca como una carpeta <em>de verdad</em> en tu árbol — para abrirla desde cualquier programa —, eso se llama montar por SSHFS, y está en el <a href="../anexos/anexo-b2-montajes.html">anexo E</a>.</p>
 </div>
 </section>
 <section id="sec-comando-remoto" class="level2" data-number="12.7">

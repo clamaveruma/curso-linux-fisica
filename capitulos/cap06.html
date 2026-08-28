@@ -217,38 +217,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity CLI de Google</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
 <p>La tabla explica media convivencia con Windows: un pendrive exFAT lo leen ambos mundos; tu ext4, Windows ni lo ve. Y fíjate en el detalle del capítulo 4: los permisos <code>rwx</code> son una <em>prestación del sistema de ficheros</em> — por eso un pendrive FAT no los tiene, y todo aparece como <code>rwxrwxrwx</code> cuando lo montas.</p>
 <div class="truco">
 <p><strong>✚ Truco · El mapa con ratón: «Discos» y GParted</strong></p>
-<p>Todo lo que <code>lsblk</code> te cuenta en texto lo dibujan dos aplicaciones gráficas que conviene conocer por su nombre, porque las verás en cualquier foro. <strong>Discos</strong> (menú → Accesorios; <code>gnome-disks</code>) viene con Mint: enseña cada disco con sus particiones como una barra de colores, monta y desmonta con un botón, formatea un pendrive y edita las opciones de montaje (anexo B2). <strong>GParted</strong> (<code>sudo apt install gparted</code>, y viene de serie en el pendrive <em>live</em> de Mint) es <em>el</em> editor de particiones: crea, borra, redimensiona y mueve particiones — es la herramienta con la que se le hace sitio a Linux junto a Windows, y su hermano de texto es lo que usarás en el instalador del capítulo 8. Hoy, por la regla del curso, las abres solo para <em>mirar</em>: GParted sobre tu disco real es tan destructivo como potente. Para tocar, la máquina virtual del bloque C o un pendrive que puedas borrar.</p>
+<p>Todo lo que <code>lsblk</code> te cuenta en texto lo dibujan dos aplicaciones gráficas que conviene conocer por su nombre, porque las verás en cualquier foro. <strong>Discos</strong> (menú → Accesorios; <code>gnome-disks</code>) viene con Mint: enseña cada disco con sus particiones como una barra de colores, monta y desmonta con un botón, formatea un pendrive y edita las opciones de montaje (anexo E). <strong>GParted</strong> (<code>sudo apt install gparted</code>, y viene de serie en el pendrive <em>live</em> de Mint) es <em>el</em> editor de particiones: crea, borra, redimensiona y mueve particiones — es la herramienta con la que se le hace sitio a Linux junto a Windows, y su hermano de texto es lo que usarás en el instalador del capítulo 8. Hoy, por la regla del curso, las abres solo para <em>mirar</em>: GParted sobre tu disco real es tan destructivo como potente. Para tocar, la máquina virtual del bloque C o un pendrive que puedas borrar.</p>
 </div>
 </section>
 <section id="sec-montar" class="level2" data-number="6.3">
@@ -380,7 +374,7 @@ Figura&nbsp;6.1: El árbol único, con sus enganches. La columna MOUNTPOINTS de 
 </figcaption>
 </figure>
 </div>
-<p>Cuando pinchas un pendrive, Mint lo monta solo en <code>/media/tu_usuario/NOMBRE</code> y te abre la ventana — cómodo y correcto. La versión manual es <code>mount</code> (montar) y <code>umount</code> (desmontar; sí, sin la primera <em>n</em>), y la usarás en el servidor sin escritorio. Hoy te basta con saber <em>leerlo</em> — montar a mano discos de otros formatos, hacerlo permanente y enganchar carpetas de otras máquinas es el <a href="../anexos/anexo-b2-montajes.html">anexo B2</a>, para cuando hayas visto SSH:</p>
+<p>Cuando pinchas un pendrive, Mint lo monta solo en <code>/media/tu_usuario/NOMBRE</code> y te abre la ventana — cómodo y correcto. La versión manual es <code>mount</code> (montar) y <code>umount</code> (desmontar; sí, sin la primera <em>n</em>), y la usarás en el servidor sin escritorio. Hoy te basta con saber <em>leerlo</em> — montar a mano discos de otros formatos, hacerlo permanente y enganchar carpetas de otras máquinas es el <a href="../anexos/anexo-b2-montajes.html">anexo E</a>, para cuando hayas visto SSH:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lsblk</span>
 <span class="t-out">NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
 <span class="t-out">sda           8:0    1  28,9G  0 disk</span>

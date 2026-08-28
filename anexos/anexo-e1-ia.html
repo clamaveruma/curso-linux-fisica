@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Apéndice E — La IA en la terminal: ayudante, no piloto – Bendito maldito Linux</title>
+<title>Apéndice A — La IA en la terminal: ayudante, no piloto – Bendito maldito Linux</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../anexos/anexo-e2-antigravity.html" rel="next">
-<link href="../anexos/anexo-b2-montajes.html" rel="prev">
+<link href="../anexos/anexo-windows.html" rel="next">
+<link href="../capitulos/proyecto-final.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -217,38 +252,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-windows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-c1-pc-real.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Instalar en un PC real: la lista de comprobación</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b1-scripting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Scripting: bucles, condiciones y <code>cron</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../anexos/anexo-b2-montajes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e1-ia.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../anexos/anexo-e2-antigravity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity CLI de Google</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span></a>
   </div>
 </li>
       </ul>
@@ -263,20 +292,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#dos-formas-de-usar-la-ia" id="toc-dos-formas-de-usar-la-ia" class="nav-link active" data-scroll-target="#dos-formas-de-usar-la-ia">Dos formas de usar la IA</a></li>
-  <li><a href="#instalar-un-agente-con-la-disciplina-del-curso" id="toc-instalar-un-agente-con-la-disciplina-del-curso" class="nav-link" data-scroll-target="#instalar-un-agente-con-la-disciplina-del-curso">Instalar un agente (con la disciplina del curso)</a></li>
+  <li><a href="#el-fontanero" id="toc-el-fontanero" class="nav-link active" data-scroll-target="#el-fontanero">El fontanero</a></li>
+  <li><a href="#instalar-antigravity-cli" id="toc-instalar-antigravity-cli" class="nav-link" data-scroll-target="#instalar-antigravity-cli">Instalar Antigravity CLI</a></li>
+  <li><a href="#configurarlo-para-aprender-desde-el-principio" id="toc-configurarlo-para-aprender-desde-el-principio" class="nav-link" data-scroll-target="#configurarlo-para-aprender-desde-el-principio">Configurarlo para aprender, desde el principio</a></li>
   <li><a href="#las-reglas-para-seguir-mandando-tú" id="toc-las-reglas-para-seguir-mandando-tú" class="nav-link" data-scroll-target="#las-reglas-para-seguir-mandando-tú">Las reglas para seguir mandando tú</a></li>
-  <li><a href="#para-qué-sirve-de-verdad" id="toc-para-qué-sirve-de-verdad" class="nav-link" data-scroll-target="#para-qué-sirve-de-verdad">Para qué sirve de verdad</a></li>
+  <li><a href="#cómo-pedirle-las-cosas" id="toc-cómo-pedirle-las-cosas" class="nav-link" data-scroll-target="#cómo-pedirle-las-cosas">Cómo pedirle las cosas</a></li>
   <li><a href="#lo-que-la-ia-no-sustituye" id="toc-lo-que-la-ia-no-sustituye" class="nav-link" data-scroll-target="#lo-que-la-ia-no-sustituye">Lo que la IA no sustituye</a></li>
+  <li><a href="#práctica" id="toc-práctica" class="nav-link" data-scroll-target="#práctica">Práctica</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-windows.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html">Apéndices</a></li><li class="breadcrumb-item"><a href="../anexos/anexo-e1-ia.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">La IA en la terminal: ayudante, no piloto</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-anexo-e1" class="quarto-section-identifier">Apéndice E — La IA en la terminal: ayudante, no piloto</span></h1>
+<h1 class="title"><span id="sec-anexo-e1" class="quarto-section-identifier">Apéndice A — La IA en la terminal: ayudante, no piloto</span></h1>
 </div>
 
 
@@ -293,48 +324,124 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este anexo es la otra mitad del curso. Todo lo que has aprendido — qué es un proceso, qué hace <code>sudo</code>, qué significa montar, qué es un puerto — no es para que teclees comandos de memoria: es para que <strong>entiendas lo que una IA te proponga</strong> y decidas tú. En 2026, un físico que administra su portátil, su servidor y su red trabaja con una IA al lado; la diferencia entre el que manda y el que copia y pega a ciegas es exactamente el contenido de este curso.</p>
-<section id="dos-formas-de-usar-la-ia" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="dos-formas-de-usar-la-ia">Dos formas de usar la IA</h2>
-<p><strong>Preguntar</strong> es la forma que ya conoces: describes el problema en un chat, te devuelve comandos, los tecleas tú. Funciona, y la disciplina es la del capítulo 3: <em>lee</em> cada comando, verifica con <code>man</code> o <code>--help</code> lo que no reconozcas, y nunca ejecutes a ciegas nada con <code>sudo</code>, <code>rm</code>, <code>dd</code> o <code>mkfs</code> (ya sabes por qué cada uno).</p>
-<p><strong>Delegar</strong> es lo nuevo: un <strong>agente</strong> — un programa que ejecuta un modelo de IA <em>con acceso a tu terminal</em>. Le describes la tarea («monta la carpeta <code>proyecto</code> de <code>debian-lab</code> en <code>~/lab</code> por NFS y hazlo permanente»), y él mismo lee tus ficheros, propone los comandos, te pide permiso, los ejecuta, mira el resultado y corrige. Los más usados hoy son <strong>Claude Code</strong> (Anthropic) y <strong>Codex CLI</strong> (OpenAI); hay otros, y cambian cada pocos meses. Se instalan como cualquier programa de terminal, y trabajan desde el directorio en el que los abres.</p>
+<p>Este anexo es la otra mitad del curso. Todo lo que has aprendido — qué es un proceso, qué hace <code>sudo</code>, qué significa montar, qué es un puerto — no es para que teclees comandos de memoria: es para que <strong>entiendas lo que una IA te proponga</strong> y decidas tú. En 2026, un científico que administra su portátil, su servidor y su red trabaja con una IA al lado; la diferencia entre el que manda y el que copia y pega a ciegas es exactamente el contenido de este curso. Aquí están las reglas, y el paso a paso con una herramienta concreta y gratuita: <strong>Antigravity CLI</strong>, el agente de Google para la terminal.</p>
+<section id="el-fontanero" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="el-fontanero">El fontanero</h2>
+<p>Cuando llamas a un fontanero tienes dos maneras de tratarlo. La primera: le dejas hacer, te vas, y vuelves cuando está todo arreglado. Rápido, cómodo, y mañana no sabrás ni qué se rompió ni cómo se arregla. La segunda: te quedas al lado, le preguntas por cada herramienta y cada técnica que va a usar, y le pides que te indique cómo hacerlo tú. Tarda el doble — y la próxima vez no hace falta llamarle. Está claro cuál de las dos vías es la de aprender.</p>
+<p>Un <strong>agente</strong> de IA — un programa que ejecuta un modelo de IA <em>con acceso a tu terminal</em> — es ese fontanero, y el trato lo eliges tú. Le describes la tarea («monta la carpeta <code>proyecto</code> de <code>debian-lab</code> en <code>~/lab</code> por NFS y hazlo permanente»), y puede leer tus ficheros, proponer los comandos, ejecutarlos, mirar el resultado y corregir. Durante este curso, la segunda vía es la única: el agente <strong>propone</strong>, tú lees, preguntas, verificas con <code>man</code> (capítulo 1) y <strong>tecleas</strong>. Cuando el curso termine y estés administrando un servidor con prisa, ya decidirás cuándo dejarle hacer — con las reglas de más abajo y una instantánea a mano.</p>
 </section>
-<section id="instalar-un-agente-con-la-disciplina-del-curso" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="instalar-un-agente-con-la-disciplina-del-curso">Instalar un agente (con la disciplina del curso)</h2>
-<p>(Para un paso a paso con una herramienta concreta y gratuita — Antigravity CLI de Google, configurado para que proponga y explique en vez de ejecutar — ve al <a href="../anexos/anexo-e2-antigravity.html">anexo E2</a>.)</p>
-<p>La mayoría se instalan con un instalador descargado de la web, y ahí aparece el reflejo que este curso te entrenó: <strong>jamás <code>curl … | bash</code> sin leer</strong>. La versión con red de seguridad:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">curl -fsSL https://claude.ai/install.sh -o instalar-claude.sh</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">less instalar-claude.sh</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">bash instalar-claude.sh</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">claude --version</span></code></pre>
-<p>Descargar, <em>mirar</em> (¿qué escribe, dónde, pide <code>sudo</code>?), y solo entonces ejecutar. Codex se instala con <code>npm install -g @openai/codex</code> (pide Node.js: <code>sudo apt install npm</code>). Ambos requieren una cuenta y un inicio de sesión la primera vez; la URL y el comando exactos cámbialos por los de la documentación oficial del día — este anexo envejece más deprisa que el resto del curso.</p>
+<section id="instalar-antigravity-cli" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="instalar-antigravity-cli">Instalar Antigravity CLI</h2>
+<p>Antigravity CLI vive directamente en tu terminal — sin ventanas ni editor —, funciona con una cuenta de Google (el acceso básico sobra para este curso) y se instala con un guion que Google publica en su web. La instrucción oficial, hoy, es esta:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curl -fsSL https://antigravity.google/cli/install.sh | bash</span></code></pre></div>
+<p>Y aquí aparece el reflejo que este curso te ha entrenado: esa línea descarga un programa de internet y lo ejecuta <em>sin que lo hayas visto</em>. Funciona, y millones de personas la teclean tal cual — pero tú ya sabes hacerlo con red de seguridad, y cuesta diez segundos más:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">curl -fsSL https://antigravity.google/cli/install.sh -o instalar-antigravity.sh</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">less instalar-antigravity.sh</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">bash instalar-antigravity.sh</span></code></pre>
+<p>Descargar, <em>mirar</em> (¿dónde escribe?, ¿pide <code>sudo</code>?, ¿de qué dirección descarga el programa?), y solo entonces ejecutar. Al terminar, el instalador te dice con qué comando se arranca y cómo iniciar sesión con tu cuenta de Google.</p>
+<p>Un consejo más importante que la línea exacta: <strong>estas instrucciones cambian</strong>. La forma más robusta de instalar cualquier herramienta de IA es preguntarle a una IA en línea — o a la propia web de Google — «cómo instalo Antigravity CLI en Linux desde bash», y aplicar a la respuesta la misma disciplina: leer el guion antes de ejecutarlo. Es, de paso, el primer ensayo de todo este anexo: pedir instrucciones a una IA y mantener el control.</p>
+</section>
+<section id="configurarlo-para-aprender-desde-el-principio" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="configurarlo-para-aprender-desde-el-principio">Configurarlo para aprender, desde el principio</h2>
+<p>Antes de pedirle nada, dos ajustes. El primero, en la configuración del agente: la <strong>ejecución de comandos</strong> tiene varios modos, desde «ejecuta lo que consideres» hasta «pide permiso cada vez» (el nombre exacto de la opción cambia con las versiones; búscala en la ayuda o pregúntale al propio agente cómo se configura). Ponla en el modo que <strong>pide confirmación siempre</strong> — nunca en automático. Así, aunque un día le dejes hacer, nada correrá sin que tú lo hayas leído y aceptado.</p>
+<p>El segundo es de trato, no de menú: la primera instrucción que le das en cada sesión fija las reglas del juego. Guárdala en un fichero (<code>~/fisica/notas/ia.txt</code>, capítulo 2) y pégala al empezar:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Estoy aprendiendo Linux. No ejecutes comandos: propónmelos y explícame</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>qué hace cada opción; los teclearé yo. Si un comando puede destruir</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos o cambiar el sistema (rm, dd, mkfs, sudo, cambios en /etc),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>avísamelo explícitamente antes. Cuando no entienda algo, dímelo con</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>un ejemplo pequeño que pueda probar.</span></code></pre></div>
+<p>Con eso el agente pasa de fontanero-que-arregla a fontanero-que-enseña. Muchos agentes permiten guardar esa instrucción como regla permanente del proyecto: si el tuyo lo ofrece, úsalo.</p>
 </section>
 <section id="las-reglas-para-seguir-mandando-tú" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="las-reglas-para-seguir-mandando-tú">Las reglas para seguir mandando tú</h2>
 <p>Un agente es un becario brillante, rapidísimo y sin miedo. Las reglas de un buen jefe:</p>
 <ol type="1">
 <li><strong>Trabaja en un sitio acotado.</strong> Abre el agente dentro de la carpeta del proyecto, no en <code>~</code>: puede leer todo lo que hay debajo.</li>
-<li><strong>Modo «pregunta antes».</strong> Todos permiten ejecutar cada comando con tu confirmación; déjalo así hasta que lleves semanas. Lee lo que propone <em>como lo que es</em>: un comando que ya sabes leer.</li>
+<li><strong>Modo «pregunta antes»</strong>, como acabas de configurar. Lee lo que propone <em>como lo que es</em>: un comando que ya sabes leer.</li>
 <li><strong><code>sudo</code> lo tecleas tú.</strong> Que el agente prepare la orden y tú la ejecutes en tu terminal es un buen reparto; lo destructivo (particionar, formatear, <code>rm -rf</code>) nunca sale de tus manos.</li>
 <li><strong>Instantánea antes</strong> (capítulo 7) si el agente va a tocar la VM; <strong>copia y vuelta atrás escrita</strong> (capítulo 10) si va a tocar tu máquina real o el router.</li>
-<li><strong>Ni claves ni contraseñas en el chat.</strong> Tu <code>id_ed25519</code> (capítulo 11), los ficheros de credenciales, los <em>tokens</em>: el agente puede necesitar <em>usarlos</em> desde tu máquina, no <em>leerlos</em> para ti.</li>
+<li><strong>Ni claves ni contraseñas en el chat.</strong> Tu <code>id_ed25519</code> (capítulo 12), los ficheros de credenciales, los <em>tokens</em>: el agente puede necesitar <em>usarlos</em> desde tu máquina, no <em>leerlos</em> para ti.</li>
 <li><strong>Pídele que explique.</strong> «¿Qué hace cada opción de ese <code>rsync</code>?» es una pregunta legítima, y la respuesta la puedes contrastar con <code>man</code>. Si no entiendes lo que va a hacer, no se ejecuta.</li>
 </ol>
 </section>
-<section id="para-qué-sirve-de-verdad" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="para-qué-sirve-de-verdad">Para qué sirve de verdad</h2>
-<p>Las tareas de este curso que más tiempo comen — y donde un agente es una ayuda inestimable — son las de <em>montaje</em>: configurar la conexión SSH con claves y agenda (capítulo 12), escribir la línea de <code>fstab</code> correcta (anexo B2), preparar el <code>rsync</code> con las opciones justas, leer un <code>journalctl</code> de tres mil líneas para encontrar por qué no arranca un servicio, o escribir el script de bash del anexo B1 que renombra doscientos ficheros. También funciona <em>a distancia</em>: el agente puede ejecutar <code>ssh lab …</code> por ti, y entonces lo que administra es tu servidor — con las mismas reglas, y con más motivo la número 4.</p>
-<p>Un ejemplo completo del reparto de papeles, con la tarea del anexo B2:</p>
+<section id="cómo-pedirle-las-cosas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="cómo-pedirle-las-cosas">Cómo pedirle las cosas</h2>
+<p>La pregunta buena describe el objetivo, no el comando que crees que necesitas. Compara: «dame un <code>grep</code>» frente a «tengo un registro de adquisición con líneas <code>2026-08-18 10:03:00 ERROR s3 …</code>; quiero saber qué sensor tiene más errores». Con la segunda, el agente te devuelve la tubería del capítulo 3 — y aquí empieza tu trabajo:</p>
+<ol type="1">
+<li><strong>Léela pieza a pieza.</strong> Cada programa lo reconoces (o lo buscas en <code>man</code>); cada opción debe tener sentido.</li>
+<li><strong>Pídele que la explique</strong>: «explícame ese <code>cut -d' ' -f4</code>». Su respuesta la contrastas con el manual; si no coinciden, gana el manual.</li>
+<li><strong>Pruébala en pequeño</strong> antes de en grande — un <code>head</code>, un fichero de prueba, la máquina virtual.</li>
+<li><strong>Tecléala tú.</strong> Los dedos aprenden lo que los ojos solo reconocen: la regla del primer día vale también con la IA delante.</li>
+</ol>
+<p>Y las preguntas que más rinden son las de después: «¿por qué has usado <code>sort</code> antes de <code>uniq</code>?», «¿qué habría pasado sin las comillas?», «¿cómo lo haría sin tuberías, en Python?». Cada una es un capítulo de este curso contado otra vez, a tu ritmo y sobre tu problema.</p>
+<p>Las tareas del curso que más tiempo comen — y donde un agente ayuda de verdad — son las de <em>montaje</em>: configurar la conexión SSH con claves y agenda (capítulo 12), escribir la línea de <code>fstab</code> correcta (anexo B2), preparar el <code>rsync</code> con las opciones justas, leer un <code>journalctl</code> de tres mil líneas para encontrar por qué no arranca un servicio, o escribir el script de bash del anexo D que renombra doscientos ficheros. Un ejemplo completo del reparto de papeles, con la tarea del anexo E:</p>
 <blockquote class="blockquote">
-<p><strong>Tú:</strong> «Quiero montar <code>/home/marcos/proyecto</code> de <code>debian-lab</code> en <code>~/lab</code> por SSHFS, y que se desmonte limpio. Explícame cada comando antes de ejecutarlo.»</p>
+<p><strong>Tú:</strong> «Quiero montar <code>/home/marcos/proyecto</code> de <code>debian-lab</code> en <code>~/lab</code> por SSHFS, y que se desmonte limpio. Explícame cada comando antes de proponerlo.»</p>
 <p><strong>Agente:</strong> propone <code>sudo apt install sshfs</code> (tú: lo entiendes, capítulo 5, lo ejecutas), <code>mkdir ~/lab</code>, <code>sshfs lab:/home/marcos/proyecto ~/lab</code> (tú: reconoces el alias <code>lab</code> de tu <code>~/.ssh/config</code>), y <code>fusermount -u ~/lab</code> para desmontar. Te explica por qué no hace falta <code>sudo</code> para el montaje.</p>
 <p><strong>Tú:</strong> verificas con <code>findmnt ~/lab</code> — capítulo 6 — y das por buena la tarea.</p>
 </blockquote>
 <p>Fíjate en lo que ha pasado: no has memorizado la sintaxis de <code>sshfs</code>, pero has entendido cada paso, has sabido qué comprobar y habrías detectado un <code>sudo</code> fuera de sitio. Eso es lo que este curso te ha dado — y la razón por la que lo <em>avanzado</em> de cada capítulo había que conocerlo aunque no dominarlo: para que, cuando la IA te lo ponga delante, sepas qué es, para qué sirve y qué puede romper.</p>
+<div class="aviso">
+<p><strong>△ Cuidado · Lo que no se le pide y lo que no se le da</strong></p>
+<p>No le pidas que ejecute «para ver qué pasa» en tu máquina real: para eso está <code>debian-lab</code> con su instantánea. No le pegues claves privadas, contraseñas ni ficheros con datos personales: el agente lee lo que le enseñas. Y no aceptes un <code>sudo</code> que no entiendas — la regla del capítulo 4, que no cambia porque quien lo proponga sea una IA.</p>
+</div>
 </section>
 <section id="lo-que-la-ia-no-sustituye" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="lo-que-la-ia-no-sustituye">Lo que la IA no sustituye</h2>
 <p>El cuaderno (<code>script</code>), la instantánea, la copia antes de editar, el <code>lsblk</code> antes de <code>dd</code>. Un agente se equivoca con la misma seguridad con la que acierta, y no tiene manera de saber que ese disco <code>sdb</code> era el de las fotos de tu abuela. Las redes de seguridad de este curso están pensadas para humanos y para agentes por igual — y con un agente al lado, las necesitas más, no menos.</p>
+<div class="truco">
+<p><strong>✚ Truco · Otros agentes, mismas reglas</strong></p>
+<p>Antigravity CLI no es el único. La misma cuenta de Google sirve para <strong>Gemini CLI</strong> (<code>sudo apt install npm</code> y <code>sudo npm install -g @google/gemini-cli</code>, se arranca con <code>gemini</code>), y existen <strong>Claude Code</strong> (Anthropic) y <strong>Codex CLI</strong> (OpenAI), con cuenta de pago o créditos. Cambian los nombres y los planes cada pocos meses; no cambia nada de lo que has leído aquí: instalador leído antes de ejecutar, modo «pregunta antes», instrucción de aprendizaje, y los comandos en tus manos. Y todos funcionan también a distancia — el agente puede ejecutar <code>ssh lab …</code> por ti, y entonces lo que administra es tu servidor, con las mismas reglas y más motivo para la número 4.</p>
+</div>
+</section>
+<section id="práctica" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="práctica">Práctica</h2>
+<div class="ejercicio">
+<p><strong>Ejercicio A.1 · Domar al fontanero</strong></p>
+<p>Instala Antigravity CLI (guion descargado, leído y ejecutado), inicia sesión, pon la ejecución de comandos en modo «pedir confirmación» y pega tu instrucción de aprendizaje. Después plantéale el problema del capítulo 3 con <code>adquisicion.log</code> (qué sensor falla más) <em>sin</em> mencionar ningún comando. Compara lo que te propone con la tubería del capítulo, pídele que te explique la pieza que menos entiendas, verifícala en <code>man</code>, y ejecútala tú.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Casi seguro te propondrá <code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> o una variante equivalente (quizá con <code>awk</code>, un programa que este curso no cubre: buena ocasión para preguntarle qué es y por qué lo prefiere). El resultado debe coincidir con el tuyo: <code>90 s3 · 15 s1 · 3 s4</code>.</p>
+<p><strong>Por qué así</strong> — Has hecho el ciclo completo del fontanero que enseña: problema en tus palabras, propuesta suya, comprensión tuya pieza a pieza, verificación en el manual, y las teclas en tus manos. Ese ciclo, repetido, es lo que convierte a la IA en profesor y no en muleta.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio A.2 · Que te explique una línea que ya tienes</strong></p>
+<p>Dale una línea de <code>/etc/fstab</code> de tu máquina (<code>cat /etc/fstab</code>, sin tocarla) y pídele que te explique campo a campo qué hace, y qué pasaría si faltara <code>nofail</code>. Contrasta con el anexo E.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Debería identificar dispositivo (UUID), punto de montaje, tipo, opciones y los dos números finales, y explicar que sin <code>nofail</code> un disco ausente puede detener el arranque. Si algo no cuadra con el anexo E, pregúntale otra vez con la cita del anexo delante: los agentes se equivocan con seguridad, y saber dudar de ellos con criterio es exactamente lo que este curso te ha dado.</p>
+<p><strong>Por qué así</strong> — Explicar lo que ya existe es el uso más rentable de un agente para quien aprende: cero riesgo, y cada respuesta es una clase sobre tu propio sistema.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -680,13 +787,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../anexos/anexo-b2-montajes.html" class="pagination-link" aria-label="Montar de todo: discos, pendrives y unidades remotas">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Montar de todo: discos, pendrives y unidades remotas</span></span>
+      <a href="../capitulos/proyecto-final.html" class="pagination-link" aria-label="Proyecto final: tu primer servidor">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Proyecto final: tu primer servidor</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../anexos/anexo-e2-antigravity.html" class="pagination-link" aria-label="Un ayudante de IA en tu terminal: Antigravity CLI de Google">
-        <span class="nav-page-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Un ayudante de IA en tu terminal: Antigravity CLI de Google</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../anexos/anexo-windows.html" class="pagination-link" aria-label="Vengo de Windows (o de macOS)">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Vengo de Windows (o de macOS)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
