@@ -62,6 +62,20 @@ vida: ese es justo el punto de partida. Con menos formación se puede
 seguir, pero te costará más y algunas partes te parecerán complicadas;
 el curso no lo esconde.
 
+**¿Y si estoy en secundaria o bachillerato?** Si te atreves, adelante:
+vas a aprender cosas muy útiles. Lo que aprendas de Linux no caduca —
+cuando llegues a la universidad, todo lo que sepas seguirá funcionando
+igual, que es una de las virtudes de Linux: es estable en el tiempo, y
+lo básico lleva décadas funcionando prácticamente sin cambios. Eso sí,
+antes de meterte en la terminal conviene que hayas manejado un rato un
+entorno gráfico de Linux, como Linux Mint o similares, para no
+estrenarte en dos cosas a la vez.
+
+**¿Y si ya no soy tan joven?** El curso habla de «jóvenes
+científicos», pero también cuentan los jóvenes de espíritu: no es un
+libro solo para estudiantes, es para quien tenga ganas de aprender,
+tenga la edad que tenga. Si tienes esas ganas, vas a aprender.
+
 **Lo que necesitas tener instalado.** Un Linux de escritorio
 funcionando. El curso está escrito y probado sobre **Linux Mint**, y
 cualquier pariente cercano — Ubuntu y sus derivados, Debian con
