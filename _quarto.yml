@@ -16,8 +16,8 @@ filters:
   - tema/soluciones.lua  # en PDF, soluciones al final del capítulo
 
 book:
-  title: "Linux con guarnición de IA"
-  subtitle: "Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender"
+  title: "Estofado de Linux"
+  subtitle: "con guarnición de IA y redes"
   author: "Claudio M. Martínez Velasco"
   cover-image: portada/portada-web.png
   cover-image-alt: "Portada: un pingüino con bata de laboratorio ante una pizarra con la ecuación de Schrödinger, un osciloscopio y un teletipo"
@@ -27,7 +27,7 @@ book:
   # redacción («deja el PDF para cuando acabemos»); reactivar al final:
   downloads: [pdf]
   page-footer:
-    center: "Linux con guarnición de IA · versión agosto 2026 · © 2026 Claudio M. Martínez Velasco · CC BY-SA 4.0"
+    center: "Estofado de Linux · versión agosto 2026 · © 2026 Claudio M. Martínez Velasco · CC BY-SA 4.0"
   chapters:
     - index.qmd
     - capitulos/cap01.qmd
@@ -92,7 +92,8 @@ format:
         \clearpage\thispagestyle{empty}
         \vspace*{\fill}
         {\small\noindent
-        \textbf{Linux con guarnición de IA}\\
+        \textbf{Estofado de Linux}\\
+        con guarnición de IA y redes\\[0.3em]
         Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender\\[1em]
         Versión: agosto 2026. Las versiones de este libro se identifican por mes y año.\\[1em]
         \textcopyright{} 2026 Claudio M. Martínez Velasco\\[0.5em]
