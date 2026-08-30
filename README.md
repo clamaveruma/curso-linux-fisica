@@ -1,4 +1,4 @@
-# Bendito maldito Linux
+# Linux con guarnición de IA
 
 Curso introductorio para estudiantes de ciencias e ingeniería: terminal, sistema, virtualización,
 redes y trabajo remoto. 13 sesiones + proyecto final. **Versión: agosto 2026** (las versiones llevan mes y año; el libro evoluciona con la IA y con la realimentación de los lectores).

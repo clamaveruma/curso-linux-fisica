@@ -122,7 +122,7 @@ El libro evoluciona con la IA y con la realimentación de los lectores. Cada ver
 
 - Portada bonita para el libro (web y PDF; Quarto admite `cover-image`) — se hará más adelante.
 - **Pasada final del PDF** (decidido 2026-08-24: el PDF se aparca hasta terminar la redacción; la web es el canal durante el piloto): reactivar formato `pdf` y `downloads` en `_quarto.yml` y los pasos tinytex/librsvg del workflow; colorear los bloques de terminal en PDF con un tema claro (ampliar `tema/terminal.lua` con salida LaTeX coloreada); revisar la tabla estrecha de §1.1 en A4.
-- ~~Nombre del curso~~ → decidido (2026-08-23): **«Bendito maldito Linux»**, subtítulo «Trabajar en Linux y conceptos de redes, explicado tan fácil que hasta un físico lo puede entender», lema «Terminal, sistemas, redes y trabajo remoto · 12 sesiones prácticas».
+- ~~Nombre del curso~~ → decidido (2026-08-23), **cambiado** (2026-08-30): «Bendito maldito Linux» generaba una asociación negativa con la palabra «maldito»; nuevo título **«Linux con guarnición de IA»** — la IA como acompañamiento, Linux como plato principal, coherente con el criterio ya fijado de «conocer, no dominar» la IA. Subtítulo sin cambios: «Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender».
 - Distribución Debian vs Mint para la VM del bloque C (Debian es más «servidor real»; Mint es continuidad con su escritorio — propuesta: Mint no, Debian sí, y explicar por qué en el propio capítulo).
 - Nombre del curso.
 - Si el bloque D incluye o no un vistazo a DNS filtrado tipo Pi-hole como ejercicio avanzado opcional.

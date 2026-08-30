@@ -12,9 +12,9 @@
   <rect width="1600" height="2400" fill="url(#gridmaj)"/>
   <!-- cabecera -->
   <text x="800" y="190" font-family="IBM Plex Mono, DejaVu Sans Mono, monospace" font-size="34" letter-spacing="8" fill="#2F6F62" text-anchor="middle">LINUX · REDES · SISTEMAS · PARA JÓVENES CIENTÍFICOS</text>
-  <text x="800" y="360" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="150" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-3">Bendito</text>
-  <text x="800" y="520" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="150" font-weight="700" fill="#C4342A" text-anchor="middle" letter-spacing="-3">maldito</text>
-  <text x="800" y="690" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="190" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-4">Linux</text>
+  <text x="800" y="400" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="195" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-4">Linux</text>
+  <text x="800" y="545" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="115" font-weight="700" fill="#C4342A" text-anchor="middle" letter-spacing="-2">con guarnición</text>
+  <text x="800" y="670" font-family="IBM Plex Serif, DejaVu Serif, Georgia, serif" font-size="90" font-weight="700" fill="#2B2318" text-anchor="middle" letter-spacing="-1">de IA</text>
   <!-- hueco ilustración -->
   <rect x="160" y="800" width="1280" height="1180" rx="18" fill="#FAF6EB" stroke="#9C8F79" stroke-width="3" stroke-dasharray="18 12"/>
   <text x="800" y="1370" font-family="IBM Plex Mono, DejaVu Sans Mono, monospace" font-size="40" fill="#9C8F79" text-anchor="middle">[ ilustración: el pingüino de laboratorio,</text>
