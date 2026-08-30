@@ -95,13 +95,14 @@ format:
         \textbf{Estofado de Linux}\\
         con guarnición de IA y redes\\[0.3em]
         Trabajar en Linux y conceptos de redes, explicado tan «fácil» que hasta un físico lo puede entender\\[1em]
-        Versión: agosto 2026. Las versiones de este libro se identifican por mes y año.\\[1em]
+        Versión: agosto 2026.\\[1em]
         \textcopyright{} 2026 Claudio M. Martínez Velasco\\[0.5em]
         El texto de este libro se publica bajo licencia Creative Commons Atribución--CompartirIgual 4.0 Internacional (CC BY-SA 4.0): puedes copiarlo, redistribuirlo y adaptarlo, citando al autor y manteniendo la misma licencia.\\
         \url{https://creativecommons.org/licenses/by-sa/4.0/deed.es}\\[0.5em]
         Las fotografías conservan las licencias indicadas en su pie de figura (Wikimedia Commons y dominio público); las capturas del instalador de Debian son GPL.\\[1em]
         Edición web, con ejercicios interactivos y datos descargables:\\
         \url{https://clamaveruma.github.io/curso-linux-fisica/}\\[1em]
+        Comentarios y sugerencias: \url{mailto:clamaver@uma.es}\\[1em]
         Compuesto con Quarto y \LaTeX{}.
         }
         \clearpage
