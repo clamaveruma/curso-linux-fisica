@@ -366,9 +366,13 @@ Desde el gestor de archivos, conéctate a `debian-lab` por SSH con el
 diálogo *Conectar al servidor…*, copia un fichero cualquiera de tu
 Mint a la casa del servidor arrastrándolo, y comprueba en la barra
 lateral que la conexión queda como marcador. Después desconéctala
-(botón ⏏ junto al marcador). *Pista: tipo SSH, servidor `debian-lab`,
-usuario `marcos`; si pide aceptar una «identidad» desconocida, es la
-huella que explica la sección siguiente — acepta.*
+(botón ⏏ junto al marcador).
+
+::: {.pista}
+Tipo SSH, servidor `debian-lab`, usuario `marcos`; si pide aceptar una
+«identidad» desconocida, es la huella que explica la sección siguiente —
+acepta.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -390,8 +394,12 @@ entrar en máquinas sin ventanas.
 Instala `openssh-server` en tu Mint, comprueba que el servicio
 escucha (`systemctl status ssh` y, del capítulo 11, `ss -tln`), y
 entra con `ssh marcos@localhost`. Dentro, ejecuta `who` para ver tu
-sesión listada, y sal. *Pista: `who` muestra las sesiones abiertas;
-la tuya por SSH aparecerá con un `pts/` y una dirección.*
+sesión listada, y sal.
+
+::: {.pista}
+`who` muestra las sesiones abiertas; la tuya por SSH aparecerá con un
+`pts/` y una dirección.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -413,8 +421,11 @@ que sabes que es de fiar quita el susto para las siguientes.
 
 Entra en `debian-lab` con contraseña, demuestra dónde estás con tres
 comandos (`hostname`, `ip a | grep "inet "`, `whoami`) y mira el
-fichero de huellas de tu Mint tras salir. *Pista: `cat
-~/.ssh/known_hosts` — verás la entrada que acabas de aceptar.*
+fichero de huellas de tu Mint tras salir.
+
+::: {.pista}
+`cat ~/.ssh/known_hosts` — verás la entrada que acabas de aceptar.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -438,8 +449,11 @@ saber que existe es saber leer el aviso de huella cambiada.
 Genera tu par ed25519 con frase de paso, instálalo en `debian-lab`
 con `ssh-copy-id`, y comprueba que `ssh marcos@debian-lab` ya no pide
 contraseña. Después mira, en el servidor, dónde ha quedado tu clave
-pública y con qué permisos. *Pista: `cat ~/.ssh/authorized_keys` y
-`ls -la ~/.ssh` dentro de la VM.*
+pública y con qué permisos.
+
+::: {.pista}
+`cat ~/.ssh/authorized_keys` y `ls -la ~/.ssh` dentro de la VM.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -463,9 +477,12 @@ línea de `authorized_keys` es exactamente el contenido de tu
 Crea `~/.ssh/config` con el alias `lab`. Después: sube
 `adquisicion.log` con `scp`, y sin abrir sesión, pídele al servidor
 que cuente los `ERROR` y que te diga el sensor que más falla (la
-tubería del capítulo 3, entre comillas). *Pista: `ssh lab "grep …
-| … | sort -nr | head -1"` — las comillas hacen que la tubería entera
-se ejecute allí.*
+tubería del capítulo 3, entre comillas).
+
+::: {.pista}
+`ssh lab "grep … | … | sort -nr | head -1"` — las comillas hacen que la
+tubería entera se ejecute allí.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -489,8 +506,12 @@ Crea en tu Mint una carpeta `resultados/` con tres ficheros
 cualesquiera. Sincronízala a la VM con `rsync -av` — primero con
 barra final, luego sin ella — y observa con `ssh lab ls -R` dónde ha
 acabado cada cosa. Después modifica un fichero, repite el `rsync` y
-fíjate en qué viaja. *Pista: `rsync -av resultados/ lab:~/resultados/`
-frente a `rsync -av resultados lab:~/otra/`.*
+fíjate en qué viaja.
+
+::: {.pista}
+`rsync -av resultados/ lab:~/resultados/` frente a
+`rsync -av resultados lab:~/otra/`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -514,10 +535,13 @@ Con instantánea previa de la VM y el protocolo del capítulo 10 (copia
 del fichero, vuelta atrás escrita): edita en `debian-lab` el fichero
 `/etc/ssh/sshd_config`, pon `PasswordAuthentication no`, reinicia el
 servicio y verifica que con tu clave sigues entrando — y que sin ella
-(prueba `ssh -o PubkeyAuthentication=no lab`) te rechaza. *Pista:
+(prueba `ssh -o PubkeyAuthentication=no lab`) te rechaza.
+
+::: {.pista}
 `sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak`, `sudo nano`,
 `sudo systemctl restart ssh`. No cierres tu sesión abierta hasta haber
-comprobado que una nueva entra.*
+comprobado que una nueva entra.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -545,10 +569,13 @@ Si dispones de una cuenta en un servidor real (universidad, nube o
 shell público): añádelo a tu `~/.ssh/config`, instala tu clave
 pública por la vía que te indiquen, entra, y repite el parte de
 «¿dónde estoy?» del 11.2 más un `ping` de vuelta a tu casa desde allí
-— para ver la distancia con los ojos del capítulo 9. *Pista: si el
-puerto no es el 22, `Port` en la agenda; si te dan solo un formulario
-web para la clave, el contenido a pegar es tu `id_ed25519.pub`
-completo.*
+— para ver la distancia con los ojos del capítulo 9.
+
+::: {.pista}
+Si el puerto no es el 22, `Port` en la agenda; si te dan solo un
+formulario web para la clave, el contenido a pegar es tu
+`id_ed25519.pub` completo.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

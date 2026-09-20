@@ -203,6 +203,15 @@ figcaption, .figure-caption {
   background-color: mix($teal-soft, $card, 35%);
 }
 
+// Las pistas (::: {.pista}, vía tema/pistas.lua) son un callout-note
+// plegado: en ámbar, más discreto que la solución, para que el lector
+// decida si la abre
+.ejercicio .callout.callout-style-default.callout-note {
+  border-left-color: $amber;
+  background-color: mix($amber-soft, $card, 35%);
+  .callout-header { font-size: .92rem; }
+}
+
 // ── Quiz de autocomprobación (idéntico al prototipo) ──
 .quiz {
   background: $card;

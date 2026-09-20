@@ -351,7 +351,10 @@ de instalar paquetes y crear un fichero grande en `/var`.
 
 Comprueba de dos formas que tu CPU tiene soporte de virtualización, y
 anota en el cuaderno cuál de las dos tecnologías tiene (Intel o AMD).
-*Pista: `/proc/cpuinfo` con `grep -c`, y `lscpu` con `grep -i`.*
+
+::: {.pista}
+`/proc/cpuinfo` con `grep -c`, y `lscpu` con `grep -i`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -375,9 +378,13 @@ Instala el Gestor de máquinas virtuales por la vía que prefieras —
 Gestor de software o `apt` —, ábrelo una vez (te pedirá la
 contraseña), añádete al grupo `libvirt`, cierra y vuelve a abrir
 sesión, y comprueba con `groups` y `virsh list --all` que estás dentro
-y que el taller responde. *Pista: las dos vías instalan exactamente
-los mismos paquetes; `usermod -aG` añade sin quitar los grupos que ya
-tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.*
+y que el taller responde.
+
+::: {.pista}
+Las dos vías instalan exactamente los mismos paquetes; `usermod -aG`
+añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen
+hasta reiniciar la sesión.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -398,10 +405,13 @@ capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.
 **Ejercicio 7.3 · La imagen, verificada**
 
 Descarga la ISO *netinst* de Debian para amd64 y su fichero
-`SHA256SUMS`, y comprueba que la huella coincide. *Pista: `sha256sum
-fichero.iso` calcula; `grep netinst SHA256SUMS` te aísla la línea
-correcta para compararla a ojo — o deja que `sha256sum -c SHA256SUMS
-2> /dev/null | grep netinst` lo compare por ti.*
+`SHA256SUMS`, y comprueba que la huella coincide.
+
+::: {.pista}
+`sha256sum fichero.iso` calcula; `grep netinst SHA256SUMS` te aísla la
+línea correcta para compararla a ojo — o deja que
+`sha256sum -c SHA256SUMS 2> /dev/null | grep netinst` lo compare por ti.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -424,9 +434,13 @@ dan la comprobación en una línea.
 Crea la máquina con el asistente (4 GB, 2 CPU, 20 GB, red NAT), deja
 que arranque hasta el menú del instalador, mírala un minuto — y
 apágala con *Forzar apagado*. Comprueba con `virsh` que existe y está
-apagada. *Pista: el asistente son cinco pantallas; si algo no encaja
-con el capítulo, avanza igual — cualquier decisión se cambia después
-en la configuración de la máquina.*
+apagada.
+
+::: {.pista}
+El asistente son cinco pantallas; si algo no encaja con el capítulo,
+avanza igual — cualquier decisión se cambia después en la configuración
+de la máquina.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -447,8 +461,12 @@ diferencia es la escala del anfitrión.
 
 Localiza el fichero de disco de tu máquina y mide su tamaño de las dos
 maneras del capítulo 6: el nominal (`ls -lh`) y el real (`du -h`).
-Explica en tu cuaderno la diferencia. *Pista: los discos de libvirt
-viven en `/var/lib/libvirt/images/`, y ese directorio es de root.*
+Explica en tu cuaderno la diferencia.
+
+::: {.pista}
+Los discos de libvirt viven en `/var/lib/libvirt/images/`, y ese
+directorio es de root.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -472,8 +490,12 @@ todos los usuarios viven ahí.
 Con la máquina apagada, crea una instantánea llamada `vm-recien-creada`
 desde virt-manager, y compruébala desde la terminal. Después, borra
 esa instantánea (será inútil en cuanto instales Debian) y verifica que
-desapareció. *Pista: `virsh snapshot-list debian-lab` lista; `virsh
-snapshot-delete debian-lab NOMBRE` borra.*
+desapareció.
+
+::: {.pista}
+`virsh snapshot-list debian-lab` lista;
+`virsh snapshot-delete debian-lab NOMBRE` borra.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -498,7 +520,10 @@ retorno de todo el resto del curso.
 libvirt guarda la definición de cada máquina como texto. Con `virsh
 dumpxml debian-lab` y las tuberías esenciales del capítulo 3, averigua
 cuánta memoria tiene asignada, cuántas CPU, y dónde está su disco.
-*Pista: `| grep -i memory`, `| grep vcpu`, `| grep -i qcow2`.*
+
+::: {.pista}
+`| grep -i memory`, `| grep vcpu`, `| grep -i qcow2`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

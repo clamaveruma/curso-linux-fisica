@@ -267,9 +267,12 @@ tus decisiones y tiempos; dentro de la VM no hace falta grabar nada.
 Antes de arrancar el instalador, escribe en tu cuaderno la tabla de
 particiones que vas a crear: nombre de dispositivo, tamaño, sistema de
 ficheros y punto de montaje de cada una. Y dos decisiones más: nombre
-de la máquina y contraseña de root (vacía, y por qué). *Pista: la
-figura del plan tiene todo; el «por qué» de root está en la sección
-de arrancar el instalador.*
+de la máquina y contraseña de root (vacía, y por qué).
+
+::: {.pista}
+La figura del plan tiene todo; el «por qué» de root está en la sección
+de arrancar el instalador.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -289,11 +292,14 @@ esa partición?» — y ahí es donde el hábito te salvará los datos.
 
 Ejecuta la instalación completa siguiendo las secciones del capítulo
 — particionado manual, sin escritorio, con servidor SSH — y anota en
-el cuaderno cuánto ha tardado y en qué pantalla dudaste. *Pista: si
-en el particionado te pierdes, «Deshacer los cambios realizados a las
+el cuaderno cuánto ha tardado y en qué pantalla dudaste.
+
+::: {.pista}
+Si en el particionado te pierdes, «Deshacer los cambios realizados a las
 particiones» vuelve al principio sin coste; y si algo sale mal de
 verdad, *Forzar apagado* y volver a arrancar la VM reinicia el
-instalador desde cero.*
+instalador desde cero.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -316,8 +322,12 @@ el diseño de este capítulo insiste en repetir.
 Entra en `debian-lab` y ejecuta la revisión del capítulo: `lsblk`,
 `df -h /`, `ip a | grep "inet "` y `systemctl status ssh`. Copia los
 cuatro resultados al cuaderno y compáralos con tu plan del 8.1.
-Después, actualiza el sistema con `apt`. *Pista: son exactamente los
-comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.*
+Después, actualiza el sistema con `apt`.
+
+::: {.pista}
+Son exactamente los comandos de los capítulos 5 y 6, ahora sobre una
+instalación tuya.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -337,9 +347,12 @@ sin medirlo; tú tampoco das por buena una instalación.
 **Ejercicio 8.4 · La instantánea que importa**
 
 Apaga la VM desde dentro (`sudo poweroff`) y crea la instantánea
-`recien-instalado`. Compruébala con `virsh` desde tu Mint. *Pista:
-capítulo 7, sección de instantáneas — con la máquina apagada, la
-instantánea guarda el disco y es la más limpia de restaurar.*
+`recien-instalado`. Compruébala con `virsh` desde tu Mint.
+
+::: {.pista}
+Capítulo 7, sección de instantáneas — con la máquina apagada, la
+instantánea guarda el disco y es la más limpia de restaurar.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -361,9 +374,12 @@ parten de aquí. Restaurarla es siempre una opción legítima.
 Con la instantánea a salvo: borra `/boot`, reinicia, y observa
 exactamente dónde se rompe la cadena del capítulo 6. Describe la
 pantalla en el cuaderno. Después restaura la instantánea y comprueba
-que `/boot` está de vuelta. *Pista: la orden está en la sección
-«Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe
-decir `debian-lab`.*
+que `/boot` está de vuelta.
+
+::: {.pista}
+La orden está en la sección «Romper, mirar, restaurar». Antes de
+teclearla, mira el prompt: debe decir `debian-lab`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -388,9 +404,13 @@ Borra la máquina entera desde virt-manager (Eliminar, marcando borrar
 el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala
 Debian desde cero — esta vez con `/home` en su propia partición de
 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el
-tiempo. *Pista: el plan cambia en una línea: la raíz se queda con
-~12,5 GB y `/home` recibe 5 GB, ext4, punto de montaje `/home`. Crea
-las cuatro particiones en orden: EFI, raíz, home, swap.*
+tiempo.
+
+::: {.pista}
+El plan cambia en una línea: la raíz se queda con ~12,5 GB y `/home`
+recibe 5 GB, ext4, punto de montaje `/home`. Crea las cuatro particiones
+en orden: EFI, raíz, home, swap.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -415,10 +435,13 @@ Siguiendo el anexo C, graba la ISO en un pendrive que puedas borrar,
 arranca tu portátil desde él hasta el menú del instalador — **y sal
 sin elegir nada**: apaga y arranca de nuevo tu Mint. Objetivo: haber
 visto el menú de arranque del UEFI y el instalador en hardware real
-sin tocar un solo byte de tu disco. *Pista: en el anexo tienes las dos
-vías — la aplicación «Discos» de Mint y la orden `dd` — y la regla de
-oro: `lsblk` antes y después de pinchar el pendrive para estar seguro
-de su nombre.*
+sin tocar un solo byte de tu disco.
+
+::: {.pista}
+En el anexo tienes las dos vías — la aplicación «Discos» de Mint y la
+orden `dd` — y la regla de oro: `lsblk` antes y después de pinchar el
+pendrive para estar seguro de su nombre.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

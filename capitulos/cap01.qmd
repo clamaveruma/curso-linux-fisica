@@ -400,7 +400,10 @@ ahora te basta con saber que está ahí y que significa algo.
 
 Sin usar internet: encuentra en `man ls` la opción que ordena los
 ficheros por fecha de modificación, del más reciente al más antiguo.
-Pista: dentro del visor, la tecla <kbd>/</kbd> busca.
+
+::: {.pista}
+Dentro del visor, la tecla <kbd>/</kbd> busca.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

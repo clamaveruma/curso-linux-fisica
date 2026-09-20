@@ -14,6 +14,7 @@ copyright:
 filters:
   - tema/terminal.lua    # colorea los bloques ```terminal en la web
   - tema/soluciones.lua  # en PDF, soluciones al final del capítulo
+  - tema/pistas.lua      # pistas plegables en la web; párrafo aparte en PDF
 
 book:
   title: "Estofado de Linux"

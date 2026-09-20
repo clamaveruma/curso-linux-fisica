@@ -230,9 +230,12 @@ el flujo de trabajo que usarás en la vida real; hazlos en orden.
 
 Reproduce el experimento del capítulo: `sleep 600 &` dentro de una
 sesión SSH, `exit`, y comprueba desde fuera si sigue vivo. Repite con
-tmux — y comprueba de nuevo. *Pista: `ssh lab "ps aux | grep sleep"`
-es la comprobación sin entrar; la primera vez desaparecerá, la segunda
-seguirá ahí.*
+tmux — y comprueba de nuevo.
+
+::: {.pista}
+`ssh lab "ps aux | grep sleep"` es la comprobación sin entrar; la
+primera vez desaparecerá, la segunda seguirá ahí.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -255,7 +258,11 @@ Crea en `debian-lab` un `simula.py` de diez minutos (abajo), lánzalo
 dentro de una sesión tmux llamada `simulacion`, desengánchate, cierra
 SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba
 el progreso — sin engancharte, con `ssh lab "tail -2 progreso.txt"` —
-y luego engánchate para verlo terminar. *Pista: con `nano simula.py`:*
+y luego engánchate para verlo terminar.
+
+::: {.pista}
+Con `nano simula.py`:
+:::
 
 ```python
 import time
@@ -289,8 +296,11 @@ En `debian-lab` (dentro de tmux), sirve tu casa con
 Mint que el puerto *no* está abierto (`nmap debian-lab`), abre el
 túnel con `ssh -L 8000:localhost:8000 lab`, y visita
 `http://localhost:8000` en tu navegador. Cierra la sesión SSH y
-recarga la página. *Pista: el túnel solo existe mientras esa conexión
-SSH esté abierta.*
+recarga la página.
+
+::: {.pista}
+El túnel solo existe mientras esa conexión SSH esté abierta.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -316,8 +326,12 @@ Instala `jupyter-notebook` en `debian-lab`, lánzalo dentro de tmux
 con `--no-browser --port 8888`, abre el túnel del 8888 y trabaja
 desde tu navegador: crea un cuaderno que lea `progreso.txt` y cuente
 sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue
-donde estaba. *Pista: la URL con el `token` la imprime Jupyter al
-arrancar; si la pierdes, `jupyter notebook list` la repite.*
+donde estaba.
+
+::: {.pista}
+La URL con el `token` la imprime Jupyter al arrancar; si la pierdes,
+`jupyter notebook list` la repite.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

@@ -264,8 +264,10 @@ máquina. Ningún ejercicio de hoy modifica nada fuera de tu casa.
 **Ejercicio 4.1 · El censo de `/etc`**
 
 ¿Cuántas entradas tiene tu `/etc`? ¿Qué Linux exacto ejecutas?
-(Pista: la respuesta está en `/etc/os-release`, y `grep PRETTY` la
-aísla.)
+
+::: {.pista}
+La respuesta está en `/etc/os-release`, y `grep PRETTY` la aísla.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -285,8 +287,11 @@ saber dónde están corriendo.
 **Ejercicio 4.2 · Leer el censo**
 
 Usando `/etc/passwd` y tuberías: ¿cuántas cuentas hay en total en tu
-sistema? ¿Cuáles son personas de verdad? (Pista: las personas tienen
-su casa en `/home` — y `grep` sabe buscar eso.)
+sistema? ¿Cuáles son personas de verdad?
+
+::: {.pista}
+Las personas tienen su casa en `/home` — y `grep` sabe buscar eso.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

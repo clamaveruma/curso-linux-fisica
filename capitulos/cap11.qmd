@@ -291,8 +291,11 @@ instantánea.
 Con `host`, averigua la dirección de `uma.es`, de `debian.org` y de
 `google.com` (esta última te dará varias: anota cuántas). Averigua
 también a qué servidor le pregunta tu máquina (`resolvectl status`).
-*Pista: `host nombre` a secas; si `host` no existe, `sudo apt install
-bind9-host`.*
+
+::: {.pista}
+`host nombre` a secas; si `host` no existe,
+`sudo apt install bind9-host`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -315,10 +318,13 @@ paso para cambiarlo con criterio en el 10.5.
 Añade a `/etc/hosts` de tu Mint una línea con la IP de `debian-lab`
 (la de `ip a` dentro de la VM) y su nombre, y comprueba que
 `ping debian-lab` funciona. Antes de editar, aplica el protocolo:
-copia de seguridad del fichero y vuelta atrás escrita. *Pista: `sudo
-cp /etc/hosts /etc/hosts.bak`, `sudo nano /etc/hosts`, y una línea
-como `192.168.122.15  debian-lab` al final. Vuelta atrás: `sudo cp
-/etc/hosts.bak /etc/hosts`.*
+copia de seguridad del fichero y vuelta atrás escrita.
+
+::: {.pista}
+`sudo cp /etc/hosts /etc/hosts.bak`, `sudo nano /etc/hosts`, y una línea
+como `192.168.122.15  debian-lab` al final. Vuelta atrás:
+`sudo cp /etc/hosts.bak /etc/hosts`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -341,8 +347,12 @@ ristra de números.
 Ejecuta `tracepath -n uma.es` (o el dominio de tu universidad).
 ¿Cuántos saltos hay? ¿Cuál es el primero? ¿En qué salto aparece la
 primera dirección que *no* es privada — es decir, dónde sale tu
-paquete a internet? *Pista: privadas son `10.x`, `192.168.x` y
-`172.16–31.x`; repasa la figura del NAT del capítulo 10.*
+paquete a internet?
+
+::: {.pista}
+Privadas son `10.x`, `192.168.x` y `172.16–31.x`; repasa la figura del
+NAT del capítulo 10.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -364,8 +374,11 @@ y por tanto a quién llamar.
 
 Desde dentro de `debian-lab`, lista los puertos que escuchan
 (`ss -tln`); desde tu Mint, tócalos desde fuera (`nmap debian-lab` —
-ya tiene nombre). ¿Coinciden las dos vistas? *Pista: `-t` TCP, `-l`
-solo los que escuchan, `-n` números en vez de nombres.*
+ya tiene nombre). ¿Coinciden las dos vistas?
+
+::: {.pista}
+`-t` TCP, `-l` solo los que escuchan, `-n` números en vez de nombres.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -391,9 +404,13 @@ escrita, cambio, verificación —: cambia el **servidor DNS** que tu
 router reparte a la casa por `9.9.9.9` (Quad9) o `1.1.1.1`
 (Cloudflare), reconecta la Wi-Fi y verifica con `resolvectl status`
 que tu máquina pregunta ahora al nuevo. Comprueba que `host
-debian.org` sigue resolviendo. *Pista: el DNS suele estar en la
-pestaña LAN/DHCP o en WAN/Internet del router; el valor anterior será
-a menudo «automático» o la IP de la compañía — anótalo tal cual.*
+debian.org` sigue resolviendo.
+
+::: {.pista}
+El DNS suele estar en la pestaña LAN/DHCP o en WAN/Internet del router;
+el valor anterior será a menudo «automático» o la IP de la compañía —
+anótalo tal cual.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -415,9 +432,12 @@ aquí, cualquier ajuste doméstico se hace así.
 Con instantánea previa de la VM: instala `ufw`, permite SSH, enciende
 el cortafuegos, y comprueba desde tu Mint con `nmap debian-lab` que
 la 22 sigue abierta y el resto aparece como `filtered`. Después
-apágalo (`sudo ufw disable`) o restaura la instantánea. *Pista: el
-orden importa — `allow OpenSSH` antes de `enable`, o te quedas fuera;
-y ten una sesión SSH abierta de reserva mientras pruebas.*
+apágalo (`sudo ufw disable`) o restaura la instantánea.
+
+::: {.pista}
+El orden importa — `allow OpenSSH` antes de `enable`, o te quedas fuera;
+y ten una sesión SSH abierta de reserva mientras pruebas.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

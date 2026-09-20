@@ -279,8 +279,11 @@ ejercicio 10.4, que sigue el protocolo del cambio reversible.
 
 Averigua tu dirección pública con `curl ifconfig.me` y compárala con
 la privada de `ip a`. Después, en la página del router, localiza la
-dirección *WAN* y comprueba que coincide con la pública. *Pista: si
-`curl` no está instalado, ya sabes: `sudo apt install curl`.*
+dirección *WAN* y comprueba que coincide con la pública.
+
+::: {.pista}
+Si `curl` no está instalado, ya sabes: `sudo apt install curl`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -301,9 +304,12 @@ convierte el NAT de concepto en hecho: toda la casa, un número.
 En la página del router, encuentra la tabla de dispositivos
 conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato.
 Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y
-anota los que no reconozcas. *Pista: si el router no la muestra o está
-incompleta, `ip neigh` en tu Mint es el plan B, y `nmap -sn` sobre tu
-`/24`, el plan C.*
+anota los que no reconozcas.
+
+::: {.pista}
+Si el router no la muestra o está incompleta, `ip neigh` en tu Mint es
+el plan B, y `nmap -sn` sobre tu `/24`, el plan C.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -328,8 +334,11 @@ vive en tu red es el principio de saber administrarla. En el capítulo
 Dentro de `debian-lab`, ejecuta `ip a` e `ip route`. Compara con tu
 Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede
 hacer `ping` a tu Mint y a `8.8.8.8`, pero el router de casa no la
-tiene en su censo? *Pista: mira el `default via` de la VM y búscalo
-en el `ip a` de tu Mint.*
+tiene en su censo?
+
+::: {.pista}
+Mira el `default via` de la VM y búscalo en el `ip a` de tu Mint.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -354,10 +363,14 @@ Con el protocolo completo — valor actual anotado, vuelta atrás
 escrita, cambio, verificación —: crea en el router una **reserva
 DHCP** para tu portátil, de modo que siempre reciba la misma dirección
 (la que tiene ahora vale). Verifica reconectando la Wi-Fi y mirando
-`ip a`. *Pista: el menú se llama «Reserva de dirección», «DHCP
-estático» o «Asignación fija», en la sección LAN/DHCP; necesita tu MAC
-(`ip a`, línea `link/ether`). Si tu router no lo ofrece, deja
-constancia en el cuaderno y sigue: no todos lo exponen.*
+`ip a`.
+
+::: {.pista}
+El menú se llama «Reserva de dirección», «DHCP estático» o «Asignación
+fija», en la sección LAN/DHCP; necesita tu MAC (`ip a`, línea
+`link/ether`). Si tu router no lo ofrece, deja constancia en el cuaderno
+y sigue: no todos lo exponen.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -383,9 +396,12 @@ Si tienes un cable de red a mano: mide con `ping -c 30` al router por
 Wi-Fi y por cable, y compara media, máximo, `mdev` y paquetes
 perdidos. Añade la señal Wi-Fi en dBm (`iw dev … link`). Escribe en el
 cuaderno una conclusión de dos líneas, como en un informe de
-prácticas. *Pista: `ip a` te dirá qué interfaz está activa en cada
-caso (`wlp…` o `enp…`); desactiva la Wi-Fi mientras mides por cable
-para no mezclar.*
+prácticas.
+
+::: {.pista}
+`ip a` te dirá qué interfaz está activa en cada caso (`wlp…` o `enp…`);
+desactiva la Wi-Fi mientras mides por cable para no mezclar.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

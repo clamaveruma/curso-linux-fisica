@@ -334,7 +334,7 @@ que usarás de verdad: no te saltes ninguno. **El mecanismo** (3.5–3.6)
 es para entender cómo encajan las piezas. **El reto** (3.7–3.9)
 encadena tres y cuatro tuberías: es opcional y está ahí para quien
 disfrute — hasta un informático se lo pensaría dos veces. Cada uno
-lleva su pista: úsala sin remordimientos.
+lleva su pista, plegada: ábrela sin remordimientos.
 
 **Nivel 1 · Lo esencial**
 
@@ -342,8 +342,12 @@ lleva su pista: úsala sin remordimientos.
 **Ejercicio 3.1 · Recuento de daños (sin tuberías)**
 
 ¿Cuántas líneas tiene el log en total? ¿Cuántas son `ERROR`, y cuántas
-`WARN`? *Pista: `wc -l` para lo primero; para lo demás, `grep -c`
-cuenta él solo — hoy todavía no necesitas ninguna tubería.*
+`WARN`?
+
+::: {.pista}
+`wc -l` para lo primero; para lo demás, `grep -c` cuenta él solo — hoy
+todavía no necesitas ninguna tubería.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -362,8 +366,11 @@ sola ya resuelve.
 **Ejercicio 3.2 · Tu primera tubería (una `|`)**
 
 ¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue?
-*Pista: el log viene en orden cronológico. Filtra los errores con
-`grep` y quédate con la primera línea que salga (`head -1`).*
+
+::: {.pista}
+El log viene en orden cronológico. Filtra los errores con `grep` y
+quédate con la primera línea que salga (`head -1`).
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -386,10 +393,13 @@ salida que produce una simulación larga. Primero léela con el
 paginador: `ls -lR /usr/share | less` — muévete, busca `/png` con la
 barra, sal con `q`. Después guárdala en un fichero:
 `ls -lR /usr/share > inventario.txt 2> /dev/null`, y cuenta con
-`grep -c` cuántas líneas contienen `.png`. *Pista: `less` tiene las
-mismas teclas que `man`; el `2> /dev/null` manda las quejas de
-permisos a la papelera del sistema; y `grep -c` acepta el fichero como
-argumento, sin tubería.*
+`grep -c` cuántas líneas contienen `.png`.
+
+::: {.pista}
+`less` tiene las mismas teclas que `man`; el `2> /dev/null` manda las
+quejas de permisos a la papelera del sistema; y `grep -c` acepta el
+fichero como argumento, sin tubería.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -413,8 +423,12 @@ valen más que cualquier tubería de cinco piezas.
 
 Crea un fichero `errores.txt` que contenga solo las líneas de error, y
 comprueba — con un comando sobre ese fichero — que contiene las 108
-que esperabas. *Pista: `>` desvía el stdout al fichero; y `wc -l`
-acepta un fichero como argumento, sin tubería.*
+que esperabas.
+
+::: {.pista}
+`>` desvía el stdout al fichero; y `wc -l` acepta un fichero como
+argumento, sin tubería.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -436,10 +450,13 @@ en el laboratorio.
 **Ejercicio 3.5 · La columna del sensor (dos `|`)**
 
 De las líneas `WARN`, extrae solo el nombre del sensor y mira los
-cinco primeros. ¿Se repite alguno? *Pista: tres piezas — `grep WARN`,
-`cut -d' ' -f4`, `head -5` — y antes de decidir el `-f`, cuenta los
-campos con los dedos sobre una línea real (ya sabes lo que pasa si
-no).*
+cinco primeros. ¿Se repite alguno?
+
+::: {.pista}
+Tres piezas — `grep WARN`, `cut -d' ' -f4`, `head -5` — y antes de
+decidir el `-f`, cuenta los campos con los dedos sobre una línea real
+(ya sabes lo que pasa si no).
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -457,8 +474,12 @@ te está susurrando la respuesta del siguiente ejercicio.
 **Ejercicio 3.6 · Sin repetidos (tres `|`)**
 
 Obtén la lista de sensores *distintos* que emitieron avisos `WARN` —
-cada nombre una sola vez. *Pista: al ejercicio anterior, quítale el
-`head` y añádele la pareja inseparable del capítulo: `sort | uniq`.*
+cada nombre una sola vez.
+
+::: {.pista}
+Al ejercicio anterior, quítale el `head` y añádele la pareja inseparable
+del capítulo: `sort | uniq`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -479,11 +500,14 @@ de golpe — le añadiste piezas a una que ya funcionaba.
 **Ejercicio 3.7 · El jefe final (cuatro `|`)**
 
 El reto de la sesión: reconstruye — de memoria si puedes, con las
-pistas si no — la tubería del ranking de errores por sensor. *Pistas,
-por pasos: (1) filtra las líneas `ERROR`; (2) recorta el campo 4;
-(3) junta los iguales; (4) colapsa contando; (5) ordena el recuento de
-mayor a menor (`sort -nr`). Y en cada paso, tu `head` de comprobación
-antes de añadir el siguiente.*
+pistas si no — la tubería del ranking de errores por sensor.
+
+::: {.pista}
+Por pasos: (1) filtra las líneas `ERROR`; (2) recorta el campo 4; (3)
+junta los iguales; (4) colapsa contando; (5) ordena el recuento de mayor
+a menor (`sort -nr`). Y en cada paso, tu `head` de comprobación antes de
+añadir el siguiente.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -505,9 +529,12 @@ siempre lo que te dé.
 
 Construye `informe.txt` con tres partes, usando solo `echo` y
 redirecciones: una línea de título, el total de errores, y el ranking
-del ejercicio anterior. *Pista: la primera orden con `>` (estrena el
-fichero); las siguientes con `>>` (añaden). La tubería del 3.7 ya la
-tienes: solo hay que redirigirla.*
+del ejercicio anterior.
+
+::: {.pista}
+La primera orden con `>` (estrena el fichero); las siguientes con `>>`
+(añaden). La tubería del 3.7 ya la tienes: solo hay que redirigirla.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -532,9 +559,13 @@ comandos. Cierra el cuaderno con `exit` y guarda `sesion03.log`.
 
 Solo si te has quedado con ganas: ¿entre qué mínima y máxima se
 movieron las lecturas *válidas* (las líneas `INFO`)? ¿Y por qué la
-máxima hay que mirarla con lupa? *Pistas: el valor viene tras un `=`,
-y `cut` también sabe cortar por `=`; `sort -n` ordena como números; y
-los extremos de una lista ordenada son `head -1` y `tail -1`.*
+máxima hay que mirarla con lupa?
+
+::: {.pista}
+El valor viene tras un `=`, y `cut` también sabe cortar por `=`;
+`sort -n` ordena como números; y los extremos de una lista ordenada son
+`head -1` y `tail -1`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}

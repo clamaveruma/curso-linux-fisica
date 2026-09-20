@@ -258,9 +258,12 @@ ni un cambio en tu máquina.
 Con `ip a` e `ip route`, rellena en tu cuaderno la ficha de tu
 portátil: nombre de la interfaz, dirección MAC, dirección IP, máscara
 y puerta de enlace. Después contrástala con la *Información de la
-conexión* del icono de red. *Pista: la MAC es la línea `link/ether`;
-la IP y la máscara van juntas en `inet`; la puerta de enlace es el
-`default via` de `ip route`.*
+conexión* del icono de red.
+
+::: {.pista}
+La MAC es la línea `link/ether`; la IP y la máscara van juntas en
+`inet`; la puerta de enlace es el `default via` de `ip route`.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -281,8 +284,11 @@ el que ayuda. Dos vías, una ficha: el principio de siempre.
 Haz `ping -c 5` a tu router, a tu `debian-lab` (arráncala si está
 apagada) y a `8.8.8.8`. Anota el tiempo medio de cada uno, y con la
 regla de «100 km por milisegundo» estima a qué distancia *máxima*
-está ese servidor de Google. *Pista: la línea final `rtt min/avg/max`
-te da la media sin calcular nada.*
+está ese servidor de Google.
+
+::: {.pista}
+La línea final `rtt min/avg/max` te da la media sin calcular nada.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
@@ -307,8 +313,11 @@ clúster remoto «vaya lento»: primero, ¿cuánto tarda el `ping`?
 Sin ejecutar nada: (a) ¿cuántas máquinas caben en una red `/8` como
 `10.0.0.0/8`? (b) ¿Y en una `/30`? (c) `192.168.1.34/24` y
 `192.168.2.10/24`, ¿se hablan directamente o necesitan un router?
-*Pista: bits para máquinas = 32 − máscara; caben 2 elevado a eso,
-menos las dos direcciones reservadas.*
+
+::: {.pista}
+Bits para máquinas = 32 − máscara; caben 2 elevado a eso, menos las dos
+direcciones reservadas.
+:::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
