@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -410,22 +410,30 @@ Figura&nbsp;7.2: Un IBM System/360 modelo 67 en la Universidad de Michigan, haci
 <section id="sec-iso" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-iso"><span class="header-section-number">7.3</span> La imagen de instalación</h2>
 <p>Para instalar un sistema en una máquina — real o virtual — hace falta el medio de instalación. Antes era un CD; hoy es un fichero <strong>ISO</strong>: la imagen exacta, byte a byte, de aquel disco. En un PC real se graba en un pendrive (capítulo 8); en una VM, el fichero <em>es</em> el disco, y se «inserta» sin más.</p>
-<p>Descarga la imagen <em>netinst</em> de Debian desde <a href="https://www.debian.org/distrib/">debian.org</a> — unos 700 MB: lo mínimo para arrancar el instalador, que después descargará el resto de la red — y guárdala en <code>~/Descargas</code>. Y antes de usarla, un hábito de físico: comprueba que llegó intacta. Junto a la ISO, Debian publica un fichero <code>SHA256SUMS</code> con la <strong>huella digital</strong> de cada imagen — un número que cambia si cambia un solo bit del fichero:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sha256sum debian-13.1.0-amd64-netinst.iso</span>
-<span class="t-out">9b6f1e0c…  debian-13.1.0-amd64-netinst.iso</span>
+<p>Descarga la imagen <em>netinst</em> de Debian desde <a href="https://www.debian.org/distrib/">debian.org</a> — unos 800 MB: lo mínimo para arrancar el instalador, que después descargará el resto de la red. El navegador la dejará en <code>~/Descargas</code>. Y antes de usarla, un hábito de físico: comprueba que llegó intacta. Junto a la ISO, Debian publica un fichero <code>SHA256SUMS</code> con la <strong>huella digital</strong> de cada imagen — un número que cambia si cambia un solo bit del fichero:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sha256sum debian-13.7.0-amd64-netinst.iso</span>
+<span class="t-out">a7ef94ac…  debian-13.7.0-amd64-netinst.iso</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">grep netinst SHA256SUMS</span>
-<span class="t-out">9b6f1e0c…  debian-13.1.0-amd64-netinst.iso</span></code></pre>
+<span class="t-out">a7ef94ac…  debian-13.7.0-amd64-netinst.iso</span></code></pre>
 <p>Si las dos huellas coinciden, el fichero es exactamente el que Debian publicó (el número de versión será el que toque cuando lo descargues). Si no, se descarga de nuevo — nunca se instala desde una imagen sospechosa. Es la misma lógica que verificar la calibración antes de medir.</p>
+<p>Verificada, un último paso que <strong>no es opcional</strong>: muévela al almacén de libvirt, <code>/var/lib/libvirt/images/</code> — el mismo directorio donde vivirá el disco de la máquina:</p>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sudo mv debian-13.7.0-amd64-netinst.iso /var/lib/libvirt/images/</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sudo ls -l /var/lib/libvirt/images/</span>
+<span class="t-out">-rw-rw-r-- 1 marcos marcos 792723456 ago 25 12:31 debian-13.7.0-amd64-netinst.iso</span></code></pre>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Por qué la ISO no puede quedarse en tu casa</strong></p>
+<p>La máquina virtual no la ejecutas tú: la ejecuta un proceso que corre como <code>libvirt-qemu</code>, un usuario de sistema de los del capítulo 4. Y en tu casa no entra nadie que no seas tú — míralo: <code>ls -ld ~</code> dice <code>drwxr-x---</code>, sin permiso de paso para «otros». Si dejas la ISO en <code>~/Descargas</code>, el asistente la acepta sin rechistar, pero al arrancar la máquina QEMU tropieza con un «Permission denied» y la instalación no llega a empezar. En <code>/var/lib/libvirt/images/</code> mandan root y libvirt, y cualquiera puede leer. Es el capítulo 4 en carne propia: el proceso que abre un fichero no siempre eres tú.</p>
+</div>
 </section>
 <section id="sec-crear-vm" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="sec-crear-vm"><span class="header-section-number">7.4</span> Crear la máquina</h2>
 <p>Abre <code>virt-manager</code> (menú → Administración → Gestor de máquinas virtuales, o tecléalo en la terminal). La ventana muestra la conexión <code>QEMU/KVM</code> con la lista vacía. Pulsa <strong>Archivo → Nueva máquina virtual</strong> y sigue el asistente — es un formulario de cinco pasos, y cada uno es una decisión que ya entiendes:</p>
 <ol type="1">
-<li><strong>Medio de instalación local (imagen ISO)</strong> → <em>Explorar</em> → <em>Buscar local</em> → tu <code>debian-13.x-amd64-netinst.iso</code>. Comprobará solo que es Debian.</li>
+<li><strong>Medio de instalación local (imagen ISO)</strong> → <em>Explorar</em>: se abre el almacén <code>default</code> — es <code>/var/lib/libvirt/images/</code> — con tu <code>debian-13.x-amd64-netinst.iso</code> dentro (si la lista sale vacía, pulsa el botón de refrescar). Elígela: comprobará solo que es Debian. No la busques en <code>~/Descargas</code> con <em>Buscar local</em>: la instalación fallaría por permisos, como cuenta la caja anterior.</li>
 <li><strong>Memoria y CPU</strong>: 4096 MB y 2 CPU es un buen taller. Regla: nunca más de la mitad de tu RAM real — la otra mitad la necesita tu Mint para seguir vivo al lado.</li>
 <li><strong>Disco</strong>: 20 GB. Es el fichero de la figura. Y un detalle elegante: el fichero <em>crece según se usa</em> — hoy ocupará unos cientos de MB aunque diga 20 GB.</li>
 <li><strong>Nombre</strong>: <code>debian-lab</code>. Sin espacios (capítulo 1: los espacios importan). <strong>Selección de red</strong>: <em>Red virtual ‘default’: NAT</em> — la opción por defecto, y la correcta hoy.</li>
-<li><strong>Finalizar.</strong> La máquina arranca sola: verás en su ventana una pantalla azul con el menú del instalador de Debian.</li>
+<li>Esta última pantalla tiene una casilla, <em>Personalizar la configuración antes de instalar</em>: déjala <strong>sin marcar</strong> — la máquina nace con el firmware clásico, el BIOS, y hoy es justo lo que quieres (la caja de la sección siguiente cuenta por qué no UEFI). <strong>Finalizar.</strong> La máquina arranca sola: verás en su ventana el menú del instalador de Debian sobre fondo azul, con «BIOS mode» en el título.</li>
 </ol>
 <p><strong>Y aquí paras.</strong> La instalación es la sesión del capítulo 8 entera; hoy solo querías ver la máquina <em>nacer</em>. Apágala desde el menú de su ventana: <strong>Máquina virtual → Apagar → Forzar apagado</strong>. En un PC real, cortar la corriente a un instalador a medias sería una barbaridad; aquí no hay nada instalado que perder — primer aviso de que las reglas dentro de la VM son otras.</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">virsh list --all</span>
@@ -439,7 +447,7 @@ Figura&nbsp;7.2: Un IBM System/360 modelo 67 en la Universidad de Michigan, haci
 <p>Ahí está el ordenador entero, en un fichero de <code>/var</code> — el directorio de «lo que varía», capítulo 4 — que dice 20 GB pero ocupa 197 MB de verdad. Ese <code>du</code> frente a <code>ls -l</code> es el capítulo 6 enseñándote tamaño nominal frente a espacio real: el fichero es <strong>disperso</strong> (<em>sparse</em>), y solo consume disco a medida que la VM escribe en él.</p>
 <div class="aviso">
 <p><strong>△ Cuidado · Lo que vale y lo que no vale en la máquina de mentira</strong></p>
-<p>Dentro de la VM, todo vale: particionar, formatear, borrar <code>/etc</code>, reinstalar — para eso está. Pero dos cosas siguen siendo reales. Su <strong>consumo</strong>: mientras corre, se lleva la RAM y los núcleos que le diste (por eso se apaga cuando no se usa). Y su <strong>fichero</strong>: borrarlo es borrar la máquina; si un día quieres deshacerte de ella, se hace desde virt-manager (<em>Eliminar</em>, marcando borrar el disco) — no con un <code>rm</code> a ciegas en <code>/var/lib/libvirt/images</code>. Y la ISO no es la máquina: es el CD de instalación; puede borrarse cuando ya no la necesites.</p>
+<p>Dentro de la VM, todo vale: particionar, formatear, borrar <code>/etc</code>, reinstalar — para eso está. Pero dos cosas siguen siendo reales. Su <strong>consumo</strong>: mientras corre, se lleva la RAM y los núcleos que le diste (por eso se apaga cuando no se usa). Y su <strong>fichero</strong>: borrarlo es borrar la máquina; si un día quieres deshacerte de ella, se hace desde virt-manager (<em>Eliminar</em>, marcando borrar el disco) — no con un <code>rm</code> a ciegas en <code>/var/lib/libvirt/images</code>. Y la ISO no es la máquina: es el CD de instalación; vive en ese mismo directorio y puede borrarse (con <code>sudo</code>) cuando ya no la necesites.</p>
 </div>
 </section>
 <section id="sec-instantaneas" class="level2" data-number="7.5">
@@ -463,6 +471,10 @@ Figura&nbsp;7.3: El flujo que usarás durante todo el bloque C: instantánea del
 <span class="t-out">--------------------------------------------------------</span>
 <span class="t-out"> vm-recien-creada    2026-08-25 12:52:10 +0200    shutoff</span></code></pre>
 <p>El protocolo del curso, a partir del capítulo 8: en cuanto Debian esté instalado y funcionando, instantánea «recién instalado». Cada experimento arriesgado, instantánea antes. Todo lo que se rompa, se restaura. Nunca más reinstalar por un error — salvo cuando reinstalar sea el ejercicio.</p>
+<div class="por-dentro">
+<p><strong>◉ Por dentro · Por qué la VM arranca «a la antigua»</strong></p>
+<p>Tu Mint arranca por UEFI (capítulo 6); <code>debian-lab</code> arranca con el firmware clásico, el BIOS. No es nostalgia: es una limitación de versiones. El UEFI de una máquina virtual guarda su memoria — la lista de arranque que en tu PC vive en un chip de la placa base — en un segundo fichero, aparte del disco, y el libvirt de Mint 22 no sabe fotografiar los dos a la vez: si eliges UEFI, la instantánea se niega con «internal snapshots of a VM with pflash based firmware are not supported». Entre un arranque moderno y el «deshacer» de cinco segundos, el curso elige el deshacer: lo que hay <em>después</em> del arranque es idéntico. La limitación está levantada en libvirt 10.10 y posteriores — el de Mint 23, previsto para diciembre de 2026; LMDE 7 ya lo lleva —, aunque aun ahí hará falta pedir expresamente que la memoria del UEFI se guarde en un formato con «versiones» (qcow2, el del disco). En el capítulo 8 hay un reto para ver el UEFI en una máquina de usar y tirar; y en tu PC real, el anexo C.</p>
+</div>
 </section>
 <section id="sec-redes-vm" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="sec-redes-vm"><span class="header-section-number">7.6</span> Dos formas de conectarla: NAT y puente</h2>
@@ -497,30 +509,23 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 7.1 · ¿Sabe virtualizar tu procesador?</strong></p>
-<p>Comprueba de dos formas que tu CPU tiene soporte de virtualización, y anota en el cuaderno cuál de las dos tecnologías tiene (Intel o AMD). <em>Pista: <code>/proc/cpuinfo</code> con <code>grep -c</code>, y <code>lscpu</code> con <code>grep -i</code>.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Comprueba de dos formas que tu CPU tiene soporte de virtualización, y anota en el cuaderno cuál de las dos tecnologías tiene (Intel o AMD).</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep -c -E 'vmx|svm' /proc/cpuinfo</code> (un número &gt; 0) y <code>lscpu | grep -i virtualiz</code> (<code>VT-x</code> para Intel, <code>AMD-V</code> para AMD). Si sale 0 o vacío, la opción está apagada en el UEFI: reinicia, entra en la configuración (capítulo 6) y actívala.</p>
-<p><strong>Por qué así</strong> — Dos instrumentos distintos para la misma medida, como siempre. Y fíjate en <code>/proc</code>: el capítulo 4 te enseñó que ahí el kernel te cuenta lo que sabe del hardware — hoy le preguntas por una capacidad concreta de la CPU.</p>
+<p><code>/proc/cpuinfo</code> con <code>grep -c</code>, y <code>lscpu</code> con <code>grep -i</code>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 7.2 · Montar el taller</strong></p>
-<p>Instala el Gestor de máquinas virtuales por la vía que prefieras — Gestor de software o <code>apt</code> —, ábrelo una vez (te pedirá la contraseña), añádete al grupo <code>libvirt</code>, cierra y vuelve a abrir sesión, y comprueba con <code>groups</code> y <code>virsh list --all</code> que estás dentro y que el taller responde. <em>Pista: las dos vías instalan exactamente los mismos paquetes; <code>usermod -aG</code> añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -534,39 +539,32 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Gestor de software → «Gestor de máquinas virtuales» → Instalar (o <code>sudo apt install virt-manager</code>), <code>sudo usermod -aG libvirt $USER</code>, cerrar sesión y entrar. <code>groups</code> debe listar <code>libvirt</code>; <code>virsh list --all</code> devuelve una tabla vacía sin quejarse. Si protesta con «permiso denegado» hablando de un <em>socket</em>, es que no reiniciaste la sesión.</p>
-<p><strong>Por qué así</strong> — Un paquete, un grupo, una comprobación: el capítulo 5 y el 4 trabajando juntos. <code>$USER</code> es la variable de entorno del capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.</p>
+<p><code>grep -c -E 'vmx|svm' /proc/cpuinfo</code> (un número &gt; 0) y <code>lscpu | grep -i virtualiz</code> (<code>VT-x</code> para Intel, <code>AMD-V</code> para AMD). Si sale 0 o vacío, la opción está apagada en el UEFI: reinicia, entra en la configuración (capítulo 6) y actívala.</p>
+<p><strong>Por qué así</strong> — Dos instrumentos distintos para la misma medida, como siempre. Y fíjate en <code>/proc</code>: el capítulo 4 te enseñó que ahí el kernel te cuenta lo que sabe del hardware — hoy le preguntas por una capacidad concreta de la CPU.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 7.3 · La imagen, verificada</strong></p>
-<p>Descarga la ISO <em>netinst</em> de Debian para amd64 y su fichero <code>SHA256SUMS</code>, y comprueba que la huella coincide. <em>Pista: <code>sha256sum fichero.iso</code> calcula; <code>grep netinst SHA256SUMS</code> te aísla la línea correcta para compararla a ojo — o deja que <code>sha256sum -c SHA256SUMS 2&gt; /dev/null | grep netinst</code> lo compare por ti.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 7.2 · Montar el taller</strong></p>
+<p>Instala el Gestor de máquinas virtuales por la vía que prefieras — Gestor de software o <code>apt</code> —, ábrelo una vez (te pedirá la contraseña), añádete al grupo <code>libvirt</code>, cierra y vuelve a abrir sesión, y comprueba con <code>groups</code> y <code>virsh list --all</code> que estás dentro y que el taller responde.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Las dos huellas deben ser idénticas carácter a carácter. Con <code>sha256sum -c</code>, la línea buena dice <code>debian-13.x-amd64-netinst.iso: La suma coincide</code>; el <code>2&gt; /dev/null</code> silencia las quejas por las otras imágenes del fichero que no descargaste.</p>
-<p><strong>Por qué así</strong> — Nunca se instala desde una imagen sin verificar: una descarga cortada o manipulada produce instalaciones que fallan de formas misteriosas. El <code>2&gt;</code> del capítulo 3 y el <code>grep</code> de siempre te dan la comprobación en una línea.</p>
+<p>Las dos vías instalan exactamente los mismos paquetes; <code>usermod -aG</code> añade sin quitar los grupos que ya tienes; los grupos nuevos no aparecen hasta reiniciar la sesión.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 7.4 · Nace <code>debian-lab</code></strong></p>
-<p>Crea la máquina con el asistente (4 GB, 2 CPU, 20 GB, red NAT), deja que arranque hasta el menú del instalador, mírala un minuto — y apágala con <em>Forzar apagado</em>. Comprueba con <code>virsh</code> que existe y está apagada. <em>Pista: el asistente son cinco pantallas; si algo no encaja con el capítulo, avanza igual — cualquier decisión se cambia después en la configuración de la máquina.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -580,39 +578,32 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>virsh list --all</code> → <code>debian-lab   apagado</code>. Si la máquina no arranca con un error sobre KVM, vuelve al 7.1: la virtualización está apagada en el UEFI. Si el asistente no encuentra la ISO, pulsa <em>Buscar local</em> y navega hasta <code>~/Descargas</code>.</p>
-<p><strong>Por qué así</strong> — Acabas de hacer, con clics, exactamente lo que el servicio de informática hace cuando te «da una VM». La única diferencia es la escala del anfitrión.</p>
+<p>Gestor de software → «Gestor de máquinas virtuales» → Instalar (o <code>sudo apt install virt-manager</code>), <code>sudo usermod -aG libvirt $USER</code>, cerrar sesión y entrar. <code>groups</code> debe listar <code>libvirt</code>; <code>virsh list --all</code> devuelve una tabla vacía sin quejarse. Si protesta con «permiso denegado» hablando de un <em>socket</em>, es que no reiniciaste la sesión.</p>
+<p><strong>Por qué así</strong> — Un paquete, un grupo, una comprobación: el capítulo 5 y el 4 trabajando juntos. <code>$USER</code> es la variable de entorno del capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 7.5 · Un disco de 20 GB que pesa 200 MB</strong></p>
-<p>Localiza el fichero de disco de tu máquina y mide su tamaño de las dos maneras del capítulo 6: el nominal (<code>ls -lh</code>) y el real (<code>du -h</code>). Explica en tu cuaderno la diferencia. <em>Pista: los discos de libvirt viven en <code>/var/lib/libvirt/images/</code>, y ese directorio es de root.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 7.3 · La imagen, verificada</strong></p>
+<p>Descarga la ISO <em>netinst</em> de Debian para amd64 y su fichero <code>SHA256SUMS</code>, comprueba que la huella coincide, y deja la ISO donde libvirt pueda leerla.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo ls -lh /var/lib/libvirt/images/</code> dice 20G; <code>sudo du -h /var/lib/libvirt/images/debian-lab.qcow2</code> dice unos cientos de MB. El fichero es <em>disperso</em>: reserva 20 GB de tamaño lógico pero solo ocupa lo que la VM ha escrito de verdad. Crecerá durante la instalación del capítulo 8.</p>
-<p><strong>Por qué así</strong> — Tamaño nominal frente a ocupación real: un físico distingue una capacidad de una medida sin pestañear. Y <code>sudo</code> porque el directorio es del sistema (<code>/var</code>, capítulo 4): las máquinas de todos los usuarios viven ahí.</p>
+<p><code>sha256sum fichero.iso</code> calcula; <code>grep netinst SHA256SUMS</code> te aísla la línea correcta para compararla a ojo — o deja que <code>sha256sum -c SHA256SUMS 2&gt; /dev/null | grep netinst</code> lo compare por ti. «Donde libvirt pueda leerla» es su almacén, <code>/var/lib/libvirt/images/</code>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 7.6 · La primera instantánea</strong></p>
-<p>Con la máquina apagada, crea una instantánea llamada <code>vm-recien-creada</code> desde virt-manager, y compruébala desde la terminal. Después, borra esa instantánea (será inútil en cuanto instales Debian) y verifica que desapareció. <em>Pista: <code>virsh snapshot-list debian-lab</code> lista; <code>virsh snapshot-delete debian-lab NOMBRE</code> borra.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -626,6 +617,123 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Las dos huellas deben ser idénticas carácter a carácter. Con <code>sha256sum -c</code>, la línea buena dice <code>debian-13.x-amd64-netinst.iso: La suma coincide</code>; el <code>2&gt; /dev/null</code> silencia las quejas por las otras imágenes del fichero que no descargaste. Y después, <code>sudo mv</code> de la ISO a <code>/var/lib/libvirt/images/</code>.</p>
+<p><strong>Por qué así</strong> — Nunca se instala desde una imagen sin verificar: una descarga cortada o manipulada produce instalaciones que fallan de formas misteriosas. El <code>2&gt;</code> del capítulo 3 y el <code>grep</code> de siempre te dan la comprobación en una línea.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.4 · Nace <code>debian-lab</code></strong></p>
+<p>Crea la máquina con el asistente (4 GB, 2 CPU, 20 GB, red NAT), deja que arranque hasta el menú del instalador, mírala un minuto — y apágala con <em>Forzar apagado</em>. Comprueba con <code>virsh</code> que existe y está apagada.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El asistente son cinco pantallas; si algo no encaja con el capítulo, avanza igual — cualquier decisión se cambia después en la configuración de la máquina.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>virsh list --all</code> → <code>debian-lab   apagado</code>. Si la máquina no arranca con un error sobre KVM, vuelve al 7.1: la virtualización está apagada en el UEFI. Si al arrancar la máquina sale «Permission denied» sobre la ISO, es que la elegiste en <code>~/Descargas</code>: muévela al almacén de libvirt (sección de la imagen) y en la configuración de la máquina apunta la unidad de CD al nuevo sitio.</p>
+<p><strong>Por qué así</strong> — Acabas de hacer, con clics, exactamente lo que el servicio de informática hace cuando te «da una VM». La única diferencia es la escala del anfitrión.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.5 · Un disco de 20 GB que pesa 200 MB</strong></p>
+<p>Localiza el fichero de disco de tu máquina y mide su tamaño de las dos maneras del capítulo 6: el nominal (<code>ls -lh</code>) y el real (<code>du -h</code>). Explica en tu cuaderno la diferencia.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Los discos de libvirt viven en <code>/var/lib/libvirt/images/</code>, y ese directorio es de root.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo ls -lh /var/lib/libvirt/images/</code> dice 20G; <code>sudo du -h /var/lib/libvirt/images/debian-lab.qcow2</code> dice unos cientos de MB. El fichero es <em>disperso</em>: reserva 20 GB de tamaño lógico pero solo ocupa lo que la VM ha escrito de verdad. Crecerá durante la instalación del capítulo 8.</p>
+<p><strong>Por qué así</strong> — Tamaño nominal frente a ocupación real: un físico distingue una capacidad de una medida sin pestañear. Y <code>sudo</code> porque el directorio es del sistema (<code>/var</code>, capítulo 4): las máquinas de todos los usuarios viven ahí.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 7.6 · La primera instantánea</strong></p>
+<p>Con la máquina apagada, crea una instantánea llamada <code>vm-recien-creada</code> desde virt-manager, y compruébala desde la terminal. Después, borra esa instantánea (será inútil en cuanto instales Debian) y verifica que desapareció.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>virsh snapshot-list debian-lab</code> lista; <code>virsh snapshot-delete debian-lab NOMBRE</code> borra.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>En virt-manager: ventana de la máquina → Ver → Instantáneas → <strong>+</strong>. En terminal: <code>virsh snapshot-list debian-lab</code> la muestra; <code>virsh snapshot-delete debian-lab vm-recien-creada</code> la elimina, y la lista vuelve a estar vacía.</p>
 <p><strong>Por qué así</strong> — Has recorrido el ciclo completo — crear, comprobar, borrar — con las dos caras de libvirt. El que importa, «recién instalado», lo harás al final del capítulo 8, y será el punto de retorno de todo el resto del curso.</p>
 </div>
@@ -636,10 +744,26 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 <p><strong>Nivel 2 · Para curiosos (opcional)</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 7.7 · La máquina, por dentro de libvirt</strong></p>
-<p>libvirt guarda la definición de cada máquina como texto. Con <code>virsh dumpxml debian-lab</code> y las tuberías esenciales del capítulo 3, averigua cuánta memoria tiene asignada, cuántas CPU, y dónde está su disco. <em>Pista: <code>| grep -i memory</code>, <code>| grep vcpu</code>, <code>| grep -i qcow2</code>.</em></p>
+<p>libvirt guarda la definición de cada máquina como texto. Con <code>virsh dumpxml debian-lab</code> y las tuberías esenciales del capítulo 3, averigua cuánta memoria tiene asignada, cuántas CPU, y dónde está su disco.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>| grep -i memory</code>, <code>| grep vcpu</code>, <code>| grep -i qcow2</code>.</p>
+</div>
+</div>
+</div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -648,7 +772,7 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>virsh dumpxml debian-lab | grep -i memory</code> → <code>&lt;memory unit='KiB'&gt;4194304&lt;/memory&gt;</code> (4 GB en KiB); <code>| grep vcpu</code> → <code>2</code>; <code>| grep qcow2</code> → la ruta en <code>/var/lib/libvirt/images/</code>.</p>
 <p><strong>Por qué así</strong> — «Todo es un fichero de texto» llega hasta aquí: tu ordenador de mentira es, en última instancia, un documento XML que describe su hardware. Cambiar la RAM de la máquina es editar un número — y <code>grep</code> es tu lupa para encontrarlo. Cierra el cuaderno: <code>exit</code>, <code>sesion07.log</code> a la colección.</p>
@@ -722,7 +846,7 @@ Figura&nbsp;7.4: Las dos topologías. Hoy usas NAT; el puente queda para cuando 
 </div>
 <div class="proxima">
 <p><strong>La próxima sesión</strong></p>
-<p>Tienes una máquina vacía con el instalador de Debian esperando en su bandeja. En el capítulo 8 la instalas de verdad — y no con el botón de «siguiente, siguiente»: particionando a mano con lo que aprendiste en el capítulo 6, eligiendo dónde va la partición EFI, viendo a GRUB instalarse. Después la romperás y la reinstalarás hasta que aburra, y saldrás con la lista de comprobación para el día en que lo hagas en un PC real. Guarda <code>sesion07.log</code>.</p>
+<p>Tienes una máquina vacía con el instalador de Debian esperando en su bandeja. En el capítulo 8 la instalas de verdad — y no con el botón de «siguiente, siguiente»: particionando a mano con lo que aprendiste en el capítulo 6, viendo a GRUB instalarse en el disco. Después la romperás y la reinstalarás hasta que aburra, y saldrás con la lista de comprobación para el día en que lo hagas en un PC real. Guarda <code>sesion07.log</code>.</p>
 </div>
 <div class="pie-piloto">
 <p>cap. 7 v0.1 · piloto — anota tiempo real invertido, dudas y erratas junto a tu <code>sesion07.log</code></p>

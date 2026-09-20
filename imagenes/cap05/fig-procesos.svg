@@ -17,7 +17,7 @@
     <text x="343" y="120" font-size="12" fill="#6BD6BC" text-anchor="middle" font-weight="600">el proceso · PID 9204</text>
     <text x="343" y="140" font-size="9.5" fill="#D8E6E0" text-anchor="middle">dueño: marcos · CPU 98 %</text>
     <text x="343" y="158" font-size="9" fill="#9FB4AC" text-anchor="middle">primer plano: ocupa la terminal</text>
-    <text x="343" y="173" font-size="9" fill="#9FB4AC" text-anchor="middle">con «&amp;»: segundo plano, prompt libre</text>
+    <text x="343" y="173" font-size="9" fill="#9FB4AC" text-anchor="middle">«&amp;»: segundo plano, prompt libre</text>
     <!-- señales -->
     <line x1="343" y1="40" x2="343" y2="90" stroke="#9A6A14" stroke-width="1.6" marker-end="url(#fpt)"/>
     <text x="343" y="30" font-size="10" fill="#9A6A14" text-anchor="middle" font-weight="600">Ctrl+C → SIGINT «interrúmpete»</text>
@@ -32,7 +32,7 @@
     <!-- fin -->
     <line x1="343" y1="190" x2="343" y2="230" stroke="#6A5F4D" stroke-width="1.6" marker-end="url(#fpr)"/>
     <rect x="268" y="236" width="150" height="34" rx="4" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.2"/>
-    <text x="343" y="258" font-size="10" fill="#6A5F4D" text-anchor="middle">termina · el PID se libera</text>
+    <text x="343" y="258" font-size="9.5" fill="#6A5F4D" text-anchor="middle">acaba · el PID se libera</text>
     <text x="350" y="292" font-size="10" fill="#9C8F79" text-anchor="middle">protocolo: primero el educado, cinco segundos de cortesía, y solo entonces el definitivo</text>
   </g>
 </svg>

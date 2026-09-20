@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -640,30 +640,23 @@ Figura&nbsp;1.10: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores d
 </div>
 <div class="ejercicio">
 <p><strong>Ejercicio 1.4 · La biblioteca responde</strong></p>
-<p>Sin usar internet: encuentra en <code>man ls</code> la opción que ordena los ficheros por fecha de modificación, del más reciente al más antiguo. Pista: dentro del visor, la tecla <kbd>/</kbd> busca.</p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Sin usar internet: encuentra en <code>man ls</code> la opción que ordena los ficheros por fecha de modificación, del más reciente al más antiguo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>man ls</code>, luego <code>/modificación</code> (o <code>/time</code> si tu manual está en inglés) e <kbd>Intro</kbd>. La opción es <code>-t</code>. Prueba: <code>ls -lt ~/Descargas</code> — tu descarga más reciente aparece la primera.</p>
-<p><strong>Por qué así</strong> — Este gesto — <code>man</code> + <kbd>/</kbd> — sustituye a la mayoría de búsquedas en Google que hace un principiante. Es más rápido, no requiere conexión, y describe exactamente <em>tu</em> versión del programa, no la de un tutorial de 2019.</p>
+<p>Dentro del visor, la tecla <kbd>/</kbd> busca.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 1.5 · Predicción teórica</strong></p>
-<p>Sin ejecutarlo todavía: partiendo de <code>/home/marcos</code>, ¿qué imprimirá <code>pwd</code> tras esta secuencia? <code>cd /tmp</code> → <code>cd</code> → <code>cd Descargas</code> → <code>cd ..</code> — Escribe tu predicción, luego compruébala experimentalmente.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -677,16 +670,16 @@ Figura&nbsp;1.10: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores d
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>/home/marcos</code>.</p>
-<p><strong>Por qué así</strong> — Paso a paso: <code>cd /tmp</code> te lleva a <code>/tmp</code>; <code>cd</code> sin argumentos, a casa (<code>/home/marcos</code>); <code>cd Descargas</code>, a <code>/home/marcos/Descargas</code>; y <code>..</code> sube al padre: de vuelta a casa. Si predijiste bien las cuatro, las rutas ya son tuyas. Si no, repite la secuencia mirando el prompt en cada paso: es tu brújula.</p>
+<p><code>man ls</code>, luego <code>/modificación</code> (o <code>/time</code> si tu manual está en inglés) e <kbd>Intro</kbd>. La opción es <code>-t</code>. Prueba: <code>ls -lt ~/Descargas</code> — tu descarga más reciente aparece la primera.</p>
+<p><strong>Por qué así</strong> — Este gesto — <code>man</code> + <kbd>/</kbd> — sustituye a la mayoría de búsquedas en Google que hace un principiante. Es más rápido, no requiere conexión, y describe exactamente <em>tu</em> versión del programa, no la de un tutorial de 2019.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 1.6 · Preparando el material de la próxima sesión</strong></p>
-<p>Descarga este fichero de medidas — veinte periodos de un péndulo, el clásico de primero: <a href="../datos/pendulo_medidas.csv" download="pendulo_medidas.csv"><code>pendulo_medidas.csv</code></a>. Después, <em>desde la terminal</em>, localízalo: comprueba con <code>ls</code> que está en tu carpeta de descargas, y averigua su tamaño y su fecha con lo aprendido en <a href="#sec-anatomia" class="quarto-xref"><span>Sección 1.3</span></a>.</p>
+<p><strong>Ejercicio 1.5 · Predicción teórica</strong></p>
+<p>Sin ejecutarlo todavía: partiendo de <code>/home/marcos</code>, ¿qué imprimirá <code>pwd</code> tras esta secuencia? <code>cd /tmp</code> → <code>cd</code> → <code>cd Descargas</code> → <code>cd ..</code> — Escribe tu predicción, luego compruébala experimentalmente.</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -699,6 +692,29 @@ Figura&nbsp;1.10: Ken Thompson (izquierda) y Dennis Ritchie (derecha), autores d
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>/home/marcos</code>.</p>
+<p><strong>Por qué así</strong> — Paso a paso: <code>cd /tmp</code> te lleva a <code>/tmp</code>; <code>cd</code> sin argumentos, a casa (<code>/home/marcos</code>); <code>cd Descargas</code>, a <code>/home/marcos/Descargas</code>; y <code>..</code> sube al padre: de vuelta a casa. Si predijiste bien las cuatro, las rutas ya son tuyas. Si no, repite la secuencia mirando el prompt en cada paso: es tu brújula.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 1.6 · Preparando el material de la próxima sesión</strong></p>
+<p>Descarga este fichero de medidas — veinte periodos de un péndulo, el clásico de primero: <a href="../datos/pendulo_medidas.csv" download="pendulo_medidas.csv"><code>pendulo_medidas.csv</code></a>. Después, <em>desde la terminal</em>, localízalo: comprueba con <code>ls</code> que está en tu carpeta de descargas, y averigua su tamaño y su fecha con lo aprendido en <a href="#sec-anatomia" class="quarto-xref"><span>Sección 1.3</span></a>.</p>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>ls -lh ~/Descargas</code> — y ahí estará <code>pendulo_medidas.csv</code>, con menos de 1K y fecha de hoy. Con <code>ls -lt ~/Descargas</code> saldrá el primero de la lista.</p>
 <p><strong>Por qué así</strong> — Fíjate en lo que <em>no</em> hemos hecho: abrirlo. Sabes llegar hasta cualquier fichero del sistema, pero aún no sabes mirar dentro desde la terminal. Ese es, exactamente, el primer gesto de la próxima sesión.</p>

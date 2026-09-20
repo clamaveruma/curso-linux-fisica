@@ -7,7 +7,7 @@
     <!-- programa -->
     <rect x="60" y="75" width="150" height="66" rx="5" fill="#0E1512"/>
     <text x="135" y="104" font-size="14" fill="#6BD6BC" text-anchor="middle" font-weight="600">grep ERROR</text>
-    <text x="135" y="124" font-size="10.5" fill="#D8E6E0" text-anchor="middle">trabaja igual que siempre</text>
+    <text x="135" y="124" font-size="9" fill="#D8E6E0" text-anchor="middle">trabaja igual que siempre</text>
     <!-- stdout hacia fichero -->
     <path d="M215 95 C 300 70, 360 70, 425 95" fill="none" stroke="#2F6F62" stroke-width="2" marker-end="url(#frd)"/>
     <text x="320" y="62" font-size="13" fill="#2F6F62" text-anchor="middle" font-weight="600">1 · stdout   &gt;</text>

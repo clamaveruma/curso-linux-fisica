@@ -10,13 +10,13 @@
     <text x="42" y="73" font-size="9" fill="#6A5F4D">qué se dice · HTTP, SSH, DNS</text>
     <rect x="30" y="86" width="240" height="38" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.2"/>
     <text x="42" y="102" font-size="10.5" fill="#24564B" font-weight="600">transporte</text>
-    <text x="42" y="117" font-size="9" fill="#6A5F4D">a qué programa, y si llega entero · TCP/UDP, puertos</text>
+    <text x="42" y="117" font-size="9" fill="#6A5F4D">a qué programa · TCP/UDP, puertos</text>
     <rect x="30" y="130" width="240" height="38" rx="3" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.2"/>
     <text x="42" y="146" font-size="10.5" fill="#9A6A14" font-weight="600">red</text>
     <text x="42" y="161" font-size="9" fill="#6A5F4D">a qué máquina del mundo · IP, routers</text>
     <rect x="30" y="174" width="240" height="38" rx="3" fill="#F5DED6" stroke="#C4342A" stroke-width="1.2"/>
     <text x="42" y="190" font-size="10.5" fill="#C4342A" font-weight="600">enlace</text>
-    <text x="42" y="205" font-size="9" fill="#6A5F4D">al vecino de al lado · Ethernet, Wi-Fi, MAC</text>
+    <text x="42" y="205" font-size="9" fill="#6A5F4D">al vecino · Ethernet, Wi-Fi, MAC</text>
     <rect x="30" y="218" width="240" height="38" rx="3" fill="#0E1512"/>
     <text x="42" y="234" font-size="10.5" fill="#6BD6BC" font-weight="600">física</text>
     <text x="42" y="249" font-size="9" fill="#D8E6E0">bits en cobre, fibra o aire</text>
@@ -35,6 +35,7 @@
     <text x="490" y="224" font-size="10" fill="#6A5F4D" text-anchor="middle">y mete todo en un sobre rojo nuevo para el siguiente vecino</text>
     <text x="490" y="250" font-size="10" fill="#9C8F79" text-anchor="middle">el sobre IP llega intacto al destino; el TCP y los datos</text>
     <text x="490" y="264" font-size="10" fill="#9C8F79" text-anchor="middle">solo los abre la máquina final — y el programa del puerto 443</text>
-    <text x="350" y="310" font-size="10" fill="#6A5F4D" text-anchor="middle">por eso la MAC solo importa dentro de tu casa y la IP en todo el mundo · el modelo OSI de los libros tiene siete capas; internet usa estas</text>
+    <text x="350" y="300" font-size="10" fill="#6A5F4D" text-anchor="middle">por eso la MAC solo importa dentro de tu casa y la IP en todo el mundo</text>
+    <text x="350" y="316" font-size="10" fill="#6A5F4D" text-anchor="middle">el modelo OSI de los libros tiene siete capas; internet usa estas</text>
   </g>
 </svg>

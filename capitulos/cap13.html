@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -439,36 +439,23 @@ Figura&nbsp;13.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 13.1 · La muerte de la sesión</strong></p>
-<p>Reproduce el experimento del capítulo: <code>sleep 600 &amp;</code> dentro de una sesión SSH, <code>exit</code>, y comprueba desde fuera si sigue vivo. Repite con tmux — y comprueba de nuevo. <em>Pista: <code>ssh lab "ps aux | grep sleep"</code> es la comprobación sin entrar; la primera vez desaparecerá, la segunda seguirá ahí.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Reproduce el experimento del capítulo: <code>sleep 600 &amp;</code> dentro de una sesión SSH, <code>exit</code>, y comprueba desde fuera si sigue vivo. Repite con tmux — y comprueba de nuevo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Sin tmux, el <code>grep</code> solo se encuentra a sí mismo: SIGHUP mató al <code>sleep</code>. Con <code>tmux new -s prueba</code>, <code>sleep 600 &amp;</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>exit</code>, la comprobación muestra el <code>sleep</code> vivo — y <code>tmux attach -t prueba</code> te lo devuelve.</p>
-<p><strong>Por qué así</strong> — Ver morir el proceso una vez vale más que cualquier explicación: a partir de hoy el reflejo «¿lo tengo en tmux?» te saldrá solo antes de lanzar nada que dure más que un café.</p>
+<p><code>ssh lab "ps aux | grep sleep"</code> es la comprobación sin entrar; la primera vez desaparecerá, la segunda seguirá ahí.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 13.2 · La simulación que sobrevive</strong></p>
-<p>Crea en <code>debian-lab</code> un <code>simula.py</code> de diez minutos (abajo), lánzalo dentro de una sesión tmux llamada <code>simulacion</code>, desengánchate, cierra SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba el progreso — sin engancharte, con <code>ssh lab "tail -2 progreso.txt"</code> — y luego engánchate para verlo terminar. <em>Pista: con <code>nano simula.py</code>:</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -482,40 +469,38 @@ Figura&nbsp;13.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>tmux new -s simulacion</code>, <code>python3 simula.py</code>, desenganchar, <code>exit</code>. Minutos después: <code>ssh lab "tail -2 progreso.txt"</code> muestra un paso avanzado; <code>ssh lab</code> + <code>tmux attach -t simulacion</code> enseña la cuenta en directo. El programa nunca supo que te fuiste.</p>
-<p><strong>Por qué así</strong> — Es el flujo del físico computacional entero en miniatura: lanzar, irse, consultar sin entrar (el comando remoto del capítulo 12), volver. Sustituye <code>simula.py</code> por tu código de verdad y <code>600</code> por doce horas: el gesto es idéntico.</p>
+<p>Sin tmux, el <code>grep</code> solo se encuentra a sí mismo: SIGHUP mató al <code>sleep</code>. Con <code>tmux new -s prueba</code>, <code>sleep 600 &amp;</code>, <kbd>Ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd>, <code>exit</code>, la comprobación muestra el <code>sleep</code> vivo — y <code>tmux attach -t prueba</code> te lo devuelve.</p>
+<p><strong>Por qué así</strong> — Ver morir el proceso una vez vale más que cualquier explicación: a partir de hoy el reflejo «¿lo tengo en tmux?» te saldrá solo antes de lanzar nada que dure más que un café.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 13.3 · Tu primer túnel</strong></p>
-<p>En <code>debian-lab</code> (dentro de tmux), sirve tu casa con <code>python3 -m http.server 8000 --bind 127.0.0.1</code>. Comprueba desde tu Mint que el puerto <em>no</em> está abierto (<code>nmap debian-lab</code>), abre el túnel con <code>ssh -L 8000:localhost:8000 lab</code>, y visita <code>http://localhost:8000</code> en tu navegador. Cierra la sesión SSH y recarga la página. <em>Pista: el túnel solo existe mientras esa conexión SSH esté abierta.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 13.2 · La simulación que sobrevive</strong></p>
+<p>Crea en <code>debian-lab</code> un <code>simula.py</code> de diez minutos (abajo), lánzalo dentro de una sesión tmux llamada <code>simulacion</code>, desengánchate, cierra SSH, espera unos minutos, vuelve a entrar desde tu Mint y comprueba el progreso — sin engancharte, con <code>ssh lab "tail -2 progreso.txt"</code> — y luego engánchate para verlo terminar.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>nmap</code> sigue viendo solo el 22 — el 8000 es privado del servidor. Con el túnel abierto, el navegador muestra el listado de ficheros de la VM (ahí estará <code>progreso.txt</code>). Al cerrar SSH, la página deja de cargar: el túnel murió con la conexión.</p>
-<p><strong>Por qué así</strong> — Has visto las tres propiedades del túnel: no abre puertas, va por SSH, y vive lo que vive la conexión. Todo lo que sigue (Jupyter, y cualquier panel web de un servidor) es este mismo gesto con otro número.</p>
+<p>Con <code>nano simula.py</code>:</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<p><strong>Nivel 3 · Opcional (para quien lo vaya a usar — con una IA al lado si quieres)</strong></p>
-<div class="ejercicio">
-<p><strong>Ejercicio 13.4 · Jupyter a distancia</strong></p>
-<p>Instala <code>jupyter-notebook</code> en <code>debian-lab</code>, lánzalo dentro de tmux con <code>--no-browser --port 8888</code>, abre el túnel del 8888 y trabaja desde tu navegador: crea un cuaderno que lea <code>progreso.txt</code> y cuente sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue donde estaba. <em>Pista: la URL con el <code>token</code> la imprime Jupyter al arrancar; si la pierdes, <code>jupyter notebook list</code> la repite.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paso <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">601</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"progreso.txt"</span>, <span class="st">"a"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"paso </span><span class="sc">{</span>paso<span class="sc">}</span><span class="ss"> / 600"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span></code></pre></div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -528,6 +513,85 @@ Figura&nbsp;13.3: MareNostrum 4 (2017), en la capilla de Torre Girona, Barcelona
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>tmux new -s simulacion</code>, <code>python3 simula.py</code>, desenganchar, <code>exit</code>. Minutos después: <code>ssh lab "tail -2 progreso.txt"</code> muestra un paso avanzado; <code>ssh lab</code> + <code>tmux attach -t simulacion</code> enseña la cuenta en directo. El programa nunca supo que te fuiste.</p>
+<p><strong>Por qué así</strong> — Es el flujo del físico computacional entero en miniatura: lanzar, irse, consultar sin entrar (el comando remoto del capítulo 12), volver. Sustituye <code>simula.py</code> por tu código de verdad y <code>600</code> por doce horas: el gesto es idéntico.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.3 · Tu primer túnel</strong></p>
+<p>En <code>debian-lab</code> (dentro de tmux), sirve tu casa con <code>python3 -m http.server 8000 --bind 127.0.0.1</code>. Comprueba desde tu Mint que el puerto <em>no</em> está abierto (<code>nmap debian-lab</code>), abre el túnel con <code>ssh -L 8000:localhost:8000 lab</code>, y visita <code>http://localhost:8000</code> en tu navegador. Cierra la sesión SSH y recarga la página.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El túnel solo existe mientras esa conexión SSH esté abierta.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>nmap</code> sigue viendo solo el 22 — el 8000 es privado del servidor. Con el túnel abierto, el navegador muestra el listado de ficheros de la VM (ahí estará <code>progreso.txt</code>). Al cerrar SSH, la página deja de cargar: el túnel murió con la conexión.</p>
+<p><strong>Por qué así</strong> — Has visto las tres propiedades del túnel: no abre puertas, va por SSH, y vive lo que vive la conexión. Todo lo que sigue (Jupyter, y cualquier panel web de un servidor) es este mismo gesto con otro número.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · Opcional (para quien lo vaya a usar — con una IA al lado si quieres)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 13.4 · Jupyter a distancia</strong></p>
+<p>Instala <code>jupyter-notebook</code> en <code>debian-lab</code>, lánzalo dentro de tmux con <code>--no-browser --port 8888</code>, abre el túnel del 8888 y trabaja desde tu navegador: crea un cuaderno que lea <code>progreso.txt</code> y cuente sus líneas. Desconéctate, vuelve, y comprueba que el cuaderno sigue donde estaba.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La URL con el <code>token</code> la imprime Jupyter al arrancar; si la pierdes, <code>jupyter notebook list</code> la repite.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>sudo apt install jupyter-notebook</code>; en tmux: <code>jupyter notebook --no-browser --port 8888</code>; en Mint: <code>ssh -L 8888:localhost:8888 lab</code> y la URL con token en el navegador. El cuaderno con <code>len(open("progreso.txt").readlines())</code> da 600. Tras cerrar y reabrir túnel, el cuaderno y su kernel siguen vivos: viven en tmux.</p>
 <p><strong>Por qué así</strong> — Este es el montaje completo: los datos y el cálculo en la máquina remota, tu comodidad en la local. En un clúster el patrón es el mismo, con Jupyter lanzado en una máquina de cálculo — pregúntalo allí: casi todos tienen una receta escrita para exactamente esto.</p>

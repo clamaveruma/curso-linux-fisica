@@ -5,7 +5,7 @@
       <ellipse cx="65" cy="52" rx="42" ry="10" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.3"/>
       <path d="M23 52 v46 a42 10 0 0 0 84 0 v-46" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.3"/>
       <ellipse cx="65" cy="98" rx="42" ry="10" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.3"/>
-      <text x="65" y="80" font-size="9.5" fill="#6A5F4D" text-anchor="middle">adquisicion.log</text>
+      <text x="65" y="80" font-size="8.5" fill="#6A5F4D" text-anchor="middle">adquisicion.log</text>
       <text x="65" y="130" font-size="9.5" fill="#9C8F79" text-anchor="middle">7 198 líneas</text>
     </g>
     <!-- etapa 1 -->
@@ -38,9 +38,9 @@
     <text x="646" y="63" font-size="10.5" fill="#24564B">90 s3</text>
     <text x="646" y="80" font-size="10.5" fill="#24564B">15 s1</text>
     <text x="646" y="97" font-size="10.5" fill="#24564B"> 3 s4</text>
-    <text x="661" y="129" font-size="9.5" fill="#6A5F4D" text-anchor="middle">el veredicto</text>
+    <text x="654" y="129" font-size="9" fill="#6A5F4D" text-anchor="middle">el veredicto</text>
     <!-- moraleja -->
-    <text x="350" y="180" font-size="11.5" fill="#6A5F4D" text-anchor="middle">cada programa hace una sola cosa; la tubería <tspan fill="#2F6F62" font-weight="600">|</tspan> conecta la salida de uno con la entrada del siguiente</text>
+    <text x="350" y="180" font-size="10.5" fill="#6A5F4D" text-anchor="middle">cada programa hace una sola cosa; la tubería <tspan fill="#2F6F62" font-weight="600">|</tspan> conecta la salida de uno con la entrada del siguiente</text>
     <text x="350" y="202" font-size="10.5" fill="#9C8F79" text-anchor="middle">7 198 líneas → una respuesta: el sensor s3 es el culpable, con 90 fallos</text>
     <text x="350" y="230" font-size="10" fill="#9C8F79" text-anchor="middle">se construye pieza a pieza, mirando qué sale en cada paso</text>
   </g>

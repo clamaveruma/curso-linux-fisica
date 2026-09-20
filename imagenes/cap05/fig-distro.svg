@@ -4,7 +4,7 @@
   </defs>
   <g font-family="IBM Plex Mono,monospace">
     <!-- pila de capas -->
-    <text x="185" y="35" font-size="12" fill="#6A5F4D" text-anchor="middle" font-weight="600">una distro = estas capas, elegidas y empaquetadas</text>
+    <text x="185" y="35" font-size="11" fill="#6A5F4D" text-anchor="middle" font-weight="600">una distro = estas capas, elegidas y empaquetadas</text>
     <rect x="60" y="50" width="250" height="44" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.3"/>
     <text x="185" y="70" font-size="12" fill="#24564B" text-anchor="middle" font-weight="600">escritorio</text>
     <text x="185" y="86" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Cinnamon · GNOME · KDE · Xfce…</text>
@@ -25,13 +25,13 @@
     <line x1="530" y1="98" x2="530" y2="118" stroke="#9C8F79" stroke-width="1.5" marker-end="url(#fdg)"/>
     <rect x="450" y="123" width="160" height="40" rx="3" fill="#FAF6EB" stroke="#9A6A14" stroke-width="1.3"/>
     <text x="530" y="141" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">Ubuntu · 2004</text>
-    <text x="530" y="156" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Debian, pulido y a plazo fijo</text>
+    <text x="530" y="156" font-size="9" fill="#6A5F4D" text-anchor="middle">Debian pulido, a plazo fijo</text>
     <line x1="530" y1="166" x2="530" y2="186" stroke="#9C8F79" stroke-width="1.5" marker-end="url(#fdg)"/>
     <rect x="450" y="191" width="160" height="40" rx="3" fill="#DFE9DF" stroke="#2F6F62" stroke-width="1.5"/>
     <text x="530" y="209" font-size="12" fill="#24564B" text-anchor="middle" font-weight="600">Mint · 2006</text>
     <text x="530" y="224" font-size="9.5" fill="#6A5F4D" text-anchor="middle">Ubuntu + Cinnamon + pulido</text>
     <text x="530" y="258" font-size="9.5" fill="#9C8F79" text-anchor="middle">misma familia: mismos .deb,</text>
     <text x="530" y="272" font-size="9.5" fill="#9C8F79" text-anchor="middle">mismo apt, mismo curso</text>
-    <text x="185" y="272" font-size="9.5" fill="#9C8F79" text-anchor="middle">cambiar de distro = cambiar de elección de capas, no de mundo</text>
+    <text x="185" y="272" font-size="9" fill="#9C8F79" text-anchor="middle">cambiar de distro = cambiar de elección de capas, no de mundo</text>
   </g>
 </svg>

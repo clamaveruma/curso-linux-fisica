@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -535,34 +535,27 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 <section id="sec-practica-3" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="sec-practica-3"><span class="header-section-number">3.8</span> Práctica: la noche en el laboratorio</h2>
 <p>Arranca tu cuaderno (<code>script sesion03.log</code>) y descarga el registro de la noche: <a href="../datos/cap03/adquisicion.log" download="adquisicion.log"><code>adquisicion.log</code></a> (305 KB de texto — ni se te ocurra abrirlo con doble clic: para eso está la sesión de hoy). Trabaja en <code>~/Descargas</code> o muévelo a tu carpeta de física del capítulo 2.</p>
-<p>Los ejercicios van en tres niveles. <strong>Lo esencial</strong> (3.1–3.4) es lo que usarás de verdad: no te saltes ninguno. <strong>El mecanismo</strong> (3.5–3.6) es para entender cómo encajan las piezas. <strong>El reto</strong> (3.7–3.9) encadena tres y cuatro tuberías: es opcional y está ahí para quien disfrute — hasta un informático se lo pensaría dos veces. Cada uno lleva su pista: úsala sin remordimientos.</p>
+<p>Los ejercicios van en tres niveles. <strong>Lo esencial</strong> (3.1–3.4) es lo que usarás de verdad: no te saltes ninguno. <strong>El mecanismo</strong> (3.5–3.6) es para entender cómo encajan las piezas. <strong>El reto</strong> (3.7–3.9) encadena tres y cuatro tuberías: es opcional y está ahí para quien disfrute — hasta un informático se lo pensaría dos veces. Cada uno lleva su pista, plegada: ábrela sin remordimientos.</p>
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 3.1 · Recuento de daños (sin tuberías)</strong></p>
-<p>¿Cuántas líneas tiene el log en total? ¿Cuántas son <code>ERROR</code>, y cuántas <code>WARN</code>? <em>Pista: <code>wc -l</code> para lo primero; para lo demás, <code>grep -c</code> cuenta él solo — hoy todavía no necesitas ninguna tubería.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>¿Cuántas líneas tiene el log en total? ¿Cuántas son <code>ERROR</code>, y cuántas <code>WARN</code>?</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>wc -l adquisicion.log</code> → 7 198. <code>grep -c ERROR adquisicion.log</code> → 108. <code>grep -c WARN adquisicion.log</code> → 357.</p>
-<p><strong>Por qué así</strong> — Tres preguntas, tres comandos de una sola pieza. Muchos filtros llevan incorporados sus propios atajos (<code>-c</code> es «cuenta en vez de mostrar»): antes de encadenar, mira si una pieza sola ya resuelve.</p>
+<p><code>wc -l</code> para lo primero; para lo demás, <code>grep -c</code> cuenta él solo — hoy todavía no necesitas ninguna tubería.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 3.2 · Tu primera tubería (una <code>|</code>)</strong></p>
-<p>¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue? <em>Pista: el log viene en orden cronológico. Filtra los errores con <code>grep</code> y quédate con la primera línea que salga (<code>head -1</code>).</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -576,39 +569,32 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep ERROR adquisicion.log | head -1</code> → <code>2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor</code>. El s3, a las 10:03:00 — tres minutos después de arrancar.</p>
-<p><strong>Por qué así</strong> — «El primer error» es literalmente la primera línea que pase el filtro, porque el orden te lo da hecho el log. Cuando el orden ya existe, aprovéchalo: ni <code>sort</code> ni nada.</p>
+<p><code>wc -l adquisicion.log</code> → 7 198. <code>grep -c ERROR adquisicion.log</code> → 108. <code>grep -c WARN adquisicion.log</code> → 357.</p>
+<p><strong>Por qué así</strong> — Tres preguntas, tres comandos de una sola pieza. Muchos filtros llevan incorporados sus propios atajos (<code>-c</code> es «cuenta en vez de mostrar»): antes de encadenar, mira si una pieza sola ya resuelve.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.3 · La salida enorme (lo que harás con tu simulación)</strong></p>
-<p><code>ls -lR /usr/share</code> lista decenas de miles de ficheros: la clase de salida que produce una simulación larga. Primero léela con el paginador: <code>ls -lR /usr/share | less</code> — muévete, busca <code>/png</code> con la barra, sal con <code>q</code>. Después guárdala en un fichero: <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code>, y cuenta con <code>grep -c</code> cuántas líneas contienen <code>.png</code>. <em>Pista: <code>less</code> tiene las mismas teclas que <code>man</code>; el <code>2&gt; /dev/null</code> manda las quejas de permisos a la papelera del sistema; y <code>grep -c</code> acepta el fichero como argumento, sin tubería.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 3.2 · Tu primera tubería (una <code>|</code>)</strong></p>
+<p>¿A qué hora exacta empezó a fallar el primer sensor, y cuál fue?</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>ls -lR /usr/share | less</code> (la <code>R</code> es <em>recursivo</em>: entra en todas las subcarpetas). Después <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code> y <code>grep -c "\.png" inventario.txt</code> → varios miles, según lo que tengas instalado. (El <code>\.</code> fuerza un punto literal; sin la barra, el punto significa «cualquier carácter» para <code>grep</code> — un matiz que puedes archivar por ahora.)</p>
-<p><strong>Por qué así</strong> — Este es el patrón que repetirás con tu simulación: salida larga → paginador si solo quieres mirar, fichero si quieres conservar, y <code>grep</code> para preguntarle al fichero. Tres reflejos que valen más que cualquier tubería de cinco piezas.</p>
+<p>El log viene en orden cronológico. Filtra los errores con <code>grep</code> y quédate con la primera línea que salga (<code>head -1</code>).</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 3.4 · A fichero (redirección, sin tuberías)</strong></p>
-<p>Crea un fichero <code>errores.txt</code> que contenga solo las líneas de error, y comprueba — con un comando sobre ese fichero — que contiene las 108 que esperabas. <em>Pista: <code>&gt;</code> desvía el stdout al fichero; y <code>wc -l</code> acepta un fichero como argumento, sin tubería.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -622,40 +608,32 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep ERROR adquisicion.log &gt; errores.txt</code> y después <code>wc -l errores.txt</code> → <code>108 errores.txt</code>.</p>
-<p><strong>Por qué así</strong> — Es la figura de la redirección, en vivo: <code>grep</code> trabajó igual que siempre, pero su stdout acabó en el fichero. Fíjate en que el recuento coincide con el <code>grep -c</code> del 3.1: dos caminos distintos a la misma cifra — la comprobación cruzada de toda la vida en el laboratorio.</p>
+<p><code>grep ERROR adquisicion.log | head -1</code> → <code>2026-08-18 10:03:00 ERROR s3 sin respuesta del sensor</code>. El s3, a las 10:03:00 — tres minutos después de arrancar.</p>
+<p><strong>Por qué así</strong> — «El primer error» es literalmente la primera línea que pase el filtro, porque el orden te lo da hecho el log. Cuando el orden ya existe, aprovéchalo: ni <code>sort</code> ni nada.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.5 · La columna del sensor (dos <code>|</code>)</strong></p>
-<p>De las líneas <code>WARN</code>, extrae solo el nombre del sensor y mira los cinco primeros. ¿Se repite alguno? <em>Pista: tres piezas — <code>grep WARN</code>, <code>cut -d' ' -f4</code>, <code>head -5</code> — y antes de decidir el <code>-f</code>, cuenta los campos con los dedos sobre una línea real (ya sabes lo que pasa si no).</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 3.3 · La salida enorme (lo que harás con tu simulación)</strong></p>
+<p><code>ls -lR /usr/share</code> lista decenas de miles de ficheros: la clase de salida que produce una simulación larga. Primero léela con el paginador: <code>ls -lR /usr/share | less</code> — muévete, busca <code>/png</code> con la barra, sal con <code>q</code>. Después guárdala en un fichero: <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code>, y cuenta con <code>grep -c</code> cuántas líneas contienen <code>.png</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | head -5</code> → <code>s2</code> cinco veces.</p>
-<p><strong>Por qué así</strong> — Es el método del capítulo en miniatura: filtrar, recortar, y un <code>head</code> de comprobación al final. Ese «s2, s2, s2…» ya te está susurrando la respuesta del siguiente ejercicio.</p>
+<p><code>less</code> tiene las mismas teclas que <code>man</code>; el <code>2&gt; /dev/null</code> manda las quejas de permisos a la papelera del sistema; y <code>grep -c</code> acepta el fichero como argumento, sin tubería.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 3.6 · Sin repetidos (tres <code>|</code>)</strong></p>
-<p>Obtén la lista de sensores <em>distintos</em> que emitieron avisos <code>WARN</code> — cada nombre una sola vez. <em>Pista: al ejercicio anterior, quítale el <code>head</code> y añádele la pareja inseparable del capítulo: <code>sort | uniq</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -669,40 +647,32 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq</code> → <code>s2</code>, solo. (Con <code>uniq -c</code> verás además que fueron los 357 del 3.1.)</p>
-<p><strong>Por qué así</strong> — <code>sort | uniq</code> sobre una columna es la pregunta «¿qué valores distintos hay aquí?». Apréndetela como frase hecha: la usarás mil veces. Y fíjate en cómo has llegado: no escribiste tres tuberías de golpe — le añadiste piezas a una que ya funcionaba.</p>
+<p><code>ls -lR /usr/share | less</code> (la <code>R</code> es <em>recursivo</em>: entra en todas las subcarpetas). Después <code>ls -lR /usr/share &gt; inventario.txt 2&gt; /dev/null</code> y <code>grep -c "\.png" inventario.txt</code> → varios miles, según lo que tengas instalado. (El <code>\.</code> fuerza un punto literal; sin la barra, el punto significa «cualquier carácter» para <code>grep</code> — un matiz que puedes archivar por ahora.)</p>
+<p><strong>Por qué así</strong> — Este es el patrón que repetirás con tu simulación: salida larga → paginador si solo quieres mirar, fichero si quieres conservar, y <code>grep</code> para preguntarle al fichero. Tres reflejos que valen más que cualquier tubería de cinco piezas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 3 · El reto (opcional)</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 3.7 · El jefe final (cuatro <code>|</code>)</strong></p>
-<p>El reto de la sesión: reconstruye — de memoria si puedes, con las pistas si no — la tubería del ranking de errores por sensor. <em>Pistas, por pasos: (1) filtra las líneas <code>ERROR</code>; (2) recorta el campo 4; (3) junta los iguales; (4) colapsa contando; (5) ordena el recuento de mayor a menor (<code>sort -nr</code>). Y en cada paso, tu <code>head</code> de comprobación antes de añadir el siguiente.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 3.4 · A fichero (redirección, sin tuberías)</strong></p>
+<p>Crea un fichero <code>errores.txt</code> que contenga solo las líneas de error, y comprueba — con un comando sobre ese fichero — que contiene las 108 que esperabas.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> → <code>90 s3 · 15 s1 · 3 s4</code>.</p>
-<p><strong>Por qué así</strong> — Si te salió, enhorabuena: cuatro tuberías es más de lo que la mayoría encadena en su día a día. Si no, ningún drama: el objetivo era practicar el método — pieza, <code>head</code>, mirar, seguir. Una tubería no se escribe: se <em>cultiva</em>. Y recuerda la caja del capítulo: la que no recuerdes, se pregunta — a <code>man</code>, o a una IA, leyendo siempre lo que te dé.</p>
+<p><code>&gt;</code> desvía el stdout al fichero; y <code>wc -l</code> acepta un fichero como argumento, sin tubería.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 3.8 · El informe (redirecciones + tu tubería)</strong></p>
-<p>Construye <code>informe.txt</code> con tres partes, usando solo <code>echo</code> y redirecciones: una línea de título, el total de errores, y el ranking del ejercicio anterior. <em>Pista: la primera orden con <code>&gt;</code> (estrena el fichero); las siguientes con <code>&gt;&gt;</code> (añaden). La tubería del 3.7 ya la tienes: solo hay que redirigirla.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -716,6 +686,164 @@ Figura&nbsp;3.4: La tubería completa del análisis, con lo que fluye en cada tr
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p><code>grep ERROR adquisicion.log &gt; errores.txt</code> y después <code>wc -l errores.txt</code> → <code>108 errores.txt</code>.</p>
+<p><strong>Por qué así</strong> — Es la figura de la redirección, en vivo: <code>grep</code> trabajó igual que siempre, pero su stdout acabó en el fichero. Fíjate en que el recuento coincide con el <code>grep -c</code> del 3.1: dos caminos distintos a la misma cifra — la comprobación cruzada de toda la vida en el laboratorio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.5 · La columna del sensor (dos <code>|</code>)</strong></p>
+<p>De las líneas <code>WARN</code>, extrae solo el nombre del sensor y mira los cinco primeros. ¿Se repite alguno?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tres piezas — <code>grep WARN</code>, <code>cut -d' ' -f4</code>, <code>head -5</code> — y antes de decidir el <code>-f</code>, cuenta los campos con los dedos sobre una línea real (ya sabes lo que pasa si no).</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | head -5</code> → <code>s2</code> cinco veces.</p>
+<p><strong>Por qué así</strong> — Es el método del capítulo en miniatura: filtrar, recortar, y un <code>head</code> de comprobación al final. Ese «s2, s2, s2…» ya te está susurrando la respuesta del siguiente ejercicio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.6 · Sin repetidos (tres <code>|</code>)</strong></p>
+<p>Obtén la lista de sensores <em>distintos</em> que emitieron avisos <code>WARN</code> — cada nombre una sola vez.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Al ejercicio anterior, quítale el <code>head</code> y añádele la pareja inseparable del capítulo: <code>sort | uniq</code>.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>grep WARN adquisicion.log | cut -d' ' -f4 | sort | uniq</code> → <code>s2</code>, solo. (Con <code>uniq -c</code> verás además que fueron los 357 del 3.1.)</p>
+<p><strong>Por qué así</strong> — <code>sort | uniq</code> sobre una columna es la pregunta «¿qué valores distintos hay aquí?». Apréndetela como frase hecha: la usarás mil veces. Y fíjate en cómo has llegado: no escribiste tres tuberías de golpe — le añadiste piezas a una que ya funcionaba.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · El reto (opcional)</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.7 · El jefe final (cuatro <code>|</code>)</strong></p>
+<p>El reto de la sesión: reconstruye — de memoria si puedes, con las pistas si no — la tubería del ranking de errores por sensor.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Por pasos: (1) filtra las líneas <code>ERROR</code>; (2) recorta el campo 4; (3) junta los iguales; (4) colapsa contando; (5) ordena el recuento de mayor a menor (<code>sort -nr</code>). Y en cada paso, tu <code>head</code> de comprobación antes de añadir el siguiente.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr</code> → <code>90 s3 · 15 s1 · 3 s4</code>.</p>
+<p><strong>Por qué así</strong> — Si te salió, enhorabuena: cuatro tuberías es más de lo que la mayoría encadena en su día a día. Si no, ningún drama: el objetivo era practicar el método — pieza, <code>head</code>, mirar, seguir. Una tubería no se escribe: se <em>cultiva</em>. Y recuerda la caja del capítulo: la que no recuerdes, se pregunta — a <code>man</code>, o a una IA, leyendo siempre lo que te dé.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 3.8 · El informe (redirecciones + tu tubería)</strong></p>
+<p>Construye <code>informe.txt</code> con tres partes, usando solo <code>echo</code> y redirecciones: una línea de título, el total de errores, y el ranking del ejercicio anterior.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La primera orden con <code>&gt;</code> (estrena el fichero); las siguientes con <code>&gt;&gt;</code> (añaden). La tubería del 3.7 ya la tienes: solo hay que redirigirla.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre><code>echo "Informe de adquisicion - 18 de agosto" &gt; informe.txt
 grep -c ERROR adquisicion.log &gt;&gt; informe.txt
 grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr &gt;&gt; informe.txt</code></pre>
@@ -728,10 +856,26 @@ grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr &gt;&gt; 
 </div>
 <div class="ejercicio">
 <p><strong>Ejercicio 3.9 · Para nota (opcional) · El termómetro sospechoso</strong></p>
-<p>Solo si te has quedado con ganas: ¿entre qué mínima y máxima se movieron las lecturas <em>válidas</em> (las líneas <code>INFO</code>)? ¿Y por qué la máxima hay que mirarla con lupa? <em>Pistas: el valor viene tras un <code>=</code>, y <code>cut</code> también sabe cortar por <code>=</code>; <code>sort -n</code> ordena como números; y los extremos de una lista ordenada son <code>head -1</code> y <code>tail -1</code>.</em></p>
+<p>Solo si te has quedado con ganas: ¿entre qué mínima y máxima se movieron las lecturas <em>válidas</em> (las líneas <code>INFO</code>)? ¿Y por qué la máxima hay que mirarla con lupa?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El valor viene tras un <code>=</code>, y <code>cut</code> también sabe cortar por <code>=</code>; <code>sort -n</code> ordena como números; y los extremos de una lista ordenada son <code>head -1</code> y <code>tail -1</code>.</p>
+</div>
+</div>
+</div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -740,7 +884,7 @@ grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr &gt;&gt; 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Mínima: <code>grep INFO adquisicion.log | grep temp_C | cut -d'=' -f2 | sort -n | head -1</code> → 20.45. Máxima: la misma tubería con <code>tail -1</code> → 25.00. Y 25.00 es justo el tope donde s2 satura (los 357 <code>WARN</code>): la «máxima» no es una medida, es el techo del instrumento.</p>
 <p><strong>Por qué así</strong> — <code>sort -n</code> ordena como números (sin <code>-n</code>, <code>9</code> iría después de <code>25</code>, orden alfabético). Y la lección de física: un valor sospechosamente redondo en el extremo del rango huele a saturación, no a dato. La tubería te dio el número; el criterio lo pones tú.</p>

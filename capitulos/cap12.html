@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -521,7 +521,7 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab "grep -c ERROR adquisicion.log"</span>
 <span class="t-out">108</span>
 <span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ssh lab df -h / | tail -1</span>
-<span class="t-out">/dev/vda2         17G   1,4G   15G   9% /</span></code></pre>
+<span class="t-out">/dev/vda1         18G   1,4G   16G   9% /</span></code></pre>
 <p>Ahí están los tres bloques anteriores dándose la mano: el <code>grep</code> del capítulo 3 corriendo en el servidor del capítulo 8, con el resultado llegando a tu terminal por la red del bloque D — y ese <code>| tail -1</code> se ejecuta <em>en tu Mint</em>, sobre lo que el servidor devolvió. Cuando tengas una simulación en un clúster, «¿ha terminado?» será <code>ssh cluster ls resultados/</code>, sin moverte de tu editor.</p>
 </section>
 <section id="sec-nivel-2" class="level2" data-number="12.8">
@@ -589,30 +589,23 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 12.0 · Con ratón</strong></p>
-<p>Desde el gestor de archivos, conéctate a <code>debian-lab</code> por SSH con el diálogo <em>Conectar al servidor…</em>, copia un fichero cualquiera de tu Mint a la casa del servidor arrastrándolo, y comprueba en la barra lateral que la conexión queda como marcador. Después desconéctala (botón ⏏ junto al marcador). <em>Pista: tipo SSH, servidor <code>debian-lab</code>, usuario <code>marcos</code>; si pide aceptar una «identidad» desconocida, es la huella que explica la sección siguiente — acepta.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Desde el gestor de archivos, conéctate a <code>debian-lab</code> por SSH con el diálogo <em>Conectar al servidor…</em>, copia un fichero cualquiera de tu Mint a la casa del servidor arrastrándolo, y comprueba en la barra lateral que la conexión queda como marcador. Después desconéctala (botón ⏏ junto al marcador).</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Archivo → Conectar al servidor → SSH · <code>debian-lab</code> · <code>/home/marcos</code> · <code>marcos</code> → contraseña → la carpeta aparece; arrastrar el fichero; ⏏ para desconectar. Desde la VM, <code>ls ~</code> muestra el fichero copiado.</p>
-<p><strong>Por qué así</strong> — Es exactamente <code>scp</code> con ratón, y para mucha gente es <em>toda</em> la SSH que necesitan. El resto del capítulo existe para cuando el ratón se queda corto: ejecutar cosas allí, automatizar, o entrar en máquinas sin ventanas.</p>
+<p>Tipo SSH, servidor <code>debian-lab</code>, usuario <code>marcos</code>; si pide aceptar una «identidad» desconocida, es la huella que explica la sección siguiente — acepta.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.1 · Nivel 0: contigo mismo</strong></p>
-<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 11, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal. <em>Pista: <code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -626,40 +619,32 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
-<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 13, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
+<p>Archivo → Conectar al servidor → SSH · <code>debian-lab</code> · <code>/home/marcos</code> · <code>marcos</code> → contraseña → la carpeta aparece; arrastrar el fichero; ⏏ para desconectar. Desde la VM, <code>ls ~</code> muestra el fichero copiado.</p>
+<p><strong>Por qué así</strong> — Es exactamente <code>scp</code> con ratón, y para mucha gente es <em>toda</em> la SSH que necesitan. El resto del capítulo existe para cuando el ratón se queda corto: ejecutar cosas allí, automatizar, o entrar en máquinas sin ventanas.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.2 · Nivel 1: el servidor</strong></p>
-<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir. <em>Pista: <code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 12.1 · Nivel 0: contigo mismo</strong></p>
+<p>Instala <code>openssh-server</code> en tu Mint, comprueba que el servicio escucha (<code>systemctl status ssh</code> y, del capítulo 11, <code>ss -tln</code>), y entra con <code>ssh marcos@localhost</code>. Dentro, ejecuta <code>who</code> para ver tu sesión listada, y sal.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
-<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
+<p><code>who</code> muestra las sesiones abiertas; la tuya por SSH aparecerá con un <code>pts/</code> y una dirección.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<p><strong>Nivel 2 · Avanzado (pero muy útil)</strong></p>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.3 · Las claves</strong></p>
-<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos. <em>Pista: <code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -673,39 +658,32 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
-<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
+<p><code>sudo apt install openssh-server</code>, <code>ss -tln | grep :22</code> muestra <code>LISTEN</code>, y tras <code>ssh marcos@localhost</code> la primera vez pedirá aceptar la huella (de tu propia máquina). <code>who</code> lista dos sesiones: la de tu escritorio y la SSH desde <code>127.0.0.1</code>. <code>exit</code>.</p>
+<p><strong>Por qué así</strong> — El servidor SSH en tu portátil es lo que permitirá, en el capítulo 13, cosas como entrar desde el móvil o conectar dos portátiles en el laboratorio. Y practicar la huella con una máquina que sabes que es de fiar quita el susto para las siguientes.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.4 · Alias, copia y comando remoto</strong></p>
-<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas). <em>Pista: <code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 12.2 · Nivel 1: el servidor</strong></p>
+<p>Entra en <code>debian-lab</code> con contraseña, demuestra dónde estás con tres comandos (<code>hostname</code>, <code>ip a | grep "inet "</code>, <code>whoami</code>) y mira el fichero de huellas de tu Mint tras salir.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
-<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
+<p><code>cat ~/.ssh/known_hosts</code> — verás la entrada que acabas de aceptar.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.5 · <code>rsync</code> y la barra</strong></p>
-<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja. <em>Pista: <code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -719,40 +697,33 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
-<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+<p><code>ssh marcos@debian-lab</code> → <code>yes</code> → contraseña. Dentro: <code>debian-lab</code>, <code>192.168.122.15</code>, <code>marcos</code>. Fuera: <code>known_hosts</code> guarda una línea por máquina conocida — ahora dos, <code>localhost</code> y <code>debian-lab</code>.</p>
+<p><strong>Por qué así</strong> — Tres comandos que responden «¿dónde estoy?», la pregunta que hay que hacerse antes de cualquier <code>rm</code> en una sesión remota. Y <code>known_hosts</code> es la memoria de confianza de tu cliente: saber que existe es saber leer el aviso de huella cambiada.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p><strong>Nivel 2 · Avanzado (pero muy útil)</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 12.6 · Cerrar la puerta a las contraseñas</strong></p>
-<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza. <em>Pista: <code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 12.3 · Las claves</strong></p>
+<p>Genera tu par ed25519 con frase de paso, instálalo en <code>debian-lab</code> con <code>ssh-copy-id</code>, y comprueba que <code>ssh marcos@debian-lab</code> ya no pide contraseña. Después mira, en el servidor, dónde ha quedado tu clave pública y con qué permisos.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>La línea suele venir comentada (<code>#PasswordAuthentication yes</code>): descoméntala y ponla a <code>no</code>. Tras el reinicio del servicio, <code>ssh lab</code> entra por clave; <code>ssh -o PubkeyAuthentication=no lab</code> devuelve <code>Permission denied (publickey)</code>. Vuelta atrás: restaurar el <code>.bak</code> y reiniciar <code>ssh</code> — o la instantánea.</p>
-<p><strong>Por qué así</strong> — Es <em>el</em> endurecimiento básico de cualquier servidor expuesto, y lo has hecho con todas las redes: instantánea, copia, sesión abierta de reserva. La regla de oro de los administradores — «nunca cierres la sesión que funciona hasta probar la nueva» — acaba de entrar en tu repertorio.</p>
+<p><code>cat ~/.ssh/authorized_keys</code> y <code>ls -la ~/.ssh</code> dentro de la VM.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<p><strong>Nivel 3 · Opcional · el host real</strong></p>
-<div class="ejercicio">
-<p><strong>Ejercicio 12.7 · Nivel 2, si tienes dónde</strong></p>
-<p>Si dispones de una cuenta en un servidor real (universidad, nube o shell público): añádelo a tu <code>~/.ssh/config</code>, instala tu clave pública por la vía que te indiquen, entra, y repite el parte de «¿dónde estoy?» del 11.2 más un <code>ping</code> de vuelta a tu casa desde allí — para ver la distancia con los ojos del capítulo 9. <em>Pista: si el puerto no es el 22, <code>Port</code> en la agenda; si te dan solo un formulario web para la clave, el contenido a pegar es tu <code>id_ed25519.pub</code> completo.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -765,6 +736,163 @@ Figura&nbsp;12.3: Privada en casa, pública en el servidor. La cerradura se comp
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ssh-keygen -t ed25519 -C "marcos@portatil"</code>, <code>ssh-copy-id marcos@debian-lab</code>, y la siguiente conexión entra directa (pedirá la frase de paso de la clave la primera vez de la sesión de escritorio). En la VM, <code>authorized_keys</code> contiene una línea larga que empieza por <code>ssh-ed25519</code> — tu pública —, con permisos <code>-rw-------</code>.</p>
+<p><strong>Por qué así</strong> — Es el ritual que repetirás con cada servidor nuevo de tu vida: generar una vez, copiar la pública a cada máquina. La línea de <code>authorized_keys</code> es exactamente el contenido de tu <code>id_ed25519.pub</code>: compáralos con <code>cat</code> y verás que coinciden.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.4 · Alias, copia y comando remoto</strong></p>
+<p>Crea <code>~/.ssh/config</code> con el alias <code>lab</code>. Después: sube <code>adquisicion.log</code> con <code>scp</code>, y sin abrir sesión, pídele al servidor que cuente los <code>ERROR</code> y que te diga el sensor que más falla (la tubería del capítulo 3, entre comillas).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ssh lab "grep … | … | sort -nr | head -1"</code> — las comillas hacen que la tubería entera se ejecute allí.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con el alias: <code>scp ~/Descargas/adquisicion.log lab:~/</code>, luego <code>ssh lab "grep -c ERROR adquisicion.log"</code> → 108, y <code>ssh lab "grep ERROR adquisicion.log | cut -d' ' -f4 | sort | uniq -c | sort -nr | head -1"</code> → <code>90 s3</code>.</p>
+<p><strong>Por qué así</strong> — Sin las comillas, tu Mint interpretaría el <code>|</code> y ejecutaría la mitad de la tubería en casa sobre un fichero que no tiene. Con ellas, el servidor recibe la orden completa. Es el patrón del trabajo remoto: los datos y el cálculo allí, el resultado aquí.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.5 · <code>rsync</code> y la barra</strong></p>
+<p>Crea en tu Mint una carpeta <code>resultados/</code> con tres ficheros cualesquiera. Sincronízala a la VM con <code>rsync -av</code> — primero con barra final, luego sin ella — y observa con <code>ssh lab ls -R</code> dónde ha acabado cada cosa. Después modifica un fichero, repite el <code>rsync</code> y fíjate en qué viaja.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>rsync -av resultados/ lab:~/resultados/</code> frente a <code>rsync -av resultados lab:~/otra/</code>.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con barra, los tres ficheros aparecen dentro de <code>~/resultados/</code>; sin barra, aparece la carpeta <code>resultados</code> entera <em>dentro</em> de <code>~/otra/</code>. En la repetición tras el cambio, <code>rsync</code> envía solo el fichero modificado — la lista dice un nombre, no tres.</p>
+<p><strong>Por qué así</strong> — La barra es la trampa clásica y la copia incremental es la virtud clásica: entender las dos en un experimento de dos minutos evita una tarde de carpetas duplicadas y horas de transferencias repetidas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.6 · Cerrar la puerta a las contraseñas</strong></p>
+<p>Con instantánea previa de la VM y el protocolo del capítulo 10 (copia del fichero, vuelta atrás escrita): edita en <code>debian-lab</code> el fichero <code>/etc/ssh/sshd_config</code>, pon <code>PasswordAuthentication no</code>, reinicia el servicio y verifica que con tu clave sigues entrando — y que sin ella (prueba <code>ssh -o PubkeyAuthentication=no lab</code>) te rechaza.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>, <code>sudo nano</code>, <code>sudo systemctl restart ssh</code>. No cierres tu sesión abierta hasta haber comprobado que una nueva entra.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La línea suele venir comentada (<code>#PasswordAuthentication yes</code>): descoméntala y ponla a <code>no</code>. Tras el reinicio del servicio, <code>ssh lab</code> entra por clave; <code>ssh -o PubkeyAuthentication=no lab</code> devuelve <code>Permission denied (publickey)</code>. Vuelta atrás: restaurar el <code>.bak</code> y reiniciar <code>ssh</code> — o la instantánea.</p>
+<p><strong>Por qué así</strong> — Es <em>el</em> endurecimiento básico de cualquier servidor expuesto, y lo has hecho con todas las redes: instantánea, copia, sesión abierta de reserva. La regla de oro de los administradores — «nunca cierres la sesión que funciona hasta probar la nueva» — acaba de entrar en tu repertorio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 3 · Opcional · el host real</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 12.7 · Nivel 2, si tienes dónde</strong></p>
+<p>Si dispones de una cuenta en un servidor real (universidad, nube o shell público): añádelo a tu <code>~/.ssh/config</code>, instala tu clave pública por la vía que te indiquen, entra, y repite el parte de «¿dónde estoy?» del 11.2 más un <code>ping</code> de vuelta a tu casa desde allí — para ver la distancia con los ojos del capítulo 9.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Si el puerto no es el 22, <code>Port</code> en la agenda; si te dan solo un formulario web para la clave, el contenido a pegar es tu <code>id_ed25519.pub</code> completo.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La experiencia es idéntica a <code>debian-lab</code> con dos diferencias visibles: el <code>ping</code> de vuelta a tu IP pública tarda decenas de milisegundos (kilómetros reales), y probablemente <code>sudo</code> no funcione — no eres administrador allí, y ahora entiendes exactamente qué significa eso.</p>
 <p><strong>Por qué así</strong> — El curso se escribió para que llegaras aquí sin necesitar este ejercicio; hacerlo cierra el círculo: la escalera de tres niveles era la misma máquina a tres distancias.</p>

@@ -15,7 +15,7 @@
     <text x="350" y="209" font-size="11.5" fill="#24564B" text-anchor="middle" font-weight="600">HIPERVISOR · reparte el hardware real y finge el de mentira</text>
     <!-- VM -->
     <rect x="200" y="62" width="300" height="112" rx="5" fill="#F5EBD6" stroke="#9A6A14" stroke-width="1.6"/>
-    <text x="350" y="84" font-size="12" fill="#9A6A14" text-anchor="middle" font-weight="600">LA MÁQUINA VIRTUAL · el huésped (Debian)</text>
+    <text x="350" y="84" font-size="11.5" fill="#9A6A14" text-anchor="middle" font-weight="600">LA MÁQUINA VIRTUAL · el huésped (Debian)</text>
     <text x="350" y="101" font-size="9.5" fill="#6A5F4D" text-anchor="middle">cree tener un ordenador entero para ella sola</text>
     <rect x="215" y="112" width="60" height="44" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1"/>
     <text x="245" y="131" font-size="9.5" fill="#2B2318" text-anchor="middle">2 CPU</text>
@@ -25,7 +25,7 @@
     <text x="315" y="146" font-size="8.5" fill="#9C8F79" text-anchor="middle">de la RAM</text>
     <rect x="355" y="112" width="60" height="44" rx="3" fill="#FAF6EB" stroke="#C4342A" stroke-width="1.2"/>
     <text x="385" y="131" font-size="9.5" fill="#C4342A" text-anchor="middle">disco</text>
-    <text x="385" y="146" font-size="8.5" fill="#9C8F79" text-anchor="middle">= un fichero</text>
+    <text x="385" y="146" font-size="8.5" fill="#9C8F79" text-anchor="middle">un fichero</text>
     <rect x="425" y="112" width="60" height="44" rx="3" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1"/>
     <text x="455" y="131" font-size="9.5" fill="#2B2318" text-anchor="middle">red</text>
     <text x="455" y="146" font-size="8.5" fill="#9C8F79" text-anchor="middle">virtual</text>

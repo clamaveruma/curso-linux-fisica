@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -351,7 +351,7 @@ Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un c
 <section id="los-hitos" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="los-hitos">Los hitos</h2>
 <p><strong>1. La máquina</strong> <em>(capítulo 7)</em>. VM <code>servidor</code>: 2 CPU, 4 GB, disco de 20 GB, red NAT, con la ISO de Debian verificada en la bandeja.</p>
-<p><strong>2. La instalación</strong> <em>(capítulos 6 y 8)</em>. Debian sin escritorio, con servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te atreves, <code>/home</code> separado. Contraseña de root vacía. Al terminar, apaga desde dentro e instantánea <code>recien-instalado</code>.</p>
+<p><strong>2. La instalación</strong> <em>(capítulos 6 y 8)</em>. Debian sin escritorio, con servidor SSH. Particionado manual: raíz ext4 y swap — o, si te atreves, <code>/home</code> separado. Contraseña de root vacía. Al terminar, apaga desde dentro e instantánea <code>recien-instalado</code>.</p>
 <p><strong>3. La red</strong> <em>(capítulos 9–11)</em>. Averigua la IP del servidor, bautízalo en el <code>/etc/hosts</code> de tu Mint como <code>servidor</code>, y comprueba que responde por nombre. De propina: ¿qué puerta tiene abierta?</p>
 <p><strong>4. El acceso</strong> <em>(capítulo 12)</em>. Tu clave pública en el servidor, alias <code>servidor</code> en <code>~/.ssh/config</code>, entrada sin contraseña. Después, cierra la puerta a las contraseñas en <code>sshd_config</code> — con copia del fichero y sesión de reserva abierta — y demuestra que te rechaza sin clave.</p>
 <p><strong>5. El sistema</strong> <em>(capítulos 4 y 5)</em>. Actualízalo. Instala lo que el análisis necesita: <code>tmux</code>, <code>htop</code>, <code>tree</code>. Comprueba con <code>which</code> que están, y con <code>df -h</code> cuánto disco queda.</p>
@@ -410,7 +410,7 @@ Figura&nbsp;1: La arquitectura que vas a montar. Cada caja y cada flecha es un c
 <tr class="even">
 <td>2</td>
 <td><code>ssh servidor lsblk</code></td>
-<td>EFI en <code>/boot/efi</code>, raíz en <code>/</code>, <code>[SWAP]</code></td>
+<td>raíz en <code>/</code>, <code>[SWAP]</code></td>
 </tr>
 <tr class="odd">
 <td>2</td>

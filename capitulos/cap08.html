@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -292,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="lede">
-<p>Hasta hoy, tu Linux te lo instalaron. Esta sesión lo instalas tú — en la máquina virtual del capítulo 7, sin red de seguridad más que las instantáneas, y sin el botón de «siguiente, siguiente»: eligiendo particiones a mano con el mapa del capítulo 6, viendo dónde va la partición EFI, mirando a GRUB instalarse. Después la romperás a propósito y la reinstalarás, porque la segunda vez tarda un cuarto de hora y la tercera ya aburre. Y saldrás con la lista de comprobación para el día en que lo hagas en un ordenador de verdad.</p>
+<p>Hasta hoy, tu Linux te lo instalaron. Esta sesión lo instalas tú — en la máquina virtual del capítulo 7, sin red de seguridad más que las instantáneas, y sin el botón de «siguiente, siguiente»: eligiendo particiones a mano con el mapa del capítulo 6, mirando a GRUB instalarse en el primer sector del disco. Después la romperás a propósito y la reinstalarás, porque la segunda vez tarda un cuarto de hora y la tercera ya aburre. Y saldrás con la lista de comprobación para el día en que lo hagas en un ordenador de verdad.</p>
 </div>
 <div class="chapmeta">
 <p>⏱ <strong>3 h</strong> con ejercicios (la instalación en sí, 20–30 min) · requisitos: <strong>capítulos 6 y 7</strong> · máquina: <strong>la VM <code>debian-lab</code></strong> — nada de hoy toca tu Mint</p>
@@ -300,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="objetivos">
 <p><strong>Al terminar esta sesión sabrás</strong></p>
 <ul>
-<li>Decidir un plan de particiones <em>antes</em> de tocar el instalador — y por qué EFI + raíz + swap es el plan que vale casi siempre.</li>
+<li>Decidir un plan de particiones <em>antes</em> de tocar el instalador — raíz + swap en la VM, y por qué tu PC real añade una tercera pieza, la EFI.</li>
 <li>Recorrer el instalador de Debian entero: idioma, red, usuarios, particionado manual, espejo, selección de programas, GRUB.</li>
 <li>Por qué se deja la contraseña de <code>root</code> vacía, y qué consigue eso.</li>
 <li>Instalar un Debian <em>sin escritorio</em> — un servidor — con SSH desde el primer día, y comprobar que respira.</li>
@@ -312,28 +312,28 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="8.1" class="anchored" data-anchor-id="sec-plan"><span class="header-section-number">8.1</span> El plan, antes que el instalador</h2>
 <p>Los instaladores modernos permiten no pensar: «usar el disco entero», siguiente, siguiente. Hoy no vas a pulsar ese botón, y la razón es la misma por la que un físico no arranca un montaje sin un esquema: <strong>cuando lo hagas en tu PC de verdad, con un Windows al lado o un disco con datos, «usar el disco entero» será exactamente lo que no quieres.</strong> Se decide el plan en papel, se ejecuta en la VM, se repite hasta que sea rutina.</p>
 <p>Lo que instalas: <strong>Debian 13</strong> — la madre de tu Mint (capítulo 5) —, imagen <em>netinst</em>, <strong>sin escritorio</strong>. Sí, sin escritorio: un servidor al que hablarás por terminal y, a partir del capítulo 12, por SSH. Es lo que te encontrarás en el clúster y en la nube, y es lo que construye el proyecto final. Nombre de la máquina: <code>debian-lab</code>. Usuario: el tuyo.</p>
-<div id="fig-particiones" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Disco virtual de 20 GB dividido en partición EFI de 512 MB, raíz ext4 con casi todo el espacio, y swap de 2 GB">
+<div id="fig-particiones" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Disco virtual de 20 GB dividido en raíz ext4 con casi todo el espacio y swap de 2 GB; GRUB va en el primer sector">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-particiones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap08/fig-particiones-vm.svg" class="img-fluid figure-img" alt="Disco virtual de 20 GB dividido en partición EFI de 512 MB, raíz ext4 con casi todo el espacio, y swap de 2 GB">
+<img src="../imagenes/cap08/fig-particiones-vm.svg" class="img-fluid figure-img" alt="Disco virtual de 20 GB dividido en raíz ext4 con casi todo el espacio y swap de 2 GB; GRUB va en el primer sector">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-particiones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.1: El plan de particiones para el disco virtual. Tres piezas, cada una con su oficio del capítulo 6.
+Figura&nbsp;8.1: El plan de particiones para el disco virtual. Dos particiones y un sector: cada pieza con su oficio del capítulo 6.
 </figcaption>
 </figure>
 </div>
-<p>Tres particiones, y cada decisión la tomas con el capítulo 6 en la cabeza: la <strong>EFI</strong> (512 MB, FAT32, montada en <code>/boot/efi</code>) es el buzón donde GRUB dejará su llave; la <strong>raíz</strong> (<code>/</code>, ext4) se lleva casi todo; y <strong>swap</strong> (2 GB) es el desahogo de la RAM cuando se llena — en una VM de 4 GB, un seguro barato. ¿Y <code>/home</code> separado? Es una opción respetable — permite reinstalar el sistema sin tocar tus datos — pero complica el reparto de espacio; para el taller, un solo <code>/</code> basta. Un detalle nuevo: dentro de la VM el disco no se llama <code>sda</code> ni <code>nvme0n1</code> sino <strong><code>vda</code></strong> — <em>virtio disk</em>, el disco de mentira del hipervisor. Mismo mapa, otro nombre.</p>
+<p>Dos particiones, y cada decisión la tomas con el capítulo 6 en la cabeza: la <strong>raíz</strong> (<code>/</code>, ext4) se lleva casi todo; y <strong>swap</strong> (2 GB) es el desahogo de la RAM cuando se llena — en una VM de 4 GB, un seguro barato. ¿Y la <strong>partición EFI</strong> del capítulo 6, el buzón de GRUB? Aquí no hay: la VM arranca con el firmware clásico, el BIOS (capítulo 7), y en ese mundo GRUB no va en una partición sino en el <strong>primer sector del disco</strong> — el MBR, <em>master boot record</em> —, que el BIOS lee a ciegas al encender. Treinta años funcionó así, y en la VM sigue valiendo; tu PC real, que arranca por UEFI, sí tendrá la EFI, y el anexo C te lo recuerda. ¿Y <code>/home</code> separado? Es una opción respetable — permite reinstalar el sistema sin tocar tus datos — pero complica el reparto de espacio; para el taller, un solo <code>/</code> basta. Un detalle nuevo: dentro de la VM el disco no se llama <code>sda</code> ni <code>nvme0n1</code> sino <strong><code>vda</code></strong> — <em>virtio disk</em>, el disco de mentira del hipervisor. Mismo mapa, otro nombre.</p>
 </section>
 <section id="sec-arrancar-instalador" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-arrancar-instalador"><span class="header-section-number">8.2</span> Arrancar el instalador</h2>
-<p>Abre virt-manager, selecciona <code>debian-lab</code> y pulsa el triángulo de <em>Ejecutar</em> (o, desde la terminal, <code>virsh start debian-lab</code> y abre su ventana). La ISO sigue en la bandeja, así que la VM arranca en el menú del instalador: <em>Graphical install</em>, <em>Install</em>, y opciones avanzadas. Los dos primeros son el mismo instalador con dos caras — la gráfica es más cómoda con ratón; la de texto funciona en cualquier sitio, incluida una consola remota sin ventanas. Elige la que quieras; las pantallas y las decisiones son idénticas.</p>
-<div id="fig-menu-iso" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install">
+<p>Abre virt-manager, selecciona <code>debian-lab</code> y pulsa el triángulo de <em>Ejecutar</em> (o, desde la terminal, <code>virsh start debian-lab</code> y abre su ventana). La ISO sigue en la bandeja, así que la VM arranca en el menú del instalador: <em>Graphical install</em>, <em>Install</em>, y opciones avanzadas (si no tocas nada en treinta segundos, arranca solo con síntesis de voz: una flecha lo para). Los dos primeros son el mismo instalador con dos caras — la gráfica es más cómoda con ratón; la de texto funciona en cualquier sitio, incluida una consola remota sin ventanas. Elige la que quieras; las pantallas y las decisiones son idénticas.</p>
+<div id="fig-menu-iso" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Menú de arranque del instalador de Debian 13 en modo BIOS, con las opciones Graphical install e Install">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-menu-iso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../imagenes/cap08/grub-debian-uefi.png" class="img-fluid figure-img" style="width:70.0%" alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install">
+<img src="../imagenes/cap08/menu-instalador-bios.png" class="img-fluid figure-img" style="width:70.0%" alt="Menú de arranque del instalador de Debian 13 en modo BIOS, con las opciones Graphical install e Install">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-menu-iso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.2: El menú de arranque de la ISO. Fíjate en la esquina inferior: es GRUB — el mismo cargador del capítulo 6 — sirviendo el instalador. <em>Captura de la versión 12 (la 13 es idéntica): Paowee, GPL, Wikimedia Commons.</em>
+Figura&nbsp;8.2: El menú de arranque de la ISO en la VM: «BIOS mode» en el título. Quien sirve este menú es <em>isolinux</em>, un cargador pequeño que viaja en la ISO; GRUB — el del capítulo 6 — llegará cuando lo instales en el disco. <em>Captura del instalador de Debian 13 (GPL).</em>
 </figcaption>
 </figure>
 </div>
@@ -360,13 +360,12 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 </section>
 <section id="sec-particionar" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="sec-particionar"><span class="header-section-number">8.3</span> Particionar a mano</h2>
-<p>Llega la pantalla que asusta a todo el mundo, y que tú vas a leer con calma. Elige <strong>Manual</strong>. Verás el disco — <code>vda</code>, 20 GB, «Virtio Block Device» — sin particiones. El procedimiento, pantalla a pantalla:</p>
+<p>Llega la pantalla que asusta a todo el mundo, y que tú vas a leer con calma. Elige <strong>Manual</strong>. Verás el disco — «Disco virtual 1 (vda) - 21.5 GB Virtio Block Device» — sin particiones. ¿21,5? El instalador cuenta en GB decimales, y tus 20 GiB del capítulo 7 son exactamente eso. El procedimiento, pantalla a pantalla:</p>
 <ol type="1">
-<li>Selecciona el disco <code>vda</code> → <strong>Crear una nueva tabla de particiones vacía</strong> → sí → tipo <strong>gpt</strong> (la tabla moderna que UEFI espera, capítulo 6). Aparece una línea «ESPACIO LIBRE» de 20 GB.</li>
-<li>Selecciona el espacio libre → <strong>Crear una partición nueva</strong> → tamaño <code>512 MB</code> → al principio → <em>Utilizar como:</em> <strong>Partición del sistema EFI</strong> → <em>Se ha terminado de definir la partición</em>.</li>
-<li>Espacio libre otra vez → partición nueva → tamaño <code>17.5 GB</code> (o lo que quede menos 2 GB) → <em>Utilizar como:</em> <strong>ext4</strong> → <em>Punto de montaje:</em> <code>/</code> → terminar.</li>
-<li>Espacio libre restante → partición nueva → todo lo que queda → <em>Utilizar como:</em> <strong>área de intercambio</strong> (swap) → terminar.</li>
-<li>Compara la tabla con la figura: <code>vda1</code> EFI, <code>vda2</code> ext4 <code>/</code>, <code>vda3</code> swap. <strong>Finalizar el particionado y escribir los cambios en el disco</strong> → «¿Desea escribir los cambios?» → <strong>Sí</strong>.</li>
+<li>Selecciona el disco <code>vda</code> → <strong>Crear una nueva tabla de particiones vacía</strong> → sí. En modo BIOS no pregunta el tipo: crea una <code>msdos</code>, la clásica (<code>gpt</code> es la que espera UEFI, capítulo 6). Aparece una línea «ESPACIO LIBRE» con los 21,5 GB.</li>
+<li>Selecciona el espacio libre → <strong>Crear una partición nueva</strong> → tamaño <code>19.5 GB</code> (quedan 2 para la swap) → <strong>Primaria</strong> → <strong>Principio</strong> → la pantalla de ajustes ya propone <em>ext4</em> con punto de montaje <code>/</code>: compruébalo → <strong>Se ha terminado de definir la partición</strong>.</li>
+<li>Espacio libre restante → partición nueva → tamaño: el que propone (todo lo que queda) → <strong>Primaria</strong> — ojo, esta vez el instalador señala <em>Lógica</em> por defecto — → en ajustes, <em>Utilizar como:</em> cambia <em>ext4</em> por <strong>área de intercambio</strong> → terminar.</li>
+<li>Compara la tabla con la figura: <code>#1 primaria 19.5 GB ext4 /</code> y <code>#2 primaria 2.0 GB swap</code> — serán <code>vda1</code> y <code>vda2</code>. <strong>Finalizar el particionado y escribir los cambios en el disco</strong> → «¿Desea escribir los cambios?» → <strong>Sí</strong>.</li>
 </ol>
 <p>Ese último <em>Sí</em> es el punto sin retorno de cualquier instalación: a partir de ahí el disco se formatea. En tu VM el disco es un fichero vacío y el susto es gratis; en tu PC real será el momento de haber leído tres veces qué disco has elegido — vuelve a esta frase cuando llegue el día.</p>
 <div class="aviso">
@@ -381,9 +380,9 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <li><strong>Réplica de Debian</strong> (<em>mirror</em>, el espejo): el repositorio del capítulo 5, en su versión Debian. <code>deb.debian.org</code> sirve; proxy, vacío. De aquí descargará todo lo que no cabía en la netinst.</li>
 <li><strong>Concurso de popularidad</strong>: no.</li>
 <li><strong>Selección de programas</strong> — la pantalla decisiva del <em>servidor</em>. <strong>Desmarca</strong> <em>Entorno de escritorio Debian</em> y <em>GNOME</em> (vienen marcados). <strong>Marca</strong> <em>Servidor SSH</em> — el bloque E te lo agradecerá — y <em>Utilidades estándar del sistema</em>. Nada más.</li>
-<li><strong>Cargador de arranque</strong>: arrancaste la VM en modo UEFI, así que GRUB se instala solo en la partición EFI que creaste. Si pregunta por «forzar la instalación en la ruta de medios extraíbles», no.</li>
+<li><strong>Cargador de arranque</strong>: la VM arranca con BIOS, así que el instalador pregunta <em>en qué disco</em> instalar GRUB: <code>/dev/vda</code> — el disco entero, no una partición. Es el primer sector de la figura del plan, el sitio que el BIOS mira al encender.</li>
 </ul>
-<p>Reinicia cuando lo pida. La ISO se expulsa sola, y en el primer arranque desde el disco recién estrenado verás, durante unos segundos, el menú de GRUB — el eslabón del capítulo 6 que hoy has puesto tú. Es el mismo menú de la figura anterior, pero ahora sirve <em>tu</em> sistema en vez del instalador.</p>
+<p>Reinicia cuando lo pida. La ISO se expulsa sola, y en el primer arranque desde el disco recién estrenado verás, durante unos segundos, el menú de GRUB — el eslabón del capítulo 6 que hoy has puesto tú. Ya no es el isolinux de la ISO: es GRUB, leído del primer sector de <code>vda</code>, sirviendo <em>tu</em> sistema.</p>
 </section>
 <section id="sec-primer-arranque" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="sec-primer-arranque"><span class="header-section-number">8.5</span> El primer arranque: comprobar que respira</h2>
@@ -391,12 +390,11 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <pre class="terminal"><code><span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lsblk</span>
 <span class="t-out">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS</span>
 <span class="t-out">vda    254:0    0   20G  0 disk</span>
-<span class="t-out">├─vda1 254:1    0  512M  0 part /boot/efi</span>
-<span class="t-out">├─vda2 254:2    0 17,5G  0 part /</span>
-<span class="t-out">└─vda3 254:3    0    2G  0 part [SWAP]</span>
+<span class="t-out">├─vda1 254:1    0 18,2G  0 part /</span>
+<span class="t-out">└─vda2 254:2    0  1,8G  0 part [SWAP]</span>
 <span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">df -h /</span>
 <span class="t-out">S.ficheros     Tamaño Usados  Disp Uso% Montado en</span>
-<span class="t-out">/dev/vda2         17G   1,3G   15G   8% /</span>
+<span class="t-out">/dev/vda1         18G   1,3G   16G   8% /</span>
 <span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ip a | grep "inet "</span>
 <span class="t-out">    inet 127.0.0.1/8 scope host lo</span>
 <span class="t-out">    inet 192.168.122.15/24 brd 192.168.122.255 scope global dynamic enp1s0</span>
@@ -404,7 +402,7 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <span class="t-out">● ssh.service - OpenBSD Secure Shell server</span>
 <span class="t-out">     Loaded: loaded (/lib/systemd/system/ssh.service; enabled)</span>
 <span class="t-out">     Active: active (running) since Tue 2026-08-25 19:02:11 CEST</span></code></pre>
-<p>Léelo como el parte de un experimento que ha salido bien: las tres particiones montadas donde las pusiste; un sistema completo que ocupa 1,3 GB; una dirección <code>192.168.122.x</code> — la red NAT del capítulo 7, repartida por tu Mint —; y un servidor SSH ya activo, esperando al capítulo 12. Pon la instalación al día con el gesto del capítulo 5 (<code>sudo apt update &amp;&amp; sudo apt upgrade</code>) — y fíjate en que <code>sudo</code> funciona: el truco de la contraseña vacía de root ha hecho su efecto.</p>
+<p>Léelo como el parte de un experimento que ha salido bien: las dos particiones montadas donde las pusiste; un sistema completo que ocupa 1,3 GB; una dirección <code>192.168.122.x</code> — la red NAT del capítulo 7, repartida por tu Mint —; y un servidor SSH ya activo, esperando al capítulo 12. Pon la instalación al día con el gesto del capítulo 5 (<code>sudo apt update &amp;&amp; sudo apt upgrade</code>) — y fíjate en que <code>sudo</code> funciona: el truco de la contraseña vacía de root ha hecho su efecto.</p>
 <p>Y ahora, el protocolo del capítulo 7. Apaga la máquina con <code>sudo poweroff</code> — un servidor se apaga desde dentro, no desde el botón —, y en virt-manager crea la instantánea <strong><code>recien-instalado</code></strong>. Es el punto de retorno del resto del curso.</p>
 <div class="truco">
 <p><strong>✚ Truco · Dos cosas que verás y no te esperabas</strong></p>
@@ -418,12 +416,12 @@ Figura&nbsp;8.3: El instalador de Debian en modo gráfico, en su primera pregunt
 <span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">ls /boot</span>
 <span class="t-out">ls: no se puede acceder a '/boot': No existe el fichero o el directorio</span>
 <span class="t-p">marcos@debian-lab</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo reboot</span></code></pre>
-<p>Acabas de borrar el kernel y la configuración de GRUB. El sistema sigue funcionando <em>hasta que se apaga</em>: todo lo que necesitaba ya estaba cargado en RAM. Pero al reiniciar, la cadena del capítulo 6 se rompe en el segundo eslabón: GRUB no encuentra el kernel, y te quedas en su consola de emergencia (<code>grub&gt;</code>) o en un aviso del UEFI. Míralo bien. Es la pantalla que aterroriza a quien no sabe qué es GRUB — y tú sabes exactamente qué falta y por qué.</p>
+<p>Acabas de borrar el kernel — y casi todo GRUB: sus módulos y su menú viven en <code>/boot/grub</code>; solo sobrevive su primer trozo, el del sector cero. El sistema sigue funcionando <em>hasta que se apaga</em>: todo lo que necesitaba ya estaba cargado en RAM. Pero al reiniciar, la cadena del capítulo 6 se rompe en el segundo eslabón: ese trozo de GRUB arranca, busca el resto de sí mismo en <code>/boot/grub</code>, no lo encuentra, y te deja en su consola de emergencia — <code>grub rescue&gt;</code>, con un «file not found». Míralo bien. Es la pantalla que aterroriza a quien no sabe qué es GRUB — y tú sabes exactamente qué falta y por qué.</p>
 <p>Ahora, desde virt-manager: <em>Forzar apagado</em> → Instantáneas → <code>recien-instalado</code> → <em>Ejecutar</em>. Arranca. Cinco segundos, y <code>/boot</code> está de vuelta como si nada. Ese es el bloque C entero en una escena: el miedo a romper ha desaparecido porque romper cuesta cinco segundos.</p>
 </section>
 <section id="sec-pc-real" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="sec-pc-real"><span class="header-section-number">8.7</span> Del ensayo al ordenador de verdad</h2>
-<p>Todo lo que has hecho hoy es, paso a paso, lo que harás el día que instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en un pendrive, el disco tiene nombre real y quizá un Windows dentro, y no hay instantánea que te salve — y por eso existe el <a href="../anexos/anexo-c1-pc-real.html">anexo C</a>: la lista de comprobación completa para ese día, con la grabación del pendrive por la vía gráfica y por terminal.</p>
+<p>Todo lo que has hecho hoy es, paso a paso, lo que harás el día que instales Linux en un PC físico. Cambian cuatro cosas — la ISO viaja en un pendrive, el disco tiene nombre real y quizá un Windows dentro, el arranque es UEFI y pide una partición más (la EFI del capítulo 6), y no hay instantánea que te salve — y por eso existe el <a href="../anexos/anexo-c1-pc-real.html">anexo C</a>: la lista de comprobación completa para ese día, con la grabación del pendrive por la vía gráfica y por terminal.</p>
 <div id="fig-dos-caminos" class="quarto-float quarto-figure quarto-figure-center anchored" alt="La ISO de Debian va directa a la máquina virtual, o grabada en un pendrive hacia un PC físico">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dos-caminos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -455,30 +453,23 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 8.1 · El plan, por escrito</strong></p>
-<p>Antes de arrancar el instalador, escribe en tu cuaderno la tabla de particiones que vas a crear: nombre de dispositivo, tamaño, sistema de ficheros y punto de montaje de cada una. Y dos decisiones más: nombre de la máquina y contraseña de root (vacía, y por qué). <em>Pista: la figura del plan tiene todo; el «por qué» de root está en la sección de arrancar el instalador.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Antes de arrancar el instalador, escribe en tu cuaderno la tabla de particiones que vas a crear: nombre de dispositivo, tamaño, sistema de ficheros y punto de montaje de cada una. Y dos decisiones más: nombre de la máquina y contraseña de root (vacía, y por qué).</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>vda1</code> 512 MB · FAT32 · <code>/boot/efi</code> (EFI) — <code>vda2</code> ~17,5 GB · ext4 · <code>/</code> — <code>vda3</code> 2 GB · swap. Máquina <code>debian-lab</code>. Root vacío: Debian desactiva root y da <code>sudo</code> a tu usuario, como en Mint.</p>
-<p><strong>Por qué así</strong> — El plan escrito es lo que separa una instalación de una apuesta. En el PC real añadirás una columna: «¿qué había antes en esa partición?» — y ahí es donde el hábito te salvará los datos.</p>
+<p>La figura del plan tiene todo; el «por qué» de root está en la sección de arrancar el instalador.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 8.2 · La instalación</strong></p>
-<p>Ejecuta la instalación completa siguiendo las secciones del capítulo — particionado manual, sin escritorio, con servidor SSH — y anota en el cuaderno cuánto ha tardado y en qué pantalla dudaste. <em>Pista: si en el particionado te pierdes, «Deshacer los cambios realizados a las particiones» vuelve al principio sin coste; y si algo sale mal de verdad, </em>Forzar apagado* y volver a arrancar la VM reinicia el instalador desde cero.*</p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -492,39 +483,32 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Entre 20 y 40 minutos la primera vez, gran parte esperando descargas del espejo. Las dudas típicas: la pantalla de root (vacío), el tamaño de la raíz (lo que quede menos el swap) y la selección de programas (desmarcar el escritorio). Al terminar, el <code>login:</code> en consola de texto es la señal de éxito.</p>
-<p><strong>Por qué así</strong> — La primera instalación siempre es lenta y torpe; la segunda (ejercicio 8.5) es donde se nota que has aprendido. Por eso el diseño de este capítulo insiste en repetir.</p>
+<p><code>vda1</code> ~18 GB · ext4 · <code>/</code> — <code>vda2</code> 2 GB · swap; GRUB en el primer sector de <code>vda</code>. Máquina <code>debian-lab</code>. Root vacío: Debian desactiva root y da <code>sudo</code> a tu usuario, como en Mint.</p>
+<p><strong>Por qué así</strong> — El plan escrito es lo que separa una instalación de una apuesta. En el PC real añadirás una columna: «¿qué había antes en esa partición?» — y ahí es donde el hábito te salvará los datos.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 8.3 · El parte del primer arranque</strong></p>
-<p>Entra en <code>debian-lab</code> y ejecuta la revisión del capítulo: <code>lsblk</code>, <code>df -h /</code>, <code>ip a | grep "inet "</code> y <code>systemctl status ssh</code>. Copia los cuatro resultados al cuaderno y compáralos con tu plan del 8.1. Después, actualiza el sistema con <code>apt</code>. <em>Pista: son exactamente los comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 8.2 · La instalación</strong></p>
+<p>Ejecuta la instalación completa siguiendo las secciones del capítulo — particionado manual, sin escritorio, con servidor SSH — y anota en el cuaderno cuánto ha tardado y en qué pantalla dudaste.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Las tres particiones montadas según el plan; alrededor de 1,3 GB usados; una dirección <code>192.168.122.x</code>; y <code>ssh.service</code> en <em>active (running)</em>. <code>sudo apt update &amp;&amp; sudo apt upgrade</code> debe funcionar sin pedir nada raro: la prueba de que el truco de root funcionó.</p>
-<p><strong>Por qué así</strong> — Cada comando verifica una decisión del instalador: particiones, tamaño, red, SSH. Un físico no da por bueno un montaje sin medirlo; tú tampoco das por buena una instalación.</p>
+<p>Si en el particionado te pierdes, «Deshacer los cambios realizados a las particiones» vuelve al principio sin coste; y si algo sale mal de verdad, <em>Forzar apagado</em> y volver a arrancar la VM reinicia el instalador desde cero.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 8.4 · La instantánea que importa</strong></p>
-<p>Apaga la VM desde dentro (<code>sudo poweroff</code>) y crea la instantánea <code>recien-instalado</code>. Compruébala con <code>virsh</code> desde tu Mint. <em>Pista: capítulo 7, sección de instantáneas — con la máquina apagada, la instantánea guarda el disco y es la más limpia de restaurar.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -538,40 +522,32 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Ver → Instantáneas → <strong>+</strong> → nombre <code>recien-instalado</code>. En Mint: <code>virsh snapshot-list debian-lab</code> la muestra con estado <code>shutoff</code>.</p>
-<p><strong>Por qué así</strong> — Es el punto de retorno de todo lo que queda de curso: los experimentos de red del bloque D y el servidor del bloque E parten de aquí. Restaurarla es siempre una opción legítima.</p>
+<p>Entre 20 y 40 minutos la primera vez, gran parte esperando descargas del espejo. Las dudas típicas: la pantalla de root (vacío), el tamaño de la raíz (lo que quede menos el swap) y la selección de programas (desmarcar el escritorio). Al terminar, el <code>login:</code> en consola de texto es la señal de éxito.</p>
+<p><strong>Por qué así</strong> — La primera instalación siempre es lenta y torpe; la segunda (ejercicio 8.6) es donde se nota que has aprendido. Por eso el diseño de este capítulo insiste en repetir.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El reto</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 8.5 · Romper el arranque</strong></p>
-<p>Con la instantánea a salvo: borra <code>/boot</code>, reinicia, y observa exactamente dónde se rompe la cadena del capítulo 6. Describe la pantalla en el cuaderno. Después restaura la instantánea y comprueba que <code>/boot</code> está de vuelta. <em>Pista: la orden está en la sección «Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe decir <code>debian-lab</code>.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 8.3 · El parte del primer arranque</strong></p>
+<p>Entra en <code>debian-lab</code> y ejecuta la revisión del capítulo: <code>lsblk</code>, <code>df -h /</code>, <code>ip a | grep "inet "</code> y <code>systemctl status ssh</code>. Copia los cuatro resultados al cuaderno y compáralos con tu plan del 8.1. Después, actualiza el sistema con <code>apt</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>sudo rm -rf /boot</code>, <code>sudo reboot</code> → GRUB arranca (su llave sigue en la partición EFI, que no has tocado) pero no encuentra el kernel: te deja en <code>grub&gt;</code> o en un error de «file not found». Forzar apagado → restaurar <code>recien-instalado</code> → <code>ls /boot</code> muestra el kernel (<code>vmlinuz-…</code>) y la carpeta <code>grub</code> como si nada.</p>
-<p><strong>Por qué así</strong> — Ver romperse un eslabón concreto de la cadena convierte «no arranca» en «falta el kernel, GRUB sigue ahí»: un diagnóstico. Y la restauración es la demostración práctica de para qué sirve el bloque C.</p>
+<p>Son exactamente los comandos de los capítulos 5 y 6, ahora sobre una instalación tuya.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 8.6 · La segunda instalación, cronometrada</strong></p>
-<p>Borra la máquina entera desde virt-manager (Eliminar, marcando borrar el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala Debian desde cero — esta vez con <code>/home</code> en su propia partición de 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el tiempo. <em>Pista: el plan cambia en una línea: la raíz se queda con ~12,5 GB y <code>/home</code> recibe 5 GB, ext4, punto de montaje <code>/home</code>. Crea las cuatro particiones en orden: EFI, raíz, home, swap.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -585,7 +561,125 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Normalmente la mitad del tiempo de la primera vez, y <code>lsblk</code> mostrará <code>vda3</code> montado en <code>/home</code>. Renueva la instantánea <code>recien-instalado</code> sobre esta máquina — es la definitiva.</p>
+<p>Las dos particiones montadas según el plan; alrededor de 1,3 GB usados; una dirección <code>192.168.122.x</code>; y <code>ssh.service</code> en <em>active (running)</em>. <code>sudo apt update &amp;&amp; sudo apt upgrade</code> debe funcionar sin pedir nada raro: la prueba de que el truco de root funcionó.</p>
+<p><strong>Por qué así</strong> — Cada comando verifica una decisión del instalador: particiones, tamaño, red, SSH. Un físico no da por bueno un montaje sin medirlo; tú tampoco das por buena una instalación.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 8.4 · La instantánea que importa</strong></p>
+<p>Apaga la VM desde dentro (<code>sudo poweroff</code>) y crea la instantánea <code>recien-instalado</code>. Compruébala con <code>virsh</code> desde tu Mint.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Capítulo 7, sección de instantáneas — con la máquina apagada, la instantánea guarda el disco y es la más limpia de restaurar.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ver → Instantáneas → <strong>+</strong> → nombre <code>recien-instalado</code>. En Mint: <code>virsh snapshot-list debian-lab</code> la muestra con estado <code>shutoff</code>.</p>
+<p><strong>Por qué así</strong> — Es el punto de retorno de todo lo que queda de curso: los experimentos de red del bloque D y el servidor del bloque E parten de aquí. Restaurarla es siempre una opción legítima.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El reto</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 8.5 · Romper el arranque</strong></p>
+<p>Con la instantánea a salvo: borra <code>/boot</code>, reinicia, y observa exactamente dónde se rompe la cadena del capítulo 6. Describe la pantalla en el cuaderno. Después restaura la instantánea y comprueba que <code>/boot</code> está de vuelta.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La orden está en la sección «Romper, mirar, restaurar». Antes de teclearla, mira el prompt: debe decir <code>debian-lab</code>.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sudo rm -rf /boot</code>, <code>sudo reboot</code> → el primer trozo de GRUB arranca (sigue en el sector cero, que no has tocado) pero no encuentra ni el resto de GRUB ni el kernel: te deja en <code>grub rescue&gt;</code> con un «file not found». Forzar apagado → restaurar <code>recien-instalado</code> → <code>ls /boot</code> muestra el kernel (<code>vmlinuz-…</code>) y la carpeta <code>grub</code> como si nada.</p>
+<p><strong>Por qué así</strong> — Ver romperse un eslabón concreto de la cadena convierte «no arranca» en «falta <code>/boot</code>; el sector cero sigue ahí»: un diagnóstico. Y la restauración es la demostración práctica de para qué sirve el bloque C.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 8.6 · La segunda instalación, cronometrada</strong></p>
+<p>Borra la máquina entera desde virt-manager (Eliminar, marcando borrar el disco), vuelve al capítulo 7 para crearla de nuevo, y reinstala Debian desde cero — esta vez con <code>/home</code> en su propia partición de 5 GB — sin mirar el capítulo más que para lo imprescindible. Anota el tiempo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El plan cambia en una línea: la raíz se queda con <code>14.5 GB</code> y <code>/home</code> recibe <code>5 GB</code>, ext4, punto de montaje <code>/home</code> (el instalador lo propone solo para la segunda ext4). Crea las tres particiones en orden: raíz, home, swap — todas <strong>primarias</strong>, aunque te sugiera lógica.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Normalmente la mitad del tiempo de la primera vez, y <code>lsblk</code> mostrará <code>vda2</code> montado en <code>/home</code>. Renueva la instantánea <code>recien-instalado</code> sobre esta máquina — es la definitiva.</p>
 <p><strong>Por qué así</strong> — «Romperla y reinstalar hasta que aburra» era el objetivo declarado del capítulo. La variante del <code>/home</code> separado enseña el matiz que más se discute en foros — y te deja decidir con criterio propio, que es lo único que cuenta.</p>
 </div>
 </div>
@@ -595,10 +689,26 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 <p><strong>Nivel 3 · Opcional · el pendrive real</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 8.7 · El pendrive de arranque (sin instalar nada)</strong></p>
-<p>Siguiendo el anexo C, graba la ISO en un pendrive que puedas borrar, arranca tu portátil desde él hasta el menú del instalador — <strong>y sal sin elegir nada</strong>: apaga y arranca de nuevo tu Mint. Objetivo: haber visto el menú de arranque del UEFI y el instalador en hardware real sin tocar un solo byte de tu disco. <em>Pista: en el anexo tienes las dos vías — la aplicación «Discos» de Mint y la orden <code>dd</code> — y la regla de oro: <code>lsblk</code> antes y después de pinchar el pendrive para estar seguro de su nombre.</em></p>
+<p>Siguiendo el anexo C, graba la ISO en un pendrive que puedas borrar, arranca tu portátil desde él hasta el menú del instalador — <strong>y sal sin elegir nada</strong>: apaga y arranca de nuevo tu Mint. Objetivo: haber visto el menú de arranque del UEFI y el instalador en hardware real sin tocar un solo byte de tu disco.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En el anexo tienes las dos vías — la aplicación «Discos» de Mint y la orden <code>dd</code> — y la regla de oro: <code>lsblk</code> antes y después de pinchar el pendrive para estar seguro de su nombre.</p>
+</div>
+</div>
+</div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -607,10 +717,51 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>El pendrive aparece como <code>sda</code> (o <code>sdb</code>) al pinchar; se graba con «Discos → Restaurar imagen de disco» o con <code>sudo dd if=debian….iso of=/dev/sdX bs=4M status=progress</code> (con la X correcta, verificada dos veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o Esc según la marca) y se elige el pendrive. Verás el mismo menú que en la VM; <em>Ctrl+Alt+Supr</em> o apagar te devuelve a Mint intacto.</p>
+<p>El pendrive aparece como <code>sda</code> (o <code>sdb</code>) al pinchar; se graba con «Discos → Restaurar imagen de disco» o con <code>sudo dd if=debian….iso of=/dev/sdX bs=4M status=progress</code> (con la X correcta, verificada dos veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o Esc según la marca) y se elige el pendrive. Verás el menú del instalador — en modo UEFI tiene otro aspecto que en la VM (anexo C), pero las mismas opciones; <em>Ctrl+Alt+Supr</em> o apagar te devuelve a Mint intacto.</p>
 <p><strong>Por qué así</strong> — Es el ensayo general con el vestuario de verdad, y la única parte del capítulo con un riesgo real: equivocar la letra del pendrive en <code>dd</code> borra el disco equivocado. Por eso la vía gráfica es perfectamente honorable — elige por su nombre y tamaño, sin letras — y por eso el anexo insiste en comprobar dos veces.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 8.8 · La misma instalación, con UEFI (de usar y tirar)</strong></p>
+<p><code>debian-lab</code> arranca con BIOS por la razón del capítulo 7. Para ver con tus manos qué cambia con UEFI — que es lo que tendrás en un PC real —, crea una <strong>segunda</strong> máquina, <code>debian-uefi</code> (2 GB de RAM bastan), marcando en el último paso del asistente <em>Personalizar la configuración antes de instalar</em> → <em>Vista general</em> → <em>Firmware:</em> <strong>UEFI</strong> → <em>Aplicar</em> → <em>Comenzar la instalación</em>. Instálala con el mismo plan y anota las tres diferencias que veas. Después bórrala (<em>Eliminar</em>, con su disco): sin instantáneas no es sitio para vivir.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Las diferencias están en el menú de arranque de la ISO, en el particionado (el instalador querrá una partición más, y de un tipo concreto) y en el <code>lsblk</code> final. Dentro de la máquina, <code>efibootmgr -v</code> enseña dónde apuntó GRUB su llave.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>El menú de la ISO ya no es isolinux sino GRUB, con «UEFI» en el título. (2) Al particionar, la tabla es <code>gpt</code> y el instalador espera una <strong>partición del sistema EFI</strong> (512 MB, FAT32) antes que nada: créala tú, o el paso «Cargador de arranque» protestará. (3) <code>lsblk</code> muestra <code>vda1 … /boot/efi</code> además de la raíz y la swap, y <code>efibootmgr -v</code> lista una entrada <code>debian</code> que apunta a <code>\EFI\debian\shimx64.efi</code> dentro de esa partición — la llave en el buzón del capítulo 6. Y si en virt-manager intentas una instantánea, verás el aviso de la caja del capítulo 7. Borra la máquina al acabar.</li>
+</ol>
+<p><strong>Por qué así</strong> — Es el ensayo exacto de lo que te encontrarás en el anexo C, en una máquina donde equivocarse sigue siendo gratis. Las tres diferencias caben en una línea del cuaderno, y con eso el UEFI deja de ser un misterio.</p>
 </div>
 </div>
 </div>
@@ -635,12 +786,12 @@ Figura&nbsp;8.5: Una caja de disquetes de 5¼ pulgadas junto a un pendrive con m
     <div class="fb good"><b>Correcto.</b> Es el comportamiento documentado de Debian y el modelo del capítulo 4: poderes de administrador orden a orden, con recibo.</div>
     <div class="fb bad"><b>No exactamente.</b> Con root vacío, Debian bloquea esa cuenta y mete a tu usuario en el grupo <code>sudo</code>. Con contraseña, tendrías root activo y un usuario sin sudo.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="3">En una instalación UEFI, GRUB deja su llave de arranque en…</p>
-    <label><input type="radio" name="z3" value="a"><span>la partición EFI (FAT32, montada en <code>/boot/efi</code>)</span></label>
+  <div class="qz"><p class="qq" data-n="3">En <code>debian-lab</code>, que arranca con BIOS, GRUB se instala en…</p>
+    <label><input type="radio" name="z3" value="a"><span>el primer sector del disco entero (<code>/dev/vda</code>, el MBR)</span></label>
     <label><input type="radio" name="z3" value="b"><span>la swap</span></label>
-    <label><input type="radio" name="z3" value="c"><span>el sector cero del disco, siempre</span></label>
-    <div class="fb good"><b>Correcto.</b> El buzón del capítulo 6. Por eso la EFI es la primera partición del plan, y por eso borrar <code>/boot</code> rompe el kernel pero no a GRUB.</div>
-    <div class="fb bad"><b>No exactamente.</b> El UEFI busca cargadores en la partición EFI: ahí va GRUB. El «sector cero» era el mundo antiguo (BIOS/MBR).</div>
+    <label><input type="radio" name="z3" value="c"><span>una partición EFI (FAT32, montada en <code>/boot/efi</code>)</span></label>
+    <div class="fb good"><b>Correcto.</b> El sitio que el BIOS lee a ciegas al encender. En tu PC real, que arranca por UEFI, el equivalente es la partición EFI del capítulo 6 — el buzón donde GRUB deja su llave.</div>
+    <div class="fb bad"><b>No exactamente.</b> En modo BIOS no hay partición EFI: GRUB va al primer sector del disco entero. La partición EFI es el buzón del mundo UEFI — el de tu PC real y del reto 8.8.</div>
   </div>
   <div class="qz"><p class="qq" data-n="4">Marcaste «Servidor SSH» en la selección de programas para…</p>
     <label><input type="radio" name="z4" value="a"><span>poder navegar por internet desde la VM</span></label>

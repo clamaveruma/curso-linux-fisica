@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -494,30 +494,23 @@ Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una l�
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 10.1 · Las dos caras</strong></p>
-<p>Averigua tu dirección pública con <code>curl ifconfig.me</code> y compárala con la privada de <code>ip a</code>. Después, en la página del router, localiza la dirección <em>WAN</em> y comprueba que coincide con la pública. <em>Pista: si <code>curl</code> no está instalado, ya sabes: <code>sudo apt install curl</code>.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Averigua tu dirección pública con <code>curl ifconfig.me</code> y compárala con la privada de <code>ip a</code>. Después, en la página del router, localiza la dirección <em>WAN</em> y comprueba que coincide con la pública.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Privada <code>192.168.1.x</code>; pública algo como <code>83.44.120.9</code>, idéntica a la WAN del router. Si la WAN del router es <em>también</em> del tipo <code>100.64.x.x</code> o <code>10.x.x.x</code>, tu compañía te tiene detrás de un NAT adicional (se llama CG-NAT), y eso condicionará el reenvío de puertos del capítulo 11.</p>
-<p><strong>Por qué así</strong> — Ver las dos direcciones con tus propios ojos convierte el NAT de concepto en hecho: toda la casa, un número.</p>
+<p>Si <code>curl</code> no está instalado, ya sabes: <code>sudo apt install curl</code>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 10.2 · El censo</strong></p>
-<p>En la página del router, encuentra la tabla de dispositivos conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato. Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y anota los que no reconozcas. <em>Pista: si el router no la muestra o está incompleta, <code>ip neigh</code> en tu Mint es el plan B, y <code>nmap -sn</code> sobre tu <code>/24</code>, el plan C.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -531,40 +524,32 @@ Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una l�
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Una tabla de entre 5 y 20 filas es lo normal en una casa. Los aparatos «misteriosos» suelen ser el propio router, un enchufe inteligente, la consola o el móvil de alguien de visita — los tres primeros bytes de la MAC identifican al fabricante, y buscarlos en internet («MAC lookup») resuelve casi todos.</p>
-<p><strong>Por qué así</strong> — Es el ejercicio central del capítulo: saber quién vive en tu red es el principio de saber administrarla. En el capítulo 10, con esta lista, podrás hacer los cambios con criterio.</p>
+<p>Privada <code>192.168.1.x</code>; pública algo como <code>83.44.120.9</code>, idéntica a la WAN del router. Si la WAN del router es <em>también</em> del tipo <code>100.64.x.x</code> o <code>10.x.x.x</code>, tu compañía te tiene detrás de un NAT adicional (se llama CG-NAT), y eso condicionará el reenvío de puertos del capítulo 11.</p>
+<p><strong>Por qué así</strong> — Ver las dos direcciones con tus propios ojos convierte el NAT de concepto en hecho: toda la casa, un número.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 10.3 · La VM en el mapa</strong></p>
-<p>Dentro de <code>debian-lab</code>, ejecuta <code>ip a</code> e <code>ip route</code>. Compara con tu Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede hacer <code>ping</code> a tu Mint y a <code>8.8.8.8</code>, pero el router de casa no la tiene en su censo? <em>Pista: mira el <code>default via</code> de la VM y búscalo en el <code>ip a</code> de tu Mint.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 10.2 · El censo</strong></p>
+<p>En la página del router, encuentra la tabla de dispositivos conectados y pásala a tu cuaderno: nombre, IP y MAC de cada aparato. Identifica cuál es cada uno (portátil, móviles, tele, impresora…) y anota los que no reconozcas.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Puerta de enlace de la VM: <code>192.168.122.1</code> — que es <code>virbr0</code>, tu propio Mint. La VM está en la red privada de libvirt; tu Mint hace de router y NAT para ella, igual que el de casa hace para tu Mint. El router de casa solo ve salir paquetes de <code>192.168.1.34</code>: la VM está escondida detrás, en un segundo NAT.</p>
-<p><strong>Por qué así</strong> — Es la figura del NAT aplicada dos veces, y la demostración de que un «router» no es una caja: es un <em>papel</em> que cualquier máquina Linux puede hacer. Tu Mint lleva haciéndolo desde el capítulo 7.</p>
+<p>Si el router no la muestra o está incompleta, <code>ip neigh</code> en tu Mint es el plan B, y <code>nmap -sn</code> sobre tu <code>/24</code>, el plan C.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 10.4 · Una reserva en el router, con vuelta atrás</strong></p>
-<p>Con el protocolo completo — valor actual anotado, vuelta atrás escrita, cambio, verificación —: crea en el router una <strong>reserva DHCP</strong> para tu portátil, de modo que siempre reciba la misma dirección (la que tiene ahora vale). Verifica reconectando la Wi-Fi y mirando <code>ip a</code>. <em>Pista: el menú se llama «Reserva de dirección», «DHCP estático» o «Asignación fija», en la sección LAN/DHCP; necesita tu MAC (<code>ip a</code>, línea <code>link/ether</code>). Si tu router no lo ofrece, deja constancia en el cuaderno y sigue: no todos lo exponen.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -578,6 +563,85 @@ Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una l�
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Una tabla de entre 5 y 20 filas es lo normal en una casa. Los aparatos «misteriosos» suelen ser el propio router, un enchufe inteligente, la consola o el móvil de alguien de visita — los tres primeros bytes de la MAC identifican al fabricante, y buscarlos en internet («MAC lookup») resuelve casi todos.</p>
+<p><strong>Por qué así</strong> — Es el ejercicio central del capítulo: saber quién vive en tu red es el principio de saber administrarla. En el capítulo 10, con esta lista, podrás hacer los cambios con criterio.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.3 · La VM en el mapa</strong></p>
+<p>Dentro de <code>debian-lab</code>, ejecuta <code>ip a</code> e <code>ip route</code>. Compara con tu Mint: ¿cuál es la puerta de enlace de la VM? ¿Por qué la VM puede hacer <code>ping</code> a tu Mint y a <code>8.8.8.8</code>, pero el router de casa no la tiene en su censo?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Mira el <code>default via</code> de la VM y búscalo en el <code>ip a</code> de tu Mint.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Puerta de enlace de la VM: <code>192.168.122.1</code> — que es <code>virbr0</code>, tu propio Mint. La VM está en la red privada de libvirt; tu Mint hace de router y NAT para ella, igual que el de casa hace para tu Mint. El router de casa solo ve salir paquetes de <code>192.168.1.34</code>: la VM está escondida detrás, en un segundo NAT.</p>
+<p><strong>Por qué así</strong> — Es la figura del NAT aplicada dos veces, y la demostración de que un «router» no es una caja: es un <em>papel</em> que cualquier máquina Linux puede hacer. Tu Mint lleva haciéndolo desde el capítulo 7.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 10.4 · Una reserva en el router, con vuelta atrás</strong></p>
+<p>Con el protocolo completo — valor actual anotado, vuelta atrás escrita, cambio, verificación —: crea en el router una <strong>reserva DHCP</strong> para tu portátil, de modo que siempre reciba la misma dirección (la que tiene ahora vale). Verifica reconectando la Wi-Fi y mirando <code>ip a</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El menú se llama «Reserva de dirección», «DHCP estático» o «Asignación fija», en la sección LAN/DHCP; necesita tu MAC (<code>ip a</code>, línea <code>link/ether</code>). Si tu router no lo ofrece, deja constancia en el cuaderno y sigue: no todos lo exponen.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>La reserva asocia tu MAC a una IP; tras reconectar, <code>ip a</code> la muestra — y a partir de ahora tu <code>/etc/hosts</code> (capítulo 11) o el SSH del capítulo 12 pueden contar con ella. Vuelta atrás: borrar la reserva; tu portátil volverá a coger la que le toque del rango.</p>
 <p><strong>Por qué así</strong> — Un cambio pequeño, útil y deshecho en un minuto si molesta: exactamente el tipo de administración que se hace en una casa. Y el protocolo que has seguido es el mismo con el que tocarás un servidor de verdad — donde tampoco habrá instantáneas.</p>
 </div>
@@ -588,10 +652,26 @@ Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una l�
 <p><strong>Nivel 3 · El reto (opcional)</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 10.5 · Wi-Fi contra cable, con datos</strong></p>
-<p>Si tienes un cable de red a mano: mide con <code>ping -c 30</code> al router por Wi-Fi y por cable, y compara media, máximo, <code>mdev</code> y paquetes perdidos. Añade la señal Wi-Fi en dBm (<code>iw dev … link</code>). Escribe en el cuaderno una conclusión de dos líneas, como en un informe de prácticas. <em>Pista: <code>ip a</code> te dirá qué interfaz está activa en cada caso (<code>wlp…</code> o <code>enp…</code>); desactiva la Wi-Fi mientras mides por cable para no mezclar.</em></p>
+<p>Si tienes un cable de red a mano: mide con <code>ping -c 30</code> al router por Wi-Fi y por cable, y compara media, máximo, <code>mdev</code> y paquetes perdidos. Añade la señal Wi-Fi en dBm (<code>iw dev … link</code>). Escribe en el cuaderno una conclusión de dos líneas, como en un informe de prácticas.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>ip a</code> te dirá qué interfaz está activa en cada caso (<code>wlp…</code> o <code>enp…</code>); desactiva la Wi-Fi mientras mides por cable para no mezclar.</p>
+</div>
+</div>
+</div>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -600,7 +680,7 @@ Figura&nbsp;10.2: La libreta del router. Cada conversación que sale deja una l�
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Cable: 30 de 30, ~1 ms, <code>mdev</code> de décimas. Wi-Fi: alguna pérdida posible, media mayor y <code>mdev</code> de varios ms — más cuanto peor la señal (por debajo de −70 dBm empieza a notarse). Conclusión típica: «la media apenas cambia; la <em>dispersión</em> y las pérdidas sí — por eso el servidor va por cable».</p>
 <p><strong>Por qué así</strong> — Media, desviación y pérdidas: el mismo trío que resume cualquier medida de laboratorio. Has convertido una opinión de foro («el cable va mejor») en un resultado con incertidumbre.</p>

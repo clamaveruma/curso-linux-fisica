@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -259,8 +259,9 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#antes-de-tocar-nada" id="toc-antes-de-tocar-nada" class="nav-link active" data-scroll-target="#antes-de-tocar-nada"><span class="header-section-number">C.1</span> Antes de tocar nada</a></li>
   <li><a href="#grabar-el-pendrive" id="toc-grabar-el-pendrive" class="nav-link" data-scroll-target="#grabar-el-pendrive"><span class="header-section-number">C.2</span> Grabar el pendrive</a></li>
-  <li><a href="#arrancar-e-instalar" id="toc-arrancar-e-instalar" class="nav-link" data-scroll-target="#arrancar-e-instalar"><span class="header-section-number">C.3</span> Arrancar e instalar</a></li>
-  <li><a href="#después-del-primer-arranque" id="toc-después-del-primer-arranque" class="nav-link" data-scroll-target="#después-del-primer-arranque"><span class="header-section-number">C.4</span> Después del primer arranque</a></li>
+  <li><a href="#lo-que-cambia-respecto-a-la-vm-el-arranque-es-uefi" id="toc-lo-que-cambia-respecto-a-la-vm-el-arranque-es-uefi" class="nav-link" data-scroll-target="#lo-que-cambia-respecto-a-la-vm-el-arranque-es-uefi"><span class="header-section-number">C.3</span> Lo que cambia respecto a la VM: el arranque es UEFI</a></li>
+  <li><a href="#arrancar-e-instalar" id="toc-arrancar-e-instalar" class="nav-link" data-scroll-target="#arrancar-e-instalar"><span class="header-section-number">C.4</span> Arrancar e instalar</a></li>
+  <li><a href="#después-del-primer-arranque" id="toc-después-del-primer-arranque" class="nav-link" data-scroll-target="#después-del-primer-arranque"><span class="header-section-number">C.5</span> Después del primer arranque</a></li>
   </ul>
 </nav>
     </div>
@@ -303,28 +304,50 @@ ul.task-list li input[type="checkbox"] {
 <p>La ISO se copia al pendrive <strong>byte a byte</strong> — no se «pega» como un fichero. Dos vías igual de válidas:</p>
 <p><strong>Con ratón (recomendada la primera vez).</strong> En Mint, aplicación <strong>Discos</strong>: selecciona el pendrive en la lista de la izquierda — compruébalo por su tamaño y su nombre —, menú (⋮) → <em>Restaurar imagen de disco</em> → elige la ISO → <em>Iniciar restauración</em>. Eliges el destino por su nombre, sin letras que confundir.</p>
 <p><strong>Con terminal.</strong> Primero, la regla de oro: <code>lsblk</code> <em>antes</em> de pinchar el pendrive y <em>después</em>, para ver qué nombre nuevo aparece (<code>sda</code>, <code>sdb</code>…). Luego, con esa letra y solo con esa:</p>
-<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">lsblk</span>
+<pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">lsblk</span>
 <span class="t-out">NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
 <span class="t-out">sda           8:0    1  14,9G  0 disk</span>
 <span class="t-out">└─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON</span>
 <span class="t-out">nvme0n1     259:0    0 476,9G  0 disk</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sudo umount /dev/sda1</span>
-<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~/Descargas</span><span class="t-dim">$</span> <span class="t-cmd">sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress</span></code></pre>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo umount /dev/sda1</span>
+<span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">sudo dd if=/var/lib/libvirt/images/debian-13.7.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress</span></code></pre>
+<p>(La ISO vive en el almacén de libvirt desde el capítulo 7; en la aplicación «Discos» llegas a ella navegando a esa misma ruta.)</p>
 <p><code>dd</code> copia bloques de <code>if</code> (<em>input file</em>) a <code>of</code> (<em>output file</em>) sin preguntar nada: <strong>si <code>of=</code> apunta a tu disco interno, lo destruye en silencio</strong>. Por eso se comprueba la letra dos veces, y por eso el destino es el disco entero (<code>/dev/sda</code>), no una partición (<code>sda1</code>). Cuando termine, <code>sync</code> y expulsar (capítulo 6).</p>
 </section>
-<section id="arrancar-e-instalar" class="level2" data-number="C.3">
-<h2 data-number="C.3" class="anchored" data-anchor-id="arrancar-e-instalar"><span class="header-section-number">C.3</span> Arrancar e instalar</h2>
+<section id="lo-que-cambia-respecto-a-la-vm-el-arranque-es-uefi" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="lo-que-cambia-respecto-a-la-vm-el-arranque-es-uefi"><span class="header-section-number">C.3</span> Lo que cambia respecto a la VM: el arranque es UEFI</h2>
+<p><code>debian-lab</code> arranca con el firmware clásico (BIOS) por la razón del capítulo 7; tu PC arranca por UEFI, y eso cambia exactamente cuatro cosas — ninguna más:</p>
+<ol type="1">
+<li><strong>El menú de arranque del firmware</strong>: se entra con una tecla al encender y el pendrive aparece con «UEFI:» delante.</li>
+<li><strong>Secure Boot</strong>: puede quedarse activado; Debian lo soporta.</li>
+<li><strong>Una partición más</strong>: la EFI (FAT32, ~512 MB, montada en <code>/boot/efi</code>) — la del capítulo 6. El particionado guiado la crea solo; en manual la creas tú (<em>Utilizar como: Partición del sistema EFI</em>), y si ya existe una, se reutiliza sin formatear.</li>
+<li><strong>GRUB</strong> se instala en esa partición, no en el primer sector, y deja una entrada de arranque en la memoria de la placa: <code>efibootmgr -v</code> la enseña.</li>
+</ol>
+<p>Si hiciste el reto 8.8, ya has visto las cuatro en una máquina de usar y tirar.</p>
+<div id="fig-menu-uefi" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-menu-uefi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../imagenes/cap08/grub-debian-uefi.png" class="img-fluid figure-img" style="width:70.0%" alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-menu-uefi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;C.1: El menú de arranque de la ISO en modo UEFI: es GRUB, con otro aspecto que el isolinux de la VM, pero las mismas opciones. <em>Captura de la versión 12 (la 13 es igual): Paowee, GPL, Wikimedia Commons.</em>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="arrancar-e-instalar" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="arrancar-e-instalar"><span class="header-section-number">C.4</span> Arrancar e instalar</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Pendrive pinchado, encender, <strong>tecla del menú de arranque</strong>, elegir el pendrive (la entrada que dice <em>UEFI:</em> delante — no la otra, si aparecen dos).</label></li>
 <li><label><input type="checkbox">Si el equipo no lo ofrece: en la configuración del UEFI, comprueba que el arranque por USB está permitido. <strong>Secure Boot puede quedarse activado</strong>: Debian lo soporta.</label></li>
-<li><label><input type="checkbox">Instalador: idénticas pantallas que en la VM. En el <strong>particionado manual</strong>, el disco se llamará <code>nvme0n1</code> o <code>sda</code> y <em>tendrá particiones ya</em>. Con Windows al lado: <strong>no crees una tabla nueva</strong> (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como <em>Partición del sistema EFI</em> sin formatearla.</label></li>
+<li><label><input type="checkbox">Instalador: las mismas pantallas que en la VM, con la partición EFI de más. En el <strong>particionado manual</strong>, el disco se llamará <code>nvme0n1</code> o <code>sda</code> y <em>tendrá particiones ya</em>. Con Windows al lado: <strong>no crees una tabla nueva</strong> (borraría todo); crea las particiones de Linux en el espacio libre que dejaste, y reutiliza la partición EFI existente marcándola como <em>Partición del sistema EFI</em> sin formatearla.</label></li>
 <li><label><input type="checkbox">Contraseña de root vacía → tu usuario con <code>sudo</code> (capítulo 8).</label></li>
 <li><label><input type="checkbox">Selección de programas: aquí sí querrás probablemente un escritorio — marca el que uses — y, por costumbre, el servidor SSH.</label></li>
-<li><label><input type="checkbox">GRUB: en modo UEFI se instala en la partición EFI; si hay Windows, lo detectará y lo añadirá al menú.</label></li>
+<li><label><input type="checkbox">GRUB: en modo UEFI se instala en la partición EFI (no pregunta por un disco, como en la VM); si hay Windows, lo detectará y lo añadirá al menú.</label></li>
 </ul>
 </section>
-<section id="después-del-primer-arranque" class="level2" data-number="C.4">
-<h2 data-number="C.4" class="anchored" data-anchor-id="después-del-primer-arranque"><span class="header-section-number">C.4</span> Después del primer arranque</h2>
+<section id="después-del-primer-arranque" class="level2" data-number="C.5">
+<h2 data-number="C.5" class="anchored" data-anchor-id="después-del-primer-arranque"><span class="header-section-number">C.5</span> Después del primer arranque</h2>
 <ul class="task-list">
 <li><label><input type="checkbox"><code>lsblk</code> y <code>df -h</code>: el parte del capítulo 8, sobre hardware real.</label></li>
 <li><label><input type="checkbox"><code>sudo apt update &amp;&amp; sudo apt upgrade</code>.</label></li>

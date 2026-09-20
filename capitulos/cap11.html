@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -524,30 +524,23 @@ Figura&nbsp;11.4: Cuatro números por conexión. El servidor repite los suyos; e
 <p><strong>Nivel 1 · Lo esencial</strong></p>
 <div class="ejercicio">
 <p><strong>Ejercicio 11.1 · El DNS en acción</strong></p>
-<p>Con <code>host</code>, averigua la dirección de <code>uma.es</code>, de <code>debian.org</code> y de <code>google.com</code> (esta última te dará varias: anota cuántas). Averigua también a qué servidor le pregunta tu máquina (<code>resolvectl status</code>). <em>Pista: <code>host nombre</code> a secas; si <code>host</code> no existe, <code>sudo apt install bind9-host</code>.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p>Con <code>host</code>, averigua la dirección de <code>uma.es</code>, de <code>debian.org</code> y de <code>google.com</code> (esta última te dará varias: anota cuántas). Averigua también a qué servidor le pregunta tu máquina (<code>resolvectl status</code>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>host uma.es</code>, <code>host debian.org</code>, <code>host google.com</code> — Google devuelve varias direcciones (y una de tipo IPv6, más larga: es la nueva numeración de internet, que hoy dejamos de lado). El resolver será tu router, <code>192.168.1.1</code>, salvo que tu compañía configure otro.</p>
-<p><strong>Por qué así</strong> — Ver que un nombre tiene <em>varias</em> direcciones desmonta la idea de «la dirección de Google»: son granjas de servidores, y el DNS reparte. Y saber a quién preguntas es el primer paso para cambiarlo con criterio en el 10.5.</p>
+<p><code>host nombre</code> a secas; si <code>host</code> no existe, <code>sudo apt install bind9-host</code>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 11.2 · Bautizar a la VM</strong></p>
-<p>Añade a <code>/etc/hosts</code> de tu Mint una línea con la IP de <code>debian-lab</code> (la de <code>ip a</code> dentro de la VM) y su nombre, y comprueba que <code>ping debian-lab</code> funciona. Antes de editar, aplica el protocolo: copia de seguridad del fichero y vuelta atrás escrita. <em>Pista: <code>sudo cp /etc/hosts /etc/hosts.bak</code>, <code>sudo nano /etc/hosts</code>, y una línea como <code>192.168.122.15  debian-lab</code> al final. Vuelta atrás: <code>sudo cp /etc/hosts.bak /etc/hosts</code>.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -561,39 +554,32 @@ Figura&nbsp;11.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tras guardar, <code>ping -c 1 debian-lab</code> responde desde <code>192.168.122.15</code> sin haber preguntado a ningún DNS: <code>/etc/hosts</code> se consulta primero. Si la IP de la VM cambiara algún día (el DHCP de libvirt suele mantenerla, pero no lo jura), basta actualizar la línea.</p>
-<p><strong>Por qué así</strong> — Es tu primera edición de un fichero de <code>/etc</code> con <code>sudo</code> — capítulo 4 — hecha con red: copia antes, vuelta atrás escrita. Y el premio llega mañana: <code>ssh debian-lab</code> en vez de una ristra de números.</p>
+<p><code>host uma.es</code>, <code>host debian.org</code>, <code>host google.com</code> — Google devuelve varias direcciones (y una de tipo IPv6, más larga: es la nueva numeración de internet, que hoy dejamos de lado). El resolver será tu router, <code>192.168.1.1</code>, salvo que tu compañía configure otro.</p>
+<p><strong>Por qué así</strong> — Ver que un nombre tiene <em>varias</em> direcciones desmonta la idea de «la dirección de Google»: son granjas de servidores, y el DNS reparte. Y saber a quién preguntas es el primer paso para cambiarlo con criterio en el 10.5.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.3 · El camino a la universidad</strong></p>
-<p>Ejecuta <code>tracepath -n uma.es</code> (o el dominio de tu universidad). ¿Cuántos saltos hay? ¿Cuál es el primero? ¿En qué salto aparece la primera dirección que <em>no</em> es privada — es decir, dónde sale tu paquete a internet? <em>Pista: privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>; repasa la figura del NAT del capítulo 10.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 11.2 · Bautizar a la VM</strong></p>
+<p>Añade a <code>/etc/hosts</code> de tu Mint una línea con la IP de <code>debian-lab</code> (la de <code>ip a</code> dentro de la VM) y su nombre, y comprueba que <code>ping debian-lab</code> funciona. Antes de editar, aplica el protocolo: copia de seguridad del fichero y vuelta atrás escrita.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Entre 8 y 15 saltos es lo normal. El primero es <code>192.168.1.1</code>, tu router; a menudo el segundo o tercero sigue siendo privado (la red interna de la compañía), y la primera pública marca la salida real a internet. Algún salto puede aparecer como <code>no reply</code>: routers que no contestan por política — no es un fallo.</p>
-<p><strong>Por qué así</strong> — Tu paquete acaba de contarte su viaje. La próxima vez que «no vaya internet», este comando te dirá en qué salto muere — y por tanto a quién llamar.</p>
+<p><code>sudo cp /etc/hosts /etc/hosts.bak</code>, <code>sudo nano /etc/hosts</code>, y una línea como <code>192.168.122.15  debian-lab</code> al final. Vuelta atrás: <code>sudo cp /etc/hosts.bak /etc/hosts</code>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 11.4 · Las puertas de tu servidor</strong></p>
-<p>Desde dentro de <code>debian-lab</code>, lista los puertos que escuchan (<code>ss -tln</code>); desde tu Mint, tócalos desde fuera (<code>nmap debian-lab</code> — ya tiene nombre). ¿Coinciden las dos vistas? <em>Pista: <code>-t</code> TCP, <code>-l</code> solo los que escuchan, <code>-n</code> números en vez de nombres.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -607,40 +593,32 @@ Figura&nbsp;11.4: Cuatro números por conexión. El servidor repite los suyos; e
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Dentro: <code>LISTEN</code> en <code>0.0.0.0:22</code> (y quizá <code>[::]:22</code>, su versión IPv6). Fuera: <code>22/tcp open ssh</code>. Una puerta, dos puntos de vista, el mismo resultado — y <code>nmap</code> funcionando ya por nombre gracias al 10.2.</p>
-<p><strong>Por qué así</strong> — Comparar la vista interior con la exterior es el diagnóstico básico de cualquier servicio: si dentro escucha pero fuera no se ve, hay un portero en medio (cortafuegos o NAT). Hoy no lo hay; en la universidad lo habrá.</p>
+<p>Tras guardar, <code>ping -c 1 debian-lab</code> responde desde <code>192.168.122.15</code> sin haber preguntado a ningún DNS: <code>/etc/hosts</code> se consulta primero. Si la IP de la VM cambiara algún día (el DHCP de libvirt suele mantenerla, pero no lo jura), basta actualizar la línea.</p>
+<p><strong>Por qué así</strong> — Es tu primera edición de un fichero de <code>/etc</code> con <code>sudo</code> — capítulo 4 — hecha con red: copia antes, vuelta atrás escrita. Y el premio llega mañana: <code>ssh debian-lab</code> en vez de una ristra de números.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p><strong>Nivel 2 · El mecanismo</strong></p>
 <div class="ejercicio">
-<p><strong>Ejercicio 11.5 · El servidor de nombres, con vuelta atrás</strong></p>
-<p>Con el protocolo del capítulo 10 — valor actual anotado, vuelta atrás escrita, cambio, verificación —: cambia el <strong>servidor DNS</strong> que tu router reparte a la casa por <code>9.9.9.9</code> (Quad9) o <code>1.1.1.1</code> (Cloudflare), reconecta la Wi-Fi y verifica con <code>resolvectl status</code> que tu máquina pregunta ahora al nuevo. Comprueba que <code>host debian.org</code> sigue resolviendo. <em>Pista: el DNS suele estar en la pestaña LAN/DHCP o en WAN/Internet del router; el valor anterior será a menudo «automático» o la IP de la compañía — anótalo tal cual.</em></p>
-<div class="solucion">
-<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<p><strong>Ejercicio 11.3 · El camino a la universidad</strong></p>
+<p>Ejecuta <code>tracepath -n uma.es</code> (o el dominio de tu universidad). ¿Cuántos saltos hay? ¿Cuál es el primero? ¿En qué salto aparece la primera dirección que <em>no</em> es privada — es decir, dónde sale tu paquete a internet?</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución razonada
+<span class="screen-reader-only">Nota</span>Pista
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>resolvectl status</code> pasa de <code>192.168.1.1</code> (o el de la compañía) a <code>9.9.9.9</code>; <code>host debian.org</code> responde igual que antes. Vuelta atrás: devolver el campo al valor anotado.</p>
-<p><strong>Por qué así</strong> — Es un cambio pequeño, deshecho en un minuto, y con una consecuencia real: quién ve las preguntas de tu casa. Y es tu segundo cambio en el router con el protocolo completo — a partir de aquí, cualquier ajuste doméstico se hace así.</p>
+<p>Privadas son <code>10.x</code>, <code>192.168.x</code> y <code>172.16–31.x</code>; repasa la figura del NAT del capítulo 10.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="ejercicio">
-<p><strong>Ejercicio 11.6 · Un portero para <code>debian-lab</code></strong></p>
-<p>Con instantánea previa de la VM: instala <code>ufw</code>, permite SSH, enciende el cortafuegos, y comprueba desde tu Mint con <code>nmap debian-lab</code> que la 22 sigue abierta y el resto aparece como <code>filtered</code>. Después apágalo (<code>sudo ufw disable</code>) o restaura la instantánea. <em>Pista: el orden importa — <code>allow OpenSSH</code> antes de <code>enable</code>, o te quedas fuera; y ten una sesión SSH abierta de reserva mientras pruebas.</em></p>
 <div class="solucion">
 <div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -653,6 +631,124 @@ Figura&nbsp;11.4: Cuatro números por conexión. El servidor repite los suyos; e
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Entre 8 y 15 saltos es lo normal. El primero es <code>192.168.1.1</code>, tu router; a menudo el segundo o tercero sigue siendo privado (la red interna de la compañía), y la primera pública marca la salida real a internet. Algún salto puede aparecer como <code>no reply</code>: routers que no contestan por política — no es un fallo.</p>
+<p><strong>Por qué así</strong> — Tu paquete acaba de contarte su viaje. La próxima vez que «no vaya internet», este comando te dirá en qué salto muere — y por tanto a quién llamar.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.4 · Las puertas de tu servidor</strong></p>
+<p>Desde dentro de <code>debian-lab</code>, lista los puertos que escuchan (<code>ss -tln</code>); desde tu Mint, tócalos desde fuera (<code>nmap debian-lab</code> — ya tiene nombre). ¿Coinciden las dos vistas?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>-t</code> TCP, <code>-l</code> solo los que escuchan, <code>-n</code> números en vez de nombres.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Dentro: <code>LISTEN</code> en <code>0.0.0.0:22</code> (y quizá <code>[::]:22</code>, su versión IPv6). Fuera: <code>22/tcp open ssh</code>. Una puerta, dos puntos de vista, el mismo resultado — y <code>nmap</code> funcionando ya por nombre gracias al 10.2.</p>
+<p><strong>Por qué así</strong> — Comparar la vista interior con la exterior es el diagnóstico básico de cualquier servicio: si dentro escucha pero fuera no se ve, hay un portero en medio (cortafuegos o NAT). Hoy no lo hay; en la universidad lo habrá.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Nivel 2 · El mecanismo</strong></p>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.5 · El servidor de nombres, con vuelta atrás</strong></p>
+<p>Con el protocolo del capítulo 10 — valor actual anotado, vuelta atrás escrita, cambio, verificación —: cambia el <strong>servidor DNS</strong> que tu router reparte a la casa por <code>9.9.9.9</code> (Quad9) o <code>1.1.1.1</code> (Cloudflare), reconecta la Wi-Fi y verifica con <code>resolvectl status</code> que tu máquina pregunta ahora al nuevo. Comprueba que <code>host debian.org</code> sigue resolviendo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El DNS suele estar en la pestaña LAN/DHCP o en WAN/Internet del router; el valor anterior será a menudo «automático» o la IP de la compañía — anótalo tal cual.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>resolvectl status</code> pasa de <code>192.168.1.1</code> (o el de la compañía) a <code>9.9.9.9</code>; <code>host debian.org</code> responde igual que antes. Vuelta atrás: devolver el campo al valor anotado.</p>
+<p><strong>Por qué así</strong> — Es un cambio pequeño, deshecho en un minuto, y con una consecuencia real: quién ve las preguntas de tu casa. Y es tu segundo cambio en el router con el protocolo completo — a partir de aquí, cualquier ajuste doméstico se hace así.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ejercicio">
+<p><strong>Ejercicio 11.6 · Un portero para <code>debian-lab</code></strong></p>
+<p>Con instantánea previa de la VM: instala <code>ufw</code>, permite SSH, enciende el cortafuegos, y comprueba desde tu Mint con <code>nmap debian-lab</code> que la 22 sigue abierta y el resto aparece como <code>filtered</code>. Después apágalo (<code>sudo ufw disable</code>) o restaura la instantánea.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El orden importa — <code>allow OpenSSH</code> antes de <code>enable</code>, o te quedas fuera; y ten una sesión SSH abierta de reserva mientras pruebas.</p>
+</div>
+</div>
+</div>
+<div class="solucion">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solución razonada">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución razonada
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>sudo apt install ufw</code>, <code>sudo ufw allow OpenSSH</code>, <code>sudo ufw enable</code>, <code>sudo ufw status verbose</code> → <code>deny (incoming)</code>, <code>allow (outgoing)</code>, <code>22/tcp ALLOW IN</code>. Desde Mint, <code>nmap debian-lab</code> muestra <code>22/tcp open</code> y nada más (los demás puertos, filtrados).</p>
 <p><strong>Por qué así</strong> — Detrás del NAT de casa la VM no lo necesita; en un servidor con dirección pública es la primera línea. Haberlo puesto una vez, en el orden correcto y con red de seguridad, es lo que hace que el día que importe no te dejes fuera.</p>

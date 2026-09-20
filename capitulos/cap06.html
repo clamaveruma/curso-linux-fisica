@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-93743b91ebf46552a17d53befe4b32bf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8bd9663ca1a9c27f44abe7ff60b55655.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-48daa2c1f1224855a09de12919b7fb32.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -303,7 +303,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Qué significa <em>montar</em>: cómo los discos se enganchan al árbol único — y por qué «expulsar con seguridad» no es un ritual supersticioso.</li>
 <li>Vigilar el espacio con <code>df</code> y encontrar qué lo devora con <code>du</code>.</li>
 <li>La película completa del arranque: UEFI → GRUB → kernel → systemd, y medirla en tu máquina.</li>
-<li>Qué es la partición EFI que te encontrarás al instalar Debian.</li>
+<li>Qué es la partición EFI que te encontrarás al instalar Debian en un PC real.</li>
 </ul>
 </div>
 <section id="sec-lsblk" class="level2" data-number="6.1">
@@ -425,7 +425,7 @@ Figura&nbsp;6.2: La cadena de mando del arranque. Cada eslabón carga al siguien
 <p>Y como todo en esta casa, la película se puede <em>medir</em>:</p>
 <pre class="terminal"><code><span class="t-p">marcos@portatil</span><span class="t-dim">:</span><span class="t-hl">~</span><span class="t-dim">$</span> <span class="t-cmd">systemd-analyze</span>
 <span class="t-out">Startup finished in 4.211s (firmware) + 2.108s (loader) + 3.998s (kernel) + 8.870s (userspace) = 19.188s</span></code></pre>
-<p>Ahí están los cuatro actos con sus tiempos. Cuando instales Debian en el bloque C vas a <em>construir</em> esta cadena — elegir la partición EFI, ver a GRUB instalarse — y cuando algo no arranque (a todos nos pasa), sabrás en qué eslabón se rompió.</p>
+<p>Ahí están los cuatro actos con sus tiempos. Cuando instales Debian en el bloque C vas a <em>construir</em> esta cadena — particionar el disco, ver a GRUB instalarse — y cuando algo no arranque (a todos nos pasa), sabrás en qué eslabón se rompió.</p>
 <div class="historia">
 <p><strong>◷ Historia · Levantarse tirando de los cordones</strong></p>
 <p>«Arrancar» en inglés es <em>to boot</em>, de <em>bootstrapping</em>: levantarse en el aire tirando de los cordones de las propias botas. El chiste es exacto: para cargar un programa hace falta un programa ya cargado — ¿y el primero? En los ordenadores de los 70, como el Altair 8800, el problema lo resolvía un humano: metía a mano el cargador inicial, byte a byte, con los interruptores del panel frontal, para que ese programita minúsculo pudiera cargar el siguiente desde la cinta. Tu UEFI es ese operador, fosilizado en la placa base: la cadena entera — firmware que carga al cargador que carga al kernel — sigue siendo la misma idea, medio siglo después.</p>
