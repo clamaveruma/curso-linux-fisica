@@ -40,7 +40,7 @@ sabes hacerlo, que es distinto de haberlo leído.
 de 20 GB, red NAT, con la ISO de Debian verificada en la bandeja.
 
 **2. La instalación** *(capítulos 6 y 8)*. Debian sin escritorio, con
-servidor SSH. Particionado manual: EFI, raíz ext4 y swap — o, si te
+servidor SSH. Particionado manual: raíz ext4 y swap — o, si te
 atreves, `/home` separado. Contraseña de root vacía. Al terminar,
 apaga desde dentro e instantánea `recien-instalado`.
 
@@ -118,7 +118,7 @@ grafícalo en tu Mint.
 | Hito | Comando (desde tu Mint salvo indicación) | Lo que debe salir |
 |------|------------------------------------------|-------------------|
 | 1 | `virsh list --all` | `servidor` en la lista |
-| 2 | `ssh servidor lsblk` | EFI en `/boot/efi`, raíz en `/`, `[SWAP]` |
+| 2 | `ssh servidor lsblk` | raíz en `/`, `[SWAP]` |
 | 2 | `virsh snapshot-list servidor` | `recien-instalado` |
 | 3 | `ping -c 1 servidor` | respuesta desde `192.168.122.x` |
 | 3 | `nmap servidor` | solo `22/tcp open` |

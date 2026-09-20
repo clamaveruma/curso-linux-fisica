@@ -21,7 +21,7 @@ la máquina virtual del bloque C, donde equivocarse es gratis.
 - Qué significa *montar*: cómo los discos se enganchan al árbol único — y por qué «expulsar con seguridad» no es un ritual supersticioso.
 - Vigilar el espacio con `df` y encontrar qué lo devora con `du`.
 - La película completa del arranque: UEFI → GRUB → kernel → systemd, y medirla en tu máquina.
-- Qué es la partición EFI que te encontrarás al instalar Debian.
+- Qué es la partición EFI que te encontrarás al instalar Debian en un PC real.
 :::
 
 ## El mapa de tus discos: `lsblk` {#sec-lsblk}
@@ -195,8 +195,8 @@ Startup finished in 4.211s (firmware) + 2.108s (loader) + 3.998s (kernel) + 8.87
 ```
 
 Ahí están los cuatro actos con sus tiempos. Cuando instales Debian en
-el bloque C vas a *construir* esta cadena — elegir la partición EFI,
-ver a GRUB instalarse — y cuando algo no arranque (a todos nos pasa),
+el bloque C vas a *construir* esta cadena — particionar el disco, ver
+a GRUB instalarse — y cuando algo no arranque (a todos nos pasa),
 sabrás en qué eslabón se rompió.
 
 ::: {.historia}

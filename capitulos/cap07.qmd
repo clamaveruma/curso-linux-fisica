@@ -167,18 +167,18 @@ en un pendrive (capítulo 8); en una VM, el fichero *es* el disco, y se
 «inserta» sin más.
 
 Descarga la imagen *netinst* de Debian desde
-[debian.org](https://www.debian.org/distrib/) — unos 700 MB: lo mínimo
-para arrancar el instalador, que después descargará el resto de la red
-— y guárdala en `~/Descargas`. Y antes de usarla, un hábito de físico:
-comprueba que llegó intacta. Junto a la ISO, Debian publica un fichero
-`SHA256SUMS` con la **huella digital** de cada imagen — un número que
-cambia si cambia un solo bit del fichero:
+[debian.org](https://www.debian.org/distrib/) — unos 800 MB: lo mínimo
+para arrancar el instalador, que después descargará el resto de la red.
+El navegador la dejará en `~/Descargas`. Y antes de usarla, un hábito
+de físico: comprueba que llegó intacta. Junto a la ISO, Debian publica
+un fichero `SHA256SUMS` con la **huella digital** de cada imagen — un
+número que cambia si cambia un solo bit del fichero:
 
 ```terminal
-marcos@portatil:~/Descargas$ sha256sum debian-13.1.0-amd64-netinst.iso
-9b6f1e0c…  debian-13.1.0-amd64-netinst.iso
+marcos@portatil:~/Descargas$ sha256sum debian-13.7.0-amd64-netinst.iso
+a7ef94ac…  debian-13.7.0-amd64-netinst.iso
 marcos@portatil:~/Descargas$ grep netinst SHA256SUMS
-9b6f1e0c…  debian-13.1.0-amd64-netinst.iso
+a7ef94ac…  debian-13.7.0-amd64-netinst.iso
 ```
 
 Si las dos huellas coinciden, el fichero es exactamente el que Debian
@@ -186,6 +186,30 @@ publicó (el número de versión será el que toque cuando lo descargues).
 Si no, se descarga de nuevo — nunca se instala desde una imagen
 sospechosa. Es la misma lógica que verificar la calibración antes de
 medir.
+
+Verificada, un último paso que **no es opcional**: muévela al almacén
+de libvirt, `/var/lib/libvirt/images/` — el mismo directorio donde
+vivirá el disco de la máquina:
+
+```terminal
+marcos@portatil:~/Descargas$ sudo mv debian-13.7.0-amd64-netinst.iso /var/lib/libvirt/images/
+marcos@portatil:~/Descargas$ sudo ls -l /var/lib/libvirt/images/
+-rw-rw-r-- 1 marcos marcos 792723456 ago 25 12:31 debian-13.7.0-amd64-netinst.iso
+```
+
+::: {.por-dentro}
+**◉ Por dentro · Por qué la ISO no puede quedarse en tu casa**
+
+La máquina virtual no la ejecutas tú: la ejecuta un proceso que corre
+como `libvirt-qemu`, un usuario de sistema de los del capítulo 4. Y en
+tu casa no entra nadie que no seas tú — míralo: `ls -ld ~` dice
+`drwxr-x---`, sin permiso de paso para «otros». Si dejas la ISO en
+`~/Descargas`, el asistente la acepta sin rechistar, pero al arrancar
+la máquina QEMU tropieza con un «Permission denied» y la instalación
+no llega a empezar. En `/var/lib/libvirt/images/` mandan root y
+libvirt, y cualquiera puede leer. Es el capítulo 4 en carne propia: el
+proceso que abre un fichero no siempre eres tú.
+:::
 
 ## Crear la máquina {#sec-crear-vm}
 
@@ -195,9 +219,12 @@ virtuales, o tecléalo en la terminal). La ventana muestra la conexión
 virtual** y sigue el asistente — es un formulario de cinco pasos, y
 cada uno es una decisión que ya entiendes:
 
-1. **Medio de instalación local (imagen ISO)** → *Explorar* → *Buscar
-   local* → tu `debian-13.x-amd64-netinst.iso`. Comprobará solo que es
-   Debian.
+1. **Medio de instalación local (imagen ISO)** → *Explorar*: se abre
+   el almacén `default` — es `/var/lib/libvirt/images/` — con tu
+   `debian-13.x-amd64-netinst.iso` dentro (si la lista sale vacía,
+   pulsa el botón de refrescar). Elígela: comprobará solo que es
+   Debian. No la busques en `~/Descargas` con *Buscar local*: la
+   instalación fallaría por permisos, como cuenta la caja anterior.
 2. **Memoria y CPU**: 4096 MB y 2 CPU es un buen taller. Regla:
    nunca más de la mitad de tu RAM real — la otra mitad la necesita tu
    Mint para seguir vivo al lado.
@@ -207,8 +234,13 @@ cada uno es una decisión que ya entiendes:
 4. **Nombre**: `debian-lab`. Sin espacios (capítulo 1: los espacios
    importan). **Selección de red**: *Red virtual 'default': NAT* — la
    opción por defecto, y la correcta hoy.
-5. **Finalizar.** La máquina arranca sola: verás en su ventana una
-   pantalla azul con el menú del instalador de Debian.
+5. Esta última pantalla tiene una casilla, *Personalizar la
+   configuración antes de instalar*: déjala **sin marcar** — la
+   máquina nace con el firmware clásico, el BIOS, y hoy es justo lo que
+   quieres (la caja de la sección siguiente cuenta por qué no UEFI).
+   **Finalizar.** La máquina arranca sola: verás en su ventana el menú
+   del instalador de Debian sobre fondo azul, con «BIOS mode» en el
+   título.
 
 **Y aquí paras.** La instalación es la sesión del capítulo 8 entera;
 hoy solo querías ver la máquina *nacer*. Apágala desde el menú de su
@@ -244,8 +276,8 @@ diste (por eso se apaga cuando no se usa). Y su **fichero**: borrarlo
 es borrar la máquina; si un día quieres deshacerte de ella, se hace
 desde virt-manager (*Eliminar*, marcando borrar el disco) — no con un
 `rm` a ciegas en `/var/lib/libvirt/images`. Y la ISO no es la
-máquina: es el CD de instalación; puede borrarse cuando ya no la
-necesites.
+máquina: es el CD de instalación; vive en ese mismo directorio y puede
+borrarse (con `sudo`) cuando ya no la necesites.
 :::
 
 ## El superpoder: instantáneas {#sec-instantaneas}
@@ -278,6 +310,26 @@ instalado y funcionando, instantánea «recién instalado». Cada
 experimento arriesgado, instantánea antes. Todo lo que se rompa, se
 restaura. Nunca más reinstalar por un error — salvo cuando reinstalar
 sea el ejercicio.
+
+::: {.por-dentro}
+**◉ Por dentro · Por qué la VM arranca «a la antigua»**
+
+Tu Mint arranca por UEFI (capítulo 6); `debian-lab` arranca con el
+firmware clásico, el BIOS. No es nostalgia: es una limitación de
+versiones. El UEFI de una máquina virtual guarda su memoria — la lista
+de arranque que en tu PC vive en un chip de la placa base — en un
+segundo fichero, aparte del disco, y el libvirt de Mint 22 no sabe
+fotografiar los dos a la vez: si eliges UEFI, la instantánea se niega
+con «internal snapshots of a VM with pflash based firmware are not
+supported». Entre un arranque moderno y el «deshacer» de cinco
+segundos, el curso elige el deshacer: lo que hay *después* del arranque
+es idéntico. La limitación está levantada en libvirt 10.10 y
+posteriores — el de Mint 23, previsto para diciembre de 2026; LMDE 7 ya
+lo lleva —, aunque aun ahí hará falta pedir expresamente que la memoria
+del UEFI se guarde en un formato con «versiones» (qcow2, el del disco).
+En el capítulo 8 hay un reto para ver el UEFI en una máquina de usar y
+tirar; y en tu PC real, el anexo C.
+:::
 
 ## Dos formas de conectarla: NAT y puente {#sec-redes-vm}
 
@@ -405,12 +457,14 @@ capítulo 5 con tu nombre — escribirlo así vale para cualquier usuario.
 **Ejercicio 7.3 · La imagen, verificada**
 
 Descarga la ISO *netinst* de Debian para amd64 y su fichero
-`SHA256SUMS`, y comprueba que la huella coincide.
+`SHA256SUMS`, comprueba que la huella coincide, y deja la ISO donde
+libvirt pueda leerla.
 
 ::: {.pista}
 `sha256sum fichero.iso` calcula; `grep netinst SHA256SUMS` te aísla la
 línea correcta para compararla a ojo — o deja que
 `sha256sum -c SHA256SUMS 2> /dev/null | grep netinst` lo compare por ti.
+«Donde libvirt pueda leerla» es su almacén, `/var/lib/libvirt/images/`.
 :::
 
 :::: {.solucion}
@@ -418,7 +472,8 @@ línea correcta para compararla a ojo — o deja que
 Las dos huellas deben ser idénticas carácter a carácter. Con
 `sha256sum -c`, la línea buena dice `debian-13.x-amd64-netinst.iso: La
 suma coincide`; el `2> /dev/null` silencia las quejas por las otras
-imágenes del fichero que no descargaste.
+imágenes del fichero que no descargaste. Y después, `sudo mv` de la ISO
+a `/var/lib/libvirt/images/`.
 
 **Por qué así** — Nunca se instala desde una imagen sin verificar: una
 descarga cortada o manipulada produce instalaciones que fallan de
@@ -446,8 +501,10 @@ de la máquina.
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 `virsh list --all` → `debian-lab   apagado`. Si la máquina no arranca
 con un error sobre KVM, vuelve al 7.1: la virtualización está apagada
-en el UEFI. Si el asistente no encuentra la ISO, pulsa *Buscar local*
-y navega hasta `~/Descargas`.
+en el UEFI. Si al arrancar la máquina sale «Permission denied» sobre
+la ISO, es que la elegiste en `~/Descargas`: muévela al almacén de
+libvirt (sección de la imagen) y en la configuración de la máquina
+apunta la unidad de CD al nuevo sitio.
 
 **Por qué así** — Acabas de hacer, con clics, exactamente lo que el
 servicio de informática hace cuando te «da una VM». La única
@@ -653,8 +710,7 @@ Responde de memoria; las respuestas están al final del capítulo.
 Tienes una máquina vacía con el instalador de Debian esperando en su
 bandeja. En el capítulo 8 la instalas de verdad — y no con el botón de
 «siguiente, siguiente»: particionando a mano con lo que aprendiste en
-el capítulo 6, eligiendo dónde va la partición EFI, viendo a GRUB
-instalarse. Después la romperás y la reinstalarás hasta que aburra,
+el capítulo 6, viendo a GRUB instalarse en el disco. Después la romperás y la reinstalarás hasta que aburra,
 y saldrás con la lista de comprobación para el día en que lo hagas en
 un PC real. Guarda `sesion07.log`.
 :::

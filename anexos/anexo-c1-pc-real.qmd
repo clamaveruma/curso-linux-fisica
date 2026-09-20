@@ -45,20 +45,45 @@ el pendrive y *después*, para ver qué nombre nuevo aparece (`sda`,
 `sdb`…). Luego, con esa letra y solo con esa:
 
 ```terminal
-marcos@portatil:~/Descargas$ lsblk
+marcos@portatil:~$ lsblk
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 sda           8:0    1  14,9G  0 disk
 └─sda1        8:1    1  14,9G  0 part /media/marcos/KINGSTON
 nvme0n1     259:0    0 476,9G  0 disk
-marcos@portatil:~/Descargas$ sudo umount /dev/sda1
-marcos@portatil:~/Descargas$ sudo dd if=debian-13.1.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress
+marcos@portatil:~$ sudo umount /dev/sda1
+marcos@portatil:~$ sudo dd if=/var/lib/libvirt/images/debian-13.7.0-amd64-netinst.iso of=/dev/sda bs=4M status=progress
 ```
+
+(La ISO vive en el almacén de libvirt desde el capítulo 7; en la
+aplicación «Discos» llegas a ella navegando a esa misma ruta.)
 
 `dd` copia bloques de `if` (*input file*) a `of` (*output file*) sin
 preguntar nada: **si `of=` apunta a tu disco interno, lo destruye en
 silencio**. Por eso se comprueba la letra dos veces, y por eso el
 destino es el disco entero (`/dev/sda`), no una partición (`sda1`).
 Cuando termine, `sync` y expulsar (capítulo 6).
+
+## Lo que cambia respecto a la VM: el arranque es UEFI
+
+`debian-lab` arranca con el firmware clásico (BIOS) por la razón del
+capítulo 7; tu PC arranca por UEFI, y eso cambia exactamente cuatro
+cosas — ninguna más:
+
+1. **El menú de arranque del firmware**: se entra con una tecla al
+   encender y el pendrive aparece con «UEFI:» delante.
+2. **Secure Boot**: puede quedarse activado; Debian lo soporta.
+3. **Una partición más**: la EFI (FAT32, ~512 MB, montada en
+   `/boot/efi`) — la del capítulo 6. El particionado guiado la crea
+   solo; en manual la creas tú (*Utilizar como: Partición del sistema
+   EFI*), y si ya existe una, se reutiliza sin formatear.
+4. **GRUB** se instala en esa partición, no en el primer sector, y
+   deja una entrada de arranque en la memoria de la placa: `efibootmgr
+   -v` la enseña.
+
+Si hiciste el reto 8.8, ya has visto las cuatro en una máquina de usar
+y tirar.
+
+![El menú de arranque de la ISO en modo UEFI: es GRUB, con otro aspecto que el isolinux de la VM, pero las mismas opciones. *Captura de la versión 12 (la 13 es igual): Paowee, GPL, Wikimedia Commons.*](../imagenes/cap08/grub-debian-uefi.png){#fig-menu-uefi fig-alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install" width="70%"}
 
 ## Arrancar e instalar
 
@@ -68,17 +93,19 @@ Cuando termine, `sync` y expulsar (capítulo 6).
 - [ ] Si el equipo no lo ofrece: en la configuración del UEFI,
   comprueba que el arranque por USB está permitido. **Secure Boot
   puede quedarse activado**: Debian lo soporta.
-- [ ] Instalador: idénticas pantallas que en la VM. En el
-  **particionado manual**, el disco se llamará `nvme0n1` o `sda` y
-  *tendrá particiones ya*. Con Windows al lado: **no crees una tabla
-  nueva** (borraría todo); crea las particiones de Linux en el espacio
-  libre que dejaste, y reutiliza la partición EFI existente marcándola
-  como *Partición del sistema EFI* sin formatearla.
+- [ ] Instalador: las mismas pantallas que en la VM, con la
+  partición EFI de más. En el **particionado manual**, el disco se
+  llamará `nvme0n1` o `sda` y *tendrá particiones ya*. Con Windows al
+  lado: **no crees una tabla nueva** (borraría todo); crea las
+  particiones de Linux en el espacio libre que dejaste, y reutiliza la
+  partición EFI existente marcándola como *Partición del sistema EFI*
+  sin formatearla.
 - [ ] Contraseña de root vacía → tu usuario con `sudo` (capítulo 8).
 - [ ] Selección de programas: aquí sí querrás probablemente un
   escritorio — marca el que uses — y, por costumbre, el servidor SSH.
-- [ ] GRUB: en modo UEFI se instala en la partición EFI; si hay
-  Windows, lo detectará y lo añadirá al menú.
+- [ ] GRUB: en modo UEFI se instala en la partición EFI (no pregunta
+  por un disco, como en la VM); si hay Windows, lo detectará y lo
+  añadirá al menú.
 
 ## Después del primer arranque
 

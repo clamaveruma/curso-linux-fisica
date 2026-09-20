@@ -4,8 +4,8 @@
 Hasta hoy, tu Linux te lo instalaron. Esta sesión lo instalas tú —
 en la máquina virtual del capítulo 7, sin red de seguridad más que
 las instantáneas, y sin el botón de «siguiente, siguiente»: eligiendo
-particiones a mano con el mapa del capítulo 6, viendo dónde va la
-partición EFI, mirando a GRUB instalarse. Después la romperás a
+particiones a mano con el mapa del capítulo 6, mirando a GRUB
+instalarse en el primer sector del disco. Después la romperás a
 propósito y la reinstalarás, porque la segunda vez tarda un cuarto de
 hora y la tercera ya aburre. Y saldrás con la lista de comprobación
 para el día en que lo hagas en un ordenador de verdad.
@@ -18,7 +18,7 @@ para el día en que lo hagas en un ordenador de verdad.
 ::: {.objetivos}
 **Al terminar esta sesión sabrás**
 
-- Decidir un plan de particiones *antes* de tocar el instalador — y por qué EFI + raíz + swap es el plan que vale casi siempre.
+- Decidir un plan de particiones *antes* de tocar el instalador — raíz + swap en la VM, y por qué tu PC real añade una tercera pieza, la EFI.
 - Recorrer el instalador de Debian entero: idioma, red, usuarios, particionado manual, espejo, selección de programas, GRUB.
 - Por qué se deja la contraseña de `root` vacía, y qué consigue eso.
 - Instalar un Debian *sin escritorio* — un servidor — con SSH desde el primer día, y comprobar que respira.
@@ -43,13 +43,18 @@ Es lo que te encontrarás en el clúster y en la nube, y es lo que
 construye el proyecto final. Nombre de la máquina: `debian-lab`.
 Usuario: el tuyo.
 
-![El plan de particiones para el disco virtual. Tres piezas, cada una con su oficio del capítulo 6.](../imagenes/cap08/fig-particiones-vm.svg){#fig-particiones fig-alt="Disco virtual de 20 GB dividido en partición EFI de 512 MB, raíz ext4 con casi todo el espacio, y swap de 2 GB"}
+![El plan de particiones para el disco virtual. Dos particiones y un sector: cada pieza con su oficio del capítulo 6.](../imagenes/cap08/fig-particiones-vm.svg){#fig-particiones fig-alt="Disco virtual de 20 GB dividido en raíz ext4 con casi todo el espacio y swap de 2 GB; GRUB va en el primer sector"}
 
-Tres particiones, y cada decisión la tomas con el capítulo 6 en la
-cabeza: la **EFI** (512 MB, FAT32, montada en `/boot/efi`) es el buzón
-donde GRUB dejará su llave; la **raíz** (`/`, ext4) se lleva casi
-todo; y **swap** (2 GB) es el desahogo de la RAM cuando se llena —
-en una VM de 4 GB, un seguro barato. ¿Y `/home` separado? Es una
+Dos particiones, y cada decisión la tomas con el capítulo 6 en la
+cabeza: la **raíz** (`/`, ext4) se lleva casi todo; y **swap** (2 GB)
+es el desahogo de la RAM cuando se llena — en una VM de 4 GB, un
+seguro barato. ¿Y la **partición EFI** del capítulo 6, el buzón de
+GRUB? Aquí no hay: la VM arranca con el firmware clásico, el BIOS
+(capítulo 7), y en ese mundo GRUB no va en una partición sino en el
+**primer sector del disco** — el MBR, *master boot record* —, que el
+BIOS lee a ciegas al encender. Treinta años funcionó así, y en la VM
+sigue valiendo; tu PC real, que arranca por UEFI, sí tendrá la EFI, y
+el anexo C te lo recuerda. ¿Y `/home` separado? Es una
 opción respetable — permite reinstalar el sistema sin tocar tus datos
 — pero complica el reparto de espacio; para el taller, un solo `/`
 basta. Un detalle nuevo: dentro de la VM el disco no se llama `sda`
@@ -62,12 +67,14 @@ Abre virt-manager, selecciona `debian-lab` y pulsa el triángulo de
 *Ejecutar* (o, desde la terminal, `virsh start debian-lab` y abre su
 ventana). La ISO sigue en la bandeja, así que la VM arranca en el
 menú del instalador: *Graphical install*, *Install*, y opciones
-avanzadas. Los dos primeros son el mismo instalador con dos caras —
-la gráfica es más cómoda con ratón; la de texto funciona en cualquier
-sitio, incluida una consola remota sin ventanas. Elige la que quieras;
-las pantallas y las decisiones son idénticas.
+avanzadas (si no tocas nada en treinta segundos, arranca solo con
+síntesis de voz: una flecha lo para). Los dos primeros son el mismo
+instalador con dos caras — la gráfica es más cómoda con ratón; la de
+texto funciona en cualquier sitio, incluida una consola remota sin
+ventanas. Elige la que quieras; las pantallas y las decisiones son
+idénticas.
 
-![El menú de arranque de la ISO. Fíjate en la esquina inferior: es GRUB — el mismo cargador del capítulo 6 — sirviendo el instalador. *Captura de la versión 12 (la 13 es idéntica): Paowee, GPL, Wikimedia Commons.*](../imagenes/cap08/grub-debian-uefi.png){#fig-menu-iso fig-alt="Menú de arranque UEFI del instalador de Debian con las opciones Graphical install e Install" width="70%"}
+![El menú de arranque de la ISO en la VM: «BIOS mode» en el título. Quien sirve este menú es *isolinux*, un cargador pequeño que viaja en la ISO; GRUB — el del capítulo 6 — llegará cuando lo instales en el disco. *Captura del instalador de Debian 13 (GPL).*](../imagenes/cap08/menu-instalador-bios.png){#fig-menu-iso fig-alt="Menú de arranque del instalador de Debian 13 en modo BIOS, con las opciones Graphical install e Install" width="70%"}
 
 ![El instalador de Debian en modo gráfico, en su primera pregunta: el idioma. Cada pantalla es una pregunta, y ya sabes responderlas todas. *Captura de la versión 12: Paowee, GPL, Wikimedia Commons.*](../imagenes/cap08/instalador-debian.png){#fig-instalador fig-alt="Pantalla del instalador gráfico de Debian" width="70%"}
 
@@ -93,23 +100,28 @@ decisión más importante del día:
 ## Particionar a mano {#sec-particionar}
 
 Llega la pantalla que asusta a todo el mundo, y que tú vas a leer con
-calma. Elige **Manual**. Verás el disco — `vda`, 20 GB, «Virtio Block
-Device» — sin particiones. El procedimiento, pantalla a pantalla:
+calma. Elige **Manual**. Verás el disco — «Disco virtual 1 (vda) -
+21.5 GB Virtio Block Device» — sin particiones. ¿21,5? El instalador
+cuenta en GB decimales, y tus 20 GiB del capítulo 7 son exactamente
+eso. El procedimiento, pantalla a pantalla:
 
 1. Selecciona el disco `vda` → **Crear una nueva tabla de particiones
-   vacía** → sí → tipo **gpt** (la tabla moderna que UEFI espera,
-   capítulo 6). Aparece una línea «ESPACIO LIBRE» de 20 GB.
+   vacía** → sí. En modo BIOS no pregunta el tipo: crea una `msdos`,
+   la clásica (`gpt` es la que espera UEFI, capítulo 6). Aparece una
+   línea «ESPACIO LIBRE» con los 21,5 GB.
 2. Selecciona el espacio libre → **Crear una partición nueva** →
-   tamaño `512 MB` → al principio → *Utilizar como:* **Partición del
-   sistema EFI** → *Se ha terminado de definir la partición*.
-3. Espacio libre otra vez → partición nueva → tamaño `17.5 GB` (o lo
-   que quede menos 2 GB) → *Utilizar como:* **ext4** → *Punto de
-   montaje:* `/` → terminar.
-4. Espacio libre restante → partición nueva → todo lo que queda →
-   *Utilizar como:* **área de intercambio** (swap) → terminar.
-5. Compara la tabla con la figura: `vda1` EFI, `vda2` ext4 `/`, `vda3`
-   swap. **Finalizar el particionado y escribir los cambios en el
-   disco** → «¿Desea escribir los cambios?» → **Sí**.
+   tamaño `19.5 GB` (quedan 2 para la swap) → **Primaria** →
+   **Principio** → la pantalla de ajustes ya propone *ext4* con punto
+   de montaje `/`: compruébalo → **Se ha terminado de definir la
+   partición**.
+3. Espacio libre restante → partición nueva → tamaño: el que propone
+   (todo lo que queda) → **Primaria** — ojo, esta vez el instalador
+   señala *Lógica* por defecto — → en ajustes, *Utilizar como:* cambia
+   *ext4* por **área de intercambio** → terminar.
+4. Compara la tabla con la figura: `#1 primaria 19.5 GB ext4 /` y
+   `#2 primaria 2.0 GB swap` — serán `vda1` y `vda2`. **Finalizar el
+   particionado y escribir los cambios en el disco** → «¿Desea
+   escribir los cambios?» → **Sí**.
 
 Ese último *Sí* es el punto sin retorno de cualquier instalación: a
 partir de ahí el disco se formatea. En tu VM el disco es un fichero
@@ -140,15 +152,16 @@ Con el disco listo, el instalador copia el sistema base y hace las
   **Desmarca** *Entorno de escritorio Debian* y *GNOME* (vienen
   marcados). **Marca** *Servidor SSH* — el bloque E te lo agradecerá —
   y *Utilidades estándar del sistema*. Nada más.
-- **Cargador de arranque**: arrancaste la VM en modo UEFI, así que
-  GRUB se instala solo en la partición EFI que creaste. Si pregunta
-  por «forzar la instalación en la ruta de medios extraíbles», no.
+- **Cargador de arranque**: la VM arranca con BIOS, así que el
+  instalador pregunta *en qué disco* instalar GRUB: `/dev/vda` — el
+  disco entero, no una partición. Es el primer sector de la figura del
+  plan, el sitio que el BIOS mira al encender.
 
 Reinicia cuando lo pida. La ISO se expulsa sola, y en el primer
 arranque desde el disco recién estrenado verás, durante unos segundos,
 el menú de GRUB — el eslabón del capítulo 6 que hoy has puesto tú.
-Es el mismo menú de la figura anterior, pero ahora sirve *tu* sistema
-en vez del instalador.
+Ya no es el isolinux de la ISO: es GRUB, leído del primer sector de
+`vda`, sirviendo *tu* sistema.
 
 ## El primer arranque: comprobar que respira {#sec-primer-arranque}
 
@@ -160,12 +173,11 @@ son tus comandos, sobre tu instalación:
 marcos@debian-lab:~$ lsblk
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
 vda    254:0    0   20G  0 disk
-├─vda1 254:1    0  512M  0 part /boot/efi
-├─vda2 254:2    0 17,5G  0 part /
-└─vda3 254:3    0    2G  0 part [SWAP]
+├─vda1 254:1    0 18,2G  0 part /
+└─vda2 254:2    0  1,8G  0 part [SWAP]
 marcos@debian-lab:~$ df -h /
 S.ficheros     Tamaño Usados  Disp Uso% Montado en
-/dev/vda2         17G   1,3G   15G   8% /
+/dev/vda1         18G   1,3G   16G   8% /
 marcos@debian-lab:~$ ip a | grep "inet "
     inet 127.0.0.1/8 scope host lo
     inet 192.168.122.15/24 brd 192.168.122.255 scope global dynamic enp1s0
@@ -175,7 +187,7 @@ marcos@debian-lab:~$ systemctl status ssh | head -3
      Active: active (running) since Tue 2026-08-25 19:02:11 CEST
 ```
 
-Léelo como el parte de un experimento que ha salido bien: las tres
+Léelo como el parte de un experimento que ha salido bien: las dos
 particiones montadas donde las pusiste; un sistema completo que ocupa
 1,3 GB; una dirección `192.168.122.x` — la red NAT del capítulo 7,
 repartida por tu Mint —; y un servidor SSH ya activo, esperando al
@@ -213,13 +225,15 @@ ls: no se puede acceder a '/boot': No existe el fichero o el directorio
 marcos@debian-lab:~$ sudo reboot
 ```
 
-Acabas de borrar el kernel y la configuración de GRUB. El sistema
-sigue funcionando *hasta que se apaga*: todo lo que necesitaba ya
-estaba cargado en RAM. Pero al reiniciar, la cadena del capítulo 6 se
-rompe en el segundo eslabón: GRUB no encuentra el kernel, y te quedas
-en su consola de emergencia (`grub>`) o en un aviso del UEFI. Míralo
-bien. Es la pantalla que aterroriza a quien no sabe qué es GRUB — y tú
-sabes exactamente qué falta y por qué.
+Acabas de borrar el kernel — y casi todo GRUB: sus módulos y su menú
+viven en `/boot/grub`; solo sobrevive su primer trozo, el del sector
+cero. El sistema sigue funcionando *hasta que se apaga*: todo lo que
+necesitaba ya estaba cargado en RAM. Pero al reiniciar, la cadena del
+capítulo 6 se rompe en el segundo eslabón: ese trozo de GRUB arranca,
+busca el resto de sí mismo en `/boot/grub`, no lo encuentra, y te deja
+en su consola de emergencia — `grub rescue>`, con un «file not found».
+Míralo bien. Es la pantalla que aterroriza a quien no sabe qué es GRUB
+— y tú sabes exactamente qué falta y por qué.
 
 Ahora, desde virt-manager: *Forzar apagado* → Instantáneas →
 `recien-instalado` → *Ejecutar*. Arranca. Cinco segundos, y `/boot`
@@ -229,9 +243,10 @@ el miedo a romper ha desaparecido porque romper cuesta cinco segundos.
 ## Del ensayo al ordenador de verdad {#sec-pc-real}
 
 Todo lo que has hecho hoy es, paso a paso, lo que harás el día que
-instales Linux en un PC físico. Cambian tres cosas — la ISO viaja en
-un pendrive, el disco tiene nombre real y quizá un Windows dentro, y
-no hay instantánea que te salve — y por eso existe el
+instales Linux en un PC físico. Cambian cuatro cosas — la ISO viaja
+en un pendrive, el disco tiene nombre real y quizá un Windows dentro,
+el arranque es UEFI y pide una partición más (la EFI del capítulo 6),
+y no hay instantánea que te salve — y por eso existe el
 [anexo C](../anexos/anexo-c1-pc-real.qmd): la lista de comprobación
 completa para ese día, con la grabación del pendrive por la vía
 gráfica y por terminal.
@@ -276,8 +291,8 @@ de arrancar el instalador.
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
-`vda1` 512 MB · FAT32 · `/boot/efi` (EFI) — `vda2` ~17,5 GB · ext4 ·
-`/` — `vda3` 2 GB · swap. Máquina `debian-lab`. Root vacío: Debian
+`vda1` ~18 GB · ext4 · `/` — `vda2` 2 GB · swap; GRUB en el primer
+sector de `vda`. Máquina `debian-lab`. Root vacío: Debian
 desactiva root y da `sudo` a tu usuario, como en Mint.
 
 **Por qué así** — El plan escrito es lo que separa una instalación de
@@ -310,7 +325,7 @@ de la raíz (lo que quede menos el swap) y la selección de programas
 texto es la señal de éxito.
 
 **Por qué así** — La primera instalación siempre es lenta y torpe; la
-segunda (ejercicio 8.5) es donde se nota que has aprendido. Por eso
+segunda (ejercicio 8.6) es donde se nota que has aprendido. Por eso
 el diseño de este capítulo insiste en repetir.
 :::
 ::::
@@ -331,7 +346,7 @@ instalación tuya.
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
-Las tres particiones montadas según el plan; alrededor de 1,3 GB
+Las dos particiones montadas según el plan; alrededor de 1,3 GB
 usados; una dirección `192.168.122.x`; y `ssh.service` en *active
 (running)*. `sudo apt update && sudo apt upgrade` debe funcionar sin
 pedir nada raro: la prueba de que el truco de root funcionó.
@@ -383,14 +398,15 @@ teclearla, mira el prompt: debe decir `debian-lab`.
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
-`sudo rm -rf /boot`, `sudo reboot` → GRUB arranca (su llave sigue en
-la partición EFI, que no has tocado) pero no encuentra el kernel: te
-deja en `grub>` o en un error de «file not found». Forzar apagado →
+`sudo rm -rf /boot`, `sudo reboot` → el primer trozo de GRUB arranca
+(sigue en el sector cero, que no has tocado) pero no encuentra ni el
+resto de GRUB ni el kernel: te deja en `grub rescue>` con un «file not
+found». Forzar apagado →
 restaurar `recien-instalado` → `ls /boot` muestra el kernel
 (`vmlinuz-…`) y la carpeta `grub` como si nada.
 
 **Por qué así** — Ver romperse un eslabón concreto de la cadena
-convierte «no arranca» en «falta el kernel, GRUB sigue ahí»: un
+convierte «no arranca» en «falta `/boot`; el sector cero sigue ahí»: un
 diagnóstico. Y la restauración es la demostración práctica de para
 qué sirve el bloque C.
 :::
@@ -407,15 +423,16 @@ Debian desde cero — esta vez con `/home` en su propia partición de
 tiempo.
 
 ::: {.pista}
-El plan cambia en una línea: la raíz se queda con ~12,5 GB y `/home`
-recibe 5 GB, ext4, punto de montaje `/home`. Crea las cuatro particiones
-en orden: EFI, raíz, home, swap.
+El plan cambia en una línea: la raíz se queda con `14.5 GB` y `/home`
+recibe `5 GB`, ext4, punto de montaje `/home` (el instalador lo propone
+solo para la segunda ext4). Crea las tres particiones en orden: raíz,
+home, swap — todas **primarias**, aunque te sugiera lógica.
 :::
 
 :::: {.solucion}
 ::: {.callout-tip collapse="true" title="Solución razonada"}
 Normalmente la mitad del tiempo de la primera vez, y `lsblk` mostrará
-`vda3` montado en `/home`. Renueva la instantánea `recien-instalado`
+`vda2` montado en `/home`. Renueva la instantánea `recien-instalado`
 sobre esta máquina — es la definitiva.
 
 **Por qué así** — «Romperla y reinstalar hasta que aburra» era el
@@ -449,14 +466,55 @@ El pendrive aparece como `sda` (o `sdb`) al pinchar; se graba con
 «Discos → Restaurar imagen de disco» o con `sudo dd if=debian….iso
 of=/dev/sdX bs=4M status=progress` (con la X correcta, verificada dos
 veces); se reinicia pulsando la tecla del menú de arranque (F12, F2 o
-Esc según la marca) y se elige el pendrive. Verás el mismo menú que en
-la VM; *Ctrl+Alt+Supr* o apagar te devuelve a Mint intacto.
+Esc según la marca) y se elige el pendrive. Verás el menú del
+instalador — en modo UEFI tiene otro aspecto que en la VM (anexo C),
+pero las mismas opciones; *Ctrl+Alt+Supr* o apagar te devuelve a Mint
+intacto.
 
 **Por qué así** — Es el ensayo general con el vestuario de verdad, y
 la única parte del capítulo con un riesgo real: equivocar la letra del
 pendrive en `dd` borra el disco equivocado. Por eso la vía gráfica es
 perfectamente honorable — elige por su nombre y tamaño, sin letras —
 y por eso el anexo insiste en comprobar dos veces.
+:::
+::::
+:::
+
+::: {.ejercicio}
+**Ejercicio 8.8 · La misma instalación, con UEFI (de usar y tirar)**
+
+`debian-lab` arranca con BIOS por la razón del capítulo 7. Para ver
+con tus manos qué cambia con UEFI — que es lo que tendrás en un PC real
+—, crea una **segunda** máquina, `debian-uefi` (2 GB de RAM bastan),
+marcando en el último paso del asistente *Personalizar la
+configuración antes de instalar* → *Vista general* → *Firmware:*
+**UEFI** → *Aplicar* → *Comenzar la instalación*. Instálala con el
+mismo plan y anota las tres diferencias que veas. Después bórrala
+(*Eliminar*, con su disco): sin instantáneas no es sitio para vivir.
+
+::: {.pista}
+Las diferencias están en el menú de arranque de la ISO, en el
+particionado (el instalador querrá una partición más, y de un tipo
+concreto) y en el `lsblk` final. Dentro de la máquina, `efibootmgr -v`
+enseña dónde apuntó GRUB su llave.
+:::
+
+:::: {.solucion}
+::: {.callout-tip collapse="true" title="Solución razonada"}
+(1) El menú de la ISO ya no es isolinux sino GRUB, con «UEFI» en el
+título. (2) Al particionar, la tabla es `gpt` y el instalador espera
+una **partición del sistema EFI** (512 MB, FAT32) antes que nada:
+créala tú, o el paso «Cargador de arranque» protestará. (3) `lsblk`
+muestra `vda1 … /boot/efi` además de la raíz y la swap, y
+`efibootmgr -v` lista una entrada `debian` que apunta a
+`\EFI\debian\shimx64.efi` dentro de esa partición — la llave en el
+buzón del capítulo 6. Y si en virt-manager intentas una instantánea,
+verás el aviso de la caja del capítulo 7. Borra la máquina al acabar.
+
+**Por qué así** — Es el ensayo exacto de lo que te encontrarás en el
+anexo C, en una máquina donde equivocarse sigue siendo gratis. Las
+tres diferencias caben en una línea del cuaderno, y con eso el UEFI
+deja de ser un misterio.
 :::
 ::::
 :::
@@ -483,12 +541,12 @@ Marca una respuesta por pregunta; la corrección es inmediata.
     <div class="fb good"><b>Correcto.</b> Es el comportamiento documentado de Debian y el modelo del capítulo 4: poderes de administrador orden a orden, con recibo.</div>
     <div class="fb bad"><b>No exactamente.</b> Con root vacío, Debian bloquea esa cuenta y mete a tu usuario en el grupo <code>sudo</code>. Con contraseña, tendrías root activo y un usuario sin sudo.</div>
   </div>
-  <div class="qz"><p class="qq" data-n="3">En una instalación UEFI, GRUB deja su llave de arranque en…</p>
-    <label><input type="radio" name="z3" value="a"><span>la partición EFI (FAT32, montada en <code>/boot/efi</code>)</span></label>
+  <div class="qz"><p class="qq" data-n="3">En <code>debian-lab</code>, que arranca con BIOS, GRUB se instala en…</p>
+    <label><input type="radio" name="z3" value="a"><span>el primer sector del disco entero (<code>/dev/vda</code>, el MBR)</span></label>
     <label><input type="radio" name="z3" value="b"><span>la swap</span></label>
-    <label><input type="radio" name="z3" value="c"><span>el sector cero del disco, siempre</span></label>
-    <div class="fb good"><b>Correcto.</b> El buzón del capítulo 6. Por eso la EFI es la primera partición del plan, y por eso borrar <code>/boot</code> rompe el kernel pero no a GRUB.</div>
-    <div class="fb bad"><b>No exactamente.</b> El UEFI busca cargadores en la partición EFI: ahí va GRUB. El «sector cero» era el mundo antiguo (BIOS/MBR).</div>
+    <label><input type="radio" name="z3" value="c"><span>una partición EFI (FAT32, montada en <code>/boot/efi</code>)</span></label>
+    <div class="fb good"><b>Correcto.</b> El sitio que el BIOS lee a ciegas al encender. En tu PC real, que arranca por UEFI, el equivalente es la partición EFI del capítulo 6 — el buzón donde GRUB deja su llave.</div>
+    <div class="fb bad"><b>No exactamente.</b> En modo BIOS no hay partición EFI: GRUB va al primer sector del disco entero. La partición EFI es el buzón del mundo UEFI — el de tu PC real y del reto 8.8.</div>
   </div>
   <div class="qz"><p class="qq" data-n="4">Marcaste «Servidor SSH» en la selección de programas para…</p>
     <label><input type="radio" name="z4" value="a"><span>poder navegar por internet desde la VM</span></label>
@@ -542,10 +600,10 @@ Responde de memoria; las respuestas están al final del capítulo.
     b)  desactiva root y da `sudo` a tu usuario, como en Mint
     c)  hace que el instalador se detenga
 
-3.  En una instalación UEFI, GRUB deja su llave de arranque en…
-    a)  la partición EFI (FAT32, montada en `/boot/efi`)
+3.  En `debian-lab`, que arranca con BIOS, GRUB se instala en…
+    a)  el primer sector del disco entero (`/dev/vda`, el MBR)
     b)  la swap
-    c)  el sector cero del disco, siempre
+    c)  una partición EFI (FAT32, montada en `/boot/efi`)
 
 4.  Marcaste «Servidor SSH» en la selección de programas para…
     a)  poder navegar por internet desde la VM

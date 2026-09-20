@@ -286,7 +286,7 @@ debian-lab
 marcos@portatil:~$ ssh lab "grep -c ERROR adquisicion.log"
 108
 marcos@portatil:~$ ssh lab df -h / | tail -1
-/dev/vda2         17G   1,4G   15G   9% /
+/dev/vda1         18G   1,4G   16G   9% /
 ```
 
 Ahí están los tres bloques anteriores dándose la mano: el `grep` del
