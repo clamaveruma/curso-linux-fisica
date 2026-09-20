@@ -29,9 +29,9 @@
     <rect x="430" y="30" width="250" height="250" rx="6" fill="#FAF6EB" stroke="#9C8F79" stroke-width="1.4"/>
     <text x="555" y="54" font-size="11.5" fill="#2B2318" text-anchor="middle" font-weight="600">«servidor» · VM Debian</text>
     <rect x="448" y="70" width="214" height="34" rx="3" fill="#0E1512"/>
-    <text x="555" y="91" font-size="9.5" fill="#6BD6BC" text-anchor="middle">sshd :22 · PasswordAuthentication no</text>
+    <text x="555" y="91" font-size="9" fill="#6BD6BC" text-anchor="middle">sshd :22 · PasswordAuthentication no</text>
     <rect x="448" y="112" width="214" height="34" rx="3" fill="#0E1512"/>
-    <text x="555" y="133" font-size="9.5" fill="#6BD6BC" text-anchor="middle">~/proyecto/datos · ~/proyecto/resultados</text>
+    <text x="555" y="133" font-size="9" fill="#6BD6BC" text-anchor="middle">~/proyecto/datos y resultados</text>
     <rect x="448" y="154" width="214" height="34" rx="3" fill="#0E1512"/>
     <text x="555" y="175" font-size="9.5" fill="#E8C170" text-anchor="middle">tmux «analisis» → analisis.py</text>
     <rect x="448" y="196" width="214" height="34" rx="3" fill="#0E1512"/>

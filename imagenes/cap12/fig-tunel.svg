@@ -23,7 +23,7 @@
     <text x="570" y="74" font-size="11.5" fill="#2B2318" text-anchor="middle" font-weight="600">el servidor</text>
     <rect x="480" y="90" width="180" height="52" rx="4" fill="#0E1512"/>
     <text x="570" y="110" font-size="10.5" fill="#6BD6BC" text-anchor="middle" font-weight="600">jupyter lab</text>
-    <text x="570" y="128" font-size="9.5" fill="#D8E6E0" text-anchor="middle">escucha solo en localhost:8888</text>
+    <text x="570" y="128" font-size="9" fill="#D8E6E0" text-anchor="middle">escucha solo en localhost:8888</text>
     <text x="570" y="168" font-size="9" fill="#9C8F79" text-anchor="middle">con los datos y la CPU del servidor</text>
     <text x="350" y="222" font-size="10" fill="#6A5F4D" text-anchor="middle">el puerto 8888 nunca se abre a la red: solo existe dentro del túnel — tu navegador local, su cálculo remoto</text>
   </g>
