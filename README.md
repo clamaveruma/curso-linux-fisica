@@ -3,6 +3,10 @@
 Curso introductorio para estudiantes de ciencias e ingeniería: terminal, sistema, virtualización,
 redes y trabajo remoto. 13 sesiones + proyecto final. **Versión: agosto 2026** (las versiones llevan mes y año; el libro evoluciona con la IA y con la realimentación de los lectores).
 Web: https://clamaveruma.github.io/curso-linux-fisica/
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23889416.svg)](https://doi.org/10.5281/zenodo.23889416)
+
+## Cómo citarlo
+Martínez Velasco, C. M. (2026). *Estofado de Linux, con guarnición de IA y redes*. Zenodo. https://doi.org/10.5281/zenodo.23889416
 
 ## Estructura
 - `_quarto.yml` — configuración: libro con salida web y PDF descargable
