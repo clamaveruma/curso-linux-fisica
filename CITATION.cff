@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Si usas este libro, cítalo así."
+type: dataset
+title: "Estofado de Linux, con guarnición de IA y redes"
+abstract: "Curso práctico de Linux, redes y trabajo remoto para estudiantes de ciencias e ingeniería: terminal, instalación, SSH y tu primer servidor. Trece sesiones, proyecto final y cinco anexos."
+authors:
+  - family-names: "Martínez Velasco"
+    given-names: "Claudio M."
+version: "2026.08"
+license: CC-BY-SA-4.0
+url: "https://clamaveruma.github.io/curso-linux-fisica/"
+repository-code: "https://github.com/clamaveruma/curso-linux-fisica"
+language: spa
+keywords:
+  - linux
+  - terminal
+  - redes
+  - ssh
+  - debian
+  - curso
