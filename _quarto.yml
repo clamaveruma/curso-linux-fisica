@@ -71,6 +71,10 @@ format:
     number-sections: true
     code-copy: false        # regla del curso: no copies, teclea
     fontsize: 16.5px
+    # verificación de propiedad en Google Search Console (invisible para el lector)
+    include-in-header:
+      text: |
+        <meta name="google-site-verification" content="bgcHv-MI4pPLW2Cka9hrmvhvWAPYysmumxkH2Eq5tUI" />
   pdf:
     documentclass: scrreprt
     papersize: a4
