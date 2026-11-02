@@ -22,6 +22,12 @@ book:
   author: "Claudio M. Martínez Velasco"
   cover-image: portada/portada-web.png
   cover-image-alt: "Portada: un pingüino con bata de laboratorio ante una pizarra con la ecuación de Schrödinger, un osciloscopio y un teletipo"
+  description: "Curso práctico de Linux, redes y trabajo remoto para estudiantes de ciencias e ingeniería: terminal, instalación, SSH y tu primer servidor."
+  # site-url es lo que permite generar /sitemap.xml y los enlaces absolutos
+  site-url: "https://clamaveruma.github.io/curso-linux-fisica"
+  repo-url: "https://github.com/clamaveruma/curso-linux-fisica"
+  open-graph: true      # vista previa al compartir el enlace (LinkedIn, etc.)
+  twitter-card: true
   date: 2026-08-01
   date-format: "MMMM [de] YYYY"   # se muestra como «agosto de 2026»
   # El botón de descarga del PDF sale de aquí. Desactivado durante la
